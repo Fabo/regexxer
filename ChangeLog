@@ -1,5 +1,11 @@
 2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h}: Show an icon indicating whether the item
+	is a file or directory in front of the filename.  Check it out,
+	this eye candy looks really nice.
+
+2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/fileio.cc (save_file): Get rid of the #96373 work-around.
 
 2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>

@@ -25,6 +25,7 @@
 #include "fileio.h"
 
 #include <gdkmm/color.h>
+#include <gdkmm/pixbuf.h>
 #include <gtkmm/treepath.h>
 #include <gtkmm/treeview.h>
 #include <list>
@@ -83,6 +84,11 @@ private:
   struct FindMatchesData;
 
   Glib::RefPtr<Gtk::TreeStore>  treestore_;
+
+  Glib::RefPtr<Gdk::Pixbuf>     pixbuf_directory_;
+  Glib::RefPtr<Gdk::Pixbuf>     pixbuf_file_;
+  Glib::RefPtr<Gdk::Pixbuf>     pixbuf_load_failed_;
+
   Gdk::Color                    color_modified_;
   Gdk::Color                    color_load_failed_;
 
@@ -98,7 +104,8 @@ private:
   std::string                   fallback_encoding_;
   Glib::RefPtr<Gdk::Pixbuf>     error_pixbuf_;
 
-  void cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
+  void icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
+  void text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
 
   static bool select_func(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk::TreePath& path,
                           bool currently_selected);

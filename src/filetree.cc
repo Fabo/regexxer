@@ -263,23 +263,42 @@ FileTree::FileTree()
   sum_matches_        (0),
   fallback_encoding_  ("ISO-8859-15")
 {
-  set_model(treestore_);
+  using namespace Gtk;
 
+  set_model(treestore_);
   const FileTreeColumns& model_columns = filetree_columns();
 
-  append_column("File", model_columns.filename);
-  append_column("#",    model_columns.matchcount);
+  {
+    TreeView::Column *const column = new TreeView::Column("File");
+    append_column(*manage(column));
 
-  Gtk::TreeView::Column& file_column = *get_column(0);
-  Gtk::CellRenderer& file_renderer = *file_column.get_first_cell_renderer();
-  file_column.set_cell_data_func(file_renderer, SigC::slot(*this, &FileTree::cell_data_func));
-  file_column.set_resizable(true);
+    CellRendererPixbuf *const cell_icon = new CellRendererPixbuf();
+    column->pack_start(*manage(cell_icon), false);
 
-  Gtk::TreeView::Column& count_column = *get_column(1);
-  Gtk::CellRenderer& count_renderer = *count_column.get_first_cell_renderer();
-  count_column.set_cell_data_func(count_renderer, SigC::slot(*this, &FileTree::cell_data_func));
-  count_column.set_alignment(1.0);
-  count_renderer.property_xalign() = 1.0;
+    CellRendererText *const cell_filename = new CellRendererText();
+    column->pack_start(*manage(cell_filename));
+
+    column->add_attribute(cell_filename->property_text(), model_columns.filename);
+
+    column->set_cell_data_func(*cell_icon,     SigC::slot(*this, &FileTree::icon_cell_data_func));
+    column->set_cell_data_func(*cell_filename, SigC::slot(*this, &FileTree::text_cell_data_func));
+
+    column->set_resizable(true);
+  }
+
+  {
+    TreeView::Column *const column = new TreeView::Column("#");
+    append_column(*manage(column));
+
+    CellRendererText *const cell_matchcount = new CellRendererText();
+    column->pack_start(*manage(cell_matchcount));
+
+    column->add_attribute(cell_matchcount->property_text(), model_columns.matchcount);
+    column->set_cell_data_func(*cell_matchcount, SigC::slot(*this, &FileTree::text_cell_data_func));
+
+    column->set_alignment(1.0);
+    cell_matchcount->property_xalign() = 1.0;
+  }
 
   treestore_->set_sort_func(model_columns.collatekey.index(), &collatekey_sort_func_dirs_first);
   treestore_->set_sort_column_id(model_columns.collatekey, Gtk::SORT_ASCENDING);
@@ -465,7 +484,12 @@ std::string FileTree::get_fallback_encoding() const
 
 void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
 {
+  pixbuf_directory_   = render_icon(Gtk::Stock::OPEN,          Gtk::ICON_SIZE_MENU);
+  pixbuf_file_        = render_icon(Gtk::Stock::NEW,           Gtk::ICON_SIZE_MENU);
+  pixbuf_load_failed_ = render_icon(Gtk::Stock::MISSING_IMAGE, Gtk::ICON_SIZE_MENU);
+
   color_load_failed_ = get_style()->get_text(Gtk::STATE_INSENSITIVE);
+
   error_pixbuf_.clear();
 
   Gtk::TreeView::on_style_changed(previous_style);
@@ -473,9 +497,29 @@ void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
 
 /**** Regexxer::FileTree -- private ****************************************/
 
-void FileTree::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
+void FileTree::icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
 {
-  Gtk::CellRendererText *const renderer = static_cast<Gtk::CellRendererText*>(cell);
+  Gtk::CellRendererPixbuf& renderer = dynamic_cast<Gtk::CellRendererPixbuf&>(*cell);
+
+  const FileInfoBasePtr base = (*iter)[filetree_columns().fileinfo];
+
+  if(const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic(base))
+  {
+    renderer.property_pixbuf() = (fileinfo->load_failed) ? pixbuf_load_failed_ : pixbuf_file_;
+  }
+  else if(DirInfoPtr::cast_dynamic(base))
+  {
+    renderer.property_pixbuf() = pixbuf_directory_;
+  }
+  else
+  {
+    renderer.property_pixbuf().reset_value();
+  }
+}
+
+void FileTree::text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
+{
+  Gtk::CellRendererText& renderer = dynamic_cast<Gtk::CellRendererText&>(*cell);
 
   const FileInfoBasePtr base = (*iter)[filetree_columns().fileinfo];
 
@@ -483,13 +527,13 @@ void FileTree::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::ite
   {
     if(fileinfo->load_failed)
     {
-      renderer->property_foreground_gdk() = color_load_failed_;
+      renderer.property_foreground_gdk() = color_load_failed_;
       return;
     }
 
     if(fileinfo->buffer && fileinfo->buffer->get_modified())
     {
-      renderer->property_foreground_gdk() = color_modified_;
+      renderer.property_foreground_gdk() = color_modified_;
       return;
     }
   }
@@ -497,12 +541,12 @@ void FileTree::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::ite
   {
     if(dirinfo->modified_count > 0)
     {
-      renderer->property_foreground_gdk() = color_modified_;
+      renderer.property_foreground_gdk() = color_modified_;
       return;
     }
   }
 
-  renderer->property_foreground_gdk().reset_value();
+  renderer.property_foreground_gdk().reset_value();
 }
 
 // static
