@@ -1,5 +1,11 @@
 2004-06-19  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* pixmaps/Makefile.am (stockimages.h): Strip the directory prefix
+	from filenames if present, because of the possibility of automatic
+	rule rewriting as done e.g. by SunOS make.
+
+2004-06-19  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* Makefile.am (dist_noinst_DATA): Add po/LINGUAS.
 
 2004-06-16  Daniel Elstner  <daniel.elstner@gmx.net>
