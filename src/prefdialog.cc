@@ -24,9 +24,9 @@
 #include "translation.h"
 
 #include <glib.h>
-#include <gconfmm.h>
 #include <gtkmm.h>
-#include <libglademm.h>
+#include <gconfmm/client.h>
+#include <libglademm/xml.h>
 #include <list>
 
 #include <config.h>

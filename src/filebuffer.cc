@@ -27,7 +27,7 @@
 #include "translation.h"
 
 #include <glib.h>
-#include <gconfmm.h>
+#include <gconfmm/client.h>
 #include <algorithm>
 #include <list>
 

@@ -25,7 +25,7 @@
 #include <gtkmm/dialog.h>
 #include <gtkmm/image.h>
 #include <gtkmm/label.h>
-#include <libglademm.h>
+#include <libglademm/xml.h>
 
 #include <config.h>
 

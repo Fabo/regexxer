@@ -30,10 +30,10 @@
 
 #include <glib.h>
 #include <gtk/gtktooltips.h>  /* XXX: see load_xml() */
-#include <gconfmm.h>
 #include <gtkmm.h>
 #include <gtkmm/comboboxentry.h>
-#include <libglademm.h>
+#include <gconfmm/client.h>
+#include <libglademm/xml.h>
 #include <algorithm>
 #include <functional>
 

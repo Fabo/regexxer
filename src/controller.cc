@@ -23,7 +23,7 @@
 #include <gtkmm/button.h>
 #include <gtkmm/menu.h>
 #include <gtkmm/toolbutton.h>
-#include <libglademm.h>
+#include <libglademm/xml.h>
 
 #include <config.h>
 

@@ -1,3 +1,15 @@
+2004-06-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/aboutdialog.cc: Include <libglademm/xml.h> instead of the
+	whole <libglademm.h> to save a tiny bit of compile time.
+	* src/controller.cc: ditto.
+
+	* src/filebuffer.cc: Same here, and also replace <gconfmm.h> by
+	<gconfmm/client.h>.
+	* src/filetree.cc: ditto
+	* src/mainwindow.cc: ditto
+	* src/prefdialog.cc: ditto.
+
 2004-06-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/translation.cc (initialize_gettext): Only call

@@ -25,7 +25,7 @@
 #include "stringutils.h"
 #include "translation.h"
 
-#include <gconfmm.h>
+#include <gconfmm/client.h>
 #include <gtkmm/stock.h>
 
 #include <config.h>
