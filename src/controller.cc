@@ -28,6 +28,8 @@
 #include <gtkmm/toolbar.h>
 #include <memory>
 
+#include <config.h>
+
 
 namespace
 {
@@ -75,15 +77,6 @@ void add_widget_button(Regexxer::ControlItem& control, Gtk::Button& button)
   button.signal_clicked().connect(control.slot());
   control.add_widget(button);
 }
-
-#if 0
-/* TODO: Fix atkmm instead.  And gtkmm.  Fuck.
- */
-void set_atk_description(Gtk::Widget& widget, const Glib::ustring& description)
-{
-  atk_object_set_description(gtk_widget_get_accessible(widget.gobj()), description.c_str());
-}
-#endif
 
 } // anonymous namespace
 
@@ -334,14 +327,14 @@ Gtk::Widget* Controller::create_action_area()
   Button *const button_replace_all = new ImageLabelButton(Stock::CONVERT, "_All files", true);
   box_replace->pack_start(*manage(button_replace_all));
 
-#if 0
-  set_atk_description(*button_prev_file,    "Go to the previous matching file");
-  set_atk_description(*button_prev,         "Go to previous match");
-  set_atk_description(*button_next,         "Go to next match");
-  set_atk_description(*button_next_file,    "Go to the next matching file");
-  set_atk_description(*button_replace,      "Replace current match");
-  set_atk_description(*button_replace_file, "Replace all matches in the current file");
-  set_atk_description(*button_replace_all,  "Replace all matches in all files");
+#if REGEXXER_HAVE_GTKMM_22
+  button_prev_file   ->get_accessible()->set_description("Go to the previous matching file");
+  button_prev        ->get_accessible()->set_description("Go to previous match");
+  button_next        ->get_accessible()->set_description("Go to next match");
+  button_next_file   ->get_accessible()->set_description("Go to the next matching file");
+  button_replace     ->get_accessible()->set_description("Replace current match");
+  button_replace_file->get_accessible()->set_description("Replace all matches in the current file");
+  button_replace_all ->get_accessible()->set_description("Replace all matches in all files");
 #endif
 
   add_widget_button(next_file,    *button_next_file);

@@ -1,5 +1,15 @@
 2002-12-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac: Check for gtkmm >= 2.1.0 and #define
+	REGEXXER_HAVE_GTKMM_22 if available.
+
+	* src/controller.cc:
+	* src/mainwindow.cc:
+	* src/statusline.cc: If building for gtkmm >= 2.1.0, make use of
+	atkmm to set names and descriptions of several GUI elements.
+
+2002-12-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* pixmaps/Makefile.am (stockimages.h): Perfectionize so that it
 	handles a case that actually never happens, but who knows who's
 	going to copy'n'paste this stuff :P

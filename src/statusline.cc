@@ -247,6 +247,10 @@ StatusLine::StatusLine()
 
   progressbar_->set_pulse_step(0.025);
 
+#if REGEXXER_HAVE_GTKMM_22
+  cancel_button_->get_accessible()->set_description("Cancels the running search");
+#endif
+
   show_all_children();
 }
 
@@ -323,7 +327,7 @@ void StatusLine::on_button_style_changed(const Glib::RefPtr<Gtk::Style>&)
   // so reduce the button's size request to a reasonable amount.
 
   int width = 0, height = 0;
-  cancel_button_->create_pango_layout("Stop")->get_pixel_size(width, height);
+  cancel_button_->create_pango_layout(cancel_button_->get_label())->get_pixel_size(width, height);
   cancel_button_->set_size_request(-1, height + 4);
 }
 

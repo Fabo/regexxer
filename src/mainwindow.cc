@@ -28,7 +28,6 @@
 #include "stringutils.h"
 
 #include <glib.h>
-#include <atk/atk.h> /* TODO: fix atkmm instead */
 #include <gtkmm.h>
 #include <algorithm>
 #include <functional>
@@ -442,9 +441,9 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_preview_->unset_flags(CAN_FOCUS);
   entry_preview_->modify_font(fileview_font_);
 
-  // TODO: Fix atkmm instead.
-  atk_object_set_description(gtk_widget_get_accessible(entry_preview_->Widget::gobj()),
-                             "Preview of the substitution in the current line");
+#if REGEXXER_HAVE_GTKMM_22
+  entry_preview_->get_accessible()->set_description("Preview of the substitution in the current line");
+#endif
 
   tooltips_.set_tip(*entry_regex_,        "A regular expression in Perl syntax");
   tooltips_.set_tip(*entry_substitution_, "The new string to substitute. As in Perl, you can "

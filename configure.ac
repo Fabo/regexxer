@@ -37,6 +37,17 @@ PKG_CHECK_MODULES([GTKMM], [glib-2.0 >= 2.0.7 gtk+-2.0 >= 2.0.6 sigc++-1.2 >= 1.
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 
+AC_MSG_CHECKING([for gtkmm >= 2.1.0])
+have_gtkmm_22=no
+${PKG_CONFIG:-"pkg-config"} --atleast-version=2.1.0 gtkmm-2.0 >&5 2>&5 && have_gtkmm_22=yes
+AC_MSG_RESULT([${have_gtkmm_22}])
+
+if test "x$have_gtkmm_22" = "xyes"; then
+{
+  AC_DEFINE([REGEXXER_HAVE_GTKMM_22], [1], [Define to 1 if gtkmm >= 2.1.0 is installed.])
+}
+fi
+
 gdk_pixbuf_exec_prefix=`${PKG_CONFIG:-"pkg-config"} --variable=exec_prefix gdk-pixbuf-2.0 2>&5`
 prog_search_path=${gdk_pixbuf_exec_prefix:+"$gdk_pixbuf_exec_prefix/bin$PATH_SEPARATOR"}$PATH
 
