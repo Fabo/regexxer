@@ -1,5 +1,11 @@
 2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.{cc,h}: Explicitely delete the preferences dialog
+	on exit.  Although this isn't really necessary, it does look neater
+	if we have a lot of cleanup to do on exit.
+
+2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.cc (find_matches): Correctly forward one character
 	rather than one byte after matching the empty string twice.  Also,
 	improve cancellation response by moving the signal_pulse() emission

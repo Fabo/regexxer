@@ -181,7 +181,6 @@ MainWindow::MainWindow()
   entry_pattern_->set_text("*");
   button_recursive_->set_active(true);
 
-  signal_hide().connect_notify(SigC::slot(*this, &MainWindow::on_busy_action_cancel));
   statusline_->signal_cancel_clicked.connect(SigC::slot(*this, &MainWindow::on_busy_action_cancel));
 
   filelist_->signal_switch_buffer.connect(
@@ -205,6 +204,19 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {}
+
+void MainWindow::on_hide()
+{
+  on_busy_action_cancel();
+
+  // Kill the preferences dialog if it's mapped right now.  This isn't
+  // really necessary since it'd be deleted in the destructor anyway.
+  // But if we have to do a lot of cleanup the dialog would stay open
+  // for that time, which doesn't look neat.
+  pref_dialog_.reset();
+
+  Gtk::Window::on_hide();
+}
 
 void MainWindow::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
 {

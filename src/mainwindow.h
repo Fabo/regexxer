@@ -58,6 +58,7 @@ public:
   virtual ~MainWindow();
 
 protected:
+  virtual void on_hide();
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 
 private:
