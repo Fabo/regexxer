@@ -1,5 +1,11 @@
 2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* regexxer.desktop: New desktop file, provided by Ross Burton.
+	Thanks Ross!
+	* Makefile.am: Distribute and install regexxer.desktop.
+
+2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (find_files): Use std::string instead
 	of Glib::ustring for 'dirname' and get rid of the call to
 	Glib::filename_from_utf8().  This doesn't really belong here.

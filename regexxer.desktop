@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=regexxer
+Comment=An interactive tool for performing search and replace operations
+Icon=regexxer.png
+Exec=regexxer
+Terminal=false
+Type=Application
+Categories=GNOME;Application;Development;

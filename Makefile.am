@@ -24,3 +24,6 @@ SUBDIRS = pixmaps src
 
 EXTRA_DIST = autogen.sh macros/cxx.m4 macros/pcre.m4
 
+dist_desktop_DATA = regexxer.desktop
+desktopdir        = $(datadir)/applications
+
