@@ -217,7 +217,7 @@ void CounterBox::on_label_style_changed(const Glib::RefPtr<Gtk::Style>&)
 StatusLine::StatusLine()
 :
   Gtk::HBox(false, 1),
-  cancel_button_  (0),
+  stop_button_    (0),
   progressbar_    (0),
   file_counter_   (0),
   match_counter_  (0),
@@ -225,8 +225,20 @@ StatusLine::StatusLine()
 {
   using namespace Gtk;
 
-  cancel_button_ = new Button("Stop");
-  pack_start(*manage(cancel_button_), PACK_SHRINK);
+  // The statusbar looks ugly if the stop button gets its default size,
+  // so reduce the button's size request to a reasonable amount.
+
+  RC::parse_string("style \"regexxer-stop-button-style\"\n"
+                   "{\n"
+                   "  ythickness = 0\n"
+                   "  GtkWidget::interior_focus = 0\n"
+                   "  GtkWidget::focus_padding = 0\n"
+                   "}\n"
+                   "widget \"*.regexxer-stop-button\" style \"regexxer-stop-button-style\"\n");
+
+  stop_button_ = new Button("Stop");
+  pack_start(*manage(stop_button_), PACK_SHRINK);
+  stop_button_->set_name("regexxer-stop-button");
 
   progressbar_ = new ProgressBar();
   pack_start(*manage(progressbar_), PACK_SHRINK);
@@ -240,15 +252,13 @@ StatusLine::StatusLine()
   statusbar_ = new Statusbar();
   pack_start(*manage(statusbar_), PACK_EXPAND_WIDGET);
 
-  cancel_button_->set_sensitive(false);
-  cancel_button_->signal_clicked().connect(signal_cancel_clicked.slot());
-  cancel_button_->signal_style_changed().connect(
-      SigC::slot(*this, &StatusLine::on_button_style_changed));
+  stop_button_->set_sensitive(false);
+  stop_button_->signal_clicked().connect(signal_cancel_clicked.slot());
 
   progressbar_->set_pulse_step(0.025);
 
 #if REGEXXER_HAVE_GTKMM_22
-  cancel_button_->get_accessible()->set_description("Cancels the running search");
+  stop_button_->get_accessible()->set_description("Cancels the running search");
 #endif
 
   show_all_children();
@@ -289,7 +299,7 @@ void StatusLine::set_file_encoding(const std::string& file_encoding)
 
 void StatusLine::pulse_start()
 {
-  cancel_button_->set_sensitive(true);
+  stop_button_->set_sensitive(true);
 }
 
 void StatusLine::pulse()
@@ -300,14 +310,14 @@ void StatusLine::pulse()
 void StatusLine::pulse_stop()
 {
   progressbar_->set_fraction(0.0);
-  cancel_button_->set_sensitive(false);
+  stop_button_->set_sensitive(false);
 }
 
 void StatusLine::on_hierarchy_changed(Gtk::Widget* previous_toplevel)
 {
   if(Gtk::Window *const window = dynamic_cast<Gtk::Window*>(previous_toplevel))
   {
-    cancel_button_->remove_accelerator(
+    stop_button_->remove_accelerator(
         window->get_accel_group(), GDK_Escape, Gdk::ModifierType(0));
   }
 
@@ -315,20 +325,10 @@ void StatusLine::on_hierarchy_changed(Gtk::Widget* previous_toplevel)
 
   if(Gtk::Window *const window = dynamic_cast<Gtk::Window*>(get_toplevel()))
   {
-    cancel_button_->add_accelerator(
+    stop_button_->add_accelerator(
         "activate", window->get_accel_group(),
         GDK_Escape, Gdk::ModifierType(0), Gtk::AccelFlags(0));
   }
-}
-
-void StatusLine::on_button_style_changed(const Glib::RefPtr<Gtk::Style>&)
-{
-  // The statusbar looks ugly if the cancel button gets its default size,
-  // so reduce the button's size request to a reasonable amount.
-
-  int width = 0, height = 0;
-  cancel_button_->create_pango_layout(cancel_button_->get_label())->get_pixel_size(width, height);
-  cancel_button_->set_size_request(-1, height + 4);
 }
 
 } // namespace Regexxer

@@ -1,5 +1,12 @@
 2002-12-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/statusline.{cc,h}: Use Gtk::RC::parse_string() and the
+	appropriate RC style settings to reduce the height of the Stop
+	button, instead of the insane set_size_request() hack.  This way
+	the label text gets properly aligned now.
+
+2002-12-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.cc (scale_to_8bit): Don't try to round to the
 	nearest value.  This fixes a fun bug that caused the orange color
 	of the current match to become slightly brighter on each config

@@ -61,13 +61,11 @@ protected:
   virtual void on_hierarchy_changed(Gtk::Widget* previous_toplevel);
 
 private:
-  Gtk::Button*        cancel_button_;
+  Gtk::Button*        stop_button_;
   Gtk::ProgressBar*   progressbar_;
   CounterBox*         file_counter_;
   CounterBox*         match_counter_;
   Gtk::Statusbar*     statusbar_;
-
-  void on_button_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 };
 
 } // namespace Regexxer
