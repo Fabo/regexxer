@@ -315,7 +315,7 @@ void FileTree::text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel
   Gtk::CellRendererText& renderer = dynamic_cast<Gtk::CellRendererText&>(*cell);
   const FileInfoBasePtr  infobase = (*iter)[filetree_columns().fileinfo];
 
-  Gdk::Color* color = 0;
+  const Gdk::Color* color = 0;
 
   if(const FileInfoPtr fileinfo = shared_dynamic_cast<FileInfo>(infobase))
   {
