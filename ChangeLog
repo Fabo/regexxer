@@ -1,5 +1,11 @@
 2002-11-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (find_recursively): Call increment_file_count()
+	from here instead of letting the caller do it.
+	(find_check_file): Simplify by using Gtk::TreeModel::Row directly.
+
+2002-11-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (collatekey_sort_func): Use std::strcmp() instead
 	of std::string::compare(), because libstdc++-v2 (which comes with
 	GCC 2.95.x) is badly broken and doesn't support this particular

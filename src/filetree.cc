@@ -332,8 +332,7 @@ void FileTree::find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
 
   try
   {
-    const int file_count = find_recursively(startdir, find_data);
-    find_increment_file_count(find_data, file_count);
+    find_recursively(startdir, find_data);
   }
   catch(const Glib::FileError& error)
   {
@@ -540,7 +539,7 @@ bool FileTree::select_func(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk:
   return get_fileinfo_from_iter(model->get_iter(path));
 }
 
-int FileTree::find_recursively(const std::string& dirname, FileTree::FindData& find_data)
+void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
 {
   using namespace Glib;
 
@@ -581,11 +580,11 @@ int FileTree::find_recursively(const std::string& dirname, FileTree::FindData& f
     }
   }
 
-  return file_count;
+  find_increment_file_count(find_data, file_count);
 }
 
 bool FileTree::find_check_file(const std::string& basename, const std::string& fullname,
-                               FileTree::FindData& find_data)
+                               FindData& find_data)
 {
   using namespace Glib;
 
@@ -600,8 +599,7 @@ bool FileTree::find_check_file(const std::string& basename, const std::string& f
     // subdirectories.
     //
     ScopedPushDir pushdir (find_data.dirstack, basename);
-    const int file_count = find_recursively(fullname, find_data); // recurse
-    find_increment_file_count(find_data, file_count);
+    find_recursively(fullname, find_data); // recurse
   }
   else if(file_test(fullname, FILE_TEST_IS_REGULAR))
   {
@@ -615,25 +613,25 @@ bool FileTree::find_check_file(const std::string& basename, const std::string& f
       std::string collate_key (1, '1');
       collate_key += basename_utf8.collate_key();
 
-      Gtk::TreeModel::iterator iter;
+      Gtk::TreeModel::Row row;
 
       if(find_data.dirstack.empty())
       {
-        iter = treestore_->prepend(); // new toplevel node
+        row = *treestore_->prepend(); // new toplevel node
       }
       else
       {
         if(!find_data.dirstack.back().second)
           find_fill_dirstack(find_data); // build all directory nodes in the stack
 
-        iter = treestore_->prepend(find_data.dirstack.back().second->children());
+        row = *treestore_->prepend(find_data.dirstack.back().second->children());
       }
 
       const FileTreeColumns& columns = filetree_columns();
 
-      (*iter)[columns.filename]   = basename_utf8;
-      (*iter)[columns.collatekey] = collate_key;
-      (*iter)[columns.fileinfo]   = FileInfoBasePtr(new FileInfo(fullname));
+      row[columns.filename]   = basename_utf8;
+      row[columns.collatekey] = collate_key;
+      row[columns.fileinfo]   = FileInfoBasePtr(new FileInfo(fullname));
 
       return true; // a file has been added
     }
