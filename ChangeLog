@@ -1,5 +1,15 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (FileTree::prev_match_file): As it turns out
+	keeping track of the parent iterator does have some merit.  While
+	there was nothing wrong with the previous change, I discovered
+	that the parent's children can be indexed in order to obtain an
+	iterator pointing to the previous row.  At least for deep trees
+	this is likely to be faster than resolving the whole path via
+	Gtk::TreeModel::get_iter().
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (FileTree::prev_match_file): There is no need to
 	keep track of the parent iterator; just use Gtk::TreePath::size()
 	and TreePath::up().  Also use TreePath::push_back() instead of the

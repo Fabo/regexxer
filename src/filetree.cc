@@ -698,18 +698,20 @@ bool FileTree::prev_match_file(Gtk::TreeModel::iterator& iter,
   g_return_val_if_fail(iter, false);
 
   const FileTreeColumns& columns = FileTreeColumns::instance();
+  Gtk::TreeModel::iterator parent = iter->parent();
   Gtk::TreePath path (iter);
 
   for (;;)
   {
     if (path.prev())
     {
-      iter = treestore_->get_iter(path);
+      iter = parent->children()[path.back()];
 
       if ((*iter)[columns.matchcount] > 0)
       {
         if (const Gtk::TreeModel::Children& children = iter->children()) // directory?
         {
+          parent = iter;
           path.push_back(children.size());
           continue;
         }
@@ -717,8 +719,9 @@ bool FileTree::prev_match_file(Gtk::TreeModel::iterator& iter,
         return true;
       }
     }
-    else if (path.size() > 1)
+    else if (parent)
     {
+      parent = parent->parent();
       path.up();
 
       if (collapse_stack && row_expanded(path))
