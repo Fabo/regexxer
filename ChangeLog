@@ -1,5 +1,10 @@
 2002-12-02  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* pixmaps/Makefile.am: Use shell magic to generate the build list
+	for gdk-pixbuf-csource.  It's way cooler than doing it manually :)
+
+2002-12-02  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (create_left_pane): Use 'd' instead of 'F'
 	as mnemonic key for the folder button, because 'F' is already
 	occupied by the file menu.
