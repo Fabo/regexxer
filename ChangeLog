@@ -1,5 +1,11 @@
 2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.{cc,h} src/prefdialog.cc: Get rid of
+	ascii_toupper() and AsciiToupper because I just added the
+	formerly missing Glib::Ascii::toupper() to glibmm :-P
+
+2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.h (AsciiToupper): New unary predicate that
 	forwards to ascii_toupper().
 

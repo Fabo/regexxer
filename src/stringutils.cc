@@ -135,7 +135,7 @@ std::string parse_control_char(std::string::const_iterator& p, std::string::cons
   {
     p = pnext;
 
-    char c = Util::ascii_toupper(*pnext);
+    char c = Glib::Ascii::toupper(*pnext);
     c ^= '\x40'; // flip bit 6
 
     return (c != 0) ? std::string(1, c) : std::string();
@@ -241,7 +241,7 @@ bool Util::encodings_equal(const std::string& lhs, const std::string& rhs)
     if(lhs_pos == lhs_end || rhs_pos == rhs_end)
       break;
 
-    if(ascii_toupper(*lhs_pos) != ascii_toupper(*rhs_pos))
+    if(Glib::Ascii::toupper(*lhs_pos) != Glib::Ascii::toupper(*rhs_pos))
       return false;
 
     ++lhs_pos;

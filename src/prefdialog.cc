@@ -19,7 +19,6 @@
  */
 
 #include "prefdialog.h"
-#include "stringutils.h"
 
 #include <glib.h>
 #include <gtkmm.h>
@@ -299,7 +298,7 @@ void PrefDialog::on_entry_fallback_activate()
   if(validate_encoding(fallback_encoding))
   {
     std::transform(fallback_encoding.begin(), fallback_encoding.end(),
-                   fallback_encoding.begin(), Util::AsciiToupper());
+                   fallback_encoding.begin(), &Glib::Ascii::toupper);
 
     signal_pref_fallback_encoding_changed(fallback_encoding); // emit
   }
