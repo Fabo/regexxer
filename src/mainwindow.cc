@@ -20,6 +20,7 @@
 
 #include "mainwindow.h"
 #include "aboutdialog.h"
+#include "configdata.h"
 #include "filetree.h"
 #include "imagebutton.h"
 #include "pcreshell.h"
@@ -155,8 +156,7 @@ MainWindow::MainWindow()
   busy_action_running_    (false),
   busy_action_cancel_     (false),
   busy_action_iteration_  (0),
-  undo_stack_             (new UndoStack()),
-  fileview_font_          ("mono")
+  undo_stack_             (new UndoStack())
 {
   using SigC::bind;
   using SigC::slot;
@@ -216,28 +216,6 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {}
-
-void MainWindow::set_menutool_mode(MenuToolMode menutool_mode)
-{
-  switch(menutool_mode)
-  {
-    case MODE_MENU_AND_TOOL: menubar_handle_->show(); toolbar_handle_->show(); break;
-    case MODE_MENU_ONLY:     toolbar_handle_->hide(); menubar_handle_->show(); break;
-    case MODE_TOOL_ONLY:     menubar_handle_->hide(); toolbar_handle_->show(); break;
-  }
-}
-
-MenuToolMode MainWindow::get_menutool_mode() const
-{
-  const bool menubar_shown = menubar_handle_->is_visible();
-  const bool toolbar_shown = toolbar_handle_->is_visible();
-
-  if(menubar_shown && toolbar_shown) return MODE_MENU_AND_TOOL;
-  else if(menubar_shown)             return MODE_MENU_ONLY;
-  else if(toolbar_shown)             return MODE_TOOL_ONLY;
-
-  g_return_val_if_reached(MODE_MENU_AND_TOOL);
-}
 
 /**** Regexxer::MainWindow -- protected ************************************/
 
@@ -443,7 +421,6 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_preview_->set_has_frame(false);
   entry_preview_->set_editable(false);
   entry_preview_->unset_flags(CAN_FOCUS);
-  entry_preview_->modify_font(fileview_font_);
 
 #if REGEXXER_HAVE_GTKMM_22
   entry_preview_->get_accessible()->set_name("Preview");
@@ -457,7 +434,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   tooltips_.set_tip(*button_multiple_,    "Find all possible matches in a line");
   tooltips_.set_tip(*button_caseless_,    "Do case insensitive matching");
   tooltips_.set_tip(*button_find_matches, "Find all matches of the regular expression");
-  tooltips_.set_tip(*entry_preview_,      "Preview of the substitution in the current line");
+  tooltips_.set_tip(*entry_preview_,      "Preview of the substitution");
 
   return vbox.release();
 }
@@ -653,8 +630,6 @@ void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
 
     if(!fileinfo->load_failed)
     {
-      textview_->modify_font(fileview_font_);
-
       buffer_connections_.push_back(buffer->signal_match_count_changed.
           connect(SigC::slot(*this, &MainWindow::on_buffer_match_count_changed)));
 
@@ -666,10 +641,6 @@ void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
 
       buffer_connections_.push_back(buffer->signal_preview_line_changed.
           connect(SigC::slot(*this, &MainWindow::update_preview)));
-    }
-    else
-    {
-      textview_->modify_font(get_pango_context()->get_font_description());
     }
 
     set_title_filename(Util::filename_to_utf8_fallback(fileinfo->fullname));
@@ -687,7 +658,6 @@ void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
     textview_->set_buffer(FileBuffer::create());
     textview_->set_editable(false);
     textview_->set_cursor_visible(false);
-    textview_->modify_font(get_pango_context()->get_font_description());
 
     set_title_filename();
 
@@ -990,12 +960,20 @@ void MainWindow::on_preferences()
   {
     std::auto_ptr<PrefDialog> dialog (new PrefDialog(*this));
 
-    dialog->set_pref_menutool_mode(get_menutool_mode());
-    dialog->set_pref_toolbar_style(toolbar_->get_toolbar_style());
+    dialog->set_pref_textview_font    (textview_->get_pango_context()->get_font_description());
+    dialog->set_pref_match_color      (FileBuffer::get_match_color());
+    dialog->set_pref_current_color    (FileBuffer::get_current_color());
+    dialog->set_pref_toolbar_style    (toolbar_->get_toolbar_style());
     dialog->set_pref_fallback_encoding(filetree_->get_fallback_encoding());
 
-    dialog->signal_pref_menutool_mode_changed.connect(
-        SigC::slot(*this, &MainWindow::set_menutool_mode));
+    dialog->signal_pref_textview_font_changed.connect(
+        SigC::slot(*textview_, &Gtk::Widget::modify_font));
+
+    dialog->signal_pref_textview_font_changed.connect(
+        SigC::slot(*entry_preview_, &Gtk::Widget::modify_font));
+
+    dialog->signal_pref_match_color_changed  .connect(&FileBuffer::set_match_color);
+    dialog->signal_pref_current_color_changed.connect(&FileBuffer::set_current_color);
 
     dialog->signal_pref_toolbar_style_changed.connect(
         SigC::slot(*toolbar_, &Gtk::Toolbar::set_toolbar_style));
@@ -1022,7 +1000,13 @@ void MainWindow::load_configuration()
 
   config.load();
 
-  set_menutool_mode(config.menutool_mode);
+  const Pango::FontDescription font (config.textview_font);
+  textview_     ->modify_font(font);
+  entry_preview_->modify_font(font);
+
+  FileBuffer::set_match_color(config.match_color);
+  FileBuffer::set_current_color(config.current_color);
+
   toolbar_->set_toolbar_style(config.toolbar_style);
   filetree_->set_fallback_encoding(config.fallback_encoding);
 }
@@ -1031,8 +1015,10 @@ void MainWindow::save_configuration()
 {
   ConfigData config;
 
-  config.menutool_mode = get_menutool_mode();
-  config.toolbar_style = toolbar_->get_toolbar_style();
+  config.textview_font     = textview_->get_pango_context()->get_font_description().to_string();
+  config.match_color       = FileBuffer::get_match_color();
+  config.current_color     = FileBuffer::get_current_color();
+  config.toolbar_style     = toolbar_->get_toolbar_style();
   config.fallback_encoding = filetree_->get_fallback_encoding();
 
   config.save();

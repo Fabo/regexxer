@@ -41,6 +41,11 @@ public:
 
   static void pango_context_changed(const Glib::RefPtr<Pango::Context>& context);
 
+  static void set_match_color(const Gdk::Color& color);
+  static void set_current_color(const Gdk::Color& color);
+  static Gdk::Color get_match_color();
+  static Gdk::Color get_current_color();
+
   virtual ~FileBuffer();
 
   bool is_freeable() const;

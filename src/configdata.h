@@ -21,24 +21,19 @@
 #ifndef REGEXXER_CONFIGDATA_H_INCLUDED
 #define REGEXXER_CONFIGDATA_H_INCLUDED
 
+#include <gdkmm/color.h>
 #include <glibmm/ustring.h>
 #include <gtkmm/toolbar.h>
-#include <string>
 
 
 namespace Regexxer
 {
 
-enum MenuToolMode
-{
-  MODE_MENU_AND_TOOL,
-  MODE_MENU_ONLY,
-  MODE_TOOL_ONLY
-};
-
 struct ConfigData
 {
-  MenuToolMode      menutool_mode;
+  Glib::ustring     textview_font;
+  Gdk::Color        match_color;
+  Gdk::Color        current_color;
   Gtk::ToolbarStyle toolbar_style;
   std::string       fallback_encoding;
 

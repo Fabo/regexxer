@@ -21,12 +21,10 @@
 #ifndef REGEXXER_MAINWINDOW_H_INCLUDED
 #define REGEXXER_MAINWINDOW_H_INCLUDED
 
-#include "configdata.h"
 #include "controller.h"
 #include "filebuffer.h"
 #include "sharedptr.h"
 
-#include <pangomm.h>
 #include <gtkmm/tooltips.h>
 #include <gtkmm/window.h>
 
@@ -58,9 +56,6 @@ class MainWindow : public Gtk::Window
 public:
   MainWindow();
   virtual ~MainWindow();
-
-  void set_menutool_mode(MenuToolMode menutool_mode);
-  MenuToolMode get_menutool_mode() const;
 
 protected:
   virtual void on_hide();
@@ -99,7 +94,6 @@ private:
 
   UndoStackPtr      undo_stack_;
 
-  Pango::FontDescription      fileview_font_;
   std::list<SigC::Connection> buffer_connections_;
 
   std::auto_ptr<AboutDialog>  about_dialog_;

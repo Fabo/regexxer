@@ -195,12 +195,14 @@ FileBuffer::create_with_error_message(const Glib::RefPtr<Gdk::Pixbuf>& pixbuf,
 // static
 void FileBuffer::pango_context_changed(const Glib::RefPtr<Pango::Context>& context)
 {
+  const Pango::FontDescription font_description (context->get_font_description());
+
   // This magic code calculates the height to rise the error message title,
   // so that it's displayed approximately in line with the error icon. By
   // default the text would appear at the bottom, and since the icon is
   // about 48 pixels tall this looks incredibly ugly.
 
-  int font_size = context->get_font_description().get_size();
+  int font_size = font_description.get_size();
 
   if(font_size <= 0) // urgh, fall back to some reasonable value
     font_size = 10 * Pango::SCALE;
@@ -215,7 +217,32 @@ void FileBuffer::pango_context_changed(const Glib::RefPtr<Pango::Context>& conte
 
   const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
 
-  tagtable->error_title->property_rise() = rise_height;
+  tagtable->error_message->property_font_desc() = font_description;
+  tagtable->error_title  ->property_rise()      = rise_height;
+}
+
+// static
+void FileBuffer::set_match_color(const Gdk::Color& color)
+{
+  RegexxerTags::instance()->match->property_background_gdk() = color;
+}
+
+// static
+void FileBuffer::set_current_color(const Gdk::Color& color)
+{
+  RegexxerTags::instance()->current->property_background_gdk() = color;
+}
+
+// static
+Gdk::Color FileBuffer::get_match_color()
+{
+  return RegexxerTags::instance()->match->property_background_gdk();
+}
+
+// static
+Gdk::Color FileBuffer::get_current_color()
+{
+  return RegexxerTags::instance()->current->property_background_gdk();
 }
 
 bool FileBuffer::is_freeable() const

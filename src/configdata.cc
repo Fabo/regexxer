@@ -65,6 +65,23 @@ public:
 #endif /* HAVE_UMASK */
 
 
+void print_warning(const char* text)
+{
+  g_warning("%s", text);
+}
+
+void print_warning(const char* text, const Glib::ustring& what)
+{
+  g_warning(text, what.c_str());
+}
+
+void print_invalid_value_warning(const Glib::ustring& value, const Glib::ustring& key)
+{
+  g_warning("Error in configuration file: invalid value `%s' for key `%s'",
+            value.c_str(), key.c_str());
+}
+
+
 struct NickValuePair
 {
   const char* nick;
@@ -82,8 +99,7 @@ int enum_from_string(const Glib::ustring& value, const Glib::ustring& key,
       return p->value;
   }
 
-  g_warning("Error in configuration file: invalid value `%s' for key `%s'",
-            value.c_str(), key.c_str());
+  print_invalid_value_warning(value, key);
 
   return p->value; // return some fallback value
 }
@@ -99,14 +115,12 @@ Glib::ustring enum_to_string(int value, const NickValuePair* value_map)
   g_return_val_if_reached("");
 }
 
-
-const NickValuePair menutool_mode_values[] =
+void color_from_string(Gdk::Color& color, const Glib::ustring& value, const Glib::ustring& key)
 {
-  { "menu_and_tool", Regexxer::MODE_MENU_AND_TOOL },
-  { "menu_only",     Regexxer::MODE_MENU_ONLY     },
-  { "tool_only",     Regexxer::MODE_TOOL_ONLY     },
-  { 0,               Regexxer::MODE_MENU_AND_TOOL }
-};
+  if(!color.parse(value))
+    print_invalid_value_warning(value, key);
+}
+
 
 const NickValuePair toolbar_style_values[] =
 {
@@ -117,16 +131,6 @@ const NickValuePair toolbar_style_values[] =
   { 0,            Gtk::TOOLBAR_BOTH_HORIZ }
 };
 
-
-void print_warning(const char* text)
-{
-  g_warning("%s", text);
-}
-
-void print_warning(const char* text, const Glib::ustring& what)
-{
-  g_warning(text, what.c_str());
-}
 
 Glib::RefPtr<Glib::IOChannel> open_config_file(const std::string& mode)
 {
@@ -208,7 +212,9 @@ namespace Regexxer
 
 ConfigData::ConfigData()
 :
-  menutool_mode     (MODE_MENU_AND_TOOL),
+  textview_font     ("Monospace"),
+  match_color       ("orange"),
+  current_color     ("yellow"),
   toolbar_style     (Gtk::TOOLBAR_BOTH_HORIZ),
   fallback_encoding ("ISO-8859-15")
 {}
@@ -227,13 +233,22 @@ void ConfigData::load()
 
     while(read_config_entry(channel, key, value))
     {
-      if(key.raw() == "menutool_mode")
-        menutool_mode = MenuToolMode(enum_from_string(value, key, menutool_mode_values));
+      if(key.raw() == "textview_font")
+        textview_font = value;
+
+      else if(key.raw() == "match_color")
+        color_from_string(match_color, value, key);
+
+      else if(key.raw() == "current_match_color")
+        color_from_string(current_color, value, key);
+
       else if(key.raw() == "toolbar_style")
         toolbar_style = Gtk::ToolbarStyle(enum_from_string(value, key, toolbar_style_values));
+
       else if(key.raw() == "fallback_encoding")
         set_fallback_encoding_from_string(value);
-      else
+
+      else if(key.raw() != "menutool_mode") // ignore key: menutool_mode is no longer supported
         print_warning("Error in configuration file: unknown key `%s'", key);
     }
   }
@@ -257,9 +272,11 @@ void ConfigData::save()
 #endif
     const Glib::RefPtr<Glib::IOChannel> channel = open_config_file("w");
 
-    channel->write("# regexxer configuration file\n");
+    channel->write("# " PACKAGE_STRING " configuration file\n");
 
-    write_config_entry(channel, "menutool_mode", enum_to_string(menutool_mode, menutool_mode_values));
+    write_config_entry(channel, "textview_font", textview_font);
+    write_config_entry(channel, "match_color", Util::color_to_string(match_color));
+    write_config_entry(channel, "current_match_color", Util::color_to_string(current_color));
     write_config_entry(channel, "toolbar_style", enum_to_string(toolbar_style, toolbar_style_values));
     write_config_entry(channel, "fallback_encoding", get_string_from_fallback_encoding());
 
@@ -286,7 +303,7 @@ void ConfigData::set_fallback_encoding_from_string(const Glib::ustring& value)
   }
   else
   {
-    print_warning("Error in configuration file: invalid value `%s' for key `fallback_encoding'", value);
+    print_invalid_value_warning(value, "fallback_encoding");
   }
 }
 

@@ -1,5 +1,29 @@
 2002-12-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/configdata.{cc,h}: Remove config option "menutool_mode"
+	because it's crack now that we have undo et al.  Add config options
+	"textview_font", "match_color" and "current_match_color".
+
+	* src/filebuffer.{cc,h} (pango_context_changed): Assign default
+	font to the error_message tag.
+	([gs]et_match_color): New accessors to tag colors.
+	([gs]et_current_color): ditto.
+
+	* src/mainwindow.{cc,h} ([gs]et_menutool_mode): Get rid of these.
+	(on_filetree_switch_buffer): No longer modify the TextView font
+	globally since we set the tag now.
+	(on_preferences): Handle the added config settings.
+	(load_configuration): ditto
+	(save_configuration): ditto.
+
+	* src/prefdialog.{cc,h} (FontSelectionButton): New utility widget.
+	(ColorSelectionButton): Another new utility widget.
+	(PrefDialog): Revamp the preferences dialog.  That is, add GUI for
+	the new config settings and remove the old one.  Also replace the
+	radio buttons for selecting the toolbar style with an option menu.
+
+2002-12-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.{cc,h} (contains_null): Remove.
 	(color_to_string): Implement.
 	(shell_pattern_to_regex): Handle alternative syntax '^' for
