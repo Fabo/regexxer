@@ -40,8 +40,8 @@ Error::~Error()
 
 Error::Error(const Error& other)
 :
-  message_  (other.message_),
-  offset_   (other.offset_)
+  message_ (other.message_),
+  offset_  (other.offset_)
 {}
 
 Error& Error::operator=(const Error& other)
