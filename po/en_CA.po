@@ -1,6 +1,6 @@
 # Canadian English translation of regexxer.
 # Copyright (C) 2004 Adam Weinberger and the GNOME Foundation
-# This file is distributed under the same license as the regexxer package.
+# This file is distributed under the same licence as the regexxer package.
 # Maintainer: Adam Weinberger <adamw@gnome.org>
 # 
 # 
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-09 01:49+0200\n"
-"PO-Revision-Date: 2004-05-30 14:57-0700\n"
+"POT-Creation-Date: 2004-08-02 14:46-0400\n"
+"PO-Revision-Date: 2004-08-02 14:57-0400\n"
 "Last-Translator:  Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: en_CA <adamw@FreeSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -94,24 +94,78 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-#, qt-format
 msgid "Failed to save file \"%1\": %2"
 msgstr "Failed to save file \"%1\": %2"
 
-#: src/filetree.cc:941
-#, qt-format
+#: src/filetree.cc:949
 msgid "\"%1\" seems to be a binary file."
 msgstr "\"%1\" seems to be a binary file."
 
-#: src/main.cc:81
+#: src/main.cc:84
 msgid "_About"
 msgstr "_About"
 
-#: src/main.cc:82
+#: src/main.cc:85
 msgid "Save _all"
 msgstr "Save _all"
 
-#: src/mainwindow.cc:200 ui/mainwindow.glade.h:1
+#: src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "Find files matching PATTERN"
+
+#: src/main.cc:100
+msgid "PATTERN"
+msgstr "PATTERN"
+
+#: src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "Do not recurse into subdirectories"
+
+#: src/main.cc:102 ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "Also find hidden files"
+
+#: src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "Find text matching REGEX"
+
+#: src/main.cc:103
+msgid "REGEX"
+msgstr "REGEX"
+
+#: src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "Find only the first match in a line"
+
+#: src/main.cc:105 ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "Do case insensitive matching"
+
+#: src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "Replace matches with STRING"
+
+#: src/main.cc:106
+msgid "STRING"
+msgstr "STRING"
+
+#: src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "Print match location to standard output"
+
+#: src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "Do not automatically start search"
+
+#: src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[OPTION]... [FOLDER]"
+
+#: src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr "Try \"regexxer --help\" for more information."
+
+#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -119,7 +173,7 @@ msgstr ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
 
-#: src/mainwindow.cc:341
+#: src/mainwindow.cc:403
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -127,8 +181,7 @@ msgstr ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
 
-#: src/mainwindow.cc:369
-#, qt-format
+#: src/mainwindow.cc:431
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
@@ -136,11 +189,11 @@ msgstr ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
 
-#: src/mainwindow.cc:388
+#: src/mainwindow.cc:450
 msgid "Select a folder"
 msgstr "Select a folder"
 
-#: src/mainwindow.cc:408
+#: src/mainwindow.cc:470
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -148,16 +201,15 @@ msgstr ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
 
-#: src/mainwindow.cc:434
+#: src/mainwindow.cc:496
 msgid "The file search pattern is invalid."
 msgstr "The file search pattern is invalid."
 
-#: src/mainwindow.cc:440
+#: src/mainwindow.cc:502
 msgid "The following errors occurred during search:"
 msgstr "The following errors occurred during search:"
 
-#: src/mainwindow.cc:465
-#, qt-format
+#: src/mainwindow.cc:527
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -165,8 +217,7 @@ msgstr ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:467
-#, qt-format
+#: src/mainwindow.cc:529
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -174,7 +225,7 @@ msgstr ""
 "Error in regular expression:\n"
 "%1"
 
-#: src/mainwindow.cc:689
+#: src/mainwindow.cc:751
 msgid "The following errors occurred during save:"
 msgstr "The following errors occurred during save:"
 
@@ -191,23 +242,22 @@ msgstr ""
 "engine."
 
 #: src/prefdialog.cc:248
-#, qt-format
 msgid "\"%1\" is not a valid encoding."
 msgstr "\"%1\" is not a valid encoding."
 
-#: src/statusline.cc:271
+#: src/statusline.cc:264
 msgid "Stop"
 msgstr "Stop"
 
-#: src/statusline.cc:278
+#: src/statusline.cc:271
 msgid "File:"
 msgstr "File:"
 
-#: src/statusline.cc:281
+#: src/statusline.cc:274
 msgid "Match:"
 msgstr "Match:"
 
-#: src/statusline.cc:292
+#: src/statusline.cc:285
 msgid "Cancels the running search"
 msgstr "Cancels the running search"
 
@@ -240,17 +290,9 @@ msgstr "written by"
 msgid "A regular expression in Perl syntax"
 msgstr "A regular expression in Perl syntax"
 
-#: ui/mainwindow.glade.h:3
-msgid "Also find hidden files"
-msgstr "Also find hidden files"
-
 #: ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "Backward"
-
-#: ui/mainwindow.glade.h:5
-msgid "Do case insensitive matching"
-msgstr "Do case insensitive matching"
 
 #: ui/mainwindow.glade.h:6
 msgid "File backward"
@@ -368,7 +410,7 @@ msgstr "_All files"
 
 #: ui/mainwindow.glade.h:33
 msgid "_Edit"
-msgstr ""
+msgstr "_Edit"
 
 #: ui/mainwindow.glade.h:34
 msgid "_File"
@@ -475,6 +517,3 @@ msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "regexxer attempts to read a file in the following encodings before giving up:"
-
-#~ msgid "*"
-#~ msgstr "*"
