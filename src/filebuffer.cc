@@ -46,7 +46,7 @@ public:
   typedef Glib::RefPtr<Gtk::TextTag> TextTagPtr;
 
   // This is a global singleton shared by all FileBuffer instances.
-  static Glib::RefPtr<RegexxerTags> instance() G_GNUC_CONST;
+  static Glib::RefPtr<RegexxerTags> instance();
 
   TextTagPtr error_message;
   TextTagPtr error_title;
