@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-28 06:45+0200\n"
+"POT-Creation-Date: 2004-05-30 11:45+0200\n"
 "PO-Revision-Date: 2004-05-05 11:34+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
@@ -34,21 +34,10 @@ msgid "Fallback encoding"
 msgstr "Rückfall-Zeichensatz"
 
 #: regexxer.schemas.in.h:3
-msgid ""
-"If enabled, the text direction of the file editor, preview area, and all "
-"file-related entry boxes is always set to left-to-right no matter what the "
-"locale's default direction is."
-msgstr ""
-"Wenn eingeschaltet, die Schriftrichtung des Datei-Editors, des "
-"Vorschaubereichs, und aller Datei-bezogenen Eingabefelder wird immer auf "
-"links-nach-rechts gesetzt, unabhängig von der Vorgaberichtung der "
-"Sprachumgebung."
-
-#: regexxer.schemas.in.h:4
 msgid "Match color"
 msgstr "Farbe eines Treffers"
 
-#: regexxer.schemas.in.h:5
+#: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
 "UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
@@ -58,22 +47,18 @@ msgstr ""
 "dem in der Sprachumgebung eingestellten Zeichensatzes gelesen werden kann. "
 "„iconv --list“ zeigt eine komplette Liste möglicher Werte an."
 
-#: regexxer.schemas.in.h:6
-msgid "Override text direction"
-msgstr "Übergehe Schriftrichtung"
-
-#: regexxer.schemas.in.h:7
+#: regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Schriftart für Text"
 
-#: regexxer.schemas.in.h:8
+#: regexxer.schemas.in.h:6
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr ""
 "Die Hintergrundfarbe die für das Hervorheben von Treffern des Suchausdrucks "
 "verwendet wird."
 
-#: regexxer.schemas.in.h:9
+#: regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
@@ -81,11 +66,11 @@ msgstr ""
 "Die Hintergrundfarbe die für das Hervorheben des ausgewählten Treffers des "
 "Suchausdrucks verwendet wird."
 
-#: regexxer.schemas.in.h:10
+#: regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
 msgstr "Die Schriftart die im Datei-Editor benutzt wird."
 
-#: regexxer.schemas.in.h:11
+#: regexxer.schemas.in.h:9
 msgid ""
 "The style of the application's toolbar. Possible values are \"icons\", \"text"
 "\", \"both\", and \"both-horiz\"."
@@ -93,7 +78,7 @@ msgstr ""
 "Der Stil der Werkzeugleiste der Anwendung. Mögliche Werte sind „icons“, "
 "„text“, „both“ und „both-horiz“."
 
-#: regexxer.schemas.in.h:12
+#: regexxer.schemas.in.h:10
 msgid "Toolbar style"
 msgstr "Stil der Werkzeugleiste"
 
@@ -197,7 +182,7 @@ msgstr ""
 "Das Benutzen der \\C Escape-Sequenz um ein einzelnes Byte zu finden wird "
 "nicht unterstützt."
 
-#: src/pcreshell.cc:149
+#: src/pcreshell.cc:150
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
@@ -205,7 +190,7 @@ msgstr ""
 "Das Rekursions- und Rückreferenz-Limit der Reguläre-Ausdrücke-"
 "Implementierung wurde erreicht."
 
-#: src/prefdialog.cc:260
+#: src/prefdialog.cc:246
 msgid "\"%1\" is not a valid encoding."
 msgstr "„%1“ ist kein gültiger Zeichensatz."
 
@@ -473,22 +458,18 @@ msgid "_File access"
 msgstr "_Dateizugriff"
 
 #: ui/prefdialog.glade.h:16
-msgid "_Ignore the text direction of the locale"
-msgstr "_Ignoriere die Schriftrichtung der Sprachumgebung"
-
-#: ui/prefdialog.glade.h:17
 msgid "_Look'n'feel"
 msgstr "_Oberfläche"
 
-#: ui/prefdialog.glade.h:18
+#: ui/prefdialog.glade.h:17
 msgid "_Match color:"
 msgstr "_Farbe eines Treffers:"
 
-#: ui/prefdialog.glade.h:19
+#: ui/prefdialog.glade.h:18
 msgid "_Text view font:"
 msgstr "_Schriftart für Text:"
 
-#: ui/prefdialog.glade.h:20
+#: ui/prefdialog.glade.h:19
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
