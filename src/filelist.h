@@ -80,11 +80,15 @@ public:
   SigC::Signal0<void>             signal_match_count_changed;
   SigC::Signal0<void>             signal_modified_count_changed;
 
+protected:
+  virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
+
 private:
   struct FindData;
 
   Glib::RefPtr<Gtk::ListStore>  liststore_;
   Gdk::Color                    color_modified_;
+  Gdk::Color                    color_load_failed_;
   bool                          find_running_;
   bool                          find_stop_;
   long                          sum_matches_;

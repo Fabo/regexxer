@@ -119,24 +119,24 @@ FileList::FileList()
 {
   set_model(liststore_);
 
-  const FileListColumns& columns = filelist_columns();
+  const FileListColumns& model_columns = filelist_columns();
 
-  append_column("File", columns.filename);
-  append_column("#",    columns.matchcount);
+  append_column("File", model_columns.filename);
+  append_column("#",    model_columns.matchcount);
 
-  Gtk::TreeView::Column *const file_column = get_column(0);
-  file_column->set_cell_data_func(*file_column->get_first_cell_renderer(),
-                                  SigC::slot(*this, &FileList::cell_data_func));
-  file_column->set_resizable(true);
+  Gtk::TreeView::Column& file_column = *get_column(0);
+  Gtk::CellRenderer& file_renderer = *file_column.get_first_cell_renderer();
+  file_column.set_cell_data_func(file_renderer, SigC::slot(*this, &FileList::cell_data_func));
+  file_column.set_resizable(true);
+
+  Gtk::TreeView::Column& count_column = *get_column(1);
+  Gtk::CellRenderer& count_renderer = *count_column.get_first_cell_renderer();
+  count_column.set_cell_data_func(count_renderer, SigC::slot(*this, &FileList::cell_data_func));
+  count_column.set_alignment(1.0);
+  count_renderer.property_xalign() = 1.0;
+
+  liststore_->set_sort_column_id(model_columns.filename, Gtk::SORT_ASCENDING);
   set_search_column(0);
-
-  Gtk::TreeView::Column *const count_column = get_column(1);
-  count_column->set_cell_data_func(*count_column->get_first_cell_renderer(),
-                                   SigC::slot(*this, &FileList::cell_data_func));
-  count_column->set_alignment(1.0);
-  count_column->get_first_cell_renderer()->property_xalign() = 1.0;
-
-  liststore_->set_sort_column_id(columns.filename, Gtk::SORT_ASCENDING);
 
   get_selection()->signal_changed().connect(SigC::slot(*this, &FileList::on_selection_changed));
 }
@@ -419,22 +419,29 @@ int FileList::get_modified_count() const
   return modified_count_;
 }
 
+/**** Regexxer::FileList -- protected **************************************/
+
+void FileList::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
+{
+  color_load_failed_ = get_style()->get_text(Gtk::STATE_INSENSITIVE);
+
+  Gtk::TreeView::on_style_changed(previous_style);
+}
+
 /**** Regexxer::FileList -- private ****************************************/
 
 void FileList::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
 {
-  Gtk::CellRendererText *const renderer = dynamic_cast<Gtk::CellRendererText*>(cell);
-
-  g_return_if_fail(renderer != 0);
-  g_return_if_fail(iter);
+  Gtk::CellRendererText *const renderer = static_cast<Gtk::CellRendererText*>(cell);
 
   if(const FileInfoPtr fileinfo = (*iter)[filelist_columns().fileinfo])
   {
     if(fileinfo->load_failed)
     {
-      renderer->property_foreground_gdk() = get_style()->get_text(Gtk::STATE_INSENSITIVE);
+      renderer->property_foreground_gdk() = color_load_failed_;
       return;
     }
+
     if(fileinfo->buffer && fileinfo->buffer->get_modified())
     {
       renderer->property_foreground_gdk() = color_modified_;

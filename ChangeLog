@@ -1,3 +1,11 @@
+2002-10-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filelist.{cc,h}: Cache the Gdk::Color object used for
+	files which failed to load.
+
+	* src/mainwindow.cc: Replace some unnecessary run-time checked
+	casts with static ones.
+
 2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/mainwindow.cc (MainWindow::on_filelist_bound_state_changed):

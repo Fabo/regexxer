@@ -358,7 +358,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   ScrolledWindow *const scrollwin = new ScrolledWindow();
   vbox_textview->pack_start(*manage(scrollwin), PACK_EXPAND_WIDGET);
 
-  textview_ = new TextView();
+  textview_ = new TextView(FileBuffer::create());
   scrollwin->add(*manage(textview_));
   textview_->set_editable(false);
 
@@ -457,7 +457,7 @@ bool MainWindow::after_exec_search()
 
 void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo)
 {
-  const FileBufferPtr old_buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer());
+  const FileBufferPtr old_buffer = FileBufferPtr::cast_static(textview_->get_buffer());
 
   if(fileinfo && fileinfo->buffer == old_buffer)
     return;
@@ -518,7 +518,7 @@ void MainWindow::on_filelist_bound_state_changed()
   button_prev_file_->set_sensitive((bound & BOUND_FIRST) == 0);
   button_next_file_->set_sensitive((bound & BOUND_LAST)  == 0);
 
-  if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer()))
+  if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
     bound &= buffer->get_bound_state();
 
   button_prev_->set_sensitive((bound & BOUND_FIRST) == 0);
@@ -561,7 +561,7 @@ void MainWindow::on_go_next_file(bool move_forward)
 
 void MainWindow::on_go_next(bool move_forward)
 {
-  if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer()))
+  if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
   {
     if(const Glib::RefPtr<Gtk::TextMark> mark = buffer->get_next_match(move_forward))
     {
@@ -578,7 +578,7 @@ void MainWindow::on_go_next(bool move_forward)
 
 void MainWindow::on_replace()
 {
-  if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer()))
+  if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
   {
     buffer->replace_current_match(entry_substitution_->get_text());
     on_go_next(true);
@@ -587,7 +587,7 @@ void MainWindow::on_replace()
 
 void MainWindow::on_replace_file()
 {
-  if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer()))
+  if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
   {
     buffer->replace_all_matches(entry_substitution_->get_text());
   }
@@ -600,7 +600,7 @@ void MainWindow::on_replace_all()
 
 void MainWindow::update_preview()
 {
-  if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer()))
+  if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
   {
     Glib::ustring preview;
     const int pos = buffer->get_line_preview(entry_substitution_->get_text(), preview);
