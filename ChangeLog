@@ -1,5 +1,13 @@
 2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (FileTree::color_modified_): Use "Accent Red"
+	from the basic GNOME 32-color palette instead of rgb.txt "red".
+
+	(FileTree::text_cell_data_func): Set the text style to "oblique"
+	in addition to painting in red color if the file was modified.
+
+2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/pcreshell.cc (Pattern::get_substring_bounds): Sanity-check
 	for index >= 0 too.
 

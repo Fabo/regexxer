@@ -62,7 +62,7 @@ namespace Regexxer
 FileTree::FileTree()
 :
   treestore_      (Gtk::TreeStore::create(filetree_columns())),
-  color_modified_ ("red"),
+  color_modified_ ("#DF421E"), // accent red
   sum_matches_    (0)
 {
   using namespace Gtk;
@@ -357,6 +357,11 @@ void FileTree::text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel
     renderer.property_foreground_gdk() = *color;
   else
     renderer.property_foreground_gdk().reset_value();
+
+  if (color == &color_modified_)
+    renderer.property_style() = Pango::STYLE_OBLIQUE;
+  else
+    renderer.property_style().reset_value();
 }
 
 // static
