@@ -1,3 +1,9 @@
+regexxer 0.3:
+
+2002-11-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* configure.ac (AC_INIT): Bump version to 0.3.
+
 2002-11-10  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/stringutils.cc (transform_pathname): Use byte-wise comparison
