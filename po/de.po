@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-13 11:10+0200\n"
+"POT-Creation-Date: 2004-07-14 10:17+0200\n"
 "PO-Revision-Date: 2004-05-05 11:34+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
@@ -100,7 +100,7 @@ msgstr "#"
 msgid "Failed to save file \"%1\": %2"
 msgstr "Fehler beim Speichern der Datei „%1“: %2"
 
-#: src/filetree.cc:941
+#: src/filetree.cc:949
 #, qt-format
 msgid "\"%1\" seems to be a binary file."
 msgstr "„%1“ scheint eine Binärdatei zu sein."
@@ -154,18 +154,22 @@ msgid "STRING"
 msgstr "STRING"
 
 #: src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "Zeige Trefferposition auf Standardausgabe an"
+
+#: src/main.cc:108
 msgid "Do not automatically start search"
 msgstr "Keine automatische Suche starten"
 
-#: src/main.cc:117
+#: src/main.cc:118
 msgid "[OPTION]... [FOLDER]"
 msgstr "[OPTION]... [ORDNER]"
 
-#: src/main.cc:139
-msgid "Try `regexxer --help' for more information."
+#: src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
 msgstr "„regexxer --help“ gibt weitere Informationen."
 
-#: src/mainwindow.cc:232 ui/mainwindow.glade.h:1
+#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -174,7 +178,7 @@ msgstr ""
 "Zeichenklassen [ab] und Klammerausdrücke im csh-Stil {a,b} werden "
 "unterstützt."
 
-#: src/mainwindow.cc:373
+#: src/mainwindow.cc:403
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -182,7 +186,7 @@ msgstr ""
 "Einige Dateien wurden noch nicht gespeichert.\n"
 "Trotzdem beenden?"
 
-#: src/mainwindow.cc:401
+#: src/mainwindow.cc:431
 #, qt-format
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
@@ -191,11 +195,11 @@ msgstr ""
 "Der Ordnername „%1“ enthält Zeichen die im Zeichensatz des lokalen "
 "Dateisystems nicht darstellbar sind."
 
-#: src/mainwindow.cc:420
+#: src/mainwindow.cc:450
 msgid "Select a folder"
 msgstr "Verzeichnisauswahl"
 
-#: src/mainwindow.cc:440
+#: src/mainwindow.cc:470
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -203,15 +207,15 @@ msgstr ""
 "Einige Dateien wurden noch nicht gespeichert.\n"
 "Trotzdem fortsetzen?"
 
-#: src/mainwindow.cc:466
+#: src/mainwindow.cc:496
 msgid "The file search pattern is invalid."
 msgstr "Das Dateinamen-Suchmuster ist ungültig."
 
-#: src/mainwindow.cc:472
+#: src/mainwindow.cc:502
 msgid "The following errors occurred during search:"
 msgstr "Die folgenden Fehler sind beim Suchen aufgetreten:"
 
-#: src/mainwindow.cc:497
+#: src/mainwindow.cc:527
 #, qt-format
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
@@ -220,7 +224,7 @@ msgstr ""
 "Fehler in regulärem Ausdruck bei „%1“ (Index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:499
+#: src/mainwindow.cc:529
 #, qt-format
 msgid ""
 "Error in regular expression:\n"
@@ -229,7 +233,7 @@ msgstr ""
 "Fehler in regulärem Ausdruck:\n"
 "%1"
 
-#: src/mainwindow.cc:721
+#: src/mainwindow.cc:751
 msgid "The following errors occurred during save:"
 msgstr "Die folgenden Fehler sind beim Speichern aufgetreten:"
 
@@ -529,6 +533,3 @@ msgid ""
 msgstr ""
 "regexxer versucht eine Datei in den folgenden Zeichensätzen zu lesen bevor "
 "ein Fehlschlag angezeigt wird:"
-
-#~ msgid "*"
-#~ msgstr "*"
