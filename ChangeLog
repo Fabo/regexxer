@@ -1,5 +1,10 @@
 2002-11-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac (AM_INIT_AUTOMAKE): Remove 'dist-bzip2' option
+	since we don't distribute bzipped tarballs right now.
+
+2002-11-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac: Get rid of AC_CANONICAL_{BUILD,HOST,TARGET}.
 	These don't seem to be necessary anymore.
 

@@ -24,7 +24,7 @@ AC_REVISION([$Revision$])
 AC_CONFIG_SRCDIR([src/pcreshell.cc])
 
 AM_CONFIG_HEADER([config.h])
-AM_INIT_AUTOMAKE([gnu dist-bzip2 no-define nostdinc])
+AM_INIT_AUTOMAKE([gnu no-define nostdinc])
 
 AC_PROG_CC()
 AC_PROG_CXX()
