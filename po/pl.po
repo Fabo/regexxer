@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-26 15:35+0200\n"
+"POT-Creation-Date: 2004-09-26 18:31+0200\n"
 "PO-Revision-Date: 2004-09-21 20:47+02000\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -28,15 +28,15 @@ msgstr "regexxer - narzędzie do wyszukiwania"
 
 #: regexxer.schemas.in.h:1
 msgid "Current-match color"
-msgstr ""
+msgstr "Kolor bieżącego dopasowania"
 
 #: regexxer.schemas.in.h:2
 msgid "Fallback encoding"
-msgstr ""
+msgstr "Kodowanie zastępcze"
 
 #: regexxer.schemas.in.h:3
 msgid "Match color"
-msgstr ""
+msgstr "Kolor dopasowania"
 
 #: regexxer.schemas.in.h:4
 msgid ""
@@ -44,40 +44,48 @@ msgid ""
 "UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
 "for a complete list of possible values."
 msgstr ""
+"Nazwa zestawu kodowania znaków używana, gdy pliku nie można odczytać zarówno "
+"w UTF-8 jak i zestawie znaków zdefiniowanym przez bieżące ustawienia locale. "
+"Spróbuj \"iconv --list\" aby uzyskać listę dostępnych wartości."
 
 #: regexxer.schemas.in.h:5
 msgid "Text view font"
-msgstr ""
+msgstr "Czcionka wyświetlania tekstu"
 
 #: regexxer.schemas.in.h:6
 msgid ""
 "The background color used to highlight matches of the search expression."
-msgstr ""
+msgstr "Kolor tła używany do wyróżniania dopasowań wyszukiwanego wyrażenia."
 
 #: regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
 msgstr ""
+"Kolor tła używany do wyróżniania obecnie zaznaczonych dopasowań "
+"wyszukiwanego wyrażenia."
 
 #: regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
-msgstr ""
+msgstr "Czcionka używana w edytorze plików."
 
 #: regexxer.schemas.in.h:9
 msgid ""
 "The style of the application's toolbar. Possible values are \"icons\", \"text"
 "\", \"both\", and \"both-horiz\"."
 msgstr ""
+"Styl paska narzędziowego aplikacji. Dopuszczalne wartości to \"icons"
+"\" (ikony), \"text\" (tekst), \"both\" (ikony i tekst) oraz \"both-horiz"
+"\" (tekst i ikony poziomo)."
 
 #: regexxer.schemas.in.h:10
 msgid "Toolbar style"
-msgstr ""
+msgstr "Styl paska narzędziowego"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
 msgid "Can't read file:"
-msgstr ""
+msgstr "Nie można odczytać pliku:"
 
 #: src/filetree.cc:81
 msgid "File"
@@ -105,11 +113,11 @@ msgstr "Zapisz _wszystko"
 
 #: src/main.cc:100
 msgid "Find files matching PATTERN"
-msgstr ""
+msgstr "Wyszukuje pliki pasujące do WZORCA"
 
 #: src/main.cc:100
 msgid "PATTERN"
-msgstr ""
+msgstr "WZORZEC"
 
 #: src/main.cc:101
 msgid "Do not recurse into subdirectories"
@@ -121,15 +129,15 @@ msgstr "Wyszukiwanie również ukrytych plików"
 
 #: src/main.cc:103
 msgid "Find text matching REGEX"
-msgstr ""
+msgstr "Wyszukuje tekst pasujący do WYRAŻENIA REGULARNEGO"
 
 #: src/main.cc:103
 msgid "REGEX"
-msgstr ""
+msgstr "WYRAŻENIE REGULARNE"
 
 #: src/main.cc:104
 msgid "Find only the first match in a line"
-msgstr ""
+msgstr "Wyszukiwanie tylko pierwszego dopasowania w linii"
 
 #: src/main.cc:105 ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
@@ -137,33 +145,35 @@ msgstr "Wyszukiwanie niezależne od wielkości liter"
 
 #: src/main.cc:106
 msgid "Replace matches with STRING"
-msgstr ""
+msgstr "Zastępuje dopasowania CIĄGIEM"
 
 #: src/main.cc:106
 msgid "STRING"
-msgstr ""
+msgstr "CIĄG"
 
 #: src/main.cc:107
 msgid "Print match location to standard output"
-msgstr ""
+msgstr "Wypisuje położenie dopasowania na standardowe wyjście"
 
 #: src/main.cc:108
 msgid "Do not automatically start search"
-msgstr ""
+msgstr "Bez automatycznego uruchamiania wyszukiwania"
 
 #: src/main.cc:118
 msgid "[OPTION]... [FOLDER]"
-msgstr ""
+msgstr "[OPCJA]... [FOLDER]"
 
 #: src/main.cc:141
 msgid "Try \"regexxer --help\" for more information."
-msgstr ""
+msgstr "Spróbuj \"regexxer --help\" aby uzyskać więcej informacji."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
 msgstr ""
+"Wzorzec nazwy pliku taki jak używany przez powłokę. Obsługiwane są klasy "
+"znaków [ab] oraz wyrażenia klamrowe w stylu csh {a,b}."
 
 #: src/mainwindow.cc:403
 msgid ""
@@ -232,6 +242,8 @@ msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
 msgstr ""
+"Osiągnięto ograniczenie rekurencji i powrotu mechanizmu obsługi wyrażenia "
+"regularnego."
 
 #: src/prefdialog.cc:248
 msgid "\"%1\" is not a valid encoding."
