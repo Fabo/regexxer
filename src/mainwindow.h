@@ -89,10 +89,12 @@ private:
   void on_select_folder();
   void on_find_files();
   void on_exec_search();
+  bool after_exec_search();
 
+  void on_filelist_switch_buffer(Util::SharedPtr<FileInfo> fileinfo);
   void on_filelist_match_count_changed();
   void on_filelist_modified_count_changed();
-  void on_filelist_switch_buffer(Util::SharedPtr<FileInfo> fileinfo, BoundState bound);
+  void on_filelist_bound_state_changed();
 
   void on_buffer_match_count_changed(int match_count);
   void on_buffer_modified_changed();

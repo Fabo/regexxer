@@ -134,26 +134,30 @@ MainWindow::MainWindow()
   set_title_filename();
   set_default_size(600, 400);
 
-  Box *const vbox_main = new VBox();
-  add(*manage(vbox_main));
+  {
+    std::auto_ptr<Paned> paned (new HPaned());
 
-  vbox_main->pack_start(*manage(create_toolbar()), PACK_SHRINK);
+    // These two should be created first so that we can connect the contained objects.
+    paned->pack1(*manage(create_left_pane()),  EXPAND);
+    paned->pack2(*manage(create_right_pane()), EXPAND);
 
-  Box *const vbox_interior = new VBox();
-  vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);
-  vbox_interior->set_border_width(2);
+    Box *const vbox_main = new VBox();
+    add(*manage(vbox_main));
 
-  Box *const hbox_bottom = new HBox(false, 1);
-  vbox_main->pack_start(*manage(hbox_bottom), PACK_SHRINK);
-  hbox_bottom->pack_start(*manage(new ProgressBar()), PACK_SHRINK);
-  hbox_bottom->pack_start(*manage(new Statusbar()), PACK_EXPAND_WIDGET);
+    vbox_main->pack_start(*manage(create_toolbar()), PACK_SHRINK);
 
-  Paned *const paned = new HPaned();
-  vbox_interior->pack_start(*manage(paned), PACK_EXPAND_WIDGET);
-  vbox_interior->pack_start(*manage(create_buttonbox()), PACK_SHRINK);
+    Box *const vbox_interior = new VBox();
+    vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);
+    vbox_interior->set_border_width(2);
 
-  paned->pack1(*manage(create_left_pane()),  EXPAND);
-  paned->pack2(*manage(create_right_pane()), EXPAND);
+    Box *const hbox_bottom = new HBox(false, 1);
+    vbox_main->pack_start(*manage(hbox_bottom), PACK_SHRINK);
+    hbox_bottom->pack_start(*manage(new ProgressBar()), PACK_SHRINK);
+    hbox_bottom->pack_start(*manage(new Statusbar()), PACK_EXPAND_WIDGET);
+
+    vbox_interior->pack_start(*manage(paned.release()), PACK_EXPAND_WIDGET);
+    vbox_interior->pack_start(*manage(create_buttonbox()), PACK_SHRINK);
+  }
 
   show_all_children();
 
@@ -163,14 +167,17 @@ MainWindow::MainWindow()
 
   signal_hide().connect_notify(SigC::slot(*filelist_, &FileList::stop_find_files));
 
+  filelist_->signal_switch_buffer.connect(
+      SigC::slot(*this, &MainWindow::on_filelist_switch_buffer));
+
+  filelist_->signal_bound_state_changed.connect(
+      SigC::slot(*this, &MainWindow::on_filelist_bound_state_changed));
+
   filelist_->signal_match_count_changed.connect(
       SigC::slot(*this, &MainWindow::on_filelist_match_count_changed));
 
   filelist_->signal_modified_count_changed.connect(
       SigC::slot(*this, &MainWindow::on_filelist_modified_count_changed));
-
-  filelist_->signal_switch_buffer.connect(
-      SigC::slot(*this, &MainWindow::on_filelist_switch_buffer));
 }
 
 MainWindow::~MainWindow()
@@ -180,14 +187,15 @@ Gtk::Widget* MainWindow::create_toolbar()
 {
   using namespace Gtk;
   using namespace Gtk::Toolbar_Helpers;
+  using SigC::slot;
 
   std::auto_ptr<Toolbar> toolbar (new Toolbar());
   ToolList& tools = toolbar->tools();
 
-  tools.push_back(StockElem(Stock::SAVE, &dummy_handler));
+  tools.push_back(StockElem(Stock::SAVE, slot(*filelist_, &FileList::save_current_file)));
   toolbutton_save_ = tools.back().get_widget();
 
-  tools.push_back(StockElem(StockID("regexxer-save-all"), &dummy_handler));
+  tools.push_back(StockElem(StockID("regexxer-save-all"), slot(*filelist_, &FileList::save_all_files)));
   toolbutton_save_all_ = tools.back().get_widget();
 
   //tools.push_back(Space());
@@ -195,7 +203,7 @@ Gtk::Widget* MainWindow::create_toolbar()
   tools.push_back(Space());
   tools.push_back(StockElem(Stock::PREFERENCES, &dummy_handler));
   tools.push_back(Space());
-  tools.push_back(StockElem(Stock::QUIT, SigC::slot(*this, &Widget::hide)));
+  tools.push_back(StockElem(Stock::QUIT, slot(*this, &Widget::hide)));
 
   toolbar->set_toolbar_style(TOOLBAR_BOTH_HORIZ);
 
@@ -414,11 +422,6 @@ void MainWindow::on_find_files()
 
 void MainWindow::on_exec_search()
 {
-  button_prev_file_->set_sensitive(false);
-  button_prev_     ->set_sensitive(false);
-  button_next_     ->set_sensitive(false);
-  button_next_file_->set_sensitive(false);
-
   try
   {
     Pcre::Pattern pattern (
@@ -435,22 +438,24 @@ void MainWindow::on_exec_search()
 
   if(filelist_->get_match_count() > 0)
   {
-    filelist_->select_first_file();
-    on_go_next(true);
+    // Scrolling has to be post-poned after the redraw, otherwise we might
+    // not end up where we want to.  So do that by installing an idle handler.
+
+    Glib::signal_idle().connect(
+        SigC::slot(*this, &MainWindow::after_exec_search),
+        Glib::PRIORITY_HIGH_IDLE + 25); // slightly less than redraw (+20)
   }
 }
 
-void MainWindow::on_filelist_match_count_changed()
+bool MainWindow::after_exec_search()
 {
-  button_replace_all_->set_sensitive(filelist_->get_match_count() > 0);
+  filelist_->select_first_file();
+  on_go_next(true);
+
+  return false;
 }
 
-void MainWindow::on_filelist_modified_count_changed()
-{
-  toolbutton_save_all_->set_sensitive(filelist_->get_modified_count() > 0);
-}
-
-void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState bound)
+void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo)
 {
   const FileBufferPtr old_buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer());
 
@@ -465,9 +470,6 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
     buffer_connections_.clear();
     old_buffer->forget_current_match();
   }
-
-  button_prev_file_->set_sensitive((bound & BOUND_FIRST) == 0);
-  button_next_file_->set_sensitive((bound & BOUND_LAST)  == 0);
 
   if(fileinfo && fileinfo->buffer)
   {
@@ -509,6 +511,24 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
   update_preview();
 }
 
+void MainWindow::on_filelist_bound_state_changed()
+{
+  const BoundState bound = filelist_->get_bound_state();
+
+  button_prev_file_->set_sensitive((bound & BOUND_FIRST) == 0);
+  button_next_file_->set_sensitive((bound & BOUND_LAST)  == 0);
+}
+
+void MainWindow::on_filelist_match_count_changed()
+{
+  button_replace_all_->set_sensitive(filelist_->get_match_count() > 0);
+}
+
+void MainWindow::on_filelist_modified_count_changed()
+{
+  toolbutton_save_all_->set_sensitive(filelist_->get_modified_count() > 0);
+}
+
 void MainWindow::on_buffer_match_count_changed(int match_count)
 {
   button_replace_file_->set_sensitive(match_count > 0);
@@ -521,8 +541,10 @@ void MainWindow::on_buffer_modified_changed()
 
 void MainWindow::on_buffer_bound_state_changed(BoundState bound)
 {
-  button_prev_->set_sensitive((bound & BOUND_FIRST) == 0 || button_prev_file_->sensitive());
-  button_next_->set_sensitive((bound & BOUND_LAST)  == 0 || button_next_file_->sensitive());
+  bound &= filelist_->get_bound_state();
+
+  button_prev_->set_sensitive((bound & BOUND_FIRST) == 0);
+  button_next_->set_sensitive((bound & BOUND_LAST)  == 0);
 }
 
 void MainWindow::on_go_next_file(bool move_forward)
@@ -568,11 +590,6 @@ void MainWindow::on_replace_file()
 void MainWindow::on_replace_all()
 {
   filelist_->replace_all_matches(entry_substitution_->get_text());
-
-  button_prev_file_->set_sensitive(false);
-  button_prev_     ->set_sensitive(false);
-  button_next_     ->set_sensitive(false);
-  button_next_file_->set_sensitive(false);
 }
 
 void MainWindow::update_preview()

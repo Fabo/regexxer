@@ -1,5 +1,12 @@
 2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.{cc,h} src/filelist.{cc,h}: Implement "Save" and
+	"Save all" functionality.  Also, separate the file list boundary
+	notification from signal_switch_buffer() -- should be a lot more
+	robust now.
+
+2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.{cc,h} src/filelist.{cc,h}: Add "Save all" tool
 	button and implement sensitivity setting for "Save" and "Save all".
 

@@ -154,14 +154,19 @@ void FileList::find_files(const Glib::ustring& dirname,
   if(chop_off > 0 && *startdir.rbegin() != G_DIR_SEPARATOR)
     ++chop_off;
 
+  const bool modified_count_changed = (modified_count_ != 0);
+
   get_selection()->unselect_all(); // workaround for GTK+ <= 2.0.6 (#94868)
   liststore_->clear();
 
-  if(modified_count_ != 0)
-  {
-    modified_count_ = 0;
-    signal_modified_count_changed();
-  }
+  sum_matches_    = 0;
+  modified_count_ = 0;
+
+  signal_bound_state_changed(); // emit
+  signal_match_count_changed(); // emit
+
+  if(modified_count_changed)
+    signal_modified_count_changed(); // emit
 
   find_stop_    = false;
   find_running_ = true;
@@ -177,11 +182,80 @@ void FileList::find_files(const Glib::ustring& dirname,
   }
 
   find_running_ = false;
+
+  signal_bound_state_changed(); // emit
 }
 
 void FileList::stop_find_files()
 {
   find_stop_ = true;
+}
+
+void FileList::save_current_file()
+{
+  if(Gtk::TreeModel::iterator iter = get_selection()->get_selected())
+  {
+    const FileInfoPtr fileinfo = (*iter)[filelist_columns().fileinfo];
+
+    try
+    {
+      if(fileinfo->buffer)
+        save_file(fileinfo);
+    }
+    catch(...)
+    {
+      const Glib::ustring filename = Glib::filename_to_utf8(fileinfo->fullname);
+      g_warning("writing to file `%s' failed", filename.c_str());
+    }
+  }
+}
+
+void FileList::save_all_files()
+{
+  const FileListColumns& columns = filelist_columns();
+  int new_modified_count = modified_count_;
+
+  for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
+  {
+    const FileInfoPtr fileinfo = (*iter)[columns.fileinfo];
+
+    if(fileinfo->buffer && fileinfo->buffer->get_modified())
+    {
+      try
+      {
+        save_file(fileinfo);
+        --new_modified_count;
+      }
+      catch(...)
+      {
+        const Glib::ustring filename = Glib::filename_to_utf8(fileinfo->fullname);
+        g_warning("writing to file `%s' failed", filename.c_str());
+      }
+
+      liststore_->row_changed(Gtk::TreePath(iter), iter);
+    }
+  }
+
+  if(modified_count_ != new_modified_count)
+  {
+    modified_count_ = new_modified_count;
+    signal_modified_count_changed(); // emit
+  }
+}
+
+void FileList::select_first_file()
+{
+  const FileListColumns& columns = filelist_columns();
+
+  for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
+  {
+    if((*iter)[columns.matchcount] > 0)
+    {
+      get_selection()->select(iter);
+      scroll_to_row(Gtk::TreePath(iter), 0.5);
+      return;
+    }
+  }
 }
 
 bool FileList::select_next_file(bool move_forward)
@@ -218,25 +292,33 @@ bool FileList::select_next_file(bool move_forward)
   return false;
 }
 
-void FileList::select_first_file()
+BoundState FileList::get_bound_state()
 {
-  const FileListColumns& columns = filelist_columns();
+  BoundState bound = BOUND_FIRST | BOUND_LAST;
 
-  for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
+  if(sum_matches_ > 0)
   {
-    if((*iter)[columns.matchcount] > 0)
+    if(const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
     {
-      get_selection()->select(iter);
-      scroll_to_row(Gtk::TreePath(iter), 0.5);
-      return;
+      Gtk::TreePath path (iter);
+
+      if(path > path_match_first_)
+        bound &= ~BOUND_FIRST;
+
+      if(path < path_match_last_)
+        bound &= ~BOUND_LAST;
     }
   }
+
+  return bound;
 }
 
 void FileList::find_matches(Pcre::Pattern& pattern, bool multiple)
 {
   const FileListColumns& columns = filelist_columns();
   long new_sum_matches = 0;
+
+  conn_match_count_.block();
 
   for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
   {
@@ -265,6 +347,10 @@ void FileList::find_matches(Pcre::Pattern& pattern, bool multiple)
   }
 
   sum_matches_ = new_sum_matches;
+
+  conn_match_count_.unblock();
+
+  signal_bound_state_changed(); // emit
   signal_match_count_changed(); // emit
 }
 
@@ -277,8 +363,9 @@ void FileList::replace_all_matches(const Glib::ustring& substitution)
 {
   const Glib::RefPtr<Glib::MainContext> main_context = Glib::MainContext::get_default();
   const FileListColumns& columns = filelist_columns();
-
   int new_modified_count = 0;
+
+  conn_match_count_.block();
 
   for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
   {
@@ -304,8 +391,11 @@ void FileList::replace_all_matches(const Glib::ustring& substitution)
   const bool modified_count_changed = (modified_count_ != new_modified_count);
   modified_count_ = new_modified_count;
 
+  conn_match_count_.unblock();
+
   g_return_if_fail(sum_matches_ == 0);
 
+  signal_bound_state_changed(); // emit
   signal_match_count_changed(); // emit
 
   if(modified_count_changed)
@@ -391,9 +481,10 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
 void FileList::on_selection_changed()
 {
   const FileListColumns& columns = filelist_columns();
-
   FileInfoPtr fileinfo;
-  BoundState bound = BOUND_FIRST | BOUND_LAST;
+
+  conn_match_count_.disconnect();
+  conn_modified_changed_.disconnect();
 
   if(Gtk::TreeModel::iterator iter = get_selection()->get_selected())
   {
@@ -401,9 +492,6 @@ void FileList::on_selection_changed()
 
     if(!fileinfo->buffer)
       load_file(fileinfo);
-
-    conn_match_count_.disconnect();
-    conn_modified_changed_.disconnect();
 
     if(fileinfo->buffer)
     {
@@ -413,20 +501,10 @@ void FileList::on_selection_changed()
       conn_modified_changed_ = fileinfo->buffer->signal_modified_changed().
           connect(SigC::slot(*this, &FileList::on_buffer_modified_changed));
     }
-
-    if(sum_matches_ > 0)
-    {
-      Gtk::TreePath path (iter);
-
-      if(path > path_match_first_)
-        bound = (bound & ~BOUND_FIRST);
-
-      if(path < path_match_last_)
-        bound = (bound & ~BOUND_LAST);
-    }
   }
 
-  signal_switch_buffer(fileinfo, bound); // emit
+  signal_switch_buffer(fileinfo); // emit
+  signal_bound_state_changed();   // emit
 }
 
 void FileList::on_buffer_match_count_changed(int match_count)
@@ -501,6 +579,8 @@ void FileList::on_buffer_match_count_changed(int match_count)
 
       path_match_last_ = path;
     }
+
+    signal_bound_state_changed(); // emit
   }
 
   signal_match_count_changed(); // emit
@@ -527,8 +607,9 @@ void FileList::on_buffer_modified_changed()
 
 void FileList::load_file(const Util::SharedPtr<FileInfo>& fileinfo)
 {
-  std::ifstream input_stream (fileinfo->fullname.c_str(), std::ios::in | std::ios::binary);
+  std::ifstream input_stream;
   input_stream.exceptions(std::ios_base::badbit);
+  input_stream.open(fileinfo->fullname.c_str(), std::ios::in | std::ios::binary);
 
   std::string encoding = "UTF-8";
   Glib::RefPtr<FileBuffer> buffer = load_stream(input_stream);
@@ -540,7 +621,7 @@ void FileList::load_file(const Util::SharedPtr<FileInfo>& fileinfo)
       input_stream.clear();
       input_stream.seekg(0);
       Glib::IConv iconv ("UTF-8", encoding);
-      buffer = convert_stream(input_stream, iconv);
+      buffer = load_convert_stream(input_stream, iconv);
     }
     if(!buffer && !Util::encodings_equal(encoding, fallback_encoding))
     {
@@ -548,7 +629,7 @@ void FileList::load_file(const Util::SharedPtr<FileInfo>& fileinfo)
       input_stream.seekg(0);
       encoding = fallback_encoding;
       Glib::IConv iconv ("UTF-8", encoding);
-      buffer = convert_stream(input_stream, iconv);
+      buffer = load_convert_stream(input_stream, iconv);
     }
     if(!buffer)
     {
@@ -604,7 +685,7 @@ Glib::RefPtr<FileBuffer> FileList::load_stream(std::istream& input)
   return text_buffer;
 }
 
-Glib::RefPtr<FileBuffer> FileList::convert_stream(std::istream& input, Glib::IConv& iconv)
+Glib::RefPtr<FileBuffer> FileList::load_convert_stream(std::istream& input, Glib::IConv& iconv)
 {
   const Glib::RefPtr<FileBuffer> text_buffer = FileBuffer::create();
 
@@ -656,7 +737,9 @@ Glib::RefPtr<FileBuffer> FileList::convert_stream(std::istream& input, Glib::ICo
       }
       else
       {
-        g_assert(err_no == EILSEQ);
+        if(err_no != EILSEQ)
+          g_error("unexpected IConv error: %s", g_strerror(err_no));
+
         return Glib::RefPtr<FileBuffer>();
       }
     }
@@ -674,6 +757,76 @@ Glib::RefPtr<FileBuffer> FileList::convert_stream(std::istream& input, Glib::ICo
     return Glib::RefPtr<FileBuffer>();
 
   return text_buffer;
+}
+
+void FileList::save_file(const Util::SharedPtr<FileInfo>& fileinfo)
+{
+  std::ofstream output_stream;
+  output_stream.exceptions(std::ios_base::badbit | std::ios::failbit);
+  output_stream.open(fileinfo->fullname.c_str(), std::ios::out | std::ios::trunc | std::ios::binary);
+
+  if(Util::encodings_equal(fileinfo->encoding, "UTF-8"))
+  {
+    save_stream(output_stream, fileinfo->buffer);
+  }
+  else
+  {
+    Glib::IConv iconv (fileinfo->encoding, "UTF-8");
+    save_convert_stream(output_stream, iconv, fileinfo->buffer);
+  }
+
+  output_stream.close(); // might throw
+
+  fileinfo->buffer->set_modified(false);
+}
+
+void FileList::save_stream(std::ostream& output, const Glib::RefPtr<FileBuffer>& buffer)
+{
+  FileBuffer::iterator start = buffer->begin();
+  FileBuffer::iterator stop  = start;
+
+  for(; start; start = stop)
+  {
+    stop.forward_chars(BUFSIZE); // inaccurate, but doesn't matter
+    const Glib::ustring chunk (buffer->get_text(start, stop));
+
+    output.write(chunk.data(), chunk.bytes());
+  }
+}
+
+void FileList::save_convert_stream(std::ostream& output, Glib::IConv& iconv,
+                                   const Glib::RefPtr<FileBuffer>& buffer)
+{
+  const Glib::ScopedPtr<char> convbuf (g_new(char, BUFSIZE));
+
+  FileBuffer::iterator start = buffer->begin();
+  FileBuffer::iterator stop  = start;
+
+  for(; start; start = stop)
+  {
+    stop.forward_chars(BUFSIZE); // inaccurate, but doesn't matter
+    const Glib::ustring chunk (buffer->get_text(start, stop));
+
+    char* inpos    = const_cast<char*>(chunk.data());
+    gsize inleft   = chunk.bytes();
+    char* convpos  = convbuf.get();
+    gsize convleft = BUFSIZE;
+
+    while(iconv.iconv(&inpos, &inleft, &convpos, &convleft) == static_cast<size_t>(-1))
+    {
+      const int err_no = errno;
+
+      if(err_no != E2BIG)
+        g_error("unexpected IConv error: %s", g_strerror(err_no));
+
+      output.write(convbuf.get(), BUFSIZE - convleft);
+
+      convpos  = convbuf.get();
+      convleft = BUFSIZE;
+    }
+
+    output.write(convbuf.get(), BUFSIZE - convleft);
+  }
 }
 
 } // namespace Regexxer

@@ -61,8 +61,13 @@ public:
                   bool recursive, bool hidden);
   void stop_find_files();
 
+  void save_current_file();
+  void save_all_files();
+
   void select_first_file();
   bool select_next_file(bool move_forward);
+
+  BoundState get_bound_state();
 
   void find_matches(Pcre::Pattern& pattern, bool multiple);
   long get_match_count() const;
@@ -70,9 +75,10 @@ public:
 
   int get_modified_count() const;
 
-  SigC::Signal2<void,FileInfoPtr,BoundState>  signal_switch_buffer;
-  SigC::Signal0<void>                         signal_match_count_changed;
-  SigC::Signal0<void>                         signal_modified_count_changed;
+  SigC::Signal1<void,FileInfoPtr> signal_switch_buffer;
+  SigC::Signal0<void>             signal_bound_state_changed;
+  SigC::Signal0<void>             signal_match_count_changed;
+  SigC::Signal0<void>             signal_modified_count_changed;
 
 private:
   struct FindData;
@@ -98,7 +104,12 @@ private:
 
   void load_file(const Util::SharedPtr<FileInfo>& fileinfo);
   Glib::RefPtr<FileBuffer> load_stream(std::istream& input);
-  Glib::RefPtr<FileBuffer> convert_stream(std::istream& input, Glib::IConv& iconv);
+  Glib::RefPtr<FileBuffer> load_convert_stream(std::istream& input, Glib::IConv& iconv);
+
+  void save_file(const Util::SharedPtr<FileInfo>& fileinfo);
+  void save_stream(std::ostream& output, const Glib::RefPtr<FileBuffer>& buffer);
+  void save_convert_stream(std::ostream& output, Glib::IConv& iconv,
+                           const Glib::RefPtr<FileBuffer>& buffer);
 };
 
 } // namespace Regexxer
