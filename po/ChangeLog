@@ -1,3 +1,10 @@
+2004-06-10  Gustavo Noronha Silva  <kov@debian.org>
+
+	* LINGUAS: added pt_BR
+
+	* pt_BR.po: added translation, by
+	  Joao Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>
+
 2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* de.po: Update to pull in the qt-format comments.
