@@ -28,7 +28,6 @@
 #include <glib.h>
 #include <gtkmm.h>
 #include <algorithm>
-#include <iostream>
 
 #include <config.h>
 
