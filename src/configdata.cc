@@ -60,7 +60,7 @@ public:
 
 struct ToolbarStyleValue
 {
-  const char*       str;
+  const char*       nick;
   Gtk::ToolbarStyle value;
 };
 
@@ -226,7 +226,7 @@ void ConfigData::set_toolbar_style_from_string(const Glib::ustring& value)
 {
   for(unsigned i = 0; i < G_N_ELEMENTS(toolbar_style_value_map); ++i)
   {
-    if(value.raw() == toolbar_style_value_map[i].str)
+    if(value.raw() == toolbar_style_value_map[i].nick)
     {
       toolbar_style = toolbar_style_value_map[i].value;
       return;
@@ -244,7 +244,7 @@ Glib::ustring ConfigData::get_string_from_toolbar_style() const
   {
     if(toolbar_style == toolbar_style_value_map[i].value)
     {
-      value_string = toolbar_style_value_map[i].str;
+      value_string = toolbar_style_value_map[i].nick;
       break;
     }
   }
