@@ -1,3 +1,12 @@
+2004-05-17  Christian Rose  <menthos@menthos.com>
+
+	* sv.po: Added an incomplete Swedish translation.
+	* LINGUAS: Added "sv".
+	* Rules-quot, boldquot.sed, en@boldquot.header, en@quot.header,
+	insert-header.sin, quot.sed, remove-potcdate.sin: Removed this
+	cruft.
+	* .cvsignore: Added more appropriate contents.
+
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* de.po: Translate new desktop file strings.
