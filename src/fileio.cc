@@ -161,7 +161,7 @@ void save_file(const FileInfoPtr& fileinfo)
   const Glib::RefPtr<Glib::IOChannel> channel =
       Glib::IOChannel::create_from_file(fileinfo->fullname, "w");
 
-  channel->set_buffer_size(2 * BUFSIZE); // XXX: workaround for GLib <= 2.0.6 (#96373)
+  channel->set_buffer_size(BUFSIZE);
 
   channel->set_encoding(fileinfo->encoding);
   save_iochannel(channel, fileinfo->buffer);

@@ -1,5 +1,9 @@
 2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.cc (save_file): Get rid of the #96373 work-around.
+
+2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac (PKG_CHECK_MODULES): Require gtk+-2.0 >= 2.0.6 in
 	order to match the web page.
 	(AC_INIT): Bump version to 0.2.  Yay!
