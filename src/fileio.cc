@@ -73,15 +73,16 @@ void save_iochannel(const Glib::RefPtr<Glib::IOChannel>& output, const Glib::Ref
   }
 }
 
-Glib::RefPtr<FileBuffer> load_try_encoding(const Glib::RefPtr<Glib::IOChannel>& input,
-                                           const std::string& encoding)
+Glib::RefPtr<FileBuffer> load_try_encoding(const std::string& filename, const std::string& encoding)
 {
-  input->seek(0);
+  const Glib::RefPtr<Glib::IOChannel> channel = Glib::IOChannel::create_from_file(filename, "r");
+
+  channel->set_buffer_size(BUFSIZE);
 
   try
   {
-    input->set_encoding(encoding);
-    return load_iochannel(input);
+    channel->set_encoding(encoding);
+    return load_iochannel(channel);
   }
   catch(const Glib::ConvertError&)
   {}
@@ -113,26 +114,19 @@ void load_file(const FileInfoPtr& fileinfo, const std::string& fallback_encoding
 {
   fileinfo->load_failed = true;
 
-  const Glib::RefPtr<Glib::IOChannel> channel =
-      Glib::IOChannel::create_from_file(fileinfo->fullname, "r");
-
-  channel->set_buffer_size(BUFSIZE);
-
   std::string encoding = "UTF-8";
-  Glib::RefPtr<FileBuffer> buffer = load_try_encoding(channel, encoding);
+  Glib::RefPtr<FileBuffer> buffer = load_try_encoding(fileinfo->fullname, encoding);
 
   if(!buffer && !Glib::get_charset(encoding)) // locale charset is _not_ UTF-8
   {
-    buffer = load_try_encoding(channel, encoding);
+    buffer = load_try_encoding(fileinfo->fullname, encoding);
   }
 
   if(!buffer && !Util::encodings_equal(encoding, fallback_encoding))
   {
     encoding = fallback_encoding;
-    buffer = load_try_encoding(channel, encoding);
+    buffer = load_try_encoding(fileinfo->fullname, encoding);
   }
-
-  channel->close();
 
   if(buffer)
   {

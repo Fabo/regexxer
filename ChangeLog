@@ -1,5 +1,11 @@
 2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.cc: Close and reopen the I/O channel when switching
+	the encoding.  Changing encodings on the fly doesn't seem to work
+	with older GLib releases.
+
+2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc src/stringutils.cc: Be more tolerant about
 	fucked up filenames.  Still show a (hopefully) annoying warning
 	message, though.
