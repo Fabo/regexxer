@@ -1,5 +1,10 @@
 2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filebuffer.cc (create_with_error_message): Improve message
+	title: s/Load failed/Can't read file/
+
+2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filelist.cc src/mainwindow.cc: Make use of the progress bar
 	pulse feature while globally replacing matches, too.
 

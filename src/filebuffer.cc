@@ -176,8 +176,12 @@ FileBuffer::create_with_error_message(const Glib::RefPtr<Gdk::Pixbuf>& pixbuf,
   const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
   iterator pend = buffer->end();
 
+  // "\302\240" == no-break space
+  const Glib::ustring title = "\302\240Can't\302\240read\302\240file:";
+
   pend = buffer->insert_pixbuf(pend, pixbuf);
-  pend = buffer->insert_with_tag(pend, "\302\240Load\302\240failed:\n", tagtable->error_title);
+  pend = buffer->insert_with_tag(pend, title, tagtable->error_title);
+  pend = buffer->insert(pend, "\n");
   pend = buffer->insert(pend, message);
 
   if(!message.empty() && *message.rbegin() != '.')
