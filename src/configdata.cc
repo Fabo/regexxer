@@ -58,13 +58,38 @@ public:
 #endif /* HAVE_UMASK */
 
 
-struct ToolbarStyleValue
+struct NickValuePair
 {
-  const char*       nick;
-  Gtk::ToolbarStyle value;
+  const char* nick;
+  int         value;
 };
 
-const ToolbarStyleValue toolbar_style_value_map[] =
+class NickEqual
+{
+  std::string nick_;
+
+public:
+  explicit NickEqual(const Glib::ustring& nick)
+    : nick_ (nick.raw()) {}
+
+  bool operator()(const NickValuePair& item) const
+    { return (item.nick == nick_); }
+};
+
+class ValueEqual
+{
+  int value_;
+
+public:
+  explicit ValueEqual(int value)
+    : value_ (value) {}
+
+  bool operator()(const NickValuePair& item) const
+    { return (item.value == value_); }
+};
+
+
+const NickValuePair toolbar_style_value_map[] =
 {
   { "icons",      Gtk::TOOLBAR_ICONS      },
   { "text",       Gtk::TOOLBAR_TEXT       },
@@ -176,7 +201,7 @@ void ConfigData::load()
       else if(key.raw() == "fallback_encoding")
         set_fallback_encoding_from_string(value);
       else
-        g_message("Error in configuration file: `%s' is not a valid key", key.c_str());
+        g_message("Error in configuration file: unknown key `%s'", key.c_str());
     }
   }
   catch(const Glib::FileError& error)
@@ -224,34 +249,26 @@ void ConfigData::save()
 
 void ConfigData::set_toolbar_style_from_string(const Glib::ustring& value)
 {
-  for(unsigned i = 0; i < G_N_ELEMENTS(toolbar_style_value_map); ++i)
-  {
-    if(value.raw() == toolbar_style_value_map[i].nick)
-    {
-      toolbar_style = toolbar_style_value_map[i].value;
-      return;
-    }
-  }
+  const NickValuePair *const pend = &toolbar_style_value_map[G_N_ELEMENTS(toolbar_style_value_map)];
+  const NickValuePair *const pfound =
+      std::find_if(&toolbar_style_value_map[0], pend, NickEqual(value));
 
-  g_message("Failed to load configuration data: `%s' is not a valid toolbar style", value.c_str());
+  if(pfound != pend)
+    toolbar_style = Gtk::ToolbarStyle(pfound->value);
+  else
+    g_message("Error in configuration file: invalid value `%s' for key `toolbar_style'",
+              value.c_str());
 }
 
 Glib::ustring ConfigData::get_string_from_toolbar_style() const
 {
-  const char* value_string = 0;
+  const NickValuePair *const pend = &toolbar_style_value_map[G_N_ELEMENTS(toolbar_style_value_map)];
+  const NickValuePair *const pfound =
+      std::find_if(&toolbar_style_value_map[0], pend, ValueEqual(toolbar_style));
 
-  for(unsigned i = 0; i < G_N_ELEMENTS(toolbar_style_value_map); ++i)
-  {
-    if(toolbar_style == toolbar_style_value_map[i].value)
-    {
-      value_string = toolbar_style_value_map[i].nick;
-      break;
-    }
-  }
+  g_return_val_if_fail(pfound != pend, "");
 
-  g_return_val_if_fail(value_string != 0, "");
-
-  return value_string;
+  return pfound->nick;
 }
 
 void ConfigData::set_fallback_encoding_from_string(const Glib::ustring& value)
@@ -265,7 +282,8 @@ void ConfigData::set_fallback_encoding_from_string(const Glib::ustring& value)
   }
   else
   {
-    g_message("Failed to load configuration data: `%s' is not a valid encoding", value.c_str());
+    g_message("Error in configuration file: invalid value `%s' for key `fallback_encoding'",
+              value.c_str());
   }
 }
 

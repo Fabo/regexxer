@@ -1,5 +1,10 @@
 2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/configdata.cc: Generalize the enum nick/value mapping code,
+	and improve the error message strings.
+
+2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (on_hide): hide() the preferences dialog
 	instead of deleting it, so that on_pref_dialog_hide() is executed
 	to save the configuration data.
