@@ -98,10 +98,17 @@ namespace Regexxer
 
 /**** Regexxer::FileInfo ***************************************************/
 
+FileInfo::FileInfo()
+:
+  load_failed (false),
+  file_count  (0)
+{}
+
 FileInfo::FileInfo(const std::string& fullname_)
 :
   fullname    (fullname_),
-  load_failed (false)
+  load_failed (false),
+  file_count  (-1)
 {}
 
 FileInfo::~FileInfo()

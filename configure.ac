@@ -19,7 +19,7 @@
 
 
 AC_INIT([regexxer], [0.1], [daniel.elstner@gmx.net], [regexxer])
-AC_CONFIG_SRCDIR([src/filelist.cc])
+AC_CONFIG_SRCDIR([src/pcreshell.cc])
 AC_CANONICAL_BUILD()
 AC_CANONICAL_HOST()
 AC_CANONICAL_TARGET()

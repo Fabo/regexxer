@@ -1,5 +1,20 @@
 2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h}: New files replacing filelist.{cc,h}.  The
+	files are now displayed in a directory tree which is much cooler.
+	As a side effect, it's now way faster when searching thousands of
+	files.
+
+	* src/Makefile.am: s/filelist/filetree/
+	* configure.ac: Use src/pcreshell.cc as unique source file.
+
+	* src/fileio.{cc,h} (FileInfo): Introduce a file_count member
+	variable that became necessary to support subdirectories.
+
+	* src/mainwindow.{cc,h}: Use the new FileTree widget.
+
+2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc: In on_find_files() and on_exec_search(), make
 	sure the corresponding button is sensitive before starting the busy
 	action.  This is necessary since these callbacks are invoked from

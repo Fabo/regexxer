@@ -20,7 +20,7 @@
 
 #include "mainwindow.h"
 #include "configdata.h"
-#include "filelist.h"
+#include "filetree.h"
 #include "pcreshell.h"
 #include "prefdialog.h"
 #include "statusline.h"
@@ -92,12 +92,12 @@ class FileErrorDialog : public Gtk::MessageDialog
 {
 public:
   FileErrorDialog(Gtk::Window& parent, const Glib::ustring& message,
-                  Gtk::MessageType type, const Regexxer::FileList::Error& error);
+                  Gtk::MessageType type, const Regexxer::FileTree::Error& error);
   virtual ~FileErrorDialog();
 };
 
 FileErrorDialog::FileErrorDialog(Gtk::Window& parent, const Glib::ustring& message,
-                                 Gtk::MessageType type, const Regexxer::FileList::Error& error)
+                                 Gtk::MessageType type, const Regexxer::FileTree::Error& error)
 :
   Gtk::MessageDialog(parent, message, type, Gtk::BUTTONS_OK, true)
 {
@@ -180,7 +180,7 @@ MainWindow::MainWindow()
   button_multiple_        (0),
   button_caseless_        (0),
   button_find_matches_    (0),
-  filelist_               (0),
+  filetree_               (0),
   textview_               (0),
   entry_preview_          (0),
   action_area_            (0),
@@ -239,22 +239,22 @@ MainWindow::MainWindow()
 
   statusline_->signal_cancel_clicked.connect(SigC::slot(*this, &MainWindow::on_busy_action_cancel));
 
-  filelist_->signal_switch_buffer.connect(
-      SigC::slot(*this, &MainWindow::on_filelist_switch_buffer));
+  filetree_->signal_switch_buffer.connect(
+      SigC::slot(*this, &MainWindow::on_filetree_switch_buffer));
 
-  filelist_->signal_bound_state_changed.connect(
-      SigC::slot(*this, &MainWindow::on_filelist_bound_state_changed));
+  filetree_->signal_bound_state_changed.connect(
+      SigC::slot(*this, &MainWindow::on_filetree_bound_state_changed));
 
-  filelist_->signal_file_count_changed.connect(
-      SigC::slot(*this, &MainWindow::on_filelist_file_count_changed));
+  filetree_->signal_file_count_changed.connect(
+      SigC::slot(*this, &MainWindow::on_filetree_file_count_changed));
 
-  filelist_->signal_match_count_changed.connect(
-      SigC::slot(*this, &MainWindow::on_filelist_match_count_changed));
+  filetree_->signal_match_count_changed.connect(
+      SigC::slot(*this, &MainWindow::on_filetree_match_count_changed));
 
-  filelist_->signal_modified_count_changed.connect(
-      SigC::slot(*this, &MainWindow::on_filelist_modified_count_changed));
+  filetree_->signal_modified_count_changed.connect(
+      SigC::slot(*this, &MainWindow::on_filetree_modified_count_changed));
 
-  filelist_->signal_pulse.connect(
+  filetree_->signal_pulse.connect(
       SigC::slot(*this, &MainWindow::on_busy_action_pulse));
 }
 
@@ -408,8 +408,8 @@ Gtk::Widget* MainWindow::create_left_pane()
   ScrolledWindow *const scrollwin = new ScrolledWindow();
   frame->add(*manage(scrollwin));
 
-  filelist_ = new FileList();
-  scrollwin->add(*manage(filelist_));
+  filetree_ = new FileTree();
+  scrollwin->add(*manage(filetree_));
   scrollwin->set_policy(POLICY_AUTOMATIC, POLICY_ALWAYS);
 
   tooltips_.set_tip(*entry_folder_,     "The directory to be searched.");
@@ -526,7 +526,7 @@ void MainWindow::on_find_files()
   {
     Pcre::Pattern pattern (Util::shell_pattern_to_regex(entry_pattern_->get_text()));
 
-    filelist_->find_files(
+    filetree_->find_files(
         Util::expand_pathname(entry_folder_->get_text()),
         pattern,
         button_recursive_->get_active(),
@@ -538,14 +538,14 @@ void MainWindow::on_find_files()
     Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
   }
-  catch(const FileList::Error& error)
+  catch(const FileTree::Error& error)
   {
     const Glib::ustring message = "The following errors occurred during search:";
     FileErrorDialog dialog (*this, message, Gtk::MESSAGE_WARNING, error);
     dialog.run();
   }
 
-  statusline_->set_file_count(filelist_->get_file_count());
+  statusline_->set_file_count(filetree_->get_file_count());
 }
 
 void MainWindow::on_exec_search()
@@ -562,7 +562,7 @@ void MainWindow::on_exec_search()
   try
   {
     Pcre::Pattern pattern (regex, (caseless) ? Pcre::CASELESS : Pcre::CompileOptions(0));
-    filelist_->find_matches(pattern, multiple);
+    filetree_->find_matches(pattern, multiple);
   }
   catch(const Pcre::Error& error)
   {
@@ -600,7 +600,7 @@ void MainWindow::on_exec_search()
     statusline_->set_match_index(buffer->get_match_index());
   }
 
-  if(filelist_->get_match_count() > 0)
+  if(filetree_->get_match_count() > 0)
   {
     // Scrolling has to be post-poned after the redraw, otherwise we might
     // not end up where we want to.  So do that by installing an idle handler.
@@ -613,13 +613,13 @@ void MainWindow::on_exec_search()
 
 bool MainWindow::after_exec_search()
 {
-  filelist_->select_first_file();
+  filetree_->select_first_file();
   on_go_next(true);
 
   return false;
 }
 
-void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, int file_index)
+void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
 {
   const FileBufferPtr old_buffer = FileBufferPtr::cast_static(textview_->get_buffer());
 
@@ -697,9 +697,9 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, int file_index)
   update_preview();
 }
 
-void MainWindow::on_filelist_bound_state_changed()
+void MainWindow::on_filetree_bound_state_changed()
 {
-  BoundState bound = filelist_->get_bound_state();
+  BoundState bound = filetree_->get_bound_state();
 
   button_prev_file_->set_sensitive((bound & BOUND_FIRST) == 0);
   button_next_file_->set_sensitive((bound & BOUND_LAST)  == 0);
@@ -711,19 +711,19 @@ void MainWindow::on_filelist_bound_state_changed()
   button_next_->set_sensitive((bound & BOUND_LAST)  == 0);
 }
 
-void MainWindow::on_filelist_file_count_changed()
+void MainWindow::on_filetree_file_count_changed()
 {
-  statusline_->set_file_count(filelist_->get_file_count());
+  statusline_->set_file_count(filetree_->get_file_count());
 }
 
-void MainWindow::on_filelist_match_count_changed()
+void MainWindow::on_filetree_match_count_changed()
 {
-  button_replace_all_->set_sensitive(filelist_->get_match_count() > 0);
+  button_replace_all_->set_sensitive(filetree_->get_match_count() > 0);
 }
 
-void MainWindow::on_filelist_modified_count_changed()
+void MainWindow::on_filetree_modified_count_changed()
 {
-  toolbutton_save_all_->set_sensitive(filelist_->get_modified_count() > 0);
+  toolbutton_save_all_->set_sensitive(filetree_->get_modified_count() > 0);
 }
 
 void MainWindow::on_buffer_match_count_changed(int match_count)
@@ -738,7 +738,7 @@ void MainWindow::on_buffer_modified_changed()
 
 void MainWindow::on_buffer_bound_state_changed(BoundState bound)
 {
-  bound &= filelist_->get_bound_state();
+  bound &= filetree_->get_bound_state();
 
   button_prev_->set_sensitive((bound & BOUND_FIRST) == 0);
   button_next_->set_sensitive((bound & BOUND_LAST)  == 0);
@@ -746,7 +746,7 @@ void MainWindow::on_buffer_bound_state_changed(BoundState bound)
 
 void MainWindow::on_go_next_file(bool move_forward)
 {
-  filelist_->select_next_file(move_forward);
+  filetree_->select_next_file(move_forward);
   on_go_next(move_forward);
 }
 
@@ -762,7 +762,7 @@ void MainWindow::on_go_next(bool move_forward)
     }
   }
 
-  if(filelist_->select_next_file(move_forward))
+  if(filetree_->select_next_file(move_forward))
   {
     on_go_next(move_forward); // recursive call
   }
@@ -790,7 +790,7 @@ void MainWindow::on_replace_all()
 {
   BusyAction busy (*this);
 
-  filelist_->replace_all_matches(entry_substitution_->get_text());
+  filetree_->replace_all_matches(entry_substitution_->get_text());
   statusline_->set_match_index(0);
 }
 
@@ -798,9 +798,9 @@ void MainWindow::on_save_file()
 {
   try
   {
-    filelist_->save_current_file();
+    filetree_->save_current_file();
   }
-  catch(const FileList::Error& error)
+  catch(const FileTree::Error& error)
   {
     const std::list<Glib::ustring>& error_list = error.get_error_list();
     g_assert(error_list.size() == 1);
@@ -814,9 +814,9 @@ void MainWindow::on_save_all()
 {
   try
   {
-    filelist_->save_all_files();
+    filetree_->save_all_files();
   }
-  catch(const FileList::Error& error)
+  catch(const FileTree::Error& error)
   {
     const Glib::ustring message = "The following errors occurred during save:";
     FileErrorDialog dialog (*this, message, Gtk::MESSAGE_ERROR, error);
@@ -952,13 +952,13 @@ void MainWindow::on_preferences()
     pref_dialog_.reset(new PrefDialog(*this));
 
     pref_dialog_->set_pref_toolbar_style(toolbar_->get_toolbar_style());
-    pref_dialog_->set_pref_fallback_encoding(filelist_->get_fallback_encoding());
+    pref_dialog_->set_pref_fallback_encoding(filetree_->get_fallback_encoding());
 
     pref_dialog_->signal_pref_toolbar_style_changed.connect(
         SigC::slot(*toolbar_, &Gtk::Toolbar::set_toolbar_style));
 
     pref_dialog_->signal_pref_fallback_encoding_changed.connect(
-        SigC::slot(*filelist_, &FileList::set_fallback_encoding));
+        SigC::slot(*filetree_, &FileTree::set_fallback_encoding));
 
     pref_dialog_->signal_hide().connect(SigC::slot(*this, &MainWindow::on_pref_dialog_hide));
     pref_dialog_->show();
@@ -978,7 +978,7 @@ void MainWindow::load_configuration()
   config.load();
 
   toolbar_->set_toolbar_style(config.toolbar_style);
-  filelist_->set_fallback_encoding(config.fallback_encoding);
+  filetree_->set_fallback_encoding(config.fallback_encoding);
 }
 
 void MainWindow::save_configuration()
@@ -986,7 +986,7 @@ void MainWindow::save_configuration()
   ConfigData config;
 
   config.toolbar_style = toolbar_->get_toolbar_style();
-  config.fallback_encoding = filelist_->get_fallback_encoding();
+  config.fallback_encoding = filetree_->get_fallback_encoding();
 
   config.save();
 }

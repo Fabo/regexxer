@@ -47,7 +47,7 @@ namespace Regexxer
 
 class FileBuffer;
 struct FileInfo;
-class FileList;
+class FileTree;
 class PrefDialog;
 class StatusLine;
 
@@ -82,7 +82,7 @@ private:
   Gtk::CheckButton* button_caseless_;
   Gtk::Button*      button_find_matches_;
 
-  FileList*         filelist_;
+  FileTree*         filetree_;
   Gtk::TextView*    textview_;
   Gtk::Entry*       entry_preview_;
 
@@ -115,11 +115,11 @@ private:
   void on_exec_search();
   bool after_exec_search();
 
-  void on_filelist_switch_buffer(Util::SharedPtr<FileInfo> fileinfo, int file_index);
-  void on_filelist_file_count_changed();
-  void on_filelist_match_count_changed();
-  void on_filelist_modified_count_changed();
-  void on_filelist_bound_state_changed();
+  void on_filetree_switch_buffer(Util::SharedPtr<FileInfo> fileinfo, int file_index);
+  void on_filetree_file_count_changed();
+  void on_filetree_match_count_changed();
+  void on_filetree_modified_count_changed();
+  void on_filetree_bound_state_changed();
 
   void on_buffer_match_count_changed(int match_count);
   void on_buffer_modified_changed();

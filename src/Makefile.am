@@ -27,8 +27,8 @@ regexxer_SOURCES =	\
 	filebuffer.h	\
 	fileio.cc	\
 	fileio.h	\
-	filelist.cc	\
-	filelist.h	\
+	filetree.cc	\
+	filetree.h	\
 	main.cc		\
 	mainwindow.cc	\
 	mainwindow.h	\

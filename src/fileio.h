@@ -37,7 +37,9 @@ struct FileInfo : public Util::SharedObject
   std::string               encoding;
   Glib::RefPtr<FileBuffer>  buffer;
   bool                      load_failed;
+  int                       file_count;
 
+  FileInfo(); // for directories
   explicit FileInfo(const std::string& fullname_);
   ~FileInfo();
 };
