@@ -1,3 +1,9 @@
+2002-11-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filetree.cc (load_file_with_fallback): Emit row_changed()
+	whenever the value of fileinfo->load_failed changed, rather than
+	only if the file seems to be binary.
+
 2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/mainwindow.{cc,h}: If there are any unsaved files on quit

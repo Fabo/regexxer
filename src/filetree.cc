@@ -484,7 +484,7 @@ void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
 void FileTree::icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
 {
   Gtk::CellRendererPixbuf& renderer = dynamic_cast<Gtk::CellRendererPixbuf&>(*cell);
-  const FileInfoBasePtr infobase = (*iter)[filetree_columns().fileinfo];
+  const FileInfoBasePtr    infobase = (*iter)[filetree_columns().fileinfo];
 
   if(const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic(infobase))
   {
@@ -1137,6 +1137,8 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
 {
   g_return_if_fail(!fileinfo->buffer);
 
+  const bool old_load_failed = fileinfo->load_failed;
+
   try
   {
     load_file(fileinfo, fallback_encoding_);
@@ -1155,9 +1157,12 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
     message += "\302\253 seems to be a binary file.";
 
     fileinfo->buffer = create_error_message_buffer(message);
+  }
 
-    // Trigger signal_row_changed() because fileinfo->load_failed has
-    // been set, which means we have to change icon and color of the row.
+  if(old_load_failed != fileinfo->load_failed)
+  {
+    // Trigger signal_row_changed() because the value of fileinfo->load_failed
+    // changed, which means we have to change icon and color of the row.
     treestore_->row_changed(Gtk::TreePath(iter), iter);
   }
 }
