@@ -92,25 +92,22 @@ rm -rf autom4te.cache
 WARNINGS=all
 export WARNINGS
 
-echo "$aclocal $ACLOCAL_FLAGS"
-"$aclocal" $ACLOCAL_FLAGS || exit 1
+set_option=':'
+test -n "${BASH_VERSION+set}" && set_option='set'
 
-echo "$autoheader"
-"$autoheader" || exit 1
+$set_option -x
 
-echo "$automake $AUTOMAKE_FLAGS"
-"$automake" $AUTOMAKE_FLAGS || exit 1
+"$aclocal" $ACLOCAL_FLAGS	|| exit 1
+"$autoheader"			|| exit 1
+"$automake" $AUTOMAKE_FLAGS	|| exit 1
+"$autoconf"			|| exit 1
+cd "$origdir"			|| exit 1
 
-echo "$autoconf"
-"$autoconf" || exit 1
-
-cd "$origdir"
 
 if test -z "$AUTOGEN_SUBDIR_MODE"
 then
-  echo "$srcdir/configure $*"
   "$srcdir/configure" ${1+"$@"} || exit 1
-
+  $set_option +x
   echo
   echo "Now type 'make' to compile $PROJECT."
 fi
