@@ -500,14 +500,13 @@ void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
 void FileTree::icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
 {
   Gtk::CellRendererPixbuf& renderer = dynamic_cast<Gtk::CellRendererPixbuf&>(*cell);
+  const FileInfoBasePtr infobase = (*iter)[filetree_columns().fileinfo];
 
-  const FileInfoBasePtr base = (*iter)[filetree_columns().fileinfo];
-
-  if(const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic(base))
+  if(const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic(infobase))
   {
     renderer.property_pixbuf() = (fileinfo->load_failed) ? pixbuf_load_failed_ : pixbuf_file_;
   }
-  else if(DirInfoPtr::cast_dynamic(base))
+  else if(DirInfoPtr::cast_dynamic(infobase))
   {
     renderer.property_pixbuf() = pixbuf_directory_;
   }
@@ -520,33 +519,27 @@ void FileTree::icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel
 void FileTree::text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
 {
   Gtk::CellRendererText& renderer = dynamic_cast<Gtk::CellRendererText&>(*cell);
+  const FileInfoBasePtr  infobase = (*iter)[filetree_columns().fileinfo];
 
-  const FileInfoBasePtr base = (*iter)[filetree_columns().fileinfo];
+  Gdk::Color* color = 0;
 
-  if(const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic(base))
+  if(const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic(infobase))
   {
     if(fileinfo->load_failed)
-    {
-      renderer.property_foreground_gdk() = color_load_failed_;
-      return;
-    }
-
-    if(fileinfo->buffer && fileinfo->buffer->get_modified())
-    {
-      renderer.property_foreground_gdk() = color_modified_;
-      return;
-    }
+      color = &color_load_failed_;
+    else if(fileinfo->buffer && fileinfo->buffer->get_modified())
+      color = &color_modified_;
   }
-  else if(const DirInfoPtr dirinfo = DirInfoPtr::cast_dynamic(base))
+  else if(const DirInfoPtr dirinfo = DirInfoPtr::cast_dynamic(infobase))
   {
     if(dirinfo->modified_count > 0)
-    {
-      renderer.property_foreground_gdk() = color_modified_;
-      return;
-    }
+      color = &color_modified_;
   }
 
-  renderer.property_foreground_gdk().reset_value();
+  if(color)
+    renderer.property_foreground_gdk() = *color;
+  else
+    renderer.property_foreground_gdk().reset_value();
 }
 
 // static
@@ -751,8 +744,8 @@ bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMa
 
   if(const FileInfoPtr fileinfo = get_fileinfo_from_iter(iter))
   {
-    if(!fileinfo->load_failed && !fileinfo->buffer)
-      load_file_with_fallback(fileinfo);
+    if(!fileinfo->buffer)
+      load_file_with_fallback(iter, fileinfo);
 
     if(fileinfo->load_failed)
       return false; // continue
@@ -948,7 +941,7 @@ void FileTree::on_selection_changed()
     file_index = calculate_file_index(iter) + 1;
 
     if(!fileinfo->buffer)
-      load_file_with_fallback(fileinfo);
+      load_file_with_fallback(iter, fileinfo);
 
     if(!fileinfo->load_failed)
     {
@@ -1154,8 +1147,14 @@ void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bo
   signal_modified_count_changed(); // emit
 }
 
-void FileTree::load_file_with_fallback(const FileInfoPtr& fileinfo)
+void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
+                                       const FileInfoPtr& fileinfo)
 {
+  g_return_if_fail(!fileinfo->buffer);
+
+  if(fileinfo->load_failed)
+    return; // we already tried loading this file
+
   try
   {
     load_file(fileinfo, fallback_encoding_);
@@ -1167,13 +1166,17 @@ void FileTree::load_file_with_fallback(const FileInfoPtr& fileinfo)
 
   if(!fileinfo->buffer)
   {
-    g_return_if_fail(fileinfo->load_failed);
+    g_assert(fileinfo->load_failed);
 
     Glib::ustring message = "\302\273";
     message += Util::filename_to_utf8_fallback(Glib::path_get_basename(fileinfo->fullname));
     message += "\302\253 seems to be a binary file.";
 
     fileinfo->buffer = create_error_message_buffer(message);
+
+    // Trigger signal_row_changed() because fileinfo->load_failed has been set,
+    // which means we have to change icon and color of the row.
+    treestore_->row_changed(Gtk::TreePath(iter), iter);
   }
 }
 

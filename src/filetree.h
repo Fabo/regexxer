@@ -137,7 +137,7 @@ private:
   void propagate_match_count_change(const Gtk::TreeModel::iterator& pos, int difference);
   void propagate_modified_change(const Gtk::TreeModel::iterator& pos, bool modified);
 
-  void load_file_with_fallback(const FileInfoPtr& fileinfo);
+  void load_file_with_fallback(const Gtk::TreeModel::iterator& iter, const FileInfoPtr& fileinfo);
   Glib::RefPtr<FileBuffer> create_error_message_buffer(const Glib::ustring& message);
 };
 
