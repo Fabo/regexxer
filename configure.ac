@@ -18,8 +18,8 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-AC_INIT([regexxer], [0.6], [daniel.elstner@gmx.net], [regexxer])
-AC_PREREQ([2.53])
+AC_INIT([regexxer],[0.6],[daniel.elstner@gmx.net],[regexxer])
+AC_PREREQ(2.59)
 
 AC_REVISION([$Revision$])
 AC_CONFIG_SRCDIR([src/pcreshell.cc])
@@ -34,9 +34,9 @@ AC_CHECK_HEADERS([sys/types.h sys/stat.h])
 AC_CHECK_FUNCS([umask])
 AC_CHECK_TYPES([mode_t])
 
-PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4 >= 2.3.7 gconfmm-2.6 >= 2.5.0 gnome-vfsmm-2.6 >= 2.5.0])
-AC_SUBST([GTKMM_CFLAGS])
-AC_SUBST([GTKMM_LIBS])
+PKG_CHECK_MODULES([MM_DEPS], [gtkmm-2.4 >= 2.4.0 gconfmm-2.6 >= 2.6.0 gnome-vfsmm-2.6 >= 2.6.0])
+AC_SUBST([MM_DEPS_CFLAGS])
+AC_SUBST([MM_DEPS_LIBS])
 
 gdk_pixbuf_exec_prefix=`${PKG_CONFIG:-"pkg-config"} --variable=exec_prefix gdk-pixbuf-2.0 2>&5`
 prog_search_path=${gdk_pixbuf_exec_prefix:+"$gdk_pixbuf_exec_prefix/bin$PATH_SEPARATOR"}$PATH
@@ -64,5 +64,6 @@ AC_CONFIG_FILES([
   src/Makefile
 ])
 
-AC_OUTPUT()
+
+AC_OUTPUT
 

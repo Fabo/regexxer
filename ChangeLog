@@ -1,3 +1,16 @@
+0.7.0:
+	
+2004-04-10  Murray Cumming  <murrayc@murrayc.com>
+
+	* regexxer/Makefile.am: Put the mm libs and cflags before the pcre 
+	ones, because the mm ones are more likely to be in more than one
+	prefix, to avoid undefined symbols when a -L command means we link
+	to an older GTK+. This is a bit hacky, but I don't know a better 
+	solution - at least it will work on distros where everything is in the 
+	same prefix.
+	* scripts/cxx.m4: Replace deprecated AC_HELP_STRING with 
+	AS_HELP_STRING.
+
 2004-04-04  Murray Cumming  <murrayc@murrayc.com>
 
 	* Ported to gtkmm 2.4 - mostly just use of libsigc++ 2 syntax, and

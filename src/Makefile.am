@@ -65,6 +65,6 @@ DEFS = @DEFS@ \
 -DREGEXXER_DATADIR=\""$(datadir)"\"
 
 
-regexxer_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir) $(PCRE_CFLAGS) $(GTKMM_CFLAGS)
-regexxer_LDADD    = $(PCRE_LIBS) $(GTKMM_LIBS)
+regexxer_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir) $(MM_DEPS_CFLAGS) $(PCRE_CFLAGS) 
+regexxer_LDADD    = $(MM_DEPS_LIBS) $(PCRE_LIBS) 
 

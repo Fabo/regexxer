@@ -62,12 +62,12 @@ AC_DEFUN([REGEXXER_ARG_ENABLE_WARNINGS],
 [
 AC_REQUIRE([AC_PROG_CXX])
 
-AC_ARG_ENABLE([warnings], AC_HELP_STRING(
+AC_ARG_ENABLE([warnings], AS_HELP_STRING(
   [--enable-warnings=@<:@none|minimum|maximum|hardcore@:>@],
   [Control compiler pickyness. @<:@default=minimum@:>@]),
   [regexxer_enable_warnings=$enableval],
   [regexxer_enable_warnings=minimum])
-
+  
 AC_MSG_CHECKING([for compiler warning flags to use])
 
 warning_flags=
