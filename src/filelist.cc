@@ -501,6 +501,8 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
 }
 
 /* Return value: whether fullname is a subdirectory to be searched recursively.
+ * Actually we could call find_recursively() right here in this function, but
+ * not doing so reduces the stack depth (on ia32, about 20 bytes per call).
  */
 bool FileList::find_check_file(const std::string& basename,
                                const std::string& fullname,
