@@ -1,5 +1,15 @@
 2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetreeprivate.{cc,h} (FileTreePrivate::next_match_file):
+	Move code from FileTree::next_match_file() here.
+	(FileTreePrivate::prev_match_file):
+	Move code from FileTree::prev_match_file() here.
+
+	* src/filetree.{cc,h} (FileTree::next_match_file): Remove.
+	(FileTree::prev_match_file): Remove.
+
+2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (FileTree::next_match_file): Replace the
 	collapse_stack parameter by a single Gtk::TreeModel::Path pointer,
 	because we really don't have to collapse each expanded child row

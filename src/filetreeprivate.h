@@ -68,6 +68,9 @@ FileInfoPtr get_fileinfo_from_iter(const Gtk::TreeModel::iterator& iter)
 int default_sort_func   (const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs);
 int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs);
 
+bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
+bool prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
+
 
 typedef std::pair<std::string,Gtk::TreeModel::iterator> DirNodePair;
 typedef std::list<DirNodePair>                          DirStack;

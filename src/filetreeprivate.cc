@@ -60,6 +60,87 @@ int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeMod
     return (lhs_key.size() - rhs_key.size());
 }
 
+bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse)
+{
+  g_return_val_if_fail(iter, false);
+
+  const FileTreeColumns& columns = FileTreeColumns::instance();
+  Gtk::TreeModel::iterator parent = iter->parent();
+
+  for (++iter;;)
+  {
+    if (iter)
+    {
+      if ((*iter)[columns.matchcount] > 0)
+      {
+        if (const Gtk::TreeModel::Children& children = iter->children()) // directory?
+        {
+          parent = iter;
+          iter = children.begin();
+          continue;
+        }
+
+        return true;
+      }
+    }
+    else if (parent)
+    {
+      iter = parent;
+      parent = iter->parent();
+
+      if (collapse)
+        *collapse = iter;
+    }
+    else
+      break;
+
+    ++iter;
+  }
+
+  return false;
+}
+
+bool prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse)
+{
+  g_return_val_if_fail(iter, false);
+
+  const FileTreeColumns& columns = FileTreeColumns::instance();
+  Gtk::TreeModel::iterator parent = iter->parent();
+  Gtk::TreeModel::Path path (iter);
+
+  for (;;)
+  {
+    if (path.prev())
+    {
+      iter = parent->children()[path.back()];
+
+      if ((*iter)[columns.matchcount] > 0)
+      {
+        if (const Gtk::TreeModel::Children& children = iter->children()) // directory?
+        {
+          parent = iter;
+          path.push_back(children.size());
+          continue;
+        }
+
+        return true;
+      }
+    }
+    else if (parent)
+    {
+      parent = parent->parent();
+      path.up();
+
+      if (collapse)
+        *collapse = path;
+    }
+    else
+      break;
+  }
+
+  return false;
+}
+
 } // namespace FileTreePrivate
 
 

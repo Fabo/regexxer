@@ -136,9 +136,6 @@ private:
                                     const Gtk::TreeModel::iterator& iter,
                                     ReplaceMatchesData* replace_data);
 
-  bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
-  bool prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
-
   void expand_and_select(const Gtk::TreePath& path);
 
   void on_treestore_rows_reordered(const Gtk::TreeModel::Path& path,
