@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Head\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-09 01:49+0200\n"
-"PO-Revision-Date: 2004-07-06 14:20+0200\n"
+"POT-Creation-Date: 2004-07-14 16:14+0200\n"
+"PO-Revision-Date: 2004-07-15 02:25+0200\n"
 "Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -95,24 +95,78 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-#, qt-format
 msgid "Failed to save file \"%1\": %2"
 msgstr "Opslaan van bestand \"%1\" is mislukt: %2"
 
-#: src/filetree.cc:941
-#, qt-format
+#: src/filetree.cc:949
 msgid "\"%1\" seems to be a binary file."
 msgstr "\"%1\" is blijkbaar een binair bestand."
 
-#: src/main.cc:81
+#: src/main.cc:84
 msgid "_About"
 msgstr "I_nfo"
 
-#: src/main.cc:82
+#: src/main.cc:85
 msgid "Save _all"
 msgstr "_Alles opslaan"
 
-#: src/mainwindow.cc:200 ui/mainwindow.glade.h:1
+#: src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "Bestanden zoeken volgensPATROON"
+
+#: src/main.cc:100
+msgid "PATTERN"
+msgstr "PATROON"
+
+#: src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "Submappen niet doorzoeken"
+
+#: src/main.cc:102 ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "Ook verborgen bestanden zoeken"
+
+#: src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "Tekst zoeken volgens REGEX"
+
+#: src/main.cc:103
+msgid "REGEX"
+msgstr "REGEX"
+
+#: src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "Alleen de eerste  overeenkomst in een regel zoeken"
+
+#: src/main.cc:105
+msgid "Ignore case distinctions"
+msgstr "Hoofdletterongevoelig"
+
+#: src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "Bij overeenkomst vervangen door TEKENREEKS"
+
+#: src/main.cc:106
+msgid "STRING"
+msgstr "TEKENREEKS"
+
+#: src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "Lokatie van overeenkomst tonen op de standaard-uitvoer"
+
+#: src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "Niet automatisch beginnen met zoeken"
+
+#: src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[OPTIE]... [MAP]"
+
+#: src/main.cc:141
+msgid "Try `regexxer --help' for more information."
+msgstr "Probeer `regexxer --help' voor meer informatie"
+
+#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -121,7 +175,7 @@ msgstr ""
 "Tekenklassen [ab] en csh-stijl haakjes {a,b} worden ondersteund."
 
 # bepaalde bestanden
-#: src/mainwindow.cc:341
+#: src/mainwindow.cc:403
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -129,8 +183,7 @@ msgstr ""
 "Sommige bestanden zijn nog niet opgeslagen.\n"
 "Toch afsluiten?"
 
-#: src/mainwindow.cc:369
-#, qt-format
+#: src/mainwindow.cc:431
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
@@ -139,11 +192,11 @@ msgstr ""
 "tekenset van het lokale bestandsyssteem."
 
 # een map selecteren
-#: src/mainwindow.cc:388
+#: src/mainwindow.cc:450
 msgid "Select a folder"
 msgstr "Selecteer een map"
 
-#: src/mainwindow.cc:408
+#: src/mainwindow.cc:470
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -151,17 +204,16 @@ msgstr ""
 "Sommige bestanden zijn nog niet opgeslagen.\n"
 "Toch doorgaan?"
 
-#: src/mainwindow.cc:434
+#: src/mainwindow.cc:496
 msgid "The file search pattern is invalid."
 msgstr "Het bestandszoekpatroon is ongeldig."
 
 # gedurende het zoeken
-#: src/mainwindow.cc:440
+#: src/mainwindow.cc:502
 msgid "The following errors occurred during search:"
 msgstr "De volgende fouten traden op gedurende de zoekopdracht:"
 
-#: src/mainwindow.cc:465
-#, qt-format
+#: src/mainwindow.cc:527
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -169,8 +221,7 @@ msgstr ""
 "Fout in reguliere expressie bij \"%1\" (index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:467
-#, qt-format
+#: src/mainwindow.cc:529
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -178,7 +229,7 @@ msgstr ""
 "Fout in reguliere extressie:\n"
 "%1"
 
-#: src/mainwindow.cc:689
+#: src/mainwindow.cc:751
 msgid "The following errors occurred during save:"
 msgstr "De volgende fouten traden op tijden opslaan:"
 
@@ -197,23 +248,22 @@ msgstr ""
 "bereikt."
 
 #: src/prefdialog.cc:248
-#, qt-format
 msgid "\"%1\" is not a valid encoding."
 msgstr "\"%1\" is geen geldige tekenset."
 
-#: src/statusline.cc:271
+#: src/statusline.cc:264
 msgid "Stop"
 msgstr "Stoppen"
 
-#: src/statusline.cc:278
+#: src/statusline.cc:271
 msgid "File:"
 msgstr "Bestand:"
 
-#: src/statusline.cc:281
+#: src/statusline.cc:274
 msgid "Match:"
 msgstr "Overeenkomst:"
 
-#: src/statusline.cc:292
+#: src/statusline.cc:285
 msgid "Cancels the running search"
 msgstr "Annuleert de huidige zoekopdracht"
 
@@ -245,10 +295,6 @@ msgstr "geschreven door"
 #: ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
 msgstr "Een reguliere experssie in Perl syntax"
-
-#: ui/mainwindow.glade.h:3
-msgid "Also find hidden files"
-msgstr "Ook verborgen bestanden zoeken"
 
 #: ui/mainwindow.glade.h:4
 msgid "Backward"
