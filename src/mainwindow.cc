@@ -983,19 +983,21 @@ void MainWindow::on_preferences()
   }
   else
   {
-    pref_dialog_.reset(new PrefDialog(*this));
+    std::auto_ptr<PrefDialog> dialog (new PrefDialog(*this));
 
-    pref_dialog_->set_pref_toolbar_style(toolbar_->get_toolbar_style());
-    pref_dialog_->set_pref_fallback_encoding(filetree_->get_fallback_encoding());
+    dialog->set_pref_toolbar_style(toolbar_->get_toolbar_style());
+    dialog->set_pref_fallback_encoding(filetree_->get_fallback_encoding());
 
-    pref_dialog_->signal_pref_toolbar_style_changed.connect(
+    dialog->signal_pref_toolbar_style_changed.connect(
         SigC::slot(*toolbar_, &Gtk::Toolbar::set_toolbar_style));
 
-    pref_dialog_->signal_pref_fallback_encoding_changed.connect(
+    dialog->signal_pref_fallback_encoding_changed.connect(
         SigC::slot(*filetree_, &FileTree::set_fallback_encoding));
 
-    pref_dialog_->signal_hide().connect(SigC::slot(*this, &MainWindow::on_pref_dialog_hide));
-    pref_dialog_->show();
+    dialog->signal_hide().connect(SigC::slot(*this, &MainWindow::on_pref_dialog_hide));
+    dialog->show();
+
+    pref_dialog_ = dialog;
   }
 }
 
