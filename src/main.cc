@@ -23,6 +23,7 @@
 #include <glib.h>
 
 #include <gconfmm.h>
+#include <libgnomevfsmm.h>
 #include <gtkmm/iconfactory.h>
 #include <gtkmm/iconset.h>
 #include <gtkmm/iconsource.h>
@@ -136,6 +137,7 @@ int main(int argc, char** argv)
   try
   {
     Gnome::Conf::init();
+    Gnome::Vfs::init();
     Gtk::Main main_instance (&argc, &argv);
 
     Glib::set_application_name("regexxer");

@@ -25,6 +25,8 @@
 #include "stringutils.h"
 
 #include <gtkmm/stock.h>
+#include <libgnomevfsmm.h> //For discovering the list of files.
+//#include <iostream> //Just for debug stuff. murrayc
 
 #include <config.h>
 
@@ -347,40 +349,66 @@ void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
   using namespace Glib;
 
   int file_count = 0;
-  Dir dir (dirname);
 
-  for(Dir::iterator pos = dir.begin(); pos != dir.end(); ++pos)
+  //Get the filenames in the directory:
+  typedef std::list< std::string > type_listStrings;
+  type_listStrings listFilenames;
+  try
   {
-    if(signal_pulse()) // emit
-      break;
+    Gnome::Vfs::DirectoryHandle handle;
+    handle.open(dirname, Gnome::Vfs::FILE_INFO_DEFAULT |
+                         Gnome::Vfs::FILE_INFO_GET_MIME_TYPE |
+                         Gnome::Vfs::FILE_INFO_FORCE_SLOW_MIME_TYPE);
 
-    const std::string basename (*pos);
-
-    if(!find_data.hidden && *basename.begin() == '.')
-      continue;
-
-    const std::string fullname (build_filename(dirname, basename));
-
-    try
+    bool file_exists = true;
+    while(file_exists) //read_next() returns false when there are no more files to read.
     {
-      if(find_check_file(basename, fullname, find_data)) // file added?
-        ++file_count;
-    }
-    catch(const Glib::FileError& error)
-    {
-      // Collect errors but don't interrupt the search.
-      find_data.error_list->push_back(error.what());
-    }
-    catch(const Glib::ConvertError& error) // unlikely due to use of our own fallback conversion
-    {
-      // Don't use Glib::locale_to_utf8() because we already
-      // tried that in Util::filename_to_utf8_fallback().
-      //
-      const Glib::ustring name = Util::convert_to_ascii(fullname);
-      const Glib::ustring what = error.what();
+      if(signal_pulse.emit())
+        break;
+      
+      Glib::RefPtr<Gnome::Vfs::FileInfo> refFileInfo = handle.read_next(file_exists);
+      Glib::ustring basename = refFileInfo->get_name();
 
-      g_warning("Eeeek, can't convert filename `%s' to UTF-8: %s", name.c_str(), what.c_str());
+      //Ignore any non-file filenames:
+      if( (basename != "..") && (basename != ".") && !basename.empty() )
+      {
+        //Avoid hidden files, if that is wanted:
+        if(!find_data.hidden && *basename.begin() == '.')
+          continue;
+
+        const std::string fullname (build_filename(dirname, basename));
+
+        //Check the file:
+        try
+        {
+          if(find_check_file(basename, fullname, find_data)) // file added?
+            ++file_count;
+        }
+        catch(const Glib::FileError& error)
+        {
+          // Collect errors but don't interrupt the search.
+          find_data.error_list->push_back(error.what());
+        }
+        catch(const Glib::ConvertError& error) // unlikely due to use of our own fallback conversion
+        {
+          // Don't use Glib::locale_to_utf8() because we already
+          // tried that in Util::filename_to_utf8_fallback().
+          //
+          const Glib::ustring name = Util::convert_to_ascii(fullname);
+          const Glib::ustring what = error.what();
+
+          g_warning("Eeeek, can't convert filename `%s' to UTF-8: %s", name.c_str(), what.c_str());
+        }
+
+      }
     }
+  }
+  catch(const Gnome::Vfs::exception& ex)
+  {
+    //TODO: Do something?
+    //Gtk::MessageDialog dialog(*this, "Regexxer failed while obtaining the list of files.");
+    //dialog.run();
+    //return false; //Stop trying.
   }
 
   find_increment_file_count(find_data, file_count);

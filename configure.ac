@@ -18,7 +18,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-AC_INIT([regexxer], [0.5], [daniel.elstner@gmx.net], [regexxer])
+AC_INIT([regexxer], [0.6], [daniel.elstner@gmx.net], [regexxer])
 AC_PREREQ([2.53])
 
 AC_REVISION([$Revision$])
@@ -34,7 +34,7 @@ AC_CHECK_HEADERS([sys/types.h sys/stat.h])
 AC_CHECK_FUNCS([umask])
 AC_CHECK_TYPES([mode_t])
 
-PKG_CHECK_MODULES([GTKMM], [gtkmm-2.0 >= 2.2.8 gconfmm-2.0 >= 2.0.0])
+PKG_CHECK_MODULES([GTKMM], [gtkmm-2.0 >= 2.2.8 gconfmm-2.0 >= 2.0.0 gnome-vfsmm-2.0 >= 1.3.5])
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 

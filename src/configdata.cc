@@ -191,16 +191,19 @@ void ConfigData::save()
 
 void ConfigData::set_fallback_encoding_from_string(const Glib::ustring& value)
 {
-  std::string encoding = value.raw();
+  if(!value.empty()) //Use the default fallback encoding if there is nothing in the config settings.
+  {
+    std::string encoding = value.raw();
 
-  if(Util::validate_encoding(encoding))
-  {
-    std::transform(encoding.begin(), encoding.end(), encoding.begin(), &Glib::Ascii::toupper);
-    fallback_encoding = encoding;
-  }
-  else
-  {
-    //print_invalid_value_warning(value, "fallback_encoding");
+    if(Util::validate_encoding(encoding))
+    {
+      std::transform(encoding.begin(), encoding.end(), encoding.begin(), &Glib::Ascii::toupper);
+      fallback_encoding = encoding;
+    }
+    else
+    {
+      //print_invalid_value_warning(value, "fallback_encoding");
+    }
   }
 }
 

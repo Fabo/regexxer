@@ -1,11 +1,27 @@
+0.6.0:
+
+2003-12-07  Murray Cumming  <murrayc@usa.net>
+
+	* src/configdata.cc: set_fallback_encoding_from_string(): Ignore
+	empty value from GConf, so that the default fallback encoding is
+	used. That is ISO-8859-15, also known as Latin 9, which seems to
+	be commonly-used on Windows.
+	* src/fileio.[h|cc]: Use gnome-vfsmm instead of Glib::IOChannel
+	to read and write file contents, so we can use any URI.
+	* src/filetree.[h|cc]: Likewise, use gnome-vfsmm instead of 
+	Glib::Dir to list the files.
+	* configure.ac: Added pkg-config check for gnome-vfsmm.
+	
 2003-11-29  Murray Cumming  <murrayc@usa.net>
 
 	* configure.ac: regexxer now depends on gconfmm. Removed the check
 	for 2.2-specific features.
-	* Remoevd all gtkmm 2.2-specific #ifdefs because 2.2 is everywhere
+	* Removed all gtkmm 2.2-specific #ifdefs because 2.2 is everywhere
 	now..
 	* src/configdata.[h|cc]: Changed the implemention to use GConfmm
 	instead of the text file.
+
+0.5.0:
 
 2003-10-31  Murray Cumming  <murrayc@usa.net>
 
