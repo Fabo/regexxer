@@ -257,7 +257,10 @@ FileTree::FileTree()
 
   treestore_->set_default_sort_func(&default_sort_func);
   treestore_->set_sort_func(model_columns.collatekey.index(), &collatekey_sort_func);
-  treestore_->set_sort_column_id(Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID, SORT_ASCENDING);
+  treestore_->set_sort_column_id(TreeStore::DEFAULT_SORT_COLUMN_ID, SORT_ASCENDING);
+
+  treestore_->signal_sort_column_changed().connect(
+      SigC::slot(*this, &FileTree::on_treestore_sort_column_changed));
 
   {
     Column *const column = new Column("File");
@@ -910,6 +913,42 @@ void FileTree::expand_and_select(const Gtk::TreePath& path)
 
   get_selection()->select(path);
   scroll_to_row(path, 0.5);
+}
+
+void FileTree::on_treestore_sort_column_changed()
+{
+  const FileTreeColumns& columns = filetree_columns();
+
+  if(sum_matches_ > 0)
+  {
+    Gtk::TreeModel::iterator first = treestore_->children().begin();
+
+    while(first->children() && (*first)[columns.matchcount] > 0)
+      first = first->children().begin();
+
+    if((*first)[columns.matchcount] == 0)
+    {
+      const bool found_first = next_match_file(first);
+      g_return_if_fail(found_first);
+    }
+
+    path_match_first_ = Gtk::TreePath(first);
+
+    Gtk::TreeModel::iterator last = treestore_->children()[treestore_->children().size() - 1];
+
+    while(last->children() && (*last)[columns.matchcount] > 0)
+      last = last->children()[last->children().size() - 1];
+
+    if((*last)[columns.matchcount] == 0)
+    {
+      const bool found_last = prev_match_file(last);
+      g_return_if_fail(found_last);
+    }
+
+    path_match_last_ = Gtk::TreePath(last);
+
+    signal_bound_state_changed(); // emit
+  }
 }
 
 void FileTree::on_selection_changed()

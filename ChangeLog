@@ -1,3 +1,10 @@
+2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filetree.{cc,h} (on_treestore_sort_column_changed): New signal
+	handler, used to recalculate path_match_first_ and path_match_last_.
+	This fixes a serious bug -- the code relies on the validity of this
+	cached range.
+
 regexxer 0.3:
 
 2002-11-10  Daniel Elstner  <daniel.elstner@gmx.net>

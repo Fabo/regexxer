@@ -128,6 +128,7 @@ private:
 
   void expand_and_select(const Gtk::TreePath& path);
 
+  void on_treestore_sort_column_changed();
   void on_selection_changed();
   void on_buffer_match_count_changed(int match_count);
   void on_buffer_modified_changed();
