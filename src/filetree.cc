@@ -29,6 +29,12 @@
 #include <utility>
 
 
+// Normally I don't like global using declarations, but it's
+// reasonable to make an exception for the smart pointer casts.
+using Util::shared_dynamic_cast;
+using Util::shared_polymorphic_cast;
+
+
 namespace
 {
 
@@ -57,7 +63,7 @@ inline
 Regexxer::FileInfoPtr get_fileinfo_from_iter(const Gtk::TreeModel::iterator& iter)
 {
   const Regexxer::FileInfoBasePtr base ((*iter)[filetree_columns().fileinfo]);
-  return Regexxer::FileInfoPtr::cast_dynamic(base);
+  return shared_dynamic_cast<Regexxer::FileInfo>(base);
 }
 
 int default_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs)
@@ -502,11 +508,11 @@ void FileTree::icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel
   Gtk::CellRendererPixbuf& renderer = dynamic_cast<Gtk::CellRendererPixbuf&>(*cell);
   const FileInfoBasePtr    infobase = (*iter)[filetree_columns().fileinfo];
 
-  if(const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic(infobase))
+  if(const FileInfoPtr fileinfo = shared_dynamic_cast<FileInfo>(infobase))
   {
     renderer.property_pixbuf() = (fileinfo->load_failed) ? pixbuf_load_failed_ : pixbuf_file_;
   }
-  else if(DirInfoPtr::cast_dynamic(infobase))
+  else if(shared_dynamic_cast<DirInfo>(infobase))
   {
     renderer.property_pixbuf() = pixbuf_directory_;
   }
@@ -523,14 +529,14 @@ void FileTree::text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel
 
   Gdk::Color* color = 0;
 
-  if(const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic(infobase))
+  if(const FileInfoPtr fileinfo = shared_dynamic_cast<FileInfo>(infobase))
   {
     if(fileinfo->load_failed)
       color = &color_load_failed_;
     else if(fileinfo->buffer && fileinfo->buffer->get_modified())
       color = &color_modified_;
   }
-  else if(const DirInfoPtr dirinfo = DirInfoPtr::cast_dynamic(infobase))
+  else if(const DirInfoPtr dirinfo = shared_dynamic_cast<DirInfo>(infobase))
   {
     if(dirinfo->modified_count > 0)
       color = &color_modified_;
@@ -696,7 +702,7 @@ void FileTree::find_increment_file_count(FindData& find_data, int file_count)
   for(; pdir != pend; ++pdir)
   {
     const FileInfoBasePtr base = (*pdir->second)[columns.fileinfo];
-    DirInfoPtr::cast_dynamic_throw(base)->file_count += file_count;
+    shared_polymorphic_cast<DirInfo>(base)->file_count += file_count;
   }
 
   toplevel_.file_count += file_count;
@@ -971,7 +977,7 @@ void FileTree::on_selection_changed()
   if(const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
   {
     const FileInfoBasePtr base = (*iter)[columns.fileinfo];
-    fileinfo = FileInfoPtr::cast_dynamic_throw(base);
+    fileinfo = shared_polymorphic_cast<FileInfo>(base);
 
     file_index = calculate_file_index(iter) + 1;
 
@@ -1099,7 +1105,7 @@ void FileTree::on_buffer_modified_changed()
   g_return_if_fail(selected);
 
   const FileInfoBasePtr base = (*selected)[filetree_columns().fileinfo];
-  const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic_throw(base);
+  const FileInfoPtr fileinfo = shared_polymorphic_cast<FileInfo>(base);
 
   g_return_if_fail(fileinfo == last_selected_);
   g_return_if_fail(fileinfo->buffer);
@@ -1130,7 +1136,7 @@ int FileTree::calculate_file_index(const Gtk::TreeModel::iterator& pos)
     const FileInfoBasePtr base ((*iter)[columns.fileinfo]);
     g_return_val_if_fail(base, index);
 
-    if(const DirInfoPtr dirinfo = DirInfoPtr::cast_dynamic(base))
+    if(const DirInfoPtr dirinfo = shared_dynamic_cast<DirInfo>(base))
       index += dirinfo->file_count; // count whole directory in one step
     else
       ++index; // single file
@@ -1163,7 +1169,7 @@ void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bo
   for(Gtk::TreeModel::iterator iter = pos->parent(); iter; iter = iter->parent())
   {
     const FileInfoBasePtr base = (*iter)[columns.fileinfo];
-    const DirInfoPtr dirinfo = DirInfoPtr::cast_dynamic_throw(base);
+    const DirInfoPtr dirinfo = shared_polymorphic_cast<DirInfo>(base);
 
     if(modified)
     {

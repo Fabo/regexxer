@@ -1,3 +1,11 @@
+2002-11-13  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/sharedptr.h: Reimplement the static member templates
+	cast_static<>(), cast_dynamic<>() and cast_dynamic_throw<>() as
+	free functions, and use the boost naming convention.
+
+	* src/filetree.cc: Use the new boost-like cast functions.
+
 2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* regexxer.desktop: New desktop file, provided by Ross Burton.

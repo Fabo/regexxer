@@ -51,6 +51,24 @@ private:
 /* Intrusive smart pointer implementation.  It requires the managed types
  * to be derived from class SharedObject, in order to do reference counting
  * as efficient as possible.
+ *
+ * The intrusive approach also simplifies the implementation, particularly
+ * with regards to exception safety.  A non- intrusive smart pointer like
+ * boost::shared_ptr<> would have to allocate memory to hold the reference
+ * count -- this is tricky not just because of the new which could throw,
+ * but it also complicates the implementation of the cast templates like
+ * shared_dynamic_cast<> and others.
+ *
+ * The cast templates use the same syntax as in boost:
+ *
+ *     shared_static_cast<T>        returns static_cast<T*>(pointer)
+ *     shared_dynamic_cast<T>       returns dynamic_cast<T*>(pointer)
+ *     shared_polymorphic_cast<T>   returns &dynamic_cast<T&>(*pointer)
+ *
+ * I didn't implement shared_polymorphic_downcast<T> because it seems to be
+ * just a debug check for those who don't want to ship with debugging enabled.
+ * This would be silly IMHO, considering that the dynamic_cast<> overhead is
+ * neglible in a GUI application like regexxer.
  */
 template <class T>
 class SharedPtr
@@ -74,10 +92,6 @@ public:
   inline T& operator*()  const;
 
   inline operator const void*() const;
-
-  template <class U> static inline SharedPtr<T> cast_static(const SharedPtr<U>& other);
-  template <class U> static inline SharedPtr<T> cast_dynamic(const SharedPtr<U>& other);
-  template <class U> static inline SharedPtr<T> cast_dynamic_throw(const SharedPtr<U>& other);
 
 private:
   T* ptr_;
@@ -178,26 +192,21 @@ SharedPtr<T>::operator const void*() const
   return ptr_;
 }
 
-template <class T>
-  template <class U>
-inline // static
-SharedPtr<T> SharedPtr<T>::cast_static(const SharedPtr<U>& other)
+
+template <class T, class U> inline
+SharedPtr<T> shared_static_cast(const SharedPtr<U>& other)
 {
   return SharedPtr<T>(static_cast<T*>(other.get()));
 }
 
-template <class T>
-  template <class U>
-inline // static
-SharedPtr<T> SharedPtr<T>::cast_dynamic(const SharedPtr<U>& other)
+template <class T, class U> inline
+SharedPtr<T> shared_dynamic_cast(const SharedPtr<U>& other)
 {
   return SharedPtr<T>(dynamic_cast<T*>(other.get()));
 }
 
-template <class T>
-  template <class U>
-inline // static
-SharedPtr<T> SharedPtr<T>::cast_dynamic_throw(const SharedPtr<U>& other)
+template <class T, class U> inline
+SharedPtr<T> shared_polymorphic_cast(const SharedPtr<U>& other)
 {
   return SharedPtr<T>(&dynamic_cast<T&>(*other)); // may throw std::bad_cast
 }
