@@ -43,15 +43,15 @@ AC_CACHE_CHECK(
   [regexxer_cv_have_gtkmm_22],
 [
   AC_LANG_PUSH([C++])
-  regexxer_saved_CXXFLAGS=$CXXFLAGS
-  CXXFLAGS="$CXXFLAGS $GTKMM_CFLAGS"
+  regexxer_saved_CPPFLAGS=$CXXFLAGS
+  CPPFLAGS="$CPPFLAGS $GTKMM_CFLAGS"
 
   AC_COMPILE_IFELSE(
-    [AC_LANG_PROGRAM([[#include <glibmm.h>]], [[using Glib::set_application_name;]])],
+    [AC_LANG_PROGRAM([[#include <glibmm/miscutils.h>]], [[using Glib::set_application_name;]])],
     [regexxer_cv_have_gtkmm_22=yes],
     [regexxer_cv_have_gtkmm_22=no])
 
-  CXXFLAGS=$regexxer_saved_CXXFLAGS
+  CPPFLAGS=$regexxer_saved_CPPFLAGS
   AC_LANG_POP([C++])
 ])
 

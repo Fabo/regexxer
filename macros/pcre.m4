@@ -90,9 +90,9 @@ AC_CACHE_CHECK(
   [pcre_cv_has_utf8_support],
 [
   AC_LANG_PUSH([C])
-  pcre_saved_CFLAGS=$CFLAGS
+  pcre_saved_CPPFLAGS=$CPPFLAGS
   pcre_saved_LIBS=$LIBS
-  CFLAGS="$CFLAGS $PCRE_CFLAGS"
+  CPPFLAGS="$CPPFLAGS $PCRE_CFLAGS"
   LIBS="$LIBS $PCRE_LIBS"
 
   AC_RUN_IFELSE(
@@ -117,7 +117,7 @@ AC_CACHE_CHECK(
     [pcre_cv_has_utf8_support=no],
     [pcre_cv_has_utf8_support="cross compile: assuming yes"])
 
-  CFLAGS=$pcre_saved_CFLAGS
+  CPPFLAGS=$pcre_saved_CPPFLAGS
   LIBS=$pcre_saved_LIBS
   AC_LANG_POP([C])
 ])
