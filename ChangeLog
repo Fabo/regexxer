@@ -1,5 +1,10 @@
 2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* pixmaps/Makefile.am: s/noinst_DATA/dist_noinst_DATA/ so that
+	the pixmap files are included in the distribution.
+
+2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/fileio.cc: Close and reopen the I/O channel when switching
 	the encoding.  Changing encodings on the fly doesn't seem to work
 	with older GLib releases.

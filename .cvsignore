@@ -9,3 +9,5 @@ config.log
 config.status
 configure
 stamp-h1
+regexxer-*.tar.bz2
+regexxer-*.tar.gz
