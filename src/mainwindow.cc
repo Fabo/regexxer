@@ -145,7 +145,7 @@ MainWindow::MainWindow()
   using SigC::slot;
 
   set_title_filename();
-  set_default_size(600, 400);
+  set_default_size(600, 450);
 
   {
     std::auto_ptr<Paned> paned (new HPaned());
