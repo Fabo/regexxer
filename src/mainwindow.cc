@@ -89,7 +89,7 @@ FileErrorDialog::FileErrorDialog(Gtk::Window& parent, const Glib::ustring& messa
   Box& box = *get_vbox();
   Frame *const frame = new Frame();
   box.pack_start(*manage(frame), PACK_EXPAND_WIDGET);
-  frame->set_border_width(5);
+  frame->set_border_width(6); //HIG spacing
   frame->set_shadow_type(SHADOW_IN);
 
   ScrolledWindow *const scrollwin = new ScrolledWindow();
@@ -273,8 +273,9 @@ Gtk::Widget* MainWindow::create_main_vbox()
   toolbar_handle->add(*manage(toolbar_));
 
   Box *const vbox_interior = new VBox();
+
   vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);
-  vbox_interior->set_border_width(2);
+  vbox_interior->set_border_width(6); //HIG spacing. This plus the window border width makes 12, or plus the other border makes 12 between widgets.
 
   statusline_ = new StatusLine();
   vbox_main->pack_start(*manage(statusline_), PACK_SHRINK);
@@ -295,12 +296,12 @@ Gtk::Widget* MainWindow::create_left_pane()
   using namespace Gtk;
 
   std::auto_ptr<Box> vbox (new VBox(false, 3));
-  vbox->set_border_width(1);
+  vbox->set_border_width(6); //HIG spacing.
 
   Table *const table = new Table(3, 2, false);
   vbox->pack_start(*manage(table), PACK_SHRINK);
-  table->set_border_width(1);
-  table->set_spacings(2);
+  table->set_border_width(0);
+  table->set_spacings(6); //HIG
 
   Button *const button_folder = new ImageLabelButton(Stock::OPEN, "Fol_der:", true);
   table->attach(*manage(button_folder), 0, 1, 0, 1, FILL, AttachOptions(0));
@@ -323,7 +324,7 @@ Gtk::Widget* MainWindow::create_left_pane()
   entry_pattern_->signal_activate().connect(controller_.find_files.slot());
   entry_pattern_->signal_changed ().connect(SigC::slot(*this, &MainWindow::on_entry_pattern_changed));
 
-  Box *const hbox = new HBox(false, 5);
+  Box *const hbox = new HBox(false, 6 /* HIG */);
   table->attach(*manage(hbox), 0, 2, 2, 3, EXPAND|FILL, AttachOptions(0));
 
   button_recursive_ = new CheckButton("recursive");
@@ -368,12 +369,12 @@ Gtk::Widget* MainWindow::create_right_pane()
   using namespace Gtk;
 
   std::auto_ptr<Box> vbox (new VBox(false, 3));
-  vbox->set_border_width(1);
+  vbox->set_border_width(6); //HIG spacing
 
   Table *const table = new Table(2, 3, false);
   vbox->pack_start(*manage(table), PACK_SHRINK);
-  table->set_border_width(1);
-  table->set_spacings(2);
+  table->set_border_width(0);
+  table->set_spacings(6); //HIG
 
   Label *const label_search = new Label("Search:",  0.0, 0.5);
   table->attach(*manage(label_search), 0, 1, 0, 1, FILL, AttachOptions(0));
@@ -389,7 +390,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_substitution_->signal_activate().connect(controller_.find_matches.slot());
   entry_substitution_->signal_changed ().connect(SigC::slot(*this, &MainWindow::update_preview));
 
-  Box *const hbox_options = new HBox(false, 5);
+  Box *const hbox_options = new HBox(false, 6 /* HIG */);
   table->attach(*manage(hbox_options), 2, 3, 0, 1, FILL, AttachOptions(0));
   hbox_options->pack_start(*manage(button_multiple_ = new CheckButton("/g")), PACK_SHRINK);
   hbox_options->pack_start(*manage(button_caseless_ = new CheckButton("/i")), PACK_SHRINK);

@@ -71,7 +71,7 @@ const StockIconData stock_icon_save_all[] =
 
 const StockItemData regexxer_stock_items[] =
 {
-  { "regexxer-info",     stock_icon_info,     G_N_ELEMENTS(stock_icon_info),     "_Info"     },
+  { "regexxer-info",     stock_icon_info,     G_N_ELEMENTS(stock_icon_info),     "_About"     },
   { "regexxer-save-all", stock_icon_save_all, G_N_ELEMENTS(stock_icon_save_all), "Save _all" }
 };
 

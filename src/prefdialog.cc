@@ -102,9 +102,9 @@ FontSelectionButton::FontSelectionButton()
   Box *const box = new HBox(false, 0);
   add(*manage(box));
 
-  box->pack_start(*manage(label_font_ = new Label()), PACK_EXPAND_WIDGET, 5);
+  box->pack_start(*manage(label_font_ = new Label()), PACK_EXPAND_WIDGET, 6 /* HIG */);
   box->pack_start(*manage(new VSeparator()),          PACK_SHRINK);
-  box->pack_start(*manage(label_size_ = new Label()), PACK_SHRINK, 5);
+  box->pack_start(*manage(label_size_ = new Label()), PACK_SHRINK, 6 /* HIG */);
 }
 
 FontSelectionButton::~FontSelectionButton()
@@ -478,7 +478,7 @@ Gtk::Widget* PrefDialog::create_page_file()
   Label *const label_locale = new Label("The encoding specified by the current locale", 0.0, 0.5);
   table->attach(*manage(label_locale), 1, 2, 1, 2, FILL, FILL);
 
-  Box *const box_fallback = new HBox(false, 5);
+  Box *const box_fallback = new HBox(false, 6 /* HIG */);
   table->attach(*manage(box_fallback), 1, 2, 2, 3, EXPAND|FILL, FILL);
 
   Label *const label_fallback = new Label("Fallback _encoding:", 0.0, 0.5, true);

@@ -300,10 +300,10 @@ Gtk::Widget* Controller::create_action_area()
   std::auto_ptr<Box> action_area (new HBox(false, 10));
   action_area->set_border_width(2);
 
-  Box *const box_replace = new HBox(true, 5);
+  Box *const box_replace = new HBox(true, 6 /* HIG */);
   action_area->pack_end(*manage(box_replace), PACK_SHRINK);
 
-  Box *const box_move = new HBox(true, 5);
+  Box *const box_move = new HBox(true, 6 /* HIG */);
   action_area->pack_end(*manage(box_move), PACK_SHRINK);
 
   Button *const button_prev_file = new ImageButton(Stock::GOTO_FIRST, "File backward");

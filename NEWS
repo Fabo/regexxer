@@ -1,4 +1,14 @@
+regexxer 0.5 (2003-10-31)
 
+  * Undo feature (Daniel Elstner)
+  * Drop-down list of common file extensions. (Murray Cumming)
+  * Allow configuration of colors via color buttons (Daniel Elstner)
+  * Accessibility improvements (tab sequences and widget names)
+    (Daniel Elstner)
+  * Very slight HIGification (Murray Cumming)
+  * new application icon (jimmac, Daniel Elstner)
+  * Danish Translation (Morten Brix Petersen)
+    
 regexxer 0.4 (2002-11-18)
 
 	* menu bar added (can be disabled)
