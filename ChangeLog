@@ -1,5 +1,10 @@
 2002-10-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.cc: Dump std::[io]fstream in favor of Glib::IOChannel.
+	It's less code now and the error reporting should be better too.
+
+2002-10-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/fileio.{cc,h}: New files.
 	* src/filelist.{cc,h}: Separate the load/save functionality into
 	fileio.{cc,h} to improve modularity of the code.

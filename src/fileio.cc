@@ -22,12 +22,6 @@
 #include "filebuffer.h"
 #include "stringutils.h"
 
-#include <cerrno>
-#include <cstddef>
-#include <cstring>
-#include <fstream>
-#include <iostream>
-
 #include <glib.h>
 #include <glibmm.h>
 
@@ -42,119 +36,28 @@ enum { BUFSIZE = 4096 };
 const char fallback_encoding[] = "ISO-8859-1";
 
 
-Glib::RefPtr<FileBuffer> load_stream(std::istream& input)
+Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& input)
 {
   const Glib::RefPtr<FileBuffer> text_buffer = FileBuffer::create();
+  FileBuffer::iterator text_end (text_buffer->end());
 
   const Glib::ScopedPtr<char> inbuf (g_new(char, BUFSIZE));
-  size_t length_incomplete = 0;
+  gsize bytes_read = 0;
 
-  while(input)
+  while(input->read(inbuf.get(), BUFSIZE, bytes_read) == Glib::IO_STATUS_NORMAL)
   {
-    input.read(inbuf.get() + length_incomplete, BUFSIZE - length_incomplete);
-    const size_t n_read = input.gcount();
-
-    // For now, let's assume that any invalid UTF-8 in the input is
-    // just an incomplete character at the end of the buffer.
-    const char* start_incomplete = 0;
-    g_utf8_validate(inbuf.get(), length_incomplete + n_read, &start_incomplete);
-    length_incomplete = (inbuf.get() + length_incomplete + n_read) - start_incomplete;
-
-    // If the remaining buffer space after the valid area is >= 6 bytes (the
-    // maximum length of a single UTF-8 character), it can't in fact be just
-    // an incomplete sequence.  Report failure.
-    if(length_incomplete >= 6)
+    if(Util::contains_null(inbuf.get(), inbuf.get() + bytes_read))
       return Glib::RefPtr<FileBuffer>();
 
-    // Insert all the valid stuff into the text buffer.
-    text_buffer->insert(text_buffer->end(), inbuf.get(), start_incomplete);
-
-    // Move the trailing invalid sequence to the front.
-    std::memcpy(inbuf.get(), start_incomplete, length_incomplete);
+    text_end = text_buffer->insert(text_end, inbuf.get(), inbuf.get() + bytes_read);
   }
 
-  // At the end of the file there shouldn't be any invalid sequence left.
-  if(length_incomplete > 0)
-    return Glib::RefPtr<FileBuffer>();
+  g_assert(bytes_read == 0);
 
   return text_buffer;
 }
 
-Glib::RefPtr<FileBuffer> load_convert_stream(std::istream& input, Glib::IConv& iconv)
-{
-  const Glib::RefPtr<FileBuffer> text_buffer = FileBuffer::create();
-
-  const Glib::ScopedPtr<char> inbuf   (g_new(char, BUFSIZE));
-  const Glib::ScopedPtr<char> convbuf (g_new(char, BUFSIZE));
-
-  gsize inleft = 0;
-
-  while(input)
-  {
-    // inleft might be > 0 if there was an incomplete
-    // multibyte sequence at the end of inbuf.
-    input.read(inbuf.get() + inleft, BUFSIZE - inleft);
-    inleft += input.gcount();
-
-    char* inpos    = inbuf.get();
-    char* convpos  = convbuf.get();
-    gsize convleft = BUFSIZE;
-
-    while(iconv.iconv(&inpos, &inleft, &convpos, &convleft) == static_cast<size_t>(-1))
-    {
-      const int err_no = errno;
-
-      if(err_no == E2BIG)
-      {
-        // The last character written to convbuf might be incomplete.
-        char *const start_incomplete = g_utf8_find_prev_char(convbuf.get(), convpos);
-        g_assert(start_incomplete != 0);
-
-        // Gtk::TextBuffer doesn't like '\0' characters.
-        if(Util::contains_null(convbuf.get(), start_incomplete))
-          return Glib::RefPtr<FileBuffer>();
-
-        // Append what we have so far.
-        text_buffer->insert(text_buffer->end(), convbuf.get(), start_incomplete);
-
-        // Move the trailing incomplete sequence to the front.
-        const size_t length_incomplete = convpos - start_incomplete;
-        std::memcpy(convbuf.get(), start_incomplete, length_incomplete);
-
-        convpos  = convbuf.get() + length_incomplete;
-        convleft = BUFSIZE - length_incomplete;
-      }
-      else if(err_no == EINVAL)
-      {
-        // Move the trailing incomplete sequence to the front.
-        std::memcpy(inbuf.get(), inpos, inleft);
-        break;
-      }
-      else
-      {
-        if(err_no != EILSEQ)
-          g_error("unexpected IConv error: %s", g_strerror(err_no));
-
-        return Glib::RefPtr<FileBuffer>();
-      }
-    }
-
-    // Gtk::TextBuffer doesn't like '\0' characters.
-    if(Util::contains_null(convbuf.get(), convpos))
-      return Glib::RefPtr<FileBuffer>();
-
-    // Append what we have so far.
-    text_buffer->insert(text_buffer->end(), convbuf.get(), convpos);
-  }
-
-  // At the end of the file there shouldn't be any data left.
-  if(inleft > 0)
-    return Glib::RefPtr<FileBuffer>();
-
-  return text_buffer;
-}
-
-void save_stream(std::ostream& output, const Glib::RefPtr<FileBuffer>& buffer)
+void save_iochannel(const Glib::RefPtr<Glib::IOChannel>& output, const Glib::RefPtr<FileBuffer>& buffer)
 {
   FileBuffer::iterator start = buffer->begin();
   FileBuffer::iterator stop  = start;
@@ -164,43 +67,28 @@ void save_stream(std::ostream& output, const Glib::RefPtr<FileBuffer>& buffer)
     stop.forward_chars(BUFSIZE); // inaccurate, but doesn't matter
     const Glib::ustring chunk (buffer->get_text(start, stop));
 
-    output.write(chunk.data(), chunk.bytes());
+    gsize bytes_written = 0;
+    const Glib::IOStatus status = output->write(chunk.data(), chunk.bytes(), bytes_written);
+
+    g_assert(status == Glib::IO_STATUS_NORMAL);
+    g_assert(bytes_written == chunk.bytes());
   }
 }
 
-void save_convert_stream(std::ostream& output, Glib::IConv& iconv,
-                         const Glib::RefPtr<FileBuffer>& buffer)
+Glib::RefPtr<FileBuffer> load_try_encoding(const Glib::RefPtr<Glib::IOChannel>& input,
+                                           const std::string& encoding)
 {
-  const Glib::ScopedPtr<char> convbuf (g_new(char, BUFSIZE));
+  input->seek(0);
 
-  FileBuffer::iterator start = buffer->begin();
-  FileBuffer::iterator stop  = start;
-
-  for(; start; start = stop)
+  try
   {
-    stop.forward_chars(BUFSIZE); // inaccurate, but doesn't matter
-    const Glib::ustring chunk (buffer->get_text(start, stop));
-
-    char* inpos    = const_cast<char*>(chunk.data());
-    gsize inleft   = chunk.bytes();
-    char* convpos  = convbuf.get();
-    gsize convleft = BUFSIZE;
-
-    while(iconv.iconv(&inpos, &inleft, &convpos, &convleft) == static_cast<size_t>(-1))
-    {
-      const int err_no = errno;
-
-      if(err_no != E2BIG)
-        g_error("unexpected IConv error: %s", g_strerror(err_no));
-
-      output.write(convbuf.get(), BUFSIZE - convleft);
-
-      convpos  = convbuf.get();
-      convleft = BUFSIZE;
-    }
-
-    output.write(convbuf.get(), BUFSIZE - convleft);
+    input->set_encoding(encoding);
+    return load_iochannel(input);
   }
+  catch(const Glib::ConvertError&)
+  {}
+
+  return Glib::RefPtr<FileBuffer>();
 }
 
 } // anonymous namespace
@@ -225,63 +113,55 @@ FileInfo::~FileInfo()
 
 void load_file(const FileInfoPtr& fileinfo)
 {
-  std::ifstream input_stream;
-  input_stream.exceptions(std::ios_base::badbit);
-  input_stream.open(fileinfo->fullname.c_str(), std::ios::in | std::ios::binary);
+  fileinfo->load_failed = true;
+
+  const Glib::RefPtr<Glib::IOChannel> channel =
+      Glib::IOChannel::create_from_file(fileinfo->fullname, "r");
+
+  channel->set_buffer_size(BUFSIZE);
 
   std::string encoding = "UTF-8";
-  Glib::RefPtr<FileBuffer> buffer = load_stream(input_stream);
+  Glib::RefPtr<FileBuffer> buffer = load_try_encoding(channel, encoding);
+
+  if(!buffer && !Glib::get_charset(encoding)) // locale charset is _not_ UTF-8
+  {
+    buffer = load_try_encoding(channel, encoding);
+  }
+
+  if(!buffer && !Util::encodings_equal(encoding, fallback_encoding))
+  {
+    encoding = fallback_encoding;
+    buffer = load_try_encoding(channel, encoding);
+  }
+
+  channel->close();
 
   if(!buffer)
   {
-    if(!Glib::get_charset(encoding)) // locale charset is _not_ UTF-8
-    {
-      input_stream.clear();
-      input_stream.seekg(0);
-      Glib::IConv iconv ("UTF-8", encoding);
-      buffer = load_convert_stream(input_stream, iconv);
-    }
-    if(!buffer && !Util::encodings_equal(encoding, fallback_encoding))
-    {
-      input_stream.clear();
-      input_stream.seekg(0);
-      encoding = fallback_encoding;
-      Glib::IConv iconv ("UTF-8", encoding);
-      buffer = load_convert_stream(input_stream, iconv);
-    }
-    if(!buffer)
-    {
-      fileinfo->load_failed = true;
-      std::cerr << "Couldn't convert `"
-                << Util::filename_to_utf8_fallback(fileinfo->fullname)
-                << "' to UTF-8.\n";
-      return;
-    }
+    const Glib::ustring filename = Util::filename_to_utf8_fallback(fileinfo->fullname);
+    g_message("couldn't convert `%s' to UTF-8", filename.c_str());
   }
+  else
+  {
+    buffer->set_modified(false);
 
-  buffer->set_modified(false);
-  fileinfo->load_failed = false;
-  fileinfo->encoding    = encoding;
-  fileinfo->buffer      = buffer;
+    fileinfo->load_failed = false;
+    fileinfo->encoding    = encoding;
+    fileinfo->buffer      = buffer;
+  }
 }
 
 void save_file(const FileInfoPtr& fileinfo)
 {
-  std::ofstream output_stream;
-  output_stream.exceptions(std::ios_base::badbit | std::ios::failbit);
-  output_stream.open(fileinfo->fullname.c_str(), std::ios::out | std::ios::trunc | std::ios::binary);
+  const Glib::RefPtr<Glib::IOChannel> channel =
+      Glib::IOChannel::create_from_file(fileinfo->fullname, "w");
 
-  if(Util::encodings_equal(fileinfo->encoding, "UTF-8"))
-  {
-    save_stream(output_stream, fileinfo->buffer);
-  }
-  else
-  {
-    Glib::IConv iconv (fileinfo->encoding, "UTF-8");
-    save_convert_stream(output_stream, iconv, fileinfo->buffer);
-  }
+  channel->set_buffer_size(2 * BUFSIZE); // XXX: workaround for GLib <= 2.0.6 (#96373)
 
-  output_stream.close(); // might throw
+  channel->set_encoding(fileinfo->encoding);
+  save_iochannel(channel, fileinfo->buffer);
+
+  channel->close(); // might throw
 
   fileinfo->buffer->set_modified(false);
 }
