@@ -1,5 +1,13 @@
 2004-06-29  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (selection_clipboard): New string constant
+	defining the name of the selection to use for the clipboard.
+	(MainWindow::on_cut): Use the selection_clipboard constant.
+	(MainWindow::on_copy): ditto
+	(MainWindow::on_paste): ditto.
+
+2004-06-29  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/controller.{cc,h} (Controller::edit_actions): Rename from
 	clip_actions.
 	(Controller::erase): Add action.

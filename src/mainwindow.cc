@@ -47,6 +47,8 @@ enum { BUSY_GUI_UPDATE_INTERVAL = 16 };
 
 typedef Glib::RefPtr<Regexxer::FileBuffer> FileBufferPtr;
 
+const char *const selection_clipboard = "CLIPBOARD";
+
 
 class FileErrorDialog : public Gtk::MessageDialog
 {
@@ -302,19 +304,21 @@ bool MainWindow::on_delete_event(GdkEventAny*)
 void MainWindow::on_cut()
 {
   if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
-    buffer->cut_clipboard(textview_->get_clipboard("CLIPBOARD"), textview_->get_editable());
+    buffer->cut_clipboard(textview_->get_clipboard(selection_clipboard),
+                          textview_->get_editable());
 }
 
 void MainWindow::on_copy()
 {
   if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
-    buffer->copy_clipboard(textview_->get_clipboard("CLIPBOARD"));
+    buffer->copy_clipboard(textview_->get_clipboard(selection_clipboard));
 }
 
 void MainWindow::on_paste()
 {
   if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
-    buffer->paste_clipboard(textview_->get_clipboard("CLIPBOARD"), textview_->get_editable());
+    buffer->paste_clipboard(textview_->get_clipboard(selection_clipboard),
+                            textview_->get_editable());
 }
 
 void MainWindow::on_erase()
