@@ -41,6 +41,7 @@ std::string substitute_references(const std::string&   substitution,
 
 Glib::ustring filename_to_utf8_fallback(const std::string& filename);
 Glib::ustring convert_to_ascii(const std::string& str);
+Glib::ustring int_to_string(int number);
 
 Glib::ustring transform_pathname(const Glib::ustring& path, bool shorten);
 

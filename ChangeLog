@@ -1,5 +1,12 @@
 2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.{cc,h} (int_to_string): New function.
+
+	* src/mainwindow.cc (on_exec_search): Show an error dialog if
+	there is an error in the regex.
+
+2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (on_select_folder): Hide the file selection
 	pane in the Gtk::FileSelection dialog, since we only need the
 	directory part.

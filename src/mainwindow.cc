@@ -25,10 +25,10 @@
 #include "statusline.h"
 #include "stringutils.h"
 
-#include <iostream>
-#include <memory>
 #include <glib.h>
 #include <gtkmm.h>
+#include <algorithm>
+#include <iostream>
 
 #include <config.h>
 
@@ -470,17 +470,37 @@ void MainWindow::on_exec_search()
 {
   BusyAction busy (*this);
 
+  const Glib::ustring regex = entry_regex_->get_text();
+  const bool caseless = button_caseless_->get_active();
+  const bool multiple = button_multiple_->get_active();
+
   try
   {
-    Pcre::Pattern pattern (
-        entry_regex_->get_text(),
-        button_caseless_->get_active() ? Pcre::CASELESS : Pcre::CompileOptions(0));
-
-    filelist_->find_matches(pattern, button_multiple_->get_active());
+    Pcre::Pattern pattern (regex, (caseless) ? Pcre::CASELESS : Pcre::CompileOptions(0));
+    filelist_->find_matches(pattern, multiple);
   }
-  catch(const Pcre::Error& e)
+  catch(const Pcre::Error& error)
   {
-    std::cerr << e.what() << std::endl;
+    Glib::ustring message = "Error in regular expression";
+    const int offset = error.offset();
+
+    if(offset >= 0 && unsigned(offset) < regex.bytes())
+    {
+      const Glib::ustring::const_iterator pos (regex.begin().base() + offset);
+
+      message += " at \302\273";
+      message += *pos;
+      message += "\302\253 (index ";
+      message += Util::int_to_string(std::distance(regex.begin(), pos) + 1);
+      message += ")";
+    }
+
+    message += ":\n";
+    message += error.what();
+
+    Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    dialog.run();
+
     return;
   }
 

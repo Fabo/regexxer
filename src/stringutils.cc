@@ -20,11 +20,14 @@
 
 #include "stringutils.h"
 
-#include <algorithm>
-#include <utility>
-#include <vector>
 #include <glib/gmessages.h>
 #include <glibmm.h>
+#include <algorithm>
+#include <sstream>
+#include <utility>
+#include <vector>
+
+#include <config.h>
 
 
 namespace
@@ -506,6 +509,19 @@ Glib::ustring Util::convert_to_ascii(const std::string& str)
   }
 
   return result;
+}
+
+Glib::ustring Util::int_to_string(int number)
+{
+  std::ostringstream output;
+
+#if REGEXXER_HAVE_STD_LOCALE
+  output.imbue(std::locale(""));
+#endif
+
+  output << number;
+
+  return Glib::locale_to_utf8(output.str());
 }
 
 Glib::ustring Util::transform_pathname(const Glib::ustring& path, bool shorten)
