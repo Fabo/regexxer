@@ -83,6 +83,39 @@ public:
 namespace Regexxer
 {
 
+/**** Regexxer::FileList::FindErrorList ************************************/
+
+struct FileList::FindErrorList : public Util::SharedObject
+{
+  FindErrorList();
+  ~FindErrorList();
+
+  std::list<Glib::FileError> errors;
+};
+
+FileList::FindErrorList::FindErrorList()
+{}
+
+FileList::FindErrorList::~FindErrorList()
+{}
+
+
+/**** Regexxer::FileList::FindError ****************************************/
+
+FileList::FindError::FindError(const Util::SharedPtr<FileList::FindErrorList>& error_list)
+:
+  error_list_ (error_list)
+{}
+
+FileList::FindError::~FindError()
+{}
+
+const std::list<Glib::FileError>& FileList::FindError::get_error_list() const
+{
+  return error_list_->errors;
+}
+
+
 /**** Regexxer::FileList::FindData *****************************************/
 
 struct FileList::FindData
@@ -92,20 +125,24 @@ struct FileList::FindData
            bool recursive_, bool hidden_);
   ~FindData();
 
-  Pcre::Pattern                 pattern;
-  const std::string::size_type  chop_off;
-  const bool                    recursive;
-  const bool                    hidden;
+  Pcre::Pattern                             pattern;
+  const std::string::size_type              chop_off;
+  const bool                                recursive;
+  const bool                                hidden;
+  Util::SharedPtr<FileList::FindErrorList>  error_list;
+
+  std::list<Glib::FileError>& errors() { return error_list->errors; }
 };
 
 FileList::FindData::FindData(const Glib::ustring&   pattern_,
                              std::string::size_type chop_off_,
                              bool recursive_, bool hidden_)
 :
-  pattern   (pattern_),
-  chop_off  (chop_off_),
-  recursive (recursive_),
-  hidden    (hidden_)
+  pattern     (pattern_),
+  chop_off    (chop_off_),
+  recursive   (recursive_),
+  hidden      (hidden_),
+  error_list  (new FileList::FindErrorList())
 {}
 
 FileList::FindData::~FindData()
@@ -162,6 +199,8 @@ void FileList::find_files(const Glib::ustring& dirname,
   if(chop_off > 0 && *startdir.rbegin() != G_DIR_SEPARATOR)
     ++chop_off;
 
+  FindData find_data (Util::shell_pattern_to_regex(pattern), chop_off, recursive, hidden);
+
   const bool modified_count_changed = (modified_count_ != 0);
 
   get_selection()->unselect_all(); // workaround for GTK+ <= 2.0.6 (#94868)
@@ -181,21 +220,17 @@ void FileList::find_files(const Glib::ustring& dirname,
 
   try
   {
-    FindData find_data (Util::shell_pattern_to_regex(pattern), chop_off, recursive, hidden);
     find_recursively(startdir, find_data);
-  }
-  catch(const Pcre::Error& error)
-  {
-    const Glib::ustring what = error.what();
-    g_message("Invalid filename search pattern: %s", what.c_str());
   }
   catch(const Glib::FileError& error)
   {
-    const Glib::ustring what = error.what();
-    g_message("%s", what.c_str());
+    find_data.errors().push_back(error);
   }
 
   signal_bound_state_changed(); // emit
+
+  if(!find_data.errors().empty())
+    throw FindError(find_data.error_list);
 }
 
 int FileList::get_file_count() const
@@ -508,8 +543,7 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
     }
     catch(const Glib::FileError& error)
     {
-      const Glib::ustring what = error.what();
-      g_message("%s", what.c_str());
+      find_data.errors().push_back(error);
     }
     catch(const Glib::ConvertError& error)
     {

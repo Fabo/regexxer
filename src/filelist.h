@@ -27,6 +27,7 @@
 #include <gdkmm/color.h>
 #include <gtkmm/treepath.h>
 #include <gtkmm/treeview.h>
+#include <list>
 
 namespace Gtk  { class ListStore; }
 namespace Pcre { class Pattern;   }
@@ -38,6 +39,8 @@ namespace Regexxer
 class FileList : public Gtk::TreeView
 {
 public:
+  class FindError; // exception class
+
   FileList();
   virtual ~FileList();
 
@@ -75,8 +78,8 @@ protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 
 private:
+  struct FindErrorList;
   struct FindData;
-  class  ScopedAction;
 
   Glib::RefPtr<Gtk::ListStore>  liststore_;
   Gdk::Color                    color_modified_;
@@ -108,6 +111,19 @@ private:
 
   void load_file_with_fallback(const FileInfoPtr& fileinfo);
   Glib::RefPtr<FileBuffer> create_error_message_buffer(const Glib::ustring& message);
+};
+
+
+class FileList::FindError
+{
+public:
+  explicit FindError(const Util::SharedPtr<FileList::FindErrorList>& error_list);
+  virtual ~FindError();
+
+  const std::list<Glib::FileError>& get_error_list() const;
+
+private:
+  Util::SharedPtr<FileList::FindErrorList> error_list_;
 };
 
 } // namespace Regexxer

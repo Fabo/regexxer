@@ -1,5 +1,15 @@
 2002-10-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filelist.{cc,h}: Collect file access errors during execution
+	of find_files() and, when finished, return the list of errors via
+	an exception to the caller.
+
+	* src/mainwindow.cc (on_find_files): Show an error message dialog
+	if the search pattern is invalid or if errors occurred during file
+	search.
+
+2002-10-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (on_exec_search): I changed my mind, there is
 	absolutely no need to show off Util::next() here :)
 

@@ -85,6 +85,59 @@ CustomButton::CustomButton(const Gtk::StockID& stock_id, const Glib::ustring& la
 CustomButton::~CustomButton()
 {}
 
+
+class FindErrorDialog : public Gtk::MessageDialog
+{
+public:
+  FindErrorDialog(Gtk::Window& parent, const Regexxer::FileList::FindError& error);
+  virtual ~FindErrorDialog();
+};
+
+FindErrorDialog::FindErrorDialog(Gtk::Window& parent, const Regexxer::FileList::FindError& error)
+:
+  Gtk::MessageDialog(
+      parent, "The following errors occurred during search:",
+      Gtk::MESSAGE_WARNING, // warning instead of error because the search hasn't been interrupted
+      Gtk::BUTTONS_OK, true)
+{
+  using namespace Gtk;
+
+  const Glib::RefPtr<TextBuffer> buffer = TextBuffer::create();
+  TextBuffer::iterator buffer_end = buffer->end();
+
+  typedef std::list<Glib::FileError> ErrorList;
+  const ErrorList& error_list = error.get_error_list();
+
+  for(ErrorList::const_iterator perr = error_list.begin(); perr != error_list.end(); ++perr)
+  {
+    buffer_end = buffer->insert(buffer_end, perr->what());
+    buffer_end = buffer->insert(buffer_end, "\n");
+  }
+
+  Box *const box = get_vbox();
+  Frame *const frame = new Frame();
+  box->pack_start(*manage(frame), PACK_EXPAND_WIDGET);
+  frame->set_border_width(5);
+  frame->set_shadow_type(SHADOW_IN);
+
+  ScrolledWindow *const scrollwin = new ScrolledWindow();
+  frame->add(*manage(scrollwin));
+  scrollwin->set_policy(POLICY_AUTOMATIC, POLICY_AUTOMATIC);
+
+  TextView *const textview = new TextView(buffer);
+  scrollwin->add(*manage(textview));
+  textview->set_editable(false);
+  textview->set_cursor_visible(false);
+  textview->set_wrap_mode(WRAP_WORD);
+  textview->set_pixels_below_lines(8);
+
+  set_default_size(400, 250);
+  frame->show_all();
+}
+
+FindErrorDialog::~FindErrorDialog()
+{}
+
 } // anonymous namespace
 
 
@@ -402,6 +455,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   textview_ = new TextView(FileBuffer::create());
   scrollwin->add(*manage(textview_));
   textview_->set_editable(false);
+  textview_->set_cursor_visible(false);
 
   entry_preview_ = new Entry();
   vbox_textview->pack_start(*manage(entry_preview_), PACK_SHRINK);
@@ -456,11 +510,25 @@ void MainWindow::on_find_files()
 {
   BusyAction busy (*this);
 
-  filelist_->find_files(
-      Util::expand_pathname(entry_folder_->get_text()),
-      entry_pattern_->get_text(),
-      button_recursive_->get_active(),
-      button_hidden_->get_active());
+  try
+  {
+    filelist_->find_files(
+        Util::expand_pathname(entry_folder_->get_text()),
+        entry_pattern_->get_text(),
+        button_recursive_->get_active(),
+        button_hidden_->get_active());
+  }
+  catch(const Pcre::Error& error)
+  {
+    const Glib::ustring message = "The file search pattern is invalid.";
+    Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    dialog.run();
+  }
+  catch(const FileList::FindError& error)
+  {
+    FindErrorDialog dialog (*this, error);
+    dialog.run();
+  }
 
   statusline_->set_file_count(filelist_->get_file_count());
 }
@@ -556,6 +624,7 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, int file_index)
 
     textview_->set_buffer(buffer);
     textview_->set_editable(!fileinfo->load_failed);
+    textview_->set_cursor_visible(!fileinfo->load_failed);
 
     if(!fileinfo->load_failed)
     {
@@ -591,6 +660,7 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, int file_index)
   {
     textview_->set_buffer(FileBuffer::create());
     textview_->set_editable(false);
+    textview_->set_cursor_visible(false);
     textview_->modify_font(get_pango_context()->get_font_description());
 
     set_title_filename();
