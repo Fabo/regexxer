@@ -139,14 +139,8 @@ void PrefDialog::connect_signals()
 void PrefDialog::on_response(int)
 {
   if (entry_fallback_changed_)
-  {
-    try // trap errors manually since we don't go through a GObject signal handler
-    {
-      on_entry_fallback_activate();
-    }
-    catch (const Gnome::Conf::Error&)
-    {}
-  }
+    entry_fallback_->activate();
+
   dialog_->hide();
 }
 

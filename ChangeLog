@@ -1,5 +1,11 @@
 2004-05-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/prefdialog.cc (PrefDialog::on_response): Invoke
+	Gtk::Widget::activate() instead of directly calling the handler
+	on_entry_fallback_activate().  Dunno why I didn't see this before.
+
+2004-05-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/prefdialog.cc (get_toolbar_style_index): Return -1 rather
 	than 0 on failure.
 
