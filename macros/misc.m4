@@ -34,9 +34,9 @@ pkg_search_path=$PATH
 pkg_exec_prefix=`${PKG_CONFIG-"pkg-config"} --variable=exec_prefix "$2" 2>&5`
 test "x$pkg_exec_prefix" = x || pkg_search_path="$pkg_exec_prefix/bin$PATH_SEPARATOR$pkg_search_path"
 
-AC_PATH_PROG([$1], [$3], [not found], [$pkg_search_path])
+AC_PATH_PROG([$1], [$3],, [$pkg_search_path])
 
-AS_IF([test "x$$1" = "xnot found"],
+AS_IF([test "x$$1" = x],
 [
 AC_MSG_ERROR([[
 *** Ooops, couldn't find ]$3[.  Actually this should

@@ -1,5 +1,12 @@
 2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* macros/misc.m4 (REGEXXER_PKG_PATH_PROG): There is no need to
+	pass the [not found] argument to AC_PATH_PROG, since the default
+	action is just right.
+	* macros/pcre.m4 (PCRE_CHECK_VERSION): ditto.
+
+2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* Makefile.am (ACLOCAL_AMFLAGS): Add ${ACLOCAL_FLAGS} as
 	recommended by James Henstridge.
 

@@ -29,9 +29,9 @@ AC_DEFUN([PCRE_CHECK_VERSION],
 m4_if([$1],, [AC_FATAL([argument required])])
 
 AC_ARG_VAR([PCRE_CONFIG], [path to pcre-config script])
-AC_PATH_PROG([PCRE_CONFIG], [pcre-config], [not found])
+AC_PATH_PROG([PCRE_CONFIG], [pcre-config])
 
-AS_IF([test "x$PCRE_CONFIG" = "xnot found"],
+AS_IF([test "x$PCRE_CONFIG" = x],
 [
 AC_MSG_ERROR([[
 *** pcre-config is missing.  Please install your distribution's
