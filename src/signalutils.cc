@@ -24,6 +24,8 @@
 namespace Util
 {
 
+/**** Util::QueuedSignal ***************************************************/
+
 QueuedSignal::QueuedSignal(int priority)
 :
   signal_   (),
@@ -54,6 +56,52 @@ bool QueuedSignal::idle_handler()
   signal_(); // emit
 
   return false; // disconnect idle handler
+}
+
+/**** Util::AutoConnection *************************************************/
+
+AutoConnection::AutoConnection()
+:
+  connection_ (),
+  blocked_    (false)
+{}
+
+AutoConnection::AutoConnection(const SigC::Connection& connection)
+:
+  connection_ (connection),
+  blocked_    (connection_.blocked())
+{}
+
+AutoConnection::~AutoConnection()
+{
+  connection_.disconnect();
+}
+
+void AutoConnection::block()
+{
+  connection_.block();
+  blocked_ = true;
+}
+
+void AutoConnection::unblock()
+{
+  connection_.unblock();
+  blocked_ = false;
+}
+
+AutoConnection& AutoConnection::operator=(const SigC::Connection& connection)
+{
+  AutoConnection temp (connection_);
+
+  connection_ = connection;
+  connection_.block(blocked_);
+
+  return *this;
+}
+
+void AutoConnection::disconnect()
+{
+  connection_.disconnect();
 }
 
 } // namespace Util

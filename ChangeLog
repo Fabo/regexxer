@@ -1,3 +1,17 @@
+2003-01-11  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/signalutils.{cc,h} (AutoConnection): New utility class that
+	breaks the previous connection on assignment, and also remembers the
+	blocked state of the connection permanently.
+
+	(ScopedBlock): Use Util::AutoConnection instead of SigC::Connection.
+
+	* src/filetree.{cc,h}: Use AutoConnection to manage the connection
+	handles of the currently selected buffer.
+
+	(on_selection_changed): Thanks to AutoConnection, we can now
+	extinguish a fair bit of error-prone code.
+
 2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* autogen.sh: Require automake >= 1.7.

@@ -23,6 +23,7 @@
 
 #include "filebuffer.h"
 #include "fileio.h"
+#include "signalutils.h"
 #include "undostack.h"
 
 #include <gdkmm/color.h>
@@ -107,9 +108,9 @@ private:
   DirInfo                       toplevel_;
   long                          sum_matches_;
 
-  SigC::Connection              conn_match_count_;
-  SigC::Connection              conn_modified_changed_;
-  SigC::Connection              conn_undo_stack_push_;
+  Util::AutoConnection          conn_match_count_;
+  Util::AutoConnection          conn_modified_changed_;
+  Util::AutoConnection          conn_undo_stack_push_;
 
   Gtk::TreePath                 path_match_first_;
   Gtk::TreePath                 path_match_last_;

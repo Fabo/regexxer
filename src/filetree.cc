@@ -22,7 +22,6 @@
 #include "filetreeprivate.h"
 #include "miscutils.h"
 #include "pcreshell.h"
-#include "signalutils.h"
 #include "stringutils.h"
 
 #include <gtkmm/stock.h>
@@ -777,10 +776,6 @@ void FileTree::on_selection_changed()
   FileInfoPtr fileinfo;
   int file_index = 0;
 
-  const bool conn_match_count_blocked      = conn_match_count_.blocked();
-  const bool conn_modified_changed_blocked = conn_modified_changed_.blocked();
-  const bool conn_undo_stack_push_blocked  = conn_undo_stack_push_.blocked();
-
   conn_match_count_     .disconnect();
   conn_modified_changed_.disconnect();
   conn_undo_stack_push_ .disconnect();
@@ -806,17 +801,6 @@ void FileTree::on_selection_changed()
 
       conn_undo_stack_push_ = fileinfo->buffer->signal_undo_stack_push.
           connect(SigC::slot(*this, &FileTree::on_buffer_undo_stack_push));
-
-      // Restore the blocked state of all connections.
-      //
-      if(conn_match_count_blocked)
-        conn_match_count_.block();
-
-      if(conn_modified_changed_blocked)
-        conn_modified_changed_.block();
-
-      if(conn_undo_stack_push_blocked)
-        conn_undo_stack_push_.block();
     }
 
     last_selected_rowref_.reset(new TreeRowRef(treestore_, Gtk::TreePath(iter)));

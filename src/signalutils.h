@@ -48,6 +48,31 @@ private:
   bool idle_handler();
 };
 
+class AutoConnection
+{
+private:
+  SigC::Connection  connection_;
+  bool              blocked_;
+
+  AutoConnection(const AutoConnection&);
+  AutoConnection& operator=(const AutoConnection&);
+
+public:
+  AutoConnection();
+  explicit AutoConnection(const SigC::Connection& connection);
+  ~AutoConnection();
+
+  void block();
+  void unblock();
+  bool blocked() const { return blocked_; }
+
+  AutoConnection& operator=(const SigC::Connection& connection);
+  void disconnect();
+
+  SigC::Connection&       base()       { return connection_; }
+  const SigC::Connection& base() const { return connection_; }
+};
+
 class ScopedConnection
 {
 private:
@@ -66,13 +91,13 @@ public:
 class ScopedBlock
 {
 private:
-  SigC::Connection& connection_;
+  AutoConnection& connection_;
 
   ScopedBlock(const ScopedBlock&);
   ScopedBlock& operator=(const ScopedBlock&);
 
 public:
-  explicit ScopedBlock(SigC::Connection& connection)
+  explicit ScopedBlock(AutoConnection& connection)
     : connection_ (connection) { connection_.block(); }
 
   ~ScopedBlock() { connection_.unblock(); }
