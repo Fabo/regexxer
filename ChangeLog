@@ -1,5 +1,14 @@
 2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.{cc,h} (MainWindow::get_folder_fullname): New
+	method that expands the entered folder name and converts it to
+	filename encoding.  An error message is displayed to the user
+	if the conversion fails.
+	(MainWindow::on_select_folder): Use get_folder_fullname().
+	(MainWindow::on_find_files): ditto.
+
+2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.{cc,h} (expand_pathname): Operate directly in
 	filename encoding since all callers need to convert one way or
 	the other anyway.  Change type of parameter and return value to

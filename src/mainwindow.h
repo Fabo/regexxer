@@ -106,6 +106,7 @@ private:
   void on_quit();
   bool confirm_quit_request();
 
+  std::string get_folder_fullname() const;
   void on_select_folder();
   void on_find_files();
   void on_exec_search();

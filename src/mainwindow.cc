@@ -315,9 +315,43 @@ bool MainWindow::confirm_quit_request()
   return (dialog.run() == Gtk::RESPONSE_OK);
 }
 
+/*
+ * Expand the pathname entered into the folder entry, and convert it to
+ * the local filename encoding.  If the conversion fails, show an error
+ * message to the user and return an empty string.
+ */
+std::string MainWindow::get_folder_fullname() const
+{
+  const Glib::ustring folder = entry_folder_->get_text();
+
+  if (folder.empty())
+    return Glib::get_current_dir();
+
+  try
+  {
+    return Util::expand_pathname(Glib::filename_from_utf8(folder));
+  }
+  catch (const Glib::ConvertError&)
+  {
+    const Glib::ustring message = Util::compose(
+        _("The folder name \"%1\" contains characters not representable "
+          "in the encoding of the local file system."), folder);
+
+    Gtk::MessageDialog dialog (*window_, message, false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    dialog.run();
+
+    return std::string();
+  }
+}
+
 void MainWindow::on_select_folder()
 {
   using namespace Gtk;
+
+  const std::string folder = get_folder_fullname();
+
+  if (folder.empty())
+    return;
 
   FileChooserDialog chooser (*window_, _("Select a folder"), FILE_CHOOSER_ACTION_SELECT_FOLDER);
 
@@ -326,14 +360,12 @@ void MainWindow::on_select_folder()
   chooser.set_default_response(RESPONSE_OK);
   chooser.set_modal(true);
   chooser.set_local_only(true);
-
-  chooser.set_current_folder(Util::expand_pathname(
-      Glib::filename_from_utf8(entry_folder_->get_text())));
+  chooser.set_current_folder(folder);
 
   if (chooser.run() == RESPONSE_OK)
   {
-    const std::string dirname = Util::shorten_pathname(chooser.get_filename());
-    entry_folder_->set_text(Util::filename_to_utf8_fallback(dirname));
+    const std::string shortname = Util::shorten_pathname(chooser.get_filename());
+    entry_folder_->set_text(Util::filename_to_utf8_fallback(shortname));
   }
 }
 
@@ -348,12 +380,12 @@ void MainWindow::on_find_files()
       return;
   }
 
-  undo_stack_clear();
-
-  std::string folder = Util::expand_pathname(Glib::filename_from_utf8(entry_folder_->get_text()));
+  const std::string folder = get_folder_fullname();
 
   if (folder.empty())
-    folder = Glib::get_current_dir();
+    return;
+
+  undo_stack_clear();
 
   BusyAction busy (*this);
 
@@ -361,10 +393,9 @@ void MainWindow::on_find_files()
   {
     Pcre::Pattern pattern (Util::shell_pattern_to_regex(entry_pattern_->get_text()), Pcre::DOTALL);
 
-    filetree_->find_files(
-        folder, pattern,
-        button_recursive_->get_active(),
-        button_hidden_->get_active());
+    filetree_->find_files(folder, pattern,
+                          button_recursive_->get_active(),
+                          button_hidden_->get_active());
   }
   catch (const Pcre::Error&)
   {
