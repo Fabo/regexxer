@@ -25,7 +25,8 @@
 ##
 AC_DEFUN([PCRE_CHECK_VERSION],
 [
-AC_PATH_PROGS([PCRE_CONFIG], [pcre-config], [not found])
+AC_ARG_VAR([PCRE_CONFIG], [path to pcre-config script])
+AC_PATH_PROG([PCRE_CONFIG], [pcre-config], [not found])
 if test "x$PCRE_CONFIG" = "xnot found"
 then
 {
