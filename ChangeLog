@@ -1,5 +1,10 @@
 2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (MainWindow::set_title_filename): Concatenate
+	with the string literal PACKAGE_NAME at compile time.
+
+2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (FileTree::find_add_file): New method.
 	Move the actual file-adding parts from find_check_file() here.
 	(FileTree::find_recursively): Move the file testing previously

@@ -729,8 +729,7 @@ void MainWindow::set_title_filename(const std::string& filename)
 
   title += " (";
   title += Util::filename_to_utf8_fallback(Util::shorten_pathname(Glib::path_get_dirname(filename)));
-  title += ") \342\200\223 "; // U+2013 EN DASH
-  title += PACKAGE_NAME;
+  title += ") \342\200\223 " PACKAGE_NAME; // U+2013 EN DASH
 
   window_->set_title(title);
 }
