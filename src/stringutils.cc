@@ -477,6 +477,28 @@ std::string Util::substitute_references(const std::string&   substitution,
   return result;
 }
 
+Glib::ustring Util::filename_to_utf8_fallback(const std::string& filename)
+{
+  try
+  {
+    return Glib::filename_to_utf8(filename);
+  }
+  catch(const Glib::ConvertError& error)
+  {
+    if(error.code() != Glib::ConvertError::ILLEGAL_SEQUENCE)
+      throw;
+  }
+
+  const Glib::ustring filename_utf8 (Glib::locale_to_utf8(filename));
+
+  g_warning("The filename encoding of `%s' is not UTF-8 but G_BROKEN_FILENAMES is unset. "
+            "Falling back to locale encoding for backward compatibility, but you should "
+            "either set the environment variable G_BROKEN_FILENAMES=1 or convert all your "
+            "filenames to UTF-8 encoding, as it should be.", filename_utf8.c_str());
+
+  return filename_utf8;
+}
+
 Glib::ustring Util::transform_pathname(const Glib::ustring& path, bool shorten)
 {
   using namespace Glib;

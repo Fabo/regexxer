@@ -39,6 +39,8 @@ std::string substitute_references(const std::string&   substitution,
                                   const std::string&   subject,
                                   const CaptureVector& captures);
 
+Glib::ustring filename_to_utf8_fallback(const std::string& filename);
+
 Glib::ustring transform_pathname(const Glib::ustring& path, bool shorten);
 
 inline Glib::ustring shorten_pathname(const Glib::ustring& path)

@@ -1,5 +1,16 @@
 2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.{cc,h} (Util::filename_to_utf8_fallback): New
+	wrapper function for Glib::filename_to_utf8() that works even if
+	the user hasn't set G_BROKEN_FILENAMES correctly.  In that case
+	it shows a hopefully annoying g_warning().
+
+	* src/filelist.cc: Use Util::filename_to_utf8_fallback() where
+	appropriate.
+	* src/mainwindow.cc: ditto.
+
+2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filelist.cc: Speed up find_files() by updating the GUI
 	every 16 iterations rather than all the time.
 

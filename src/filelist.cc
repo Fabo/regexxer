@@ -210,7 +210,7 @@ void FileList::save_current_file()
     }
     catch(...)
     {
-      const Glib::ustring filename = Glib::filename_to_utf8(fileinfo->fullname);
+      const Glib::ustring filename = Util::filename_to_utf8_fallback(fileinfo->fullname);
       g_warning("writing to file `%s' failed", filename.c_str());
     }
   }
@@ -234,7 +234,7 @@ void FileList::save_all_files()
       }
       catch(...)
       {
-        const Glib::ustring filename = Glib::filename_to_utf8(fileinfo->fullname);
+        const Glib::ustring filename = Util::filename_to_utf8_fallback(fileinfo->fullname);
         g_warning("writing to file `%s' failed", filename.c_str());
       }
 
@@ -644,7 +644,7 @@ void FileList::load_file(const Util::SharedPtr<FileInfo>& fileinfo)
     {
       fileinfo->load_failed = true;
       std::cerr << "Couldn't convert `"
-                << Glib::filename_to_utf8(fileinfo->fullname)
+                << Util::filename_to_utf8_fallback(fileinfo->fullname)
                 << "' to UTF-8.\n";
       return;
     }

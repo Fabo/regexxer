@@ -478,7 +478,7 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo)
     textview_->set_buffer(buffer);
     textview_->set_editable(true);
 
-    set_title_filename(Glib::filename_to_utf8(fileinfo->fullname));
+    set_title_filename(Util::filename_to_utf8_fallback(fileinfo->fullname));
 
     buffer_connections_.push_back(buffer->signal_match_count_changed.
         connect(SigC::slot(*this, &MainWindow::on_buffer_match_count_changed)));
