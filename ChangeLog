@@ -1,5 +1,12 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (FileTree::prev_match_file): There is no need to
+	keep track of the parent iterator; just use Gtk::TreePath::size()
+	and TreePath::up().  Also use TreePath::push_back() instead of the
+	deprecated TreePath::append_index().
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (FileTree::find_matches_at_path_iter):
 	Rename from find_matches_at_iter(): add a path parameter and
 	use it instead of obtaining the path from the iter argument.
