@@ -1,3 +1,9 @@
+2004-07-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* configure.ac: Swap invocations of REGEXXER_ARG_ENABLE_WARNINGS()
+	and REGEXXER_CXXLINK_VERSION_SCRIPT(), just in case the additional
+	warning flags break the test program used by the latter macro.
+
 0.8:
 
 2004-07-08  Daniel Elstner  <daniel.elstner@gmx.net>
