@@ -152,9 +152,9 @@ void load_file(const FileInfoPtr& fileinfo, const std::string& fallback_encoding
 
   buffer->set_modified(false);
 
-  fileinfo->load_failed = false;
   fileinfo->encoding    = encoding;
   fileinfo->buffer      = buffer;
+  fileinfo->load_failed = false;
 }
 
 void save_file(const FileInfoPtr& fileinfo)

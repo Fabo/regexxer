@@ -1,5 +1,12 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.cc (load_file): Move the assignment of 'false' to
+	fileinfo->load_failed to the very end of the function, because
+	there is a tiny chance that one of the other assignments throws
+	an exception.
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (FileTree::find_increment_file_count): There
 	is no need for the reverse_iterator abstraction here -- just use
 	plain iterators and decrement them.
