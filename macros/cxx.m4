@@ -18,40 +18,6 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-## REGEXXER_CXX_HAS_STD_LOCALE()
-##
-## Check whether the C++ environment supports std::locale.
-## If true, #define REGEXXER_HAVE_STD_LOCALE 1.
-##
-AC_DEFUN([REGEXXER_CXX_HAS_STD_LOCALE],
-[
-AC_CACHE_CHECK(
-  [whether the C++ library supports std::locale],
-  [regexxer_cv_cxx_has_std_locale],
-[
-  AC_LANG_PUSH([C++])
-  AC_LINK_IFELSE(
-  [
-    AC_LANG_PROGRAM(
-    [[
-      #include <iostream>
-      #include <locale>
-    ]],[[
-      std::cout.imbue(std::locale(""));
-    ]])
-  ],
-    [regexxer_cv_cxx_has_std_locale=yes],
-    [regexxer_cv_cxx_has_std_locale=no])
-  AC_LANG_POP([C++])
-])
-
-AS_IF([test "x$regexxer_cv_cxx_has_std_locale" = xyes],
-[
-  AC_DEFINE([REGEXXER_HAVE_STD_LOCALE], [1], [Define to 1 if the C++ library supports std::locale.])
-])
-])
-
-
 ## REGEXXER_ARG_ENABLE_WARNINGS()
 ##
 ## Provide the --enable-warnings configure argument, set to 'minimum'
@@ -147,7 +113,7 @@ AC_CACHE_CHECK(
 
 AS_IF([test "x$regexxer_cv_cxxlink_version_script" = xyes],
 [
-  REGEXXER_VERSION_SCRIPT='-Wl,--version-script=$(top_srcdir)/$1'
+  REGEXXER_VERSION_SCRIPT='-Wl,--version-script=$(top_srcdir)/'"$1"
 ],[
   REGEXXER_VERSION_SCRIPT=
 ])

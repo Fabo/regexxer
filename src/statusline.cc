@@ -23,14 +23,9 @@
 
 #include <gdk/gdkkeysyms.h>
 #include <gtkmm.h>
+#include <locale>
 #include <sstream>
 #include <stdexcept>
-
-#include <config.h>
-
-#if REGEXXER_HAVE_STD_LOCALE
-#include <locale>
-#endif
 
 
 namespace
@@ -116,7 +111,6 @@ CounterBox::CounterBox(const Glib::ustring& label)
   label_index_->signal_style_changed().connect(
       sigc::mem_fun(*this, &CounterBox::on_label_style_changed));
 
-#if REGEXXER_HAVE_STD_LOCALE
   try // don't abort if the user-specified locale doesn't exist
   {
     stringstream_.imbue(std::locale(""));
@@ -125,7 +119,6 @@ CounterBox::CounterBox(const Glib::ustring& label)
   {
     g_warning("%s", error.what());
   }
-#endif
 
   set_index(0);
   set_count(0);

@@ -1,3 +1,15 @@
+2004-07-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* configure.ac (REGEXXER_CXX_HAS_STD_LOCALE): Remove.  libsigc++ 2
+	depends on a proper compiler like g++ 3 anyway, so it make sense
+	to require support of std::locale from now on.
+
+	* macros/cxx.m4 (REGEXXER_CXX_HAS_STD_LOCALE): Delete the macro.
+
+	* src/statusline.cc: Get rid of the preprocessor conditionals
+	around code that makes use of std::locale.
+	* src/stringutils.cc: ditto.
+
 2004-07-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* configure.ac: Swap invocations of REGEXXER_ARG_ENABLE_WARNINGS()

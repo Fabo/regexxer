@@ -26,16 +26,11 @@
 #include <gdkmm/color.h>
 #include <algorithm>
 #include <iomanip>
+#include <locale>
 #include <sstream>
 #include <stdexcept>
 #include <utility>
 #include <vector>
-
-#include <config.h>
-
-#if REGEXXER_HAVE_STD_LOCALE
-#include <locale>
-#endif
 
 
 namespace
@@ -623,10 +618,7 @@ Glib::ustring Util::convert_to_ascii(const std::string& str)
 {
   std::ostringstream output;
 
-#if REGEXXER_HAVE_STD_LOCALE
   output.imbue(std::locale::classic());
-#endif
-
   output.setf(std::ios::oct, std::ios::basefield);
 
   for (std::string::const_iterator p = str.begin(); p != str.end(); ++p)
@@ -644,7 +636,6 @@ Glib::ustring Util::int_to_string(int number)
 {
   std::ostringstream output;
 
-#if REGEXXER_HAVE_STD_LOCALE
   try // don't abort if the user-specified locale doesn't exist
   {
     output.imbue(std::locale(""));
@@ -653,7 +644,6 @@ Glib::ustring Util::int_to_string(int number)
   {
     g_warning("%s", error.what());
   }
-#endif
 
   output << number;
 
@@ -694,10 +684,7 @@ Glib::ustring Util::color_to_string(const Gdk::Color& color)
 {
   std::ostringstream output;
 
-#if REGEXXER_HAVE_STD_LOCALE
   output.imbue(std::locale::classic());
-#endif
-
   output.setf(std::ios::hex, std::ios::basefield);
   output.setf(std::ios::uppercase);
   output.fill('0');
