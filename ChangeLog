@@ -1,5 +1,12 @@
 2002-11-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/signalutils.h (ScopedBlock): Move from filetree.cc hitherto.
+	(ScopedConnection): ditto.
+
+	* src/filetree.cc: Use the new signal stuff from namespace Util.
+
+2002-11-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.{cc,h} (signal_preview_line_changed): Use the
 	new Util::QueuedSignal rather than queuing manually.
 

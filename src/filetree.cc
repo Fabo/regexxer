@@ -20,6 +20,7 @@
 
 #include "filetree.h"
 #include "pcreshell.h"
+#include "signalutils.h"
 #include "stringutils.h"
 
 #include <gtkmm/treestore.h>
@@ -94,36 +95,6 @@ int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeMod
   return std::strcmp(lhs_key.c_str() + 1, rhs_key.c_str() + 1);
 }
 
-
-class ScopedConnection
-{
-private:
-  SigC::Connection connection_;
-
-  ScopedConnection(const ScopedConnection&);
-  ScopedConnection& operator=(const ScopedConnection&);
-
-public:
-  explicit ScopedConnection(const SigC::Connection& connection)
-    : connection_ (connection) {}
-
-  ~ScopedConnection() { connection_.disconnect(); }
-};
-
-class ScopedBlock
-{
-private:
-  SigC::Connection& connection_;
-
-  ScopedBlock(const ScopedBlock&);
-  ScopedBlock& operator=(const ScopedBlock&);
-
-public:
-  explicit ScopedBlock(SigC::Connection& connection)
-    : connection_ (connection) { connection_.block(); }
-
-  ~ScopedBlock() { connection_.unblock(); }
-};
 
 class ScopedPushDir
 {
@@ -409,7 +380,7 @@ void FileTree::save_current_file()
     Util::SharedPtr<MessageList> error_list;
 
     {
-      ScopedBlock block (conn_modified_changed_);
+      Util::ScopedBlock block (conn_modified_changed_);
       save_file_at_iter(selected, &error_list);
     }
 
@@ -423,7 +394,7 @@ void FileTree::save_all_files()
   Util::SharedPtr<MessageList> error_list;
 
   {
-    ScopedBlock block (conn_modified_changed_);
+    Util::ScopedBlock block (conn_modified_changed_);
     treestore_->foreach(SigC::bind(SigC::slot(*this, &FileTree::save_file_at_iter), &error_list));
   }
 
@@ -482,7 +453,7 @@ BoundState FileTree::get_bound_state()
 void FileTree::find_matches(Pcre::Pattern& pattern, bool multiple)
 {
   {
-    ScopedBlock block_conn (conn_match_count_);
+    Util::ScopedBlock block_conn (conn_match_count_);
     ScopedBlockSorting block_sort (*this);
     FindMatchesData find_data (pattern, multiple);
 
@@ -501,8 +472,8 @@ long FileTree::get_match_count() const
 void FileTree::replace_all_matches(const Glib::ustring& substitution)
 {
   {
-    ScopedBlock block_match_count      (conn_match_count_);
-    ScopedBlock block_modified_changed (conn_modified_changed_);
+    Util::ScopedBlock block_match_count      (conn_match_count_);
+    Util::ScopedBlock block_modified_changed (conn_modified_changed_);
     ScopedBlockSorting block_sort (*this);
 
     treestore_->foreach(SigC::bind(
@@ -804,7 +775,7 @@ bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMa
     const Glib::RefPtr<FileBuffer> buffer = fileinfo->buffer;
     g_assert(buffer);
 
-    ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.slot()));
+    Util::ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.slot()));
 
     const int old_match_count = buffer->get_match_count();
     const int new_match_count = buffer->find_matches(find_data->pattern, find_data->multiple);
@@ -851,7 +822,7 @@ bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
       const bool was_modified = buffer->get_modified();
 
       {
-        ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.slot()));
+        Util::ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.slot()));
         buffer->replace_all_matches(*substitution);
       }
 

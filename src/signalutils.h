@@ -48,6 +48,36 @@ private:
   bool idle_handler();
 };
 
+class ScopedConnection
+{
+private:
+  SigC::Connection connection_;
+
+  ScopedConnection(const ScopedConnection&);
+  ScopedConnection& operator=(const ScopedConnection&);
+
+public:
+  explicit ScopedConnection(const SigC::Connection& connection)
+    : connection_ (connection) {}
+
+  ~ScopedConnection() { connection_.disconnect(); }
+};
+
+class ScopedBlock
+{
+private:
+  SigC::Connection& connection_;
+
+  ScopedBlock(const ScopedBlock&);
+  ScopedBlock& operator=(const ScopedBlock&);
+
+public:
+  explicit ScopedBlock(SigC::Connection& connection)
+    : connection_ (connection) { connection_.block(); }
+
+  ~ScopedBlock() { connection_.unblock(); }
+};
+
 } // namespace Util
 
 #endif /* REGEXXER_SIGNALUTILS_H_INCLUDED */
