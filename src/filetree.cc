@@ -559,6 +559,7 @@ void FileTree::text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel
 // static
 bool FileTree::select_func(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk::TreePath& path, bool)
 {
+  // Don't allow selection of directory nodes.
   return get_fileinfo_from_iter(model->get_iter(path));
 }
 
