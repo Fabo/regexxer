@@ -1,5 +1,12 @@
 2004-05-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* autogen.sh: Avoid using postfix operators on subexpressions
+	in the regex used to extract version numbers.  This makes the
+	expression both simpler and more portable.
+	* macros/pcre.m4 (PCRE_CHECK_VERSION): ditto.
+
+2004-05-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* macros/pcre.m4 (PCRE_CHECK_VERSION): Strip "-L/usr/lib" from
 	PCRE_LIBS if necessary.  Strip "-I/usr/include" from PCRE_CFLAGS
 	too -- although not required on Debian, it's better not to rely

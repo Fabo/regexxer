@@ -60,8 +60,8 @@ auto_version=0
 # For instance, "1.7.2" becomes "1 \* 1000000 + 7 \* 1000 + 02".  This string
 # can be fed to 'eval expr' in order to compare version numbers.
 #
-num='\([0123456789]\{1,\}\)'
-get_version='s/^.*(GNU automake) '$num'\.'$num'\.\{0,1\}'$num'\{0,1\}.*$'
+d='[0123456789]'
+get_version='s/^.*(GNU automake) \('$d'\{1,\}\)\.\('$d'\{1,\}\)\.\{0,1\}\('$d'*\).*$'
 get_version=$get_version'/\1 \\* 1000000 + \2 \\* 1000 + 0\3/p'
 
 for suffix in -1.6 -1.7 -1.8 -1.9 ""

@@ -43,8 +43,8 @@ AC_MSG_CHECKING([[for libpcre >= ]$1])
 
 pcre_version_string=`$PCRE_CONFIG --version`
 
-pcre_num='\(@<:@0123456789@:>@\{1,\}\)'
-pcre_transform='s/^'$pcre_num'\.'$pcre_num'\.\{0,1\}'$pcre_num'\{0,1\}$/\1 \\* 1000000 + \2 \\* 1000 + 0\3/p'
+d='@<:@0123456789@:>@'
+pcre_transform='s/^\('$d'\{1,\}\)\.\('$d'\{1,\}\)\.\{0,1\}\('$d'*\)$/\1 \\* 1000000 + \2 \\* 1000 + 0\3/p'
 pcre_required=`echo "$1" | sed -n "$pcre_transform"`
 pcre_version=`echo "$pcre_version_string" | sed -n "$pcre_transform"`
 
