@@ -770,7 +770,7 @@ void FileBuffer::replace_match(MatchSet::const_iterator pos, const Glib::ustring
     }
 
     // Manually remove match mark and insert the new text.
-    delete_mark(match->mark);        // triggers on_mark_deleted()
+    delete_mark(match->mark); // triggers on_mark_deleted()
 
     if (!substituted_text.empty())
       insert(start, substituted_text); // triggers on_insert()
