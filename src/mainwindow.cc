@@ -298,7 +298,7 @@ Gtk::Widget* MainWindow::create_left_pane()
 {
   using namespace Gtk;
 
-  std::auto_ptr<VBox> vbox (new VBox(false, 3));
+  std::auto_ptr<Box> vbox (new VBox(false, 3));
   vbox->set_border_width(1);
 
   Table *const table = new Table(3, 2, false);
@@ -318,7 +318,7 @@ Gtk::Widget* MainWindow::create_left_pane()
   entry_pattern_->signal_activate().connect(controller_.find_files.slot());
   entry_pattern_->signal_changed ().connect(SigC::slot(*this, &MainWindow::on_entry_pattern_changed));
 
-  HBox *const hbox = new HBox(false, 5);
+  Box *const hbox = new HBox(false, 5);
   table->attach(*manage(hbox), 0, 2, 2, 3, EXPAND|FILL, AttachOptions(0));
 
   button_recursive_ = new CheckButton("recursive");
@@ -358,7 +358,7 @@ Gtk::Widget* MainWindow::create_right_pane()
 {
   using namespace Gtk;
 
-  std::auto_ptr<VBox> vbox (new VBox(false, 3));
+  std::auto_ptr<Box> vbox (new VBox(false, 3));
   vbox->set_border_width(1);
 
   Table *const table = new Table(2, 3, false);
@@ -375,7 +375,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_substitution_->signal_activate().connect(controller_.find_matches.slot());
   entry_substitution_->signal_changed ().connect(SigC::slot(*this, &MainWindow::update_preview));
 
-  HBox *const hbox_options = new HBox(false, 5);
+  Box *const hbox_options = new HBox(false, 5);
   table->attach(*manage(hbox_options), 2, 3, 0, 1, FILL, AttachOptions(0));
   hbox_options->pack_start(*manage(button_multiple_ = new CheckButton("/g")), PACK_SHRINK);
   hbox_options->pack_start(*manage(button_caseless_ = new CheckButton("/i")), PACK_SHRINK);
@@ -389,7 +389,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   Frame *const frame = new Frame();
   vbox->pack_start(*manage(frame), PACK_EXPAND_WIDGET);
 
-  VBox *const vbox_textview = new VBox(false, 3);
+  Box *const vbox_textview = new VBox(false, 3);
   frame->add(*manage(vbox_textview));
 
   ScrolledWindow *const scrollwin = new ScrolledWindow();
