@@ -19,6 +19,7 @@
 
 
 ## PCRE_CHECK_VERSION(min_version)
+##
 ## Run pcre-config to determine the libpcre version number and
 ## bail out if it is insufficient.  Also retrieve the necessary
 ## compiler flags and store them in PCRE_CFLAGS rpt. PCRE_LIBS.
@@ -27,8 +28,8 @@ AC_DEFUN([PCRE_CHECK_VERSION],
 [
 AC_ARG_VAR([PCRE_CONFIG], [path to pcre-config script])
 AC_PATH_PROG([PCRE_CONFIG], [pcre-config], [not found])
-if test "x$PCRE_CONFIG" = "xnot found"
-then
+
+if test "x$PCRE_CONFIG" = "xnot found"; then
 {
 AC_MSG_ERROR([[
 *** pcre-config is missing.  Please install your distribution's
@@ -37,14 +38,13 @@ AC_MSG_ERROR([[
 }
 fi
 
-AC_MSG_CHECKING([[for PCRE >= ]$1])
+AC_MSG_CHECKING([[for libpcre >= ]$1])
 pcre_version=`$PCRE_CONFIG --version`
-pcre_version_ok="no"
-expr "$pcre_version" '>=' "[$1]" >/dev/null 2>&1 && pcre_version_ok="yes"
+pcre_version_ok=no
+expr "$pcre_version" '>=' "[$1]" >/dev/null 2>&1 && pcre_version_ok=yes
 AC_MSG_RESULT([${pcre_version_ok}])
 
-if test "x$pcre_version_ok" = "xno"
-then
+if test "x$pcre_version_ok" = xno; then
 {
 AC_MSG_ERROR([[
 *** libpcre ]$1[ or higher is required, but you only have
@@ -66,50 +66,49 @@ AC_SUBST([PCRE_LIBS])
 
 
 ## PCRE_CHECK_UTF8()
+##
 ## Run a test program to determine whether PCRE was compiled with
 ## UTF-8 support.  If it wasn't, bail out with an error message.
 ##
 AC_DEFUN([PCRE_CHECK_UTF8],
 [
-AC_MSG_CHECKING([[whether PCRE was compiled with UTF-8 support]])
+AC_MSG_CHECKING([whether libpcre was compiled with UTF-8 support])
 AC_LANG_PUSH(C)
-pcre_saved_CFLAGS="$CFLAGS"
-pcre_saved_LIBS="$LIBS"
+pcre_saved_CFLAGS=$CFLAGS
+pcre_saved_LIBS=$LIBS
 CFLAGS="$CFLAGS $PCRE_CFLAGS"
 LIBS="$LIBS $PCRE_LIBS"
 
 AC_TRY_RUN(
 [
-#include <stdio.h>
-#include <stdlib.h>
-#include <pcre.h>
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <pcre.h>
 
-int main(int argc, char** argv)
-{
-  const char* errptr = NULL;
-  int erroffset = 0;
+  int main(int argc, char** argv)
+  {
+    const char* errptr = NULL;
+    int erroffset = 0;
 
-  if(pcre_compile(".", PCRE_UTF8, &errptr, &erroffset, NULL))
-    exit(0);
+    if(pcre_compile(".", PCRE_UTF8, &errptr, &erroffset, NULL))
+      exit(0);
 
-  fprintf(stderr, "%s\n", errptr);
-  exit(1);
+    fprintf(stderr, "%s\n", errptr);
+    exit(1);
 
-  return 0;
-}
+    return 0;
+  }
 ],
-[pcre_supports_utf8="yes"],
-[pcre_supports_utf8="no"],
-[pcre_supports_utf8="cross compile: assuming yes"]
-)
+[pcre_supports_utf8=yes],
+[pcre_supports_utf8=no],
+[pcre_supports_utf8="cross compile: assuming yes"])
 
-CFLAGS="$pcre_saved_CFLAGS"
-LIBS="$pcre_saved_LIBS"
+CFLAGS=$pcre_saved_CFLAGS
+LIBS=$pcre_saved_LIBS
 AC_LANG_POP(C)
 AC_MSG_RESULT([${pcre_supports_utf8}])
 
-if test "x$pcre_supports_utf8" = "xno"
-then
+if test "x$pcre_supports_utf8" = xno; then
 {
 AC_MSG_ERROR([[
 *** Sorry, the libpcre installed on your system doesn't support

@@ -24,13 +24,13 @@ AC_CANONICAL_BUILD()
 AC_CANONICAL_HOST()
 AC_CANONICAL_TARGET()
 
-#
-# If the user didn't predefine any flags, set them to `space'.
-# This prevents autoconf from setting them to defaults.
-#
-#test "x${CFLAGS}" = "x"   && CFLAGS=' '
-#test "x${CXXFLAGS}" = "x" && CXXFLAGS=' '
-#test "x${LDFLAGS}" = "x"  && LDFLAGS=' '
+##
+## If the user didn't predefine any flags, set them to `space'.
+## This prevents autoconf from setting them to defaults.
+##
+##test "x${CFLAGS}" = "x"   && CFLAGS=' '
+##test "x${CXXFLAGS}" = "x" && CXXFLAGS=' '
+##test "x${LDFLAGS}" = "x"  && LDFLAGS=' '
 
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE([gnu dist-bzip2 no-define nostdinc])
@@ -42,12 +42,12 @@ PKG_CHECK_MODULES(GTKMM, sigc++-1.2 >= 1.2.1 gtkmm-2.0 >= 2.0.0)
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 
-gdk_pixbuf_exec_prefix=`${PKG_CONFIG:-pkg-config} --variable=exec_prefix gdk-pixbuf-2.0 2>&5`
-prog_search_path="${gdk_pixbuf_exec_prefix:+$gdk_pixbuf_exec_prefix/bin$PATH_SEPARATOR}$PATH"
+gdk_pixbuf_exec_prefix=`${PKG_CONFIG:-"pkg-config"} --variable=exec_prefix gdk-pixbuf-2.0 2>&5`
+prog_search_path=${gdk_pixbuf_exec_prefix:+"$gdk_pixbuf_exec_prefix/bin$PATH_SEPARATOR"}$PATH
 
 AC_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-csource], [not found], [$prog_search_path])
-if test "x$GDK_PIXBUF_CSOURCE" = "xnot found"
-then
+
+if test "x$GDK_PIXBUF_CSOURCE" = "xnot found"; then
 {
 AC_MSG_ERROR([[
 *** Ooops, couldn't find gdk-pixbuf-csource.  Actually this should
@@ -58,6 +58,9 @@ fi
 
 PCRE_CHECK_VERSION([3.4])
 PCRE_CHECK_UTF8()
+
+REGEXXER_CXX_HAS_STD_LOCALE()
+REGEXXER_ARG_ENABLE_WARNINGS()
 
 AC_CONFIG_FILES([
   Makefile
