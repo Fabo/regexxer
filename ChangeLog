@@ -1,3 +1,8 @@
+2002-11-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* macros/cxx.m4: Use quadrigraphs to output characters like [ ].
+	* macros/pcre.m4: Add error checking at the autoconf level.
+
 2002-11-19  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/aboutdialog.cc: Set the default response.

@@ -44,7 +44,7 @@ AC_CACHE_CHECK(
 
 if test "x$regexxer_cv_cxx_has_std_locale" = xyes; then
 {
-  AC_DEFINE([REGEXXER_HAVE_STD_LOCALE], [1], [Define if the C++ library supports std::locale.])
+  AC_DEFINE([REGEXXER_HAVE_STD_LOCALE], [1], [Define to 1 if the C++ library supports std::locale.])
 }
 fi
 ])
@@ -60,8 +60,8 @@ AC_DEFUN([REGEXXER_ARG_ENABLE_WARNINGS],
 AC_REQUIRE([AC_PROG_CXX])
 
 AC_ARG_ENABLE([warnings], AC_HELP_STRING(
-  [--enable-warnings=none|minimum|maximum|hardcore],
-  [Control compiler pickyness. [[default=minimum]]]),
+  [--enable-warnings=@<:@none|minimum|maximum|hardcore@:>@],
+  [Control compiler pickyness. @<:@default=minimum@:>@]),
   [regexxer_enable_warnings=$enableval],
   [regexxer_enable_warnings=minimum])
 

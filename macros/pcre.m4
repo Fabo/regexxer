@@ -26,6 +26,8 @@
 ##
 AC_DEFUN([PCRE_CHECK_VERSION],
 [
+m4_if([$1],, [AC_FATAL([argument required])])
+
 AC_ARG_VAR([PCRE_CONFIG], [path to pcre-config script])
 AC_PATH_PROG([PCRE_CONFIG], [pcre-config], [not found])
 
@@ -41,7 +43,7 @@ fi
 AC_MSG_CHECKING([[for libpcre >= ]$1])
 pcre_version=`$PCRE_CONFIG --version`
 pcre_version_ok=no
-expr "$pcre_version" '>=' "[$1]" >/dev/null 2>&1 && pcre_version_ok=yes
+expr "$pcre_version" '>=' "[$1]" >/dev/null 2>&5 && pcre_version_ok=yes
 AC_MSG_RESULT([${pcre_version_ok}])
 
 if test "x$pcre_version_ok" = xno; then
@@ -72,6 +74,8 @@ AC_SUBST([PCRE_LIBS])
 ##
 AC_DEFUN([PCRE_CHECK_UTF8],
 [
+AC_REQUIRE([PCRE_CHECK_VERSION])
+
 AC_MSG_CHECKING([whether libpcre was compiled with UTF-8 support])
 AC_LANG_PUSH(C)
 pcre_saved_CFLAGS=$CFLAGS
@@ -87,13 +91,13 @@ AC_TRY_RUN(
 
   int main(int argc, char** argv)
   {
-    const char* errptr = NULL;
+    const char* errmessage = NULL;
     int erroffset = 0;
 
-    if(pcre_compile(".", PCRE_UTF8, &errptr, &erroffset, NULL))
+    if(pcre_compile(".", PCRE_UTF8, &errmessage, &erroffset, NULL))
       exit(0);
 
-    fprintf(stderr, "%s\n", errptr);
+    fprintf(stderr, "%s\n", errmessage);
     exit(1);
 
     return 0;
