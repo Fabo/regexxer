@@ -1,3 +1,5 @@
+regexxer.desktop.in
+regexxer.schemas.in
 src/filebuffer.cc
 src/filetree.cc
 src/main.cc

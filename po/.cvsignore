@@ -1,10 +1,12 @@
 Makefile
 Makefile.in
+Makefile.in.in
 POTFILES
 en@quot.po
 en@boldquot.po
 *.gmo
 *.insert-header
+missing
 regexxer.pot
 remove-potcdate.sed
 stamp-po

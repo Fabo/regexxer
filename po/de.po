@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: regexxer 0.7\n"
-"Report-Msgid-Bugs-To: daniel.elstner@gmx.net\n"
-"POT-Creation-Date: 2004-05-17 09:31+0200\n"
+"Project-Id-Version: regexxer 0.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-05-17 17:10+0200\n"
 "PO-Revision-Date: 2004-05-05 11:34+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
@@ -16,6 +16,82 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: regexxer.desktop.in.h:1
+msgid "An interactive tool for performing search and replace operations"
+msgstr "Ein interaktives Werkzeug zum Suchen und Ersetzen"
+
+#: regexxer.schemas.in.h:1
+msgid "Current-match color"
+msgstr "Farbe des gewählten Treffers"
+
+#: regexxer.schemas.in.h:2
+msgid "Fallback encoding"
+msgstr "Rückfall-Zeichensatz"
+
+#: regexxer.schemas.in.h:3
+msgid ""
+"If enabled, the text direction of the file editor, preview area, and all "
+"file-related entry boxes is always set to left-to-right no matter what the "
+"locale's default direction is."
+msgstr ""
+"Wenn eingeschaltet, die Schriftrichtung des Datei-Editors, des "
+"Vorschaubereichs, und aller Datei-bezogenen Eingabefelder wird immer auf "
+"links-nach-rechts gesetzt, unabhängig von der Vorgaberichtung der "
+"Sprachumgebung."
+
+#: regexxer.schemas.in.h:4
+msgid "Match color"
+msgstr "Farbe eines Treffers"
+
+#: regexxer.schemas.in.h:5
+msgid ""
+"Name of the character encoding to use if a file is not readable in either "
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
+msgstr ""
+"Name des zu benutzenden Zeichensatzes wenn eine Datei weder in UTF-8 noch "
+"dem in der Sprachumgebung eingestellten Zeichensatzes gelesen werden kann. "
+"„iconv --list” zeigt eine komplette Liste möglicher Werte an."
+
+#: regexxer.schemas.in.h:6
+msgid "Override text direction"
+msgstr "Übergehe Schriftrichtung"
+
+#: regexxer.schemas.in.h:7
+msgid "Text view font"
+msgstr "Schriftart für Text"
+
+#: regexxer.schemas.in.h:8
+msgid ""
+"The background color used to highlight matches of the search expression."
+msgstr ""
+"Die Hintergrundfarbe die für das Hervorheben von Treffern des Suchausdrucks "
+"verwendet wird."
+
+#: regexxer.schemas.in.h:9
+msgid ""
+"The background color used to highlight the currently selected match of the "
+"search expression."
+msgstr ""
+"Die Hintergrundfarbe die für das Hervorheben des ausgewählten Treffers des "
+"Suchausdrucks verwendet wird."
+
+#: regexxer.schemas.in.h:10
+msgid "The font used in the file editor."
+msgstr "Die Schriftart die im Datei-Editor benutzt wird."
+
+#: regexxer.schemas.in.h:11
+msgid ""
+"The style of the application's toolbar. Possible values are \"icons\", \"text"
+"\", \"both\", and \"both-horiz\"."
+msgstr ""
+"Der Stil der Werkzeugleiste der Anwendung. Mögliche Werte sind „icons”, "
+"„text”, „both” und „both-horiz”."
+
+#: regexxer.schemas.in.h:12
+msgid "Toolbar style"
+msgstr "Stil der Werkzeugleiste"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
@@ -132,76 +208,32 @@ msgstr "Treffer:"
 msgid "Cancels the running search"
 msgstr "Bricht die laufende Suche ab"
 
-#: ui/aboutdialog.glade:7
+#. namespace Regexxer
+#: ui/aboutdialog.glade.h:1
 msgid "About regexxer"
 msgstr "Info zu regexxer"
 
-#: ui/aboutdialog.glade:77
-msgid "regexxer icon"
-msgstr "regexxer-Icon"
-
-#: ui/aboutdialog.glade:78
-msgid "The application icon of regexxer"
-msgstr "Das Anwendungsicon von regexxer"
-
-#: ui/aboutdialog.glade:148
-msgid "written by"
-msgstr "geschrieben von"
-
-#: ui/aboutdialog.glade:205
+#: ui/aboutdialog.glade.h:2
 msgid "Debian package by"
 msgstr "Debian-Paket von"
 
-#: ui/mainwindow.glade:35
-msgid "_File"
-msgstr "_Datei"
+#: ui/aboutdialog.glade.h:3
+msgid "The application icon of regexxer"
+msgstr "Das Anwendungsicon von regexxer"
 
-#: ui/mainwindow.glade:114
-msgid "_Match"
-msgstr "_Treffer"
+#: ui/aboutdialog.glade.h:4
+msgid "regexxer icon"
+msgstr "regexxer-Icon"
 
-#: ui/mainwindow.glade:129
-msgid "_Previous file"
-msgstr "_Vorherige Datei"
+#: ui/aboutdialog.glade.h:5
+msgid "written by"
+msgstr "geschrieben von"
 
-#: ui/mainwindow.glade:168
-msgid "_Next file"
-msgstr "_Nächste Datei"
-
-#: ui/mainwindow.glade:195
-msgid "Replace _current"
-msgstr "_Ersetze Auswahl"
-
-#: ui/mainwindow.glade:216
-msgid "Replace in _this file"
-msgstr "Ersetze in _dieser Datei"
-
-#: ui/mainwindow.glade:236
-msgid "Replace in _all files"
-msgstr "Ersetze in _allen Dateien"
-
-#: ui/mainwindow.glade:260
-msgid "_Help"
-msgstr "_Hilfe"
-
-#: ui/mainwindow.glade:400
-msgid "Pattern:"
-msgstr "Suchmuster:"
-
-#: ui/mainwindow.glade:424
-msgid "The directory to be searched"
-msgstr "Das zu durchsuchende Verzeichnis"
-
-#: ui/mainwindow.glade:431 ui/mainwindow.glade:534 ui/mainwindow.glade:883
-#: ui/mainwindow.glade:905 ui/mainwindow.glade:1051 ui/prefdialog.glade:502
+#: ui/mainwindow.glade.h:1 ui/prefdialog.glade.h:1
 msgid "*"
 msgstr "*"
 
-#: ui/mainwindow.glade:483
-msgid "Fol_der:"
-msgstr "_Ordner:"
-
-#: ui/mainwindow.glade:527
+#: ui/mainwindow.glade.h:2
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -210,43 +242,123 @@ msgstr ""
 "Zeichenklassen [ab] und Klammerausdrücke im csh-Stil {a,b} werden "
 "unterstützt."
 
-#: ui/mainwindow.glade:644
-msgid "Recurse into subdirectories"
-msgstr "Steige in Unterverzeichnisse hinab"
-
-#: ui/mainwindow.glade:646
-msgid "recursive"
-msgstr "rekursiv"
-
-#: ui/mainwindow.glade:663
-msgid "Also find hidden files"
-msgstr "Finde auch versteckte Dateien"
-
-#: ui/mainwindow.glade:665
-msgid "hidden"
-msgstr "versteckt"
-
-#: ui/mainwindow.glade:682
-msgid "Find all files that match the filename pattern"
-msgstr "Finde alle Dateien auf die das Dateinamen-Suchmuster passt"
-
-#: ui/mainwindow.glade:720
-msgid "Find fi_les"
-msgstr "_Finde Dateien"
-
-#: ui/mainwindow.glade:826
-msgid "Search:"
-msgstr "Suchen:"
-
-#: ui/mainwindow.glade:851
-msgid "Replace:"
-msgstr "Ersetzen:"
-
-#: ui/mainwindow.glade:876
+#: ui/mainwindow.glade.h:3
 msgid "A regular expression in Perl syntax"
 msgstr "Ein regulärer Ausdruck in Perl-Syntax"
 
-#: ui/mainwindow.glade:898
+#: ui/mainwindow.glade.h:4
+msgid "Also find hidden files"
+msgstr "Finde auch versteckte Dateien"
+
+#: ui/mainwindow.glade.h:5
+msgid "Backward"
+msgstr "Zurück"
+
+#: ui/mainwindow.glade.h:6
+msgid "Do case insensitive matching"
+msgstr "Ignoriere Groß-/Kleinschreibung beim Suchen"
+
+#: ui/mainwindow.glade.h:7
+msgid "File backward"
+msgstr "Eine Datei zurück"
+
+#: ui/mainwindow.glade.h:8
+msgid "File forward"
+msgstr "Eine Datei vorwärts"
+
+#: ui/mainwindow.glade.h:9
+msgid "Find all files that match the filename pattern"
+msgstr "Finde alle Dateien auf die das Dateinamen-Suchmuster passt"
+
+#: ui/mainwindow.glade.h:10
+msgid "Find all matches of the regular expression"
+msgstr "Finde alle Treffer für den regulären Ausdruck"
+
+#: ui/mainwindow.glade.h:11
+msgid "Find all possible matches in a line"
+msgstr "Finde alle möglichen Treffer innerhalb einer Zeile"
+
+#: ui/mainwindow.glade.h:12
+msgid "Find fi_les"
+msgstr "_Finde Dateien"
+
+#: ui/mainwindow.glade.h:13
+msgid "Fol_der:"
+msgstr "_Ordner:"
+
+#: ui/mainwindow.glade.h:14
+msgid "Forward"
+msgstr "Vorwärts"
+
+#: ui/mainwindow.glade.h:15
+msgid "Go to next match"
+msgstr "Gehe zum nächsten Treffer"
+
+#: ui/mainwindow.glade.h:16
+msgid "Go to previous match"
+msgstr "Gehe zum vorherigen Treffer"
+
+#: ui/mainwindow.glade.h:17
+msgid "Go to the next matching file"
+msgstr "Gehe zur nächsten Datei mit Treffern"
+
+#: ui/mainwindow.glade.h:18
+msgid "Go to the previous matching file"
+msgstr "Gehe zur vorherigen Datei mit Treffern"
+
+#: ui/mainwindow.glade.h:19
+msgid "Pattern:"
+msgstr "Suchmuster:"
+
+#: ui/mainwindow.glade.h:20
+msgid "Preview"
+msgstr "Vorschau"
+
+#: ui/mainwindow.glade.h:21
+msgid "Preview of the substitution"
+msgstr "Vorschau des ersetzten Texts"
+
+#: ui/mainwindow.glade.h:22
+msgid "Recurse into subdirectories"
+msgstr "Steige in Unterverzeichnisse hinab"
+
+#: ui/mainwindow.glade.h:23
+msgid "Replace _current"
+msgstr "_Ersetze Auswahl"
+
+#: ui/mainwindow.glade.h:24
+msgid "Replace all matches in all files"
+msgstr "Ersetze alle Treffer in allen Dateien"
+
+#: ui/mainwindow.glade.h:25
+msgid "Replace all matches in the current file"
+msgstr "Ersetze alle Treffer in der gewählten Datei"
+
+#: ui/mainwindow.glade.h:26
+msgid "Replace current match"
+msgstr "Ersetze gewählten Treffer"
+
+#: ui/mainwindow.glade.h:27
+msgid "Replace in _all files"
+msgstr "Ersetze in _allen Dateien"
+
+#: ui/mainwindow.glade.h:28
+msgid "Replace in _this file"
+msgstr "Ersetze in _dieser Datei"
+
+#: ui/mainwindow.glade.h:29
+msgid "Replace:"
+msgstr "Ersetzen:"
+
+#: ui/mainwindow.glade.h:30
+msgid "Search:"
+msgstr "Suchen:"
+
+#: ui/mainwindow.glade.h:31
+msgid "The directory to be searched"
+msgstr "Das zu durchsuchende Verzeichnis"
+
+#: ui/mainwindow.glade.h:32
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
@@ -256,157 +368,121 @@ msgstr ""
 "mit $1, $2, etc. oder sogar $+, $&, $` und $' referenziert werden. Die "
 "Operatoren \\l, \\u, \\L, \\U und \\E werden auch unterstützt."
 
-#: ui/mainwindow.glade:926
-msgid "Find all possible matches in a line"
-msgstr "Finde alle möglichen Treffer innerhalb einer Zeile"
-
-#: ui/mainwindow.glade:944
-msgid "Do case insensitive matching"
-msgstr "Ignoriere Groß-/Kleinschreibung beim Suchen"
-
-#: ui/mainwindow.glade:972
-msgid "Find all matches of the regular expression"
-msgstr "Finde alle Treffer für den regulären Ausdruck"
-
-#: ui/mainwindow.glade:1045
-msgid "Preview of the substitution"
-msgstr "Vorschau des ersetzten Texts"
-
-#: ui/mainwindow.glade:1054
-msgid "Preview"
-msgstr "Vorschau"
-
-#: ui/mainwindow.glade:1105
-msgid "Replace current match"
-msgstr "Ersetze gewählten Treffer"
-
-#: ui/mainwindow.glade:1142
-msgid "_Replace"
-msgstr "_Ersetzen"
-
-#: ui/mainwindow.glade:1177
-msgid "Replace all matches in the current file"
-msgstr "Ersetze alle Treffer in der gewählten Datei"
-
-#: ui/mainwindow.glade:1214
-msgid "_This file"
-msgstr "D_iese Datei"
-
-#: ui/mainwindow.glade:1249
-msgid "Replace all matches in all files"
-msgstr "Ersetze alle Treffer in allen Dateien"
-
-#: ui/mainwindow.glade:1286
+#: ui/mainwindow.glade.h:33
 msgid "_All files"
 msgstr "_Alle Dateien"
 
-#: ui/mainwindow.glade:1335
-msgid "File backward"
-msgstr "Eine Datei zurück"
+#: ui/mainwindow.glade.h:34
+msgid "_File"
+msgstr "_Datei"
 
-#: ui/mainwindow.glade:1336
-msgid "Go to the previous matching file"
-msgstr "Gehe zur vorherigen Datei mit Treffern"
+#: ui/mainwindow.glade.h:35
+msgid "_Help"
+msgstr "_Hilfe"
 
-#: ui/mainwindow.glade:1364
-msgid "Backward"
-msgstr "Zurück"
+#: ui/mainwindow.glade.h:36
+msgid "_Match"
+msgstr "_Treffer"
 
-#: ui/mainwindow.glade:1365
-msgid "Go to previous match"
-msgstr "Gehe zum vorherigen Treffer"
+#: ui/mainwindow.glade.h:37
+msgid "_Next file"
+msgstr "_Nächste Datei"
 
-#: ui/mainwindow.glade:1393
-msgid "Forward"
-msgstr "Vorwärts"
+#: ui/mainwindow.glade.h:38
+msgid "_Previous file"
+msgstr "_Vorherige Datei"
 
-#: ui/mainwindow.glade:1394
-msgid "Go to next match"
-msgstr "Gehe zum nächsten Treffer"
+#: ui/mainwindow.glade.h:39
+msgid "_Replace"
+msgstr "_Ersetzen"
 
-#: ui/mainwindow.glade:1422
-msgid "File forward"
-msgstr "Eine Datei vorwärts"
+#: ui/mainwindow.glade.h:40
+msgid "_This file"
+msgstr "D_iese Datei"
 
-#: ui/mainwindow.glade:1423
-msgid "Go to the next matching file"
-msgstr "Gehe zur nächsten Datei mit Treffern"
+#: ui/mainwindow.glade.h:41
+msgid "hidden"
+msgstr "versteckt"
 
-#: ui/prefdialog.glade:7
-msgid "Preferences"
-msgstr "Einstellungen"
+#: ui/mainwindow.glade.h:42
+msgid "recursive"
+msgstr "rekursiv"
 
-#: ui/prefdialog.glade:79
-msgid "Icons only"
-msgstr "Nur Icons"
+#: ui/prefdialog.glade.h:2
+msgid "1."
+msgstr "1."
 
-#: ui/prefdialog.glade:88
-msgid "Text only"
-msgstr "Nur Text"
+#: ui/prefdialog.glade.h:3
+msgid "2."
+msgstr "2."
 
-#: ui/prefdialog.glade:97
-msgid "Icons and text"
-msgstr "Icons und Text"
+#: ui/prefdialog.glade.h:4
+msgid "3."
+msgstr "3."
 
-#: ui/prefdialog.glade:106
+#: ui/prefdialog.glade.h:5
 msgid "Both horizontal"
 msgstr "Beides horizontal"
 
-#: ui/prefdialog.glade:126
-msgid "_Text view font:"
-msgstr "_Schriftart für Text:"
-
-#: ui/prefdialog.glade:151
-msgid "_Match color:"
-msgstr "_Farbe eines Treffers:"
-
-#: ui/prefdialog.glade:176
+#: ui/prefdialog.glade.h:6
 msgid "C_urrent match color:"
 msgstr "Farbe des _gewählten Treffers:"
 
-#: ui/prefdialog.glade:201
+#: ui/prefdialog.glade.h:7
+msgid "Fallback _encoding:"
+msgstr "_Rückfall-Zeichensatz:"
+
+#: ui/prefdialog.glade.h:8
+msgid "Icons and text"
+msgstr "Icons und Text"
+
+#: ui/prefdialog.glade.h:9
+msgid "Icons only"
+msgstr "Nur Icons"
+
+#: ui/prefdialog.glade.h:10
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: ui/prefdialog.glade.h:11
+msgid "Text only"
+msgstr "Nur Text"
+
+#: ui/prefdialog.glade.h:12
+msgid "The encoding specified by the current locale"
+msgstr "Der in der Sprachumgebung eingestellte Zeichensatz"
+
+#: ui/prefdialog.glade.h:13
 msgid "Tool_bar style:"
 msgstr "Stil der _Werkzeugleiste:"
 
-#: ui/prefdialog.glade:309
+#: ui/prefdialog.glade.h:14
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ui/prefdialog.glade.h:15
+msgid "_File access"
+msgstr "_Dateizugriff"
+
+#: ui/prefdialog.glade.h:16
+msgid "_Ignore the text direction of the locale"
+msgstr "_Ignoriere die Textausrichtung der Sprachumgebung"
+
+#: ui/prefdialog.glade.h:17
 msgid "_Look'n'feel"
 msgstr "_Oberfläche"
 
-#: ui/prefdialog.glade:342
+#: ui/prefdialog.glade.h:18
+msgid "_Match color:"
+msgstr "_Farbe eines Treffers:"
+
+#: ui/prefdialog.glade.h:19
+msgid "_Text view font:"
+msgstr "_Schriftart für Text:"
+
+#: ui/prefdialog.glade.h:20
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "regexxer versucht eine Datei in den folgenden Zeichensätzen zu lesen bevor "
 "ein Fehlschlag angezeigt wird:"
-
-#: ui/prefdialog.glade:372
-msgid "3."
-msgstr "3."
-
-#: ui/prefdialog.glade:396
-msgid "2."
-msgstr "2."
-
-#: ui/prefdialog.glade:420
-msgid "1."
-msgstr "1."
-
-#: ui/prefdialog.glade:444
-msgid "UTF-8"
-msgstr "UTF-8"
-
-#: ui/prefdialog.glade:474
-msgid "Fallback _encoding:"
-msgstr "_Rückfall-Zeichensatz:"
-
-#: ui/prefdialog.glade:525
-msgid "The encoding specified by the current locale"
-msgstr "Der in der Sprachumgebung eingestellte Zeichensatz"
-
-#: ui/prefdialog.glade:557
-msgid "_Ignore the text direction of the locale"
-msgstr "_Ignoriere die Textausrichtung der Sprachumgebung"
-
-#: ui/prefdialog.glade:603
-msgid "_File access"
-msgstr "_Dateizugriff"

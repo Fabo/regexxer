@@ -1,5 +1,17 @@
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* Makefile.in.in: Remove file from the repository because
+	autogen.sh now executes glib-gettextize.
+
+	* POTFILES.in: Add regexxer.desktop.in and regexxer.schemas.in
+	in order to make intltool merge translatable messages from these
+	files into regexxer.pot.
+
+	* de.po: Translate the new strings merged by intltool.
+	* en.po: ditto.
+
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* *.po: Line number changes.
 
 2004-05-16  Daniel Elstner  <daniel.elstner@gmx.net>
