@@ -831,8 +831,6 @@ void MainWindow::on_pref_dialog_hide()
 
 void MainWindow::on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value)
 {
-  using namespace Gtk;
-
   if (value.get_type() == Gnome::Conf::VALUE_STRING)
   {
     if (key.raw() == conf_key_textview_font)
@@ -843,7 +841,7 @@ void MainWindow::on_conf_value_changed(const Glib::ustring& key, const Gnome::Co
     }
     else if (key.raw() == conf_key_toolbar_style)
     {
-      toolbar_->set_toolbar_style(Util::enum_from_nick<ToolbarStyle>(value.get_string()));
+      toolbar_->set_toolbar_style(Util::enum_from_nick<Gtk::ToolbarStyle>(value.get_string()));
     }
   }
 }

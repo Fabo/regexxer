@@ -1,5 +1,11 @@
 2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (MainWindow::on_conf_value_changed): Remove
+	"using namespace Gtk" directive which became pointless after the
+	last change.
+
+2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* regexxer.schemas.in (override_direction): Remove configuration
 	option because it doesn't seem to be necessary anymore.  That is,
 	the current GTK+ release gets the direction of Latin text in RTL
