@@ -1,5 +1,12 @@
 2002-11-29  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (on_selection_changed): Ooops, forgot to
+	disconnect() conn_undo_stack_push_.  That means the mysterious
+	one of the assertions is now fixed -- the remaining ones are
+	expected :)
+
+2002-11-29  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac (AC_INIT): Version 0.5.
 
 2002-11-29  Daniel Elstner  <daniel.elstner@gmx.net>

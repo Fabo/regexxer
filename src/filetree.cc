@@ -776,8 +776,9 @@ void FileTree::on_selection_changed()
   const bool conn_modified_changed_blocked = conn_modified_changed_.blocked();
   const bool conn_undo_stack_push_blocked  = conn_undo_stack_push_.blocked();
 
-  conn_match_count_.disconnect();
+  conn_match_count_     .disconnect();
   conn_modified_changed_.disconnect();
+  conn_undo_stack_push_ .disconnect();
 
   if(const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
   {
