@@ -26,18 +26,9 @@
 #include <algorithm>
 #include <memory>
 
-#include <config.h>
-
 
 namespace
 {
-
-const char regexxer_icon_filename[] = REGEXXER_DATADIR G_DIR_SEPARATOR_S
-                                      "pixmaps" G_DIR_SEPARATOR_S "regexxer.png";
-
-const char regexxer_author_list[]   = "Daniel Elstner <daniel.elstner@gmx.net>";
-const char regexxer_project_url[]   = "http://regexxer.sourceforge.net/";
-
 
 class ImageLabel : public Gtk::HBox
 {
@@ -51,7 +42,7 @@ ImageLabel::ImageLabel(const Gtk::StockID& stock_id, const Glib::ustring& label)
   Gtk::HBox(false, 2)
 {
   pack_start(*Gtk::manage(new Gtk::Image(stock_id, Gtk::ICON_SIZE_MENU)), Gtk::PACK_SHRINK);
-  pack_start(*Gtk::manage(new Gtk::Label(label)), Gtk::PACK_SHRINK);
+  pack_start(*Gtk::manage(new Gtk::Label(label, true)), Gtk::PACK_SHRINK);
 
   show_all_children();
 }
@@ -68,11 +59,17 @@ namespace Regexxer
 PrefDialog::PrefDialog(Gtk::Window& parent)
 :
   Gtk::Dialog             ("Preferences", parent),
+  button_menu_and_tool_   (0),
+  button_menu_only_       (0),
+  button_tool_only_       (0),
+  label_toolbar_          (0),
+  box_toolbar_            (0),
   button_icons_           (0),
   button_text_            (0),
   button_both_            (0),
   button_both_horiz_      (0),
   entry_fallback_         (0),
+  current_menutool_mode_  (MODE_MENU_AND_TOOL),
   current_toolbar_style_  (Gtk::TOOLBAR_ICONS)
 {
   using namespace Gtk;
@@ -84,14 +81,14 @@ PrefDialog::PrefDialog(Gtk::Window& parent)
   box->pack_start(*manage(notebook));
 
   {
-    std::auto_ptr<Widget> label (new ImageLabel(Stock::PROPERTIES, "Options"));
-    Widget *const page = create_page_options();
+    std::auto_ptr<Widget> label (new ImageLabel(Stock::PREFERENCES, "_Look'n'feel"));
+    Widget *const page = create_page_look();
 
     notebook->append_page(*manage(page), *manage(label.release()));
   }
   {
-    std::auto_ptr<Widget> label (new ImageLabel(StockID("regexxer-info"), "Info"));
-    Widget *const page = create_page_info();
+    std::auto_ptr<Widget> label (new ImageLabel(Stock::PROPERTIES, "_File access"));
+    Widget *const page = create_page_file();
 
     notebook->append_page(*manage(page), *manage(label.release()));
   }
@@ -101,6 +98,23 @@ PrefDialog::PrefDialog(Gtk::Window& parent)
 
 PrefDialog::~PrefDialog()
 {}
+
+void PrefDialog::set_pref_menutool_mode(MenuToolMode menutool_mode)
+{
+  Gtk::RadioButton* button = 0;
+
+  switch(menutool_mode)
+  {
+    case MODE_MENU_AND_TOOL: button = button_menu_and_tool_; break;
+    case MODE_MENU_ONLY:     button = button_menu_only_;     break;
+    case MODE_TOOL_ONLY:     button = button_tool_only_;     break;
+  }
+
+  g_return_if_fail(button != 0);
+
+  current_menutool_mode_ = menutool_mode;
+  button->set_active(true);
+}
 
 void PrefDialog::set_pref_toolbar_style(Gtk::ToolbarStyle toolbar_style)
 {
@@ -134,125 +148,138 @@ void PrefDialog::on_response(int)
   hide();
 }
 
-Gtk::Widget* PrefDialog::create_page_options()
+Gtk::Widget* PrefDialog::create_page_look()
 {
   using namespace Gtk;
 
-  std::auto_ptr<Box> page (new VBox(false, 0));
+  std::auto_ptr<Table> page (new Table(2, 2, false));
+  page->set_border_width(10);
+  page->set_row_spacings(20);
+  page->set_col_spacings(10);
 
   {
-    Box *const box_toolbar = new HBox(false, 10);
-    page->pack_start(*manage(box_toolbar), PACK_EXPAND_PADDING);
-    box_toolbar->set_border_width(10);
-
-    box_toolbar->pack_start(*manage(new Label("Toolbar style:", 0.0, 0.5)), PACK_SHRINK);
+    page->attach(*manage(new Label("User interface:", 0.0, 0.5)), 0, 1, 0, 1, FILL, FILL);
 
     Box *const box_radio = new VBox(true, 0);
-    box_toolbar->pack_start(*manage(box_radio), PACK_SHRINK);
+    page->attach(*manage(box_radio), 1, 2, 0, 1, FILL, FILL);
+
+    RadioButton::Group radio_group;
+
+    button_menu_and_tool_ = new RadioButton(radio_group, "Menu bar _and toolbar", true);
+    box_radio->pack_start(*manage(button_menu_and_tool_), PACK_SHRINK);
+
+    button_menu_only_ = new RadioButton(radio_group, "_Menu bar only", true);
+    box_radio->pack_start(*manage(button_menu_only_), PACK_SHRINK);
+
+    button_tool_only_ = new RadioButton(radio_group, "_Toolbar only", true);
+    box_radio->pack_start(*manage(button_tool_only_), PACK_SHRINK);
+
+    const SigC::Slot0<void> slot_toggled
+        (SigC::slot(*this, &PrefDialog::on_radio_menutool_mode_toggled));
+
+    button_menu_and_tool_->signal_toggled().connect(slot_toggled);
+    button_menu_only_    ->signal_toggled().connect(slot_toggled);
+    button_tool_only_    ->signal_toggled().connect(slot_toggled);
+  }
+
+  {
+    label_toolbar_ = new Label("Toolbar style:", 0.0, 0.5);
+    page->attach(*manage(label_toolbar_), 0, 1, 1, 2, FILL, FILL);
+
+    box_toolbar_ = new VBox(true, 0);
+    page->attach(*manage(box_toolbar_), 1, 2, 1, 2, FILL, FILL);
 
     RadioButton::Group radio_group;
 
     button_icons_ = new RadioButton(radio_group, "_Icons only", true);
-    box_radio->pack_start(*manage(button_icons_), PACK_SHRINK);
+    box_toolbar_->pack_start(*manage(button_icons_), PACK_SHRINK);
 
     button_text_ = new RadioButton(radio_group, "_Text only", true);
-    box_radio->pack_start(*manage(button_text_), PACK_SHRINK);
+    box_toolbar_->pack_start(*manage(button_text_), PACK_SHRINK);
 
     button_both_ = new RadioButton(radio_group, "Icons _and text", true);
-    box_radio->pack_start(*manage(button_both_), PACK_SHRINK);
+    box_toolbar_->pack_start(*manage(button_both_), PACK_SHRINK);
 
     button_both_horiz_ = new RadioButton(radio_group, "Both _horizontal", true);
-    box_radio->pack_start(*manage(button_both_horiz_), PACK_SHRINK);
+    box_toolbar_->pack_start(*manage(button_both_horiz_), PACK_SHRINK);
 
-    const SigC::Slot0<void> slot_toggled (SigC::slot(*this, &PrefDialog::on_radio_toggled));
+    const SigC::Slot0<void> slot_toggled
+        (SigC::slot(*this, &PrefDialog::on_radio_toolbar_style_toggled));
 
     button_icons_     ->signal_toggled().connect(slot_toggled);
     button_text_      ->signal_toggled().connect(slot_toggled);
     button_both_      ->signal_toggled().connect(slot_toggled);
     button_both_horiz_->signal_toggled().connect(slot_toggled);
   }
-  {
-    Box *const box_encoding = new VBox(false, 10);
-    page->pack_start(*manage(box_encoding), PACK_EXPAND_PADDING);
-    box_encoding->set_border_width(10);
-
-    Label *const label_info = new Label("regexxer attempts to read a file in the following "
-                                        "encodings before giving up:", 0.0, 0.5);
-    box_encoding->pack_start(*manage(label_info), PACK_SHRINK);
-    label_info->set_line_wrap(true);
-
-    Table *const table = new Table(3, 2, false);
-    box_encoding->pack_start(*manage(table), PACK_SHRINK);
-    table->set_col_spacings(3);
-
-    table->attach(*manage(new Label("1.", 1.0, 0.5)), 0, 1, 0, 1, FILL, FILL);
-    table->attach(*manage(new Label("2.", 1.0, 0.5)), 0, 1, 1, 2, FILL, FILL);
-    table->attach(*manage(new Label("3.", 1.0, 0.5)), 0, 1, 2, 3, FILL, FILL);
-
-    Label *const label_utf8 = new Label("UTF-8", 0.0, 0.5);
-    table->attach(*manage(label_utf8), 1, 2, 0, 1, FILL, FILL);
-
-    Label *const label_locale = new Label("The encoding specified by the current locale", 0.0, 0.5);
-    table->attach(*manage(label_locale), 1, 2, 1, 2, FILL, FILL);
-
-    Box *const box_fallback = new HBox(false, 5);
-    table->attach(*manage(box_fallback), 1, 2, 2, 3, EXPAND|FILL, FILL);
-
-    Label *const label_fallback = new Label("Fallback _encoding:", 0.0, 0.5, true);
-    box_fallback->pack_start(*manage(label_fallback), PACK_SHRINK);
-
-    entry_fallback_ = new Entry();
-    box_fallback->pack_start(*manage(entry_fallback_), PACK_EXPAND_WIDGET);
-
-    label_fallback->set_mnemonic_widget(*entry_fallback_);
-
-    const Glib::RefPtr<SizeGroup> size_group = SizeGroup::create(SIZE_GROUP_VERTICAL);
-    size_group->add_widget(*label_utf8);
-    size_group->add_widget(*label_locale);
-    size_group->add_widget(*box_fallback);
-
-    entry_fallback_->signal_activate().connect(
-        SigC::slot(*this, &PrefDialog::on_entry_fallback_activate));
-  }
 
   return page.release();
 }
 
-Gtk::Widget* PrefDialog::create_page_info()
+Gtk::Widget* PrefDialog::create_page_file()
 {
   using namespace Gtk;
 
-  std::auto_ptr<Alignment> page (new Alignment(0.5, 0.33, 0.0, 0.0));
+  std::auto_ptr<Box> page (new VBox(false, 10));
+  page->set_border_width(10);
 
-  Box *const box = new VBox(false, 10);
-  page->add(*manage(box));
-  box->set_border_width(10);
+  Label *const label_info = new Label("regexxer attempts to read a file in the following "
+                                      "encodings before giving up:", 0.0, 0.5);
+  page->pack_start(*manage(label_info), PACK_SHRINK);
+  label_info->set_line_wrap(true);
 
-  Box *const box_title = new HBox(false, 10);
-  box->pack_start(*manage(box_title), PACK_SHRINK);
-  box_title->set_border_width(10);
+  Table *const table = new Table(3, 2, false);
+  page->pack_start(*manage(table), PACK_SHRINK);
+  table->set_col_spacings(3);
 
-  Image *const image = new Image(regexxer_icon_filename);
-  box_title->pack_start(*manage(image), PACK_EXPAND_WIDGET);
-  image->set_alignment(1.0, 0.5);
+  table->attach(*manage(new Label("1.", 1.0, 0.5)), 0, 1, 0, 1, FILL, FILL);
+  table->attach(*manage(new Label("2.", 1.0, 0.5)), 0, 1, 1, 2, FILL, FILL);
+  table->attach(*manage(new Label("3.", 1.0, 0.5)), 0, 1, 2, 3, FILL, FILL);
 
-  Label *const label_title = new Label();
-  box_title->pack_start(*manage(label_title), PACK_EXPAND_WIDGET);
-  label_title->set_alignment(0.0, 0.5);
-  label_title->set_markup("<span size=\"xx-large\" weight=\"heavy\">" PACKAGE_STRING "</span>");
+  Label *const label_utf8 = new Label("UTF-8", 0.0, 0.5);
+  table->attach(*manage(label_utf8), 1, 2, 0, 1, FILL, FILL);
 
-  Label *const label_mail = new Label(regexxer_author_list);
-  box->pack_start(*manage(label_mail), PACK_SHRINK);
-  label_mail->set_selectable(true);
+  Label *const label_locale = new Label("The encoding specified by the current locale", 0.0, 0.5);
+  table->attach(*manage(label_locale), 1, 2, 1, 2, FILL, FILL);
 
-  Label *const label_url = new Label(regexxer_project_url);
-  box->pack_start(*manage(label_url), PACK_SHRINK);
-  label_url->set_selectable(true);
+  Box *const box_fallback = new HBox(false, 5);
+  table->attach(*manage(box_fallback), 1, 2, 2, 3, EXPAND|FILL, FILL);
+
+  Label *const label_fallback = new Label("Fallback _encoding:", 0.0, 0.5, true);
+  box_fallback->pack_start(*manage(label_fallback), PACK_SHRINK);
+
+  entry_fallback_ = new Entry();
+  box_fallback->pack_start(*manage(entry_fallback_), PACK_EXPAND_WIDGET);
+
+  label_fallback->set_mnemonic_widget(*entry_fallback_);
+
+  const Glib::RefPtr<SizeGroup> size_group = SizeGroup::create(SIZE_GROUP_VERTICAL);
+  size_group->add_widget(*label_utf8);
+  size_group->add_widget(*label_locale);
+  size_group->add_widget(*box_fallback);
+
+  entry_fallback_->signal_activate().connect(
+      SigC::slot(*this, &PrefDialog::on_entry_fallback_activate));
 
   return page.release();
 }
 
-void PrefDialog::on_radio_toggled()
+void PrefDialog::on_radio_menutool_mode_toggled()
+{
+  const MenuToolMode menutool_mode =
+      (button_menu_and_tool_->get_active() ? MODE_MENU_AND_TOOL :
+      (button_menu_only_    ->get_active() ? MODE_MENU_ONLY     : MODE_TOOL_ONLY));
+
+  label_toolbar_->set_sensitive(menutool_mode != MODE_MENU_ONLY);
+  box_toolbar_  ->set_sensitive(menutool_mode != MODE_MENU_ONLY);
+
+  if(menutool_mode != current_menutool_mode_)
+  {
+    current_menutool_mode_ = menutool_mode;
+    signal_pref_menutool_mode_changed(menutool_mode); // emit
+  }
+}
+
+void PrefDialog::on_radio_toolbar_style_toggled()
 {
   const Gtk::ToolbarStyle toolbar_style =
       (button_icons_->get_active() ? Gtk::TOOLBAR_ICONS :

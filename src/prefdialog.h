@@ -21,12 +21,16 @@
 #ifndef REGEXXER_PREFDIALOG_H_INCLUDED
 #define REGEXXER_PREFDIALOG_H_INCLUDED
 
+#include "configdata.h"
+
 #include <gtkmm/dialog.h>
 #include <gtkmm/toolbar.h>
 
 namespace Gtk
 {
+class Box;
 class Entry;
+class Label;
 class RadioButton;
 }
 
@@ -40,9 +44,11 @@ public:
   explicit PrefDialog(Gtk::Window& parent);
   virtual ~PrefDialog();
 
+  void set_pref_menutool_mode(MenuToolMode menutool_mode);
   void set_pref_toolbar_style(Gtk::ToolbarStyle toolbar_style);
   void set_pref_fallback_encoding(const std::string& fallback_encoding);
 
+  SigC::Signal1<void,MenuToolMode>        signal_pref_menutool_mode_changed;
   SigC::Signal1<void,Gtk::ToolbarStyle>   signal_pref_toolbar_style_changed;
   SigC::Signal1<void,const std::string&>  signal_pref_fallback_encoding_changed;
 
@@ -50,17 +56,28 @@ protected:
   virtual void on_response(int response_id);
 
 private:
+  Gtk::RadioButton*   button_menu_and_tool_;
+  Gtk::RadioButton*   button_menu_only_;
+  Gtk::RadioButton*   button_tool_only_;
+
+  Gtk::Label*         label_toolbar_;
+  Gtk::Box*           box_toolbar_;
+
   Gtk::RadioButton*   button_icons_;
   Gtk::RadioButton*   button_text_;
   Gtk::RadioButton*   button_both_;
   Gtk::RadioButton*   button_both_horiz_;
+
   Gtk::Entry*         entry_fallback_;
+
+  MenuToolMode        current_menutool_mode_;
   Gtk::ToolbarStyle   current_toolbar_style_;
 
-  Gtk::Widget* create_page_options();
-  Gtk::Widget* create_page_info();
+  Gtk::Widget* create_page_look();
+  Gtk::Widget* create_page_file();
 
-  void on_radio_toggled();
+  void on_radio_menutool_mode_toggled();
+  void on_radio_toolbar_style_toggled();
   void on_entry_fallback_activate();
 };
 
