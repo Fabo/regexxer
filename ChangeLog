@@ -1,5 +1,15 @@
 2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.{cc,h} (Util::convert_to_ascii): New function
+	which replaces all non-ASCII characters with '?'.  This should be
+	used for error messages when everything else failed.
+
+	* src/filelist.cc: Use filename_to_utf8_fallback() in a few more
+	places.  Also, if the filename conversion fails ultimately show a
+	warning and skip the file.
+
+2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.{cc,h} (Util::filename_to_utf8_fallback): New
 	wrapper function for Glib::filename_to_utf8() that works even if
 	the user hasn't set G_BROKEN_FILENAMES correctly.  In that case

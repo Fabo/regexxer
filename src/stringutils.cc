@@ -499,6 +499,22 @@ Glib::ustring Util::filename_to_utf8_fallback(const std::string& filename)
   return filename_utf8;
 }
 
+Glib::ustring Util::convert_to_ascii(const std::string& str)
+{
+  std::string result (str);
+
+  std::string::iterator p    = result.begin();
+  std::string::iterator pend = result.end();
+
+  for(; p != pend; ++p)
+  {
+    if((*p & '\x80') != 0)
+      *p = '?';
+  }
+
+  return result;
+}
+
 Glib::ustring Util::transform_pathname(const Glib::ustring& path, bool shorten)
 {
   using namespace Glib;

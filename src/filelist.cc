@@ -471,18 +471,33 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
     {
       find_recursively(fullname, find_data);
     }
-    else if(file_test(fullname, FILE_TEST_IS_REGULAR) &&
-            find_data.pattern.match(filename_to_utf8(basename)) > 0)
+    else if(file_test(fullname, FILE_TEST_IS_REGULAR))
     {
-      const FileInfoPtr fileinfo (new FileInfo(fullname));
-      const ustring chopped_filename =
-          filename_to_utf8(std::string(fullname, find_data.chop_off, std::string::npos));
+      try
+      {
+        if(find_data.pattern.match(Util::filename_to_utf8_fallback(basename)) > 0)
+        {
+          const FileInfoPtr fileinfo (new FileInfo(fullname));
+          const ustring chopped_filename = Util::filename_to_utf8_fallback(
+              std::string(fullname, find_data.chop_off, std::string::npos));
 
-      const FileListColumns& columns = filelist_columns();
-      Gtk::TreeModel::Row row = *liststore_->append();
+          const FileListColumns& columns = filelist_columns();
+          Gtk::TreeModel::Row row = *liststore_->append();
 
-      row[columns.filename] = chopped_filename;
-      row[columns.fileinfo] = fileinfo;
+          row[columns.filename] = chopped_filename;
+          row[columns.fileinfo] = fileinfo;
+        }
+      }
+      catch(const Glib::ConvertError& error)
+      {
+        // Don't use Glib::locale_to_utf8() because we already
+        // tried that in Util::filename_to_utf8_fallback().
+        //
+        const Glib::ustring name = Util::convert_to_ascii(fullname);
+        const Glib::ustring what = error.what();
+
+        g_warning("Eeeek, can't convert filename `%s' to UTF-8: %s", name.c_str(), what.c_str());
+      }
     }
   }
 }

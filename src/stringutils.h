@@ -40,6 +40,7 @@ std::string substitute_references(const std::string&   substitution,
                                   const CaptureVector& captures);
 
 Glib::ustring filename_to_utf8_fallback(const std::string& filename);
+Glib::ustring convert_to_ascii(const std::string& str);
 
 Glib::ustring transform_pathname(const Glib::ustring& path, bool shorten);
 
