@@ -19,6 +19,7 @@
 
 
 ACLOCAL_AMFLAGS = -I $(top_srcdir)/macros
+DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=hardcore
 
 SUBDIRS = pixmaps src
 

@@ -1,5 +1,10 @@
 2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): On make distcheck,
+	pass --enable-warnings=hardcore to ./configure.
+
+2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac (AM_INIT_AUTOMAKE): Require automake >= 1.6 and
 	make use of the "check-news" option.
 
