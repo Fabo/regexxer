@@ -101,7 +101,7 @@ bool UndoStack::do_undo(const sigc::slot<bool>& pulse)
     {
       skip = false;
 
-      if ((++iteration % PULSE_INTERVAL) == 0 && sigc::slot<bool>(pulse)())
+      if ((++iteration % PULSE_INTERVAL) == 0 && pulse())
         throw StopUndo();
     }
   }
