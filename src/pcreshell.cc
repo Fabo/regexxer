@@ -140,7 +140,8 @@ int Pattern::match(const Glib::ustring& subject, int offset, MatchOptions option
 {
   const int rc = pcre_exec(pcre_, 0, subject.data(), subject.bytes(),
                            offset, options, ovector_, ovecsize_);
-  if (rc >= -1)
+
+  if (rc >= 0 || rc == PCRE_ERROR_NOMATCH)
     return rc;
 
   // Of all possible error conditions pcre_exec() might return, hitting
