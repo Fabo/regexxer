@@ -1,3 +1,11 @@
+regexxer 0.8 (2004-07-09)
+
+	* port to new API of sigc++ 2, gtkmm 2.4 and gconfmm 2.6
+	* now using libglademm to load the UI at runtime from glade XML files
+	* polished UI: new GTK+ file chooser, Edit menu, and more
+	* bugfixes, bugfixes, bugfixes
+	* more translations: cs en_CA en_GB it ja nl pt pt_BR sv
+
 regexxer 0.7 (2004-05-08)
 
 	* gnome-vfs dependency dropped
