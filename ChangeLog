@@ -1,3 +1,8 @@
+2004-07-12  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/stringutils.cc (shell_pattern_to_regex): Handle ']' and '!'
+	inside character classes more correctly.
+
 2004-07-10  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* configure.ac (REGEXXER_CXX_HAS_STD_LOCALE): Remove.  libsigc++ 2

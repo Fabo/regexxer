@@ -389,11 +389,11 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
 
   result.append("\\A", 2);
 
-  int  brace_level = 0;
-  bool in_cclass   = false;
+  int brace_level = 0;
 
   const std::string::const_iterator pend = pattern.end().base();
   std::string::const_iterator       p    = pattern.begin().base();
+  std::string::const_iterator       pcc  = pend; // start of character class
 
   for (; p != pend; ++p)
   {
@@ -407,7 +407,7 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
 
       result += *p;
     }
-    else if (!in_cclass)
+    else if (pcc == pend)
     {
       switch (*p)
       {
@@ -421,7 +421,7 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
 
         case '[':
           result += '[';
-          in_cclass = true;
+          pcc = p + 1;
           break;
 
         case '{':
@@ -447,19 +447,18 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
           break;
       }
     }
-    else // in_cclass == true
+    else // pcc != pend
     {
-      // Note that the negative indices below are safe because at least
-      // the opening '[' must have been preceding in order to get here.
       switch (*p)
       {
         case ']':
           result += ']';
-          in_cclass = ((p[-1] == '[') || ((p[-1] == '!' || p[-1] == '^') && p[-2] == '['));
+          if (p != pcc && !(p == pcc + 1 && (*pcc == '!' || *pcc == '^')))
+            pcc = pend;
           break;
 
         case '!':
-          result += (p[-1] == '[') ? '^' : '!';
+          result += (p == pcc) ? '^' : '!';
           break;
 
         default:
