@@ -517,9 +517,9 @@ bool FileTree::on_button_release_event(GdkEventButton* event)
           collapse_row(path);
         else
           expand_row(path, false);
-      }
 
-      return true; // event handled
+        return true; // event handled
+      }
     }
   }
 
