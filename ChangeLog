@@ -1,5 +1,13 @@
 2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* autogen.sh: Enable Bourne shell posix mode if possible, and
+	export WARNINGS=all in order to get auto* diagnostic messages.
+
+	* src/Makefile.am: Replace deprecated variables INCLUDES and LIBS
+	with regexxer_CPPFLAGS and regexxer_LDADD.
+
+2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* macros/cxx.m4: Get rid of all deprecated autoconf constructs.
 	* macros/pcre.m4: ditto.
 

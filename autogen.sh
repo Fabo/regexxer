@@ -19,6 +19,18 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+
+# Be Bourne compatible. (stolen from autoconf)
+if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
+  emulate sh
+  NULLCMD=:
+  # Zsh 3.x and 4.x performs word splitting on ${1+"$@"}, which
+  # is contrary to our usage.  Disable this feature.
+  alias -g '${1+"$@"}'='"$@"'
+elif test -n "${BASH_VERSION+set}" && (set -o posix) >/dev/null 2>&1; then
+  set -o posix
+fi
+
 PROJECT=regexxer
 
 srcdir=`dirname "$0"`
@@ -55,6 +67,9 @@ done
 rm -f config.guess config.sub depcomp install-sh missing mkinstalldirs
 rm -f config.cache acconfig.h
 rm -rf autom4te.cache
+
+WARNINGS=all
+export WARNINGS
 
 echo "$aclocal $ACLOCAL_FLAGS"
 "$aclocal" $ACLOCAL_FLAGS || exit 1

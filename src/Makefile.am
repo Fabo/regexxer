@@ -66,6 +66,6 @@ DEFS = @DEFS@ \
 -DGTK_DISABLE_DEPRECATED \
 -DREGEXXER_DATADIR=\""$(datadir)"\"
 
-INCLUDES = -I$(top_builddir) -I$(top_srcdir) $(PCRE_CFLAGS) $(GTKMM_CFLAGS)
-LIBS     = $(PCRE_LIBS) $(GTKMM_LIBS)
+regexxer_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir) $(PCRE_CFLAGS) $(GTKMM_CFLAGS)
+regexxer_LDADD    = $(PCRE_LIBS) $(GTKMM_LIBS)
 
