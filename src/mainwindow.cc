@@ -230,7 +230,8 @@ MainWindow::MainWindow()
 
   load_configuration();
 
-  entry_folder_->set_text(Util::shorten_pathname(Glib::filename_to_utf8(Glib::get_current_dir())));
+  entry_folder_->set_text(Util::shorten_pathname(
+      Util::filename_to_utf8_fallback(Glib::get_current_dir())));
   entry_pattern_->set_text("*");
   button_recursive_->set_active(true);
 

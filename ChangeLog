@@ -1,5 +1,11 @@
 2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc src/stringutils.cc: Be more tolerant about
+	fucked up filenames.  Still show a (hopefully) annoying warning
+	message, though.
+
+2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc: Invoke file search respectively regex search
 	on the entry widgets' signal_activate().
 

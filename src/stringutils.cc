@@ -611,9 +611,9 @@ Glib::ustring Util::int_to_string(int number)
 
 Glib::ustring Util::transform_pathname(const Glib::ustring& path, bool shorten)
 {
-  using namespace Glib;
+  using Glib::ustring;
 
-  static const ustring homedir (filename_to_utf8(get_home_dir()));
+  static const ustring homedir (Util::filename_to_utf8_fallback(Glib::get_home_dir()));
   static const ustring::size_type homedir_length = homedir.length();
 
   if(shorten)
