@@ -280,12 +280,12 @@ bool ColorSelectionButton::ColorLabel::on_expose_event(GdkEventExpose* event)
   Gtk::Widget& button = *get_parent();
 
 #if REGEXXER_HAVE_GTKMM_22
-  button.get_style_property("focus-padding",    focus_padding);
-  button.get_style_property("focus-line-width", focus_line_width);
+  button.get_style_property("focus_padding",    focus_padding);
+  button.get_style_property("focus_line_width", focus_line_width);
 #else
   gtk_widget_style_get(button.gobj(),
-                       "focus-padding",    &focus_padding,
-                       "focus-line-width", &focus_line_width,
+                       "focus_padding",    &focus_padding,
+                       "focus_line_width", &focus_line_width,
                        static_cast<char*>(0));
 #endif
 
