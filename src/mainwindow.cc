@@ -366,7 +366,7 @@ void MainWindow::on_find_files()
         button_recursive_->get_active(),
         button_hidden_->get_active());
   }
-  catch (const Pcre::Error& error)
+  catch (const Pcre::Error&)
   {
     Gtk::MessageDialog dialog (*window_, _("The file search pattern is invalid."),
                                false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
@@ -621,8 +621,8 @@ void MainWindow::on_save_all()
   }
   catch (const FileTree::Error& error)
   {
-    const Glib::ustring message = _("The following errors occurred during save:");
-    FileErrorDialog dialog (*window_, message, Gtk::MESSAGE_ERROR, error);
+    FileErrorDialog dialog (*window_, _("The following errors occurred during save:"),
+                            Gtk::MESSAGE_ERROR, error);
     dialog.run();
   }
 }
