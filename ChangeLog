@@ -1,5 +1,12 @@
 2004-06-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/sharedptr.h (SharedPtr): Add dummy template specializations
+	for SharedObject and const SharedObject.  This makes it impossible
+	to instantiate a generic SharedPtr<SharedObject>, which would be
+	fatal because SharedObject doesn't have a virtual destructor.
+
+2004-06-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/sharedptr.h (SharedObject::refcount_): Change type to long,
 	so that a full word will be used on 64 bit machines.
 	(SharedPtr): Add a paragraph about operator const void*() to the

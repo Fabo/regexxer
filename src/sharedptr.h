@@ -111,6 +111,11 @@ private:
   T* ptr_;
 };
 
+// Explicitely forbid the usage of a generic SharedPtr<SharedObject>
+// because class SharedObject doesn't have a virtual destructor.
+template <> class SharedPtr<SharedObject> {};
+template <> class SharedPtr<const SharedObject> {};
+
 
 template <class T> inline
 SharedPtr<T>::SharedPtr()
