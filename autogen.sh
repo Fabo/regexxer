@@ -86,6 +86,7 @@ then
   exit 1
 fi
 
+rm -f intltool-extract.in intltool-merge.in intltool-update.in po/Makefile.in.in
 rm -f config.guess config.sub depcomp install-sh missing
 rm -f config.cache acconfig.h
 rm -rf autom4te.cache
@@ -98,6 +99,8 @@ test -n "${BASH_VERSION+set}" && set_option='set'
 
 $set_option -x
 
+glib-gettextize --copy		|| exit 1
+intltoolize --automake		|| exit 1
 "$aclocal" $ACLOCAL_FLAGS	|| exit 1
 "$autoheader"			|| exit 1
 "$automake" $AUTOMAKE_FLAGS	|| exit 1

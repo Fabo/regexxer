@@ -1,5 +1,26 @@
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* autogen.sh: Execute glib-gettextize and intltoolize.
+
+	* configure.ac: Call AC_PROG_INTLTOOL().  Assign ALL_LINGUAS and
+	GETTEXT_PACKAGE, and do an AC_SUBST() of the latter.
+	(AM_GNU_GETTEXT): Use AM_GLIB_GNU_GETTEXT() instead.
+
+	* Makefile.am (dist_desktop_DATA): Remove the dist_ prefix,
+	introduce desktop_in_files, and add the @INTLTOOL_DESKTOP_RULE@
+	substitution in order to make regexxer intltool-aware.
+	(dist_schema_DATA): Likewise for the GConf schemas file.
+	(dist_noinst_SCRIPTS): Add intltool-extract.in, intltool-merge.in
+	and intltool-update.in.
+
+	* regexxer.desktop: Rename to regexxer.desktop.in, use _Comment
+	instead of Comment, and remove the manually inserted de and dk
+	translations.
+
+	* regexxer.schemas: Rename to regexxer.schemas.in.
+
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetreeprivate.cc (collatekey_sort_func): Use libstdc++-v3
 	method std::string::compare() instead of memcmp() for sub-string
 	comparison, since libsigc++2 depends on gcc >= 3 anyway.

@@ -72,7 +72,7 @@
 	 <long>
 	   Name of the character encoding to use if a file is not readable
 	   in either UTF-8 or the codeset specified by the current locale.
-	   Try `iconv --list&apos; for a complete list of possible values.
+	   Try &quot;iconv --list&quot; for a complete list of possible values.
 	 </long>
       </locale>
     </schema>

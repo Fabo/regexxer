@@ -8,6 +8,14 @@ config.h.in
 config.log
 config.status
 configure
+intltool-extract
+intltool-extract.in
+intltool-merge
+intltool-merge.in
+intltool-update
+intltool-update.in
+regexxer.desktop
+regexxer.schemas
 stamp-h1
 stamp-h.in
 regexxer-*.tar.bz2

@@ -23,14 +23,20 @@ DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install --enable-warnings=hardcore
 
 SUBDIRS = pixmaps ui src po
 
-dist_noinst_SCRIPTS = autogen.sh config.rpath
-dist_noinst_DATA    = macros/cxx.m4 macros/misc.m4 macros/pcre.m4
-
+desktop_in_files    = regexxer.desktop.in
 desktopdir          = $(datadir)/applications
-dist_desktop_DATA   = regexxer.desktop
+desktop_DATA        = regexxer.desktop
 
-schemadir           = $(GCONF_SCHEMA_FILE_DIR)
-dist_schema_DATA    = regexxer.schemas
+@INTLTOOL_DESKTOP_RULE@
+
+schemas_in_files    = regexxer.schemas.in
+schemasdir          = $(GCONF_SCHEMA_FILE_DIR)
+schemas_DATA        = regexxer.schemas
+
+@INTLTOOL_SCHEMAS_RULE@
+
+dist_noinst_SCRIPTS = autogen.sh config.rpath intltool-extract.in intltool-merge.in intltool-update.in
+dist_noinst_DATA    = $(desktop_in_files) $(schemas_in_files) macros/cxx.m4 macros/misc.m4 macros/pcre.m4
 
 gconftool_command   = GCONF_CONFIG_SOURCE='$(GCONF_SCHEMA_CONFIG_SOURCE)' $(GCONFTOOL)
 
@@ -42,9 +48,9 @@ install-data-hook:
 uninstall-hook:
 endif
 
-install-schemas: $(dist_schema_DATA)
+install-schemas: $(schemas_DATA)
 	@$(POST_INSTALL)
-	@file='$(dist_schema_DATA)'; test -f "$$file" || file="$(srcdir)/$$file"; \
+	@file='$(schemas_DATA)'; test -f "$$file" || file="$(srcdir)/$$file"; \
 	echo " $(gconftool_command) --makefile-install-rule $$file"; \
 	$(gconftool_command) --makefile-install-rule $$file
 	@echo; \
@@ -58,7 +64,7 @@ install-schemas: $(dist_schema_DATA)
 
 uninstall-schemas:
 	@$(NORMAL_UNINSTALL)
-	@file='$(dist_schema_DATA)'; test -f "$$file" || file="$(srcdir)/$$file"; \
+	@file='$(schemas_DATA)'; test -f "$$file" || file="$(srcdir)/$$file"; \
 	echo " $(gconftool_command) --makefile-uninstall-rule $$file"; \
 	$(gconftool_command) --makefile-uninstall-rule $$file
 

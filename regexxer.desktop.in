@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=regexxer
+_Comment=An interactive tool for performing search and replace operations
+Exec=regexxer
+Icon=regexxer.png
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Application;Development;
