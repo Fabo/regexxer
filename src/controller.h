@@ -95,6 +95,7 @@ public:
   // Group for all controls that could change matches
   // or require match information to operate.
   ControlGroup  match_actions;
+  ControlGroup  clip_actions;
 
   ControlItem   save_file;
   ControlItem   save_all;
@@ -114,6 +115,10 @@ public:
   ControlItem   replace;
   ControlItem   replace_file;
   ControlItem   replace_all;
+
+  ControlItem   cut;
+  ControlItem   copy;
+  ControlItem   paste;
 
   void load_xml(const Glib::RefPtr<Gnome::Glade::Xml>& xml);
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-09 20:18+0200\n"
+"POT-Creation-Date: 2004-06-25 17:34+0200\n"
 "PO-Revision-Date: 2004-05-05 15:35+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -371,38 +371,42 @@ msgid "_All files"
 msgstr "_All files"
 
 #: ui/mainwindow.glade.h:34
+msgid "_Edit"
+msgstr "_Edit"
+
+#: ui/mainwindow.glade.h:35
 msgid "_File"
 msgstr "_File"
 
-#: ui/mainwindow.glade.h:35
+#: ui/mainwindow.glade.h:36
 msgid "_Help"
 msgstr "_Help"
 
-#: ui/mainwindow.glade.h:36
+#: ui/mainwindow.glade.h:37
 msgid "_Match"
 msgstr "_Match"
 
-#: ui/mainwindow.glade.h:37
+#: ui/mainwindow.glade.h:38
 msgid "_Next file"
 msgstr "_Next file"
 
-#: ui/mainwindow.glade.h:38
+#: ui/mainwindow.glade.h:39
 msgid "_Previous file"
 msgstr "_Previous file"
 
-#: ui/mainwindow.glade.h:39
+#: ui/mainwindow.glade.h:40
 msgid "_Replace"
 msgstr "_Replace"
 
-#: ui/mainwindow.glade.h:40
+#: ui/mainwindow.glade.h:41
 msgid "_This file"
 msgstr "_This file"
 
-#: ui/mainwindow.glade.h:41
+#: ui/mainwindow.glade.h:42
 msgid "hidden"
 msgstr "hidden"
 
-#: ui/mainwindow.glade.h:42
+#: ui/mainwindow.glade.h:43
 msgid "recursive"
 msgstr "recursive"
 

@@ -150,6 +150,7 @@ void ControlGroup::set_enabled(bool enable)
 Controller::Controller()
 :
   match_actions (true),
+  clip_actions  (false),
   save_file     (false),
   save_all      (false),
   undo          (false),
@@ -164,7 +165,10 @@ Controller::Controller()
   prev_match    (false),
   replace       (false),
   replace_file  (false),
-  replace_all   (false)
+  replace_all   (false),
+  cut           (false),
+  copy          (true),
+  paste         (false)
 {
   match_actions.add(undo);
   match_actions.add(find_files);
@@ -176,6 +180,9 @@ Controller::Controller()
   match_actions.add(replace);
   match_actions.add(replace_file);
   match_actions.add(replace_all);
+  clip_actions.add(cut);
+  clip_actions.add(copy);
+  clip_actions.add(paste);
 }
 
 Controller::~Controller()
@@ -185,10 +192,9 @@ void Controller::load_xml(const Glib::RefPtr<Gnome::Glade::Xml>& xml)
 {
   save_file   .add_widgets(xml, "menuitem_save",         "button_save");
   save_all    .add_widgets(xml, "menuitem_save_all",     "button_save_all");
+  quit        .add_widgets(xml, "menuitem_quit",         "button_quit");
   undo        .add_widgets(xml, "menuitem_undo",         "button_undo");
   preferences .add_widgets(xml, "menuitem_preferences",  0);
-  quit        .add_widgets(xml, "menuitem_quit",         "button_quit");
-  about       .add_widgets(xml, "menuitem_about",        0);
   next_file   .add_widgets(xml, "menuitem_next_file",    "button_next_file");
   prev_file   .add_widgets(xml, "menuitem_prev_file",    "button_prev_file");
   next_match  .add_widgets(xml, "menuitem_next_match",   "button_next_match");
@@ -198,6 +204,7 @@ void Controller::load_xml(const Glib::RefPtr<Gnome::Glade::Xml>& xml)
   replace_all .add_widgets(xml, "menuitem_replace_all",  "button_replace_all");
   find_files  .add_widgets(xml, 0,                       "button_find_files");
   find_matches.add_widgets(xml, 0,                       "button_find_matches");
+  about       .add_widgets(xml, "menuitem_about",        0);
 }
 
 } // namespace Regexxer

@@ -1,3 +1,11 @@
+2004-06-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/controller.{cc,h} (Controller): Add an Edit menu, as well
+	as a Cut, Copy and Paste menu items.
+
+	* ui/mainwindow.glade: As above, and move Undo and Preferences
+	into the Edit menu.
+
 2004-06-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* po/Makevars (XGETTEXT_OPTIONS): Recent intltool now parses the
