@@ -1,5 +1,9 @@
 2002-11-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/controller.cc (ControlItem::add_widget): Honor group_enabled_.
+
+2002-11-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc: Change default size of the window to 600x450
 	because the new menu bar takes up quite some space.
 

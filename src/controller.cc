@@ -112,7 +112,7 @@ void ControlItem::connect(const SigC::Slot0<void>& slot_activated)
 void ControlItem::add_widget(Gtk::Widget& widget)
 {
   signal_set_sensitive_.connect(SigC::slot(widget, &Gtk::Widget::set_sensitive));
-  widget.set_sensitive(enabled_);
+  widget.set_sensitive(enabled_ && group_enabled_);
 }
 
 void ControlItem::set_enabled(bool enable)
