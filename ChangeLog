@@ -5,9 +5,15 @@
 
 2004-05-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
-	* src/filetree.cc (FileTree::replace_all_matches): Make sure
-	path_match_first_ points to the first file that still has matches
-	after a replace operation was interrupted.
+	* src/filetree.cc: Replace a couple of explicit TreePath(iter)
+	conversions by simple assignments.
+	(FileTree::replace_all_matches): Make sure path_match_first_
+	points to the first file that still has matches after a replace
+	operation was interrupted.
+	(FileTree::replace_matches_at_iter): Remove the assertion that
+	FileBuffer::get_match_count() must return 0 after returning from
+	FileBuffer::replace_all_matches(), because the operation might
+	have been interrupted.
 
 2004-05-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
