@@ -1,4 +1,8 @@
 
+regexxer 0.3 (2002-11-10)
+
+	* fix build with GCC 2.95.x (libstdc++-v2 is broken)
+
 regexxer 0.2 (2002-11-08)
 
 	* file list replaced with file tree
