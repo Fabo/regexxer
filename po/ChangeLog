@@ -2,6 +2,7 @@
 
 	* ca.po: Added Catalan translation by
 	Xavi Ivars <ear@oronetes.net>.
+	* LINGUAS: Added "ca" (Catalan).
 
 2005-01-28  Alexander Shopov  <ash@contact.bg>
 
