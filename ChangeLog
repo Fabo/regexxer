@@ -1,5 +1,11 @@
 2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.cc (apply_modifiers): Handle modifier sequences
+	like "\u\L$2" correctly.  Since it's not an recursive function the
+	code got pretty messy.  Needs to be refactored at some point.
+
+2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/configdata.cc: Use g_warning() instead of g_message().  These
 	errors don't occur on a normal setup and should really go to stderr.
 

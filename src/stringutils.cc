@@ -93,7 +93,7 @@ std::string apply_modifiers(const std::string& subject, const std::vector<ModPos
     {
       case 'L': case 'U':
       {
-        while(p != pend && Glib::Ascii::islower(p->second)) { ++p; }
+        while(p != pend && (p->second == 'l' || p->second == 'u')) { ++p; }
 
         const size_type stop = (p == pend) ? subject.size() : p->first;
         const Glib::ustring str (subject.begin() + start, subject.begin() + stop);
@@ -102,18 +102,48 @@ std::string apply_modifiers(const std::string& subject, const std::vector<ModPos
         idx = stop;
         break;
       }
-      case 'l': case 'u':
+      case 'l': case 'u': // TODO: Simplify.  This code is way too complicated.
       {
         if(start < subject.size())
         {
-          Glib::ustring::const_iterator cpos (subject.begin() + start);
-          gunichar uc = *cpos++;
+          while(p != pend && p->first == int(start) &&
+                (p->second == 'E' || p->second == 'l' || p->second == 'u')) { ++p; }
 
-          uc = (mod == 'l') ? Glib::Unicode::tolower(uc) : Glib::Unicode::totitle(uc);
-          const Glib::ustring str (1, uc);
+          if(p != pend && p->first == int(start))
+          {
+            const char submod = p->second;
+            g_assert(submod == 'L' || submod == 'U');
 
-          result.append(str.raw());
-          idx = cpos.base() - subject.begin();
+            do { ++p; } while(p != pend && (p->second == 'l' || p->second == 'u'));
+
+            const size_type stop = (p == pend) ? subject.size() : p->first;
+            Glib::ustring str (subject.begin() + start, subject.begin() + stop);
+            str = (submod == 'L') ? str.lowercase() : str.uppercase();
+
+            if(!str.empty())
+            {
+              Glib::ustring::iterator pstr = str.begin();
+
+              gunichar uc = *pstr++;
+              uc = (mod == 'l') ? Glib::Unicode::tolower(uc) : Glib::Unicode::totitle(uc);
+              const Glib::ustring str_uc (1, uc);
+
+              result.append(str_uc.raw());
+              result.append(pstr.base(), str.end().base());
+            }
+            idx = stop;
+          }
+          else
+          {
+            Glib::ustring::const_iterator cpos (subject.begin() + start);
+            gunichar uc = *cpos++;
+
+            uc = (mod == 'l') ? Glib::Unicode::tolower(uc) : Glib::Unicode::totitle(uc);
+            const Glib::ustring str (1, uc);
+
+            result.append(str.raw());
+            idx = cpos.base() - subject.begin();
+          }
         }
         break;
       }
