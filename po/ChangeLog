@@ -1,3 +1,8 @@
+2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po: Update to pull in the qt-format comments.
+	* en.po: ditto.
+
 2004-06-03  Gareth Owen  <gowen72@yahoo.com>
 
 	* en_GB.po: Updated British English translation

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-30 11:45+0200\n"
+"POT-Creation-Date: 2004-06-09 20:18+0200\n"
 "PO-Revision-Date: 2004-05-05 15:35+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -93,11 +93,13 @@ msgstr "File"
 msgid "#"
 msgstr "#"
 
-#: src/filetree.cc:529
+#: src/filetree.cc:535
+#, qt-format
 msgid "Failed to save file \"%1\": %2"
 msgstr "Failed to save file “%1”: %2"
 
-#: src/filetree.cc:1023
+#: src/filetree.cc:944
+#, qt-format
 msgid "\"%1\" seems to be a binary file."
 msgstr "“%1” seems to be a binary file."
 
@@ -126,6 +128,7 @@ msgstr ""
 "Quit anyway?"
 
 #: src/mainwindow.cc:337
+#, qt-format
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
@@ -154,6 +157,7 @@ msgid "The following errors occurred during search:"
 msgstr "The following errors occurred during search:"
 
 #: src/mainwindow.cc:433
+#, qt-format
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -162,6 +166,7 @@ msgstr ""
 "%3"
 
 #: src/mainwindow.cc:435
+#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -173,11 +178,11 @@ msgstr ""
 msgid "The following errors occurred during save:"
 msgstr "The following errors occurred during save:"
 
-#: src/pcreshell.cc:58
+#: src/pcreshell.cc:59
 msgid "Using the \\C escape sequence to match a single byte is not supported."
 msgstr "Using the \\C escape sequence to match a single byte is not supported."
 
-#: src/pcreshell.cc:150
+#: src/pcreshell.cc:151
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
@@ -186,6 +191,7 @@ msgstr ""
 "engine."
 
 #: src/prefdialog.cc:246
+#, qt-format
 msgid "\"%1\" is not a valid encoding."
 msgstr "“%1” is not a valid encoding."
 
