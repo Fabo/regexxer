@@ -105,8 +105,6 @@ FontSelectionButton::FontSelectionButton()
   box->pack_start(*manage(label_font_ = new Label()), PACK_EXPAND_WIDGET, 5);
   box->pack_start(*manage(new VSeparator()),          PACK_SHRINK);
   box->pack_start(*manage(label_size_ = new Label()), PACK_SHRINK, 5);
-
-  box->show_all();
 }
 
 FontSelectionButton::~FontSelectionButton()
@@ -185,7 +183,6 @@ private:
 ColorSelectionButton::ColorSelectionButton()
 {
   add(*Gtk::manage(colorlabel_ = new ColorLabel()));
-  colorlabel_->show();
 }
 
 ColorSelectionButton::~ColorSelectionButton()

@@ -41,6 +41,38 @@ const char regexxer_author_mail[]   = "Daniel Elstner <daniel.elstner@gmx.net>";
 const char regexxer_debian_mail[]   = "Ross Burton <ross@burtonini.com>";
 
 
+class SelectableLabel : public Gtk::Label
+{
+public:
+  SelectableLabel(const Glib::ustring& label);
+  virtual ~SelectableLabel();
+
+protected:
+  virtual bool on_focus(Gtk::DirectionType direction);
+};
+
+SelectableLabel::SelectableLabel(const Glib::ustring& label)
+:
+  Gtk::Label(label)
+{
+  set_selectable(true);
+}
+
+SelectableLabel::~SelectableLabel()
+{}
+
+bool SelectableLabel::on_focus(Gtk::DirectionType)
+{
+  if(can_focus() && !is_focus())
+  {
+    grab_focus();
+    return true;
+  }
+
+  return false;
+}
+
+
 class ContributorBox : public Gtk::VBox
 {
 public:
@@ -58,11 +90,7 @@ ContributorBox::ContributorBox(const Glib::ustring& what, const Glib::ustring& w
   pack_start(*manage(label_what), PACK_SHRINK);
   label_what->set_markup("<span size=\"small\">" + what + "</span>");
 
-  Label *const label_who = new Label(who);
-  pack_start(*manage(label_who), PACK_SHRINK);
-  label_who->set_selectable(true);
-
-  show_all_children();
+  pack_start(*manage(new SelectableLabel(who)), PACK_SHRINK);
 }
 
 ContributorBox::~ContributorBox()
@@ -80,7 +108,7 @@ AboutDialog::AboutDialog(Gtk::Window& parent)
 {
   using namespace Gtk;
 
-  add_button(Stock::OK, RESPONSE_OK);
+  add_button(Stock::OK, RESPONSE_OK)->grab_focus();
 
   Box& box_dialog = *get_vbox();
   Alignment *const alignment = new Alignment(0.5, 0.33, 0.0, 0.0);

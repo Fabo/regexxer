@@ -34,9 +34,7 @@ namespace Regexxer
 
 ImageButton::ImageButton(const Gtk::StockID& stock_id, const Glib::ustring& name)
 {
-  Gtk::Image *const image = new Gtk::Image(stock_id, Gtk::ICON_SIZE_BUTTON);
-  add(*Gtk::manage(image));
-  image->show();
+  add(*Gtk::manage(new Gtk::Image(stock_id, Gtk::ICON_SIZE_BUTTON)));
 
 #if REGEXXER_HAVE_GTKMM_22
   get_accessible()->set_name(name);
@@ -62,8 +60,6 @@ ImageLabelButton::ImageLabelButton(const Gtk::StockID& stock_id, const Glib::ust
 
   box->pack_start(*manage(new Image(stock_id, ICON_SIZE_BUTTON)), PACK_SHRINK);
   box->pack_start(*manage(new Label(label, mnemonic)),            PACK_SHRINK);
-
-  alignment->show_all();
 }
 
 ImageLabelButton::~ImageLabelButton()

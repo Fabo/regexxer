@@ -1,3 +1,16 @@
+2002-12-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/aboutdialog.cc (SelectableLabel): New fancy experiment to
+	make labels both selectable _and_ focusable, so that they end up
+	in the Tab chain.
+
+	* src/aboutdialog.cc src/imagebutton.cc src/prefdialog.cc: Don't
+	show all children of custom "composite" widgets in the constructor.
+	It doesn't make much sense since we call show_all() later on anyway.
+	And making these "composite" widgets really independent components
+	would require overriding both show_all_vfunc() and hide_all_vfunc(),
+	which is currently not worth the effort.
+
 2002-12-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* pixmaps/regexxer.png: Replace with a much nicer icon stolen from
