@@ -254,19 +254,19 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
 
     const Glib::ustring subject (get_slice(line, line_end));
     int  offset = 0;
-    bool do_match_empty = true;
+    bool allow_empty_match = true;
 
     do
     {
       const int capture_count = pattern.match(
-          subject, offset, (do_match_empty) ? Pcre::MatchOptions(0) : Pcre::NOT_EMPTY);
+          subject, offset, (allow_empty_match) ? Pcre::MatchOptions(0) : Pcre::NOT_EMPTY);
 
       if(capture_count <= 0)
       {
-        if(!do_match_empty && unsigned(offset) < subject.bytes())
+        if(!allow_empty_match && unsigned(offset) < subject.bytes())
         {
           ++offset;
-          do_match_empty = true;
+          allow_empty_match = true;
           continue;
         }
         break;
@@ -290,7 +290,7 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
 
       apply_tag(tagtable->match, start, stop);
 
-      do_match_empty = (match_length > 0);
+      allow_empty_match = (match_length > 0);
       offset = bounds.second;
     }
     while(multiple);
