@@ -36,7 +36,9 @@ ImageButton::ImageButton(const Gtk::StockID& stock_id, const Glib::ustring& name
 {
   add(*Gtk::manage(new Gtk::Image(stock_id, Gtk::ICON_SIZE_BUTTON)));
 
-  get_accessible()->set_name(name);
+  Glib::RefPtr<Atk::Object> refAccessible = get_accessible();
+  if(refAccessible)
+    refAccessible->set_name(name);
 }
 
 ImageButton::~ImageButton()
