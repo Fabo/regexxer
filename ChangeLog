@@ -1,5 +1,10 @@
 2002-12-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* autogen.sh: Implement some fancy sed magic to compare automake
+	version numbers, in order to choose the one that suits us best.
+
+2002-12-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (create_left_pane): Set the accessible name
 	of the folder entry.
 	(create_right_pane): Set the accessible name of the preview entry,

@@ -32,6 +32,7 @@ elif test -n "${BASH_VERSION+set}" && (set -o posix) >/dev/null 2>&1; then
 fi
 
 PROJECT=regexxer
+MIN_AUTOMAKE_VERSION=1.6
 
 srcdir=`dirname "$0"`
 test -z $srcdir && srcdir=.
@@ -50,19 +51,39 @@ fi
 
 autoconf=autoconf
 autoheader=autoheader
-aclocal=aclocal
-automake=automake
+aclocal=
+automake=
+auto_version=0
 
-for suffix in "1.7" "1.6"
+# sed magic to transform a version string into a mathematical expression.
+# For instance, "1.7.2" becomes "1 \* 1000000 + 7 \* 1000 + 02".  This string
+# can be fed into 'eval expr' in order to compare version numbers.
+#
+get_version='s/^.*(GNU automake) \([0-9]\+\)\.\([0-9]\+\)\(\.\([0-9]\+\)\)\?.*$'
+get_version=$get_version'/\1 \\* 1000000 + \2 \\* 1000 + 0\4/p'
+
+for suffix in -1.5 -1.6 -1.7 -1.8 ""
 do
-  if "$aclocal-$suffix"  --version </dev/null >/dev/null 2>&1 && \
-     "$automake-$suffix" --version </dev/null >/dev/null 2>&1
+  aclocal_version=`aclocal$suffix --version </dev/null 2>&1 | sed -n "$get_version"`
+  automake_version=`automake$suffix --version </dev/null 2>&1 | sed -n "$get_version"`
+
+  if test -n "$aclocal_version" && \
+     test "x$aclocal_version" = "x$automake_version" && \
+     eval expr "$automake_version \\>= $auto_version" >/dev/null
   then
-    aclocal="$aclocal-$suffix"
-    automake="$automake-$suffix"
-    break
+    auto_version=$automake_version
+    aclocal=aclocal$suffix
+    automake=automake$suffix
   fi
 done
+
+min_auto_version=`echo "(GNU automake) $MIN_AUTOMAKE_VERSION" | sed -n "$get_version"`
+
+if eval expr "$auto_version \\< $min_auto_version" >/dev/null
+then
+  echo "Sorry, at least automake $MIN_AUTOMAKE_VERSION is required to configure $PROJECT."
+  exit 1
+fi
 
 rm -f config.guess config.sub depcomp install-sh missing mkinstalldirs
 rm -f config.cache acconfig.h
