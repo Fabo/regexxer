@@ -144,7 +144,9 @@ std::string apply_modifiers(const std::string& subject, const std::vector<ModPos
               gunichar uc = *cpos++;
               uc = (mod == 'l') ? Glib::Unicode::tolower(uc) : Glib::Unicode::totitle(uc);
 
-              result.append(Glib::ustring(1, uc).raw());
+              if (Glib::Unicode::validate(uc))
+                result.append(Glib::ustring(1, uc).raw());
+
               result.append(cpos.base(), str.end().base());
             }
             idx = stop;
@@ -155,7 +157,9 @@ std::string apply_modifiers(const std::string& subject, const std::vector<ModPos
             gunichar uc = *cpos++;
             uc = (mod == 'l') ? Glib::Unicode::tolower(uc) : Glib::Unicode::totitle(uc);
 
-            result.append(Glib::ustring(1, uc).raw());
+            if (Glib::Unicode::validate(uc))
+              result.append(Glib::ustring(1, uc).raw());
+
             idx = cpos.base() - subject.begin();
           }
         }
