@@ -104,10 +104,12 @@ FileList::FindData::~FindData()
 
 FileList::FileList()
 :
-  liststore_    (Gtk::ListStore::create(filelist_columns())),
-  find_running_ (false),
-  find_stop_    (false),
-  sum_matches_  (0)
+  liststore_      (Gtk::ListStore::create(filelist_columns())),
+  color_modified_ ("red"),
+  find_running_   (false),
+  find_stop_      (false),
+  sum_matches_    (0),
+  modified_count_ (0)
 {
   set_model(liststore_);
 
@@ -154,6 +156,12 @@ void FileList::find_files(const Glib::ustring& dirname,
 
   get_selection()->unselect_all(); // workaround for GTK+ <= 2.0.6 (#94868)
   liststore_->clear();
+
+  if(modified_count_ != 0)
+  {
+    modified_count_ = 0;
+    signal_modified_count_changed();
+  }
 
   find_stop_    = false;
   find_running_ = true;
@@ -257,7 +265,7 @@ void FileList::find_matches(Pcre::Pattern& pattern, bool multiple)
   }
 
   sum_matches_ = new_sum_matches;
-  signal_match_count_changed(sum_matches_); // emit
+  signal_match_count_changed(); // emit
 }
 
 long FileList::get_match_count() const
@@ -270,6 +278,8 @@ void FileList::replace_all_matches(const Glib::ustring& substitution)
   const Glib::RefPtr<Glib::MainContext> main_context = Glib::MainContext::get_default();
   const FileListColumns& columns = filelist_columns();
 
+  int new_modified_count = 0;
+
   for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
   {
     while(main_context->iteration(false)) {}
@@ -281,6 +291,9 @@ void FileList::replace_all_matches(const Glib::ustring& substitution)
     {
       fileinfo->buffer->replace_all_matches(substitution);
 
+      if(fileinfo->buffer->get_modified())
+        ++new_modified_count;
+
       sum_matches_ -= (*iter)[columns.matchcount];
       (*iter)[columns.matchcount] = 0;
 
@@ -288,9 +301,20 @@ void FileList::replace_all_matches(const Glib::ustring& substitution)
     }
   }
 
+  const bool modified_count_changed = (modified_count_ != new_modified_count);
+  modified_count_ = new_modified_count;
+
   g_return_if_fail(sum_matches_ == 0);
 
-  signal_match_count_changed(sum_matches_); // emit
+  signal_match_count_changed(); // emit
+
+  if(modified_count_changed)
+    signal_modified_count_changed(); // emit
+}
+
+int FileList::get_modified_count() const
+{
+  return modified_count_;
 }
 
 /**** Regexxer::FileList -- private ****************************************/
@@ -309,9 +333,9 @@ void FileList::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::ite
       renderer->property_foreground_gdk() = get_style()->get_text(Gtk::STATE_INSENSITIVE);
       return;
     }
-    else if(fileinfo->buffer && fileinfo->buffer->get_modified())
+    if(fileinfo->buffer && fileinfo->buffer->get_modified())
     {
-      renderer->property_foreground_gdk() = Gdk::Color("red");
+      renderer->property_foreground_gdk() = color_modified_;
       return;
     }
   }
@@ -479,15 +503,26 @@ void FileList::on_buffer_match_count_changed(int match_count)
     }
   }
 
-  signal_match_count_changed(sum_matches_); // emit
+  signal_match_count_changed(); // emit
 }
 
 void FileList::on_buffer_modified_changed()
 {
-  if(const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
-  {
-    liststore_->row_changed(Gtk::TreePath(iter), iter);
-  }
+  const Gtk::TreeModel::iterator iter = get_selection()->get_selected();
+  g_return_if_fail(iter);
+
+  const FileInfoPtr fileinfo = (*iter)[filelist_columns().fileinfo];
+  g_return_if_fail(fileinfo && fileinfo->buffer);
+
+  if(fileinfo->buffer->get_modified())
+    ++modified_count_;
+  else
+    --modified_count_;
+
+  g_return_if_fail(modified_count_ >= 0);
+
+  liststore_->row_changed(Gtk::TreePath(iter), iter);
+  signal_modified_count_changed(); // emit
 }
 
 void FileList::load_file(const Util::SharedPtr<FileInfo>& fileinfo)

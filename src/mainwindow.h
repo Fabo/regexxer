@@ -21,11 +21,12 @@
 #ifndef REGEXXER_MAINWINDOW_H_INCLUDED
 #define REGEXXER_MAINWINDOW_H_INCLUDED
 
-#include <gtkmm/tooltips.h>
-#include <gtkmm/window.h>
-
 #include "filebuffer.h"
 #include "sharedptr.h"
+
+#include <list>
+#include <gtkmm/tooltips.h>
+#include <gtkmm/window.h>
 
 
 namespace Gtk
@@ -36,8 +37,6 @@ class Entry;
 class TextBuffer;
 class TextView;
 }
-
-namespace Pcre { class Pattern; }
 
 namespace Regexxer
 {
@@ -55,6 +54,9 @@ public:
 private:
   Gtk::Tooltips     tooltips_;
 
+  Gtk::Widget*      toolbutton_save_;
+  Gtk::Widget*      toolbutton_save_all_;
+
   Gtk::Entry*       entry_folder_;
   Gtk::Entry*       entry_pattern_;
   Gtk::CheckButton* button_recursive_;
@@ -69,10 +71,6 @@ private:
   Gtk::TextView*    textview_;
   Gtk::Entry*       entry_preview_;
 
-  SigC::Connection  conn_match_count_changed_;
-  SigC::Connection  conn_bound_state_changed_;
-  SigC::Connection  conn_preview_changed_;
-
   Gtk::Button*      button_prev_file_;
   Gtk::Button*      button_prev_;
   Gtk::Button*      button_next_;
@@ -80,6 +78,8 @@ private:
   Gtk::Button*      button_replace_;
   Gtk::Button*      button_replace_file_;
   Gtk::Button*      button_replace_all_;
+
+  std::list<SigC::Connection> buffer_connections_;
 
   Gtk::Widget* create_toolbar();
   Gtk::Widget* create_buttonbox();
@@ -90,10 +90,12 @@ private:
   void on_find_files();
   void on_exec_search();
 
-  void on_filelist_match_count_changed(long match_count);
+  void on_filelist_match_count_changed();
+  void on_filelist_modified_count_changed();
   void on_filelist_switch_buffer(Util::SharedPtr<FileInfo> fileinfo, BoundState bound);
 
   void on_buffer_match_count_changed(int match_count);
+  void on_buffer_modified_changed();
   void on_buffer_bound_state_changed(BoundState bound);
 
   void on_go_next_file(bool move_forward);

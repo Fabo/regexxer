@@ -22,6 +22,7 @@
 #define REGEXXER_FILELIST_H_INCLUDED
 
 #include <iosfwd>
+#include <gdkmm/color.h>
 #include <gtkmm/treepath.h>
 #include <gtkmm/treeview.h>
 
@@ -67,16 +68,21 @@ public:
   long get_match_count() const;
   void replace_all_matches(const Glib::ustring& substitution);
 
+  int get_modified_count() const;
+
   SigC::Signal2<void,FileInfoPtr,BoundState>  signal_switch_buffer;
-  SigC::Signal1<void,long>                    signal_match_count_changed;
+  SigC::Signal0<void>                         signal_match_count_changed;
+  SigC::Signal0<void>                         signal_modified_count_changed;
 
 private:
   struct FindData;
 
   Glib::RefPtr<Gtk::ListStore>  liststore_;
+  Gdk::Color                    color_modified_;
   bool                          find_running_;
   bool                          find_stop_;
   long                          sum_matches_;
+  int                           modified_count_;
   SigC::Connection              conn_match_count_;
   SigC::Connection              conn_modified_changed_;
   Gtk::TreePath                 path_match_first_;

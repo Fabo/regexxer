@@ -25,6 +25,7 @@
 
 #include <iostream>
 #include <memory>
+#include <glib.h>
 #include <gtkmm.h>
 
 #include <config.h>
@@ -33,7 +34,8 @@
 namespace
 {
 
-const char regexxer_icon_path[] = "pixmaps" G_DIR_SEPARATOR_S "regexxer.png";
+const char regexxer_icon_filename[] = REGEXXER_DATADIR G_DIR_SEPARATOR_S
+                                      "pixmaps" G_DIR_SEPARATOR_S "regexxer.png";
 
 typedef Glib::RefPtr<Regexxer::FileBuffer> FileBufferPtr;
 
@@ -83,7 +85,6 @@ CustomButton::CustomButton(const Gtk::StockID& stock_id, const Glib::ustring& la
 CustomButton::~CustomButton()
 {}
 
-
 void dummy_handler()
 {
   std::cout << "foo!\n";
@@ -97,6 +98,8 @@ namespace Regexxer
 
 MainWindow::MainWindow()
 :
+  toolbutton_save_      (0),
+  toolbutton_save_all_  (0),
   entry_folder_         (0),
   entry_pattern_        (0),
   button_recursive_     (0),
@@ -120,12 +123,12 @@ MainWindow::MainWindow()
 
   try
   {
-    const std::string filename = Glib::build_filename(REGEXXER_DATADIR, regexxer_icon_path);
-    set_icon(Gdk::Pixbuf::create_from_file(filename));
+    set_icon(Gdk::Pixbuf::create_from_file(regexxer_icon_filename));
   }
-  catch(const Glib::Error& e)
+  catch(const Glib::Error& error)
   {
-    std::cerr << e.what() << std::endl;
+    const Glib::ustring what = error.what();
+    g_warning(what.c_str());
   }
 
   set_title_filename();
@@ -163,6 +166,9 @@ MainWindow::MainWindow()
   filelist_->signal_match_count_changed.connect(
       SigC::slot(*this, &MainWindow::on_filelist_match_count_changed));
 
+  filelist_->signal_modified_count_changed.connect(
+      SigC::slot(*this, &MainWindow::on_filelist_modified_count_changed));
+
   filelist_->signal_switch_buffer.connect(
       SigC::slot(*this, &MainWindow::on_filelist_switch_buffer));
 }
@@ -179,14 +185,22 @@ Gtk::Widget* MainWindow::create_toolbar()
   ToolList& tools = toolbar->tools();
 
   tools.push_back(StockElem(Stock::SAVE, &dummy_handler));
-  tools.push_back(Space());
-  tools.push_back(StockElem(Stock::UNDO, &dummy_handler));
+  toolbutton_save_ = tools.back().get_widget();
+
+  tools.push_back(StockElem(StockID("regexxer-save-all"), &dummy_handler));
+  toolbutton_save_all_ = tools.back().get_widget();
+
+  //tools.push_back(Space());
+  //tools.push_back(StockElem(Stock::UNDO, &dummy_handler));
   tools.push_back(Space());
   tools.push_back(StockElem(Stock::PREFERENCES, &dummy_handler));
   tools.push_back(Space());
   tools.push_back(StockElem(Stock::QUIT, SigC::slot(*this, &Widget::hide)));
 
   toolbar->set_toolbar_style(TOOLBAR_BOTH_HORIZ);
+
+  toolbutton_save_    ->set_sensitive(false);
+  toolbutton_save_all_->set_sensitive(false);
 
   return toolbar.release();
 }
@@ -426,9 +440,14 @@ void MainWindow::on_exec_search()
   }
 }
 
-void MainWindow::on_filelist_match_count_changed(long match_count)
+void MainWindow::on_filelist_match_count_changed()
 {
-  button_replace_all_->set_sensitive(match_count > 0);
+  button_replace_all_->set_sensitive(filelist_->get_match_count() > 0);
+}
+
+void MainWindow::on_filelist_modified_count_changed()
+{
+  toolbutton_save_all_->set_sensitive(filelist_->get_modified_count() > 0);
 }
 
 void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState bound)
@@ -440,10 +459,10 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
 
   if(old_buffer)
   {
-    conn_match_count_changed_.disconnect();
-    conn_bound_state_changed_.disconnect();
-    conn_preview_changed_.disconnect();
+    std::for_each(buffer_connections_.begin(), buffer_connections_.end(),
+                  std::mem_fun_ref(&SigC::Connection::disconnect));
 
+    buffer_connections_.clear();
     old_buffer->forget_current_match();
   }
 
@@ -459,16 +478,20 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
 
     set_title_filename(Glib::filename_to_utf8(fileinfo->fullname));
 
-    conn_match_count_changed_ = buffer->signal_match_count_changed.
-        connect(SigC::slot(*this, &MainWindow::on_buffer_match_count_changed));
+    buffer_connections_.push_back(buffer->signal_match_count_changed.
+        connect(SigC::slot(*this, &MainWindow::on_buffer_match_count_changed)));
 
-    conn_bound_state_changed_ = buffer->signal_bound_state_changed.
-        connect(SigC::slot(*this, &MainWindow::on_buffer_bound_state_changed));
+    buffer_connections_.push_back(buffer->signal_modified_changed().
+        connect(SigC::slot(*this, &MainWindow::on_buffer_modified_changed)));
 
-    conn_preview_changed_ = buffer->signal_preview_line_changed.
-        connect(SigC::slot(*this, &MainWindow::update_preview));
+    buffer_connections_.push_back(buffer->signal_bound_state_changed.
+        connect(SigC::slot(*this, &MainWindow::on_buffer_bound_state_changed)));
+
+    buffer_connections_.push_back(buffer->signal_preview_line_changed.
+        connect(SigC::slot(*this, &MainWindow::update_preview)));
 
     on_buffer_match_count_changed(buffer->get_match_count());
+    on_buffer_modified_changed();
     on_buffer_bound_state_changed(buffer->get_bound_state());
   }
   else
@@ -479,6 +502,7 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
     set_title_filename();
 
     on_buffer_match_count_changed(0);
+    on_buffer_modified_changed();
     on_buffer_bound_state_changed(BOUND_FIRST | BOUND_LAST);
   }
 
@@ -488,6 +512,11 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
 void MainWindow::on_buffer_match_count_changed(int match_count)
 {
   button_replace_file_->set_sensitive(match_count > 0);
+}
+
+void MainWindow::on_buffer_modified_changed()
+{
+  toolbutton_save_->set_sensitive(textview_->get_buffer()->get_modified());
 }
 
 void MainWindow::on_buffer_bound_state_changed(BoundState bound)

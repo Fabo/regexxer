@@ -1,3 +1,8 @@
+2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/mainwindow.{cc,h} src/filelist.{cc,h}: Add "Save all" tool
+	button and implement sensitivity setting for "Save" and "Save all".
+
 2002-10-19  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* pixmaps/stock_save_all_24.png: New file.
