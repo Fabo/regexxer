@@ -57,13 +57,13 @@ ImageLabelButton::ImageLabelButton(const Gtk::StockID& stock_id, const Glib::ust
   Alignment *const alignment = new Alignment(0.5, 0.5, 0.0, 0.0);
   add(*manage(alignment));
 
-  HBox *const hbox = new HBox(false, 3);
-  alignment->add(*manage(hbox));
+  Box *const box = new HBox(false, 3);
+  alignment->add(*manage(box));
 
-  hbox->pack_start(*manage(new Image(stock_id, ICON_SIZE_BUTTON)), PACK_SHRINK);
-  hbox->pack_start(*manage(new Label(label, mnemonic)),            PACK_SHRINK);
+  box->pack_start(*manage(new Image(stock_id, ICON_SIZE_BUTTON)), PACK_SHRINK);
+  box->pack_start(*manage(new Label(label, mnemonic)),            PACK_SHRINK);
 
-  show_all_children();
+  alignment->show_all();
 }
 
 ImageLabelButton::~ImageLabelButton()
