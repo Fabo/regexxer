@@ -26,6 +26,7 @@
 #include <gtkmm/menubar.h>
 #include <gtkmm/stock.h>
 #include <gtkmm/toolbar.h>
+#include <gtkmm/separatortoolitem.h>
 #include <memory>
 
 #include <config.h>
@@ -42,7 +43,7 @@ void add_menu_stock(Gtk::MenuBar::MenuList& items, const Gtk::StockID& stock_id,
 }
 
 void add_menu_stock(Gtk::MenuBar::MenuList& items, const Gtk::StockID& stock_id,
-                    const Gtk::Menu::AccelKey& accel_key, Regexxer::ControlItem& control)
+                    const Gtk::AccelKey& accel_key, Regexxer::ControlItem& control)
 {
   items.push_back(Gtk::Menu_Helpers::StockMenuElem(stock_id, accel_key, control.slot()));
   control.add_widget(items.back());
@@ -57,7 +58,7 @@ void add_menu_image(Gtk::MenuBar::MenuList& items, const Gtk::StockID& stock_id,
 }
 
 void add_menu_image(Gtk::MenuBar::MenuList& items, const Gtk::StockID& stock_id,
-                    const Glib::ustring& label, const Gtk::Menu::AccelKey& accel_key,
+                    const Glib::ustring& label, const Gtk::AccelKey& accel_key,
                     Regexxer::ControlItem& control)
 {
   items.push_back(Gtk::Menu_Helpers::ImageMenuElem(
@@ -65,11 +66,13 @@ void add_menu_image(Gtk::MenuBar::MenuList& items, const Gtk::StockID& stock_id,
   control.add_widget(items.back());
 }
 
-void add_tool_stock(Gtk::Toolbar::ToolList& tools, const Gtk::StockID& stock_id,
+void add_tool_stock(Gtk::Toolbar& toolbar, const Gtk::StockID& stock_id,
                     Regexxer::ControlItem& control)
 {
-  tools.push_back(Gtk::Toolbar_Helpers::StockElem(stock_id, control.slot()));
-  control.add_widget(*tools.back().get_widget());
+  Gtk::ToolButton* item = Gtk::manage(new Gtk::ToolButton(stock_id));
+  toolbar.append(*item, control.slot());
+  
+  control.add_widget(*item);
 }
 
 void add_widget_button(Regexxer::ControlItem& control, Gtk::Button& button)
@@ -101,19 +104,19 @@ void ControlItem::activate()
     signal_activate_(); // emit
 }
 
-SigC::Slot0<void> ControlItem::slot()
+sigc::slot<void> ControlItem::slot()
 {
-  return SigC::slot(*this, &ControlItem::activate);
+  return sigc::mem_fun(*this, &ControlItem::activate);
 }
 
-void ControlItem::connect(const SigC::Slot0<void>& slot_activated)
+void ControlItem::connect(const sigc::slot<void>& slot_activated)
 {
   signal_activate_.connect(slot_activated);
 }
 
 void ControlItem::add_widget(Gtk::Widget& widget)
 {
-  signal_set_sensitive_.connect(SigC::slot(widget, &Gtk::Widget::set_sensitive));
+  signal_set_sensitive_.connect(sigc::mem_fun(widget, &Gtk::Widget::set_sensitive));
   widget.set_sensitive(enabled_ && group_enabled_);
 }
 
@@ -157,7 +160,7 @@ ControlGroup::~ControlGroup()
 
 void ControlGroup::add(ControlItem& control)
 {
-  signal_set_enabled_.connect(SigC::slot(control, &ControlItem::set_group_enabled));
+  signal_set_enabled_.connect(sigc::mem_fun(control, &ControlItem::set_group_enabled));
   control.set_group_enabled(enabled_);
 }
 
@@ -273,24 +276,21 @@ Gtk::MenuBar* Controller::create_menubar()
 Gtk::Toolbar* Controller::create_toolbar()
 {
   using namespace Gtk;
-  using namespace Gtk::Toolbar_Helpers;
 
-  std::auto_ptr<Toolbar> toolbar (new Toolbar());
-  ToolList& tools = toolbar->tools();
+  Toolbar* toolbar = new Toolbar();
+  
+  add_tool_stock(*toolbar, Stock::SAVE, save_file);
+  add_tool_stock(*toolbar, StockID("regexxer-save-all"), save_all);
+  toolbar->append( *(Gtk::manage(new SeparatorToolItem())) );
+  add_tool_stock(*toolbar, Stock::UNDO, undo);
 
-  add_tool_stock(tools, Stock::SAVE, save_file);
-  add_tool_stock(tools, StockID("regexxer-save-all"), save_all);
+  toolbar->append( *(Gtk::manage(new SeparatorToolItem())) );
+  add_tool_stock(*toolbar, Stock::PREFERENCES, preferences);
 
-  tools.push_back(Space());
-  add_tool_stock(tools, Stock::UNDO, undo);
+  toolbar->append( *(Gtk::manage(new SeparatorToolItem())) );
+  add_tool_stock(*toolbar, Stock::QUIT, quit);
 
-  tools.push_back(Space());
-  add_tool_stock(tools, Stock::PREFERENCES, preferences);
-
-  tools.push_back(Space());
-  add_tool_stock(tools, Stock::QUIT, quit);
-
-  return toolbar.release();
+  return toolbar;
 }
 
 Gtk::Widget* Controller::create_action_area()

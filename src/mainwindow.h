@@ -92,7 +92,7 @@ private:
 
   UndoStackPtr      undo_stack_;
 
-  std::list<SigC::Connection> buffer_connections_;
+  std::list<sigc::connection> buffer_connections_;
 
   std::auto_ptr<AboutDialog>  about_dialog_;
   std::auto_ptr<PrefDialog>   pref_dialog_;

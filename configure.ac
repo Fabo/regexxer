@@ -34,7 +34,7 @@ AC_CHECK_HEADERS([sys/types.h sys/stat.h])
 AC_CHECK_FUNCS([umask])
 AC_CHECK_TYPES([mode_t])
 
-PKG_CHECK_MODULES([GTKMM], [gtkmm-2.0 >= 2.2.8 gconfmm-2.0 >= 2.0.0 gnome-vfsmm-2.0 >= 1.3.5])
+PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4 >= 2.3.7 gconfmm-2.6 >= 2.5.0 gnome-vfsmm-2.6 >= 2.5.0])
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 

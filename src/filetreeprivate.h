@@ -155,7 +155,7 @@ struct FileTree::ReplaceMatchesData
   const Glib::ustring                   substitution;
   FileTree::TreeRowRefPtr               row_reference;
   UndoStackPtr                          undo_stack;
-  const SigC::Slot1<void,UndoActionPtr> slot_undo_stack_push;
+  const sigc::slot<void, UndoActionPtr> slot_undo_stack_push;
 
   void undo_stack_push(UndoActionPtr undo_action);
 

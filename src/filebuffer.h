@@ -72,11 +72,11 @@ public:
   void decrement_stamp();
   void undo_remove_match(const MatchDataPtr& match, int offset);
 
-  SigC::Signal1<void,int>           signal_match_count_changed;
-  SigC::Signal1<void,BoundState>    signal_bound_state_changed;
+  sigc::signal<void, int>           signal_match_count_changed;
+  sigc::signal<void, BoundState>    signal_bound_state_changed;
   Util::QueuedSignal                signal_preview_line_changed;
-  SigC::Signal0<bool>               signal_pulse;
-  SigC::Signal1<void,UndoActionPtr> signal_undo_stack_push;
+  sigc::signal<bool>               signal_pulse;
+  sigc::signal<void, UndoActionPtr> signal_undo_stack_push;
 
 protected:
   FileBuffer();

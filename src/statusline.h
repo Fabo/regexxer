@@ -55,10 +55,11 @@ public:
   void pulse();
   void pulse_stop();
 
-  SigC::Signal0<void> signal_cancel_clicked;
+  sigc::signal<void> signal_cancel_clicked;
 
 protected:
   virtual void on_hierarchy_changed(Gtk::Widget* previous_toplevel);
+  virtual void on_button_stop();
 
 private:
   Gtk::Button*        stop_button_;

@@ -91,7 +91,7 @@ CounterBox::CounterBox(const Glib::ustring& label)
   box->pack_start(*manage(label_count_), PACK_SHRINK);
 
   label_index_->signal_style_changed().connect(
-      SigC::slot(*this, &CounterBox::on_label_style_changed));
+      sigc::mem_fun(*this, &CounterBox::on_label_style_changed));
 
 #if REGEXXER_HAVE_STD_LOCALE
   stringstream_.imbue(std::locale(""));
@@ -253,7 +253,7 @@ StatusLine::StatusLine()
   pack_start(*manage(statusbar_), PACK_EXPAND_WIDGET);
 
   stop_button_->set_sensitive(false);
-  stop_button_->signal_clicked().connect(signal_cancel_clicked.slot());
+  stop_button_->signal_clicked().connect( sigc::mem_fun(*this, &StatusLine::on_button_stop) );
 
   progressbar_->set_pulse_step(0.025);
 
@@ -264,6 +264,11 @@ StatusLine::StatusLine()
 
 StatusLine::~StatusLine()
 {}
+
+void StatusLine::on_button_stop()
+{
+  signal_cancel_clicked.emit(); 
+}
 
 void StatusLine::set_file_index(int file_index)
 {

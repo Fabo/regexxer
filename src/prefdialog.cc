@@ -76,7 +76,7 @@ public:
   void set_selected_font(const Pango::FontDescription& font);
   Pango::FontDescription get_selected_font() const;
 
-  SigC::Signal0<void> signal_font_selected;
+  sigc::signal<void> signal_font_selected;
 
 protected:
   virtual void on_clicked();
@@ -151,7 +151,7 @@ public:
   void set_selected_color(const Gdk::Color& color);
   Gdk::Color get_selected_color() const;
 
-  SigC::Signal0<void> signal_color_selected;
+  sigc::signal<void> signal_color_selected;
 
 protected:
   virtual void on_clicked();
@@ -264,15 +264,15 @@ bool ColorSelectionButton::ColorLabel::on_expose_event(GdkEventExpose* event)
   button.get_style_property("focus_line_width", focus_line_width);
 
   const int margin = focus_padding + focus_line_width + 1;
-  const GdkRectangle alloc = get_allocation();
+  const Gdk::Rectangle alloc = get_allocation();
 
   get_style()->paint_box(
       get_window(), get_state(), Gtk::SHADOW_ETCHED_OUT,
       Glib::wrap(&event->area), *this, "regexxer-color-label",
-      alloc.x + margin,
-      alloc.y + margin,
-      std::max(0, alloc.width  - 2 * margin),
-      std::max(0, alloc.height - 2 * margin));
+      alloc.get_x() + margin,
+      alloc.get_y() + margin,
+      std::max(0, alloc.get_width() - 2 * margin),
+      std::max(0, alloc.get_height() - 2 * margin));
 
   return false;
 }
@@ -394,13 +394,13 @@ Gtk::Widget* PrefDialog::create_page_look()
     label_current_color->set_mnemonic_widget(*button_current_color_);
 
     button_textview_font_->signal_font_selected.connect(
-        SigC::slot(*this, &PrefDialog::on_textview_font_selected));
+        sigc::mem_fun(*this, &PrefDialog::on_textview_font_selected));
 
     button_match_color_->signal_color_selected.connect(
-        SigC::slot(*this, &PrefDialog::on_match_color_selected));
+        sigc::mem_fun(*this, &PrefDialog::on_match_color_selected));
 
     button_current_color_->signal_color_selected.connect(
-        SigC::slot(*this, &PrefDialog::on_current_color_selected));
+        sigc::mem_fun(*this, &PrefDialog::on_current_color_selected));
   }
   {
     using Gtk::Menu_Helpers::MenuElem;
@@ -423,7 +423,7 @@ Gtk::Widget* PrefDialog::create_page_look()
     items.push_back(MenuElem("Both horizontal"));
 
     option_toolbar_style_->signal_changed().connect(
-        SigC::slot(*this, &PrefDialog::on_option_toolbar_style_changed));
+        sigc::mem_fun(*this, &PrefDialog::on_option_toolbar_style_changed));
   }
 
   return page.release();
@@ -473,7 +473,7 @@ Gtk::Widget* PrefDialog::create_page_file()
   size_group->add_widget(*box_fallback);
 
   entry_fallback_->signal_activate().connect(
-      SigC::slot(*this, &PrefDialog::on_entry_fallback_activate));
+      sigc::mem_fun(*this, &PrefDialog::on_entry_fallback_activate));
 
   return page.release();
 }
@@ -519,7 +519,7 @@ void PrefDialog::on_entry_fallback_activate()
     message += fallback_encoding;
     message += "\302\253 is not a valid encoding.";
 
-    Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    Gtk::MessageDialog dialog (*this, message, false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
 
     dialog.run();
   }

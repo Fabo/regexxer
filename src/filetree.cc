@@ -55,7 +55,7 @@ FileTree::FileTree()
   treestore_->set_sort_column_id(TreeStore::DEFAULT_SORT_COLUMN_ID, SORT_ASCENDING);
 
   treestore_->signal_sort_column_changed().connect(
-      SigC::slot(*this, &FileTree::on_treestore_sort_column_changed));
+      sigc::mem_fun(*this, &FileTree::on_treestore_sort_column_changed));
 
   {
     Column *const column = new Column("File");
@@ -68,8 +68,8 @@ FileTree::FileTree()
     column->pack_start(*manage(cell_filename));
 
     column->add_attribute(cell_filename->property_text(), model_columns.filename);
-    column->set_cell_data_func(*cell_icon,     SigC::slot(*this, &FileTree::icon_cell_data_func));
-    column->set_cell_data_func(*cell_filename, SigC::slot(*this, &FileTree::text_cell_data_func));
+    column->set_cell_data_func(*cell_icon,     sigc::mem_fun(*this, &FileTree::icon_cell_data_func));
+    column->set_cell_data_func(*cell_filename, sigc::mem_fun(*this, &FileTree::text_cell_data_func));
 
     column->set_resizable(true);
 
@@ -84,7 +84,7 @@ FileTree::FileTree()
     column->pack_start(*manage(cell_matchcount));
 
     column->add_attribute(cell_matchcount->property_text(), model_columns.matchcount);
-    column->set_cell_data_func(*cell_matchcount, SigC::slot(*this, &FileTree::text_cell_data_func));
+    column->set_cell_data_func(*cell_matchcount, sigc::mem_fun(*this, &FileTree::text_cell_data_func));
 
     column->set_alignment(1.0);
     cell_matchcount->property_xalign() = 1.0;
@@ -97,7 +97,7 @@ FileTree::FileTree()
   const Glib::RefPtr<Gtk::TreeSelection> selection = get_selection();
 
   selection->set_select_function(&FileTree::select_func);
-  selection->signal_changed().connect(SigC::slot(*this, &FileTree::on_selection_changed));
+  selection->signal_changed().connect(sigc::mem_fun(*this, &FileTree::on_selection_changed));
 }
 
 FileTree::~FileTree()
@@ -166,7 +166,7 @@ void FileTree::save_all_files()
 
   {
     Util::ScopedBlock block (conn_modified_changed_);
-    treestore_->foreach(SigC::bind(SigC::slot(*this, &FileTree::save_file_at_iter), &error_list));
+    treestore_->foreach_iter(sigc::bind(sigc::mem_fun(*this, &FileTree::save_file_at_iter), &error_list));
   }
 
   if(error_list)
@@ -228,7 +228,7 @@ void FileTree::find_matches(Pcre::Pattern& pattern, bool multiple)
     ScopedBlockSorting block_sort (*this);
     FindMatchesData find_data (pattern, multiple);
 
-    treestore_->foreach(SigC::bind(SigC::slot(*this, &FileTree::find_matches_at_iter), &find_data));
+    treestore_->foreach_iter(sigc::bind(sigc::mem_fun(*this, &FileTree::find_matches_at_iter), &find_data));
   }
 
   signal_bound_state_changed(); // emit
@@ -249,8 +249,8 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
     ScopedBlockSorting block_sort (*this);
     ReplaceMatchesData replace_data (*this, substitution);
 
-    treestore_->foreach(SigC::bind(
-        SigC::slot(*this, &FileTree::replace_matches_at_iter),
+    treestore_->foreach_iter(sigc::bind(
+        sigc::mem_fun(*this, &FileTree::replace_matches_at_iter),
         &replace_data));
 
     signal_undo_stack_push(replace_data.undo_stack); // emit
@@ -574,7 +574,7 @@ bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMa
     const Glib::RefPtr<FileBuffer> buffer = fileinfo->buffer;
     g_assert(buffer);
 
-    Util::ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.slot()));
+    Util::ScopedConnection conn(buffer->signal_pulse.connect( sigc::mem_fun(*this, &FileTree::on_buffer_pulse) ));
 
     const int old_match_count = buffer->get_match_count();
     const int new_match_count = buffer->find_matches(find_data->pattern, find_data->multiple);
@@ -600,6 +600,11 @@ bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMa
   }
 
   return false;
+}
+
+bool FileTree::on_buffer_pulse()
+{
+  return signal_pulse.emit();
 }
 
 bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
@@ -633,7 +638,7 @@ bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
         Util::ScopedConnection conn1 (buffer->signal_undo_stack_push.
                                       connect(replace_data->slot_undo_stack_push));
 
-        Util::ScopedConnection conn2 (buffer->signal_pulse.connect(signal_pulse.slot()));
+        Util::ScopedConnection conn2( buffer->signal_pulse.connect( sigc::mem_fun(*this, &FileTree::on_buffer_pulse) ));
 
         buffer->replace_all_matches(replace_data->substitution);
       }
@@ -812,13 +817,13 @@ void FileTree::on_selection_changed()
     if(!fileinfo->load_failed)
     {
       conn_match_count_ = fileinfo->buffer->signal_match_count_changed.
-          connect(SigC::slot(*this, &FileTree::on_buffer_match_count_changed));
+          connect(sigc::mem_fun(*this, &FileTree::on_buffer_match_count_changed));
 
       conn_modified_changed_ = fileinfo->buffer->signal_modified_changed().
-          connect(SigC::slot(*this, &FileTree::on_buffer_modified_changed));
+          connect(sigc::mem_fun(*this, &FileTree::on_buffer_modified_changed));
 
       conn_undo_stack_push_ = fileinfo->buffer->signal_undo_stack_push.
-          connect(SigC::slot(*this, &FileTree::on_buffer_undo_stack_push));
+          connect(sigc::mem_fun(*this, &FileTree::on_buffer_undo_stack_push));
     }
 
     last_selected_rowref_.reset(new TreeRowRef(treestore_, Gtk::TreePath(iter)));

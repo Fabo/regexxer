@@ -36,7 +36,7 @@ QueuedSignal::QueuedSignal(int priority)
 QueuedSignal::~QueuedSignal()
 {}
 
-SigC::Connection QueuedSignal::connect(const SigC::Slot0<void>& slot)
+sigc::connection QueuedSignal::connect(const sigc::slot<void>& slot)
 {
   return signal_.connect(slot);
 }
@@ -45,7 +45,7 @@ void QueuedSignal::queue()
 {
   if(!queued_)
   {
-    Glib::signal_idle().connect(SigC::slot(*this, &QueuedSignal::idle_handler), priority_);
+    Glib::signal_idle().connect(sigc::mem_fun(*this, &QueuedSignal::idle_handler), priority_);
     queued_ = true;
   }
 }
@@ -66,7 +66,7 @@ AutoConnection::AutoConnection()
   blocked_    (false)
 {}
 
-AutoConnection::AutoConnection(const SigC::Connection& connection)
+AutoConnection::AutoConnection(const sigc::connection& connection)
 :
   connection_ (connection),
   blocked_    (connection_.blocked())
@@ -89,7 +89,7 @@ void AutoConnection::unblock()
   blocked_ = false;
 }
 
-AutoConnection& AutoConnection::operator=(const SigC::Connection& connection)
+AutoConnection& AutoConnection::operator=(const sigc::connection& connection)
 {
   AutoConnection temp (connection_);
 

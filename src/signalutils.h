@@ -27,18 +27,18 @@
 namespace Util
 {
 
-class QueuedSignal : public SigC::Object
+class QueuedSignal : public sigc::trackable
 {
 public:
   explicit QueuedSignal(int priority = Glib::PRIORITY_HIGH_IDLE);
   virtual ~QueuedSignal();
 
-  SigC::Connection connect(const SigC::Slot0<void>& slot);
+  sigc::connection connect(const sigc::slot<void>& slot);
   void queue();
   void operator()() { queue(); }
 
 private:
-  SigC::Signal0<void> signal_;
+  sigc::signal<void> signal_;
   int                 priority_;
   bool                queued_;
 
@@ -51,7 +51,7 @@ private:
 class AutoConnection
 {
 private:
-  SigC::Connection  connection_;
+  sigc::connection  connection_;
   bool              blocked_;
 
   AutoConnection(const AutoConnection&);
@@ -59,30 +59,30 @@ private:
 
 public:
   AutoConnection();
-  explicit AutoConnection(const SigC::Connection& connection);
+  explicit AutoConnection(const sigc::connection& connection);
   ~AutoConnection();
 
   void block();
   void unblock();
   bool blocked() const { return blocked_; }
 
-  AutoConnection& operator=(const SigC::Connection& connection);
+  AutoConnection& operator=(const sigc::connection& connection);
   void disconnect();
 
-  SigC::Connection&       base()       { return connection_; }
-  const SigC::Connection& base() const { return connection_; }
+  sigc::connection&       base()       { return connection_; }
+  const sigc::connection& base() const { return connection_; }
 };
 
 class ScopedConnection
 {
 private:
-  SigC::Connection connection_;
+  sigc::connection connection_;
 
   ScopedConnection(const ScopedConnection&);
   ScopedConnection& operator=(const ScopedConnection&);
 
 public:
-  explicit ScopedConnection(const SigC::Connection& connection)
+  explicit ScopedConnection(const sigc::connection& connection)
     : connection_ (connection) {}
 
   ~ScopedConnection() { connection_.disconnect(); }

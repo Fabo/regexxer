@@ -70,7 +70,7 @@ public:
 FileErrorDialog::FileErrorDialog(Gtk::Window& parent, const Glib::ustring& message,
                                  Gtk::MessageType type, const Regexxer::FileTree::Error& error)
 :
-  Gtk::MessageDialog(parent, message, type, Gtk::BUTTONS_OK, true)
+  Gtk::MessageDialog(parent, message, false, type, Gtk::BUTTONS_OK, true)
 {
   using namespace Gtk;
 
@@ -156,29 +156,26 @@ MainWindow::MainWindow()
   busy_action_iteration_  (0),
   undo_stack_             (new UndoStack())
 {
-  using SigC::bind;
-  using SigC::slot;
-
   set_title_filename();
   set_default_size(640, 450);
 
   add(*Gtk::manage(create_main_vbox()));
 
-  controller_.save_file   .connect(slot(*this, &MainWindow::on_save_file));
-  controller_.save_all    .connect(slot(*this, &MainWindow::on_save_all));
-  controller_.undo        .connect(slot(*this, &MainWindow::on_undo));
-  controller_.preferences .connect(slot(*this, &MainWindow::on_preferences));
-  controller_.quit        .connect(slot(*this, &MainWindow::on_quit));
-  controller_.info        .connect(slot(*this, &MainWindow::on_info));
-  controller_.find_files  .connect(slot(*this, &MainWindow::on_find_files));
-  controller_.find_matches.connect(slot(*this, &MainWindow::on_exec_search));
-  controller_.next_file   .connect(bind(slot(*this, &MainWindow::on_go_next_file), true));
-  controller_.prev_file   .connect(bind(slot(*this, &MainWindow::on_go_next_file), false));
-  controller_.next_match  .connect(bind(slot(*this, &MainWindow::on_go_next), true));
-  controller_.prev_match  .connect(bind(slot(*this, &MainWindow::on_go_next), false));
-  controller_.replace     .connect(slot(*this, &MainWindow::on_replace));
-  controller_.replace_file.connect(slot(*this, &MainWindow::on_replace_file));
-  controller_.replace_all .connect(slot(*this, &MainWindow::on_replace_all));
+  controller_.save_file   .connect(sigc::mem_fun(*this, &MainWindow::on_save_file));
+  controller_.save_all    .connect(sigc::mem_fun(*this, &MainWindow::on_save_all));
+  controller_.undo        .connect(sigc::mem_fun(*this, &MainWindow::on_undo));
+  controller_.preferences .connect(sigc::mem_fun(*this, &MainWindow::on_preferences));
+  controller_.quit        .connect(sigc::mem_fun(*this, &MainWindow::on_quit));
+  controller_.info        .connect(sigc::mem_fun(*this, &MainWindow::on_info));
+  controller_.find_files  .connect(sigc::mem_fun(*this, &MainWindow::on_find_files));
+  controller_.find_matches.connect(sigc::mem_fun(*this, &MainWindow::on_exec_search));
+  controller_.next_file   .connect(sigc::bind(sigc::mem_fun(*this, &MainWindow::on_go_next_file), true));
+  controller_.prev_file   .connect(sigc::bind(sigc::mem_fun(*this, &MainWindow::on_go_next_file), false));
+  controller_.next_match  .connect(sigc::bind(sigc::mem_fun(*this, &MainWindow::on_go_next), true));
+  controller_.prev_match  .connect(sigc::bind(sigc::mem_fun(*this, &MainWindow::on_go_next), false));
+  controller_.replace     .connect(sigc::mem_fun(*this, &MainWindow::on_replace));
+  controller_.replace_file.connect(sigc::mem_fun(*this, &MainWindow::on_replace_file));
+  controller_.replace_all .connect(sigc::mem_fun(*this, &MainWindow::on_replace_all));
 
   show_all_children();
   load_configuration();
@@ -188,28 +185,28 @@ MainWindow::MainWindow()
   entry_pattern_->set_text("*");
   button_recursive_->set_active(true);
 
-  statusline_->signal_cancel_clicked.connect(slot(*this, &MainWindow::on_busy_action_cancel));
+  statusline_->signal_cancel_clicked.connect(sigc::mem_fun(*this, &MainWindow::on_busy_action_cancel));
 
   filetree_->signal_switch_buffer.connect(
-      slot(*this, &MainWindow::on_filetree_switch_buffer));
+      sigc::mem_fun(*this, &MainWindow::on_filetree_switch_buffer));
 
   filetree_->signal_bound_state_changed.connect(
-      slot(*this, &MainWindow::on_filetree_bound_state_changed));
+      sigc::mem_fun(*this, &MainWindow::on_filetree_bound_state_changed));
 
   filetree_->signal_file_count_changed.connect(
-      slot(*this, &MainWindow::on_filetree_file_count_changed));
+      sigc::mem_fun(*this, &MainWindow::on_filetree_file_count_changed));
 
   filetree_->signal_match_count_changed.connect(
-      slot(*this, &MainWindow::on_filetree_match_count_changed));
+      sigc::mem_fun(*this, &MainWindow::on_filetree_match_count_changed));
 
   filetree_->signal_modified_count_changed.connect(
-      slot(*this, &MainWindow::on_filetree_modified_count_changed));
+      sigc::mem_fun(*this, &MainWindow::on_filetree_modified_count_changed));
 
   filetree_->signal_pulse.connect(
-      slot(*this, &MainWindow::on_busy_action_pulse));
+      sigc::mem_fun(*this, &MainWindow::on_busy_action_pulse));
 
   filetree_->signal_undo_stack_push.connect(
-      slot(*this, &MainWindow::on_undo_stack_push));
+      sigc::mem_fun(*this, &MainWindow::on_undo_stack_push));
 }
 
 MainWindow::~MainWindow()
@@ -305,7 +302,7 @@ Gtk::Widget* MainWindow::create_left_pane()
 
   Button *const button_folder = new ImageLabelButton(Stock::OPEN, "Fol_der:", true);
   table->attach(*manage(button_folder), 0, 1, 0, 1, FILL, AttachOptions(0));
-  button_folder->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_select_folder));
+  button_folder->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_select_folder));
 
   Label *const label_pattern = new Label("Pattern:", 0.0, 0.5);
   table->attach(*manage(label_pattern), 0, 1, 1, 2, FILL, AttachOptions(0));
@@ -322,7 +319,7 @@ Gtk::Widget* MainWindow::create_left_pane()
 
   entry_folder_ ->signal_activate().connect(controller_.find_files.slot());
   entry_pattern_->signal_activate().connect(controller_.find_files.slot());
-  entry_pattern_->signal_changed ().connect(SigC::slot(*this, &MainWindow::on_entry_pattern_changed));
+  entry_pattern_->signal_changed ().connect(sigc::mem_fun(*this, &MainWindow::on_entry_pattern_changed));
 
   Box *const hbox = new HBox(false, 6 /* HIG */);
   table->attach(*manage(hbox), 0, 2, 2, 3, EXPAND|FILL, AttachOptions(0));
@@ -386,7 +383,7 @@ Gtk::Widget* MainWindow::create_right_pane()
 
   entry_regex_       ->signal_activate().connect(controller_.find_matches.slot());
   entry_substitution_->signal_activate().connect(controller_.find_matches.slot());
-  entry_substitution_->signal_changed ().connect(SigC::slot(*this, &MainWindow::update_preview));
+  entry_substitution_->signal_changed ().connect(sigc::mem_fun(*this, &MainWindow::update_preview));
 
   Box *const hbox_options = new HBox(false, 6 /* HIG */);
   table->attach(*manage(hbox_options), 2, 3, 0, 1, FILL, AttachOptions(0));
@@ -446,7 +443,7 @@ bool MainWindow::confirm_quit_request()
     return true;
 
   const Glib::ustring message = "Some files haven't been saved yet.\nQuit anyway?";
-  Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE, true);
+  Gtk::MessageDialog dialog (*this, message, false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE, true);
 
   dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
   dialog.add_button(Gtk::Stock::QUIT,   Gtk::RESPONSE_OK);
@@ -492,7 +489,7 @@ void MainWindow::on_find_files()
   if(filetree_->get_modified_count() > 0)
   {
     const Glib::ustring message = "Some files haven't been saved yet.\nContinue anyway?";
-    Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_OK_CANCEL, true);
+    Gtk::MessageDialog dialog (*this, message, false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_OK_CANCEL, true);
 
     if(dialog.run() != Gtk::RESPONSE_OK)
       return;
@@ -517,7 +514,7 @@ void MainWindow::on_find_files()
   catch(const Pcre::Error& error)
   {
     const Glib::ustring message = "The file search pattern is invalid.";
-    Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    Gtk::MessageDialog dialog (*this, message, false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
   }
   catch(const FileTree::Error& error)
@@ -560,7 +557,7 @@ void MainWindow::on_exec_search()
     message += ":\n";
     message += error.what();
 
-    Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    Gtk::MessageDialog dialog (*this, message, false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
 
     if(offset >= 0 && offset < entry_regex_->get_text_length())
@@ -584,7 +581,7 @@ void MainWindow::on_exec_search()
     // not end up where we want to.  So do that by installing an idle handler.
 
     Glib::signal_idle().connect(
-        SigC::slot(*this, &MainWindow::after_exec_search),
+        sigc::mem_fun(*this, &MainWindow::after_exec_search),
         Glib::PRIORITY_HIGH_IDLE + 25); // slightly less than redraw (+20)
   }
 }
@@ -607,7 +604,7 @@ void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
   if(old_buffer)
   {
     std::for_each(buffer_connections_.begin(), buffer_connections_.end(),
-                  std::mem_fun_ref(&SigC::Connection::disconnect));
+                  std::mem_fun_ref(&sigc::connection::disconnect));
 
     buffer_connections_.clear();
     old_buffer->forget_current_match();
@@ -625,16 +622,16 @@ void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
     if(!fileinfo->load_failed)
     {
       buffer_connections_.push_back(buffer->signal_match_count_changed.
-          connect(SigC::slot(*this, &MainWindow::on_buffer_match_count_changed)));
+          connect(sigc::mem_fun(*this, &MainWindow::on_buffer_match_count_changed)));
 
       buffer_connections_.push_back(buffer->signal_modified_changed().
-          connect(SigC::slot(*this, &MainWindow::on_buffer_modified_changed)));
+          connect(sigc::mem_fun(*this, &MainWindow::on_buffer_modified_changed)));
 
       buffer_connections_.push_back(buffer->signal_bound_state_changed.
-          connect(SigC::slot(*this, &MainWindow::on_buffer_bound_state_changed)));
+          connect(sigc::mem_fun(*this, &MainWindow::on_buffer_bound_state_changed)));
 
       buffer_connections_.push_back(buffer->signal_preview_line_changed.
-          connect(SigC::slot(*this, &MainWindow::update_preview)));
+          connect(sigc::mem_fun(*this, &MainWindow::update_preview)));
     }
 
     set_title_filename(Util::filename_to_utf8_fallback(fileinfo->fullname));
@@ -779,7 +776,7 @@ void MainWindow::on_save_file()
     const std::list<Glib::ustring>& error_list = error.get_error_list();
     g_assert(error_list.size() == 1);
 
-    Gtk::MessageDialog dialog (*this, error_list.front(), Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    Gtk::MessageDialog dialog (*this, error_list.front(), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
   }
 }
@@ -846,12 +843,9 @@ void MainWindow::update_preview()
 
     if(pos > 0)
     {
-      using SigC::slot;
-      using SigC::bind;
-      using SigC::bind_return;
 
       Glib::signal_idle().connect(
-          bind_return(bind(slot(*entry_preview_, &Gtk::Editable::set_position), pos), false),
+          sigc::bind_return(sigc::bind(sigc::mem_fun(*entry_preview_, &Gtk::Editable::set_position), pos), false),
           Glib::PRIORITY_HIGH_IDLE + 17); // between scroll update (+ 15) and redraw (+ 20)
     }
   }
@@ -932,7 +926,7 @@ void MainWindow::on_info()
   {
     std::auto_ptr<AboutDialog> dialog (new AboutDialog(*this));
 
-    dialog->signal_hide().connect(SigC::slot(*this, &MainWindow::on_about_dialog_hide));
+    dialog->signal_hide().connect(sigc::mem_fun(*this, &MainWindow::on_about_dialog_hide));
     dialog->show();
 
     about_dialog_ = dialog;
@@ -962,21 +956,21 @@ void MainWindow::on_preferences()
     dialog->set_pref_fallback_encoding(filetree_->get_fallback_encoding());
 
     dialog->signal_pref_textview_font_changed.connect(
-        SigC::slot(*textview_, &Gtk::Widget::modify_font));
+        sigc::mem_fun(*textview_, &Gtk::Widget::modify_font));
 
     dialog->signal_pref_textview_font_changed.connect(
-        SigC::slot(*entry_preview_, &Gtk::Widget::modify_font));
+        sigc::mem_fun(*entry_preview_, &Gtk::Widget::modify_font));
 
     dialog->signal_pref_match_color_changed  .connect(&FileBuffer::set_match_color);
     dialog->signal_pref_current_color_changed.connect(&FileBuffer::set_current_color);
 
     dialog->signal_pref_toolbar_style_changed.connect(
-        SigC::slot(*toolbar_, &Gtk::Toolbar::set_toolbar_style));
+        sigc::mem_fun(*toolbar_, &Gtk::Toolbar::set_toolbar_style));
 
     dialog->signal_pref_fallback_encoding_changed.connect(
-        SigC::slot(*filetree_, &FileTree::set_fallback_encoding));
+        sigc::mem_fun(*filetree_, &FileTree::set_fallback_encoding));
 
-    dialog->signal_hide().connect(SigC::slot(*this, &MainWindow::on_pref_dialog_hide));
+    dialog->signal_hide().connect(sigc::mem_fun(*this, &MainWindow::on_pref_dialog_hide));
     dialog->show();
 
     pref_dialog_ = dialog;

@@ -70,16 +70,18 @@ public:
   void set_fallback_encoding(const std::string& fallback_encoding);
   std::string get_fallback_encoding() const;
 
-  SigC::Signal2<void,FileInfoPtr,int> signal_switch_buffer;
-  SigC::Signal0<void>                 signal_bound_state_changed;
-  SigC::Signal0<void>                 signal_file_count_changed;
-  SigC::Signal0<void>                 signal_match_count_changed;
-  SigC::Signal0<void>                 signal_modified_count_changed;
-  SigC::Signal0<bool>                 signal_pulse;
-  SigC::Signal1<void,UndoActionPtr>   signal_undo_stack_push;
+  sigc::signal<void, FileInfoPtr, int> signal_switch_buffer;
+  sigc::signal<void>                 signal_bound_state_changed;
+  sigc::signal<void>                 signal_file_count_changed;
+  sigc::signal<void>                 signal_match_count_changed;
+  sigc::signal<void>                 signal_modified_count_changed;
+  sigc::signal<bool>                 signal_pulse;
+  sigc::signal<void, UndoActionPtr>   signal_undo_stack_push;
 
 protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
+
+  virtual bool on_buffer_pulse();
 
 private:
   class  TreeRowRef;

@@ -50,11 +50,11 @@ public:
   void set_pref_toolbar_style(Gtk::ToolbarStyle toolbar_style);
   void set_pref_fallback_encoding(const std::string& fallback_encoding);
 
-  SigC::Signal1<void,const Pango::FontDescription&> signal_pref_textview_font_changed;
-  SigC::Signal1<void,const Gdk::Color&>             signal_pref_match_color_changed;
-  SigC::Signal1<void,const Gdk::Color&>             signal_pref_current_color_changed;
-  SigC::Signal1<void,Gtk::ToolbarStyle>             signal_pref_toolbar_style_changed;
-  SigC::Signal1<void,const std::string&>            signal_pref_fallback_encoding_changed;
+  sigc::signal<void, const Pango::FontDescription&> signal_pref_textview_font_changed;
+  sigc::signal<void, const Gdk::Color&>             signal_pref_match_color_changed;
+  sigc::signal<void, const Gdk::Color&>             signal_pref_current_color_changed;
+  sigc::signal<void, Gtk::ToolbarStyle>             signal_pref_toolbar_style_changed;
+  sigc::signal<void, const std::string&>            signal_pref_fallback_encoding_changed;
 
 protected:
   virtual void on_response(int response_id);

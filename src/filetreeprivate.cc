@@ -149,7 +149,7 @@ FileTree::ReplaceMatchesData::ReplaceMatchesData(FileTree& filetree_,
   filetree             (filetree_),
   substitution         (substitution_),
   undo_stack           (new UndoStack()),
-  slot_undo_stack_push (SigC::slot_class(*this, &FileTree::ReplaceMatchesData::undo_stack_push))
+  slot_undo_stack_push (sigc::mem_fun(*this, &FileTree::ReplaceMatchesData::undo_stack_push))
 {}
 
 FileTree::ReplaceMatchesData::~ReplaceMatchesData()

@@ -743,8 +743,9 @@ void FileBuffer::remove_match_at_iter(const FileBuffer::iterator& start)
 {
   if(!start.get_marks().empty())
   {
+    FileBuffer::iterator iter_copy = start;
     typedef std::list< Glib::RefPtr<Mark> > MarkList;
-    const MarkList marks (start.get_marks());
+    const MarkList marks (iter_copy.get_marks());
 
     for(MarkList::const_iterator pmark = marks.begin(); pmark != marks.end(); ++pmark)
     {
@@ -844,8 +845,9 @@ void FileBuffer::apply_tag_current()
 // static
 bool FileBuffer::is_match_start(const iterator& where)
 {
+  iterator iter_copy = where;
   typedef std::list< Glib::RefPtr<Mark> > MarkList;
-  const MarkList marks (where.get_marks());
+  const MarkList marks (iter_copy.get_marks());
 
   return (std::find_if(marks.begin(), marks.end(), &MatchData::is_match_mark) != marks.end());
 }

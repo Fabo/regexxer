@@ -35,16 +35,16 @@ class Widget;
 namespace Regexxer
 {
 
-class ControlItem : public SigC::Object
+class ControlItem : public sigc::trackable
 {
 public:
   explicit ControlItem(bool enable = false);
   virtual ~ControlItem();
 
   void activate();
-  SigC::Slot0<void> slot();
+  sigc::slot<void> slot();
 
-  void connect(const SigC::Slot0<void>& slot_activated);
+  void connect(const sigc::slot<void>& slot_activated);
 
   void add_widget(Gtk::Widget& widget);
 
@@ -53,8 +53,8 @@ public:
   bool is_enabled() const;
 
 private:
-  SigC::Signal0<void>       signal_activate_;
-  SigC::Signal1<void,bool>  signal_set_sensitive_;
+  sigc::signal<void>       signal_activate_;
+  sigc::signal<void,bool>  signal_set_sensitive_;
   bool                      enabled_;
   bool                      group_enabled_;
 

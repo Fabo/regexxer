@@ -20,7 +20,6 @@
 
 #include "aboutdialog.h"
 
-#include <glib.h>
 #include <atkmm.h>
 #include <gtkmm/alignment.h>
 #include <gtkmm/box.h>
