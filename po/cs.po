@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-30 21:47+0200\n"
+"POT-Creation-Date: 2004-07-09 01:49+0200\n"
 "PO-Revision-Date: 2004-07-01 13:20+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -92,11 +92,13 @@ msgstr "Soubor"
 msgid "#"
 msgstr "#"
 
-#: src/filetree.cc:535
+#: src/filetree.cc:532
+#, qt-format
 msgid "Failed to save file \"%1\": %2"
 msgstr "Nemohu uložit soubor \"%1\": %2"
 
-#: src/filetree.cc:944
+#: src/filetree.cc:941
+#, qt-format
 msgid "\"%1\" seems to be a binary file."
 msgstr "\"%1\" je zřejmě binární soubor."
 
@@ -125,6 +127,7 @@ msgstr ""
 "Přesto skončit?"
 
 #: src/mainwindow.cc:369
+#, qt-format
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
@@ -153,6 +156,7 @@ msgid "The following errors occurred during search:"
 msgstr "Při hledání došlo k následujícím chybám:"
 
 #: src/mainwindow.cc:465
+#, qt-format
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -161,6 +165,7 @@ msgstr ""
 "%3"
 
 #: src/mainwindow.cc:467
+#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -184,6 +189,7 @@ msgid ""
 msgstr "Narazil jsem na limit rekurze a návratů v engine pro regulární výrazy."
 
 #: src/prefdialog.cc:248
+#, qt-format
 msgid "\"%1\" is not a valid encoding."
 msgstr "\"%1\" není platné kódování."
 

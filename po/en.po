@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-25 17:34+0200\n"
+"POT-Creation-Date: 2004-07-09 01:49+0200\n"
 "PO-Revision-Date: 2004-05-05 15:35+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -93,12 +93,12 @@ msgstr "File"
 msgid "#"
 msgstr "#"
 
-#: src/filetree.cc:535
+#: src/filetree.cc:532
 #, qt-format
 msgid "Failed to save file \"%1\": %2"
 msgstr "Failed to save file “%1”: %2"
 
-#: src/filetree.cc:944
+#: src/filetree.cc:941
 #, qt-format
 msgid "\"%1\" seems to be a binary file."
 msgstr "“%1” seems to be a binary file."
@@ -111,7 +111,7 @@ msgstr "_About"
 msgid "Save _all"
 msgstr "Save _all"
 
-#: src/mainwindow.cc:198 ui/mainwindow.glade.h:2
+#: src/mainwindow.cc:200 ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -119,7 +119,7 @@ msgstr ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
 
-#: src/mainwindow.cc:309
+#: src/mainwindow.cc:341
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -127,7 +127,7 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 
-#: src/mainwindow.cc:337
+#: src/mainwindow.cc:369
 #, qt-format
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
@@ -136,11 +136,11 @@ msgstr ""
 "The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 
-#: src/mainwindow.cc:356
+#: src/mainwindow.cc:388
 msgid "Select a folder"
 msgstr "Select a folder"
 
-#: src/mainwindow.cc:376
+#: src/mainwindow.cc:408
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -148,15 +148,15 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 
-#: src/mainwindow.cc:402
+#: src/mainwindow.cc:434
 msgid "The file search pattern is invalid."
 msgstr "The file search pattern is invalid."
 
-#: src/mainwindow.cc:408
+#: src/mainwindow.cc:440
 msgid "The following errors occurred during search:"
 msgstr "The following errors occurred during search:"
 
-#: src/mainwindow.cc:433
+#: src/mainwindow.cc:465
 #, qt-format
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
@@ -165,7 +165,7 @@ msgstr ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:435
+#: src/mainwindow.cc:467
 #, qt-format
 msgid ""
 "Error in regular expression:\n"
@@ -174,7 +174,7 @@ msgstr ""
 "Error in regular expression:\n"
 "%1"
 
-#: src/mainwindow.cc:655
+#: src/mainwindow.cc:689
 msgid "The following errors occurred during save:"
 msgstr "The following errors occurred during save:"
 
@@ -190,7 +190,7 @@ msgstr ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
 
-#: src/prefdialog.cc:246
+#: src/prefdialog.cc:248
 #, qt-format
 msgid "\"%1\" is not a valid encoding."
 msgstr "“%1” is not a valid encoding."
@@ -236,127 +236,123 @@ msgstr "Daniel Elstner <daniel.elstner@gmx.net>"
 msgid "written by"
 msgstr "written by"
 
-#: ui/mainwindow.glade.h:1 ui/prefdialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: ui/mainwindow.glade.h:3
+#: ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
 msgstr "A regular expression in Perl syntax"
 
-#: ui/mainwindow.glade.h:4
+#: ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "Also find hidden files"
 
-#: ui/mainwindow.glade.h:5
+#: ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "Backward"
 
-#: ui/mainwindow.glade.h:6
+#: ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr "Do case insensitive matching"
 
-#: ui/mainwindow.glade.h:7
+#: ui/mainwindow.glade.h:6
 msgid "File backward"
 msgstr "File backward"
 
-#: ui/mainwindow.glade.h:8
+#: ui/mainwindow.glade.h:7
 msgid "File forward"
 msgstr "File forward"
 
-#: ui/mainwindow.glade.h:9
+#: ui/mainwindow.glade.h:8
 msgid "Find all files that match the filename pattern"
 msgstr "Find all files that match the filename pattern"
 
-#: ui/mainwindow.glade.h:10
+#: ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
 msgstr "Find all matches of the regular expression"
 
-#: ui/mainwindow.glade.h:11
+#: ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
 msgstr "Find all possible matches in a line"
 
-#: ui/mainwindow.glade.h:12
+#: ui/mainwindow.glade.h:11
 msgid "Find fi_les"
 msgstr "Find fi_les"
 
-#: ui/mainwindow.glade.h:13
+#: ui/mainwindow.glade.h:12
 msgid "Fol_der:"
 msgstr "Fol_der:"
 
-#: ui/mainwindow.glade.h:14
+#: ui/mainwindow.glade.h:13
 msgid "Forward"
 msgstr "Forward"
 
-#: ui/mainwindow.glade.h:15
+#: ui/mainwindow.glade.h:14
 msgid "Go to next match"
 msgstr "Go to next match"
 
-#: ui/mainwindow.glade.h:16
+#: ui/mainwindow.glade.h:15
 msgid "Go to previous match"
 msgstr "Go to previous match"
 
-#: ui/mainwindow.glade.h:17
+#: ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
 msgstr "Go to the next matching file"
 
-#: ui/mainwindow.glade.h:18
+#: ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
 msgstr "Go to the previous matching file"
 
-#: ui/mainwindow.glade.h:19
+#: ui/mainwindow.glade.h:18
 msgid "Pattern:"
 msgstr "Pattern:"
 
-#: ui/mainwindow.glade.h:20
+#: ui/mainwindow.glade.h:19
 msgid "Preview"
 msgstr "Preview"
 
-#: ui/mainwindow.glade.h:21
+#: ui/mainwindow.glade.h:20
 msgid "Preview of the substitution"
 msgstr "Preview of the substitution"
 
-#: ui/mainwindow.glade.h:22
+#: ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
 msgstr "Recurse into subdirectories"
 
-#: ui/mainwindow.glade.h:23
+#: ui/mainwindow.glade.h:22
 msgid "Replace _current"
 msgstr "Replace _current"
 
-#: ui/mainwindow.glade.h:24
+#: ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
 msgstr "Replace all matches in all files"
 
-#: ui/mainwindow.glade.h:25
+#: ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
 msgstr "Replace all matches in the current file"
 
-#: ui/mainwindow.glade.h:26
+#: ui/mainwindow.glade.h:25
 msgid "Replace current match"
 msgstr "Replace current match"
 
-#: ui/mainwindow.glade.h:27
+#: ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
 msgstr "Replace in _all files"
 
-#: ui/mainwindow.glade.h:28
+#: ui/mainwindow.glade.h:27
 msgid "Replace in _this file"
 msgstr "Replace in _this file"
 
-#: ui/mainwindow.glade.h:29
+#: ui/mainwindow.glade.h:28
 msgid "Replace:"
 msgstr "Replace:"
 
-#: ui/mainwindow.glade.h:30
+#: ui/mainwindow.glade.h:29
 msgid "Search:"
 msgstr "Search:"
 
-#: ui/mainwindow.glade.h:31
+#: ui/mainwindow.glade.h:30
 msgid "The directory to be searched"
 msgstr "The directory to be searched"
 
-#: ui/mainwindow.glade.h:32
+#: ui/mainwindow.glade.h:31
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
@@ -366,71 +362,71 @@ msgstr ""
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
 "\\L, \\U and \\E are supported as well."
 
-#: ui/mainwindow.glade.h:33
+#: ui/mainwindow.glade.h:32
 msgid "_All files"
 msgstr "_All files"
 
-#: ui/mainwindow.glade.h:34
+#: ui/mainwindow.glade.h:33
 msgid "_Edit"
 msgstr "_Edit"
 
-#: ui/mainwindow.glade.h:35
+#: ui/mainwindow.glade.h:34
 msgid "_File"
 msgstr "_File"
 
-#: ui/mainwindow.glade.h:36
+#: ui/mainwindow.glade.h:35
 msgid "_Help"
 msgstr "_Help"
 
-#: ui/mainwindow.glade.h:37
+#: ui/mainwindow.glade.h:36
 msgid "_Match"
 msgstr "_Match"
 
-#: ui/mainwindow.glade.h:38
+#: ui/mainwindow.glade.h:37
 msgid "_Next file"
 msgstr "_Next file"
 
-#: ui/mainwindow.glade.h:39
+#: ui/mainwindow.glade.h:38
 msgid "_Previous file"
 msgstr "_Previous file"
 
-#: ui/mainwindow.glade.h:40
+#: ui/mainwindow.glade.h:39
 msgid "_Replace"
 msgstr "_Replace"
 
-#: ui/mainwindow.glade.h:41
+#: ui/mainwindow.glade.h:40
 msgid "_This file"
 msgstr "_This file"
 
-#: ui/mainwindow.glade.h:42
+#: ui/mainwindow.glade.h:41
 msgid "hidden"
 msgstr "hidden"
 
-#: ui/mainwindow.glade.h:43
+#: ui/mainwindow.glade.h:42
 msgid "recursive"
 msgstr "recursive"
 
-#: ui/prefdialog.glade.h:2
+#: ui/prefdialog.glade.h:1
 msgid "1."
 msgstr "1."
 
-#: ui/prefdialog.glade.h:3
+#: ui/prefdialog.glade.h:2
 msgid "2."
 msgstr "2."
 
-#: ui/prefdialog.glade.h:4
+#: ui/prefdialog.glade.h:3
 msgid "3."
 msgstr "3."
 
-#: ui/prefdialog.glade.h:5
+#: ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
 msgstr "C_urrent match color:"
 
-#: ui/prefdialog.glade.h:6
+#: ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
 msgstr "Fallback _encoding:"
 
-#: ui/prefdialog.glade.h:7
+#: ui/prefdialog.glade.h:6
 msgid ""
 "Icons only\n"
 "Text only\n"
@@ -442,40 +438,43 @@ msgstr ""
 "Icons and text\n"
 "Both horizontal"
 
-#: ui/prefdialog.glade.h:11
+#: ui/prefdialog.glade.h:10
 msgid "Preferences"
 msgstr "Preferences"
 
-#: ui/prefdialog.glade.h:12
+#: ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
 msgstr "The encoding specified by the current locale"
 
-#: ui/prefdialog.glade.h:13
+#: ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
 msgstr "Tool_bar style:"
 
-#: ui/prefdialog.glade.h:14
+#: ui/prefdialog.glade.h:13
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: ui/prefdialog.glade.h:15
+#: ui/prefdialog.glade.h:14
 msgid "_File access"
 msgstr "_File access"
 
-#: ui/prefdialog.glade.h:16
+#: ui/prefdialog.glade.h:15
 msgid "_Look'n'feel"
 msgstr "_Look’n’feel"
 
-#: ui/prefdialog.glade.h:17
+#: ui/prefdialog.glade.h:16
 msgid "_Match color:"
 msgstr "_Match color:"
 
-#: ui/prefdialog.glade.h:18
+#: ui/prefdialog.glade.h:17
 msgid "_Text view font:"
 msgstr "_Text view font:"
 
-#: ui/prefdialog.glade.h:19
+#: ui/prefdialog.glade.h:18
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "regexxer attempts to read a file in the following encodings before giving up:"
+
+#~ msgid "*"
+#~ msgstr "*"

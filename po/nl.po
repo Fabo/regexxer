@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Head\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-06 05:04+0200\n"
+"POT-Creation-Date: 2004-07-09 01:49+0200\n"
 "PO-Revision-Date: 2004-07-06 14:20+0200\n"
 "Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -95,10 +95,12 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
+#, qt-format
 msgid "Failed to save file \"%1\": %2"
 msgstr "Opslaan van bestand \"%1\" is mislukt: %2"
 
 #: src/filetree.cc:941
+#, qt-format
 msgid "\"%1\" seems to be a binary file."
 msgstr "\"%1\" is blijkbaar een binair bestand."
 
@@ -128,6 +130,7 @@ msgstr ""
 "Toch afsluiten?"
 
 #: src/mainwindow.cc:369
+#, qt-format
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
@@ -158,14 +161,16 @@ msgid "The following errors occurred during search:"
 msgstr "De volgende fouten traden op gedurende de zoekopdracht:"
 
 #: src/mainwindow.cc:465
+#, qt-format
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
 msgstr ""
-"Fout in reguliere expressie bij \"%1\" (index %s):\n"
+"Fout in reguliere expressie bij \"%1\" (index %2):\n"
 "%3"
 
 #: src/mainwindow.cc:467
+#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -192,6 +197,7 @@ msgstr ""
 "bereikt."
 
 #: src/prefdialog.cc:248
+#, qt-format
 msgid "\"%1\" is not a valid encoding."
 msgstr "\"%1\" is geen geldige tekenset."
 

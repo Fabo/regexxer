@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-12 19:33+0900\n"
+"POT-Creation-Date: 2004-07-09 01:49+0200\n"
 "PO-Revision-Date: 2004-06-12 19:32+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -91,11 +91,13 @@ msgstr "ファイル"
 msgid "#"
 msgstr "#"
 
-#: src/filetree.cc:535
+#: src/filetree.cc:532
+#, qt-format
 msgid "Failed to save file \"%1\": %2"
-msgstr "ファイル \"%s\" の保存に失敗: %2"
+msgstr "ファイル \"%1\" の保存に失敗: %2"
 
-#: src/filetree.cc:944
+#: src/filetree.cc:941
+#, qt-format
 msgid "\"%1\" seems to be a binary file."
 msgstr "\"%1\" はバイナリ・ファイルのようです。"
 
@@ -107,7 +109,7 @@ msgstr "情報(_A)"
 msgid "Save _all"
 msgstr "全て保存(_A)"
 
-#: src/mainwindow.cc:198 ui/mainwindow.glade.h:2
+#: src/mainwindow.cc:200 ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -115,7 +117,7 @@ msgstr ""
 "ファイル名のパターンで SHELL で使用するものと同じです (文字の分類 [ab] と C-"
 "SHELL 式の括弧 {a,b} をサポートします)"
 
-#: src/mainwindow.cc:309
+#: src/mainwindow.cc:341
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -123,7 +125,8 @@ msgstr ""
 "いくつかのファイルが未だ保存されていません。\n"
 "とにかく終了しますか？"
 
-#: src/mainwindow.cc:337
+#: src/mainwindow.cc:369
+#, qt-format
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
@@ -131,11 +134,11 @@ msgstr ""
 "フォルダ名 \"%1\" には、ローカルで使用しているファイル・システムのエンコー"
 "ディングを使って表現できない文字が含まれています。"
 
-#: src/mainwindow.cc:356
+#: src/mainwindow.cc:388
 msgid "Select a folder"
 msgstr "フォルダの選択"
 
-#: src/mainwindow.cc:376
+#: src/mainwindow.cc:408
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -143,15 +146,16 @@ msgstr ""
 "いくつかのファイルがまだ保存されていません。\n"
 "とにかく続行しますか？"
 
-#: src/mainwindow.cc:402
+#: src/mainwindow.cc:434
 msgid "The file search pattern is invalid."
 msgstr "ファイルの検索条件が間違っています。"
 
-#: src/mainwindow.cc:408
+#: src/mainwindow.cc:440
 msgid "The following errors occurred during search:"
 msgstr "検索の実行中に次のエラーが発生しました:"
 
-#: src/mainwindow.cc:433
+#: src/mainwindow.cc:465
+#, qt-format
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -159,7 +163,8 @@ msgstr ""
 "正規表現の条件式 \"%1\" (インデックス %2) でエラー:\n"
 "%3"
 
-#: src/mainwindow.cc:435
+#: src/mainwindow.cc:467
+#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -167,7 +172,7 @@ msgstr ""
 "正規表現の条件式の中でエラー:\n"
 "%1"
 
-#: src/mainwindow.cc:655
+#: src/mainwindow.cc:689
 msgid "The following errors occurred during save:"
 msgstr "保存中に次のエラーが発生しました:"
 
@@ -183,7 +188,8 @@ msgid ""
 "engine."
 msgstr "正規表現エンジンで再帰とバックトラッキングの上限に到達しました。"
 
-#: src/prefdialog.cc:246
+#: src/prefdialog.cc:248
+#, qt-format
 msgid "\"%1\" is not a valid encoding."
 msgstr "エンコーディング \"%1\" が間違っています。"
 
@@ -230,127 +236,123 @@ msgstr ""
 msgid "written by"
 msgstr "作者"
 
-#: ui/mainwindow.glade.h:1 ui/prefdialog.glade.h:1
-msgid "*"
-msgstr "*"
-
-#: ui/mainwindow.glade.h:3
+#: ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
 msgstr "Perl の文法を使った正規表現です"
 
-#: ui/mainwindow.glade.h:4
+#: ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "隠しファイルも検索します"
 
-#: ui/mainwindow.glade.h:5
+#: ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "後方へ検索します"
 
-#: ui/mainwindow.glade.h:6
+#: ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr "大文字/小文字を無視します"
 
-#: ui/mainwindow.glade.h:7
+#: ui/mainwindow.glade.h:6
 msgid "File backward"
 msgstr "ファイルの後方"
 
-#: ui/mainwindow.glade.h:8
+#: ui/mainwindow.glade.h:7
 msgid "File forward"
 msgstr "ファイルの後方を検索します"
 
-#: ui/mainwindow.glade.h:9
+#: ui/mainwindow.glade.h:8
 msgid "Find all files that match the filename pattern"
 msgstr "ファイル名のパターンにマッチする全てのファイルを検索します"
 
-#: ui/mainwindow.glade.h:10
+#: ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
 msgstr "正規表現にマッチするものを全て検索します"
 
-#: ui/mainwindow.glade.h:11
+#: ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
 msgstr "行内でマッチする可能性のあるものを全て検索します"
 
-#: ui/mainwindow.glade.h:12
+#: ui/mainwindow.glade.h:11
 msgid "Find fi_les"
 msgstr "ファイルの検索(_L)"
 
-#: ui/mainwindow.glade.h:13
+#: ui/mainwindow.glade.h:12
 msgid "Fol_der:"
 msgstr "フォルダ(_D):"
 
-#: ui/mainwindow.glade.h:14
+#: ui/mainwindow.glade.h:13
 msgid "Forward"
 msgstr "前方"
 
-#: ui/mainwindow.glade.h:15
+#: ui/mainwindow.glade.h:14
 msgid "Go to next match"
 msgstr "前方でマッチしたものへジャンプします"
 
-#: ui/mainwindow.glade.h:16
+#: ui/mainwindow.glade.h:15
 msgid "Go to previous match"
 msgstr "後方でマッチしたものへジャンプします"
 
-#: ui/mainwindow.glade.h:17
+#: ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
 msgstr "次にマッチするファイルへジャンプします"
 
-#: ui/mainwindow.glade.h:18
+#: ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
 msgstr "前にマッチしたファイルへジャンプします"
 
-#: ui/mainwindow.glade.h:19
+#: ui/mainwindow.glade.h:18
 msgid "Pattern:"
 msgstr "パターン:"
 
-#: ui/mainwindow.glade.h:20
+#: ui/mainwindow.glade.h:19
 msgid "Preview"
 msgstr "プレビュー"
 
-#: ui/mainwindow.glade.h:21
+#: ui/mainwindow.glade.h:20
 msgid "Preview of the substitution"
 msgstr "置換した際のプレビューです"
 
-#: ui/mainwindow.glade.h:22
+#: ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
 msgstr "サブフォルダの中も再帰的に検索します"
 
-#: ui/mainwindow.glade.h:23
+#: ui/mainwindow.glade.h:22
 msgid "Replace _current"
 msgstr "これを置換する(_C)"
 
-#: ui/mainwindow.glade.h:24
+#: ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
 msgstr "全てのファイルの中でマッチしたものを全て置換します"
 
-#: ui/mainwindow.glade.h:25
+#: ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
 msgstr "このファイルの中でマッチしたもの全てを置換します"
 
-#: ui/mainwindow.glade.h:26
+#: ui/mainwindow.glade.h:25
 msgid "Replace current match"
 msgstr "現在、マッチしているものを置換します"
 
-#: ui/mainwindow.glade.h:27
+#: ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
 msgstr "全てのファイルを置換する(_A)"
 
-#: ui/mainwindow.glade.h:28
+#: ui/mainwindow.glade.h:27
 msgid "Replace in _this file"
 msgstr "このファイルを置換する(_T)"
 
-#: ui/mainwindow.glade.h:29
+#: ui/mainwindow.glade.h:28
 msgid "Replace:"
 msgstr "置換:"
 
-#: ui/mainwindow.glade.h:30
+#: ui/mainwindow.glade.h:29
 msgid "Search:"
 msgstr "検索:"
 
-#: ui/mainwindow.glade.h:31
+#: ui/mainwindow.glade.h:30
 msgid "The directory to be searched"
 msgstr "検索の対象となるフォルダです"
 
-#: ui/mainwindow.glade.h:32
+#: ui/mainwindow.glade.h:31
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
@@ -360,9 +362,13 @@ msgstr ""
 "を参照することができます。あるいは $+、$&、$` と $' も使えます。演算子 \\l、"
 "\\u、\\L、\\U と \\E も同様にサポートしています)"
 
-#: ui/mainwindow.glade.h:33
+#: ui/mainwindow.glade.h:32
 msgid "_All files"
 msgstr "全てのファイル(_A)"
+
+#: ui/mainwindow.glade.h:33
+msgid "_Edit"
+msgstr ""
 
 #: ui/mainwindow.glade.h:34
 msgid "_File"
@@ -400,27 +406,27 @@ msgstr "隠しファイル"
 msgid "recursive"
 msgstr "再帰的に実行する"
 
-#: ui/prefdialog.glade.h:2
+#: ui/prefdialog.glade.h:1
 msgid "1."
 msgstr "1."
 
-#: ui/prefdialog.glade.h:3
+#: ui/prefdialog.glade.h:2
 msgid "2."
 msgstr "2."
 
-#: ui/prefdialog.glade.h:4
+#: ui/prefdialog.glade.h:3
 msgid "3."
 msgstr "3."
 
-#: ui/prefdialog.glade.h:5
+#: ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
 msgstr "現在マッチしたものの色(_U):"
 
-#: ui/prefdialog.glade.h:6
+#: ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
 msgstr "予備のエンコーディング(_E):"
 
-#: ui/prefdialog.glade.h:7
+#: ui/prefdialog.glade.h:6
 msgid ""
 "Icons only\n"
 "Text only\n"
@@ -432,40 +438,43 @@ msgstr ""
 "アイコンとラベル\n"
 "両方を水平配置"
 
-#: ui/prefdialog.glade.h:11
+#: ui/prefdialog.glade.h:10
 msgid "Preferences"
 msgstr "設定"
 
-#: ui/prefdialog.glade.h:12
+#: ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
 msgstr "現在利用しているロケールが指定するエンコーディング"
 
-#: ui/prefdialog.glade.h:13
+#: ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
 msgstr "ツールバーのスタイル(_B):"
 
-#: ui/prefdialog.glade.h:14
+#: ui/prefdialog.glade.h:13
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: ui/prefdialog.glade.h:15
+#: ui/prefdialog.glade.h:14
 msgid "_File access"
 msgstr "ファイルのアクセス"
 
-#: ui/prefdialog.glade.h:16
+#: ui/prefdialog.glade.h:15
 msgid "_Look'n'feel"
 msgstr "ルック＆フィール"
 
-#: ui/prefdialog.glade.h:17
+#: ui/prefdialog.glade.h:16
 msgid "_Match color:"
 msgstr "マッチするものの色(_M):"
 
-#: ui/prefdialog.glade.h:18
+#: ui/prefdialog.glade.h:17
 msgid "_Text view font:"
 msgstr "テキストの表示用フォント(_T):"
 
-#: ui/prefdialog.glade.h:19
+#: ui/prefdialog.glade.h:18
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "regexxer は次の順番でエンコーディングを解決しながらファイルを読み込みます:"
+
+#~ msgid "*"
+#~ msgstr "*"
