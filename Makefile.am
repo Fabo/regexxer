@@ -18,7 +18,6 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-ACLOCAL_AMFLAGS = -I macros ${ACLOCAL_FLAGS}
 DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install --enable-warnings=hardcore
 
 SUBDIRS = pixmaps ui src po

@@ -26,6 +26,7 @@ AC_CONFIG_SRCDIR([src/pcreshell.cc])
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.7 gnu no-define nostdinc check-news])
+AC_SUBST([ACLOCAL_AMFLAGS], ['-I macros ${ACLOCAL_FLAGS}'])
 
 AC_PROG_CC()
 AC_PROG_CXX()

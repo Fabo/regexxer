@@ -1,5 +1,14 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* Makefile.am (ACLOCAL_AMFLAGS): Remove because automake-1.7
+	complains about the undefined variable ${ACLOCAL_FLAGS} even
+	though it's a shell substitution.
+
+	* configure.ac: Use AC_SUBST() to set up ACLOCAL_AMFLAGS here
+	instead, so automake-1.7 won't notice.
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (FileTree::expand_and_select): Replace the
 	calls to TreeSelection::select() and TreeView::scroll_to_row()
 	by a single TreeView::set_cursor() call.
