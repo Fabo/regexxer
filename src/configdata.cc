@@ -66,6 +66,8 @@ struct NickValuePair
 
 class NickEqual
 {
+  // Don't use Glib::ustring because we don't need locale
+  // sensitive comparison, which would be way more expensive.
   std::string nick_;
 
 public:
