@@ -1,3 +1,15 @@
+2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filetree.{cc,h} (FileTree::find_add_file): New method.
+	Move the actual file-adding parts from find_check_file() here.
+	(FileTree::find_recursively): Move the file testing previously
+	done in find_check_file() into this method in order to make the
+	recursion more obvious.  Also handle Glib::Dir exceptions right
+	here, so that the caller doesn't have to handle them.
+	(FileTree::find_files): Remove the try/catch block enclosing the
+	call to find_recursively().  We no longer need to do it twice.
+	(FileTree::find_check_file): Remove.
+
 2004-06-03  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filetree.cc (FileTree::calculate_file_index): Simplify.

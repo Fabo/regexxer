@@ -122,7 +122,7 @@ private:
                           bool currently_selected);
 
   void find_recursively(const std::string& dirname, FindData& find_data);
-  bool find_check_file(const std::string& basename, const std::string& fullname, FindData& find_data);
+  void find_add_file(const Glib::ustring& basename, const std::string& fullname, FindData& find_data);
   void find_fill_dirstack(FindData& find_data);
   void find_increment_file_count(FindData& find_data, int file_count);
 

@@ -146,14 +146,7 @@ void FileTree::find_files(const std::string& dirname, Pcre::Pattern& pattern,
   if (modified_count_changed)
     signal_modified_count_changed(); // emit
 
-  try
-  {
-    find_recursively(dirname, find_data);
-  }
-  catch (const Glib::FileError& error)
-  {
-    find_data.error_list->push_back(error.what()); // collect errors but don't fail
-  }
+  find_recursively(dirname, find_data);
 
   // Work around a strange misbehavior: the tree is kept sorted while the
   // file search is in progress, which causes the scroll offset to change
@@ -387,91 +380,85 @@ void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
 {
   using namespace Glib;
 
-  int file_count = 0;
-  Dir dir (dirname);
-
-  for (Dir::iterator pos = dir.begin(); pos != dir.end(); ++pos)
+  try
   {
-    if (signal_pulse()) // emit
-      break;
+    int file_count = 0;
+    Dir dir (dirname);
 
-    const std::string basename = *pos;
-
-    if (!find_data.hidden && *basename.begin() == '.')
-      continue;
-
-    const std::string fullname = build_filename(dirname, basename);
-
-    try
+    for (Dir::iterator pos = dir.begin(); pos != dir.end(); ++pos)
     {
-      if (find_check_file(basename, fullname, find_data)) // file added?
-        ++file_count;
+      if (signal_pulse()) // emit
+        break;
+
+      const std::string basename = *pos;
+
+      if (!find_data.hidden && *basename.begin() == '.')
+        continue;
+
+      const std::string fullname = build_filename(dirname, basename);
+
+      if (file_test(fullname, FILE_TEST_IS_SYMLINK))
+        continue; // ignore symbolic links
+
+      if (find_data.recursive && file_test(fullname, FILE_TEST_IS_DIR))
+      {
+        // Put the directory name on the stack instead of creating a new node
+        // immediately.  The corresponding node will be created on demand if
+        // there's actually a matching file in the directory or one of its
+        // subdirectories.
+        //
+        ScopedPushDir pushdir (find_data.dirstack, basename);
+        find_recursively(fullname, find_data); // recurse
+      }
+      else if (file_test(fullname, FILE_TEST_IS_REGULAR))
+      {
+        const ustring basename_utf8 = Util::filename_to_utf8_fallback(basename);
+
+        if (find_data.pattern.match(basename_utf8) > 0)
+        {
+          find_add_file(basename_utf8, fullname, find_data);
+          ++file_count;
+        }
+      }
     }
-    catch (const Glib::FileError& error)
-    {
-      // Collect errors but don't interrupt the search.
-      find_data.error_list->push_back(error.what());
-    }
+
+    find_increment_file_count(find_data, file_count);
   }
-
-  find_increment_file_count(find_data, file_count);
+  catch (const FileError& error)
+  {
+    // Collect errors but don't interrupt the search.
+    find_data.error_list->push_back(error.what());
+  }
 }
 
-bool FileTree::find_check_file(const std::string& basename, const std::string& fullname,
-                               FindData& find_data)
+void FileTree::find_add_file(const Glib::ustring& basename, const std::string& fullname,
+                             FindData& find_data)
 {
-  using namespace Glib;
+  // Build the collate key with a leading '1' so that directories always
+  // come first (they have a leading '0').  This is simpler and faster
+  // than explicitely checking for directories in the sort function.
+  std::string collate_key (1, '1');
+  collate_key += basename.collate_key();
 
-  if (file_test(fullname, FILE_TEST_IS_SYMLINK))
-    return false;
+  Gtk::TreeModel::Row row;
 
-  if (find_data.recursive && file_test(fullname, FILE_TEST_IS_DIR))
+  if (find_data.dirstack.empty())
   {
-    // Put the directory name on the stack instead of creating a new node
-    // immediately.  The corresponding node will be created on demand if
-    // there's actually a matching file in the directory or one of its
-    // subdirectories.
-    //
-    ScopedPushDir pushdir (find_data.dirstack, basename);
-    find_recursively(fullname, find_data); // recurse
+    row = *treestore_->prepend(); // new toplevel node
   }
-  else if (file_test(fullname, FILE_TEST_IS_REGULAR))
+  else
   {
-    const ustring basename_utf8 = Util::filename_to_utf8_fallback(basename);
+    if (!find_data.dirstack.back().second)
+      find_fill_dirstack(find_data); // build all directory nodes in the stack
 
-    if (find_data.pattern.match(basename_utf8) > 0)
-    {
-      // Build the collate key with a leading '1' so that directories always
-      // come first (they have a leading '0').  This is simpler and faster
-      // than explicitely checking for directories in the sort function.
-      std::string collate_key (1, '1');
-      collate_key += basename_utf8.collate_key();
-
-      Gtk::TreeModel::Row row;
-
-      if (find_data.dirstack.empty())
-      {
-        row = *treestore_->prepend(); // new toplevel node
-      }
-      else
-      {
-        if (!find_data.dirstack.back().second)
-          find_fill_dirstack(find_data); // build all directory nodes in the stack
-
-        row = *treestore_->prepend(find_data.dirstack.back().second->children());
-      }
-
-      const FileTreeColumns& columns = FileTreeColumns::instance();
-
-      row[columns.filename]   = basename_utf8;
-      row[columns.collatekey] = collate_key;
-      row[columns.fileinfo]   = FileInfoBasePtr(new FileInfo(fullname));
-
-      return true; // a file has been added
-    }
+    row = *treestore_->prepend(find_data.dirstack.back().second->children());
   }
 
-  return false;
+  const FileTreeColumns& columns = FileTreeColumns::instance();
+
+  row[columns.filename]   = basename;
+  row[columns.collatekey] = collate_key;
+  row[columns.fileinfo]   = FileInfoBasePtr(new FileInfo(fullname));
 }
 
 void FileTree::find_fill_dirstack(FindData& find_data)
