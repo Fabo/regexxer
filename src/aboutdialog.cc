@@ -67,6 +67,9 @@ std::auto_ptr<Gtk::Dialog> AboutDialog::create(Gtk::Window& parent)
   apply_label_markup(*xml->get_widget("label_author_what", label));
   apply_label_markup(*xml->get_widget("label_translator_what", label));
 
+  if (xml->get_widget("label_translator_who", label)->get_text().raw() == "translator-credits")
+    label->set_markup("<i>(no translation available)</i>");
+
   return dialog;
 }
 

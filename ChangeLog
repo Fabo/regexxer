@@ -1,3 +1,9 @@
+2004-05-31  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/aboutdialog.cc (AboutDialog::create): If no translation is
+	available for the current locale, replace "translator-credits" by
+	some more user-friendly text.
+
 2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filetree.cc (FileTree::color_modified_): Use "Accent Red"
