@@ -27,13 +27,13 @@
 
 #include <glib.h>
 #include <glibmm.h>
-#include <vector>
 
 
 namespace
 {
 
-Glib::ustring compose_impl(const Glib::ustring& format, const std::vector<Glib::ustring>& args)
+Glib::ustring compose_impl(const Glib::ustring& format,
+                           int argc, const Glib::ustring *const * argv)
 {
   using Glib::ustring;
 
@@ -54,9 +54,9 @@ Glib::ustring compose_impl(const Glib::ustring& format, const std::vector<Glib::
       {
         const int index = Glib::Unicode::digit_value(uc) - 1;
 
-        if (index >= 0 && unsigned(index) < args.size())
+        if (index >= 0 && index < argc)
         {
-          result += args[index];
+          result += *argv[index];
           continue;
         }
 
@@ -101,28 +101,22 @@ const char* Util::translate(const char* msgid)
 
 Glib::ustring Util::compose(const Glib::ustring& format, const Glib::ustring& arg1)
 {
-  std::vector<Glib::ustring> args;
-  args.push_back(arg1);
-  return compose_impl(format, args);
+  const Glib::ustring *const argv[] = { &arg1 };
+  return compose_impl(format, G_N_ELEMENTS(argv), argv);
 }
 
 Glib::ustring Util::compose(const Glib::ustring& format, const Glib::ustring& arg1,
                                                          const Glib::ustring& arg2)
 {
-  std::vector<Glib::ustring> args;
-  args.push_back(arg1);
-  args.push_back(arg2);
-  return compose_impl(format, args);
+  const Glib::ustring *const argv[] = { &arg1, &arg2 };
+  return compose_impl(format, G_N_ELEMENTS(argv), argv);
 }
 
 Glib::ustring Util::compose(const Glib::ustring& format, const Glib::ustring& arg1,
                                                          const Glib::ustring& arg2,
                                                          const Glib::ustring& arg3)
 {
-  std::vector<Glib::ustring> args;
-  args.push_back(arg1);
-  args.push_back(arg2);
-  args.push_back(arg3);
-  return compose_impl(format, args);
+  const Glib::ustring *const argv[] = { &arg1, &arg2, &arg3 };
+  return compose_impl(format, G_N_ELEMENTS(argv), argv);
 }
 

@@ -1,5 +1,11 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/translation.cc (compose): Optimize and reduce executable
+	size by replacing std::vector<Glib::ustring> by a POD array of
+	pointers to the Glib::ustring arguments.
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (FileTree::load_file_with_fallback): Get the
 	UTF-8 encoded basename from the filename column of the tree model
 	instead of stripping and converting fileinfo->fullname all over
