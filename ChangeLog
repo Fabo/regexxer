@@ -1,5 +1,12 @@
 2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.{cc,h}: Move the GUI stuff from the ctor into an
+	auxilary method create_main_vbox().  Manually call accelerate() on
+	the menu bar because otherwise the menu accelerators wouldn't be
+	enabled if the menu bar is never shown due to user preference.
+
+2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac (AC_INIT): Bump version to 0.4.
 
 2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>

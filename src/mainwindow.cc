@@ -142,41 +142,13 @@ MainWindow::MainWindow()
   busy_action_iteration_  (0),
   fileview_font_          ("mono")
 {
-  using namespace Gtk;
   using SigC::bind;
   using SigC::slot;
 
   set_title_filename();
   set_default_size(640, 450);
 
-  {
-    std::auto_ptr<Paned> paned (new HPaned());
-
-    // These two should be created first so that we can connect the contained objects.
-    paned->pack1(*manage(create_left_pane()),  EXPAND);
-    paned->pack2(*manage(create_right_pane()), EXPAND);
-
-    Box *const vbox_main = new VBox();
-    add(*manage(vbox_main));
-
-    menubar_handle_ = new HandleBox();
-    vbox_main->pack_start(*manage(menubar_handle_), PACK_SHRINK);
-    menubar_handle_->add(*manage(controller_.create_menubar()));
-
-    toolbar_handle_ = new HandleBox();
-    vbox_main->pack_start(*manage(toolbar_handle_), PACK_SHRINK);
-    toolbar_handle_->add(*manage(toolbar_ = controller_.create_toolbar()));
-
-    Box *const vbox_interior = new VBox();
-    vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);
-    vbox_interior->set_border_width(2);
-
-    statusline_ = new StatusLine();
-    vbox_main->pack_start(*manage(statusline_), PACK_SHRINK);
-
-    vbox_interior->pack_start(*manage(paned.release()), PACK_EXPAND_WIDGET);
-    vbox_interior->pack_start(*manage(controller_.create_action_area()), PACK_SHRINK);
-  }
+  add(*Gtk::manage(create_main_vbox()));
 
   controller_.save_file   .connect(slot(*this, &MainWindow::on_save_file));
   controller_.save_all    .connect(slot(*this, &MainWindow::on_save_all));
@@ -280,6 +252,47 @@ bool MainWindow::on_delete_event(GdkEventAny*)
 }
 
 /**** Regexxer::MainWindow -- private **************************************/
+
+Gtk::Widget* MainWindow::create_main_vbox()
+{
+  using namespace Gtk;
+
+  std::auto_ptr<Box> vbox_main (new VBox());
+
+  menubar_handle_ = new HandleBox();
+  vbox_main->pack_start(*manage(menubar_handle_), PACK_SHRINK);
+
+  MenuBar *const menubar = controller_.create_menubar();
+  menubar_handle_->add(*manage(menubar));
+
+  // We have to call accelerate() manually, because otherwise the menu
+  // accelerators wouldn't be available if the menu bar is never shown
+  // due to user preference.
+  menubar->accelerate(*this);
+
+  toolbar_handle_ = new HandleBox();
+  vbox_main->pack_start(*manage(toolbar_handle_), PACK_SHRINK);
+
+  toolbar_ = controller_.create_toolbar();
+  toolbar_handle_->add(*manage(toolbar_));
+
+  Box *const vbox_interior = new VBox();
+  vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);
+  vbox_interior->set_border_width(2);
+
+  statusline_ = new StatusLine();
+  vbox_main->pack_start(*manage(statusline_), PACK_SHRINK);
+
+  Paned *const paned = new HPaned();
+  vbox_interior->pack_start(*manage(paned), PACK_EXPAND_WIDGET);
+
+  paned->pack1(*manage(create_left_pane()),  EXPAND);
+  paned->pack2(*manage(create_right_pane()), EXPAND);
+
+  vbox_interior->pack_start(*manage(controller_.create_action_area()), PACK_SHRINK);
+
+  return vbox_main.release();
+}
 
 Gtk::Widget* MainWindow::create_left_pane()
 {

@@ -103,6 +103,7 @@ private:
   std::auto_ptr<AboutDialog>  about_dialog_;
   std::auto_ptr<PrefDialog>   pref_dialog_;
 
+  Gtk::Widget* create_main_vbox();
   Gtk::Widget* create_left_pane();
   Gtk::Widget* create_right_pane();
 
