@@ -19,247 +19,18 @@
  */
 
 #include "filetree.h"
+#include "filetreeprivate.h"
 #include "pcreshell.h"
 #include "signalutils.h"
 #include "stringutils.h"
 
-#include <gtkmm/treestore.h>
 #include <gtkmm/stock.h>
 
-#include <cstring> /* for fucked up libstdc++-v2, see collatekey_sort_func() */
-#include <utility>
-
-
-// Normally I don't like global using declarations, but it's
-// reasonable to make an exception for the smart pointer casts.
-using Util::shared_dynamic_cast;
-using Util::shared_polymorphic_cast;
-
-
-namespace
-{
-
-typedef std::pair<std::string,Gtk::TreeModel::iterator> DirNodePair;
-typedef std::list<DirNodePair>                          DirStack;
-
-
-struct FileTreeColumns : public Gtk::TreeModel::ColumnRecord
-{
-  Gtk::TreeModelColumn<Glib::ustring>             filename;
-  Gtk::TreeModelColumn<std::string>               collatekey;
-  Gtk::TreeModelColumn<int>                       matchcount;
-  Gtk::TreeModelColumn<Regexxer::FileInfoBasePtr> fileinfo;
-
-  FileTreeColumns() { add(filename); add(collatekey); add(matchcount); add(fileinfo); }
-};
-
-const FileTreeColumns& filetree_columns() G_GNUC_CONST;
-const FileTreeColumns& filetree_columns()
-{
-  static FileTreeColumns column_record;
-  return column_record;
-}
-
-inline
-Regexxer::FileInfoPtr get_fileinfo_from_iter(const Gtk::TreeModel::iterator& iter)
-{
-  const Regexxer::FileInfoBasePtr base ((*iter)[filetree_columns().fileinfo]);
-  return shared_dynamic_cast<Regexxer::FileInfo>(base);
-}
-
-int default_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs)
-{
-  const FileTreeColumns& columns = filetree_columns();
-
-  const std::string lhs_key ((*lhs)[columns.collatekey]);
-  const std::string rhs_key ((*rhs)[columns.collatekey]);
-
-  return lhs_key.compare(rhs_key);
-}
-
-int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs)
-{
-  const FileTreeColumns& columns = filetree_columns();
-
-  const std::string lhs_key ((*lhs)[columns.collatekey]);
-  const std::string rhs_key ((*rhs)[columns.collatekey]);
-
-  if(lhs_key.empty() || rhs_key.empty())
-    return (lhs_key.empty() && rhs_key.empty()) ? 0 : (lhs_key.empty() ? -1 : 1);
-
-  // Can't use the following absolutely correct code due to the fucked up
-  // libstdc++-v2 GCC 2.95.x comes with.  Resort to strcmp().  Damn.
-  //
-  // return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
-
-  return std::strcmp(lhs_key.c_str() + 1, rhs_key.c_str() + 1);
-}
-
-
-class ScopedPushDir
-{
-private:
-  DirStack& dirstack_;
-
-  ScopedPushDir(const ScopedPushDir&);
-  ScopedPushDir& operator=(const ScopedPushDir&);
-
-public:
-  ScopedPushDir(DirStack& dirstack, const std::string& dirname)
-    : dirstack_ (dirstack) { dirstack_.push_back(DirNodePair(dirname, Gtk::TreeIter())); }
-
-  ~ScopedPushDir() { dirstack_.pop_back(); }
-};
-
-} // anonymous namespace
+using namespace Regexxer::FileTreePrivate;
 
 
 namespace Regexxer
 {
-
-/**** Regexxer::FileTree::MessageList **************************************/
-
-/* This is just a std::list<> wrapper that can be used with Util::SharedPtr<>.
- */
-class FileTree::MessageList : public Util::SharedObject, public std::list<Glib::ustring>
-{
-public:
-  MessageList();
-  ~MessageList();
-
-private:
-  MessageList(const FileTree::MessageList&);
-  FileTree::MessageList& operator=(const FileTree::MessageList&);
-};
-
-FileTree::MessageList::MessageList()
-{}
-
-FileTree::MessageList::~MessageList()
-{}
-
-
-/**** Regexxer::FileTree::Error ********************************************/
-
-FileTree::Error::Error(const Util::SharedPtr<FileTree::MessageList>& error_list)
-:
-  error_list_ (error_list)
-{}
-
-FileTree::Error::~Error()
-{}
-
-FileTree::Error::Error(const FileTree::Error& other)
-:
-  error_list_ (other.error_list_)
-{}
-
-FileTree::Error& FileTree::Error::operator=(const FileTree::Error& other)
-{
-  error_list_ = other.error_list_;
-  return *this;
-}
-
-const std::list<Glib::ustring>& FileTree::Error::get_error_list() const
-{
-  return *error_list_;
-}
-
-
-/**** Regexxer::FileTree::FindData *****************************************/
-
-struct FileTree::FindData
-{
-  FindData(Pcre::Pattern& pattern_, bool recursive_, bool hidden_);
-  ~FindData();
-
-  Pcre::Pattern&                          pattern;
-  const bool                              recursive;
-  const bool                              hidden;
-  DirStack                                dirstack;
-  Util::SharedPtr<FileTree::MessageList>  error_list;
-
-private:
-  FindData(const FileTree::FindData&);
-  FileTree::FindData& operator=(const FileTree::FindData&);
-};
-
-FileTree::FindData::FindData(Pcre::Pattern& pattern_, bool recursive_, bool hidden_)
-:
-  pattern     (pattern_),
-  recursive   (recursive_),
-  hidden      (hidden_),
-  error_list  (new FileTree::MessageList())
-{}
-
-FileTree::FindData::~FindData()
-{}
-
-
-/**** Regexxer::FileTree::FindMatchesData **********************************/
-
-struct FileTree::FindMatchesData
-{
-  FindMatchesData(Pcre::Pattern& pattern_, bool multiple_);
-
-  Pcre::Pattern&  pattern;
-  const bool      multiple;
-  bool            path_match_first_set;
-
-private:
-  FindMatchesData(const FileTree::FindMatchesData&);
-  FileTree::FindMatchesData& operator=(const FileTree::FindMatchesData&);
-};
-
-FileTree::FindMatchesData::FindMatchesData(Pcre::Pattern& pattern_, bool multiple_)
-:
-  pattern              (pattern_),
-  multiple             (multiple_),
-  path_match_first_set (false)
-{}
-
-
-/**** Regexxer::FileTree::ScopedBlockSorting *******************************/
-
-class FileTree::ScopedBlockSorting
-{
-public:
-  explicit ScopedBlockSorting(FileTree& filetree);
-  ~ScopedBlockSorting();
-
-private:
-  FileTree&     filetree_;
-  int           sort_column_;
-  Gtk::SortType sort_order_;
-
-  ScopedBlockSorting(const FileTree::ScopedBlockSorting&);
-  FileTree::ScopedBlockSorting& operator=(const FileTree::ScopedBlockSorting&);
-};
-
-FileTree::ScopedBlockSorting::ScopedBlockSorting(FileTree& filetree)
-:
-  filetree_     (filetree),
-  sort_column_  (Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID),
-  sort_order_   (Gtk::SORT_ASCENDING)
-{
-  filetree_.set_headers_clickable(false);
-  filetree_.treestore_->get_sort_column_id(sort_column_, sort_order_);
-
-  // If we're currently sorting on the match count column, we have to switch
-  // temporarily to the default sort column because changes to the match count
-  // could cause reordering of the model.  Gtk::TreeModel::foreach() won't
-  // like that at all, and that's precisily why this utility class exists.
-  //
-  if(sort_column_ == filetree_columns().matchcount.index())
-    filetree_.treestore_->set_sort_column_id(Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID, sort_order_);
-}
-
-FileTree::ScopedBlockSorting::~ScopedBlockSorting()
-{
-  filetree_.treestore_->set_sort_column_id(sort_column_, sort_order_);
-  filetree_.set_headers_clickable(true);
-}
-
 
 /**** Regexxer::FileTree ***************************************************/
 
@@ -453,7 +224,7 @@ BoundState FileTree::get_bound_state()
 void FileTree::find_matches(Pcre::Pattern& pattern, bool multiple)
 {
   {
-    Util::ScopedBlock block_conn (conn_match_count_);
+    Util::ScopedBlock  block_conn (conn_match_count_);
     ScopedBlockSorting block_sort (*this);
     FindMatchesData find_data (pattern, multiple);
 
@@ -474,11 +245,15 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
   {
     Util::ScopedBlock block_match_count      (conn_match_count_);
     Util::ScopedBlock block_modified_changed (conn_modified_changed_);
+    Util::ScopedBlock block_undo_stack_push  (conn_undo_stack_push_);
     ScopedBlockSorting block_sort (*this);
+    ReplaceMatchesData replace_data (*this, substitution);
 
     treestore_->foreach(SigC::bind(
         SigC::slot(*this, &FileTree::replace_matches_at_iter),
-        &substitution));
+        &replace_data));
+
+    signal_undo_stack_push(replace_data.undo_stack); // emit
   }
 
   signal_bound_state_changed(); // emit
@@ -804,7 +579,7 @@ bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMa
 }
 
 bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
-                                       const Glib::ustring* substitution)
+                                       ReplaceMatchesData* replace_data)
 {
   if(signal_pulse()) // emit
     return true;
@@ -819,11 +594,24 @@ bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
 
     if(match_count > 0)
     {
+      if(fileinfo != last_selected_)
+        replace_data->row_reference.reset(new TreeRowRef(treestore_, Gtk::TreePath(iter)));
+      else
+        replace_data->row_reference = last_selected_rowref_;
+
       const bool was_modified = buffer->get_modified();
 
       {
-        Util::ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.slot()));
-        buffer->replace_all_matches(*substitution);
+        // Redirect the buffer's signal_undo_stack_push() in order to create
+        // a single user action object for all replacements in all buffers.
+        // Note that the caller must block conn_undo_stack_push_ to avoid
+        // double notification.
+        Util::ScopedConnection conn1 (buffer->signal_undo_stack_push.
+                                      connect(replace_data->slot_undo_stack_push));
+
+        Util::ScopedConnection conn2 (buffer->signal_pulse.connect(signal_pulse.slot()));
+
+        buffer->replace_all_matches(replace_data->substitution);
       }
 
       const bool is_modified = buffer->get_modified();
@@ -979,22 +767,24 @@ void FileTree::on_treestore_sort_column_changed()
 
 void FileTree::on_selection_changed()
 {
-  const FileTreeColumns& columns = filetree_columns();
+  last_selected_rowref_.reset();
 
   FileInfoPtr fileinfo;
   int file_index = 0;
 
   const bool conn_match_count_blocked      = conn_match_count_.blocked();
   const bool conn_modified_changed_blocked = conn_modified_changed_.blocked();
+  const bool conn_undo_stack_push_blocked  = conn_undo_stack_push_.blocked();
 
   conn_match_count_.disconnect();
   conn_modified_changed_.disconnect();
 
   if(const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
   {
+    const FileTreeColumns& columns = filetree_columns();
     const FileInfoBasePtr base = (*iter)[columns.fileinfo];
-    fileinfo = shared_polymorphic_cast<FileInfo>(base);
 
+    fileinfo   = shared_polymorphic_cast<FileInfo>(base);
     file_index = calculate_file_index(iter) + 1;
 
     if(!fileinfo->buffer)
@@ -1008,14 +798,22 @@ void FileTree::on_selection_changed()
       conn_modified_changed_ = fileinfo->buffer->signal_modified_changed().
           connect(SigC::slot(*this, &FileTree::on_buffer_modified_changed));
 
-      // Restore the blocked state of both connections.
+      conn_undo_stack_push_ = fileinfo->buffer->signal_undo_stack_push.
+          connect(SigC::slot(*this, &FileTree::on_buffer_undo_stack_push));
+
+      // Restore the blocked state of all connections.
       //
       if(conn_match_count_blocked)
         conn_match_count_.block();
 
       if(conn_modified_changed_blocked)
         conn_modified_changed_.block();
+
+      if(conn_undo_stack_push_blocked)
+        conn_undo_stack_push_.block();
     }
+
+    last_selected_rowref_.reset(new TreeRowRef(treestore_, Gtk::TreePath(iter)));
   }
 
   if(last_selected_ && last_selected_ != fileinfo &&
@@ -1127,6 +925,16 @@ void FileTree::on_buffer_modified_changed()
   g_return_if_fail(fileinfo->buffer);
 
   propagate_modified_change(selected, fileinfo->buffer->get_modified());
+}
+
+void FileTree::on_buffer_undo_stack_push(UndoActionPtr undo_action)
+{
+  g_return_if_fail(last_selected_rowref_);
+
+  const UndoActionPtr action_shell (
+      new BufferActionShell(*this, last_selected_rowref_, undo_action));
+
+  signal_undo_stack_push(action_shell); // emit
 }
 
 int FileTree::calculate_file_index(const Gtk::TreeModel::iterator& pos)

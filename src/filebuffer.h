@@ -21,71 +21,16 @@
 #ifndef REGEXXER_FILEBUFFER_H_INCLUDED
 #define REGEXXER_FILEBUFFER_H_INCLUDED
 
+#include "fileshared.h"
 #include "signalutils.h"
+#include "undostack.h"
 
-#include <list>
-#include <utility>
-#include <vector>
 #include <gtkmm/textbuffer.h>
+#include <set>
 
-
-namespace Pcre { class Pattern; }
 
 namespace Regexxer
 {
-
-enum BoundState
-{
-  BOUND_NONE  = 0,
-  BOUND_FIRST = 1 << 0,
-  BOUND_LAST  = 1 << 1,
-  BOUND_MASK  = BOUND_FIRST | BOUND_LAST
-};
-
-inline BoundState operator|(BoundState lhs, BoundState rhs)
-  { return static_cast<BoundState>(static_cast<unsigned>(lhs) | static_cast<unsigned>(rhs)); }
-
-inline BoundState operator&(BoundState lhs, BoundState rhs)
-  { return static_cast<BoundState>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs)); }
-
-inline BoundState operator^(BoundState lhs, BoundState rhs)
-  { return static_cast<BoundState>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs)); }
-
-inline BoundState operator~(BoundState flags)
-  { return static_cast<BoundState>(~static_cast<unsigned>(flags)); }
-
-inline BoundState& operator|=(BoundState& lhs, BoundState rhs)
-  { return (lhs = static_cast<BoundState>(static_cast<unsigned>(lhs) | static_cast<unsigned>(rhs))); }
-
-inline BoundState& operator&=(BoundState& lhs, BoundState rhs)
-  { return (lhs = static_cast<BoundState>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs))); }
-
-inline BoundState& operator^=(BoundState& lhs, BoundState rhs)
-  { return (lhs = static_cast<BoundState>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs))); }
-
-
-// This struct holds all the information that's necessary to locate a
-// match's position in the buffer and to substitute captured substrings
-// into a replacement string.  The latter is achived by storing the whole
-// subject string (i.e. the line in the buffer) together with a table of
-// indices into it.  This arrangement should consume less memory than the
-// alternative of storing a vector of captured substrings since we want
-// to support $&, $`, $' too.
-//
-struct MatchData
-{
-  MatchData(int match_index, const Glib::RefPtr<Gtk::TextMark>& position,
-            const Glib::ustring& line, const Pcre::Pattern& pattern, int capture_count);
-  ~MatchData();
-
-  int get_bytes_length() const;
-
-  int                               index;
-  Glib::RefPtr<Gtk::TextMark>       mark;
-  Glib::ustring                     subject;
-  std::vector< std::pair<int,int> > captures;
-};
-
 
 class FileBuffer : public Gtk::TextBuffer
 {
@@ -99,6 +44,7 @@ public:
   virtual ~FileBuffer();
 
   bool is_freeable() const;
+  bool in_user_action() const;
 
   int find_matches(Pcre::Pattern& pattern, bool multiple);
 
@@ -116,10 +62,16 @@ public:
 
   int get_line_preview(const Glib::ustring& substitution, Glib::ustring& preview);
 
-  SigC::Signal1<void,int>         signal_match_count_changed;
-  SigC::Signal1<void,BoundState>  signal_bound_state_changed;
-  Util::QueuedSignal              signal_preview_line_changed;
-  SigC::Signal0<bool>             signal_pulse;
+  // Special API for the FileBufferAction classes.
+  void increment_stamp();
+  void decrement_stamp();
+  void undo_remove_match(const MatchDataPtr& match, int offset);
+
+  SigC::Signal1<void,int>           signal_match_count_changed;
+  SigC::Signal1<void,BoundState>    signal_bound_state_changed;
+  Util::QueuedSignal                signal_preview_line_changed;
+  SigC::Signal0<bool>               signal_pulse;
+  SigC::Signal1<void,UndoActionPtr> signal_undo_stack_push;
 
 protected:
   FileBuffer();
@@ -127,31 +79,34 @@ protected:
   virtual void on_insert(const iterator& pos, const Glib::ustring& text, int bytes);
   virtual void on_erase(const iterator& rbegin, const iterator& rend);
   virtual void on_mark_deleted(const Glib::RefPtr<TextBuffer::Mark>& mark);
+  virtual void on_modified_changed();
+  virtual void on_begin_user_action();
+  virtual void on_end_user_action();
 
 private:
   class ScopedLock;
+  class ScopedUserAction;
 
-  std::list<MatchData>            match_list_;
-  int                             match_count_;
-  int                             original_match_count_;
-  std::list<MatchData>::iterator  current_match_;
-  bool                            match_removed_;
-  BoundState                      bound_state_;
-  bool                            locked_;
+  typedef std::set<MatchDataPtr,MatchDataLess> MatchSet;
 
-  void replace_match(std::list<MatchData>::iterator pos, const Glib::ustring& substitution);
+  MatchSet            match_set_;
+  int                 match_count_;
+  int                 original_match_count_;
+  MatchSet::iterator  current_match_;
+  bool                match_removed_;
+  BoundState          bound_state_;
+  bool                locked_;
+  UndoStackPtr        user_action_stack_;
+  unsigned long       stamp_modified_;
+  unsigned long       stamp_saved_;
 
-  Glib::RefPtr<Mark> create_match_mark(const iterator& where, int length);
-  static bool is_match_mark(const Glib::RefPtr<Mark>& mark);
-  static int get_match_length(const Glib::RefPtr<Mark>& mark);
-
-  static bool is_match_start(const iterator& where);
+  void replace_match(MatchSet::iterator pos, const Glib::ustring& substitution);
+  void remove_match_at_iter(const iterator& start);
 
   void remove_tag_current();
   void apply_tag_current();
 
-  void remove_match_at_iter(const iterator& start);
-
+  static bool is_match_start(const iterator& where);
   static void find_line_bounds(iterator& line_begin, iterator& line_end);
 
   void update_bound_state();

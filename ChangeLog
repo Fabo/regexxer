@@ -1,3 +1,44 @@
+2002-11-29  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	OK folks, this is the new undo system.  It works, but don't rely
+	too much on undo yet since there are still some issues to work out.
+	Try stress testing the system a bit and you'll be able to trigger
+	assertions, misbehaviour and all other kind of evil stuff.
+
+	However, the framework is basically working and the remaining
+	problems are going to be sorted out very soon.  Happy testing!
+
+	* src/undostack.{cc,h}: New files, implementing the core of the
+	new undo system.  Basically it's a simple undo stack using virtual
+	methods for the implementation of undo actions.  But the undo stack
+	is itself an undo action, which allows for nested stacks.  This
+	functionality is necessary since the undo works globally on all
+	files.
+
+	* src/filebufferundo.{cc,h}: New files, defining the implementation
+	of the FileBuffer undo actions.
+
+	* src/fileshared.{cc,h}: Move parts of filebuffer.{cc,h} into these
+	new files, in order to avoid circular dependencies and to reduce the
+	length of single source files.
+
+	* src/filetreeprivate.{cc,h}: Move the anonymous namespace parts
+	and the nested classes of the FileTree implementation into separate
+	files.  filetreeprivate.h is included by filetree.cc only.
+
+	* src/Makefile.am (regexxer_SOURCES): Add new source files.
+
+	* src/filebuffer.{cc,h}: Heavily modify and enhance the code in
+	order to support the new undo framework.
+
+	* src/filetree.{cc,h}: ditto.
+
+	* src/controller.{cc,h}: Add undo ControlItem and show menu/toolbar
+	items for it.
+
+	* src/mainwindow.{cc,h}: Add code to maintain the undo stack and
+	connect the GUI bits.
+
 2002-11-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/signalutils.h (ScopedBlock): Move from filetree.cc hitherto.

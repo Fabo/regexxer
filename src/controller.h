@@ -87,15 +87,16 @@ public:
   Controller();
   virtual ~Controller();
 
-  ControlItem   save_file;
-  ControlItem   save_all;
-  ControlItem   preferences;
-  ControlItem   quit;
-  ControlItem   info;
-
   // Group for all controls that could change matches
   // or require match information to operate.
   ControlGroup  match_actions;
+
+  ControlItem   save_file;
+  ControlItem   save_all;
+  ControlItem   undo;
+  ControlItem   preferences;
+  ControlItem   quit;
+  ControlItem   info;
 
   ControlItem   find_files;
   ControlItem   find_matches;

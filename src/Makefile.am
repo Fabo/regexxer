@@ -20,36 +20,44 @@
 
 bin_PROGRAMS = regexxer
 
-regexxer_SOURCES =	\
-	aboutdialog.cc	\
-	aboutdialog.h	\
-	configdata.cc	\
-	configdata.h	\
-	controller.cc	\
-	controller.h	\
-	filebuffer.cc	\
-	filebuffer.h	\
-	fileio.cc	\
-	fileio.h	\
-	filetree.cc	\
-	filetree.h	\
-	imagebutton.cc	\
-	imagebutton.h	\
-	main.cc		\
-	mainwindow.cc	\
-	mainwindow.h	\
-	pcreshell.cc	\
-	pcreshell.h	\
-	prefdialog.cc	\
-	prefdialog.h	\
-	sharedptr.cc	\
-	sharedptr.h	\
-	signalutils.cc	\
-	signalutils.h	\
-	statusline.cc	\
-	statusline.h	\
-	stringutils.cc	\
-	stringutils.h
+regexxer_SOURCES =		\
+	aboutdialog.cc		\
+	aboutdialog.h		\
+	configdata.cc		\
+	configdata.h		\
+	controller.cc		\
+	controller.h		\
+	filebuffer.cc		\
+	filebuffer.h		\
+	filebufferundo.cc	\
+	filebufferundo.h	\
+	fileio.cc		\
+	fileio.h		\
+	fileshared.cc		\
+	fileshared.h		\
+	filetree.cc		\
+	filetree.h		\
+	filetreeprivate.cc	\
+	filetreeprivate.h	\
+	imagebutton.cc		\
+	imagebutton.h		\
+	main.cc			\
+	mainwindow.cc		\
+	mainwindow.h		\
+	pcreshell.cc		\
+	pcreshell.h		\
+	prefdialog.cc		\
+	prefdialog.h		\
+	sharedptr.cc		\
+	sharedptr.h		\
+	signalutils.cc		\
+	signalutils.h		\
+	statusline.cc		\
+	statusline.h		\
+	stringutils.cc		\
+	stringutils.h		\
+	undostack.cc		\
+	undostack.h
 
 DEFS = @DEFS@ \
 -DG_DISABLE_DEPRECATED \

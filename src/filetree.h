@@ -23,6 +23,7 @@
 
 #include "filebuffer.h"
 #include "fileio.h"
+#include "undostack.h"
 
 #include <gdkmm/color.h>
 #include <gdkmm/pixbuf.h>
@@ -74,15 +75,22 @@ public:
   SigC::Signal0<void>                 signal_match_count_changed;
   SigC::Signal0<void>                 signal_modified_count_changed;
   SigC::Signal0<bool>                 signal_pulse;
+  SigC::Signal1<void,UndoActionPtr>   signal_undo_stack_push;
 
 protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 
 private:
-  struct MessageList;
+  class  TreeRowRef;
+  class  MessageList;
+  class  ScopedBlockSorting;
+  class  BufferActionShell;
   struct FindData;
   struct FindMatchesData;
-  class  ScopedBlockSorting;
+  struct ReplaceMatchesData;
+
+  typedef Util::SharedPtr<TreeRowRef>        TreeRowRefPtr;
+  typedef Util::SharedPtr<BufferActionShell> BufferActionShellPtr;
 
   Glib::RefPtr<Gtk::TreeStore>  treestore_;
 
@@ -93,12 +101,16 @@ private:
   Gdk::Color                    color_modified_;
   Gdk::Color                    color_load_failed_;
 
+  TreeRowRefPtr                 last_selected_rowref_;
   FileInfoPtr                   last_selected_;
+
   DirInfo                       toplevel_;
   long                          sum_matches_;
 
   SigC::Connection              conn_match_count_;
   SigC::Connection              conn_modified_changed_;
+  SigC::Connection              conn_undo_stack_push_;
+
   Gtk::TreePath                 path_match_first_;
   Gtk::TreePath                 path_match_last_;
 
@@ -122,7 +134,7 @@ private:
   bool find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMatchesData* find_data);
 
   bool replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
-                               const Glib::ustring* substitution);
+                               ReplaceMatchesData* replace_data);
 
   bool next_match_file(Gtk::TreeModel::iterator& iter, std::stack<Gtk::TreePath>* collapse_stack = 0);
   bool prev_match_file(Gtk::TreeModel::iterator& iter, std::stack<Gtk::TreePath>* collapse_stack = 0);
@@ -133,6 +145,7 @@ private:
   void on_selection_changed();
   void on_buffer_match_count_changed(int match_count);
   void on_buffer_modified_changed();
+  void on_buffer_undo_stack_push(UndoActionPtr undo_action);
 
   int calculate_file_index(const Gtk::TreeModel::iterator& pos);
 
@@ -144,6 +157,7 @@ private:
 
   // Work-around for silly, stupid, and annoying gcc 2.95.x.
   friend class FileTree::ScopedBlockSorting;
+  friend class FileTree::BufferActionShell;
 };
 
 

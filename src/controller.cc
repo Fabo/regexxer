@@ -173,12 +173,13 @@ void ControlGroup::set_enabled(bool enable)
 
 Controller::Controller()
 :
+  match_actions (true),
   save_file     (false),
   save_all      (false),
+  undo          (false),
   preferences   (true),
   quit          (true),
   info          (true),
-  match_actions (true),
   find_files    (false),
   find_matches  (false),
   next_file     (false),
@@ -189,6 +190,7 @@ Controller::Controller()
   replace_file  (false),
   replace_all   (false)
 {
+  match_actions.add(undo);
   match_actions.add(find_files);
   match_actions.add(find_matches);
   match_actions.add(next_file);
@@ -220,6 +222,10 @@ Gtk::MenuBar* Controller::create_menubar()
 
     add_menu_stock(items, Stock::SAVE, save_file);
     add_menu_stock(items, StockID("regexxer-save-all"), save_all);
+
+    items.push_back(SeparatorElem());
+
+    add_menu_stock(items, Stock::UNDO, undo);
 
     items.push_back(SeparatorElem());
 
@@ -272,6 +278,9 @@ Gtk::Toolbar* Controller::create_toolbar()
 
   add_tool_stock(tools, Stock::SAVE, save_file);
   add_tool_stock(tools, StockID("regexxer-save-all"), save_all);
+
+  tools.push_back(Space());
+  add_tool_stock(tools, Stock::UNDO, undo);
 
   tools.push_back(Space());
   add_tool_stock(tools, Stock::PREFERENCES, preferences);

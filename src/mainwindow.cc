@@ -140,6 +140,7 @@ MainWindow::MainWindow()
   busy_action_running_    (false),
   busy_action_cancel_     (false),
   busy_action_iteration_  (0),
+  undo_stack_             (new UndoStack()),
   fileview_font_          ("mono")
 {
   using SigC::bind;
@@ -152,6 +153,7 @@ MainWindow::MainWindow()
 
   controller_.save_file   .connect(slot(*this, &MainWindow::on_save_file));
   controller_.save_all    .connect(slot(*this, &MainWindow::on_save_all));
+  controller_.undo        .connect(slot(*this, &MainWindow::on_undo));
   controller_.preferences .connect(slot(*this, &MainWindow::on_preferences));
   controller_.quit        .connect(slot(*this, &MainWindow::on_quit));
   controller_.info        .connect(slot(*this, &MainWindow::on_info));
@@ -192,6 +194,9 @@ MainWindow::MainWindow()
 
   filetree_->signal_pulse.connect(
       slot(*this, &MainWindow::on_busy_action_pulse));
+
+  filetree_->signal_undo_stack_push.connect(
+      slot(*this, &MainWindow::on_undo_stack_push));
 }
 
 MainWindow::~MainWindow()
@@ -789,6 +794,18 @@ void MainWindow::on_save_all()
     FileErrorDialog dialog (*this, message, Gtk::MESSAGE_ERROR, error);
     dialog.run();
   }
+}
+
+void MainWindow::on_undo_stack_push(UndoActionPtr action)
+{
+  undo_stack_->push(action);
+  controller_.undo.set_enabled(true);
+}
+
+void MainWindow::on_undo()
+{
+  undo_stack_->undo_step();
+  controller_.undo.set_enabled(!undo_stack_->empty());
 }
 
 void MainWindow::on_entry_pattern_changed()

@@ -97,6 +97,8 @@ private:
   bool              busy_action_cancel_;
   unsigned int      busy_action_iteration_;
 
+  UndoStackPtr      undo_stack_;
+
   Pango::FontDescription      fileview_font_;
   std::list<SigC::Connection> buffer_connections_;
 
@@ -133,6 +135,9 @@ private:
 
   void on_save_file();
   void on_save_all();
+
+  void on_undo_stack_push(UndoActionPtr action);
+  void on_undo();
 
   void on_entry_pattern_changed();
   void update_preview();
