@@ -1,5 +1,14 @@
 2004-05-31  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* ui/aboutdialog.glade (label_url): Get rid of the prefixed U+202D
+	LEFT-TO-RIGHT OVERRIDE since Pango gets that right on its own now.
+	(label_author_who): ditto
+
+	* ui/mainwindow.glade (button_multiple): ditto
+	(button_caseless): ditto.
+
+2004-05-31  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* ui/mainwindow.glade (button_multiple): Set to active by default.
 
 2004-05-31  Daniel Elstner  <daniel.elstner@gmx.net>
