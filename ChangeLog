@@ -1,5 +1,11 @@
 2004-07-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/main.cc (parse_command_line): Fix the help string of the
+	--ignore-case option to match the tool tip of the corresponding
+	checkbutton.
+
+2004-07-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/main.cc (parse_command_line): Replace `...' with \"...\" in
 	message strings, for consistency with the rest of the application.
 

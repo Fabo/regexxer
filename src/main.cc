@@ -102,7 +102,7 @@ std::auto_ptr<Regexxer::InitState> parse_command_line(int argc, char** argv)
     { "hidden",       'h', NONE,   0, 'h', N_("Also find hidden files"),                  0 },
     { "regex",        'e', STRING, 0, 'e', N_("Find text matching REGEX"),    N_("REGEX")   },
     { "no-global",    'G', NONE,   0, 'G', N_("Find only the first match in a line"),     0 },
-    { "ignore-case",  'i', NONE,   0, 'i', N_("Ignore case distinctions"),                0 },
+    { "ignore-case",  'i', NONE,   0, 'i', N_("Do case insensitive matching"),            0 },
     { "substitution", 's', STRING, 0, 's', N_("Replace matches with STRING"), N_("STRING")  },
     { "line-number",  'n', NONE,   0, 'n', N_("Print match location to standard output"), 0 },
     { "no-autorun",   'A', NONE,   0, 'A', N_("Do not automatically start search"),       0 },
