@@ -481,12 +481,12 @@ void MainWindow::on_exec_search()
   catch(const Pcre::Error& error)
   {
     Glib::ustring message = "Error in regular expression";
-    const int offset      = error.offset();
+    const int byte_offset = error.offset();
     int       char_index  = entry_regex_->get_position();
 
-    if(offset >= 0 && unsigned(offset) < regex.bytes())
+    if(byte_offset >= 0 && unsigned(byte_offset) < regex.bytes())
     {
-      const Glib::ustring::const_iterator pos (regex.begin().base() + offset);
+      const Glib::ustring::const_iterator pos (regex.begin().base() + byte_offset);
       char_index = std::distance(regex.begin(), pos);
 
       message += " at \302\273";
