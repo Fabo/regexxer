@@ -393,6 +393,7 @@ Gtk::Widget* MainWindow::create_left_pane()
 
   entry_folder_ ->signal_activate().connect(SigC::slot(*this, &MainWindow::on_find_files));
   entry_pattern_->signal_activate().connect(SigC::slot(*this, &MainWindow::on_find_files));
+  entry_pattern_->signal_changed ().connect(SigC::slot(*this, &MainWindow::on_entry_pattern_changed));
 
   HBox *const hbox = new HBox(false, 5);
   table->attach(*manage(hbox), 0, 2, 2, 3, EXPAND|FILL, AttachOptions(0));
@@ -405,6 +406,7 @@ Gtk::Widget* MainWindow::create_left_pane()
 
   button_find_files_ = new Button(Stock::FIND);
   hbox->pack_end(*manage(button_find_files_), PACK_SHRINK);
+  button_find_files_->set_sensitive(false);
   button_find_files_->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_find_files));
 
   Frame *const frame = new Frame();
@@ -455,6 +457,7 @@ Gtk::Widget* MainWindow::create_right_pane()
 
   button_find_matches_ = new Button(Stock::FIND);
   table->attach(*manage(button_find_matches_), 2, 3, 1, 2, FILL, AttachOptions(0));
+  button_find_matches_->set_sensitive(false);
   button_find_matches_->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_exec_search));
 
   Frame *const frame = new Frame();
@@ -860,6 +863,12 @@ void MainWindow::on_save_all()
   }
 }
 
+void MainWindow::on_entry_pattern_changed()
+{
+  if(!busy_action_running_)
+    button_find_files_->set_sensitive(entry_pattern_->get_text_length() > 0);
+}
+
 void MainWindow::update_preview()
 {
   if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
@@ -943,8 +952,8 @@ void MainWindow::busy_action_leave()
 
   statusline_->pulse_stop();
 
-  button_find_files_  ->set_sensitive(true);
-  button_find_matches_->set_sensitive(true);
+  button_find_files_  ->set_sensitive(entry_pattern_->get_text_length() > 0);
+  button_find_matches_->set_sensitive(filetree_->get_file_count() > 0);
   action_area_        ->set_sensitive(true);
 }
 

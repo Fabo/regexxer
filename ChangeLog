@@ -1,5 +1,13 @@
 2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.{cc,h} (button_find_matches_): Set this button
+	insensitive unless there is at least one file to search in.
+	Suggested by Murray Cumming <murrayc@usa.net>.
+	(button_find_files_): Likewise set this button insensitive if
+	entry_pattern_ is empty.
+
+2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (on_buffer_modified_changed): Work around a nasty
 	gtkmm bug:  Glib::SignalProxy seems to ignore the 'blocked' flag of
 	the SigC::Connection object.  I'll fix this later in gtkmm itself.

@@ -138,6 +138,7 @@ private:
   void on_save_file();
   void on_save_all();
 
+  void on_entry_pattern_changed();
   void update_preview();
   void set_title_filename(const Glib::ustring& filename = Glib::ustring());
 
