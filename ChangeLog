@@ -1,5 +1,17 @@
 2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.{cc,h} (FileInfo): Split this data structure into
+	DirInfo and FileInfo, with a common base class FileInfoBase.
+	This should be cleaner than having data members that can be
+	invalid.
+
+	* src/filetree.{cc,h}: Use the new DirInfo and FileInfo structs.
+	Propagate changes of a buffer's modified change to all parent
+	nodes, and color them red too.  Fix potential race conditions
+	due to reassigment of blocked connections.
+
+2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/sharedptr.h (SharedPtr<T>::cast_static): implement
 	(cast_dynamic): implement
 	(cast_dynamic_throw): implement.

@@ -96,19 +96,30 @@ Glib::RefPtr<FileBuffer> load_try_encoding(const std::string& filename, const st
 namespace Regexxer
 {
 
-/**** Regexxer::FileInfo ***************************************************/
+/**** Regexxer::FileInfoBase ***********************************************/
 
-FileInfo::FileInfo()
-:
-  load_failed (false),
-  file_count  (0)
+FileInfoBase::~FileInfoBase()
 {}
+
+
+/**** Regexxer::DirInfo ****************************************************/
+
+DirInfo::DirInfo()
+:
+  file_count     (0),
+  modified_count (0)
+{}
+
+DirInfo::~DirInfo()
+{}
+
+
+/**** Regexxer::FileInfo ***************************************************/
 
 FileInfo::FileInfo(const std::string& fullname_)
 :
   fullname    (fullname_),
-  load_failed (false),
-  file_count  (-1)
+  load_failed (false)
 {}
 
 FileInfo::~FileInfo()

@@ -85,8 +85,7 @@ private:
   Gdk::Color                    color_modified_;
   Gdk::Color                    color_load_failed_;
 
-  int                           file_count_;
-  int                           modified_count_;
+  DirInfo                       toplevel_;
   long                          sum_matches_;
 
   SigC::Connection              conn_match_count_;
@@ -111,12 +110,10 @@ private:
   void find_increment_file_count(FindData& find_data, int file_count);
 
   bool save_file_at_iter(const Gtk::TreeModel::iterator& iter,
-                         Util::SharedPtr<ErrorList> error_list,
-                         int* new_modified_count);
+                         Util::SharedPtr<ErrorList>* error_list);
 
   bool replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
-                               const Glib::ustring* substitution,
-                               int* new_modified_count);
+                               const Glib::ustring* substitution);
 
   long find_matches_recursively(const Gtk::TreeModel::Children& node,
                                 Pcre::Pattern& pattern, bool multiple,
@@ -131,8 +128,10 @@ private:
   void on_buffer_match_count_changed(int match_count);
   void on_buffer_modified_changed();
 
-  int  calculate_file_index(const Gtk::TreeModel::iterator& pos);
+  int calculate_file_index(const Gtk::TreeModel::iterator& pos);
+
   void propagate_match_count_change(const Gtk::TreeModel::iterator& pos, int difference);
+  void propagate_modified_change(const Gtk::TreeModel::iterator& pos, bool modified);
 
   void load_file_with_fallback(const FileInfoPtr& fileinfo);
   Glib::RefPtr<FileBuffer> create_error_message_buffer(const Glib::ustring& message);

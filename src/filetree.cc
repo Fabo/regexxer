@@ -37,10 +37,10 @@ typedef std::list<DirNodePair>                          DirStack;
 
 struct FileTreeColumns : public Gtk::TreeModel::ColumnRecord
 {
-  Gtk::TreeModelColumn<Glib::ustring>         filename;
-  Gtk::TreeModelColumn<std::string>           collatekey;
-  Gtk::TreeModelColumn<int>                   matchcount;
-  Gtk::TreeModelColumn<Regexxer::FileInfoPtr> fileinfo;
+  Gtk::TreeModelColumn<Glib::ustring>             filename;
+  Gtk::TreeModelColumn<std::string>               collatekey;
+  Gtk::TreeModelColumn<int>                       matchcount;
+  Gtk::TreeModelColumn<Regexxer::FileInfoBasePtr> fileinfo;
 
   FileTreeColumns() { add(filename); add(collatekey); add(matchcount); add(fileinfo); }
 };
@@ -52,6 +52,12 @@ const FileTreeColumns& filetree_columns()
   return column_record;
 }
 
+inline
+Regexxer::FileInfoPtr get_fileinfo_from_iter(const Gtk::TreeModel::iterator& iter)
+{
+  const Regexxer::FileInfoBasePtr base ((*iter)[filetree_columns().fileinfo]);
+  return Regexxer::FileInfoPtr::cast_dynamic(base);
+}
 
 class ScopedConnection
 {
@@ -188,8 +194,6 @@ FileTree::FileTree()
 :
   treestore_          (Gtk::TreeStore::create(filetree_columns())),
   color_modified_     ("red"),
-  file_count_         (0),
-  modified_count_     (0),
   sum_matches_        (0),
   fallback_encoding_  ("ISO-8859-15")
 {
@@ -231,7 +235,7 @@ void FileTree::find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
   const std::string startdir = Glib::filename_from_utf8(dirname);
   FindData find_data (pattern, recursive, hidden);
 
-  const bool modified_count_changed = (modified_count_ != 0);
+  const bool modified_count_changed = (toplevel_.modified_count != 0);
 
   get_selection()->unselect_all(); // workaround for GTK+ <= 2.0.6 (#94868)
   treestore_->clear();
@@ -240,9 +244,9 @@ void FileTree::find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
   // It's recreated on demand if necessary.
   error_pixbuf_.clear();
 
-  file_count_     = 0;
-  modified_count_ = 0;
-  sum_matches_    = 0;
+  toplevel_.file_count     = 0;
+  toplevel_.modified_count = 0;
+  sum_matches_ = 0;
 
   signal_bound_state_changed(); // emit
   signal_match_count_changed(); // emit
@@ -268,45 +272,32 @@ void FileTree::find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
 
 int FileTree::get_file_count() const
 {
-  return file_count_;
+  return toplevel_.file_count;
 }
 
 void FileTree::save_current_file()
 {
   if(const Gtk::TreeModel::iterator selected = get_selection()->get_selected())
   {
-    const Util::SharedPtr<ErrorList> error_list (new ErrorList());
-    int new_modified_count = modified_count_;
+    Util::SharedPtr<ErrorList> error_list;
 
-    save_file_at_iter(selected, error_list, &new_modified_count);
+    save_file_at_iter(selected, &error_list);
 
-    if(modified_count_ != new_modified_count)
-    {
-      modified_count_ = new_modified_count;
-      signal_modified_count_changed(); // emit
-    }
-
-    if(!error_list->errors.empty())
+    if(error_list)
       throw Error(error_list);
   }
 }
 
 void FileTree::save_all_files()
 {
-  const Util::SharedPtr<ErrorList> error_list (new ErrorList());
-  int new_modified_count = modified_count_;
+  Util::SharedPtr<ErrorList> error_list;
 
-  treestore_->foreach(SigC::bind(
-      SigC::slot(*this, &FileTree::save_file_at_iter),
-      error_list, &new_modified_count));
-
-  if(modified_count_ != new_modified_count)
   {
-    modified_count_ = new_modified_count;
-    signal_modified_count_changed(); // emit
+    ScopedBlock block (conn_modified_changed_);
+    treestore_->foreach(SigC::bind(SigC::slot(*this, &FileTree::save_file_at_iter), &error_list));
   }
 
-  if(!error_list->errors.empty())
+  if(error_list)
     throw Error(error_list);
 }
 
@@ -377,31 +368,22 @@ long FileTree::get_match_count() const
 
 void FileTree::replace_all_matches(const Glib::ustring& substitution)
 {
-  int new_modified_count = 0;
-
   {
-    ScopedBlock block (conn_match_count_);
+    ScopedBlock block_match_count      (conn_match_count_);
+    ScopedBlock block_modified_changed (conn_modified_changed_);
 
     treestore_->foreach(SigC::bind(
         SigC::slot(*this, &FileTree::replace_matches_at_iter),
-        &substitution, &new_modified_count));
+        &substitution));
   }
-
-  const bool modified_count_changed = (modified_count_ != new_modified_count);
-  modified_count_ = new_modified_count;
-
-  g_return_if_fail(sum_matches_ == 0);
 
   signal_bound_state_changed(); // emit
   signal_match_count_changed(); // emit
-
-  if(modified_count_changed)
-    signal_modified_count_changed(); // emit
 }
 
 int FileTree::get_modified_count() const
 {
-  return modified_count_;
+  return toplevel_.modified_count;
 }
 
 void FileTree::set_fallback_encoding(const std::string& fallback_encoding)
@@ -429,7 +411,9 @@ void FileTree::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::ite
 {
   Gtk::CellRendererText *const renderer = static_cast<Gtk::CellRendererText*>(cell);
 
-  if(const FileInfoPtr fileinfo = (*iter)[filetree_columns().fileinfo])
+  const FileInfoBasePtr base = (*iter)[filetree_columns().fileinfo];
+
+  if(const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic(base))
   {
     if(fileinfo->load_failed)
     {
@@ -438,6 +422,14 @@ void FileTree::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::ite
     }
 
     if(fileinfo->buffer && fileinfo->buffer->get_modified())
+    {
+      renderer->property_foreground_gdk() = color_modified_;
+      return;
+    }
+  }
+  else if(const DirInfoPtr dirinfo = DirInfoPtr::cast_dynamic(base))
+  {
+    if(dirinfo->modified_count > 0)
     {
       renderer->property_foreground_gdk() = color_modified_;
       return;
@@ -453,16 +445,11 @@ int FileTree::default_sort_func(const Gtk::TreeModel::iterator& lhs,
 {
   const FileTreeColumns& columns = filetree_columns();
 
-  {
-    const FileInfoPtr lhs_fileinfo ((*lhs)[columns.fileinfo]);
-    const FileInfoPtr rhs_fileinfo ((*rhs)[columns.fileinfo]);
+  const bool lhs_isdir = DirInfoPtr::cast_dynamic(FileInfoBasePtr((*lhs)[columns.fileinfo]));
+  const bool rhs_isdir = DirInfoPtr::cast_dynamic(FileInfoBasePtr((*rhs)[columns.fileinfo]));
 
-    const bool lhs_isfile = (lhs_fileinfo && lhs_fileinfo->file_count < 0);
-    const bool rhs_isfile = (rhs_fileinfo && rhs_fileinfo->file_count < 0);
-
-    if(lhs_isfile != rhs_isfile)
-      return (lhs_isfile) ? 1 : -1;
-  }
+  if(lhs_isdir != rhs_isdir)
+    return (lhs_isdir) ? -1 : 1;
 
   const std::string lhs_key ((*lhs)[columns.collatekey]);
   const std::string rhs_key ((*rhs)[columns.collatekey]);
@@ -473,10 +460,7 @@ int FileTree::default_sort_func(const Gtk::TreeModel::iterator& lhs,
 // static
 bool FileTree::select_func(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk::TreePath& path, bool)
 {
-  const Gtk::TreeModel::Row row (*model->get_iter(path));
-  const FileInfoPtr fileinfo (row[filetree_columns().fileinfo]);
-
-  return (fileinfo && fileinfo->file_count < 0);
+  return get_fileinfo_from_iter(model->get_iter(path));
 }
 
 int FileTree::find_recursively(const std::string& dirname, FileTree::FindData& find_data)
@@ -566,7 +550,7 @@ bool FileTree::find_check_file(const std::string& basename, const std::string& f
 
       (*iter)[columns.filename]   = basename_utf8;
       (*iter)[columns.collatekey] = basename_utf8.collate_key();
-      (*iter)[columns.fileinfo]   = FileInfoPtr(new FileInfo(fullname));
+      (*iter)[columns.fileinfo]   = FileInfoBasePtr(new FileInfo(fullname));
 
       return true; // a file has been added
     }
@@ -598,7 +582,7 @@ void FileTree::find_fill_dirstack(FindData& find_data)
 
     row[columns.filename]   = dirname;
     row[columns.collatekey] = dirname.collate_key();
-    row[columns.fileinfo]   = FileInfoPtr(new FileInfo());
+    row[columns.fileinfo]   = FileInfoBasePtr(new DirInfo());
   }
 }
 
@@ -614,67 +598,70 @@ void FileTree::find_increment_file_count(FindData& find_data, int file_count)
 
   for(; pdir != pend; ++pdir)
   {
-    const FileInfoPtr fileinfo ((*pdir->second)[columns.fileinfo]);
-    fileinfo->file_count += file_count;
+    const FileInfoBasePtr base = (*pdir->second)[columns.fileinfo];
+    DirInfoPtr::cast_dynamic_throw(base)->file_count += file_count;
   }
 
-  file_count_ += file_count;
+  toplevel_.file_count += file_count;
   signal_file_count_changed(); // emit
 }
 
 bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
-                                 Util::SharedPtr<ErrorList> error_list,
-                                 int* new_modified_count)
+                                 Util::SharedPtr<ErrorList>* error_list)
 {
-  const FileInfoPtr fileinfo = (*iter)[filetree_columns().fileinfo];
-  g_return_val_if_fail(fileinfo, false);
+  const FileInfoPtr fileinfo = get_fileinfo_from_iter(iter);
 
-  if(fileinfo->buffer && fileinfo->buffer->get_modified())
+  if(fileinfo && fileinfo->buffer && fileinfo->buffer->get_modified())
   {
     try
     {
       save_file(fileinfo);
-      --*new_modified_count;
     }
     catch(const Glib::Error& error)
     {
+      if(!*error_list)
+        error_list->reset(new ErrorList());
+
       Glib::ustring message = "Failed to save file '";
       message += Util::filename_to_utf8_fallback(fileinfo->fullname);
       message += "': ";
       message += error.what();
 
-      error_list->errors.push_back(message);
+      (*error_list)->errors.push_back(message);
     }
 
-    treestore_->row_changed(Gtk::TreePath(iter), iter);
+    if(!fileinfo->buffer->get_modified())
+      propagate_modified_change(iter, false);
   }
 
   return false;
 }
 
 bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
-                                       const Glib::ustring* substitution,
-                                       int* new_modified_count)
+                                       const Glib::ustring* substitution)
 {
   if(signal_pulse()) // emit
     return true;
 
-  const FileTreeColumns& columns = filetree_columns();
-  const FileInfoPtr fileinfo = (*iter)[columns.fileinfo];
-  g_return_val_if_fail(fileinfo, false);
+  const FileInfoPtr fileinfo = get_fileinfo_from_iter(iter);
 
-  if(fileinfo->buffer)
+  if(fileinfo && fileinfo->buffer)
   {
     const int match_count = fileinfo->buffer->get_match_count();
 
     if(match_count > 0)
     {
-      ScopedConnection conn (fileinfo->buffer->signal_pulse.connect(signal_pulse.slot()));
+      const bool was_modified = fileinfo->buffer->get_modified();
 
-      fileinfo->buffer->replace_all_matches(*substitution);
+      {
+        ScopedConnection conn (fileinfo->buffer->signal_pulse.connect(signal_pulse.slot()));
+        fileinfo->buffer->replace_all_matches(*substitution);
+      }
 
-      if(fileinfo->buffer->get_modified())
-        ++*new_modified_count;
+      const bool is_modified = fileinfo->buffer->get_modified();
+
+      if(was_modified != is_modified)
+        propagate_modified_change(iter, is_modified);
 
       g_return_val_if_fail(fileinfo->buffer->get_match_count() == 0, false);
 
@@ -699,16 +686,14 @@ long FileTree::find_matches_recursively(const Gtk::TreeModel::Children& node,
     if(signal_pulse()) // emit
       break;
 
-    if(const Gtk::TreeModel::Children& children = iter->children())
+    if(const Gtk::TreeModel::Children& children = iter->children()) // directory?
     {
       n_matches = find_matches_recursively(children, pattern, multiple, path_match_first_set);
     }
     else
     {
-      const FileInfoPtr fileinfo = (*iter)[columns.fileinfo];
-
-      g_return_val_if_fail(fileinfo, new_sum_matches);
-      g_return_val_if_fail(fileinfo->file_count < 0, new_sum_matches);
+      const FileInfoBasePtr base = (*iter)[columns.fileinfo];
+      const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic_throw(base);
 
       if(!fileinfo->load_failed && !fileinfo->buffer)
         load_file_with_fallback(fileinfo);
@@ -850,15 +835,16 @@ void FileTree::on_selection_changed()
   FileInfoPtr fileinfo;
   int file_index = 0;
 
+  const bool conn_match_count_blocked      = conn_match_count_.blocked();
+  const bool conn_modified_changed_blocked = conn_modified_changed_.blocked();
+
   conn_match_count_.disconnect();
   conn_modified_changed_.disconnect();
 
   if(const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
   {
-    fileinfo = (*iter)[columns.fileinfo];
-
-    g_return_if_fail(fileinfo);
-    g_return_if_fail(fileinfo->file_count < 0);
+    const FileInfoBasePtr base = (*iter)[columns.fileinfo];
+    fileinfo = FileInfoPtr::cast_dynamic_throw(base);
 
     file_index = calculate_file_index(iter) + 1;
 
@@ -872,6 +858,14 @@ void FileTree::on_selection_changed()
 
       conn_modified_changed_ = fileinfo->buffer->signal_modified_changed().
           connect(SigC::slot(*this, &FileTree::on_buffer_modified_changed));
+
+      // Restore the blocked state of both connections.
+      //
+      if(conn_match_count_blocked)
+        conn_match_count_.block();
+
+      if(conn_modified_changed_blocked)
+        conn_modified_changed_.block();
     }
   }
 
@@ -965,23 +959,15 @@ void FileTree::on_buffer_match_count_changed(int match_count)
 
 void FileTree::on_buffer_modified_changed()
 {
-  const Gtk::TreeModel::iterator iter = get_selection()->get_selected();
-  g_return_if_fail(iter);
+  const Gtk::TreeModel::iterator selected = get_selection()->get_selected();
+  g_return_if_fail(selected);
 
-  const FileInfoPtr fileinfo = (*iter)[filetree_columns().fileinfo];
+  const FileInfoBasePtr base = (*selected)[filetree_columns().fileinfo];
+  const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic_throw(base);
 
-  g_return_if_fail(fileinfo);
   g_return_if_fail(fileinfo->buffer);
 
-  if(fileinfo->buffer->get_modified())
-    ++modified_count_;
-  else
-    --modified_count_;
-
-  g_return_if_fail(modified_count_ >= 0);
-
-  treestore_->row_changed(Gtk::TreePath(iter), iter);
-  signal_modified_count_changed(); // emit
+  propagate_modified_change(selected, fileinfo->buffer->get_modified());
 }
 
 int FileTree::calculate_file_index(const Gtk::TreeModel::iterator& pos)
@@ -1004,11 +990,11 @@ int FileTree::calculate_file_index(const Gtk::TreeModel::iterator& pos)
 
   for(; iter != pos; ++iter)
   {
-    const FileInfoPtr fileinfo ((*iter)[columns.fileinfo]);
-    g_return_val_if_fail(fileinfo, index);
+    const FileInfoBasePtr base ((*iter)[columns.fileinfo]);
+    g_return_val_if_fail(base, index);
 
-    if(fileinfo->file_count >= 0)
-      index += fileinfo->file_count; // count whole directory in one step
+    if(const DirInfoPtr dirinfo = DirInfoPtr::cast_dynamic(base))
+      index += dirinfo->file_count; // count whole directory in one step
     else
       ++index; // single file
   }
@@ -1027,6 +1013,37 @@ void FileTree::propagate_match_count_change(const Gtk::TreeModel::iterator& pos,
   }
 
   sum_matches_ += difference;
+}
+
+void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bool modified)
+{
+  const FileTreeColumns& columns = filetree_columns();
+
+  treestore_->row_changed(Gtk::TreePath(pos), pos);
+
+  for(Gtk::TreeModel::iterator iter = pos->parent(); iter; iter = iter->parent())
+  {
+    const FileInfoBasePtr base = (*iter)[columns.fileinfo];
+    const DirInfoPtr dirinfo = DirInfoPtr::cast_dynamic_throw(base);
+
+    if(modified)
+    {
+      if(dirinfo->modified_count++ == 0)
+        treestore_->row_changed(Gtk::TreePath(iter), iter);
+    }
+    else
+    {
+      if(--dirinfo->modified_count == 0)
+        treestore_->row_changed(Gtk::TreePath(iter), iter);
+    }
+  }
+
+  if(modified)
+    ++toplevel_.modified_count;
+  else
+    --toplevel_.modified_count;
+
+  signal_modified_count_changed(); // emit
 }
 
 void FileTree::load_file_with_fallback(const FileInfoPtr& fileinfo)

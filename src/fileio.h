@@ -31,20 +31,36 @@ namespace Regexxer
 
 class FileBuffer;
 
-struct FileInfo : public Util::SharedObject
+class FileInfoBase : public Util::SharedObject
+{
+public:
+  virtual ~FileInfoBase() = 0;
+};
+
+struct DirInfo : public FileInfoBase
+{
+  int file_count;
+  int modified_count;
+
+  DirInfo();
+  virtual ~DirInfo();
+};
+
+struct FileInfo : public FileInfoBase
 {
   std::string               fullname;
   std::string               encoding;
   Glib::RefPtr<FileBuffer>  buffer;
   bool                      load_failed;
-  int                       file_count;
 
-  FileInfo(); // for directories
   explicit FileInfo(const std::string& fullname_);
-  ~FileInfo();
+  virtual ~FileInfo();
 };
 
-typedef Util::SharedPtr<FileInfo> FileInfoPtr;
+typedef Util::SharedPtr<FileInfoBase> FileInfoBasePtr;
+typedef Util::SharedPtr<DirInfo>      DirInfoPtr;
+typedef Util::SharedPtr<FileInfo>     FileInfoPtr;
+
 
 void load_file(const FileInfoPtr& fileinfo, const std::string& fallback_encoding);
 void save_file(const FileInfoPtr& fileinfo);
