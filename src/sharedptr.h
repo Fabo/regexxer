@@ -75,6 +75,10 @@ public:
 
   inline operator const void*() const;
 
+  template <class U> static inline SharedPtr<T> cast_static(const SharedPtr<U>& other);
+  template <class U> static inline SharedPtr<T> cast_dynamic(const SharedPtr<U>& other);
+  template <class U> static inline SharedPtr<T> cast_dynamic_throw(const SharedPtr<U>& other);
+
 private:
   T* ptr_;
 };
@@ -174,7 +178,31 @@ SharedPtr<T>::operator const void*() const
   return ptr_;
 }
 
+template <class T>
+  template <class U>
+inline // static
+SharedPtr<T> SharedPtr<T>::cast_static(const SharedPtr<U>& other)
+{
+  return SharedPtr<T>(static_cast<T*>(other.get()));
+}
+
+template <class T>
+  template <class U>
+inline // static
+SharedPtr<T> SharedPtr<T>::cast_dynamic(const SharedPtr<U>& other)
+{
+  return SharedPtr<T>(dynamic_cast<T*>(other.get()));
+}
+
+template <class T>
+  template <class U>
+inline // static
+SharedPtr<T> SharedPtr<T>::cast_dynamic_throw(const SharedPtr<U>& other)
+{
+  return SharedPtr<T>(&dynamic_cast<T&>(*other)); // may throw std::bad_cast
+}
+
 } // namespace Util
 
-#endif
+#endif /* REGEXXER_SHAREDPTR_H_INCLUDED */
 

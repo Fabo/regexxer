@@ -1,5 +1,11 @@
 2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/sharedptr.h (SharedPtr<T>::cast_static): implement
+	(cast_dynamic): implement
+	(cast_dynamic_throw): implement.
+
+2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h}: New files replacing filelist.{cc,h}.  The
 	files are now displayed in a directory tree which is much cooler.
 	As a side effect, it's now way faster when searching thousands of
