@@ -1,5 +1,11 @@
 2003-01-11  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac: Check for gtkmm >= 2.2.0 rather than 2.1.1.  Note
+	that gtkmm 2.2 is still optional, but this is likely to change after
+	the regexxer 0.5 release.
+
+2003-01-11  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (propagate_modified_change): Simplify.
 
 2003-01-11  Daniel Elstner  <daniel.elstner@gmx.net>
