@@ -1,3 +1,9 @@
+2004-09-06  Danilo Šegan  <dsegan@gmx.net>
+
+	* LINGUAS: Added "sr" and "sr@Latn".
+
+	* sr.po, sr@Latn.po: Added Serbian translation.
+
 2004-09-05  Ilkka Tuohela <hile@iki.fi>
 
 	* fi.po: Added Finnish tranlation.
