@@ -565,7 +565,15 @@ bool FileTree::find_matches_at_path_iter(const Gtk::TreeModel::Path& path,
     Util::ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.make_slot()));
 
     const int old_match_count = buffer->get_match_count();
-    const int new_match_count = buffer->find_matches(find_data.pattern, find_data.multiple);
+
+    // Optimize the common case and construct the feedback slot only if there
+    // are actually any handlers connected to the signal.  find_matches() can
+    // then check whether the slot is empty to avoid providing arguments that
+    // are never going to be used.
+    const int new_match_count = buffer->find_matches(
+        find_data.pattern, find_data.multiple,
+        (signal_feedback.empty()) ? sigc::slot<void,int,const Glib::ustring&>()
+                                  : sigc::bind(signal_feedback.make_slot(), fileinfo));
 
     if (new_match_count > 0)
     {

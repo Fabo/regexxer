@@ -1,3 +1,25 @@
+2004-07-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filebuffer.{cc,h} (FileBuffer::find_matches): Add a feedback
+	slot parameter and invoke it for every matching line.  The current
+	line number and the subject string are passed as arguments to the
+	feedback slot.
+
+	* src/filetree.{cc,h} (FileTree::signal_feedback): New signal.
+	(FileTree::find_matches_at_path_iter): Pass a feedback slot to
+	FileBuffer::find_matches() that forwards to signal_feedback()
+	with the fileinfo object bound as third argument.
+
+	* src/mainwindow.{cc,h} (print_location): New handler for the
+	feedback signal which prints the location of the match to standard
+	output, in the same format as used by 'grep -n'.
+	(InitState::feedback): New bool member.
+	(MainWindow::initialize): Connect the filetree's signal_feedback
+	to print_location if the init state's feedback flag is true.
+
+	* src/main.cc (parse_command_line): Add the --line-number command
+	line argument, intended to work just like the grep equivalent.
+
 2004-07-13  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/mainwindow.{cc,h} (MainWindow::autorun_idle): New method

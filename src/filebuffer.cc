@@ -259,7 +259,8 @@ bool FileBuffer::in_user_action() const
  * If multiple is false then every line is matched only once, otherwise
  * multiple matches per line will be found (like modifier /g in Perl).
  */
-int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
+int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple,
+                             const sigc::slot<void,int,const Glib::ustring&>& feedback)
 {
   ScopedLock lock (*this);
 
@@ -331,6 +332,9 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
       match->install_mark(start);
 
       apply_tag(tagtable->match, start, stop);
+
+      if (offset == 0 && feedback)
+        feedback(line.get_line(), subject);
 
       last_was_empty = (bounds.first == bounds.second);
       offset = bounds.second;

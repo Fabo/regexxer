@@ -75,6 +75,9 @@ public:
   sigc::signal<bool>                  signal_pulse;
   sigc::signal<void,UndoActionPtr>    signal_undo_stack_push;
 
+  // Provide line number, subject and file info for match location output.
+  sigc::signal<void,int,const Glib::ustring&,FileInfoPtr> signal_feedback;
+
 protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 

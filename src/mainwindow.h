@@ -63,6 +63,7 @@ struct InitState
   bool          hidden;
   bool          global;
   bool          ignorecase;
+  bool          feedback;
   bool          autorun;
 
   InitState();

@@ -36,6 +36,7 @@
 #include <libglademm/xml.h>
 #include <algorithm>
 #include <functional>
+#include <iostream>
 
 #include <config.h>
 
@@ -98,6 +99,21 @@ FileErrorDialog::FileErrorDialog(Gtk::Window& parent, const Glib::ustring& messa
 FileErrorDialog::~FileErrorDialog()
 {}
 
+
+void print_location(int linenumber, const Glib::ustring& subject, Regexxer::FileInfoPtr fileinfo)
+{
+  std::cout << fileinfo->fullname << ':' << linenumber + 1 << ':';
+
+  std::string charset;
+
+  if (Glib::get_charset(charset))
+    std::cout << subject.raw(); // charset is UTF-8
+  else
+    std::cout << Glib::convert_with_fallback(subject.raw(), charset, "UTF-8");
+
+  std::cout << std::endl;
+}
+
 } // anonymous namespace
 
 
@@ -116,6 +132,7 @@ InitState::InitState()
   hidden        (false),
   global        (true),
   ignorecase    (false),
+  feedback      (false),
   autorun       (false)
 {}
 
@@ -187,6 +204,9 @@ void MainWindow::initialize(std::auto_ptr<InitState> init)
   button_hidden_   ->set_active(init->hidden);
   button_multiple_ ->set_active(init->global);
   button_caseless_ ->set_active(init->ignorecase);
+
+  if (init->feedback)
+    filetree_->signal_feedback.connect(&print_location);
 
   if (init->autorun)
     Glib::signal_idle().connect(sigc::mem_fun(*this, &MainWindow::autorun_idle));

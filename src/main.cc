@@ -98,13 +98,14 @@ std::auto_ptr<Regexxer::InitState> parse_command_line(int argc, char** argv)
   static const poptOption option_table[] =
   {
     { "pattern",      'p', STRING, 0, 'p', N_("Find files matching PATTERN"), N_("PATTERN") },
-    { "no-recursion", 'R', NONE,   0, 'R', N_("Do not recurse into subdirectories"),  0     },
-    { "hidden",       'h', NONE,   0, 'h', N_("Also find hidden files"),              0     },
+    { "no-recursion", 'R', NONE,   0, 'R', N_("Do not recurse into subdirectories"),      0 },
+    { "hidden",       'h', NONE,   0, 'h', N_("Also find hidden files"),                  0 },
     { "regex",        'e', STRING, 0, 'e', N_("Find text matching REGEX"),    N_("REGEX")   },
-    { "no-global",    'G', NONE,   0, 'G', N_("Find only the first match in a line"), 0     },
-    { "ignore-case",  'i', NONE,   0, 'i', N_("Ignore case distinctions"),            0     },
+    { "no-global",    'G', NONE,   0, 'G', N_("Find only the first match in a line"),     0 },
+    { "ignore-case",  'i', NONE,   0, 'i', N_("Ignore case distinctions"),                0 },
     { "substitution", 's', STRING, 0, 's', N_("Replace matches with STRING"), N_("STRING")  },
-    { "no-autorun",   'A', NONE,   0, 'A', N_("Do not automatically start search"),   0     },
+    { "line-number",  'n', NONE,   0, 'n', N_("Print match location to standard output"), 0 },
+    { "no-autorun",   'A', NONE,   0, 'A', N_("Do not automatically start search"),       0 },
     POPT_AUTOHELP
     POPT_TABLEEND
   };
@@ -129,6 +130,7 @@ std::auto_ptr<Regexxer::InitState> parse_command_line(int argc, char** argv)
       case 'h': init->hidden       = true;  break;
       case 'G': init->global       = false; break;
       case 'i': init->ignorecase   = true;  break;
+      case 'n': init->feedback     = true;  break;
       case 'A': autorun            = false; break;
     }
 
