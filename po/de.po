@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.7\n"
 "Report-Msgid-Bugs-To: daniel.elstner@gmx.net\n"
-"POT-Creation-Date: 2004-05-16 07:04+0200\n"
+"POT-Creation-Date: 2004-05-17 08:43+0200\n"
 "PO-Revision-Date: 2004-05-05 11:34+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
-#: src/filebuffer.cc:205
+#: src/filebuffer.cc:203
 msgid "Can't read file:"
 msgstr "Datei nicht lesbar:"
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Color Selection"
 msgstr "Farbauswahl"
 
-#: src/prefdialog.cc:514
+#: src/prefdialog.cc:507
 msgid "\"%1\" is not a valid encoding."
 msgstr "„%1” ist kein gültiger Zeichensatz."
 
