@@ -189,7 +189,10 @@ void FileTree::save_all_files()
 
   {
     Util::ScopedBlock block (conn_modified_changed_);
-    treestore_->foreach_iter(sigc::bind(sigc::mem_fun(*this, &FileTree::save_file_at_iter), &error_list));
+
+    treestore_->foreach_iter(sigc::bind(
+        sigc::mem_fun(*this, &FileTree::save_file_at_iter),
+        &error_list));
   }
 
   if (error_list)
@@ -249,9 +252,11 @@ void FileTree::find_matches(Pcre::Pattern& pattern, bool multiple)
   {
     Util::ScopedBlock  block_conn (conn_match_count_);
     ScopedBlockSorting block_sort (*this);
-    FindMatchesData find_data (pattern, multiple);
+    FindMatchesData    find_data  (pattern, multiple);
 
-    treestore_->foreach_iter(sigc::bind(sigc::mem_fun(*this, &FileTree::find_matches_at_iter), &find_data));
+    treestore_->foreach(sigc::bind(
+        sigc::mem_fun(*this, &FileTree::find_matches_at_path_iter),
+        &find_data));
   }
 
   signal_bound_state_changed(); // emit
@@ -272,8 +277,8 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
     ScopedBlockSorting block_sort   (*this);
     ReplaceMatchesData replace_data (*this, substitution);
 
-    treestore_->foreach_iter(sigc::bind(
-        sigc::mem_fun(*this, &FileTree::replace_matches_at_iter),
+    treestore_->foreach(sigc::bind(
+        sigc::mem_fun(*this, &FileTree::replace_matches_at_path_iter),
         &replace_data));
 
     // Adjust the boundary range if the operation has been interrupted.
@@ -546,7 +551,9 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
   return false;
 }
 
-bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMatchesData* find_data)
+bool FileTree::find_matches_at_path_iter(const Gtk::TreeModel::Path& path,
+                                         const Gtk::TreeModel::iterator& iter,
+                                         FindMatchesData* find_data)
 {
   if (signal_pulse()) // emit
     return true;
@@ -572,10 +579,10 @@ bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMa
       if (!find_data->path_match_first_set)
       {
         find_data->path_match_first_set = true;
-        path_match_first_ = iter;
+        path_match_first_ = path;
       }
 
-      path_match_last_ = iter;
+      path_match_last_ = path;
     }
 
     if (new_match_count != old_match_count)
@@ -588,8 +595,9 @@ bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMa
   return false;
 }
 
-bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
-                                       ReplaceMatchesData* replace_data)
+bool FileTree::replace_matches_at_path_iter(const Gtk::TreeModel::Path& path,
+                                            const Gtk::TreeModel::iterator& iter,
+                                            ReplaceMatchesData* replace_data)
 {
   if (signal_pulse()) // emit
     return true;
@@ -604,10 +612,10 @@ bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
 
     if (match_count > 0)
     {
-      path_match_first_ = iter;
+      path_match_first_ = path;
 
       if (fileinfo != last_selected_)
-        replace_data->row_reference.reset(new TreeRowRef(treestore_, path_match_first_));
+        replace_data->row_reference.reset(new TreeRowRef(treestore_, path));
       else
         replace_data->row_reference = last_selected_rowref_;
 

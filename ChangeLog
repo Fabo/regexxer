@@ -1,5 +1,17 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (FileTree::find_matches_at_path_iter):
+	Rename from find_matches_at_iter(): add a path parameter and
+	use it instead of obtaining the path from the iter argument.
+	(FileTree::replace_matches_at_path_iter): Rename from
+	replace_matches_at_iter(): add a path parameter and use it.
+	(FileTree::find_matches): Use TreeModel::foreach() rather than
+	foreach_iter() in order to gain a minor performance improvement
+	by taking advantage of the supplied Gtk::TreePath.
+	(FileTree::replace_all_matches): ditto.
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (FileTree::on_treestore_rows_reordered):
 	New signal handler which updates the match boundaries defined by
 	the [path_match_first_, path_match_last_] range.  Previously this
