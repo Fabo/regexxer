@@ -1,5 +1,13 @@
 2004-06-29  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* ui/mainwindow.glade: Remove empty string properties and all
+	GtkEntry "invisible_char" properties.  The latter had no purpose
+	other than to annoy the translators.
+
+	* ui/prefdialog.glade: ditto.
+
+2004-06-29  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (selection_clipboard): New string constant
 	defining the name of the selection to use for the clipboard.
 	(MainWindow::on_cut): Use the selection_clipboard constant.
