@@ -1,5 +1,10 @@
 2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.cc (substitute_references): Reduce usage of
+	Glib::ustring::raw() in favor of native ustring accessor methods.
+
+2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.{cc,h} (substitute_references): Change return
 	type and parameter types to Glib::ustring.  I have no idea as to
 	why the interface used std::string in the first place...

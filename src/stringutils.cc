@@ -476,12 +476,12 @@ Glib::ustring Util::substitute_references(const Glib::ustring& substitution,
                                           const CaptureVector& captures)
 {
   std::string result;
-  result.reserve(2 * std::max(substitution.raw().size(), subject.raw().size()));
+  result.reserve(2 * std::max(substitution.bytes(), subject.bytes()));
 
   std::vector<ModPos> modifiers;
 
-  const std::string::const_iterator pend = substitution.raw().end();
-  std::string::const_iterator       p    = substitution.raw().begin();
+  const std::string::const_iterator pend = substitution.end().base();
+  std::string::const_iterator       p    = substitution.begin().base();
 
   for (; p != pend; ++p)
   {
@@ -565,7 +565,7 @@ Glib::ustring Util::substitute_references(const Glib::ustring& substitution,
 
         case '\'':
           bounds.first  = captures.front().second;
-          bounds.second = subject.raw().size();
+          bounds.second = subject.bytes();
           break;
 
         default:
