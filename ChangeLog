@@ -1,5 +1,10 @@
 2002-10-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filebuffer.h (BoundState): Define operator|=() and friends.
+	* src/filebuffer.cc: Use the new operator.
+
+2002-10-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	Woohoo, first ChangeLog entry for regexxer!
 
 	* virtually all files: Insert copyright notice and CVS Id tags.

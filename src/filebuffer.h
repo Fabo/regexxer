@@ -46,8 +46,20 @@ inline BoundState operator|(BoundState lhs, BoundState rhs)
 inline BoundState operator&(BoundState lhs, BoundState rhs)
   { return static_cast<BoundState>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs)); }
 
+inline BoundState operator^(BoundState lhs, BoundState rhs)
+  { return static_cast<BoundState>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs)); }
+
 inline BoundState operator~(BoundState flags)
   { return static_cast<BoundState>(~static_cast<unsigned>(flags)); }
+
+inline BoundState& operator|=(BoundState& lhs, BoundState rhs)
+  { return (lhs = static_cast<BoundState>(static_cast<unsigned>(lhs) | static_cast<unsigned>(rhs))); }
+
+inline BoundState& operator&=(BoundState& lhs, BoundState rhs)
+  { return (lhs = static_cast<BoundState>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs))); }
+
+inline BoundState& operator^=(BoundState& lhs, BoundState rhs)
+  { return (lhs = static_cast<BoundState>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs))); }
 
 
 // This struct holds all the information that's necessary to locate a

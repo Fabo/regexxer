@@ -197,15 +197,15 @@ BoundState FileBuffer::get_bound_state()
 
   if(match_list_.empty())
   {
-    bound_state_ = (BOUND_FIRST | BOUND_LAST);
+    bound_state_ = BOUND_FIRST | BOUND_LAST;
   }
   else if(current_match_ != match_list_.end())
   {
     if(current_match_ == match_list_.begin())
-      bound_state_ = (bound_state_ | BOUND_FIRST);
+      bound_state_ |= BOUND_FIRST;
 
     if(!match_removed_ && current_match_ == --match_list_.end())
-      bound_state_ = (bound_state_ | BOUND_LAST);
+      bound_state_ |= BOUND_LAST;
   }
 
   return bound_state_;
