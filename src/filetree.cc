@@ -255,6 +255,15 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
         sigc::mem_fun(*this, &FileTree::replace_matches_at_iter),
         &replace_data));
 
+    // Adjust the boundary range if the operation has been interrupted.
+    if (sum_matches_ > 0)
+    {
+      Gtk::TreeIter first = treestore_->get_iter(path_match_first_);
+
+      if ((*first)[filetree_columns().matchcount] == 0 && next_match_file(first))
+        path_match_first_ = first;
+    }
+
     signal_undo_stack_push(replace_data.undo_stack); // emit
   }
 
@@ -582,8 +591,10 @@ bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
 
     if (match_count > 0)
     {
+      path_match_first_ = iter;
+
       if (fileinfo != last_selected_)
-        replace_data->row_reference.reset(new TreeRowRef(treestore_, Gtk::TreePath(iter)));
+        replace_data->row_reference.reset(new TreeRowRef(treestore_, path_match_first_));
       else
         replace_data->row_reference = last_selected_rowref_;
 
@@ -607,9 +618,7 @@ bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
       if (was_modified != is_modified)
         propagate_modified_change(iter, is_modified);
 
-      g_return_val_if_fail(buffer->get_match_count() == 0, false);
-
-      propagate_match_count_change(iter, -match_count);
+      propagate_match_count_change(iter, buffer->get_match_count() - match_count);
     }
   }
 
@@ -691,7 +700,7 @@ bool FileTree::prev_match_file(Gtk::TreeModel::iterator& iter,
     }
     else if (parent)
     {
-      path = Gtk::TreePath(parent);
+      path   = parent;
       parent = parent->parent();
 
       if (collapse_stack && row_expanded(path))
@@ -740,8 +749,8 @@ void FileTree::on_treestore_sort_column_changed()
       g_return_if_fail(found_last);
     }
 
-    path_match_first_ = Gtk::TreePath(first);
-    path_match_last_  = Gtk::TreePath(last);
+    path_match_first_ = first;
+    path_match_last_  = last;
 
     signal_bound_state_changed(); // emit
   }
@@ -820,7 +829,7 @@ void FileTree::on_buffer_match_count_changed()
 
   if (old_sum_matches == 0)
   {
-    path_match_first_ = Gtk::TreePath(iter);
+    path_match_first_ = iter;
     path_match_last_  = path_match_first_;
   }
   else if ((sum_matches_ > 0) && (old_match_count == 0 || match_count == 0))
@@ -867,7 +876,7 @@ void FileTree::on_buffer_match_count_changed()
         const bool found_next = next_match_file(iter);
         g_return_if_fail(found_next);
 
-        path_match_first_ = Gtk::TreePath(iter);
+        path_match_first_ = iter;
       }
       else if (path == path_match_last_)
       {
@@ -875,7 +884,7 @@ void FileTree::on_buffer_match_count_changed()
         const bool found_prev = prev_match_file(iter);
         g_return_if_fail(found_prev);
 
-        path_match_last_ = Gtk::TreePath(iter);
+        path_match_last_ = iter;
       }
     }
 

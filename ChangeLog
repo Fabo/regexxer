@@ -1,3 +1,9 @@
+2004-05-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filetree.cc (FileTree::replace_all_matches): Make sure
+	path_match_first_ points to the first file that still has matches
+	after a replace operation was interrupted.
+
 2004-05-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* ui/mainwindow.glade (entry_preview): Set "can_focus" to False.
