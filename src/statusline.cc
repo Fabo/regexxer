@@ -51,7 +51,6 @@ private:
   unsigned int        digits_range_;
   unsigned int        widest_digit_;
   unsigned int        second_widest_digit_;
-  int                 diff_9_to_0_;
   std::ostringstream  stringstream_;
 
   Glib::ustring number_to_string(unsigned int number);
