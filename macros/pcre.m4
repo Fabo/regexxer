@@ -41,16 +41,25 @@ AC_MSG_ERROR([[
 fi
 
 AC_MSG_CHECKING([[for libpcre >= ]$1])
-pcre_version=`$PCRE_CONFIG --version`
+
 pcre_version_ok=no
-expr "$pcre_version" '>=' "[$1]" >/dev/null 2>&5 && pcre_version_ok=yes
+pcre_version_string=`$PCRE_CONFIG --version`
+
+pcre_num='\(@<:@0123456789@:>@\+\)'
+pcre_transform='s/^'$pcre_num'\.'$pcre_num'\(\.'$pcre_num'\)\?$/\1 \\* 1000000 + \2 \\* 1000 + 0\4/p'
+pcre_required=`echo "[$1]" | sed -n "$pcre_transform"`
+pcre_version=`echo "$pcre_version_string" | sed -n "$pcre_transform"`
+
+test -n "$pcre_version" && eval expr "$pcre_version \\>= $pcre_required" >/dev/null 2>&5 && \
+  pcre_version_ok=yes
+
 AC_MSG_RESULT([${pcre_version_ok}])
 
 if test "x$pcre_version_ok" = xno; then
 {
 AC_MSG_ERROR([[
 *** libpcre ]$1[ or higher is required, but you only have
-*** version ${pcre_version} installed.  Please upgrade and try again.
+*** version ${pcre_version_string} installed.  Please upgrade and try again.
 ]])
 }
 fi

@@ -1,5 +1,10 @@
 2002-12-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* macros/pcre.m4 (PCRE_CHECK_VERSION): Use the sed magic from
+	autogen.sh to implement a proper version check.
+
+2002-12-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* autogen.sh: Implement some fancy sed magic to compare automake
 	version numbers, in order to choose the one that suits us best.
 
