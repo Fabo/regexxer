@@ -44,7 +44,7 @@ struct IsSignificantEncodingChar
   inline bool operator()(char c) const;
 };
 
-inline bool ascii_isodigit    (char c);
+inline bool ascii_isodigit    (char c) G_GNUC_CONST;
 std::string apply_modifiers   (const std::string& subject, const std::vector<ModPos>& modifiers);
 std::string parse_control_char(std::string::const_iterator& p, std::string::const_iterator pend);
 std::string parse_hex_unichar (std::string::const_iterator& p, std::string::const_iterator pend);
