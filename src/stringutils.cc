@@ -22,8 +22,10 @@
 
 #include <glib.h>
 #include <glibmm.h>
+#include <gdkmm/color.h>
 #include <cstring>
 #include <algorithm>
+#include <iomanip>
 #include <sstream>
 #include <utility>
 #include <vector>
@@ -62,6 +64,11 @@ bool IsSignificantEncodingChar::operator()(char c) const
   }
 
   return true;
+}
+
+unsigned int scale_to_8bit(unsigned int value)
+{
+  return std::min(255u, (value + 128) / 256);
 }
 
 inline
@@ -340,14 +347,12 @@ bool Util::encodings_equal(const std::string& lhs, const std::string& rhs)
   return (lhs_pos == lhs_end && rhs_pos == rhs_end);
 }
 
-bool Util::contains_null(const char* pbegin, const char* pend)
-{
-  return (std::find(pbegin, pend, '\0') != pend);
-}
-
 Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
 {
-  std::string result = "\\A";
+  std::string result;
+  result.reserve(std::max<std::string::size_type>(32, 2 * pattern.bytes()));
+
+  result += "\\A";
 
   std::string::const_iterator       p    = pattern.raw().begin();
   const std::string::const_iterator pend = pattern.raw().end();
@@ -404,8 +409,7 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
       {
         case ']':
           result += ']';
-          if(!((p[-1] == '[') || (p[-1] == '!' && p[-2] == '[')))
-            in_cclass = false;
+          in_cclass = ((p[-1] == '[') || ((p[-1] == '!' || p[-1] == '^') && p[-2] == '['));
           break;
 
         case '!':
@@ -413,8 +417,8 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
           break;
 
         case '\\':
-          result += "\\\\";
-          break;
+          result += '\\';
+          // fallthrough
 
         default:
           result += *p;
@@ -636,5 +640,24 @@ Glib::ustring Util::transform_pathname(const Glib::ustring& path, bool shorten)
   }
 
   return path;
+}
+
+Glib::ustring Util::color_to_string(const Gdk::Color& color)
+{
+  std::ostringstream output;
+
+#if REGEXXER_HAVE_STD_LOCALE
+  output.imbue(std::locale::classic());
+#endif
+
+  output.setf(std::ios::hex, std::ios::basefield);
+  output.setf(std::ios::uppercase);
+  output.fill('0');
+
+  output << '#' << std::setw(2) << scale_to_8bit(color.get_red())
+                << std::setw(2) << scale_to_8bit(color.get_green())
+                << std::setw(2) << scale_to_8bit(color.get_blue());
+
+  return output.str();
 }
 

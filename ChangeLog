@@ -1,5 +1,12 @@
 2002-12-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.{cc,h} (contains_null): Remove.
+	(color_to_string): Implement.
+	(shell_pattern_to_regex): Handle alternative syntax '^' for
+	negation of character classes properly.
+
+2002-12-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/miscutils.h (ScopedArray<>): New little utility template
 	to manage a dynamically allocated array.
 

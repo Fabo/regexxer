@@ -25,6 +25,8 @@
 #include <vector>
 #include <glibmm/ustring.h>
 
+namespace Gdk { class Color; }
+
 
 namespace Util
 {
@@ -34,7 +36,6 @@ typedef std::vector< std::pair<int,int> > CaptureVector;
 void trim_whitespace(Glib::ustring::const_iterator& pbegin, Glib::ustring::const_iterator& pend);
 bool validate_encoding(const std::string& encoding);
 bool encodings_equal(const std::string& lhs, const std::string& rhs);
-bool contains_null(const char* pbegin, const char* pend);
 Glib::ustring shell_pattern_to_regex(const Glib::ustring& pattern);
 
 std::string substitute_references(const std::string&   substitution,
@@ -52,6 +53,8 @@ inline Glib::ustring shorten_pathname(const Glib::ustring& path)
 
 inline Glib::ustring expand_pathname(const Glib::ustring& path)
   { return transform_pathname(path, false); }
+
+Glib::ustring color_to_string(const Gdk::Color& color);
 
 } // namespace Util
 
