@@ -98,6 +98,16 @@ const NickValuePair toolbar_style_value_map[] =
 };
 
 
+void print_message(const char* text)
+{
+  g_message(text);
+}
+
+void print_message(const char* text, const Glib::ustring& what)
+{
+  g_message(text, what.c_str());
+}
+
 Glib::RefPtr<Glib::IOChannel> open_config_file(const std::string& mode)
 {
   const std::string filename = Glib::build_filename(Glib::get_home_dir(), ".regexxer");
@@ -128,7 +138,7 @@ bool read_config_entry(const Glib::RefPtr<Glib::IOChannel>& channel,
 
     if(passign == pend)
     {
-      g_message("Error in configuration file: missing `='");
+      print_message("Error in configuration file: missing `='");
       continue;
     }
 
@@ -137,7 +147,7 @@ bool read_config_entry(const Glib::RefPtr<Glib::IOChannel>& channel,
 
     if(pend_key == pbegin)
     {
-      g_message("Error in configuration file: missing key before `='");
+      print_message("Error in configuration file: missing key before `='");
       continue;
     }
 
@@ -146,7 +156,7 @@ bool read_config_entry(const Glib::RefPtr<Glib::IOChannel>& channel,
 
     if(pbegin_value == pend)
     {
-      g_message("Error in configuration file: missing value after `='");
+      print_message("Error in configuration file: missing value after `='");
       continue;
     }
 
@@ -201,21 +211,17 @@ void ConfigData::load()
       else if(key.raw() == "fallback_encoding")
         set_fallback_encoding_from_string(value);
       else
-        g_message("Error in configuration file: unknown key `%s'", key.c_str());
+        print_message("Error in configuration file: unknown key `%s'", key);
     }
   }
   catch(const Glib::FileError& error)
   {
     if(error.code() != Glib::FileError::NO_SUCH_ENTITY)
-    {
-      const Glib::ustring what = error.what();
-      g_message("Failed to open configuration file: %s", what.c_str());
-    }
+      print_message("Failed to open configuration file: %s", error.what());
   }
   catch(const Glib::Error& error)
   {
-    const Glib::ustring what = error.what();
-    g_message("Failed to read configuration file: %s", what.c_str());
+    print_message("Failed to read configuration file: %s", error.what());
   }
 }
 
@@ -237,13 +243,11 @@ void ConfigData::save()
   }
   catch(const Glib::FileError& error)
   {
-    const Glib::ustring what = error.what();
-    g_message("Failed to open configuration file: %s", what.c_str());
+    print_message("Failed to open configuration file: %s", error.what());
   }
   catch(const Glib::Error& error)
   {
-    const Glib::ustring what = error.what();
-    g_message("Failed to write configuration file: %s", what.c_str());
+    print_message("Failed to write configuration file: %s", error.what());
   }
 }
 
@@ -256,8 +260,7 @@ void ConfigData::set_toolbar_style_from_string(const Glib::ustring& value)
   if(pfound != pend)
     toolbar_style = Gtk::ToolbarStyle(pfound->value);
   else
-    g_message("Error in configuration file: invalid value `%s' for key `toolbar_style'",
-              value.c_str());
+    print_message("Error in configuration file: invalid value `%s' for key `toolbar_style'", value);
 }
 
 Glib::ustring ConfigData::get_string_from_toolbar_style() const
@@ -282,8 +285,7 @@ void ConfigData::set_fallback_encoding_from_string(const Glib::ustring& value)
   }
   else
   {
-    g_message("Error in configuration file: invalid value `%s' for key `fallback_encoding'",
-              value.c_str());
+    print_message("Error in configuration file: invalid value `%s' for key `fallback_encoding'", value);
   }
 }
 
