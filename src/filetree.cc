@@ -513,9 +513,9 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
       if(!*error_list)
         error_list->reset(new MessageList());
 
-      Glib::ustring message = "Failed to save file '";
+      Glib::ustring message = "Failed to save file \302\273";
       message += Util::filename_to_utf8_fallback(fileinfo->fullname);
-      message += "': ";
+      message += "\302\253: ";
       message += error.what();
 
       (*error_list)->push_back(message);
