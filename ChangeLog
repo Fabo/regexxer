@@ -1,3 +1,9 @@
+2002-12-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* pixmaps/Makefile.am (stockimages.h): Beautify by printing the
+	actual command line that is executed, rather than the shell code
+	to build it.  This is also what autoconf does in its rules.
+
 2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* regexxer.desktop: Add Comment[de] translation, and remove GNOME

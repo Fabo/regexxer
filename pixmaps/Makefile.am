@@ -28,11 +28,12 @@ BUILT_SOURCES = stockimages.h
 CLEANFILES    = stockimages.h
 
 stockimages.h: $(stockimages)
-	build_list=''; \
+	@build_list=''; \
 	list='$(stockimages)'; for file in $$list ; do \
 	  name=`echo $$file | sed 's|\..*$$||'`; \
 	  dir=''; test -f "$$file" || dir='$(srcdir)/'; \
 	  build_list="$$build_list $$name $$dir$$file"; \
 	done; \
+	echo "$(GDK_PIXBUF_CSOURCE) --extern --raw --build-list $$build_list > $@"; \
 	$(GDK_PIXBUF_CSOURCE) --extern --raw --build-list $$build_list > $@
 
