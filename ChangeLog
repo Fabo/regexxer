@@ -1,3 +1,9 @@
+2002-12-02  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/mainwindow.cc (create_left_pane): Use 'd' instead of 'F'
+	as mnemonic key for the folder button, because 'F' is already
+	occupied by the file menu.
+
 2002-12-01  Murray Cumming  <murrayc@usa.net>
 
 	[ SF patch 646526, slightly modified ]

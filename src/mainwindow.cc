@@ -327,7 +327,7 @@ Gtk::Widget* MainWindow::create_left_pane()
   table->set_border_width(1);
   table->set_spacings(2);
 
-  Button *const button_folder = new ImageLabelButton(Stock::OPEN, "_Folder:", true);
+  Button *const button_folder = new ImageLabelButton(Stock::OPEN, "Fol_der:", true);
   table->attach(*manage(button_folder), 0, 1, 0, 1, FILL, AttachOptions(0));
   button_folder->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_select_folder));
 
