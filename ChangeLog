@@ -1,5 +1,9 @@
 2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/sharedptr.h (SharedPtr<>::swap): Implement.
+
+2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (on_hide): For safety, transfer ownership of
 	the preferences and about dialogs into local variables, rather than
 	invoking hide() to delete them.  That way delete won't be called

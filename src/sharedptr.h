@@ -85,6 +85,8 @@ public:
   template <class U> inline SharedPtr(const SharedPtr<U>& other);
   template <class U> inline SharedPtr<T>& operator=(const SharedPtr<U>& other);
 
+  inline void swap(SharedPtr<T>& other);
+
   inline void reset(T* ptr = 0); // obtains reference
   inline T*   get() const;
 
@@ -123,6 +125,12 @@ SharedPtr<T>::SharedPtr(T* ptr)
 // Note that reset() and get() are defined here and not in declaration order
 // on purpose -- defining them before they're first used allows for maximum
 // inlining.
+
+template <class T> inline
+void SharedPtr<T>::swap(SharedPtr<T>& other)
+{
+  std::swap(ptr_, other.ptr_);
+}
 
 template <class T> inline
 void SharedPtr<T>::reset(T* ptr)
@@ -192,6 +200,12 @@ SharedPtr<T>::operator const void*() const
   return ptr_;
 }
 
+
+template <class T> inline
+void swap(SharedPtr<T>& lhs, SharedPtr<T>& rhs)
+{
+  lhs.swap(rhs);
+}
 
 template <class T, class U> inline
 SharedPtr<T> shared_static_cast(const SharedPtr<U>& other)
