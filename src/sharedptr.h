@@ -53,13 +53,13 @@ private:
  * as efficient as possible.
  *
  * The intrusive approach also simplifies the implementation, particularly
- * with regards to exception safety.  A non- intrusive smart pointer like
+ * with regards to exception safety.  A non-intrusive smart pointer like
  * boost::shared_ptr<> would have to allocate memory to hold the reference
- * count -- this is tricky not just because of the new which could throw,
+ * count -- this is tricky not only because of the 'new' which could throw,
  * but it also complicates the implementation of the cast templates like
- * shared_dynamic_cast<> and others.
+ * shared_dynamic_cast<> etc.
  *
- * The cast templates use the same syntax as in boost:
+ * The cast template functions use the same syntax as in boost:
  *
  *     shared_static_cast<T>        returns static_cast<T*>(pointer)
  *     shared_dynamic_cast<T>       returns dynamic_cast<T*>(pointer)
