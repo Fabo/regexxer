@@ -261,6 +261,8 @@ MainWindow::MainWindow()
 MainWindow::~MainWindow()
 {}
 
+/**** Regexxer::MainWindow -- protected ************************************/
+
 void MainWindow::on_hide()
 {
   on_busy_action_cancel();
@@ -287,6 +289,8 @@ bool MainWindow::on_delete_event(GdkEventAny*)
 {
   return !confirm_quit_request();
 }
+
+/**** Regexxer::MainWindow -- private **************************************/
 
 Gtk::Toolbar* MainWindow::create_toolbar()
 {
