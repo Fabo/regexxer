@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.6\n"
-"Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
-"POT-Creation-Date: 2004-05-17 22:59+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-05-18 13:26+0200\n"
 "PO-Revision-Date: 2004-05-17 23:30+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -53,8 +53,8 @@ msgid ""
 "for a complete list of possible values."
 msgstr ""
 "Nome da codificação de caracteres a utilizar se um ficheiro não for legível "
-"em UTF-8 nem na codificação especificada pelo local actual. Tente \"iconv "
-"--list\" para obter uma lista completa dos valores possíveis."
+"em UTF-8 nem na codificação especificada pelo local actual. Tente \"iconv --"
+"list\" para obter uma lista completa dos valores possíveis."
 
 #: regexxer.schemas.in.h:6
 msgid "Override text direction"
@@ -68,15 +68,16 @@ msgstr "Fonte da vista de texto"
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr ""
-"A cor de fundo utilizada para realçar as coincidências da expressão procurada."
+"A cor de fundo utilizada para realçar as coincidências da expressão "
+"procurada."
 
 #: regexxer.schemas.in.h:9
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
 msgstr ""
-"A cor de fundo utilizada para realçar a coincidência actualmente seleccionada "
-"de entre as obtidas pela expressão de procura."
+"A cor de fundo utilizada para realçar a coincidência actualmente "
+"seleccionada de entre as obtidas pela expressão de procura."
 
 #: regexxer.schemas.in.h:10
 msgid "The font used in the file editor."
@@ -87,8 +88,8 @@ msgid ""
 "The style of the application's toolbar. Possible values are \"icons\", \"text"
 "\", \"both\", and \"both-horiz\"."
 msgstr ""
-"O estilo da barra de ferramentas da aplicação. Valores possíveis são \"icons\", "
-"\"text\", \"both\", e \"both-horiz\"."
+"O estilo da barra de ferramentas da aplicação. Valores possíveis são \"icons"
+"\", \"text\", \"both\", e \"both-horiz\"."
 
 #: regexxer.schemas.in.h:12
 msgid "Toolbar style"
@@ -123,7 +124,7 @@ msgstr "_Sobre"
 msgid "Save _all"
 msgstr "Gravar _todos"
 
-#: src/mainwindow.cc:291
+#: src/mainwindow.cc:292
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -131,11 +132,11 @@ msgstr ""
 "Alguns ficheiros ainda não foram gravados.\n"
 "Ainda assim terminar?"
 
-#: src/mainwindow.cc:305
+#: src/mainwindow.cc:306
 msgid "Select a folder"
 msgstr "Seleccione uma pasta"
 
-#: src/mainwindow.cc:336
+#: src/mainwindow.cc:337
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -143,15 +144,15 @@ msgstr ""
 "Alguns ficheiros ainda não foram gravados.\n"
 "Ainda assim prosseguir?"
 
-#: src/mainwindow.cc:363
+#: src/mainwindow.cc:364
 msgid "The file search pattern is invalid."
 msgstr "O padrão de procura de ficheiros é inválido."
 
-#: src/mainwindow.cc:369
+#: src/mainwindow.cc:370
 msgid "The following errors occurred during search:"
 msgstr "Ocorreram os seguintes erros durante a procura:"
 
-#: src/mainwindow.cc:394
+#: src/mainwindow.cc:395
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -159,7 +160,7 @@ msgstr ""
 "Erro na expressão regular em \"%1\" (índice %2):\n"
 "%3"
 
-#: src/mainwindow.cc:396
+#: src/mainwindow.cc:397
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -167,27 +168,25 @@ msgstr ""
 "Erro na expressão regular:\n"
 "%1"
 
-#: src/mainwindow.cc:615
+#: src/mainwindow.cc:616
 msgid "The following errors occurred during save:"
 msgstr "Ocorreram os seguintes erros durante a gravação:"
 
 #: src/pcreshell.cc:58
 msgid "Using the \\C escape sequence to match a single byte is not supported."
 msgstr ""
-"A utilização da sequência de escape \\C para coincidir um único byte não é suportada."
+"A utilização da sequência de escape \\C para coincidir um único byte não é "
+"suportada."
 
 #: src/pcreshell.cc:149
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
 msgstr ""
-"Atingido o limite de recursividade e retrocesso do motor de expressões regulares."
+"Atingido o limite de recursividade e retrocesso do motor de expressões "
+"regulares."
 
-#: src/prefdialog.cc:217
-msgid "Color Selection"
-msgstr "Selecção de Cor"
-
-#: src/prefdialog.cc:507
+#: src/prefdialog.cc:266
 msgid "\"%1\" is not a valid encoding."
 msgstr "\"%1\" não é uma codificação válida."
 
@@ -363,9 +362,9 @@ msgid ""
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
 "\\L, \\U and \\E are supported as well."
 msgstr ""
-"A nova expressão a substituir. Tal como no Perl, pode referir-se a partes "
-"da coincidência utilizando $1, $2, etc. ou mesmo $+, $&, $` e $'. Também "
-"são suportados os operadores \\l, \\u, \\L, \\U e \\E."
+"A nova expressão a substituir. Tal como no Perl, pode referir-se a partes da "
+"coincidência utilizando $1, $2, etc. ou mesmo $+, $&, $` e $'. Também são "
+"suportados os operadores \\l, \\u, \\L, \\U e \\E."
 
 #: ui/mainwindow.glade.h:33
 msgid "_All files"
@@ -420,32 +419,28 @@ msgid "3."
 msgstr "3."
 
 #: ui/prefdialog.glade.h:5
-msgid "Both horizontal"
-msgstr "Ambas horizontais"
-
-#: ui/prefdialog.glade.h:6
 msgid "C_urrent match color:"
 msgstr "Cor de coincidência act_ual:"
 
-#: ui/prefdialog.glade.h:7
+#: ui/prefdialog.glade.h:6
 msgid "Fallback _encoding:"
 msgstr "Codificação de _recurso:"
 
-#: ui/prefdialog.glade.h:8
-msgid "Icons and text"
-msgstr "Ícones e texto"
-
-#: ui/prefdialog.glade.h:9
-msgid "Icons only"
-msgstr "Apenas ícones"
-
-#: ui/prefdialog.glade.h:10
-msgid "Preferences"
-msgstr "Preferências"
+#: ui/prefdialog.glade.h:7
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
+"Apenas ícones\n"
+"Apenas texto\n"
+"Ícones e texto\n"
+"Ambas horizontais"
 
 #: ui/prefdialog.glade.h:11
-msgid "Text only"
-msgstr "Apenas texto"
+msgid "Preferences"
+msgstr "Preferências"
 
 #: ui/prefdialog.glade.h:12
 msgid "The encoding specified by the current locale"
@@ -483,4 +478,8 @@ msgstr "Fonte da vista de _texto:"
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
-"regexxer tentará ler um ficheiro nas seguintes codificações, antes de desistir:"
+"regexxer tentará ler um ficheiro nas seguintes codificações, antes de "
+"desistir:"
+
+#~ msgid "Color Selection"
+#~ msgstr "Selecção de Cor"

@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
-"POT-Creation-Date: 2004-05-17 23:01+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-05-18 13:26+0200\n"
 "PO-Revision-Date: 2004-05-17 23:01+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: regexxer.desktop.in.h:1
@@ -119,46 +119,46 @@ msgstr "_Om"
 msgid "Save _all"
 msgstr "Spara _alla"
 
-#: src/mainwindow.cc:291
+#: src/mainwindow.cc:292
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 
-#: src/mainwindow.cc:305
+#: src/mainwindow.cc:306
 msgid "Select a folder"
 msgstr "Välj en mapp"
 
-#: src/mainwindow.cc:336
+#: src/mainwindow.cc:337
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 
-#: src/mainwindow.cc:363
+#: src/mainwindow.cc:364
 #, fuzzy
 msgid "The file search pattern is invalid."
 msgstr "Visaren som är associerad med \"%s\" är ogiltig."
 
-#: src/mainwindow.cc:369
+#: src/mainwindow.cc:370
 msgid "The following errors occurred during search:"
 msgstr ""
 
-#: src/mainwindow.cc:394
+#: src/mainwindow.cc:395
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
 msgstr ""
 
 # SUN NEW TRANSLATION
-#: src/mainwindow.cc:396
+#: src/mainwindow.cc:397
 #, fuzzy
 msgid ""
 "Error in regular expression:\n"
 "%1"
 msgstr "Andra reguljära uttryck: "
 
-#: src/mainwindow.cc:615
+#: src/mainwindow.cc:616
 msgid "The following errors occurred during save:"
 msgstr ""
 
@@ -172,11 +172,7 @@ msgid ""
 "engine."
 msgstr ""
 
-#: src/prefdialog.cc:217
-msgid "Color Selection"
-msgstr "Färgval"
-
-#: src/prefdialog.cc:507
+#: src/prefdialog.cc:266
 #, fuzzy
 msgid "\"%1\" is not a valid encoding."
 msgstr "\"%s\" är inte en giltig plats."
@@ -409,35 +405,26 @@ msgid "3."
 msgstr "3."
 
 #: ui/prefdialog.glade.h:5
-msgid "Both horizontal"
-msgstr ""
-
-#: ui/prefdialog.glade.h:6
 #, fuzzy
 msgid "C_urrent match color:"
 msgstr "Aktuell kolumn"
 
-#: ui/prefdialog.glade.h:7
+#: ui/prefdialog.glade.h:6
 #, fuzzy
 msgid "Fallback _encoding:"
 msgstr "Tillgängliga kodningar:"
 
-# ui/prefdialog.glade.h:
-#: ui/prefdialog.glade.h:8
-msgid "Icons and text"
-msgstr "Ikoner och text"
-
-#: ui/prefdialog.glade.h:9
-msgid "Icons only"
-msgstr "Endast ikoner"
-
-#: ui/prefdialog.glade.h:10
-msgid "Preferences"
-msgstr "Inställningar"
+#: ui/prefdialog.glade.h:7
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
 
 #: ui/prefdialog.glade.h:11
-msgid "Text only"
-msgstr "Endast text"
+msgid "Preferences"
+msgstr "Inställningar"
 
 #: ui/prefdialog.glade.h:12
 #, fuzzy
@@ -477,6 +464,16 @@ msgstr "_Typsnitt för textvyn:"
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
+
+# ui/prefdialog.glade.h:
+#~ msgid "Icons and text"
+#~ msgstr "Ikoner och text"
+
+#~ msgid "Icons only"
+#~ msgstr "Endast ikoner"
+
+#~ msgid "Text only"
+#~ msgstr "Endast text"
 
 #~ msgid "Search Tool"
 #~ msgstr "Sökverktyg"

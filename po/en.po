@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-17 19:28+0200\n"
+"POT-Creation-Date: 2004-05-18 13:26+0200\n"
 "PO-Revision-Date: 2004-05-05 15:35+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -123,7 +123,7 @@ msgstr "_About"
 msgid "Save _all"
 msgstr "Save _all"
 
-#: src/mainwindow.cc:291
+#: src/mainwindow.cc:292
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -131,11 +131,11 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 
-#: src/mainwindow.cc:305
+#: src/mainwindow.cc:306
 msgid "Select a folder"
 msgstr "Select a folder"
 
-#: src/mainwindow.cc:336
+#: src/mainwindow.cc:337
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -143,15 +143,15 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 
-#: src/mainwindow.cc:363
+#: src/mainwindow.cc:364
 msgid "The file search pattern is invalid."
 msgstr "The file search pattern is invalid."
 
-#: src/mainwindow.cc:369
+#: src/mainwindow.cc:370
 msgid "The following errors occurred during search:"
 msgstr "The following errors occurred during search:"
 
-#: src/mainwindow.cc:394
+#: src/mainwindow.cc:395
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -159,7 +159,7 @@ msgstr ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:396
+#: src/mainwindow.cc:397
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -167,7 +167,7 @@ msgstr ""
 "Error in regular expression:\n"
 "%1"
 
-#: src/mainwindow.cc:615
+#: src/mainwindow.cc:616
 msgid "The following errors occurred during save:"
 msgstr "The following errors occurred during save:"
 
@@ -183,11 +183,7 @@ msgstr ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
 
-#: src/prefdialog.cc:217
-msgid "Color Selection"
-msgstr "Color Selection"
-
-#: src/prefdialog.cc:507
+#: src/prefdialog.cc:266
 msgid "\"%1\" is not a valid encoding."
 msgstr "“%1” is not a valid encoding."
 
@@ -419,32 +415,28 @@ msgid "3."
 msgstr "3."
 
 #: ui/prefdialog.glade.h:5
-msgid "Both horizontal"
-msgstr "Both horizontal"
-
-#: ui/prefdialog.glade.h:6
 msgid "C_urrent match color:"
 msgstr "C_urrent match color:"
 
-#: ui/prefdialog.glade.h:7
+#: ui/prefdialog.glade.h:6
 msgid "Fallback _encoding:"
 msgstr "Fallback _encoding:"
 
-#: ui/prefdialog.glade.h:8
-msgid "Icons and text"
-msgstr "Icons and text"
-
-#: ui/prefdialog.glade.h:9
-msgid "Icons only"
-msgstr "Icons only"
-
-#: ui/prefdialog.glade.h:10
-msgid "Preferences"
-msgstr "Preferences"
+#: ui/prefdialog.glade.h:7
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
 
 #: ui/prefdialog.glade.h:11
-msgid "Text only"
-msgstr "Text only"
+msgid "Preferences"
+msgstr "Preferences"
 
 #: ui/prefdialog.glade.h:12
 msgid "The encoding specified by the current locale"
@@ -483,6 +475,3 @@ msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "regexxer attempts to read a file in the following encodings before giving up:"
-
-#~ msgid "An interactive tool for performing search and replace operations"
-#~ msgstr "An interactive tool for performing search and replace operations"
