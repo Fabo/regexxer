@@ -1,5 +1,9 @@
 2002-11-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc: Show tool tips for both find buttons too.
+
+2002-11-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc: Use sentence case for all tool tips, as
 	suggested by Ross Burton.
 
