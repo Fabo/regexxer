@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-14 16:14+0200\n"
-"PO-Revision-Date: 2004-07-14 23:03+0200\n"
+"POT-Creation-Date: 2004-07-15 05:20+0200\n"
+"PO-Revision-Date: 2004-07-15 18:55+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -136,8 +136,8 @@ msgstr "REGEX"
 msgid "Find only the first match in a line"
 msgstr "Hledat jen první výskyt na řádku"
 
-#: src/main.cc:105
-msgid "Ignore case distinctions"
+#: src/main.cc:105 ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
 msgstr "Nerozlišovat velikost písmen"
 
 #: src/main.cc:106
@@ -161,8 +161,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[PŘEPÍNAČ]... [ADRESÁŘ]"
 
 #: src/main.cc:141
-msgid "Try `regexxer --help' for more information."
-msgstr "Pro více informací zkuste `regexxer --help'."
+msgid "Try \"regexxer --help\" for more information."
+msgstr "Pro více informací zkuste \"regexxer --help\"."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -291,10 +291,6 @@ msgstr "Reguálrní výraz v syntaxi Perlu"
 #: ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "Zpět"
-
-#: ui/mainwindow.glade.h:5
-msgid "Do case insensitive matching"
-msgstr "Nerozlišovat velikost písmen"
 
 #: ui/mainwindow.glade.h:6
 msgid "File backward"
@@ -518,6 +514,9 @@ msgstr "_Písmo textového pohledu:"
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr "Než se regexxer vzdá, zkouší soubor načíst v následujících kódováních:"
+
+#~ msgid "Ignore case distinctions"
+#~ msgstr "Nerozlišovat velikost písmen"
 
 #~ msgid ""
 #~ "If enabled, the text direction of the file editor, preview area, and all "
