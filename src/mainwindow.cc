@@ -306,8 +306,8 @@ bool MainWindow::confirm_quit_request()
   if (filetree_->get_modified_count() == 0)
     return true;
 
-  const Glib::ustring message = _("Some files haven't been saved yet.\nQuit anyway?");
-  Gtk::MessageDialog dialog (*window_, message, false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE, true);
+  Gtk::MessageDialog dialog (*window_, _("Some files haven't been saved yet.\nQuit anyway?"),
+                             false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE, true);
 
   dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
   dialog.add_button(Gtk::Stock::QUIT,   Gtk::RESPONSE_OK);
@@ -351,8 +351,8 @@ void MainWindow::on_find_files()
 {
   if (filetree_->get_modified_count() > 0)
   {
-    const Glib::ustring message = _("Some files haven't been saved yet.\nContinue anyway?");
-    Gtk::MessageDialog dialog (*window_, message, false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_OK_CANCEL, true);
+    Gtk::MessageDialog dialog (*window_, _("Some files haven't been saved yet.\nContinue anyway?"),
+                               false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_OK_CANCEL, true);
 
     if (dialog.run() != Gtk::RESPONSE_OK)
       return;
@@ -378,14 +378,14 @@ void MainWindow::on_find_files()
   }
   catch (const Pcre::Error& error)
   {
-    const Glib::ustring message = _("The file search pattern is invalid.");
-    Gtk::MessageDialog dialog (*window_, message, false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    Gtk::MessageDialog dialog (*window_, _("The file search pattern is invalid."),
+                               false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
   }
   catch (const FileTree::Error& error)
   {
-    const Glib::ustring message = _("The following errors occurred during search:");
-    FileErrorDialog dialog (*window_, message, Gtk::MESSAGE_WARNING, error);
+    FileErrorDialog dialog (*window_, _("The following errors occurred during search:"),
+                            Gtk::MESSAGE_WARNING, error);
     dialog.run();
   }
 
@@ -617,7 +617,8 @@ void MainWindow::on_save_file()
     const std::list<Glib::ustring>& error_list = error.get_error_list();
     g_assert(error_list.size() == 1);
 
-    Gtk::MessageDialog dialog (*window_, error_list.front(), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    Gtk::MessageDialog dialog (*window_, error_list.front(), false,
+                               Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
   }
 }
