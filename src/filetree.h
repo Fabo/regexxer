@@ -100,8 +100,8 @@ private:
 
   void cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
 
-  static int default_sort_func(const Gtk::TreeModel::iterator& lhs,
-                               const Gtk::TreeModel::iterator& rhs);
+  static int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs,
+                                  const Gtk::TreeModel::iterator& rhs);
 
   static bool select_func(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk::TreePath& path,
                           bool currently_selected);

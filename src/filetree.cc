@@ -238,8 +238,8 @@ FileTree::FileTree()
   count_column.set_alignment(1.0);
   count_renderer.property_xalign() = 1.0;
 
-  treestore_->set_default_sort_func(&FileTree::default_sort_func);
-  treestore_->set_sort_column_id(Gtk::TreeSortable::DEFAULT_SORT_COLUMN_ID, Gtk::SORT_ASCENDING);
+  treestore_->set_sort_func(model_columns.collatekey.index(), &FileTree::collatekey_sort_func);
+  treestore_->set_sort_column_id(model_columns.collatekey, Gtk::SORT_ASCENDING);
 
   set_search_column(0);
 
@@ -463,16 +463,10 @@ void FileTree::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::ite
 }
 
 // static
-int FileTree::default_sort_func(const Gtk::TreeModel::iterator& lhs,
-                                const Gtk::TreeModel::iterator& rhs)
+int FileTree::collatekey_sort_func(const Gtk::TreeModel::iterator& lhs,
+                                   const Gtk::TreeModel::iterator& rhs)
 {
   const FileTreeColumns& columns = filetree_columns();
-
-  const bool lhs_isdir = DirInfoPtr::cast_dynamic(FileInfoBasePtr((*lhs)[columns.fileinfo]));
-  const bool rhs_isdir = DirInfoPtr::cast_dynamic(FileInfoBasePtr((*rhs)[columns.fileinfo]));
-
-  if(lhs_isdir != rhs_isdir)
-    return (lhs_isdir) ? -1 : 1;
 
   const std::string lhs_key ((*lhs)[columns.collatekey]);
   const std::string rhs_key ((*rhs)[columns.collatekey]);
@@ -555,6 +549,12 @@ bool FileTree::find_check_file(const std::string& basename, const std::string& f
 
     if(find_data.pattern.match(basename_utf8) > 0)
     {
+      // Build the collate key with a leading '1' so that directories always
+      // come first (they have a leading '0').  This is simpler and faster
+      // than explicitely checking for directories in the sort function.
+      std::string collate_key (1, '1');
+      collate_key += basename_utf8.collate_key();
+
       Gtk::TreeModel::iterator iter;
 
       if(find_data.dirstack.empty())
@@ -572,7 +572,7 @@ bool FileTree::find_check_file(const std::string& basename, const std::string& f
       const FileTreeColumns& columns = filetree_columns();
 
       (*iter)[columns.filename]   = basename_utf8;
-      (*iter)[columns.collatekey] = basename_utf8.collate_key();
+      (*iter)[columns.collatekey] = collate_key;
       (*iter)[columns.fileinfo]   = FileInfoBasePtr(new FileInfo(fullname));
 
       return true; // a file has been added
@@ -596,6 +596,12 @@ void FileTree::find_fill_dirstack(FindData& find_data)
 
     const Glib::ustring dirname (Util::filename_to_utf8_fallback(pdir->first));
 
+    // Build the collate key with a leading '0' so that directories always
+    // come first.  This is simpler and faster than explicitely checking for
+    // directories in the sort function.
+    std::string collate_key (1, '0');
+    collate_key += dirname.collate_key();
+
     if(pprev == pend)
       pdir->second = treestore_->prepend(); // new toplevel node
     else
@@ -604,7 +610,7 @@ void FileTree::find_fill_dirstack(FindData& find_data)
     Gtk::TreeModel::Row row (*pdir->second);
 
     row[columns.filename]   = dirname;
-    row[columns.collatekey] = dirname.collate_key();
+    row[columns.collatekey] = collate_key;
     row[columns.fileinfo]   = FileInfoBasePtr(new DirInfo());
   }
 }

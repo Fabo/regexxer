@@ -1,3 +1,11 @@
+2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filetree.{cc,h}: Speed up and simplify sorting by merging
+	the directory/file information into the collate key (directories
+	get a leading '0', files get a leading '1').  This is amazingly
+	easy and not hackish in any way -- after all, this kind of pre-
+	processing the strings is exactly what collate keys are for.
+
 2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filebuffer.{cc,h} (is_freeable): New method that checks
