@@ -56,7 +56,7 @@ bool IsSignificantEncodingChar::operator()(char c) const
 {
   switch(c)
   {
-    case '-': case '_': case '.': case ' ':
+    case '-': case '_': case '.': case ':': case ' ':
       return false;
   }
 
