@@ -72,7 +72,7 @@ FileTree::FileTree()
 
   treestore_->set_default_sort_func(&default_sort_func);
   treestore_->set_sort_func(model_columns.collatekey, &collatekey_sort_func);
-  treestore_->set_sort_column_id(TreeStore::DEFAULT_SORT_COLUMN_ID, SORT_ASCENDING);
+  treestore_->set_sort_column(TreeStore::DEFAULT_SORT_COLUMN_ID, SORT_ASCENDING);
 
   treestore_->signal_rows_reordered().connect(
       sigc::mem_fun(*this, &FileTree::on_treestore_rows_reordered));
@@ -94,7 +94,7 @@ FileTree::FileTree()
     column->set_resizable(true);
     column->set_expand(true);
 
-    column->set_sort_column_id(model_columns.collatekey);
+    column->set_sort_column(model_columns.collatekey);
   }
 
   {
@@ -110,7 +110,7 @@ FileTree::FileTree()
     column->set_alignment(1.0);
     cell_matchcount->property_xalign() = 1.0;
 
-    column->set_sort_column_id(model_columns.matchcount);
+    column->set_sort_column(model_columns.matchcount);
   }
 
   set_search_column(model_columns.filename);

@@ -1,5 +1,18 @@
 2004-06-19  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/Makefile.am (global_defines): Add -DGTKMM_DISABLE_DEPRECATED.
+
+	* src/filetree.cc (FileTree::FileTree): Replace the deprecated
+	set_sort_column_id() by set_sort_column().
+	* src/filetreeprivate.cc
+	(FileTree::ScopedBlockSorting::ScopedBlockSorting): ditto
+	(FileTree::ScopedBlockSorting::~ScopedBlockSorting): ditto.
+
+	* src/mainwindow.cc (MainWindow::on_go_next): Use scroll_to()
+	in place of the deprecated scroll_to_mark().
+
+2004-06-19  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* pixmaps/Makefile.am (stockimages.h): Strip the directory prefix
 	from filenames if present, because of the possibility of automatic
 	rule rewriting as done e.g. by SunOS make.

@@ -589,7 +589,7 @@ void MainWindow::on_go_next(bool move_forward)
   {
     if (const Glib::RefPtr<Gtk::TextMark> mark = buffer->get_next_match(move_forward))
     {
-      textview_->scroll_to_mark(mark, 0.125);
+      textview_->scroll_to(mark, 0.125);
       statusline_->set_match_index(buffer->get_match_index());
       return;
     }

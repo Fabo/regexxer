@@ -254,12 +254,12 @@ FileTree::ScopedBlockSorting::ScopedBlockSorting(FileTree& filetree)
   // like that at all, and that's precisely why this utility class exists.
   //
   if (sort_column_ == FileTreePrivate::FileTreeColumns::instance().matchcount.index())
-    filetree_.treestore_->set_sort_column_id(Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID, sort_order_);
+    filetree_.treestore_->set_sort_column(Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID, sort_order_);
 }
 
 FileTree::ScopedBlockSorting::~ScopedBlockSorting()
 {
-  filetree_.treestore_->set_sort_column_id(sort_column_, sort_order_);
+  filetree_.treestore_->set_sort_column(sort_column_, sort_order_);
   filetree_.set_headers_clickable(true);
 }
 
