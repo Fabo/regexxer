@@ -1,5 +1,10 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/translation.cc (compose_impl): Remove superfluous namespace
+	prefix.
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/translation.cc (compose): Optimize and reduce executable
 	size by replacing std::vector<Glib::ustring> by a POD array of
 	pointers to the Glib::ustring arguments.

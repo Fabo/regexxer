@@ -60,7 +60,7 @@ Glib::ustring compose_impl(const Glib::ustring& format,
           continue;
         }
 
-        const Glib::ustring buf (1, uc);
+        const ustring buf (1, uc);
 
         g_warning("Util::compose(): invalid substitution `%%%s' in format string `%s'",
                   buf.c_str(), format.c_str());
