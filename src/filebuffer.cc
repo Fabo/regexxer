@@ -50,6 +50,8 @@ public:
   // This is a global singleton shared by all FileBuffer instances.
   static const Glib::RefPtr<RegexxerTags>& instance();
 
+  TextTagPtr error_message;
+  TextTagPtr error_title;
   TextTagPtr match;
   TextTagPtr current;
 
@@ -60,12 +62,22 @@ protected:
 
 RegexxerTags::RegexxerTags()
 :
-  Gtk::TextTagTable(),
+  error_message (Gtk::TextTag::create("regexxer-error-message")),
+  error_title   (Gtk::TextTag::create("regexxer-error-title")),
   match         (Gtk::TextTag::create("regexxer-match")),
   current       (Gtk::TextTag::create("regexxer-current-match"))
 {
+  error_message->property_wrap_mode()          = Gtk::WRAP_WORD;
+  error_message->property_justification()      = Gtk::JUSTIFY_CENTER;
+  error_message->property_pixels_above_lines() = 10;
+
+  error_title->property_scale() = Pango::SCALE_X_LARGE;
+
   match  ->property_background() = "orange";
   current->property_background() = "yellow";
+
+  add(error_message);
+  add(error_title);
   add(match);
   add(current);
 }
@@ -108,9 +120,10 @@ namespace Regexxer
 
 /**** Regexxer::MatchData **************************************************/
 
-MatchData::MatchData(const Glib::RefPtr<Gtk::TextMark>& position,
+MatchData::MatchData(int match_index, const Glib::RefPtr<Gtk::TextMark>& position,
                      const Glib::ustring& line, const Pcre::Pattern& pattern, int capture_count)
 :
+  index   (match_index),
   mark    (position),
   subject (line)
 {
@@ -137,6 +150,7 @@ FileBuffer::FileBuffer()
   Gtk::TextBuffer       (RegexxerTags::instance()),
   match_list_           (),
   match_count_          (0),
+  original_match_count_ (0),
   current_match_        (match_list_.end()),
   match_removed_        (false),
   bound_state_          (BOUND_FIRST | BOUND_LAST),
@@ -150,6 +164,54 @@ FileBuffer::~FileBuffer()
 Glib::RefPtr<FileBuffer> FileBuffer::create()
 {
   return Glib::RefPtr<FileBuffer>(new FileBuffer());
+}
+
+// static
+Glib::RefPtr<FileBuffer>
+FileBuffer::create_with_error_message(const Glib::RefPtr<Gdk::Pixbuf>& pixbuf,
+                                      const Glib::ustring& message)
+{
+  const Glib::RefPtr<FileBuffer> buffer (new FileBuffer());
+
+  const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
+  iterator pend = buffer->end();
+
+  pend = buffer->insert_pixbuf(pend, pixbuf);
+  pend = buffer->insert_with_tag(pend, "\302\240Load\302\240failed:\n", tagtable->error_title);
+  pend = buffer->insert(pend, message);
+
+  if(!message.empty() && *message.rbegin() != '.')
+    pend = buffer->insert(pend, ".");
+
+  buffer->apply_tag(tagtable->error_message, buffer->begin(), pend);
+
+  return buffer;
+}
+
+// static
+void FileBuffer::pango_context_changed(const Glib::RefPtr<Pango::Context>& context)
+{
+  // This magic code calculates the height to rise the error message title,
+  // so that it's displayed approximately in line with the error icon. By
+  // default the text would appear at the bottom, and since the icon is
+  // about 48 pixels tall this looks incredibly ugly.
+
+  int font_size = context->get_font_description().get_size();
+
+  if(font_size <= 0) // urgh, fall back to some reasonable value
+    font_size = 10 * Pango::SCALE;
+
+  int icon_height = 0, icon_width = 0;
+  Gtk::IconSize::lookup(Gtk::ICON_SIZE_DIALOG, icon_height, icon_width);
+
+  g_return_if_fail(icon_height > 0); // the lookup should never fail for builtin icon sizes
+
+  const int title_size  = int(Pango::SCALE_X_LARGE * font_size);
+  const int rise_height = (icon_height * Pango::SCALE - title_size) / 2;
+
+  const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
+
+  tagtable->error_title->property_rise() = rise_height;
 }
 
 /* Apply pattern on all lines in the buffer and return the number of matches.
@@ -168,6 +230,7 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
     delete_mark(match_list_.front().mark);
 
   g_return_val_if_fail(match_count_ == 0, 0);
+  original_match_count_ = 0;
 
   for(iterator line = begin(); !line.is_end(); line.forward_line())
   {
@@ -199,6 +262,7 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
       }
 
       ++match_count_;
+      ++original_match_count_;
 
       const std::pair<int,int> bounds (pattern.get_substring_bounds(0));
       const int match_length = calculate_match_length(subject, bounds);
@@ -210,7 +274,8 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
       stop .set_line_index(bounds.second);
 
       match_list_.push_back(MatchData(
-          create_match_mark(start, match_length), subject, pattern, capture_count));
+          original_match_count_, create_match_mark(start, match_length),
+          subject, pattern, capture_count));
 
       apply_tag(tagtable->match, start, stop);
 
@@ -227,6 +292,16 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
 int FileBuffer::get_match_count() const
 {
   return match_count_;
+}
+
+int FileBuffer::get_match_index() const
+{
+  return (!match_removed_ && current_match_ != match_list_.end()) ? current_match_->index : 0;
+}
+
+int FileBuffer::get_original_match_count() const
+{
+  return original_match_count_;
 }
 
 /* Move to the next match in the buffer.  If there is a next match
@@ -475,7 +550,7 @@ void FileBuffer::replace_match(std::list<MatchData>::iterator pos, const Glib::u
   // Get the start of the match.
   const iterator start (pos->mark->get_iter());
 
-  const int bytes_length = current_match_->get_bytes_length();
+  const int bytes_length = pos->get_bytes_length();
 
   if(bytes_length > 0)
   {

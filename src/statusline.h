@@ -44,8 +44,8 @@ public:
   void set_file_index(int file_index);
   void set_file_count(int file_count);
 
-  void set_match_index(long match_index);
-  void set_match_count(long match_count);
+  void set_match_index(int match_index);
+  void set_match_count(int match_count);
 
   void pulse();
   void stop_pulse();

@@ -1,3 +1,19 @@
+2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/statusline.cc: Correctly handle signal_style_changed()
+	from the labels rather than the container.
+
+	* src/filebuffer.{cc,h} src/fileio.{cc,h} src/filelist.{cc,h}:
+	Instead of printing error messages to the console, write the
+	message to a text buffer.  Use a dialog error stock image so
+	that it looks good.
+
+	* src/filebuffer.{cc,h} src/filelist.{cc,h} src/mainwindow.{cc,h}:
+	In the match counter, display the number of matches per file rather
+	than the overall match count.  Also, remember this original match
+	count and don't decrease it when removing matches.  Make the match
+	index counter work.
+
 2002-10-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/statusline.{cc,h} (CounterBox): New class encapsulating a

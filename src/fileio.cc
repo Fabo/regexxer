@@ -136,12 +136,7 @@ void load_file(const FileInfoPtr& fileinfo)
 
   channel->close();
 
-  if(!buffer)
-  {
-    const Glib::ustring filename = Util::filename_to_utf8_fallback(fileinfo->fullname);
-    g_message("couldn't convert `%s' to UTF-8", filename.c_str());
-  }
-  else
+  if(buffer)
   {
     buffer->set_modified(false);
 

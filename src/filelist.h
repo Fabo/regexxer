@@ -63,6 +63,7 @@ public:
 
   SigC::Signal2<void,FileInfoPtr,int> signal_switch_buffer;
   SigC::Signal0<void>                 signal_bound_state_changed;
+  SigC::Signal0<void>                 signal_file_count_changed;
   SigC::Signal0<void>                 signal_match_count_changed;
   SigC::Signal0<void>                 signal_modified_count_changed;
   SigC::Signal0<void>                 signal_pulse;
@@ -88,6 +89,8 @@ private:
   Gtk::TreePath                 path_match_first_;
   Gtk::TreePath                 path_match_last_;
 
+  Glib::RefPtr<Gdk::Pixbuf>     error_pixbuf_;
+
   void cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
 
   static int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs,
@@ -99,6 +102,9 @@ private:
   void on_selection_changed();
   void on_buffer_match_count_changed(int match_count);
   void on_buffer_modified_changed();
+
+  void load_file_with_fallback(const FileInfoPtr& fileinfo);
+  Glib::RefPtr<FileBuffer> create_error_message_buffer(const Glib::ustring& message);
 };
 
 } // namespace Regexxer

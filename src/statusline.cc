@@ -40,24 +40,22 @@ public:
   explicit CounterBox(const Glib::ustring& label);
   virtual ~CounterBox();
 
-  void set_index(unsigned long index);
-  void set_count(unsigned long count);
-
-protected:
-  virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
+  void set_index(unsigned int index);
+  void set_count(unsigned int count);
 
 private:
   Gtk::Label*         label_index_;
   Gtk::Label*         label_count_;
-  unsigned long       index_;
+  unsigned int        index_;
   bool                refreshing_;
-  unsigned long       digit_range_;
+  unsigned int        digit_range_;
   std::ostringstream  stringstream_;
 
-  Glib::ustring number_to_string(unsigned long number);
+  Glib::ustring number_to_string(unsigned int number);
   void recalculate_label_width();
   static void set_width_from_string(Gtk::Label& label, const Glib::ustring& text);
 
+  void on_label_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style, Gtk::Label* label);
   bool idle_refresh_label_index();
 };
 
@@ -68,7 +66,7 @@ CounterBox::CounterBox(const Glib::ustring& label)
   label_count_  (0),
   index_        (0),
   refreshing_   (false),
-  digit_range_  (10)
+  digit_range_  (100)
 {
   using namespace Gtk;
 
@@ -90,6 +88,12 @@ CounterBox::CounterBox(const Glib::ustring& label)
   label_count_ = new Label("", 0.0, 0.5);
   box->pack_start(*manage(label_count_), PACK_SHRINK);
 
+  label_index_->signal_style_changed().connect(
+      SigC::bind(SigC::slot(*this, &CounterBox::on_label_style_changed), label_index_));
+
+  label_count_->signal_style_changed().connect(
+      SigC::bind(SigC::slot(*this, &CounterBox::on_label_style_changed), label_count_));
+
 #if REGEXXER_HAVE_STD_LOCALE
   stringstream_.imbue(std::locale(""));
 #endif
@@ -103,7 +107,7 @@ CounterBox::CounterBox(const Glib::ustring& label)
 CounterBox::~CounterBox()
 {}
 
-void CounterBox::set_index(unsigned long index)
+void CounterBox::set_index(unsigned int index)
 {
   // Work around a bug in GTK+ that causes right-aligned labels to be
   // cut off at the end.  The label magically displays correctly if the
@@ -117,18 +121,18 @@ void CounterBox::set_index(unsigned long index)
 
     Glib::signal_idle().connect(
         SigC::slot(*this, &CounterBox::idle_refresh_label_index),
-        Glib::PRIORITY_HIGH_IDLE);
+        Glib::PRIORITY_HIGH_IDLE + 50);
   }
 }
 
-void CounterBox::set_count(unsigned long count)
+void CounterBox::set_count(unsigned int count)
 {
-  unsigned long range = digit_range_;
+  unsigned int range = digit_range_;
 
   while(range <= count)
     range *= 10;
 
-  while(range > 10 && range / 10 > count)
+  while(range > 100 && range / 10 > count)
     range /= 10;
 
   if(range != digit_range_)
@@ -140,13 +144,7 @@ void CounterBox::set_count(unsigned long count)
   label_count_->set_text(number_to_string(count));
 }
 
-void CounterBox::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
-{
-  Gtk::Frame::on_style_changed(previous_style);
-  recalculate_label_width();
-}
-
-Glib::ustring CounterBox::number_to_string(unsigned long number)
+Glib::ustring CounterBox::number_to_string(unsigned int number)
 {
   stringstream_.str(std::string());
   stringstream_ << number;
@@ -169,6 +167,11 @@ void CounterBox::set_width_from_string(Gtk::Label& label, const Glib::ustring& t
   label.create_pango_layout(text)->get_pixel_size(width, height);
   label.get_padding(xpad, ypad);
   label.set_size_request(width + 2 * xpad, -1);
+}
+
+void CounterBox::on_label_style_changed(const Glib::RefPtr<Gtk::Style>&, Gtk::Label* label)
+{
+  set_width_from_string(*label, number_to_string(digit_range_ - 1));
 }
 
 bool CounterBox::idle_refresh_label_index()
@@ -220,12 +223,12 @@ void StatusLine::set_file_count(int file_count)
   file_counter_->set_count(file_count);
 }
 
-void StatusLine::set_match_index(long match_index)
+void StatusLine::set_match_index(int match_index)
 {
   match_counter_->set_index(match_index);
 }
 
-void StatusLine::set_match_count(long match_count)
+void StatusLine::set_match_count(int match_count)
 {
   match_counter_->set_count(match_count);
 }

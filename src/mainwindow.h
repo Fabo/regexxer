@@ -25,6 +25,7 @@
 #include "sharedptr.h"
 
 #include <list>
+#include <pangomm.h>
 #include <gtkmm/tooltips.h>
 #include <gtkmm/window.h>
 
@@ -51,6 +52,9 @@ class MainWindow : public Gtk::Window
 public:
   MainWindow();
   virtual ~MainWindow();
+
+protected:
+  virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 
 private:
   Gtk::Tooltips     tooltips_;
@@ -82,6 +86,7 @@ private:
 
   StatusLine*       statusline_;
 
+  Pango::FontDescription      fileview_font_;
   std::list<SigC::Connection> buffer_connections_;
 
   Gtk::Widget* create_toolbar();
@@ -95,10 +100,10 @@ private:
   bool after_exec_search();
 
   void on_filelist_switch_buffer(Util::SharedPtr<FileInfo> fileinfo, int file_index);
+  void on_filelist_file_count_changed();
   void on_filelist_match_count_changed();
   void on_filelist_modified_count_changed();
   void on_filelist_bound_state_changed();
-  void on_filelist_pulse();
 
   void on_buffer_match_count_changed(int match_count);
   void on_buffer_modified_changed();

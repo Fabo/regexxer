@@ -119,7 +119,8 @@ MainWindow::MainWindow()
   button_replace_       (0),
   button_replace_file_  (0),
   button_replace_all_   (0),
-  statusline_           (0)
+  statusline_           (0),
+  fileview_font_        ("mono")
 {
   using namespace Gtk;
 
@@ -173,18 +174,27 @@ MainWindow::MainWindow()
   filelist_->signal_bound_state_changed.connect(
       SigC::slot(*this, &MainWindow::on_filelist_bound_state_changed));
 
+  filelist_->signal_file_count_changed.connect(
+      SigC::slot(*this, &MainWindow::on_filelist_file_count_changed));
+
   filelist_->signal_match_count_changed.connect(
       SigC::slot(*this, &MainWindow::on_filelist_match_count_changed));
 
   filelist_->signal_modified_count_changed.connect(
       SigC::slot(*this, &MainWindow::on_filelist_modified_count_changed));
 
-  filelist_->signal_pulse.connect(
-      SigC::slot(*this, &MainWindow::on_filelist_pulse));
+  filelist_->signal_pulse.connect(SigC::slot(*statusline_, &StatusLine::pulse));
 }
 
 MainWindow::~MainWindow()
 {}
+
+void MainWindow::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
+{
+  Gtk::Window::on_style_changed(previous_style);
+
+  FileBuffer::pango_context_changed(get_pango_context());
+}
 
 Gtk::Widget* MainWindow::create_toolbar()
 {
@@ -370,10 +380,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_preview_->set_has_frame(false);
   entry_preview_->set_editable(false);
   entry_preview_->unset_flags(CAN_FOCUS);
-
-  const Pango::FontDescription fixed_font ("fixed");
-  textview_     ->modify_font(fixed_font);
-  entry_preview_->modify_font(fixed_font);
+  entry_preview_->modify_font(fileview_font_);
 
   tooltips_.set_tip(*entry_regex_,        "A regular expression in Perl syntax.");
   tooltips_.set_tip(*entry_substitution_, "The new string to substitute. As in Perl, you can "
@@ -439,7 +446,16 @@ void MainWindow::on_exec_search()
   catch(const Pcre::Error& e)
   {
     std::cerr << e.what() << std::endl;
+    statusline_->stop_pulse();
     return;
+  }
+
+  statusline_->stop_pulse();
+
+  if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
+  {
+    statusline_->set_match_count(buffer->get_original_match_count());
+    statusline_->set_match_index(buffer->get_match_index());
   }
 
   if(filelist_->get_match_count() > 0)
@@ -477,41 +493,58 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, int file_index)
     old_buffer->forget_current_match();
   }
 
-  if(fileinfo && fileinfo->buffer)
+  if(fileinfo)
   {
     const FileBufferPtr buffer = fileinfo->buffer;
+    g_return_if_fail(buffer);
 
     textview_->set_buffer(buffer);
-    textview_->set_editable(true);
+    textview_->set_editable(!fileinfo->load_failed);
+
+    if(!fileinfo->load_failed)
+    {
+      textview_->modify_font(fileview_font_);
+
+      buffer_connections_.push_back(buffer->signal_match_count_changed.
+          connect(SigC::slot(*this, &MainWindow::on_buffer_match_count_changed)));
+
+      buffer_connections_.push_back(buffer->signal_modified_changed().
+          connect(SigC::slot(*this, &MainWindow::on_buffer_modified_changed)));
+
+      buffer_connections_.push_back(buffer->signal_bound_state_changed.
+          connect(SigC::slot(*this, &MainWindow::on_buffer_bound_state_changed)));
+
+      buffer_connections_.push_back(buffer->signal_preview_line_changed.
+          connect(SigC::slot(*this, &MainWindow::update_preview)));
+    }
+    else
+    {
+      textview_->modify_font(get_pango_context()->get_font_description());
+    }
 
     set_title_filename(Util::filename_to_utf8_fallback(fileinfo->fullname));
-
-    buffer_connections_.push_back(buffer->signal_match_count_changed.
-        connect(SigC::slot(*this, &MainWindow::on_buffer_match_count_changed)));
-
-    buffer_connections_.push_back(buffer->signal_modified_changed().
-        connect(SigC::slot(*this, &MainWindow::on_buffer_modified_changed)));
-
-    buffer_connections_.push_back(buffer->signal_bound_state_changed.
-        connect(SigC::slot(*this, &MainWindow::on_buffer_bound_state_changed)));
-
-    buffer_connections_.push_back(buffer->signal_preview_line_changed.
-        connect(SigC::slot(*this, &MainWindow::update_preview)));
 
     on_buffer_match_count_changed(buffer->get_match_count());
     on_buffer_modified_changed();
     on_buffer_bound_state_changed(buffer->get_bound_state());
+
+    statusline_->set_match_count(buffer->get_original_match_count());
+    statusline_->set_match_index(buffer->get_match_index());
   }
   else
   {
     textview_->set_buffer(FileBuffer::create());
     textview_->set_editable(false);
+    textview_->modify_font(get_pango_context()->get_font_description());
 
     set_title_filename();
 
     on_buffer_match_count_changed(0);
     on_buffer_modified_changed();
     on_buffer_bound_state_changed(BOUND_FIRST | BOUND_LAST);
+
+    statusline_->set_match_count(0);
+    statusline_->set_match_index(0);
   }
 
   statusline_->set_file_index(file_index);
@@ -532,23 +565,19 @@ void MainWindow::on_filelist_bound_state_changed()
   button_next_->set_sensitive((bound & BOUND_LAST)  == 0);
 }
 
+void MainWindow::on_filelist_file_count_changed()
+{
+  statusline_->set_file_count(filelist_->get_file_count());
+}
+
 void MainWindow::on_filelist_match_count_changed()
 {
-  const long match_count = filelist_->get_match_count();
-
-  statusline_->set_match_count(match_count);
-  button_replace_all_->set_sensitive(match_count > 0);
+  button_replace_all_->set_sensitive(filelist_->get_match_count() > 0);
 }
 
 void MainWindow::on_filelist_modified_count_changed()
 {
   toolbutton_save_all_->set_sensitive(filelist_->get_modified_count() > 0);
-}
-
-void MainWindow::on_filelist_pulse()
-{
-  statusline_->set_file_count(filelist_->get_file_count());
-  statusline_->pulse();
 }
 
 void MainWindow::on_buffer_match_count_changed(int match_count)
@@ -582,6 +611,7 @@ void MainWindow::on_go_next(bool move_forward)
     if(const Glib::RefPtr<Gtk::TextMark> mark = buffer->get_next_match(move_forward))
     {
       textview_->scroll_to_mark(mark, 0.2);
+      statusline_->set_match_index(buffer->get_match_index());
       return;
     }
   }
@@ -606,12 +636,14 @@ void MainWindow::on_replace_file()
   if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
   {
     buffer->replace_all_matches(entry_substitution_->get_text());
+    statusline_->set_match_index(0);
   }
 }
 
 void MainWindow::on_replace_all()
 {
   filelist_->replace_all_matches(entry_substitution_->get_text());
+  statusline_->set_match_index(0);
 }
 
 void MainWindow::update_preview()

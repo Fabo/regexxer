@@ -72,12 +72,13 @@ inline BoundState& operator^=(BoundState& lhs, BoundState rhs)
 //
 struct MatchData
 {
-  MatchData(const Glib::RefPtr<Gtk::TextMark>& position,
+  MatchData(int match_index, const Glib::RefPtr<Gtk::TextMark>& position,
             const Glib::ustring& line, const Pcre::Pattern& pattern, int capture_count);
   ~MatchData();
 
   int get_bytes_length() const;
 
+  int                               index;
   Glib::RefPtr<Gtk::TextMark>       mark;
   Glib::ustring                     subject;
   std::vector< std::pair<int,int> > captures;
@@ -88,11 +89,19 @@ class FileBuffer : public Gtk::TextBuffer
 {
 public:
   static Glib::RefPtr<FileBuffer> create();
+  static Glib::RefPtr<FileBuffer> create_with_error_message(
+      const Glib::RefPtr<Gdk::Pixbuf>& pixbuf, const Glib::ustring& message);
+
+  static void pango_context_changed(const Glib::RefPtr<Pango::Context>& context);
+
   virtual ~FileBuffer();
 
   int find_matches(Pcre::Pattern& pattern, bool multiple);
 
   int get_match_count() const;
+  int get_match_index() const;
+  int get_original_match_count() const;
+
   Glib::RefPtr<Mark> get_next_match(bool move_forward);
   void forget_current_match();
 
@@ -117,6 +126,7 @@ protected:
 private:
   std::list<MatchData>            match_list_;
   int                             match_count_;
+  int                             original_match_count_;
   std::list<MatchData>::iterator  current_match_;
   bool                            match_removed_;
   BoundState                      bound_state_;
@@ -144,5 +154,5 @@ private:
 
 } // namespace Regexxer
 
-#endif
+#endif /* REGEXXER_FILEBUFFER_H_INCLUDED */
 

@@ -21,7 +21,9 @@
 #include "filelist.h"
 #include "pcreshell.h"
 #include "stringutils.h"
+
 #include <gtkmm/liststore.h>
+#include <gtkmm/stock.h>
 
 
 namespace
@@ -144,6 +146,8 @@ void FileList::find_files(const Glib::ustring& dirname,
 
   get_selection()->unselect_all(); // workaround for GTK+ <= 2.0.6 (#94868)
   liststore_->clear();
+
+  error_pixbuf_.clear();
 
   file_count_     = 0;
   modified_count_ = 0;
@@ -320,15 +324,17 @@ void FileList::find_matches(Pcre::Pattern& pattern, bool multiple)
 
   for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
   {
+    signal_pulse(); // emit
+
     const FileInfoPtr fileinfo = (*iter)[columns.fileinfo];
 
-    if(!fileinfo->buffer)
-    {
-      load_file(fileinfo);
+    if(!fileinfo->load_failed && !fileinfo->buffer)
+      load_file_with_fallback(fileinfo);
 
-      if(!fileinfo->buffer)
-        continue;
-    }
+    if(fileinfo->load_failed)
+      continue;
+
+    g_return_if_fail(fileinfo->buffer);
 
     const int n_matches = fileinfo->buffer->find_matches(pattern, multiple);
 
@@ -462,6 +468,7 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
     if((++find_data.iteration % FIND_UPDATE_INTERVAL) == 0)
     {
       signal_pulse(); // emit
+      signal_file_count_changed(); // emit
 
       const RefPtr<MainContext> main_context = MainContext::get_default();
       while(!find_stop_ && main_context->iteration(false)) {}
@@ -556,9 +563,9 @@ void FileList::on_selection_changed()
     fileinfo = (*iter)[columns.fileinfo];
 
     if(!fileinfo->buffer)
-      load_file(fileinfo);
+      load_file_with_fallback(fileinfo);
 
-    if(fileinfo->buffer)
+    if(!fileinfo->load_failed)
     {
       conn_match_count_ = fileinfo->buffer->signal_match_count_changed.
           connect(SigC::slot(*this, &FileList::on_buffer_match_count_changed));
@@ -668,6 +675,37 @@ void FileList::on_buffer_modified_changed()
 
   liststore_->row_changed(Gtk::TreePath(iter), iter);
   signal_modified_count_changed(); // emit
+}
+
+void FileList::load_file_with_fallback(const FileInfoPtr& fileinfo)
+{
+  try
+  {
+    load_file(fileinfo);
+  }
+  catch(const Glib::Error& error)
+  {
+    fileinfo->buffer = create_error_message_buffer(error.what());
+  }
+
+  if(!fileinfo->buffer)
+  {
+    g_return_if_fail(fileinfo->load_failed);
+
+    Glib::ustring message = "\302\273";
+    message += Util::filename_to_utf8_fallback(Glib::path_get_basename(fileinfo->fullname));
+    message += "\302\253 seems to be a binary file.";
+
+    fileinfo->buffer = create_error_message_buffer(message);
+  }
+}
+
+Glib::RefPtr<FileBuffer> FileList::create_error_message_buffer(const Glib::ustring& message)
+{
+  if(!error_pixbuf_)
+    error_pixbuf_ = render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG);
+
+  return FileBuffer::create_with_error_message(error_pixbuf_, message);
 }
 
 } // namespace Regexxer
