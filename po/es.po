@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-07-18 12:24+0200\n"
-"PO-Revision-Date: 2004-07-18 12:37+0200\n"
+"PO-Revision-Date: 2004-07-31 12:39+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -171,19 +171,21 @@ msgstr "Pruebe con «regexxer --help» para más información."
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
-msgstr ""
+msgstr "Un patrón de nombres de archivos tal como se usa por el shell. Las clases de caracteres [ab] y las expresiones de llaves estilo csh, {a,b} están soportadas."
 
 #: src/mainwindow.cc:403
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
 msgstr ""
+"Algunos archivos no han sido guardados aún.\n"
+"¿Desea salir de todas formas?"
 
 #: src/mainwindow.cc:431
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
-msgstr ""
+msgstr "El nombre de carpeta «%1» contiene caracteres no representables en la codificación del sistema de archivos local."
 
 #: src/mainwindow.cc:450
 msgid "Select a folder"
@@ -210,12 +212,16 @@ msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
 msgstr ""
+"Error en la expresión regular en «%1» (índice %2):\n"
+"%3"
 
 #: src/mainwindow.cc:529
 msgid ""
 "Error in regular expression:\n"
 "%1"
 msgstr ""
+"Error en la expresión regular:\n"
+"%1"
 
 #: src/mainwindow.cc:751
 msgid "The following errors occurred during save:"
@@ -223,17 +229,17 @@ msgstr "Los siguientes errores ocurrieron al guardar:"
 
 #: src/pcreshell.cc:59
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
+msgstr "El uso de la secuencia de escap \\C para coincidir un byte único no está soportada."
 
 #: src/pcreshell.cc:151
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
-msgstr ""
+msgstr "Se alcanzó el límite de recursión y vuelta atrás del motor de expresiones regulares."
 
 #: src/prefdialog.cc:248
 msgid "\"%1\" is not a valid encoding."
-msgstr ""
+msgstr "«%1» no es una codificación válida."
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -258,7 +264,7 @@ msgstr "Acerca de regexxer"
 
 #: ui/aboutdialog.glade.h:2
 msgid "The application icon of regexxer"
-msgstr ""
+msgstr "El icono de aplicación de regexxer"
 
 #: ui/aboutdialog.glade.h:3
 msgid "regexxer icon"
@@ -298,15 +304,15 @@ msgstr "Encontrar todos los archivos que coincidan con el patrón en el nombre d
 
 #: ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
-msgstr ""
+msgstr "Buscar todas las coincidencias de la expresión regular"
 
 #: ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
-msgstr ""
+msgstr "Buscar todas las posibles coincidencias en una línea"
 
 #: ui/mainwindow.glade.h:11
 msgid "Find fi_les"
-msgstr ""
+msgstr "Buscar _archivos"
 
 #: ui/mainwindow.glade.h:12
 msgid "Fol_der:"
@@ -322,7 +328,7 @@ msgstr "Ir a la siguiente coincidencia"
 
 #: ui/mainwindow.glade.h:15
 msgid "Go to previous match"
-msgstr ""
+msgstr "Ir a la anterior coincidencia"
 
 #: ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
@@ -389,7 +395,7 @@ msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
 "\\L, \\U and \\E are supported as well."
-msgstr ""
+msgstr "La cadena nueva a sustituir. Como en Perl, puede referirse a partes de la coincidencia usando $1, $2, etc. o incluso $+, $&, $` y $'. Los operadores \\l, \\u, \\L, \\U y \\E están soportados también."
 
 #: ui/mainwindow.glade.h:32
 msgid "_All files"
@@ -437,23 +443,23 @@ msgstr "recursivo"
 
 #: ui/prefdialog.glade.h:1
 msgid "1."
-msgstr ""
+msgstr "1."
 
 #: ui/prefdialog.glade.h:2
 msgid "2."
-msgstr ""
+msgstr "2."
 
 #: ui/prefdialog.glade.h:3
 msgid "3."
-msgstr ""
+msgstr "3."
 
 #: ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
-msgstr ""
+msgstr "Color actual de _coincidencia:"
 
 #: ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
-msgstr ""
+msgstr "_Codificación en caso de error:"
 
 #: ui/prefdialog.glade.h:6
 msgid ""
@@ -462,6 +468,10 @@ msgid ""
 "Icons and text\n"
 "Both horizontal"
 msgstr ""
+"Sólo iconos\n"
+"Sólo texto\n"
+"Iconos y texto\n"
+"Ambos horizontal"
 
 #: ui/prefdialog.glade.h:10
 msgid "Preferences"
@@ -469,11 +479,11 @@ msgstr "Preferencias"
 
 #: ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
-msgstr ""
+msgstr "La codificación especificada por la localización actual"
 
 #: ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
-msgstr ""
+msgstr "Estilo de la barra de _herramientas:"
 
 #: ui/prefdialog.glade.h:13
 msgid "UTF-8"
@@ -485,17 +495,17 @@ msgstr "Acceso al _archivo"
 
 #: ui/prefdialog.glade.h:15
 msgid "_Look'n'feel"
-msgstr ""
+msgstr "_Apariencia"
 
 #: ui/prefdialog.glade.h:16
 msgid "_Match color:"
-msgstr ""
+msgstr "Color de _coincidencia:"
 
 #: ui/prefdialog.glade.h:17
 msgid "_Text view font:"
-msgstr ""
+msgstr "Tipografía de la vista de _texto:"
 
 #: ui/prefdialog.glade.h:18
 msgid "regexxer attempts to read a file in the following encodings before giving up:"
-msgstr ""
+msgstr "regexxer intenta leer un archivo en las siguientes codificaciones antes de dejarlo:"
 
