@@ -59,12 +59,16 @@ regexxer_SOURCES =		\
 	undostack.cc		\
 	undostack.h
 
+dist_noinst_DATA = exported-symbols
+
 global_defines = \
 -DREGEXXER_DATADIR=\""$(datadir)"\" \
 -DREGEXXER_PKGDATADIR=\""$(pkgdatadir)"\" \
 -DREGEXXER_GCONF_DIRECTORY=\""$(REGEXXER_GCONF_DIRECTORY)"\" \
 -DGTKMM_DISABLE_DEPRECATED
 
-AM_CPPFLAGS    = -I$(top_builddir) -I$(top_srcdir) $(global_defines) $(PKG_CFLAGS) $(PCRE_CFLAGS)
+AM_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir) $(global_defines) $(PKG_CFLAGS) $(PCRE_CFLAGS)
+regexxer_DEPENDENCIES = exported-symbols
+regexxer_LDFLAGS = $(REGEXXER_VERSION_SCRIPT)
 regexxer_LDADD = $(LIBINTL) $(PKG_LIBS) $(PCRE_LIBS)
 

@@ -1,3 +1,18 @@
+2004-07-06  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/exported-symbols: New file; an ld version script which lists
+	the symbols that should be exported explicitely.  Using that makes
+	the stripped regexxer binary more than 100k smaller!
+
+	* macros/cxx.m4 (REGEXXER_CXXLINK_VERSION_SCRIPT): New macro to
+	test if the linker supports the -Wl,--version-script argument.
+
+	* configure.ac: Call REGEXXER_CXXLINK_VERSION_SCRIPT().
+
+	* src/Makefile.am (dist_noinst_DATA): Distribute exported-symbols.
+	(regexxer_DEPENDENCIES): Depend on exported-symbols.
+	(regexxer_LDFLAGS): Pass $(REGEXXER_VERSION_SCRIPT) to the linker.
+
 2004-07-05  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/aboutdialog.cc (apply_label_what_markup): Rename from
