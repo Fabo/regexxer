@@ -24,7 +24,6 @@
 
 #include <gtkmm/treestore.h>
 #include <gtkmm/stock.h>
-#include <stack>
 #include <utility>
 
 
