@@ -1,5 +1,12 @@
 2002-12-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.cc (scale_to_8bit): Don't try to round to the
+	nearest value.  This fixes a fun bug that caused the orange color
+	of the current match to become slightly brighter on each config
+	load/save cycle.
+
+2002-12-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* pixmaps/Makefile.am (stockimages.h): Beautify by printing the
 	actual command line that is executed, rather than the shell code
 	to build it.  This is also what autoconf does in its rules.

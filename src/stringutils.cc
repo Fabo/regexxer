@@ -66,9 +66,10 @@ bool IsSignificantEncodingChar::operator()(char c) const
   return true;
 }
 
+inline
 unsigned int scale_to_8bit(unsigned int value)
 {
-  return std::min(255u, (value + 128) / 256);
+  return (value >> 8) & 0xFF;
 }
 
 inline
