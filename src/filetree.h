@@ -139,7 +139,8 @@ private:
 
   void expand_and_select(const Gtk::TreePath& path);
 
-  void on_treestore_sort_column_changed();
+  void on_treestore_rows_reordered(const Gtk::TreeModel::Path& path,
+                                   const Gtk::TreeModel::iterator& iter, int* order);
   void on_selection_changed();
   void on_buffer_match_count_changed();
   void on_buffer_modified_changed();

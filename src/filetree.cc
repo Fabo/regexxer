@@ -74,8 +74,8 @@ FileTree::FileTree()
   treestore_->set_sort_func(model_columns.collatekey, &collatekey_sort_func);
   treestore_->set_sort_column_id(TreeStore::DEFAULT_SORT_COLUMN_ID, SORT_ASCENDING);
 
-  treestore_->signal_sort_column_changed().connect(
-      sigc::mem_fun(*this, &FileTree::on_treestore_sort_column_changed));
+  treestore_->signal_rows_reordered().connect(
+      sigc::mem_fun(*this, &FileTree::on_treestore_rows_reordered));
 
   {
     Column *const column = new Column(_("File"));
@@ -569,15 +569,13 @@ bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMa
 
     if (new_match_count > 0)
     {
-      const Gtk::TreePath path (iter);
-
       if (!find_data->path_match_first_set)
       {
-        path_match_first_ = path;
         find_data->path_match_first_set = true;
+        path_match_first_ = iter;
       }
 
-      path_match_last_ = path;
+      path_match_last_ = iter;
     }
 
     if (new_match_count != old_match_count)
@@ -736,38 +734,50 @@ void FileTree::expand_and_select(const Gtk::TreePath& path)
   scroll_to_row(path); // lazy scrolling implemented since GTK+ 2.1.4
 }
 
-void FileTree::on_treestore_sort_column_changed()
+void FileTree::on_treestore_rows_reordered(const Gtk::TreeModel::Path& path,
+                                           const Gtk::TreeModel::iterator& iter, int*)
 {
-  const FileTreeColumns& columns = FileTreeColumns::instance();
-
   if (sum_matches_ > 0)
   {
-    Gtk::TreeModel::iterator first = treestore_->children().begin();
+    const FileTreeColumns& columns = FileTreeColumns::instance();
+    bool bounds_changed = false;
 
-    while (first->children() && (*first)[columns.matchcount] > 0)
-      first = first->children().begin();
-
-    if ((*first)[columns.matchcount] == 0)
+    if (path.is_ancestor(path_match_first_))
     {
-      const bool found_first = next_match_file(first);
-      g_return_if_fail(found_first);
+      Gtk::TreeModel::iterator first = iter->children().begin();
+
+      while (first->children() && (*first)[columns.matchcount] > 0)
+        first = first->children().begin();
+
+      if ((*first)[columns.matchcount] == 0)
+      {
+        const bool found_first = next_match_file(first);
+        g_return_if_fail(found_first);
+      }
+
+      path_match_first_ = first;
+      bounds_changed = true;
     }
 
-    Gtk::TreeModel::iterator last = treestore_->children()[treestore_->children().size() - 1];
-
-    while (last->children() && (*last)[columns.matchcount] > 0)
-      last = last->children()[last->children().size() - 1];
-
-    if ((*last)[columns.matchcount] == 0)
+    if (path.is_ancestor(path_match_last_))
     {
-      const bool found_last = prev_match_file(last);
-      g_return_if_fail(found_last);
+      Gtk::TreeModel::iterator last = iter->children()[iter->children().size() - 1];
+
+      while (last->children() && (*last)[columns.matchcount] > 0)
+        last = last->children()[last->children().size() - 1];
+
+      if ((*last)[columns.matchcount] == 0)
+      {
+        const bool found_last = prev_match_file(last);
+        g_return_if_fail(found_last);
+      }
+
+      path_match_last_ = last;
+      bounds_changed = true;
     }
 
-    path_match_first_ = first;
-    path_match_last_  = last;
-
-    signal_bound_state_changed(); // emit
+    if (bounds_changed)
+      signal_bound_state_changed(); // emit
   }
 }
 

@@ -1,3 +1,14 @@
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filetree.{cc,h} (FileTree::on_treestore_rows_reordered):
+	New signal handler which updates the match boundaries defined by
+	the [path_match_first_, path_match_last_] range.  Previously this
+	has been handled in on_treestore_sort_column_changed(), which is
+	unfortunately called before the actual sorting takes place.
+	(FileTree::on_treestore_sort_column_changed): Remove.
+	(FileTree::FileTree): Connect to signal_rows_reordered() instead
+	of signal_sort_column_changed().
+
 2004-05-31  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filetreeprivate.{cc,h} (FileTreeColumns::instance): New
