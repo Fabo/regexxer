@@ -301,7 +301,7 @@ FileTree::FileTree()
   }
 
   treestore_->set_sort_func(model_columns.collatekey.index(), &collatekey_sort_func_dirs_first);
-  treestore_->set_sort_column_id(model_columns.collatekey, Gtk::SORT_ASCENDING);
+  treestore_->set_sort_column_id(model_columns.collatekey, SORT_ASCENDING);
 
   set_search_column(0);
 
