@@ -76,9 +76,9 @@ PrefDialog::PrefDialog(Gtk::Window& parent)
 
   add_button(Stock::CLOSE, RESPONSE_CLOSE);
 
-  Box *const box = get_vbox();
+  Box& box = *get_vbox();
   Notebook *const notebook = new Notebook();
-  box->pack_start(*manage(notebook));
+  box.pack_start(*manage(notebook));
 
   {
     std::auto_ptr<Widget> label (new ImageLabel(Stock::PREFERENCES, "_Look'n'feel"));
