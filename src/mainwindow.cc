@@ -463,7 +463,7 @@ void MainWindow::on_select_folder()
 
   if(filesel.run() == Gtk::RESPONSE_OK)
   {
-    const Glib::ustring filename = filename_to_utf8(filesel.get_filename());
+    const ustring filename = filename_to_utf8(filesel.get_filename());
 
     entry_folder_->set_text(Util::shorten_pathname(path_get_dirname(filename)));
 
