@@ -1,3 +1,11 @@
+2002-11-22  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/Makefile.am (DEFS): Don't use backslash quoting inside the
+	double-quoted string.  Rather, quote the outer pair of double-
+	quotes with backslashes.  I reckon it's more portable not to use
+	backslash quoting inside double-quoted strings since most other
+	packages seem to avoid it too.
+
 2002-11-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* configure.ac (AC_TYPE_MODE_T): Eeek, this macro makes use of a
