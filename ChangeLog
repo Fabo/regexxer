@@ -1,5 +1,10 @@
 2002-11-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filebuffer.{cc,h} (signal_preview_line_changed): Use the
+	new Util::QueuedSignal rather than queuing manually.
+
+2002-11-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/signalutils.{cc,h}: New files containing various sigc++
 	related utilities.  For now, there's only Util::QueuedSignal,
 	which implements a SigC::Signal0<void> that is emitted when the

@@ -23,7 +23,6 @@
 #include "stringutils.h"
 
 #include <algorithm>
-#include <glibmm.h>
 
 
 namespace
@@ -187,7 +186,6 @@ FileBuffer::FileBuffer()
   current_match_        (match_list_.end()),
   match_removed_        (false),
   bound_state_          (BOUND_FIRST | BOUND_LAST),
-  preview_line_changed_ (false),
   locked_               (false)
 {}
 
@@ -510,7 +508,7 @@ void FileBuffer::on_insert(const FileBuffer::iterator& pos, const Glib::ustring&
       find_line_bounds(lbegin, lend);
 
       if(pos.in_range(lbegin, lend))
-        queue_preview_line_changed();
+        signal_preview_line_changed.queue();
     }
 
     const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
@@ -539,7 +537,7 @@ void FileBuffer::on_erase(const FileBuffer::iterator& rbegin, const FileBuffer::
     find_line_bounds(lbegin, lend);
 
     if(lbegin.in_range(rbegin, rend) || rbegin.in_range(lbegin, lend))
-      queue_preview_line_changed();
+      signal_preview_line_changed.queue();
   }
 
   const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
@@ -699,7 +697,7 @@ void FileBuffer::remove_tag_current()
       current_match_->mark->set_visible(false);
     }
 
-    queue_preview_line_changed();
+    signal_preview_line_changed.queue();
   }
 }
 
@@ -729,7 +727,7 @@ void FileBuffer::apply_tag_current()
 
     place_cursor(start);
 
-    queue_preview_line_changed();
+    signal_preview_line_changed.queue();
   }
 }
 
@@ -785,31 +783,6 @@ void FileBuffer::update_bound_state()
 
   if(bound_state_ != old_bound_state)
     signal_bound_state_changed(bound_state_); // emit
-}
-
-void FileBuffer::queue_preview_line_changed()
-{
-  // Collect subsequent emission requests and emit only once,
-  // as soon as the GLib main loop is idle again.
-
-  if(!preview_line_changed_)
-  {
-    preview_line_changed_ = true;
-
-    Glib::signal_idle().connect(
-        SigC::slot(*this, &FileBuffer::preview_line_changed_idle_callback),
-        Glib::PRIORITY_HIGH_IDLE);
-  }
-}
-
-bool FileBuffer::preview_line_changed_idle_callback()
-{
-  signal_preview_line_changed(); // emit
-
-  // Tell queue_preview_line_changed() that we've done the update.
-  preview_line_changed_ = false;
-
-  return false; // disconnect callback
 }
 
 } // namespace Regexxer

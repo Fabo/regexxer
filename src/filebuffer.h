@@ -21,6 +21,8 @@
 #ifndef REGEXXER_FILEBUFFER_H_INCLUDED
 #define REGEXXER_FILEBUFFER_H_INCLUDED
 
+#include "signalutils.h"
+
 #include <list>
 #include <utility>
 #include <vector>
@@ -116,7 +118,7 @@ public:
 
   SigC::Signal1<void,int>         signal_match_count_changed;
   SigC::Signal1<void,BoundState>  signal_bound_state_changed;
-  SigC::Signal0<void>             signal_preview_line_changed;
+  Util::QueuedSignal              signal_preview_line_changed;
   SigC::Signal0<bool>             signal_pulse;
 
 protected:
@@ -135,7 +137,6 @@ private:
   std::list<MatchData>::iterator  current_match_;
   bool                            match_removed_;
   BoundState                      bound_state_;
-  bool                            preview_line_changed_;
   bool                            locked_;
 
   void replace_match(std::list<MatchData>::iterator pos, const Glib::ustring& substitution);
@@ -154,8 +155,6 @@ private:
   static void find_line_bounds(iterator& line_begin, iterator& line_end);
 
   void update_bound_state();
-  void queue_preview_line_changed();
-  bool preview_line_changed_idle_callback();
 
   // Work-around for silly, stupid, and annoying gcc 2.95.x.
   friend class FileBuffer::ScopedLock;
