@@ -52,7 +52,9 @@ do
   fi
 done
 
+rm -f config.guess config.sub depcomp install-sh missing mkinstalldirs
 rm -f config.cache acconfig.h
+rm -rf autom4te.cache
 
 echo "$aclocal $ACLOCAL_FLAGS"
 "$aclocal" $ACLOCAL_FLAGS || exit 1

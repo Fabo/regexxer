@@ -1,5 +1,10 @@
 2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* autogen.sh: Delete all scripts and symbolic links that will
+	be recreated by automake --add-missing.
+
+2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* regexxer.desktop: Set StartupNotify=true in order to take
 	advantage of the startup notification feature in GNOME 2.1.
 
