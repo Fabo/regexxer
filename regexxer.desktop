@@ -2,9 +2,10 @@
 Encoding=UTF-8
 Name=regexxer
 Comment=An interactive tool for performing search and replace operations
-Icon=regexxer.png
+Comment[de]=Ein interaktives Werkzeug zum Suchen und Ersetzen
 Exec=regexxer
+Icon=regexxer.png
 Terminal=false
 StartupNotify=true
 Type=Application
-Categories=GNOME;Application;Development;
+Categories=Application;Development;

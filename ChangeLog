@@ -1,5 +1,11 @@
 2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* regexxer.desktop: Add Comment[de] translation, and remove GNOME
+	from Categories.  Recent GNOME applications don't seem to specify
+	this category anymore.
+
+2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/pcreshell.cc (escape_non_ascii): New function to work around
 	a crash in libpcre when using literal UTF-8 in character classes.
 	This still won't make it work, but prevents the crash and forces
