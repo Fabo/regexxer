@@ -1,3 +1,8 @@
+2002-11-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/mainwindow.cc: Use sentence case for all tool tips, as
+	suggested by Ross Burton.
+
 2002-11-15  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/sharedptr.cc: Remove already unused debug code.  The

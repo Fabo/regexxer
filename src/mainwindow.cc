@@ -423,12 +423,12 @@ Gtk::Widget* MainWindow::create_left_pane()
   scrollwin->add(*manage(filetree_));
   scrollwin->set_policy(POLICY_AUTOMATIC, POLICY_ALWAYS);
 
-  tooltips_.set_tip(*entry_folder_,     "The directory to be searched.");
+  tooltips_.set_tip(*entry_folder_,     "The directory to be searched");
   tooltips_.set_tip(*entry_pattern_,    "A filename pattern as used by the shell. "
                                         "Character classes [ab] and csh style "
                                         "brace expressions {a,b} are supported.");
-  tooltips_.set_tip(*button_recursive_, "recurse into subdirectories");
-  tooltips_.set_tip(*button_hidden_,    "also find hidden files");
+  tooltips_.set_tip(*button_recursive_, "Recurse into subdirectories");
+  tooltips_.set_tip(*button_hidden_,    "Also find hidden files");
 
   return vbox.release();
 }
@@ -485,13 +485,13 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_preview_->unset_flags(CAN_FOCUS);
   entry_preview_->modify_font(fileview_font_);
 
-  tooltips_.set_tip(*entry_regex_,        "A regular expression in Perl syntax.");
+  tooltips_.set_tip(*entry_regex_,        "A regular expression in Perl syntax");
   tooltips_.set_tip(*entry_substitution_, "The new string to substitute. As in Perl, you can "
                                           "refer to parts of the match using $1, $2, etc. "
                                           "or even $+, $&, $` and $'. The operators "
                                           "\\l, \\u, \\L, \\U and \\E are supported as well.");
-  tooltips_.set_tip(*button_multiple_,    "find all possible matches in a line");
-  tooltips_.set_tip(*button_caseless_,    "do case insensitive matching");
+  tooltips_.set_tip(*button_multiple_,    "Find all possible matches in a line");
+  tooltips_.set_tip(*button_caseless_,    "Do case insensitive matching");
 
   return vbox.release();
 }
