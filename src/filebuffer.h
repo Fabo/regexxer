@@ -154,7 +154,7 @@ private:
   static void find_line_bounds(iterator& line_begin, iterator& line_end);
 
   void update_bound_state();
-  void trigger_preview_line_changed();
+  void queue_preview_line_changed();
   bool preview_line_changed_idle_callback();
 
   // Work-around for silly, stupid, and annoying gcc 2.95.x.

@@ -510,7 +510,7 @@ void FileBuffer::on_insert(const FileBuffer::iterator& pos, const Glib::ustring&
       find_line_bounds(lbegin, lend);
 
       if(pos.in_range(lbegin, lend))
-        trigger_preview_line_changed();
+        queue_preview_line_changed();
     }
 
     const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
@@ -539,7 +539,7 @@ void FileBuffer::on_erase(const FileBuffer::iterator& rbegin, const FileBuffer::
     find_line_bounds(lbegin, lend);
 
     if(lbegin.in_range(rbegin, rend) || rbegin.in_range(lbegin, lend))
-      trigger_preview_line_changed();
+      queue_preview_line_changed();
   }
 
   const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
@@ -699,7 +699,7 @@ void FileBuffer::remove_tag_current()
       current_match_->mark->set_visible(false);
     }
 
-    trigger_preview_line_changed();
+    queue_preview_line_changed();
   }
 }
 
@@ -729,7 +729,7 @@ void FileBuffer::apply_tag_current()
 
     place_cursor(start);
 
-    trigger_preview_line_changed();
+    queue_preview_line_changed();
   }
 }
 
@@ -787,7 +787,7 @@ void FileBuffer::update_bound_state()
     signal_bound_state_changed(bound_state_); // emit
 }
 
-void FileBuffer::trigger_preview_line_changed()
+void FileBuffer::queue_preview_line_changed()
 {
   // Collect subsequent emission requests and emit only once,
   // as soon as the GLib main loop is idle again.
@@ -806,7 +806,7 @@ bool FileBuffer::preview_line_changed_idle_callback()
 {
   signal_preview_line_changed(); // emit
 
-  // Tell trigger_preview_line_changed() that we've done the update.
+  // Tell queue_preview_line_changed() that we've done the update.
   preview_line_changed_ = false;
 
   return false; // disconnect callback
