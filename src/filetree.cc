@@ -501,23 +501,26 @@ bool FileTree::on_button_release_event(GdkEventButton* event)
   if(Gtk::TreeView::on_button_release_event(event))
     return true;
 
-  if(event->button == 1)
+  switch(event->button)
   {
-    Gtk::TreePath path;
-    Column* column = 0;
-    int cell_x = 0;
-    int cell_y = 0;
-
-    if(get_path_at_pos(int(event->x), int(event->y), path, column, cell_x, cell_y) &&
-       treestore_->get_iter(path)->children())
+    case 1: case 2: case 3:
     {
-      if(row_expanded(path))
-        collapse_row(path);
-      else
-        expand_row(path, false);
-    }
+      Gtk::TreePath path;
+      Column* column = 0;
+      int cell_x = 0;
+      int cell_y = 0;
 
-    return true; // event handled
+      if(get_path_at_pos(int(event->x), int(event->y), path, column, cell_x, cell_y) &&
+         treestore_->get_iter(path)->children())
+      {
+        if(row_expanded(path))
+          collapse_row(path);
+        else
+          expand_row(path, false);
+      }
+
+      return true; // event handled
+    }
   }
 
   return false; // continue emission
