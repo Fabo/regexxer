@@ -327,7 +327,7 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
       const MatchDataPtr match (new MatchData(
           original_match_count_, subject, pattern, capture_count));
 
-      match_set_.insert(match_set_.end(), match); // triggers on_insert()
+      match_set_.insert(match_set_.end(), match);
       match->install_mark(start);
 
       apply_tag(tagtable->match, start, stop);
