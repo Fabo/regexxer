@@ -1,3 +1,7 @@
+2004-07-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ui/mainwindow.glade (hbox_file): Increase "spacing" to 9.
+
 2004-07-06  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/exported-symbols: New file; an ld version script which lists

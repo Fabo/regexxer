@@ -611,7 +611,7 @@
 			<widget class="GtkHBox" id="hbox_file">
 			  <property name="visible">True</property>
 			  <property name="homogeneous">False</property>
-			  <property name="spacing">6</property>
+			  <property name="spacing">9</property>
 
 			  <child>
 			    <widget class="GtkVBox" id="vbox_options">
