@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=regexxer
-_Comment=An interactive tool for performing search and replace operations
+_Name=regexxer Search Tool
+_Comment=Search and replace using regular expressions
 Exec=regexxer
 Icon=regexxer.png
 Terminal=false

@@ -1,5 +1,10 @@
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* regexxer.desktop (Name): Use _Name to make it translatable, and
+	change the string to "regexxer Search Tool".  Idea from Dag Wieers.
+
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.cc: Mark all const_cast<> work-arounds for the
 	Gtk::TextIter API bug with // XXX comments.
 	(FileBuffer::get_match_index): Get rid of libstdc++-v2 work-around.
