@@ -120,11 +120,11 @@ Glib::RefPtr<Glib::IOChannel> open_config_file(const std::string& mode)
 bool read_config_entry(const Glib::RefPtr<Glib::IOChannel>& channel,
                        Glib::ustring& key, Glib::ustring& value)
 {
-  using namespace Glib;
+  using Glib::ustring;
 
   ustring line;
 
-  while(channel->read_line(line) == IO_STATUS_NORMAL)
+  while(channel->read_line(line) == Glib::IO_STATUS_NORMAL)
   {
     ustring::const_iterator pbegin = line.begin();
     ustring::const_iterator pend   = line.end();
