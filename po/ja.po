@@ -2,14 +2,15 @@
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the regexxer package.
 # Takeshi AIHANA <aihana@gnome.gr.jp>, 2004.
+# Satoru SATOH <ss@gnome.gr.jp>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-11 15:44+0900\n"
-"PO-Revision-Date: 2004-07-11 15:43+0900\n"
-"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
+"POT-Creation-Date: 2004-08-29 23:03+0900\n"
+"PO-Revision-Date: 2004-08-28 00:15+0900\n"
+"Last-Translator: Satoru SATOH <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -95,19 +96,75 @@ msgstr "#"
 msgid "Failed to save file \"%1\": %2"
 msgstr "ファイル \"%1\" の保存に失敗: %2"
 
-#: src/filetree.cc:941
+#: src/filetree.cc:949
 msgid "\"%1\" seems to be a binary file."
 msgstr "\"%1\" はバイナリ・ファイルのようです。"
 
-#: src/main.cc:81
+#: src/main.cc:84
 msgid "_About"
 msgstr "情報(_A)"
 
-#: src/main.cc:82
+#: src/main.cc:85
 msgid "Save _all"
 msgstr "全て保存(_A)"
 
-#: src/mainwindow.cc:200 ui/mainwindow.glade.h:1
+#: src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "パターンにマッチするファイルを検索"
+
+#: src/main.cc:100
+msgid "PATTERN"
+msgstr "パターン"
+
+#: src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "サブフォルダの中を再帰的に検索しない"
+
+#: src/main.cc:102 ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "隠しファイルも検索します"
+
+#: src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "正規表現にマッチするテキストを検索"
+
+#: src/main.cc:103
+msgid "REGEX"
+msgstr "正規表現"
+
+#: src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "行内で最初にマッチするものだけを検索します"
+
+#: src/main.cc:105 ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "大文字/小文字を無視します"
+
+#: src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "マッチした文字列をすべて置換"
+
+#: src/main.cc:106
+msgid "STRING"
+msgstr "文字列"
+
+#: src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "マッチした場所を標準出力に出力"
+
+#: src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "自動的に検索を開始しない"
+
+#: src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[オプション]...[フォルダ]"
+
+#: src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr "より情報が欲しければ \"regexxer --help\" を試して下さい"
+
+#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -115,7 +172,7 @@ msgstr ""
 "ファイル名のパターンで SHELL で使用するものと同じです (文字の分類 [ab] と C-"
 "SHELL 式の括弧 {a,b} をサポートします)"
 
-#: src/mainwindow.cc:341
+#: src/mainwindow.cc:403
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -123,7 +180,7 @@ msgstr ""
 "いくつかのファイルが未だ保存されていません。\n"
 "とにかく終了しますか？"
 
-#: src/mainwindow.cc:369
+#: src/mainwindow.cc:431
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
@@ -131,11 +188,11 @@ msgstr ""
 "フォルダ名 \"%1\" には、ローカルで使用しているファイル・システムのエンコー"
 "ディングを使って表現できない文字が含まれています。"
 
-#: src/mainwindow.cc:388
+#: src/mainwindow.cc:450
 msgid "Select a folder"
 msgstr "フォルダの選択"
 
-#: src/mainwindow.cc:408
+#: src/mainwindow.cc:470
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -143,15 +200,15 @@ msgstr ""
 "いくつかのファイルがまだ保存されていません。\n"
 "とにかく続行しますか？"
 
-#: src/mainwindow.cc:434
+#: src/mainwindow.cc:496
 msgid "The file search pattern is invalid."
 msgstr "ファイルの検索条件が間違っています。"
 
-#: src/mainwindow.cc:440
+#: src/mainwindow.cc:502
 msgid "The following errors occurred during search:"
 msgstr "検索の実行中に次のエラーが発生しました:"
 
-#: src/mainwindow.cc:465
+#: src/mainwindow.cc:527
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -159,7 +216,7 @@ msgstr ""
 "正規表現の条件式 \"%1\" (インデックス %2) でエラー:\n"
 "%3"
 
-#: src/mainwindow.cc:467
+#: src/mainwindow.cc:529
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -167,7 +224,7 @@ msgstr ""
 "正規表現の条件式の中でエラー:\n"
 "%1"
 
-#: src/mainwindow.cc:689
+#: src/mainwindow.cc:751
 msgid "The following errors occurred during save:"
 msgstr "保存中に次のエラーが発生しました:"
 
@@ -224,6 +281,7 @@ msgstr "翻訳者"
 msgid "translator-credits"
 msgstr ""
 "相花 毅 <aihana@gnome.gr.jp>\n"
+"佐藤 暁 <ss@gnome.gr.jp>\n"
 "日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
 
 #: ui/aboutdialog.glade.h:6
@@ -234,17 +292,9 @@ msgstr "作者"
 msgid "A regular expression in Perl syntax"
 msgstr "Perl の文法を使った正規表現です"
 
-#: ui/mainwindow.glade.h:3
-msgid "Also find hidden files"
-msgstr "隠しファイルも検索します"
-
 #: ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "後方へ検索します"
-
-#: ui/mainwindow.glade.h:5
-msgid "Do case insensitive matching"
-msgstr "大文字/小文字を無視します"
 
 #: ui/mainwindow.glade.h:6
 msgid "File backward"
