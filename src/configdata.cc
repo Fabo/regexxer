@@ -28,12 +28,19 @@
 #include <config.h>
 
 #if HAVE_UMASK
+
 #if HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
+
 #if HAVE_SYS_STAT_H
 #include <sys/stat.h>
 #endif
+
+#if !HAVE_MODE_T
+typedef int mode_t;
+#endif
+
 #endif /* HAVE_UMASK */
 
 

@@ -1,5 +1,12 @@
 2002-11-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac (AC_TYPE_MODE_T): Eeek, this macro makes use of a
+	deprecated autoconf macro.  Replace with AC_CHECK_TYPES([mode_t]).
+
+	* src/configdata.cc: Do "typedef int mode_t" if necessary.
+
+2002-11-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac: Check for mode_t too since we need it for umask().
 	You can never know.
 
