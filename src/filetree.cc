@@ -507,12 +507,12 @@ void FileTree::find_increment_file_count(FindData& find_data, int file_count)
 
   const FileTreeColumns& columns = FileTreeColumns::instance();
 
-  DirStack::reverse_iterator       pdir = find_data.dirstack.rbegin();
-  const DirStack::reverse_iterator pend = find_data.dirstack.rend();
+  const DirStack::iterator pbegin = find_data.dirstack.begin();
+  DirStack::iterator       pdir   = find_data.dirstack.end();
 
-  for (; pdir != pend; ++pdir)
+  while (pdir != pbegin)
   {
-    const FileInfoBasePtr base = (*pdir->second)[columns.fileinfo];
+    const FileInfoBasePtr base = (*(--pdir)->second)[columns.fileinfo];
     shared_polymorphic_cast<DirInfo>(base)->file_count += file_count;
   }
 
