@@ -146,7 +146,7 @@ public:
 namespace Regexxer
 {
 
-/**** Regexxer::FileTree::MessageList ****************************************/
+/**** Regexxer::FileTree::MessageList **************************************/
 
 /* This is just a std::list<> wrapper that can be used with Util::SharedPtr<>.
  */
