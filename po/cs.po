@@ -1,0 +1,466 @@
+# Czech translation of regexxer.
+# Copyright (C) 2004 regexxer'S COPYRIGHT HOLDER
+# Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>
+# This file is distributed under the same license as the regexxer package.
+# Miloslav Trmac <mitr@volny.cz>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-05-18 04:38+0200\n"
+"PO-Revision-Date: 2004-05-18 16:43+0200\n"
+"Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
+"Language-Team: Czech <cs@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: regexxer.desktop.in.h:1
+msgid "Search and replace using regular expressions"
+msgstr "Hledat a nahradit pomocí regulárních výrazů"
+
+#: regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "Nástroj pro hledání regexxer"
+
+#: regexxer.schemas.in.h:1
+msgid "Current-match color"
+msgstr "Barva aktuálního výskytu"
+
+#: regexxer.schemas.in.h:2
+msgid "Fallback encoding"
+msgstr "Náhradní kódování"
+
+#: regexxer.schemas.in.h:3
+msgid ""
+"If enabled, the text direction of the file editor, preview area, and all "
+"file-related entry boxes is always set to left-to-right no matter what the "
+"locale's default direction is."
+msgstr "Je-li povoleno, je směr textu v editoru souborů, oblasti náhledu a všech polích souvisejících se souborem vždy nastaven na zleva doprava bez ohledu na implicitní směr locale."
+
+#: regexxer.schemas.in.h:4
+msgid "Match color"
+msgstr "Barva výskytu"
+
+#: regexxer.schemas.in.h:5
+msgid ""
+"Name of the character encoding to use if a file is not readable in either "
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
+msgstr "Název kódování znaků, které používat, když soubor není čitelný ani v UTF-8 ani kódování určeném aktuálním locale. Pro úplný seznam možných hodnot zkuste \"iconv --list\"."
+
+#: regexxer.schemas.in.h:6
+msgid "Override text direction"
+msgstr "Ignorovat směr textu"
+
+#: regexxer.schemas.in.h:7
+msgid "Text view font"
+msgstr "Písmo pro textový pohled"
+
+#: regexxer.schemas.in.h:8
+msgid ""
+"The background color used to highlight matches of the search expression."
+msgstr "Barva pozadí používaná pro zvýraznění výskytů hledaného výrazu."
+
+#: regexxer.schemas.in.h:9
+msgid ""
+"The background color used to highlight the currently selected match of the "
+"search expression."
+msgstr "Barva pozadí používaná pro zvýraznění momentálně vybraného výskytu hledaného výrazu."
+
+#: regexxer.schemas.in.h:10
+msgid "The font used in the file editor."
+msgstr "Písmo používané v editoru souborů."
+
+#: regexxer.schemas.in.h:11
+msgid ""
+"The style of the application's toolbar. Possible values are \"icons\", \"text"
+"\", \"both\", and \"both-horiz\"."
+msgstr "Styl lišty nástrojů aplikace. Možné hodnoty jsou \"icons\", \"text\", \"both\" a \"both-horiz\"."
+
+#: regexxer.schemas.in.h:12
+msgid "Toolbar style"
+msgstr "Styl lišty nástrojů"
+
+#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+#: src/filebuffer.cc:203
+msgid "Can't read file:"
+msgstr "Nemohu číst soubor:"
+
+#: src/filetree.cc:60
+msgid "File"
+msgstr "Soubor"
+
+#: src/filetree.cc:80
+msgid "#"
+msgstr "#"
+
+#: src/filetree.cc:509
+msgid "Failed to save file \"%1\": %2"
+msgstr "Nemohu uložit soubor \"%1\": %2"
+
+#: src/filetree.cc:1002
+msgid "\"%1\" seems to be a binary file."
+msgstr "\"%1\" je zřejmě binární soubor."
+
+#: src/main.cc:81
+msgid "_About"
+msgstr "O _aplikaci"
+
+#: src/main.cc:82
+msgid "Save _all"
+msgstr "Uložit _vše"
+
+#: src/mainwindow.cc:291
+msgid ""
+"Some files haven't been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+"Některé soubory dosud nebyly uloženy.\n"
+"Přesto skončit?"
+
+#: src/mainwindow.cc:305
+msgid "Select a folder"
+msgstr "Zvolte adresář"
+
+#: src/mainwindow.cc:336
+msgid ""
+"Some files haven't been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+"Některé soubory dosud nebyly uloženy.\n"
+"Přesto pokračovat?"
+
+#: src/mainwindow.cc:363
+msgid "The file search pattern is invalid."
+msgstr "Vzor pro hledání souborů je neplatný."
+
+#: src/mainwindow.cc:369
+msgid "The following errors occurred during search:"
+msgstr "Při hledání došlo k následujícím chybám:"
+
+#: src/mainwindow.cc:394
+msgid ""
+"Error in regular expression at \"%1\" (index %2):\n"
+"%3"
+msgstr ""
+"Chyba v regulárním výrazu na \"%1\" (index %2):\n"
+"%3"
+
+#: src/mainwindow.cc:396
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"Chyba v regulárním výrazu:\n"
+"%1"
+
+#: src/mainwindow.cc:615
+msgid "The following errors occurred during save:"
+msgstr "Při ukládání došlo k následujícím chybám:"
+
+#: src/pcreshell.cc:58
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr "Používání escape sekvence \\C pro hledání jednoho bajtu není podporováno."
+
+#: src/pcreshell.cc:149
+msgid ""
+"Reached the recursion and backtracking limit of the regular expression "
+"engine."
+msgstr "Narazil jsem na limit rekurze a návratů v engine pro regulární výrazy."
+
+#: src/prefdialog.cc:217
+msgid "Color Selection"
+msgstr "Výběr barev"
+
+#: src/prefdialog.cc:507
+msgid "\"%1\" is not a valid encoding."
+msgstr "\"%1\" není platné kódování."
+
+#: src/statusline.cc:250
+msgid "Stop"
+msgstr "Zastavit"
+
+#: src/statusline.cc:257
+msgid "File:"
+msgstr "Soubor:"
+
+#: src/statusline.cc:260
+msgid "Match:"
+msgstr "Výskyt:"
+
+#: src/statusline.cc:271
+msgid "Cancels the running search"
+msgstr "Zruší probíhající hledání"
+
+#. namespace Regexxer
+#: ui/aboutdialog.glade.h:1
+msgid "About regexxer"
+msgstr "O regexxeru"
+
+#: ui/aboutdialog.glade.h:2
+msgid "Debian package by"
+msgstr "Balíček pro Debian od"
+
+#: ui/aboutdialog.glade.h:3
+msgid "The application icon of regexxer"
+msgstr "Ikona aplikace regexxer"
+
+#: ui/aboutdialog.glade.h:4
+msgid "regexxer icon"
+msgstr "ikona regexxeru"
+
+#: ui/aboutdialog.glade.h:5
+msgid "written by"
+msgstr "napsali"
+
+#: ui/mainwindow.glade.h:1 ui/prefdialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: ui/mainwindow.glade.h:2
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr "Vzor názvů souborů jako v shellu. Třídy znaků [ab] a výrazy se složenými závorkami ve stylu csh {a,b} jsou podporovány."
+
+#: ui/mainwindow.glade.h:3
+msgid "A regular expression in Perl syntax"
+msgstr "Reguálrní výraz v syntaxi Perlu"
+
+#: ui/mainwindow.glade.h:4
+msgid "Also find hidden files"
+msgstr "Hledat i skryté soubory"
+
+#: ui/mainwindow.glade.h:5
+msgid "Backward"
+msgstr "Zpět"
+
+#: ui/mainwindow.glade.h:6
+msgid "Do case insensitive matching"
+msgstr "Nerozlišovat velikost písmen"
+
+#: ui/mainwindow.glade.h:7
+msgid "File backward"
+msgstr "Soubor zpět"
+
+#: ui/mainwindow.glade.h:8
+msgid "File forward"
+msgstr "Soubor vpřed"
+
+#: ui/mainwindow.glade.h:9
+msgid "Find all files that match the filename pattern"
+msgstr "Hledat všechny soubory, které odpovídají vzoru názvu souboru"
+
+#: ui/mainwindow.glade.h:10
+msgid "Find all matches of the regular expression"
+msgstr "Hledat všechny výskyty regulárního výrazu"
+
+#: ui/mainwindow.glade.h:11
+msgid "Find all possible matches in a line"
+msgstr "Hledat všechny možné výskyty na řádku"
+
+#: ui/mainwindow.glade.h:12
+msgid "Find fi_les"
+msgstr "Hledat _soubory"
+
+#: ui/mainwindow.glade.h:13
+msgid "Fol_der:"
+msgstr "_Adresář:"
+
+#: ui/mainwindow.glade.h:14
+msgid "Forward"
+msgstr "Vpřed"
+
+#: ui/mainwindow.glade.h:15
+msgid "Go to next match"
+msgstr "Jít na následující výskyt"
+
+#: ui/mainwindow.glade.h:16
+msgid "Go to previous match"
+msgstr "Jít na předchozí výskyt"
+
+#: ui/mainwindow.glade.h:17
+msgid "Go to the next matching file"
+msgstr "Jít na následující odpovídající soubor"
+
+#: ui/mainwindow.glade.h:18
+msgid "Go to the previous matching file"
+msgstr "Jít na předchozí odpovídající soubor"
+
+#: ui/mainwindow.glade.h:19
+msgid "Pattern:"
+msgstr "Vzorek:"
+
+#: ui/mainwindow.glade.h:20
+msgid "Preview"
+msgstr "Náhled"
+
+#: ui/mainwindow.glade.h:21
+msgid "Preview of the substitution"
+msgstr "Náhled nahrazení"
+
+#: ui/mainwindow.glade.h:22
+msgid "Recurse into subdirectories"
+msgstr "Vnořovat se do adresářů"
+
+#: ui/mainwindow.glade.h:23
+msgid "Replace _current"
+msgstr "Nahradit _aktuální"
+
+#: ui/mainwindow.glade.h:24
+msgid "Replace all matches in all files"
+msgstr "Nahradit všechny výskyty ve všech souborech"
+
+#: ui/mainwindow.glade.h:25
+msgid "Replace all matches in the current file"
+msgstr "Nahradit všechny výskyty v aktuálním souboru"
+
+#: ui/mainwindow.glade.h:26
+msgid "Replace current match"
+msgstr "Nahradit aktuální výskyt"
+
+#: ui/mainwindow.glade.h:27
+msgid "Replace in _all files"
+msgstr "Nahrazovat ve _všech souborech"
+
+#: ui/mainwindow.glade.h:28
+msgid "Replace in _this file"
+msgstr "Nahrazovat v _tomto souboru"
+
+#: ui/mainwindow.glade.h:29
+msgid "Replace:"
+msgstr "Nahradit:"
+
+#: ui/mainwindow.glade.h:30
+msgid "Search:"
+msgstr "Hledat:"
+
+#: ui/mainwindow.glade.h:31
+msgid "The directory to be searched"
+msgstr "Adresář, ve kterém hledat"
+
+#: ui/mainwindow.glade.h:32
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
+"\\L, \\U and \\E are supported as well."
+msgstr "Nový řetězec, kterým nahrazovat. Můžete se odkazovat na části nalezeného výskytu pomocí $1, $2 atd. nebo i $+, $&, $` a $', jako v Perlu. Operátory \\l, \\u, \\L, \\U a \\E jsou také podporovány."
+
+#: ui/mainwindow.glade.h:33
+msgid "_All files"
+msgstr "_Všechny soubory"
+
+#: ui/mainwindow.glade.h:34
+msgid "_File"
+msgstr "_Soubor"
+
+#: ui/mainwindow.glade.h:35
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: ui/mainwindow.glade.h:36
+msgid "_Match"
+msgstr "_Výskyt"
+
+#: ui/mainwindow.glade.h:37
+msgid "_Next file"
+msgstr "_Následující soubor"
+
+#: ui/mainwindow.glade.h:38
+msgid "_Previous file"
+msgstr "_Předchozí soubor"
+
+#: ui/mainwindow.glade.h:39
+msgid "_Replace"
+msgstr "Na_hradit"
+
+#: ui/mainwindow.glade.h:40
+msgid "_This file"
+msgstr "_Tento soubor"
+
+#: ui/mainwindow.glade.h:41
+msgid "hidden"
+msgstr "skryté"
+
+#: ui/mainwindow.glade.h:42
+msgid "recursive"
+msgstr "rekurzivně"
+
+#: ui/prefdialog.glade.h:2
+msgid "1."
+msgstr "1."
+
+#: ui/prefdialog.glade.h:3
+msgid "2."
+msgstr "2."
+
+#: ui/prefdialog.glade.h:4
+msgid "3."
+msgstr "3."
+
+#: ui/prefdialog.glade.h:5
+msgid "Both horizontal"
+msgstr "Obojí vodorovně"
+
+#: ui/prefdialog.glade.h:6
+msgid "C_urrent match color:"
+msgstr "Barva _aktuálního výskytu:"
+
+#: ui/prefdialog.glade.h:7
+msgid "Fallback _encoding:"
+msgstr "Náhradní _kódování:"
+
+#: ui/prefdialog.glade.h:8
+msgid "Icons and text"
+msgstr "Ikony a text"
+
+#: ui/prefdialog.glade.h:9
+msgid "Icons only"
+msgstr "Jen ikony"
+
+#: ui/prefdialog.glade.h:10
+msgid "Preferences"
+msgstr "Nastavení"
+
+#: ui/prefdialog.glade.h:11
+msgid "Text only"
+msgstr "Jen text"
+
+#: ui/prefdialog.glade.h:12
+msgid "The encoding specified by the current locale"
+msgstr "Kódování určené aktuálním locale"
+
+#: ui/prefdialog.glade.h:13
+msgid "Tool_bar style:"
+msgstr "_Styl lišty nástrojů:"
+
+#: ui/prefdialog.glade.h:14
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ui/prefdialog.glade.h:15
+msgid "_File access"
+msgstr "_Přístup k souborům"
+
+#: ui/prefdialog.glade.h:16
+msgid "_Ignore the text direction of the locale"
+msgstr "_Ignorovat směr textu locale"
+
+#: ui/prefdialog.glade.h:17
+msgid "_Look'n'feel"
+msgstr "_Vzhled a chování"
+
+#: ui/prefdialog.glade.h:18
+msgid "_Match color:"
+msgstr "_Barva výskytu:"
+
+#: ui/prefdialog.glade.h:19
+msgid "_Text view font:"
+msgstr "_Písmo textového pohledu:"
+
+#: ui/prefdialog.glade.h:20
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "Než se regexxer vzdá, zkouší soubor načíst v následujících kódováních:"
