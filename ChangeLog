@@ -1,5 +1,9 @@
 2002-11-29  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac (AC_INIT): Version 0.5.
+
+2002-11-29  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	OK folks, this is the new undo system.  It works, but don't rely
 	too much on undo yet since there are still some issues to work out.
 	Try stress testing the system a bit and you'll be able to trigger
