@@ -1,5 +1,18 @@
 2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* regexxer.schemas.in (override_direction): Remove configuration
+	option because it doesn't seem to be necessary anymore.  That is,
+	the current GTK+ release gets the direction of Latin text in RTL
+	locales right now.
+
+	* src/globalstrings.h (conf_key_override_direction): Remove.
+	* src/mainwindow.cc (MainWindow::on_conf_value_changed): Remove
+	the code that handles the "override_direction" config option.
+	* src/prefdialog.{cc,h} (PrefDialog): ditto.
+	* ui/prefdialog.glade (button_override_direction): Remove.
+
+2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.cc (FileBuffer::find_matches): Get rid of an
 	unused main_context variable plus initialization code.  Whoa,
 	this ancient piece of code must have been lurking here for at

@@ -38,7 +38,6 @@ const char *const conf_key_match_color          = REGEXXER_GCONF_DIRECTORY "/mat
 const char *const conf_key_current_match_color  = REGEXXER_GCONF_DIRECTORY "/current_match_color";
 const char *const conf_key_toolbar_style        = REGEXXER_GCONF_DIRECTORY "/toolbar_style";
 const char *const conf_key_fallback_encoding    = REGEXXER_GCONF_DIRECTORY "/fallback_encoding";
-const char *const conf_key_override_direction   = REGEXXER_GCONF_DIRECTORY "/override_direction";
 
 const char *const application_icon_filename     = REGEXXER_DATADIR G_DIR_SEPARATOR_S
                                                   "pixmaps" G_DIR_SEPARATOR_S "regexxer.png";

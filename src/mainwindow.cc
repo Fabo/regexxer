@@ -846,20 +846,6 @@ void MainWindow::on_conf_value_changed(const Glib::ustring& key, const Gnome::Co
       toolbar_->set_toolbar_style(Util::enum_from_nick<ToolbarStyle>(value.get_string()));
     }
   }
-  else if (value.get_type() == Gnome::Conf::VALUE_BOOL)
-  {
-    if (key.raw() == conf_key_override_direction)
-    {
-      const TextDirection direction = (value.get_bool()) ? TEXT_DIR_LTR : TEXT_DIR_NONE;
-      entry_folder_      ->set_direction(direction);
-      entry_pattern_     ->set_direction(direction);
-      entry_regex_       ->set_direction(direction);
-      entry_substitution_->set_direction(direction);
-      filetree_          ->set_direction(direction);
-      textview_          ->set_direction(direction);
-      entry_preview_     ->set_direction(direction);
-    }
-  }
 }
 
 } // namespace Regexxer

@@ -60,9 +60,7 @@ private:
   Gtk::ColorButton*           button_current_color_;
   Gtk::ComboBox*              combo_toolbar_style_;
   Gtk::Entry*                 entry_fallback_;
-  Gtk::CheckButton*           button_direction_;
   Util::AutoConnection        conn_toolbar_style_;
-  Util::AutoConnection        conn_direction_;
   bool                        entry_fallback_changed_;
 
   void load_xml();
@@ -79,7 +77,6 @@ private:
   void on_option_toolbar_style_changed();
   void on_entry_fallback_changed();
   void on_entry_fallback_activate();
-  void on_button_direction_toggled();
 };
 
 } // namespace Regexxer

@@ -77,21 +77,5 @@
       </locale>
     </schema>
 
-    <schema>
-      <key>/schemas/apps/regexxer/override_direction</key>
-      <applyto>/apps/regexxer/override_direction</applyto>
-      <owner>regexxer</owner>
-      <type>bool</type>
-      <default>false</default>
-      <locale name="C">
-	 <short>Override text direction</short>
-	 <long>
-	   If enabled, the text direction of the file editor, preview area,
-	   and all file-related entry boxes is always set to left-to-right
-	   no matter what the locale&apos;s default direction is.
-	 </long>
-      </locale>
-    </schema>
-
   </schemalist>  
 </gconfschemafile>

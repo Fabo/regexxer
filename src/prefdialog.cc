@@ -72,7 +72,6 @@ PrefDialog::PrefDialog(Gtk::Window& parent)
   button_current_color_   (0),
   combo_toolbar_style_    (0),
   entry_fallback_         (0),
-  button_direction_       (0),
   entry_fallback_changed_ (false)
 {
   load_xml();
@@ -100,7 +99,6 @@ void PrefDialog::load_xml()
   xml->get_widget("button_current_color", button_current_color_);
   xml->get_widget("combo_toolbar_style",  combo_toolbar_style_);
   xml->get_widget("entry_fallback",       entry_fallback_);
-  xml->get_widget("button_direction",     button_direction_);
 
   const Glib::RefPtr<SizeGroup> size_group = SizeGroup::create(SIZE_GROUP_VERTICAL);
 
@@ -131,9 +129,6 @@ void PrefDialog::connect_signals()
 
   entry_fallback_->signal_activate().connect(
       sigc::mem_fun(*this, &PrefDialog::on_entry_fallback_activate));
-
-  conn_direction_ = button_direction_->signal_toggled().connect(
-      sigc::mem_fun(*this, &PrefDialog::on_button_direction_toggled));
 }
 
 void PrefDialog::on_response(int)
@@ -145,12 +140,11 @@ void PrefDialog::on_response(int)
 }
 
 /*
- * Note that it isn't strictly required to block the change notifications
- * as done below for the "toolbar_style" and "override_direction" settings.
- * GConf doesn't emit "value_changed" if the new value is identical to the
- * old one.  If, however, the value was reset to the schema default, the
- * following change notification would again detach the schema.  This won't
- * look neat, and I like neat.
+ * Note that it isn't strictly required to block the change notification
+ * as done below for the "toolbar_style" setting.  GConf doesn't emit
+ * "value_changed" if the new value is identical to the old one.  If, however,
+ * the value was reset to the schema default, the following change notification
+ * would again detach the schema.  This won't look neat, and I like neat.
  */
 void PrefDialog::on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value)
 {
@@ -177,14 +171,6 @@ void PrefDialog::on_conf_value_changed(const Glib::ustring& key, const Gnome::Co
     {
       entry_fallback_->set_text(value.get_string());
       entry_fallback_changed_ = false;
-    }
-  }
-  else if (value.get_type() == Gnome::Conf::VALUE_BOOL)
-  {
-    if (key.raw() == conf_key_override_direction)
-    {
-      Util::ScopedBlock block (conn_direction_);
-      button_direction_->set_active(value.get_bool());
     }
   }
 }
@@ -263,12 +249,6 @@ void PrefDialog::on_entry_fallback_activate()
 
     error_dialog.run();
   }
-}
-
-void PrefDialog::on_button_direction_toggled()
-{
-  const bool value = button_direction_->get_active();
-  Gnome::Conf::Client::get_default_client()->set(conf_key_override_direction, value);
 }
 
 } // namespace Regexxer
