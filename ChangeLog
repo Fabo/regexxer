@@ -1,5 +1,10 @@
 2004-05-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (FileTree::FileTree): Remove superfluous
+	namespace qualification.
+
+2004-05-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* autogen.sh: Avoid using postfix operators on subexpressions
 	in the regex used to extract version numbers.  This makes the
 	expression both simpler and more portable.

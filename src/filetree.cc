@@ -94,7 +94,7 @@ FileTree::FileTree()
 
   set_search_column(model_columns.filename);
 
-  const Glib::RefPtr<Gtk::TreeSelection> selection = get_selection();
+  const Glib::RefPtr<TreeSelection> selection = get_selection();
 
   selection->set_select_function(&FileTree::select_func);
   selection->signal_changed().connect(sigc::mem_fun(*this, &FileTree::on_selection_changed));
