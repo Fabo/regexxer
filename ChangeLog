@@ -1,5 +1,11 @@
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetreeprivate.cc (collatekey_sort_func): Use libstdc++-v3
+	method std::string::compare() instead of memcmp() for sub-string
+	comparison, since libsigc++2 depends on gcc >= 3 anyway.
+
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (FileTree::FileTree): Make the file column
 	take up available space with set_expand(true).
 

@@ -23,9 +23,6 @@
 #include <glib.h>
 #include <gtkmm/treestore.h>
 
-#include <cstring> /* for fucked up libstdc++-v2, see collatekey_sort_func() */
-#include <algorithm>
-
 
 namespace Regexxer
 {
@@ -56,23 +53,10 @@ int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeMod
   const std::string lhs_key = (*lhs)[columns.collatekey];
   const std::string rhs_key = (*rhs)[columns.collatekey];
 
-  const std::string::size_type minsize = std::min(lhs_key.size(), rhs_key.size());
-  int order = 0;
-
-  if (minsize > 0)
-  {
-    // Can't use the following absolutely correct code due to the fucked up
-    // libstdc++-v2 GCC 2.95.x comes with.  Resort to memcmp().  Damn.
-    //
-    // return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
-
-    order = std::memcmp(lhs_key.data() + 1, rhs_key.data() + 1, minsize - 1);
-  }
-
-  if (order == 0)
-    order = lhs_key.size() - rhs_key.size();
-
-  return order;
+  if (lhs_key.size() > 1 && rhs_key.size() > 1)
+    return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
+  else
+    return (lhs_key.size() - rhs_key.size());
 }
 
 } // namespace FileTreePrivate
