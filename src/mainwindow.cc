@@ -21,6 +21,7 @@
 #include "mainwindow.h"
 #include "configdata.h"
 #include "filetree.h"
+#include "imagebutton.h"
 #include "pcreshell.h"
 #include "prefdialog.h"
 #include "statusline.h"
@@ -40,52 +41,6 @@ namespace
 enum { BUSY_GUI_UPDATE_INTERVAL = 16 };
 
 typedef Glib::RefPtr<Regexxer::FileBuffer> FileBufferPtr;
-
-
-class ImageButton : public Gtk::Button
-{
-public:
-  explicit ImageButton(const Gtk::StockID& stock_id);
-  virtual ~ImageButton();
-};
-
-class CustomButton : public Gtk::Button
-{
-public:
-  CustomButton(const Gtk::StockID& stock_id, const Glib::ustring& label, bool mnemonic = false);
-  virtual ~CustomButton();
-};
-
-
-ImageButton::ImageButton(const Gtk::StockID& stock_id)
-{
-  Gtk::Image *const image = new Gtk::Image(stock_id, Gtk::ICON_SIZE_BUTTON);
-  add(*Gtk::manage(image));
-  image->show();
-}
-
-ImageButton::~ImageButton()
-{}
-
-
-CustomButton::CustomButton(const Gtk::StockID& stock_id, const Glib::ustring& label, bool mnemonic)
-{
-  using namespace Gtk;
-
-  Alignment *const alignment = new Alignment(0.5, 0.5, 0.0, 0.0);
-  add(*manage(alignment));
-
-  HBox *const hbox = new HBox(false, 3);
-  alignment->add(*manage(hbox));
-
-  hbox->pack_start(*manage(new Image(stock_id, ICON_SIZE_BUTTON)), PACK_SHRINK);
-  hbox->pack_start(*manage(new Label(label, mnemonic)),            PACK_SHRINK);
-
-  show_all_children();
-}
-
-CustomButton::~CustomButton()
-{}
 
 
 class FileErrorDialog : public Gtk::MessageDialog
@@ -168,29 +123,17 @@ public:
 MainWindow::MainWindow()
 :
   toolbar_                (0),
-  toolbutton_save_        (0),
-  toolbutton_save_all_    (0),
   entry_folder_           (0),
   entry_pattern_          (0),
   button_recursive_       (0),
   button_hidden_          (0),
-  button_find_files_      (0),
   entry_regex_            (0),
   entry_substitution_     (0),
   button_multiple_        (0),
   button_caseless_        (0),
-  button_find_matches_    (0),
   filetree_               (0),
   textview_               (0),
   entry_preview_          (0),
-  action_area_            (0),
-  button_prev_file_       (0),
-  button_prev_            (0),
-  button_next_            (0),
-  button_next_file_       (0),
-  button_replace_         (0),
-  button_replace_file_    (0),
-  button_replace_all_     (0),
   statusline_             (0),
   busy_action_running_    (false),
   busy_action_cancel_     (false),
@@ -198,6 +141,8 @@ MainWindow::MainWindow()
   fileview_font_          ("mono")
 {
   using namespace Gtk;
+  using SigC::bind;
+  using SigC::slot;
 
   set_title_filename();
   set_default_size(600, 400);
@@ -212,7 +157,7 @@ MainWindow::MainWindow()
     Box *const vbox_main = new VBox();
     add(*manage(vbox_main));
 
-    toolbar_ = create_toolbar();
+    toolbar_ = controller_.create_toolbar();
     vbox_main->pack_start(*manage(toolbar_), PACK_SHRINK);
 
     Box *const vbox_interior = new VBox();
@@ -223,10 +168,22 @@ MainWindow::MainWindow()
     vbox_main->pack_start(*manage(statusline_), PACK_SHRINK);
 
     vbox_interior->pack_start(*manage(paned.release()), PACK_EXPAND_WIDGET);
-
-    action_area_ = create_action_area();
-    vbox_interior->pack_start(*manage(action_area_), PACK_SHRINK);
+    vbox_interior->pack_start(*manage(controller_.create_action_area()), PACK_SHRINK);
   }
+
+  controller_.save_file   .connect(slot(*this, &MainWindow::on_save_file));
+  controller_.save_all    .connect(slot(*this, &MainWindow::on_save_all));
+  controller_.preferences .connect(slot(*this, &MainWindow::on_preferences));
+  controller_.quit        .connect(slot(*this, &MainWindow::on_quit));
+  controller_.find_files  .connect(slot(*this, &MainWindow::on_find_files));
+  controller_.find_matches.connect(slot(*this, &MainWindow::on_exec_search));
+  controller_.next_file   .connect(bind(slot(*this, &MainWindow::on_go_next_file), true));
+  controller_.prev_file   .connect(bind(slot(*this, &MainWindow::on_go_next_file), false));
+  controller_.next_match  .connect(bind(slot(*this, &MainWindow::on_go_next), true));
+  controller_.prev_match  .connect(bind(slot(*this, &MainWindow::on_go_next), false));
+  controller_.replace     .connect(slot(*this, &MainWindow::on_replace));
+  controller_.replace_file.connect(slot(*this, &MainWindow::on_replace_file));
+  controller_.replace_all .connect(slot(*this, &MainWindow::on_replace_all));
 
   load_configuration();
 
@@ -292,89 +249,6 @@ bool MainWindow::on_delete_event(GdkEventAny*)
 
 /**** Regexxer::MainWindow -- private **************************************/
 
-Gtk::Toolbar* MainWindow::create_toolbar()
-{
-  using namespace Gtk;
-  using namespace Gtk::Toolbar_Helpers;
-  using SigC::slot;
-
-  std::auto_ptr<Toolbar> toolbar (new Toolbar());
-  ToolList& tools = toolbar->tools();
-
-  tools.push_back(StockElem(Stock::SAVE, slot(*this, &MainWindow::on_save_file)));
-  toolbutton_save_ = tools.back().get_widget();
-
-  tools.push_back(StockElem(StockID("regexxer-save-all"), slot(*this, &MainWindow::on_save_all)));
-  toolbutton_save_all_ = tools.back().get_widget();
-
-  //tools.push_back(Space());
-  //tools.push_back(StockElem(Stock::UNDO, &dummy_handler));
-  tools.push_back(Space());
-  tools.push_back(StockElem(Stock::PREFERENCES, slot(*this, &MainWindow::on_preferences)));
-  tools.push_back(Space());
-  tools.push_back(StockElem(Stock::QUIT, slot(*this, &MainWindow::on_quit)));
-
-  toolbutton_save_    ->set_sensitive(false);
-  toolbutton_save_all_->set_sensitive(false);
-
-  return toolbar.release();
-}
-
-Gtk::Widget* MainWindow::create_action_area()
-{
-  using namespace Gtk;
-  using SigC::bind;
-  using SigC::slot;
-
-  std::auto_ptr<Box> action_area (new HBox(false, 10));
-  action_area->set_border_width(2);
-
-  Box *const box_action = new HBox(true, 5);
-  action_area->pack_end(*manage(box_action), PACK_SHRINK);
-
-  Box *const box_move = new HBox(true, 5);
-  action_area->pack_end(*manage(box_move), PACK_SHRINK);
-
-  button_prev_file_ = new ImageButton(Stock::GOTO_FIRST);
-  box_move->pack_start(*manage(button_prev_file_));
-
-  button_prev_ = new ImageButton(Stock::GO_BACK);
-  box_move->pack_start(*manage(button_prev_));
-
-  button_next_ = new ImageButton(Stock::GO_FORWARD);
-  box_move->pack_start(*manage(button_next_));
-
-  button_next_file_ = new ImageButton(Stock::GOTO_LAST);
-  box_move->pack_start(*manage(button_next_file_));
-
-  button_replace_ = new CustomButton(Stock::CONVERT, "_Replace", true);
-  box_action->pack_start(*manage(button_replace_));
-
-  button_replace_file_ = new CustomButton(Stock::CONVERT, "_This file", true);
-  box_action->pack_start(*manage(button_replace_file_));
-
-  button_replace_all_ = new CustomButton(Stock::CONVERT, "_All files", true);
-  box_action->pack_start(*manage(button_replace_all_));
-
-  button_prev_file_   ->set_sensitive(false);
-  button_prev_        ->set_sensitive(false);
-  button_next_        ->set_sensitive(false);
-  button_next_file_   ->set_sensitive(false);
-  button_replace_     ->set_sensitive(false);
-  button_replace_file_->set_sensitive(false);
-  button_replace_all_ ->set_sensitive(false);
-
-  button_prev_file_   ->signal_clicked().connect(bind(slot(*this, &MainWindow::on_go_next_file), false));
-  button_prev_        ->signal_clicked().connect(bind(slot(*this, &MainWindow::on_go_next),      false));
-  button_next_        ->signal_clicked().connect(bind(slot(*this, &MainWindow::on_go_next),      true));
-  button_next_file_   ->signal_clicked().connect(bind(slot(*this, &MainWindow::on_go_next_file), true));
-  button_replace_     ->signal_clicked().connect(slot(*this, &MainWindow::on_replace));
-  button_replace_file_->signal_clicked().connect(slot(*this, &MainWindow::on_replace_file));
-  button_replace_all_ ->signal_clicked().connect(slot(*this, &MainWindow::on_replace_all));
-
-  return action_area.release();
-}
-
 Gtk::Widget* MainWindow::create_left_pane()
 {
   using namespace Gtk;
@@ -387,7 +261,7 @@ Gtk::Widget* MainWindow::create_left_pane()
   table->set_border_width(1);
   table->set_spacings(2);
 
-  Button *const button_folder = new CustomButton(Stock::OPEN, "_Folder:", true);
+  Button *const button_folder = new ImageLabelButton(Stock::OPEN, "_Folder:", true);
   table->attach(*manage(button_folder), 0, 1, 0, 1, FILL, AttachOptions(0));
   button_folder->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_select_folder));
 
@@ -395,8 +269,8 @@ Gtk::Widget* MainWindow::create_left_pane()
   table->attach(*manage(entry_folder_  = new Entry()), 1, 2, 0, 1, EXPAND|FILL, AttachOptions(0));
   table->attach(*manage(entry_pattern_ = new Entry()), 1, 2, 1, 2, EXPAND|FILL, AttachOptions(0));
 
-  entry_folder_ ->signal_activate().connect(SigC::slot(*this, &MainWindow::on_find_files));
-  entry_pattern_->signal_activate().connect(SigC::slot(*this, &MainWindow::on_find_files));
+  entry_folder_ ->signal_activate().connect(controller_.find_files.slot());
+  entry_pattern_->signal_activate().connect(controller_.find_files.slot());
   entry_pattern_->signal_changed ().connect(SigC::slot(*this, &MainWindow::on_entry_pattern_changed));
 
   HBox *const hbox = new HBox(false, 5);
@@ -408,10 +282,11 @@ Gtk::Widget* MainWindow::create_left_pane()
   button_hidden_ = new CheckButton("hidden");
   hbox->pack_start(*manage(button_hidden_), PACK_SHRINK);
 
-  button_find_files_ = new Button(Stock::FIND);
-  hbox->pack_end(*manage(button_find_files_), PACK_SHRINK);
-  button_find_files_->set_sensitive(false);
-  button_find_files_->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_find_files));
+  Button *const button_find_files = new Button(Stock::FIND);
+  hbox->pack_end(*manage(button_find_files), PACK_SHRINK);
+
+  button_find_files->signal_clicked().connect(controller_.find_files.slot());
+  controller_.find_files.add_widget(*button_find_files);
 
   Frame *const frame = new Frame();
   vbox->pack_start(*manage(frame), PACK_EXPAND_WIDGET);
@@ -423,13 +298,13 @@ Gtk::Widget* MainWindow::create_left_pane()
   scrollwin->add(*manage(filetree_));
   scrollwin->set_policy(POLICY_AUTOMATIC, POLICY_ALWAYS);
 
-  tooltips_.set_tip(*entry_folder_,      "The directory to be searched");
-  tooltips_.set_tip(*entry_pattern_,     "A filename pattern as used by the shell. "
-                                         "Character classes [ab] and csh style "
-                                         "brace expressions {a,b} are supported.");
-  tooltips_.set_tip(*button_recursive_,  "Recurse into subdirectories");
-  tooltips_.set_tip(*button_hidden_,     "Also find hidden files");
-  tooltips_.set_tip(*button_find_files_, "Find all files that match the filename pattern");
+  tooltips_.set_tip(*entry_folder_,     "The directory to be searched");
+  tooltips_.set_tip(*entry_pattern_,    "A filename pattern as used by the shell. "
+                                        "Character classes [ab] and csh style "
+                                        "brace expressions {a,b} are supported.");
+  tooltips_.set_tip(*button_recursive_, "Recurse into subdirectories");
+  tooltips_.set_tip(*button_hidden_,    "Also find hidden files");
+  tooltips_.set_tip(*button_find_files, "Find all files that match the filename pattern");
 
   return vbox.release();
 }
@@ -451,8 +326,8 @@ Gtk::Widget* MainWindow::create_right_pane()
   table->attach(*manage(entry_regex_        = new Entry()),  1, 2, 0, 1, EXPAND|FILL, AttachOptions(0));
   table->attach(*manage(entry_substitution_ = new Entry()),  1, 2, 1, 2, EXPAND|FILL, AttachOptions(0));
 
-  entry_regex_       ->signal_activate().connect(SigC::slot(*this, &MainWindow::on_exec_search));
-  entry_substitution_->signal_activate().connect(SigC::slot(*this, &MainWindow::on_exec_search));
+  entry_regex_       ->signal_activate().connect(controller_.find_matches.slot());
+  entry_substitution_->signal_activate().connect(controller_.find_matches.slot());
   entry_substitution_->signal_changed ().connect(SigC::slot(*this, &MainWindow::update_preview));
 
   HBox *const hbox_options = new HBox(false, 5);
@@ -460,10 +335,11 @@ Gtk::Widget* MainWindow::create_right_pane()
   hbox_options->pack_start(*manage(button_multiple_ = new CheckButton("/g")), PACK_SHRINK);
   hbox_options->pack_start(*manage(button_caseless_ = new CheckButton("/i")), PACK_SHRINK);
 
-  button_find_matches_ = new Button(Stock::FIND);
-  table->attach(*manage(button_find_matches_), 2, 3, 1, 2, FILL, AttachOptions(0));
-  button_find_matches_->set_sensitive(false);
-  button_find_matches_->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_exec_search));
+  Button *const button_find_matches = new Button(Stock::FIND);
+  table->attach(*manage(button_find_matches), 2, 3, 1, 2, FILL, AttachOptions(0));
+
+  controller_.find_matches.add_widget(*button_find_matches);
+  button_find_matches->signal_clicked().connect(controller_.find_matches.slot());
 
   Frame *const frame = new Frame();
   vbox->pack_start(*manage(frame), PACK_EXPAND_WIDGET);
@@ -486,14 +362,14 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_preview_->unset_flags(CAN_FOCUS);
   entry_preview_->modify_font(fileview_font_);
 
-  tooltips_.set_tip(*entry_regex_,         "A regular expression in Perl syntax");
-  tooltips_.set_tip(*entry_substitution_,  "The new string to substitute. As in Perl, you can "
-                                           "refer to parts of the match using $1, $2, etc. "
-                                           "or even $+, $&, $` and $'. The operators "
-                                           "\\l, \\u, \\L, \\U and \\E are supported as well.");
-  tooltips_.set_tip(*button_multiple_,     "Find all possible matches in a line");
-  tooltips_.set_tip(*button_caseless_,     "Do case insensitive matching");
-  tooltips_.set_tip(*button_find_matches_, "Find all matches of the regular expression");
+  tooltips_.set_tip(*entry_regex_,        "A regular expression in Perl syntax");
+  tooltips_.set_tip(*entry_substitution_, "The new string to substitute. As in Perl, you can "
+                                          "refer to parts of the match using $1, $2, etc. "
+                                          "or even $+, $&, $` and $'. The operators "
+                                          "\\l, \\u, \\L, \\U and \\E are supported as well.");
+  tooltips_.set_tip(*button_multiple_,    "Find all possible matches in a line");
+  tooltips_.set_tip(*button_caseless_,    "Do case insensitive matching");
+  tooltips_.set_tip(*button_find_matches, "Find all matches of the regular expression");
 
   return vbox.release();
 }
@@ -553,9 +429,6 @@ void MainWindow::on_select_folder()
 
 void MainWindow::on_find_files()
 {
-  if(!button_find_files_->is_sensitive())
-    return; // This could happen if we were invoked from from an entry's activate signal.
-
   if(filetree_->get_modified_count() > 0)
   {
     const Glib::ustring message = "Some files haven't been saved yet.\nContinue anyway?";
@@ -599,9 +472,6 @@ void MainWindow::on_find_files()
 
 void MainWindow::on_exec_search()
 {
-  if(!button_find_matches_->is_sensitive())
-    return; // This could happen if we were invoked from from an entry's activate signal.
-
   BusyAction busy (*this);
 
   const Glib::ustring regex = entry_regex_->get_text();
@@ -750,47 +620,50 @@ void MainWindow::on_filetree_bound_state_changed()
 {
   BoundState bound = filetree_->get_bound_state();
 
-  button_prev_file_->set_sensitive((bound & BOUND_FIRST) == 0);
-  button_next_file_->set_sensitive((bound & BOUND_LAST)  == 0);
+  controller_.prev_file.set_enabled((bound & BOUND_FIRST) == 0);
+  controller_.next_file.set_enabled((bound & BOUND_LAST)  == 0);
 
   if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
     bound &= buffer->get_bound_state();
 
-  button_prev_->set_sensitive((bound & BOUND_FIRST) == 0);
-  button_next_->set_sensitive((bound & BOUND_LAST)  == 0);
+  controller_.prev_match.set_enabled((bound & BOUND_FIRST) == 0);
+  controller_.next_match.set_enabled((bound & BOUND_LAST)  == 0);
 }
 
 void MainWindow::on_filetree_file_count_changed()
 {
-  statusline_->set_file_count(filetree_->get_file_count());
+  const int file_count = filetree_->get_file_count();
+
+  statusline_->set_file_count(file_count);
+  controller_.find_matches.set_enabled(file_count > 0);
 }
 
 void MainWindow::on_filetree_match_count_changed()
 {
-  button_replace_all_->set_sensitive(filetree_->get_match_count() > 0);
+  controller_.replace_all.set_enabled(filetree_->get_match_count() > 0);
 }
 
 void MainWindow::on_filetree_modified_count_changed()
 {
-  toolbutton_save_all_->set_sensitive(filetree_->get_modified_count() > 0);
+  controller_.save_all.set_enabled(filetree_->get_modified_count() > 0);
 }
 
 void MainWindow::on_buffer_match_count_changed(int match_count)
 {
-  button_replace_file_->set_sensitive(match_count > 0);
+  controller_.replace_file.set_enabled(match_count > 0);
 }
 
 void MainWindow::on_buffer_modified_changed()
 {
-  toolbutton_save_->set_sensitive(textview_->get_buffer()->get_modified());
+  controller_.save_file.set_enabled(textview_->get_buffer()->get_modified());
 }
 
 void MainWindow::on_buffer_bound_state_changed(BoundState bound)
 {
   bound &= filetree_->get_bound_state();
 
-  button_prev_->set_sensitive((bound & BOUND_FIRST) == 0);
-  button_next_->set_sensitive((bound & BOUND_LAST)  == 0);
+  controller_.prev_match.set_enabled((bound & BOUND_FIRST) == 0);
+  controller_.next_match.set_enabled((bound & BOUND_LAST)  == 0);
 }
 
 void MainWindow::on_go_next_file(bool move_forward)
@@ -875,8 +748,7 @@ void MainWindow::on_save_all()
 
 void MainWindow::on_entry_pattern_changed()
 {
-  if(!busy_action_running_)
-    button_find_files_->set_sensitive(entry_pattern_->get_text_length() > 0);
+  controller_.find_files.set_enabled(entry_pattern_->get_text_length() > 0);
 }
 
 void MainWindow::update_preview()
@@ -887,7 +759,7 @@ void MainWindow::update_preview()
     const int pos = buffer->get_line_preview(entry_substitution_->get_text(), preview);
     entry_preview_->set_text(preview);
 
-    button_replace_->set_sensitive(pos >= 0);
+    controller_.replace.set_enabled(pos >= 0);
 
     // Beware, strange code ahead!
     //
@@ -942,9 +814,7 @@ void MainWindow::busy_action_enter()
 {
   g_return_if_fail(!busy_action_running_);
 
-  button_find_files_  ->set_sensitive(false);
-  button_find_matches_->set_sensitive(false);
-  action_area_        ->set_sensitive(false);
+  controller_.match_actions.set_enabled(false);
 
   statusline_->pulse_start();
 
@@ -962,9 +832,7 @@ void MainWindow::busy_action_leave()
 
   statusline_->pulse_stop();
 
-  button_find_files_  ->set_sensitive(entry_pattern_->get_text_length() > 0);
-  button_find_matches_->set_sensitive(filetree_->get_file_count() > 0);
-  action_area_        ->set_sensitive(true);
+  controller_.match_actions.set_enabled(true);
 }
 
 bool MainWindow::on_busy_action_pulse()

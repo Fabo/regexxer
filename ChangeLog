@@ -1,3 +1,27 @@
+2002-11-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/controller.{cc,h}: New files, implementing class Controller
+	and class ControlItem.  ControlItem maintains an arbitrary number
+	of activation sources, and controls the sensitivity state of an
+	arbitrary number of widgets too.  Controller centralizes all of
+	the ControlItems and provides create() functions for all pure
+	control widgets in regexxer.  Also, there's ControlGroup which can
+	be used to set the sensitivity of several widgets at once.
+
+	All this stuff became necessary due to the proposed addition of
+	menus.  Getting the sensitivity of all widgets right was already
+	quite complex.  After the integration of menus the old code would
+	have reached a critical mass.
+
+	* src/imagebutton.{cc,h}: New files, containing ImageButton and
+	ImageLabelButton that were previously in mainwindow.cc.  We need
+	them in controller.cc now too.
+
+	* src/Makefile.am (regexxer_SOURCES): Add new files.
+
+	* src/mainwindow.{cc,h}: Integrate the new Controller concept and
+	get rid of the obsolete cruft.  We're now below 1000 lines again.
+
 2002-11-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/mainwindow.cc: Show tool tips for both find buttons too.

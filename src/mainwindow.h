@@ -21,6 +21,7 @@
 #ifndef REGEXXER_MAINWINDOW_H_INCLUDED
 #define REGEXXER_MAINWINDOW_H_INCLUDED
 
+#include "controller.h"
 #include "filebuffer.h"
 #include "sharedptr.h"
 
@@ -38,7 +39,6 @@ class CheckButton;
 class Entry;
 class TextBuffer;
 class TextView;
-class Toolbar;
 }
 
 
@@ -65,36 +65,24 @@ protected:
 private:
   class BusyAction;
 
+  Controller        controller_;
   Gtk::Tooltips     tooltips_;
 
   Gtk::Toolbar*     toolbar_;
-  Gtk::Widget*      toolbutton_save_;
-  Gtk::Widget*      toolbutton_save_all_;
 
   Gtk::Entry*       entry_folder_;
   Gtk::Entry*       entry_pattern_;
   Gtk::CheckButton* button_recursive_;
   Gtk::CheckButton* button_hidden_;
-  Gtk::Button*      button_find_files_;
 
   Gtk::Entry*       entry_regex_;
   Gtk::Entry*       entry_substitution_;
   Gtk::CheckButton* button_multiple_;
   Gtk::CheckButton* button_caseless_;
-  Gtk::Button*      button_find_matches_;
 
   FileTree*         filetree_;
   Gtk::TextView*    textview_;
   Gtk::Entry*       entry_preview_;
-
-  Gtk::Widget*      action_area_;
-  Gtk::Button*      button_prev_file_;
-  Gtk::Button*      button_prev_;
-  Gtk::Button*      button_next_;
-  Gtk::Button*      button_next_file_;
-  Gtk::Button*      button_replace_;
-  Gtk::Button*      button_replace_file_;
-  Gtk::Button*      button_replace_all_;
 
   StatusLine*       statusline_;
 
@@ -106,10 +94,8 @@ private:
   std::list<SigC::Connection> buffer_connections_;
   std::auto_ptr<PrefDialog>   pref_dialog_;
 
-  Gtk::Toolbar* create_toolbar();
-  Gtk::Widget*  create_action_area();
-  Gtk::Widget*  create_left_pane();
-  Gtk::Widget*  create_right_pane();
+  Gtk::Widget* create_left_pane();
+  Gtk::Widget* create_right_pane();
 
   void on_quit();
   bool confirm_quit_request();

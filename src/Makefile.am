@@ -23,12 +23,16 @@ bin_PROGRAMS = regexxer
 regexxer_SOURCES =	\
 	configdata.cc	\
 	configdata.h	\
+	controller.cc	\
+	controller.h	\
 	filebuffer.cc	\
 	filebuffer.h	\
 	fileio.cc	\
 	fileio.h	\
 	filetree.cc	\
 	filetree.h	\
+	imagebutton.cc	\
+	imagebutton.h	\
 	main.cc		\
 	mainwindow.cc	\
 	mainwindow.h	\
