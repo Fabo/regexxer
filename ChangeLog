@@ -1,5 +1,10 @@
 2004-05-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (on_select_folder): Use Gtk::FileChooserDialog
+	instead of the old Gtk::FileSelection.
+
+2004-05-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* ui/prefdialog.glade: Removes the <requires lib="gnome"/> line
 	that was inserted by buggy glade-2.
 

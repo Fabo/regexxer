@@ -300,32 +300,25 @@ bool MainWindow::confirm_quit_request()
 void MainWindow::on_select_folder()
 {
   using namespace Glib;
+  using namespace Gtk;
 
-  Gtk::FileSelection filesel (_("Select a folder"));
+  FileChooserDialog chooser (*window_, _("Select a folder"), FILE_CHOOSER_ACTION_SELECT_FOLDER);
 
-  filesel.set_modal(true);
-  filesel.set_transient_for(*window_);
-  filesel.hide_fileop_buttons();
-  filesel.set_has_separator(false);
-  filesel.get_file_list()->get_parent()->hide();
-  filesel.set_default_size(400, -1);
+  chooser.add_button(Stock::CANCEL, RESPONSE_CANCEL);
+  chooser.add_button(Stock::OK,     RESPONSE_OK);
+  chooser.set_default_response(RESPONSE_OK);
+  chooser.set_modal(true);
 
+  chooser.set_local_only(true);
+  chooser.set_current_folder(filename_from_utf8(Util::expand_pathname(entry_folder_->get_text())));
+
+  if (chooser.run() == RESPONSE_OK)
   {
-    std::string filename = filename_from_utf8(Util::expand_pathname(entry_folder_->get_text()));
-
-    if (!filename.empty() && *filename.rbegin() != G_DIR_SEPARATOR)
-      filename += G_DIR_SEPARATOR;
-
-    filesel.set_filename(filename);
-  }
-
-  if (filesel.run() == Gtk::RESPONSE_OK)
-  {
-    std::string filename = filesel.get_filename();
+    std::string filename = chooser.get_filename();
 
     if (!filename.empty() && *filename.rbegin() != G_DIR_SEPARATOR)
     {
-      // The new GTK+ file selector doesn't append '/' to directories anymore.
+      // The new GTK+ file chooser doesn't append '/' to directories anymore.
       if (file_test(filename, FILE_TEST_IS_DIR))
         filename += G_DIR_SEPARATOR;
       else
