@@ -46,7 +46,7 @@ Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& inp
   while (input->read(inbuf.get(), BUFSIZE, bytes_read) == Glib::IO_STATUS_NORMAL)
   {
     if (std::memchr(inbuf.get(), '\0', bytes_read)) // binary file?
-      return Glib::RefPtr<FileBuffer>();
+      throw Regexxer::ErrorBinaryFile();
 
     text_end = text_buffer->insert(text_end, inbuf.get(), inbuf.get() + bytes_read);
   }
@@ -147,14 +147,14 @@ void load_file(const FileInfoPtr& fileinfo, const std::string& fallback_encoding
     buffer = load_try_encoding(fileinfo->fullname, encoding);
   }
 
-  if (buffer)
-  {
-    buffer->set_modified(false);
+  if (!buffer)
+    throw ErrorBinaryFile();
 
-    fileinfo->load_failed = false;
-    fileinfo->encoding    = encoding;
-    fileinfo->buffer      = buffer;
-  }
+  buffer->set_modified(false);
+
+  fileinfo->load_failed = false;
+  fileinfo->encoding    = encoding;
+  fileinfo->buffer      = buffer;
 }
 
 void save_file(const FileInfoPtr& fileinfo)

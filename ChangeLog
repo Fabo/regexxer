@@ -1,5 +1,18 @@
 2004-05-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.h (ErrorBinaryFile): New exception class.
+
+	* src/fileio.cc (load_iochannel): Throw ErrorBinaryFile if the
+	input stream contains '\0' bytes, rather than just returning a
+	null pointer.
+	(load_file): Throw ErrorBinaryFile if the file could not be
+	loaded in either of the specified encodings.
+
+	* src/filetree.cc (FileTree::load_file_with_fallback): Handle
+	the ErrorBinaryFile exception.
+
+2004-05-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (FileTree::replace_all_matches): Substitute
 	Gtk::TreeIter with Gtk::TreeModel::iterator for consistency.
 

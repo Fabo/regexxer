@@ -1003,16 +1003,14 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
     fileinfo->buffer = FileBuffer::create_with_error_message(
         render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG), error.what());
   }
-
-  if (!fileinfo->buffer)
+  catch (const ErrorBinaryFile&)
   {
-    g_assert(fileinfo->load_failed);
-
-    const Glib::ustring message = Util::compose(_("\"%1\" seems to be a binary file."),
-        Util::filename_to_utf8_fallback(Glib::path_get_basename(fileinfo->fullname)));
+    const Glib::ustring filename =
+        Util::filename_to_utf8_fallback(Glib::path_get_basename(fileinfo->fullname));
 
     fileinfo->buffer = FileBuffer::create_with_error_message(
-        render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG), message);
+        render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG),
+        Util::compose(_("\"%1\" seems to be a binary file."), filename));
   }
 
   if (old_load_failed != fileinfo->load_failed)

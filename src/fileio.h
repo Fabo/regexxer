@@ -61,6 +61,7 @@ typedef Util::SharedPtr<FileInfoBase> FileInfoBasePtr;
 typedef Util::SharedPtr<DirInfo>      DirInfoPtr;
 typedef Util::SharedPtr<FileInfo>     FileInfoPtr;
 
+class ErrorBinaryFile {}; // exception type
 
 void load_file(const FileInfoPtr& fileinfo, const std::string& fallback_encoding);
 void save_file(const FileInfoPtr& fileinfo);
