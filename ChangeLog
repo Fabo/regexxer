@@ -1,5 +1,12 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (FileTree::load_file_with_fallback): Get the
+	UTF-8 encoded basename from the filename column of the tree model
+	instead of stripping and converting fileinfo->fullname all over
+	again.
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/fileio.cc (load_file): Move the assignment of 'false' to
 	fileinfo->load_failed to the very end of the function, because
 	there is a tiny chance that one of the other assignments throws

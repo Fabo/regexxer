@@ -1038,8 +1038,7 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
   }
   catch (const ErrorBinaryFile&)
   {
-    const Glib::ustring filename =
-        Util::filename_to_utf8_fallback(Glib::path_get_basename(fileinfo->fullname));
+    const Glib::ustring filename = (*iter)[FileTreeColumns::instance().filename];
 
     fileinfo->buffer = FileBuffer::create_with_error_message(
         render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG),
