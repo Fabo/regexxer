@@ -31,7 +31,6 @@
 #include <gtkmm/treepath.h>
 #include <gtkmm/treeview.h>
 #include <list>
-#include <stack>
 
 namespace Gtk   { class TreeStore; }
 namespace Pcre  { class Pattern;   }
@@ -137,8 +136,8 @@ private:
                                     const Gtk::TreeModel::iterator& iter,
                                     ReplaceMatchesData* replace_data);
 
-  bool next_match_file(Gtk::TreeModel::iterator& iter, std::stack<Gtk::TreePath>* collapse_stack = 0);
-  bool prev_match_file(Gtk::TreeModel::iterator& iter, std::stack<Gtk::TreePath>* collapse_stack = 0);
+  bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
+  bool prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
 
   void expand_and_select(const Gtk::TreePath& path);
 

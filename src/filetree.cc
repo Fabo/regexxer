@@ -209,16 +209,14 @@ bool FileTree::select_next_file(bool move_forward)
 {
   if (Gtk::TreeModel::iterator iter = get_selection()->get_selected())
   {
-    std::stack<Gtk::TreePath> collapse_stack;
+    Gtk::TreeModel::Path collapse;
 
-    if ((move_forward) ? next_match_file(iter, &collapse_stack)
-                       : prev_match_file(iter, &collapse_stack))
+    if ((move_forward) ? next_match_file(iter, &collapse) : prev_match_file(iter, &collapse))
     {
-      for (; !collapse_stack.empty(); collapse_stack.pop())
-        collapse_row(collapse_stack.top());
+      if (!collapse.empty())
+        collapse_row(collapse);
 
-      expand_and_select(Gtk::TreePath(iter));
-
+      expand_and_select(Gtk::TreeModel::Path(iter));
       return true;
     }
   }
@@ -640,8 +638,7 @@ bool FileTree::replace_matches_at_path_iter(const Gtk::TreeModel::Path& path,
   return false;
 }
 
-bool FileTree::next_match_file(Gtk::TreeModel::iterator& iter,
-                               std::stack<Gtk::TreePath>* collapse_stack)
+bool FileTree::next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse)
 {
   g_return_val_if_fail(iter, false);
 
@@ -669,13 +666,8 @@ bool FileTree::next_match_file(Gtk::TreeModel::iterator& iter,
       iter = parent;
       parent = iter->parent();
 
-      if (collapse_stack)
-      {
-        const Gtk::TreePath path (iter);
-
-        if (row_expanded(path))
-          collapse_stack->push(path);
-      }
+      if (collapse)
+        *collapse = iter;
     }
     else
       break;
@@ -686,14 +678,13 @@ bool FileTree::next_match_file(Gtk::TreeModel::iterator& iter,
   return false;
 }
 
-bool FileTree::prev_match_file(Gtk::TreeModel::iterator& iter,
-                               std::stack<Gtk::TreePath>* collapse_stack)
+bool FileTree::prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse)
 {
   g_return_val_if_fail(iter, false);
 
   const FileTreeColumns& columns = FileTreeColumns::instance();
   Gtk::TreeModel::iterator parent = iter->parent();
-  Gtk::TreePath path (iter);
+  Gtk::TreeModel::Path path (iter);
 
   for (;;)
   {
@@ -718,8 +709,8 @@ bool FileTree::prev_match_file(Gtk::TreeModel::iterator& iter,
       parent = parent->parent();
       path.up();
 
-      if (collapse_stack && row_expanded(path))
-        collapse_stack->push(path);
+      if (collapse)
+        *collapse = path;
     }
     else
       break;

@@ -1,5 +1,15 @@
 2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (FileTree::next_match_file): Replace the
+	collapse_stack parameter by a single Gtk::TreeModel::Path pointer,
+	because we really don't have to collapse each expanded child row
+	explicitely.  Simplify the implementation accordingly.
+	(FileTree::prev_match_file): ditto.
+	(FileTree::select_next_file): Get rid of the collapse_stack
+	container and use a simple Gtk::TreeModel::Path variable instead.
+
+2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/fileio.cc (save_iochannel): Use Gtk::TextBuffer::get_slice()
 	rather than get_text().
 
