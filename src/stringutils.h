@@ -31,6 +31,14 @@ namespace Util
 
 typedef std::vector< std::pair<int,int> > CaptureVector;
 
+// next() and prev(): Idea shamelessly stolen from boost.
+//
+template <class Iterator>
+inline Iterator next(Iterator pos) { return ++pos; }
+
+template <class Iterator>
+inline Iterator prev(Iterator pos) { return --pos; }
+
 bool encodings_equal(const std::string& lhs, const std::string& rhs);
 bool contains_null(const char* pbegin, const char* pend);
 Glib::ustring shell_pattern_to_regex(const Glib::ustring& pattern);

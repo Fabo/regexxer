@@ -490,7 +490,7 @@ void MainWindow::on_exec_search()
       char_index = std::distance(regex.begin(), pos);
 
       message += " at \302\273";
-      message += *pos;
+      message.append(pos, Util::next(pos));
       message += "\302\253 (index ";
       message += Util::int_to_string(char_index + 1);
       message += ")";
