@@ -40,6 +40,8 @@ ImageButton::ImageButton(const Gtk::StockID& stock_id, const Glib::ustring& name
 
 #if REGEXXER_HAVE_GTKMM_22
   get_accessible()->set_name(name);
+#else
+  (void) name; // suppress warning about unused parameter
 #endif
 }
 
