@@ -91,6 +91,7 @@ public:
   ControlItem   save_all;
   ControlItem   preferences;
   ControlItem   quit;
+  ControlItem   info;
 
   // Group for all controls that could change matches
   // or require match information to operate.

@@ -157,8 +157,13 @@ MainWindow::MainWindow()
     Box *const vbox_main = new VBox();
     add(*manage(vbox_main));
 
-    toolbar_ = controller_.create_toolbar();
-    vbox_main->pack_start(*manage(toolbar_), PACK_SHRINK);
+    HandleBox *const menubar_handle = new HandleBox();
+    vbox_main->pack_start(*manage(menubar_handle), PACK_SHRINK);
+    menubar_handle->add(*manage(controller_.create_menubar()));
+
+    HandleBox *const toolbar_handle = new HandleBox();
+    vbox_main->pack_start(*manage(toolbar_handle), PACK_SHRINK);
+    toolbar_handle->add(*manage(toolbar_ = controller_.create_toolbar()));
 
     Box *const vbox_interior = new VBox();
     vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);

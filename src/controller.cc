@@ -26,10 +26,42 @@
 #include <gtkmm/menubar.h>
 #include <gtkmm/stock.h>
 #include <gtkmm/toolbar.h>
+#include <memory>
 
 
 namespace
 {
+
+void add_menu_stock(Gtk::MenuBar::MenuList& items, const Gtk::StockID& stock_id,
+                    Regexxer::ControlItem& control)
+{
+  items.push_back(Gtk::Menu_Helpers::StockMenuElem(stock_id, control.slot()));
+  control.add_widget(items.back());
+}
+
+void add_menu_stock(Gtk::MenuBar::MenuList& items, const Gtk::StockID& stock_id,
+                    const Gtk::Menu::AccelKey& accel_key, Regexxer::ControlItem& control)
+{
+  items.push_back(Gtk::Menu_Helpers::StockMenuElem(stock_id, accel_key, control.slot()));
+  control.add_widget(items.back());
+}
+
+void add_menu_image(Gtk::MenuBar::MenuList& items, const Gtk::StockID& stock_id,
+                    const Glib::ustring& label, Regexxer::ControlItem& control)
+{
+  items.push_back(Gtk::Menu_Helpers::ImageMenuElem(
+      label, *Gtk::manage(new Gtk::Image(stock_id, Gtk::ICON_SIZE_MENU)), control.slot()));
+  control.add_widget(items.back());
+}
+
+void add_menu_image(Gtk::MenuBar::MenuList& items, const Gtk::StockID& stock_id,
+                    const Glib::ustring& label, const Gtk::Menu::AccelKey& accel_key,
+                    Regexxer::ControlItem& control)
+{
+  items.push_back(Gtk::Menu_Helpers::ImageMenuElem(
+      label, accel_key, *Gtk::manage(new Gtk::Image(stock_id, Gtk::ICON_SIZE_MENU)), control.slot()));
+  control.add_widget(items.back());
+}
 
 void add_tool_stock(Gtk::Toolbar::ToolList& tools, const Gtk::StockID& stock_id,
                     Regexxer::ControlItem& control)
@@ -145,6 +177,7 @@ Controller::Controller()
   save_all      (false),
   preferences   (true),
   quit          (true),
+  info          (true),
   match_actions (true),
   find_files    (false),
   find_matches  (false),
@@ -172,7 +205,61 @@ Controller::~Controller()
 
 Gtk::MenuBar* Controller::create_menubar()
 {
-  return 0;
+  using namespace Gtk;
+  using namespace Gtk::Menu_Helpers;
+
+  std::auto_ptr<MenuBar> menubar (new MenuBar());
+  MenuList& menubar_items = menubar->items();
+
+  {
+    Menu *const menu = new Menu();
+    menubar_items.push_back(MenuElem("_File", *manage(menu)));
+    MenuList& items = menu->items();
+
+    items.push_back(TearoffMenuElem());
+
+    add_menu_stock(items, Stock::SAVE, save_file);
+    add_menu_stock(items, StockID("regexxer-save-all"), save_all);
+
+    items.push_back(SeparatorElem());
+
+    add_menu_stock(items, Stock::PREFERENCES, preferences);
+
+    items.push_back(SeparatorElem());
+
+    add_menu_stock(items, Stock::QUIT, quit);
+  }
+
+  {
+    Menu *const menu = new Menu();
+    menubar_items.push_back(MenuElem("_Match", *manage(menu)));
+    MenuList& items = menu->items();
+
+    items.push_back(TearoffMenuElem());
+
+    add_menu_image(items, Stock::GOTO_FIRST, "_Previous file", AccelKey("<control>p"), prev_file);
+    add_menu_stock(items, Stock::GO_BACK,                      AccelKey("<control>b"), prev_match);
+    add_menu_stock(items, Stock::GO_FORWARD,                   AccelKey("<control>f"), next_match);
+    add_menu_image(items, Stock::GOTO_LAST,  "_Next file",     AccelKey("<control>n"), next_file);
+
+    items.push_back(SeparatorElem());
+
+    add_menu_image(items, Stock::CONVERT, "Replace _current", AccelKey("<control>r"), replace);
+    add_menu_image(items, Stock::CONVERT, "Replace in _this file", replace_file);
+    add_menu_image(items, Stock::CONVERT, "Replace in _all files", replace_all);
+  }
+
+  {
+    Menu *const menu = new Menu();
+    menubar_items.push_back(MenuElem("_Help", *manage(menu)));
+    MenuList& items = menu->items();
+
+    items.push_back(TearoffMenuElem());
+
+    add_menu_stock(items, StockID("regexxer-info"), info);
+  }
+
+  return menubar.release();
 }
 
 Gtk::Toolbar* Controller::create_toolbar()

@@ -1,5 +1,11 @@
 2002-11-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/controller.{cc,h} (create_menubar): Implement.
+	* src/mainwindow.cc: Show the menu bar, and make both toolbar and
+	menu bar detachable.
+
+2002-11-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/controller.{cc,h}: New files, implementing class Controller
 	and class ControlItem.  ControlItem maintains an arbitrary number
 	of activation sources, and controls the sensitivity state of an
