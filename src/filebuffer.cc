@@ -1,6 +1,6 @@
 /* $Id$
  *
- * Copyright (c) 2002  Daniel Elstner  <daniel.elstner@gmx.net>
+ * Copyright (c) 2004  Daniel Elstner  <daniel.elstner@gmx.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License VERSION 2 as
@@ -264,7 +264,6 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
 {
   ScopedLock lock (*this);
 
-  const Glib::RefPtr<Glib::MainContext> main_context = Glib::MainContext::get_default();
   const Glib::RefPtr<RegexxerTags> tagtable = RegexxerTags::instance();
 
   notify_weak_undos();

@@ -1,5 +1,13 @@
 2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filebuffer.cc (FileBuffer::find_matches): Get rid of an
+	unused main_context variable plus initialization code.  Whoa,
+	this ancient piece of code must have been lurking here for at
+	least a year without being used.  Unfortunately g++ didn't warn
+	about it since the ctor/dtor might have had side effects...
+
+2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* autogen.sh: In the regex used to extract version numbers, avoid
 	any use of quantifiers other than * for maximum portability.
 
