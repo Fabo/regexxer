@@ -38,12 +38,24 @@ PKG_CHECK_MODULES([GTKMM], [glib-2.0 >= 2.0.7 gtk+-2.0 >= 2.0.6 sigc++-1.2 >= 1.
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 
-AC_MSG_CHECKING([for gtkmm >= 2.1.0])
-have_gtkmm_22=no
-${PKG_CONFIG:-"pkg-config"} --atleast-version=2.1.0 gtkmm-2.0 >&5 2>&5 && have_gtkmm_22=yes
-AC_MSG_RESULT([${have_gtkmm_22}])
+AC_CACHE_CHECK(
+  [for sufficiently recent gtkmm-2.1],
+  [regexxer_cv_have_gtkmm_22],
+[
+  AC_LANG_PUSH([C++])
+  regexxer_saved_CXXFLAGS=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS $GTKMM_CFLAGS"
 
-if test "x$have_gtkmm_22" = "xyes"; then
+  AC_COMPILE_IFELSE(
+    [AC_LANG_PROGRAM([[#include <glibmm.h>]], [[using Glib::set_application_name;]])],
+    [regexxer_cv_have_gtkmm_22=yes],
+    [regexxer_cv_have_gtkmm_22=no])
+
+  CXXFLAGS=$regexxer_saved_CXXFLAGS
+  AC_LANG_POP([C++])
+])
+
+if test "x$regexxer_cv_have_gtkmm_22" = "xyes"; then
 {
   AC_DEFINE([REGEXXER_HAVE_GTKMM_22], [1], [Define to 1 if gtkmm >= 2.1.0 is installed.])
 }

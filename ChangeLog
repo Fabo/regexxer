@@ -1,5 +1,10 @@
 2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac: Replace the check for gtkmm >= 2.1.0 with a test
+	for Glib::set_application_name().  This should be much safer.
+
+2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/main.cc (main): Use Glib::set_application_name() if building
 	for gtkmm 2.1.
 
