@@ -513,10 +513,18 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo)
 
 void MainWindow::on_filelist_bound_state_changed()
 {
-  const BoundState bound = filelist_->get_bound_state();
+  BoundState bound = filelist_->get_bound_state();
 
   button_prev_file_->set_sensitive((bound & BOUND_FIRST) == 0);
   button_next_file_->set_sensitive((bound & BOUND_LAST)  == 0);
+
+  if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer()))
+  {
+    bound &= buffer->get_bound_state();
+
+    button_prev_->set_sensitive((bound & BOUND_FIRST) == 0);
+    button_next_->set_sensitive((bound & BOUND_LAST)  == 0);
+  }
 }
 
 void MainWindow::on_filelist_match_count_changed()
