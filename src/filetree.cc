@@ -932,8 +932,6 @@ void FileTree::on_treestore_sort_column_changed()
       g_return_if_fail(found_first);
     }
 
-    path_match_first_ = Gtk::TreePath(first);
-
     Gtk::TreeModel::iterator last = treestore_->children()[treestore_->children().size() - 1];
 
     while(last->children() && (*last)[columns.matchcount] > 0)
@@ -945,7 +943,8 @@ void FileTree::on_treestore_sort_column_changed()
       g_return_if_fail(found_last);
     }
 
-    path_match_last_ = Gtk::TreePath(last);
+    path_match_first_ = Gtk::TreePath(first);
+    path_match_last_  = Gtk::TreePath(last);
 
     signal_bound_state_changed(); // emit
   }
