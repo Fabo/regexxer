@@ -979,7 +979,7 @@ void MainWindow::on_preferences()
 {
   if(pref_dialog_.get())
   {
-    pref_dialog_->raise();
+    pref_dialog_->present();
   }
   else
   {
