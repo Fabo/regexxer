@@ -1,5 +1,10 @@
 2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* Makefile.am (ACLOCAL_AMFLAGS): Add ${ACLOCAL_FLAGS} as
+	recommended by James Henstridge.
+
+2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* Makefile.am (install-schemas): Don't use $^ since it probably
 	isn't portable.
 	(uninstall-schemas): ditto.
