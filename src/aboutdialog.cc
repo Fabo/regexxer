@@ -38,7 +38,7 @@ const char *const package_title = "<span size=\"xx-large\" weight=\"heavy\">"
 
 void apply_label_markup(Gtk::Label& label)
 {
-  label.set_markup("<span size=\"small\">" + Glib::Markup::escape_text(label.get_text()) + "</span>");
+  label.set_markup("<small>" + Glib::Markup::escape_text(label.get_text()) + "</small>");
 }
 
 } // anonymous namespace

@@ -1,5 +1,10 @@
 2004-06-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/aboutdialog.cc (apply_label_markup): Make use of the <small>
+	convenience tag to simplify the markup slightly.
+
+2004-06-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/aboutdialog.cc: Include <libglademm/xml.h> instead of the
 	whole <libglademm.h> to save a tiny bit of compile time.
 	* src/controller.cc: ditto.
