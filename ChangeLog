@@ -1,3 +1,10 @@
+2002-12-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/mainwindow.cc (create_left_pane): Set the accessible name
+	of the folder entry.
+	(create_right_pane): Set the accessible name of the preview entry,
+	but replace the accessible description with a tool tip.
+
 2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filetree.cc (expand_and_select): Make use of

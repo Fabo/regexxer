@@ -372,6 +372,10 @@ Gtk::Widget* MainWindow::create_left_pane()
   scrollwin->add(*manage(filetree_));
   scrollwin->set_policy(POLICY_AUTOMATIC, POLICY_ALWAYS);
 
+#if REGEXXER_HAVE_GTKMM_22
+  entry_folder_->get_accessible()->set_name("Folder");
+#endif
+
   tooltips_.set_tip(*entry_folder_,     "The directory to be searched");
   tooltips_.set_tip(*entry_pattern_,    "A filename pattern as used by the shell. "
                                         "Character classes [ab] and csh style "
@@ -442,7 +446,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_preview_->modify_font(fileview_font_);
 
 #if REGEXXER_HAVE_GTKMM_22
-  entry_preview_->get_accessible()->set_description("Preview of the substitution in the current line");
+  entry_preview_->get_accessible()->set_name("Preview");
 #endif
 
   tooltips_.set_tip(*entry_regex_,        "A regular expression in Perl syntax");
@@ -453,6 +457,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   tooltips_.set_tip(*button_multiple_,    "Find all possible matches in a line");
   tooltips_.set_tip(*button_caseless_,    "Do case insensitive matching");
   tooltips_.set_tip(*button_find_matches, "Find all matches of the regular expression");
+  tooltips_.set_tip(*entry_preview_,      "Preview of the substitution in the current line");
 
   return vbox.release();
 }
