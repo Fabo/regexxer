@@ -33,8 +33,9 @@ AC_PROG_CXX()
 
 AC_PROG_INTLTOOL([0.23])
 ALL_LINGUAS=`cat "$srcdir/po/LINGUAS"`
+GETTEXT_PACKAGE=regexxer
 AC_SUBST([CONFIG_STATUS_DEPENDENCIES], ['$(top_srcdir)/po/LINGUAS'])
-AC_SUBST([GETTEXT_PACKAGE], ['regexxer'])
+AC_SUBST([GETTEXT_PACKAGE])
 AM_GLIB_GNU_GETTEXT()
 
 PKG_CHECK_MODULES([PKG], [gtkmm-2.4 >= 2.4.0 libglademm-2.4 >= 2.4.0 gconfmm-2.6 >= 2.6.1])
