@@ -1,5 +1,12 @@
 2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* autogen.sh: Append an XGETTEXT_KEYWORDS = ... line to the
+	generated po/Makefile.in.in file.  These flags are picked up
+	by intltool-update and passed to xgettext.  Use this feature
+	to make xgettext recognize Util::compose() format strings.
+
+2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac (GETTEXT_PACKAGE): Use a plain shell assignment
 	plus a separate AC_SUBST([GETTEXT_PACKAGE]) in order to please
 	the fucked up intltool-update script.

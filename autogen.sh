@@ -34,6 +34,7 @@ fi
 
 PROJECT=regexxer
 MIN_AUTOMAKE_VERSION=1.7
+XGETTEXT_KEYWORDS='--keyword=_ --keyword=N_ --keyword=translate --qt'
 
 srcdir=`dirname "$0"`
 test -n "$srcdir" || srcdir=.
@@ -102,6 +103,7 @@ $set_option -x
 
 glib-gettextize --copy		|| exit 1
 intltoolize --automake		|| exit 1
+(echo; echo "XGETTEXT_KEYWORDS = $XGETTEXT_KEYWORDS") >> po/Makefile.in.in || exit 1
 "$aclocal" $ACLOCAL_FLAGS	|| exit 1
 "$autoheader"			|| exit 1
 "$automake" $AUTOMAKE_FLAGS	|| exit 1
