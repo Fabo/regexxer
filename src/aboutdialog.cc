@@ -36,7 +36,7 @@ namespace
 const char *const package_title = "<span size=\"xx-large\" weight=\"heavy\">"
                                   PACKAGE_STRING "</span>";
 
-void apply_label_markup(Gtk::Label& label)
+void apply_label_what_markup(Gtk::Label& label)
 {
   label.set_markup("<small>" + Glib::Markup::escape_text(label.get_text()) + "</small>");
 }
@@ -64,8 +64,8 @@ std::auto_ptr<Gtk::Dialog> AboutDialog::create(Gtk::Window& parent)
 
   Gtk::Label* label = 0;
   xml->get_widget("label_title", label)->set_markup(package_title);
-  apply_label_markup(*xml->get_widget("label_author_what", label));
-  apply_label_markup(*xml->get_widget("label_translator_what", label));
+  apply_label_what_markup(*xml->get_widget("label_author_what", label));
+  apply_label_what_markup(*xml->get_widget("label_translator_what", label));
 
   if (xml->get_widget("label_translator_who", label)->get_text().raw() == "translator-credits")
     label->set_markup("<i>(no translation available)</i>");

@@ -1,4 +1,9 @@
-2004-06-30  Daniel Elstner  <daniel.elstner@gmx.net>
+2004-07-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/aboutdialog.cc (apply_label_what_markup): Rename from
+	apply_label_markup for clarity.
+
+2004-07-05  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filetree.{cc,h} (FileTree::find_matches_at_path_iter): Use
 	reference arguments instead of pointers.  Make use of sigc::ref()
