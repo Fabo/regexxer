@@ -115,6 +115,7 @@ private:
 
   void load_xml();
   void connect_signals();
+  bool autorun_idle();
 
   void on_hide();
   void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);

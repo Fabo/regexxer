@@ -189,7 +189,7 @@ void MainWindow::initialize(std::auto_ptr<InitState> init)
   button_caseless_ ->set_active(init->ignorecase);
 
   if (init->autorun)
-    Glib::signal_idle().connect(sigc::bind_return(controller_.find_files.slot(), false));
+    Glib::signal_idle().connect(sigc::mem_fun(*this, &MainWindow::autorun_idle));
 }
 
 /**** Regexxer::MainWindow -- private **************************************/
@@ -303,6 +303,16 @@ void MainWindow::connect_signals()
 
   filetree_->signal_undo_stack_push.connect(
       mem_fun(*this, &MainWindow::on_undo_stack_push));
+}
+
+bool MainWindow::autorun_idle()
+{
+  controller_.find_files.activate();
+
+  if (!busy_action_cancel_ && entry_regex_->get_text_length() > 0)
+    controller_.find_matches.activate();
+
+  return false;
 }
 
 void MainWindow::on_hide()
@@ -818,7 +828,6 @@ void MainWindow::busy_action_leave()
   g_return_if_fail(busy_action_running_);
 
   busy_action_running_ = false;
-  busy_action_cancel_  = false;
 
   statusline_->pulse_stop();
 

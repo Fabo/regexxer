@@ -1,5 +1,16 @@
 2004-07-13  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.{cc,h} (MainWindow::autorun_idle): New method
+	which first invokes the file search and the regex search after
+	that, unless the user hit the Stop button in between.
+	(MainWindow::initialize): Connect Glib::signal_idle() to the new
+	autorun_idle() method instead of controller_.find_files.slot().
+	(MainWindow::busy_action_leave): Don't reset busy_action_cancel_
+	so that autorun_idle() can test this flag to determine whether
+	the busy action was cancelled by the user.
+
+2004-07-13  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* macros/pcre.m4 (PCRE_CHECK_UTF8): Make sure the preprocessor
 	directives in the test program start in the first column, just
 	in case we do hit on some ancient compiler that requires it.
