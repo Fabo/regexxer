@@ -1,3 +1,13 @@
+2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* autogen.sh: Incorporate bits of the standard GNOME autogen.sh,
+	and make use of aclocal-1.7 and automake-1.7 if available.
+
+	* configure.ac: AC_PREREQ([2.53]) to make sure the Debian magic
+	chooses the right autoconf version.
+	(AM_CONFIG_HEADER): Replace with AC_CONFIG_HEADERS().  This
+	could create a dependency on automake-1.7, don't know for sure.
+
 2002-12-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/imagebutton.{cc,h} (ImageButton): Add a 'name' argument to

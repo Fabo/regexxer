@@ -19,11 +19,12 @@
 
 
 AC_INIT([regexxer], [0.5], [daniel.elstner@gmx.net], [regexxer])
+AC_PREREQ([2.53])
 
 AC_REVISION([$Revision$])
 AC_CONFIG_SRCDIR([src/pcreshell.cc])
+AC_CONFIG_HEADERS([config.h])
 
-AM_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([gnu no-define nostdinc])
 
 AC_PROG_CC()

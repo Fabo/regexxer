@@ -19,28 +19,63 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+PROJECT=regexxer
 
-dir=`echo "$0" | sed 's,[^/]*$,,'`
-test "x${dir}" = "x" && dir='.'
+srcdir=`dirname "$0"`
+test -z $srcdir && srcdir=.
 
-if test "x`cd "${dir}" 2>/dev/null && pwd`" != "x`pwd`"
+origdir=`pwd`
+cd "$srcdir"
+
+ACLOCAL_FLAGS="-I ./macros $ACLOCAL_FLAGS"
+AUTOMAKE_FLAGS="--add-missing --gnu $AUTOMAKE_FLAGS"
+
+if test -z "$AUTOGEN_SUBDIR_MODE" && test -z "$*"
 then
-    echo "This script must be executed directly from the source directory."
-    exit 1
+  echo "I am going to run ./configure with no arguments - if you wish "
+  echo "to pass any to it, please specify them on the $0 command line."
 fi
+
+autoconf=autoconf
+autoheader=autoheader
+aclocal=aclocal
+automake=automake
+
+for suffix in "1.7" "1.6"
+do
+  if "$aclocal-$suffix"  --version </dev/null >/dev/null 2>&1 && \
+     "$automake-$suffix" --version </dev/null >/dev/null 2>&1
+  then
+    aclocal="$aclocal-$suffix"
+    automake="$automake-$suffix"
+    break
+  fi
+done
 
 rm -f config.cache acconfig.h
 
-echo "- aclocal."		&& \
-aclocal -I ./macros		&& \
-echo "- autoconf."		&& \
-autoconf			&& \
-echo "- autoheader."		&& \
-autoheader			&& \
-echo "- automake."		&& \
-automake --add-missing --gnu	&& \
-echo				&& \
-./configure "$@"		&& exit 0
+echo "$aclocal $ACLOCAL_FLAGS"
+"$aclocal" $ACLOCAL_FLAGS || exit 1
 
-exit 1
+echo "$autoheader"
+"$autoheader" || exit 1
+
+echo "$automake $AUTOMAKE_FLAGS"
+"$automake" $AUTOMAKE_FLAGS || exit 1
+
+echo "$autoconf"
+"$autoconf" || exit 1
+
+cd "$origdir"
+
+if test -z "$AUTOGEN_SUBDIR_MODE"
+then
+  echo "$srcdir/configure $*"
+  "$srcdir/configure" "$@" || exit 1
+
+  echo
+  echo "Now type 'make' to compile $PROJECT."
+fi
+
+exit 0
 
