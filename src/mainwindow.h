@@ -60,6 +60,7 @@ public:
 protected:
   virtual void on_hide();
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
+  virtual bool on_delete_event(GdkEventAny* event);
 
 private:
   class BusyAction;
@@ -109,6 +110,9 @@ private:
   Gtk::Widget*  create_action_area();
   Gtk::Widget*  create_left_pane();
   Gtk::Widget*  create_right_pane();
+
+  void on_quit();
+  bool confirm_quit_request();
 
   void on_select_folder();
   void on_find_files();

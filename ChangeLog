@@ -1,5 +1,11 @@
 2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.{cc,h}: If there are any unsaved files on quit
+	or when reloading the file tree, pop up a dialog asking for
+	confirmation.
+
+2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h}: Get rid of the code that expanded/collapsed
 	directory nodes on row clicks and the activated signal.  The GTK+
 	people persuaded me that the inconsistency is worse than the little

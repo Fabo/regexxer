@@ -283,6 +283,11 @@ void MainWindow::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style
   FileBuffer::pango_context_changed(get_pango_context());
 }
 
+bool MainWindow::on_delete_event(GdkEventAny*)
+{
+  return !confirm_quit_request();
+}
+
 Gtk::Toolbar* MainWindow::create_toolbar()
 {
   using namespace Gtk;
@@ -303,7 +308,7 @@ Gtk::Toolbar* MainWindow::create_toolbar()
   tools.push_back(Space());
   tools.push_back(StockElem(Stock::PREFERENCES, slot(*this, &MainWindow::on_preferences)));
   tools.push_back(Space());
-  tools.push_back(StockElem(Stock::QUIT, slot(*this, &Widget::hide)));
+  tools.push_back(StockElem(Stock::QUIT, slot(*this, &MainWindow::on_quit)));
 
   toolbutton_save_    ->set_sensitive(false);
   toolbutton_save_all_->set_sensitive(false);
@@ -484,6 +489,26 @@ Gtk::Widget* MainWindow::create_right_pane()
   return vbox.release();
 }
 
+void MainWindow::on_quit()
+{
+  if(confirm_quit_request())
+    hide();
+}
+
+bool MainWindow::confirm_quit_request()
+{
+  if(filetree_->get_modified_count() == 0)
+    return true;
+
+  const Glib::ustring message = "Some files haven't been saved yet.\nQuit anyway?";
+  Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE, true);
+
+  dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+  dialog.add_button(Gtk::Stock::QUIT,   Gtk::RESPONSE_OK);
+
+  return (dialog.run() == Gtk::RESPONSE_OK);
+}
+
 void MainWindow::on_select_folder()
 {
   using namespace Glib;
@@ -519,6 +544,15 @@ void MainWindow::on_find_files()
 {
   if(!button_find_files_->is_sensitive())
     return; // This could happen if we were invoked from from an entry's activate signal.
+
+  if(filetree_->get_modified_count() > 0)
+  {
+    const Glib::ustring message = "Some files haven't been saved yet.\nContinue anyway?";
+    Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_OK_CANCEL, true);
+
+    if(dialog.run() != Gtk::RESPONSE_OK)
+      return;
+  }
 
   BusyAction busy (*this);
 
