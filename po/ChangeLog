@@ -1,3 +1,8 @@
+2004-05-24  Adam Weinberger  <adamw@gnome.org>
+
+	* LINGUAS: Added en_CA to the list
+	* en_CA.po: Added Canadian English translation.
+
 2004-05-22  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* de.po: Oops, the closing quote in German is U+201C not U+201D.
