@@ -208,7 +208,7 @@ void ColorSelectionButton::on_clicked()
   Gtk::ColorSelectionDialog dialog;
 
   dialog.set_modal(true);
-  dialog.set_title("Color selection");
+  dialog.set_title("Color Selection");
 
   if(Gtk::Window *const toplevel = dynamic_cast<Gtk::Window*>(get_toplevel()))
     dialog.set_transient_for(*toplevel);

@@ -1,3 +1,8 @@
+2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/prefdialog.cc (ColorSelectionButton::on_clicked): Convert
+	the dialog window title to title case.
+
 2002-12-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/prefdialog.cc (ColorLabel::ColorLabel): Modify the whole
