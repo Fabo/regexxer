@@ -27,13 +27,16 @@ dist_noinst_DATA = $(stockimages)
 BUILT_SOURCES = stockimages.h
 CLEANFILES    = stockimages.h
 
+# use --extern here and include stockimages.h within an anonymous namespace
+gdk_pixbuf_csource_command = $(GDK_PIXBUF_CSOURCE) --extern --raw
+
 stockimages.h: $(stockimages)
 	@build_list=''; \
 	list='$(stockimages)'; for file in $$list ; do \
-	  name=`echo $$file | sed 's|\..*$$||'`; \
+	  name=`echo "$$file" | sed 's|\..*$$||'`; \
 	  dir=''; test -f "$$file" || dir='$(srcdir)/'; \
 	  build_list="$$build_list $$name $$dir$$file"; \
 	done; \
-	echo "$(GDK_PIXBUF_CSOURCE) --extern --raw --build-list $$build_list > $@"; \
-	$(GDK_PIXBUF_CSOURCE) --extern --raw --build-list $$build_list > $@
+	echo "$(gdk_pixbuf_csource_command) --build-list $$build_list > $@"; \
+	$(gdk_pixbuf_csource_command) --build-list $$build_list > $@
 
