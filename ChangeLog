@@ -1,5 +1,10 @@
 2002-12-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* pixmaps/regexxer.png: Replace with a much nicer icon stolen from
+	http://jimmac.musichall.cz/ikony.php3 -- looks sweet!
+
+2002-12-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac (PCRE_CHECK_VERSION): Require libpcre >= 3.9.  It
 	finally arrived in Debian unstable a while ago and there's at least
 	one UTF-8 related bug in prior releases that could cause crashes.
