@@ -19,14 +19,50 @@
  */
 
 #include "miscutils.h"
-#include <gtk/gtk.h>
+#include "signalutils.h"
 
+#include <glib-object.h>
+#include <gconf/gconf-value.h>
+#include <gconfmm.h>
 
-bool Util::gtk_version_at_least(unsigned int minor, unsigned int micro)
+#include <config.h>
+
+#if REGEXXER_ENABLE_GCONFMM_VALUE_HACK
+
+namespace
 {
-  g_assert(gtk_major_version == GTK_MAJOR_VERSION);
 
-  return ((gtk_minor_version > minor) ||
-          (gtk_minor_version == minor && gtk_micro_version >= micro));
+const void* received_value_pointer = 0;
+bool        broken_value_changed   = false;
+
+void value_changed_handler(const Glib::ustring&, const Gnome::Conf::Value& value)
+{
+  received_value_pointer = value.gobj();
 }
+
+} // anonymous namespace
+
+
+void Util::check_for_broken_gconfmm_value_changed()
+{
+  const Glib::RefPtr<Gnome::Conf::Client> client = Gnome::Conf::Client::get_default_client();
+  Util::AutoConnection connection (client->signal_value_changed().connect(&value_changed_handler));
+
+  GConfValue* value = gconf_value_new(GCONF_VALUE_INT);
+  gconf_value_set_int(value, 0);
+
+  g_signal_emit_by_name(client->gobj(), "value_changed", "dummy_key", value);
+
+  broken_value_changed = (received_value_pointer == value);
+
+  if (!broken_value_changed)
+    gconf_value_free(value);
+}
+
+bool Util::has_broken_gconfmm_value_changed()
+{
+  return broken_value_changed;
+}
+
+#endif /* REGEXXER_ENABLE_GCONFMM_VALUE_HACK */
 

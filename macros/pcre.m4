@@ -31,38 +31,36 @@ m4_if([$1],, [AC_FATAL([argument required])])
 AC_ARG_VAR([PCRE_CONFIG], [path to pcre-config script])
 AC_PATH_PROG([PCRE_CONFIG], [pcre-config], [not found])
 
-if test "x$PCRE_CONFIG" = "xnot found"; then
-{
+AS_IF([test "x$PCRE_CONFIG" = "xnot found"],
+[
 AC_MSG_ERROR([[
 *** pcre-config is missing.  Please install your distribution's
 *** libpcre development package and then try again.
 ]])
-}
-fi
+])
 
 AC_MSG_CHECKING([[for libpcre >= ]$1])
 
-pcre_version_ok=no
 pcre_version_string=`$PCRE_CONFIG --version`
 
 pcre_num='\(@<:@0123456789@:>@\+\)'
-pcre_transform='s/^'$pcre_num'\.'$pcre_num'\(\.'$pcre_num'\)\?$/\1 \\* 1000000 + \2 \\* 1000 + 0\4/p'
-pcre_required=`echo "[$1]" | sed -n "$pcre_transform"`
+pcre_transform='s/^'$pcre_num'\.'$pcre_num'\.\?'$pcre_num'\?$/\1 \\* 1000000 + \2 \\* 1000 + 0\3/p'
+pcre_required=`echo "$1" | sed -n "$pcre_transform"`
 pcre_version=`echo "$pcre_version_string" | sed -n "$pcre_transform"`
 
-test -n "$pcre_version" && eval expr "$pcre_version \\>= $pcre_required" >/dev/null 2>&5 && \
-  pcre_version_ok=yes
+AS_IF([eval "expr $pcre_version \\>= $pcre_required" >/dev/null 2>&5],
+      [pcre_version_ok=yes],
+      [pcre_version_ok=no])
 
 AC_MSG_RESULT([${pcre_version_ok}])
 
-if test "x$pcre_version_ok" = xno; then
-{
+AS_IF([test "x$pcre_version_ok" = xno],
+[
 AC_MSG_ERROR([[
 *** libpcre ]$1[ or higher is required, but you only have
-*** version ${pcre_version_string} installed.  Please upgrade and try again.
+*** version $pcre_version_string installed.  Please upgrade and try again.
 ]])
-}
-fi
+])
 
 AC_MSG_CHECKING([[PCRE_CFLAGS]])
 PCRE_CFLAGS=`$PCRE_CONFIG --cflags`
@@ -106,7 +104,7 @@ AC_CACHE_CHECK(
       const char* errmessage = NULL;
       int erroffset = 0;
 
-      if(pcre_compile(".", PCRE_UTF8, &errmessage, &erroffset, NULL))
+      if (pcre_compile(".", PCRE_UTF8, &errmessage, &erroffset, NULL))
         exit(0);
 
       fprintf(stderr, "%s\n", errmessage);
@@ -122,15 +120,14 @@ AC_CACHE_CHECK(
   AC_LANG_POP([C])
 ])
 
-if test "x$pcre_cv_has_utf8_support" = xno; then
-{
+AS_IF([test "x$pcre_cv_has_utf8_support" = xno],
+[
 AC_MSG_ERROR([[
 *** Sorry, the PCRE library installed on your system doesn't support
 *** UTF-8 encoding.  Please install a libpcre package which includes
 *** support for UTF-8.  Note that if you compile libpcre from source
 *** you have to pass the --enable-utf8 flag to its ./configure script.
 ]])
-}
-fi
+])
 ])
 

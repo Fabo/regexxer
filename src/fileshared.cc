@@ -21,15 +21,14 @@
 #include "fileshared.h"
 #include "pcreshell.h"
 
-#include <glib/gmacros.h>
+#include <glib.h>
 #include <algorithm>
 
 
 namespace
 {
 
-Glib::Quark file_buffer_match_quark() G_GNUC_CONST;
-Glib::Quark file_buffer_match_quark()
+const Glib::Quark& file_buffer_match_quark()
 {
   // Regexxer::FileBuffer uses anonymous Gtk::TextMark objects to remember
   // the position of matches.  This quark is used to identify a match mark,
@@ -65,14 +64,20 @@ MatchData::MatchData(int match_index, const Glib::ustring& line,
 {
   captures.reserve(capture_count);
 
-  for(int i = 0; i < capture_count; ++i)
+  for (int i = 0; i < capture_count; ++i)
     captures.push_back(pattern.get_substring_bounds(i));
 
   length = calculate_match_length(subject, captures.front());
 }
 
 MatchData::~MatchData()
-{}
+{
+  // We *should* be the only one holding a reference to the Mark apart from
+  // the Gtk::TextBuffer itself.  Nonetheless, let's better be extra careful
+  // and invalidate the reference.
+  if (mark)
+    mark->steal_data(file_buffer_match_quark());
+}
 
 void MatchData::install_mark(const Gtk::TextBuffer::iterator& pos)
 {
@@ -86,7 +91,7 @@ void MatchData::install_mark(const Gtk::TextBuffer::iterator& pos)
 // static
 bool MatchData::is_match_mark(const Glib::RefPtr<Gtk::TextMark>& textmark)
 {
-  return textmark->get_data(file_buffer_match_quark());
+  return (textmark->get_data(file_buffer_match_quark()) != 0);
 }
 
 // static

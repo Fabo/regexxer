@@ -1,0 +1,103 @@
+2004-05-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* *.po: Synchronize message IDs with source code.
+
+2004-05-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po ("Find fi_les"): Translate new string.
+	* en.po: ditto.
+
+2004-05-12  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* *.po: Update due to line number changes.
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* POTFILES.in: Add ui/mainwindow.glade, remove src/controller.cc.
+	* de.po: Update.
+	* en.po: Update.
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* POTFILES.in: Add ui/aboutdialog.glade, remove src/aboutdialog.cc.
+	* de.po: Update.
+	* en.po: Update.
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* POTFILES.in: Add ui/prefdialog.glade.
+	* de.po: Update.
+	* en.po: Update.
+
+2004-05-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po ("regexxer icon"): Fix translation.
+
+2004-05-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* *.po: Remove the disambiguing "...|" from all message keys,
+	because sgettext() is no longer used.
+
+2004-05-07  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* en.po: Replace U+0027 APOSTROPHE with U+2019, which is
+	the preferred code point for apostrophe.
+
+2004-05-07  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po: Fix translation of "About" menu item.
+
+2004-05-06  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po ("LeftPane|Pattern:"): Improve the translation's clarity.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* remove-potcdate.sed: Remove file from CVS, as it was added by
+	mistake.  Apparently make clean deletes it -- I have know idea why
+	gettextize installed this file.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po: Translate the newly added compose() format strings.
+	* en.po: ditto.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po ("Find all matches..."): Fix English artifact in the
+	translation, yet again.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po ("Do case insensitive matching"): Fix English artifact
+	in the translation.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po ("Fallback _encoding:"): Ooops, forgot the hotkey in the
+	translated string.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* en.po: New translation file for plain English with some special
+	Unicode goodies.
+
+	* de.po: Update.
+
+	* LINGUAS: Add en and remove en@quot, because the auto-generation
+	of the latter doesn't really suit our purpose.  For instance I'd
+	like to seep NO-BREAK SPACE and such in the English UI too.
+
+	* POTFILES.in: Add all of the recently gettextized source files.
+
+2004-05-05  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: New file, from gettext-0.14.1.
+	* boldquot.sed: New file, from gettext-0.14.1.
+	* en@boldquot.header: New file, from gettext-0.14.1.
+	* en@quot.header: New file, from gettext-0.14.1.
+	* insert-header.sin: New file, from gettext-0.14.1.
+	* quot.sed: New file, from gettext-0.14.1.
+	* remove-potcdate.sin: New file, from gettext-0.14.1.
+	* Rules-quot: New file, from gettext-0.14.1.
+

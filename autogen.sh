@@ -35,7 +35,7 @@ PROJECT=regexxer
 MIN_AUTOMAKE_VERSION=1.7
 
 srcdir=`dirname "$0"`
-test -z $srcdir && srcdir=.
+test -n "$srcdir" || srcdir=.
 
 origdir=`pwd`
 cd "$srcdir"
@@ -43,7 +43,7 @@ cd "$srcdir"
 ACLOCAL_FLAGS="-I ./macros $ACLOCAL_FLAGS"
 AUTOMAKE_FLAGS="--add-missing --gnu $AUTOMAKE_FLAGS"
 
-if test -z "$AUTOGEN_SUBDIR_MODE" && test -z "$*"
+if test -z "$AUTOGEN_SUBDIR_MODE" && test "x$*" = x
 then
   echo "I am going to run ./configure with no arguments - if you wish "
   echo "to pass any to it, please specify them on the $0 command line."
@@ -57,10 +57,11 @@ auto_version=0
 
 # sed magic to transform a version string into a mathematical expression.
 # For instance, "1.7.2" becomes "1 \* 1000000 + 7 \* 1000 + 02".  This string
-# can be fed into 'eval expr' in order to compare version numbers.
+# can be fed to 'eval expr' in order to compare version numbers.
 #
-get_version='s/^.*(GNU automake) \([0-9]\+\)\.\([0-9]\+\)\(\.\([0-9]\+\)\)\?.*$'
-get_version=$get_version'/\1 \\* 1000000 + \2 \\* 1000 + 0\4/p'
+num='\([0123456789]\+\)'
+get_version='s/^.*(GNU automake) '$num'\.'$num'\.\?'$num'\?.*$'
+get_version=$get_version'/\1 \\* 1000000 + \2 \\* 1000 + 0\3/p'
 
 for suffix in -1.5 -1.6 -1.7 -1.8 ""
 do
@@ -69,7 +70,7 @@ do
 
   if test -n "$aclocal_version" && \
      test "x$aclocal_version" = "x$automake_version" && \
-     eval expr "$automake_version \\>= $auto_version" >/dev/null
+     eval "expr $automake_version \\>= $auto_version" >/dev/null
   then
     auto_version=$automake_version
     aclocal=aclocal$suffix
@@ -79,18 +80,18 @@ done
 
 min_auto_version=`echo "(GNU automake) $MIN_AUTOMAKE_VERSION" | sed -n "$get_version"`
 
-if eval expr "$auto_version \\< $min_auto_version" >/dev/null
+if eval "expr $auto_version \\< $min_auto_version" >/dev/null
 then
   echo "Sorry, at least automake $MIN_AUTOMAKE_VERSION is required to configure $PROJECT."
   exit 1
 fi
 
-rm -f config.guess config.sub depcomp install-sh missing mkinstalldirs
+rm -f config.guess config.sub depcomp install-sh missing
 rm -f config.cache acconfig.h
 rm -rf autom4te.cache
 
-WARNINGS=all
-export WARNINGS
+#WARNINGS=all
+#export WARNINGS
 
 set_option=':'
 test -n "${BASH_VERSION+set}" && set_option='set'

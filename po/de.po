@@ -1,0 +1,412 @@
+# German translations for regexxer package
+# German messages for regexxer.
+# Copyright (C) 2004 Free Software Foundation, Inc.
+# This file is distributed under the same license as the regexxer package.
+# Daniel Elstner <daniel.elstner@gmx.net>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer 0.7\n"
+"Report-Msgid-Bugs-To: daniel.elstner@gmx.net\n"
+"POT-Creation-Date: 2004-05-16 01:19+0200\n"
+"PO-Revision-Date: 2004-05-05 11:34+0200\n"
+"Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
+"Language-Team: German <de@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+#: src/filebuffer.cc:205
+msgid "Can't read file:"
+msgstr "Datei nicht lesbar:"
+
+#: src/filetree.cc:60
+msgid "File"
+msgstr "Datei"
+
+#: src/filetree.cc:79
+msgid "#"
+msgstr "#"
+
+#: src/filetree.cc:508
+msgid "Failed to save file \"%1\": %2"
+msgstr "Fehler beim Speichern der Datei „%1”: %2"
+
+#: src/filetree.cc:1001
+msgid "\"%1\" seems to be a binary file."
+msgstr "„%1” scheint eine Binärdatei zu sein."
+
+#: src/main.cc:81
+msgid "_About"
+msgstr "_Info"
+
+#: src/main.cc:82
+msgid "Save _all"
+msgstr "_Alle speichern"
+
+#: src/mainwindow.cc:291
+msgid ""
+"Some files haven't been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+"Einige Dateien wurden noch nicht gespeichert.\n"
+"Trotzdem beenden?"
+
+#: src/mainwindow.cc:304
+msgid "Select a folder"
+msgstr "Verzeichnisauswahl"
+
+#: src/mainwindow.cc:343
+msgid ""
+"Some files haven't been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+"Einige Dateien wurden noch nicht gespeichert.\n"
+"Trotzdem fortsetzen?"
+
+#: src/mainwindow.cc:370
+msgid "The file search pattern is invalid."
+msgstr "Das Dateinamen-Suchmuster ist ungültig."
+
+#: src/mainwindow.cc:376
+msgid "The following errors occurred during search:"
+msgstr "Die folgenden Fehler sind beim Suchen aufgetreten:"
+
+#: src/mainwindow.cc:401
+msgid ""
+"Error in regular expression at \"%1\" (index %2):\n"
+"%3"
+msgstr ""
+"Fehler in regulärem Ausdruck bei „%1” (Index %2):\n"
+"%3"
+
+#: src/mainwindow.cc:403
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"Fehler in regulärem Ausdruck:\n"
+"%1"
+
+#: src/mainwindow.cc:622
+msgid "The following errors occurred during save:"
+msgstr "Die folgenden Fehler sind beim Speichern aufgetreten:"
+
+#: src/pcreshell.cc:58
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr ""
+"Das Benutzen der \\C Escape-Sequenz um ein einzelnes Byte zu finden wird "
+"nicht unterstützt."
+
+#: src/pcreshell.cc:149
+msgid ""
+"Reached the recursion and backtracking limit of the regular expression "
+"engine."
+msgstr ""
+"Das Rekursions- und Rückreferenz-Limit der Reguläre-Ausdrücke-"
+"Implementierung wurde erreicht."
+
+#: src/prefdialog.cc:217
+msgid "Color Selection"
+msgstr "Farbauswahl"
+
+#: src/prefdialog.cc:514
+msgid "\"%1\" is not a valid encoding."
+msgstr "„%1” ist kein gültiger Zeichensatz."
+
+#: src/statusline.cc:250
+msgid "Stop"
+msgstr "Stopp"
+
+#: src/statusline.cc:257
+msgid "File:"
+msgstr "Datei:"
+
+#: src/statusline.cc:260
+msgid "Match:"
+msgstr "Treffer:"
+
+#: src/statusline.cc:271
+msgid "Cancels the running search"
+msgstr "Bricht die laufende Suche ab"
+
+#: ui/aboutdialog.glade:7
+msgid "About regexxer"
+msgstr "Info zu regexxer"
+
+#: ui/aboutdialog.glade:77
+msgid "regexxer icon"
+msgstr "regexxer-Icon"
+
+#: ui/aboutdialog.glade:78
+msgid "The application icon of regexxer"
+msgstr "Das Anwendungsicon von regexxer"
+
+#: ui/aboutdialog.glade:148
+msgid "written by"
+msgstr "geschrieben von"
+
+#: ui/aboutdialog.glade:205
+msgid "Debian package by"
+msgstr "Debian-Paket von"
+
+#: ui/mainwindow.glade:35
+msgid "_File"
+msgstr "_Datei"
+
+#: ui/mainwindow.glade:114
+msgid "_Match"
+msgstr "_Treffer"
+
+#: ui/mainwindow.glade:129
+msgid "_Previous file"
+msgstr "_Vorherige Datei"
+
+#: ui/mainwindow.glade:168
+msgid "_Next file"
+msgstr "_Nächste Datei"
+
+#: ui/mainwindow.glade:195
+msgid "Replace _current"
+msgstr "_Ersetze Auswahl"
+
+#: ui/mainwindow.glade:216
+msgid "Replace in _this file"
+msgstr "Ersetze in _dieser Datei"
+
+#: ui/mainwindow.glade:236
+msgid "Replace in _all files"
+msgstr "Ersetze in _allen Dateien"
+
+#: ui/mainwindow.glade:260
+msgid "_Help"
+msgstr "_Hilfe"
+
+#: ui/mainwindow.glade:400
+msgid "Pattern:"
+msgstr "Suchmuster:"
+
+#: ui/mainwindow.glade:424
+msgid "The directory to be searched"
+msgstr "Das zu durchsuchende Verzeichnis"
+
+#: ui/mainwindow.glade:431 ui/mainwindow.glade:534 ui/mainwindow.glade:883
+#: ui/mainwindow.glade:905 ui/mainwindow.glade:1051 ui/prefdialog.glade:502
+msgid "*"
+msgstr "*"
+
+#: ui/mainwindow.glade:483
+msgid "Fol_der:"
+msgstr "_Ordner:"
+
+#: ui/mainwindow.glade:527
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Ein Dateinamen-Suchmuster wie es in der Kommandozeile benutzt wird. "
+"Zeichenklassen [ab] und Klammerausdrücke im csh-Stil {a,b} werden "
+"unterstützt."
+
+#: ui/mainwindow.glade:644
+msgid "Recurse into subdirectories"
+msgstr "Steige in Unterverzeichnisse hinab"
+
+#: ui/mainwindow.glade:646
+msgid "recursive"
+msgstr "rekursiv"
+
+#: ui/mainwindow.glade:663
+msgid "Also find hidden files"
+msgstr "Finde auch versteckte Dateien"
+
+#: ui/mainwindow.glade:665
+msgid "hidden"
+msgstr "versteckt"
+
+#: ui/mainwindow.glade:682
+msgid "Find all files that match the filename pattern"
+msgstr "Finde alle Dateien auf die das Dateinamen-Suchmuster passt"
+
+#: ui/mainwindow.glade:720
+msgid "Find fi_les"
+msgstr "_Finde Dateien"
+
+#: ui/mainwindow.glade:826
+msgid "Search:"
+msgstr "Suchen:"
+
+#: ui/mainwindow.glade:851
+msgid "Replace:"
+msgstr "Ersetzen:"
+
+#: ui/mainwindow.glade:876
+msgid "A regular expression in Perl syntax"
+msgstr "Ein regulärer Ausdruck in Perl-Syntax"
+
+#: ui/mainwindow.glade:898
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
+"\\L, \\U and \\E are supported as well."
+msgstr ""
+"Die neu einzusetzende Zeichenkette. Wie in Perl können Teile des Treffers "
+"mit $1, $2, etc. oder sogar $+, $&, $` und $' referenziert werden. Die "
+"Operatoren \\l, \\u, \\L, \\U und \\E werden auch unterstützt."
+
+#: ui/mainwindow.glade:926
+msgid "Find all possible matches in a line"
+msgstr "Finde alle möglichen Treffer innerhalb einer Zeile"
+
+#: ui/mainwindow.glade:944
+msgid "Do case insensitive matching"
+msgstr "Ignoriere Groß-/Kleinschreibung beim Suchen"
+
+#: ui/mainwindow.glade:972
+msgid "Find all matches of the regular expression"
+msgstr "Finde alle Treffer für den regulären Ausdruck"
+
+#: ui/mainwindow.glade:1045
+msgid "Preview of the substitution"
+msgstr "Vorschau des ersetzten Texts"
+
+#: ui/mainwindow.glade:1054
+msgid "Preview"
+msgstr "Vorschau"
+
+#: ui/mainwindow.glade:1105
+msgid "Replace current match"
+msgstr "Ersetze gewählten Treffer"
+
+#: ui/mainwindow.glade:1142
+msgid "_Replace"
+msgstr "_Ersetzen"
+
+#: ui/mainwindow.glade:1177
+msgid "Replace all matches in the current file"
+msgstr "Ersetze alle Treffer in der gewählten Datei"
+
+#: ui/mainwindow.glade:1214
+msgid "_This file"
+msgstr "D_iese Datei"
+
+#: ui/mainwindow.glade:1249
+msgid "Replace all matches in all files"
+msgstr "Ersetze alle Treffer in allen Dateien"
+
+#: ui/mainwindow.glade:1286
+msgid "_All files"
+msgstr "_Alle Dateien"
+
+#: ui/mainwindow.glade:1335
+msgid "File backward"
+msgstr "Eine Datei zurück"
+
+#: ui/mainwindow.glade:1336
+msgid "Go to the previous matching file"
+msgstr "Gehe zur vorherigen Datei mit Treffern"
+
+#: ui/mainwindow.glade:1364
+msgid "Backward"
+msgstr "Zurück"
+
+#: ui/mainwindow.glade:1365
+msgid "Go to previous match"
+msgstr "Gehe zum vorherigen Treffer"
+
+#: ui/mainwindow.glade:1393
+msgid "Forward"
+msgstr "Vorwärts"
+
+#: ui/mainwindow.glade:1394
+msgid "Go to next match"
+msgstr "Gehe zum nächsten Treffer"
+
+#: ui/mainwindow.glade:1422
+msgid "File forward"
+msgstr "Eine Datei vorwärts"
+
+#: ui/mainwindow.glade:1423
+msgid "Go to the next matching file"
+msgstr "Gehe zur nächsten Datei mit Treffern"
+
+#: ui/prefdialog.glade:7
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: ui/prefdialog.glade:79
+msgid "Icons only"
+msgstr "Nur Icons"
+
+#: ui/prefdialog.glade:88
+msgid "Text only"
+msgstr "Nur Text"
+
+#: ui/prefdialog.glade:97
+msgid "Icons and text"
+msgstr "Icons und Text"
+
+#: ui/prefdialog.glade:106
+msgid "Both horizontal"
+msgstr "Beides horizontal"
+
+#: ui/prefdialog.glade:126
+msgid "_Text view font:"
+msgstr "_Schriftart für Text:"
+
+#: ui/prefdialog.glade:151
+msgid "_Match color:"
+msgstr "_Farbe eines Treffers:"
+
+#: ui/prefdialog.glade:176
+msgid "C_urrent match color:"
+msgstr "Farbe des _gewählten Treffers:"
+
+#: ui/prefdialog.glade:201
+msgid "Tool_bar style:"
+msgstr "Stil der _Werkzeugleiste:"
+
+#: ui/prefdialog.glade:309
+msgid "_Look'n'feel"
+msgstr "_Oberfläche"
+
+#: ui/prefdialog.glade:342
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr ""
+"regexxer versucht eine Datei in den folgenden Zeichensätzen zu lesen bevor "
+"ein Fehlschlag angezeigt wird:"
+
+#: ui/prefdialog.glade:372
+msgid "3."
+msgstr "3."
+
+#: ui/prefdialog.glade:396
+msgid "2."
+msgstr "2."
+
+#: ui/prefdialog.glade:420
+msgid "1."
+msgstr "1."
+
+#: ui/prefdialog.glade:444
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ui/prefdialog.glade:474
+msgid "Fallback _encoding:"
+msgstr "_Rückfall-Zeichensatz:"
+
+#: ui/prefdialog.glade:525
+msgid "The encoding specified by the current locale"
+msgstr "Der in der Sprachumgebung eingestellte Zeichensatz"
+
+#: ui/prefdialog.glade:557
+msgid "_Ignore the text direction of the locale"
+msgstr "_Ignoriere die Textausrichtung der Sprachumgebung"
+
+#: ui/prefdialog.glade:603
+msgid "_File access"
+msgstr "_Dateizugriff"

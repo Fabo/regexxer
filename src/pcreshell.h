@@ -47,8 +47,20 @@ inline CompileOptions operator|(CompileOptions lhs, CompileOptions rhs)
 inline CompileOptions operator&(CompileOptions lhs, CompileOptions rhs)
   { return static_cast<CompileOptions>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs)); }
 
+inline CompileOptions operator^(CompileOptions lhs, CompileOptions rhs)
+  { return static_cast<CompileOptions>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs)); }
+
 inline CompileOptions operator~(CompileOptions flags)
   { return static_cast<CompileOptions>(~static_cast<unsigned>(flags)); }
+
+inline CompileOptions& operator|=(CompileOptions& lhs, CompileOptions rhs)
+  { return (lhs = static_cast<CompileOptions>(static_cast<unsigned>(lhs) | static_cast<unsigned>(rhs))); }
+
+inline CompileOptions& operator&=(CompileOptions& lhs, CompileOptions rhs)
+  { return (lhs = static_cast<CompileOptions>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs))); }
+
+inline CompileOptions& operator^=(CompileOptions& lhs, CompileOptions rhs)
+  { return (lhs = static_cast<CompileOptions>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs))); }
 
 
 enum MatchOptions
@@ -64,8 +76,20 @@ inline MatchOptions operator|(MatchOptions lhs, MatchOptions rhs)
 inline MatchOptions operator&(MatchOptions lhs, MatchOptions rhs)
   { return static_cast<MatchOptions>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs)); }
 
+inline MatchOptions operator^(MatchOptions lhs, MatchOptions rhs)
+  { return static_cast<MatchOptions>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs)); }
+
 inline MatchOptions operator~(MatchOptions flags)
   { return static_cast<MatchOptions>(~static_cast<unsigned>(flags)); }
+
+inline MatchOptions& operator|=(MatchOptions& lhs, MatchOptions rhs)
+  { return (lhs = static_cast<MatchOptions>(static_cast<unsigned>(lhs) | static_cast<unsigned>(rhs))); }
+
+inline MatchOptions& operator&=(MatchOptions& lhs, MatchOptions rhs)
+  { return (lhs = static_cast<MatchOptions>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs))); }
+
+inline MatchOptions& operator^=(MatchOptions& lhs, MatchOptions rhs)
+  { return (lhs = static_cast<MatchOptions>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs))); }
 
 
 class Error
@@ -86,7 +110,8 @@ private:
 };
 
 
-/* Pcre::Pattern represents a compiled regular expression.
+/*
+ * Pcre::Pattern represents a compiled regular expression.
  * Note that all offset values are in bytes, not characters.
  */
 class Pattern
@@ -103,10 +128,9 @@ public:
   Glib::ustring get_substring(const Glib::ustring& subject, int index) const;
 
 private:
-  pcre*       pcre_;
-  pcre_extra* pcre_extra_;
-  int*        ovector_;
-  int         ovecsize_;
+  pcre* pcre_;
+  int*  ovector_;
+  int   ovecsize_;
 
   Pattern(const Pattern&);
   Pattern& operator=(const Pattern&);

@@ -1,0 +1,10 @@
+Makefile
+Makefile.in
+POTFILES
+en@quot.po
+en@boldquot.po
+*.gmo
+*.insert-header
+regexxer.pot
+remove-potcdate.sed
+stamp-po

@@ -19,88 +19,47 @@
  */
 
 #include "pcreshell.h"
+#include "translation.h"
 
 #include <glib.h>
 #include <glibmm.h>
-#include <sstream>
-
-#include <config.h>
-
-#if REGEXXER_HAVE_STD_LOCALE
-#include <locale>
-#endif
+#include <algorithm>
 
 
 namespace
 {
 
-/* Work around a bug in PCRE that makes it crash on literal UTF-8 characters
- * in character classes.  Hexadecimal escapes help a bit, though non-ASCII
- * characters in classes still won't work.  But it doesn't crash and PCRE
- * gives us a proper error message if the UCS-4 value is above 255.
- */
-Glib::ustring escape_non_ascii(const Glib::ustring& regex)
+int byte_to_char_offset(Glib::ustring::const_iterator start, int byte_offset)
 {
-  std::ostringstream output;
-
-#if REGEXXER_HAVE_STD_LOCALE
-  output.imbue(std::locale::classic());
-#endif
-
-  output.setf(std::ios::hex, std::ios::basefield);
-  output.setf(std::ios::uppercase);
-
-  Glib::ustring::const_iterator       p    = regex.begin();
-  const Glib::ustring::const_iterator pend = regex.end();
-
-  for(; p != pend; ++p)
-  {
-    const gunichar uc = *p;
-
-    if(uc < 0x80)
-      output << static_cast<char>(uc);
-    else
-      output << "\\x{" << uc << '}';
-  }
-
-  return output.str();
+  return std::distance(start, Glib::ustring::const_iterator(start.base() + byte_offset));
 }
 
-int translate_to_char_offset(int error_offset, const Glib::ustring& regex,
-                                               const Glib::ustring& escaped)
+/*
+ * Explicitely forbid any usage of the \C escape to match a single byte.
+ * Having Pcre::Pattern::match() return matches on partial UTF-8 characters
+ * would make regexxer crash faster than you can say "illegal sequence!"
+ */
+void check_for_single_byte_escape(const Glib::ustring& regex)
 {
-  if(error_offset < 0)
-    return -1;
+  using std::string;
 
-  const int escaped_size = escaped.bytes();
+  string::size_type index = 0;
 
-  g_return_val_if_fail(error_offset <= escaped_size, -1);
-  g_return_val_if_fail(int(regex.bytes()) <= escaped_size, -1);
-
-  int byte_offset = 0;
-  int char_offset = 0;
-
-  Glib::ustring::const_iterator       pregex     = regex.begin();
-  const Glib::ustring::const_iterator pregex_end = regex.end();
-
-  for(; byte_offset < error_offset && pregex < pregex_end; ++pregex)
+  while ((index = regex.raw().find("\\C", index, 2)) != string::npos)
   {
-    if(*pregex >= 0x80)
+    // Find the first of a sequence of backslashes preceding 'C'.
+    string::size_type rewind = regex.raw().find_last_not_of('\\', index);
+    rewind = (rewind != string::npos) ? rewind + 1 : 0;
+
+    // The \C we found is a real \C escape only if preceded by an even number
+    // of backslashes.  If this holds true, let's stage a right little tantrum.
+    if ((index - rewind) % 2 == 0)
     {
-      while(byte_offset < error_offset && escaped.raw()[byte_offset] != '}')
-        ++byte_offset;
-
-      if(byte_offset == error_offset)
-        break;
+      throw Pcre::Error(_("Using the \\C escape sequence to match a single byte is not supported."),
+                        byte_to_char_offset(regex.begin(), index + 1));
     }
-
-    ++byte_offset;
-    ++char_offset;
+    index += 2;
   }
-
-  g_return_val_if_fail(byte_offset == error_offset, -1);
-
-  return char_offset;
 }
 
 } // anonymous namespace
@@ -142,38 +101,27 @@ Error& Error::operator=(const Error& other)
 
 Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
 :
-  pcre_       (0),
-  pcre_extra_ (0),
-  ovector_    (0),
-  ovecsize_   (0)
+  pcre_     (0),
+  ovector_  (0),
+  ovecsize_ (0)
 {
+  check_for_single_byte_escape(regex);
+
   const char* error_message = 0;
+  int error_offset = -1;
 
+  pcre_ = pcre_compile(regex.c_str(), options | PCRE_UTF8, &error_message, &error_offset, 0);
+
+  if (!pcre_)
   {
-    const Glib::ustring escaped = escape_non_ascii(regex);
+    g_assert(error_message != 0);
 
-    int error_offset = -1;
-    pcre_ = pcre_compile(escaped.c_str(), options | PCRE_UTF8, &error_message, &error_offset, 0);
-
-    if(!pcre_)
-    {
-      g_assert(error_message != 0);
-
-      throw Error(Glib::locale_to_utf8(error_message),
-                  translate_to_char_offset(error_offset, regex, escaped));
-    }
-  }
-
-  pcre_extra_ = pcre_study(pcre_, 0, &error_message);
-
-  if(error_message)
-  {
-    (*pcre_free)(pcre_);
-    throw Error(Glib::locale_to_utf8(error_message));
+    throw Error(Glib::locale_to_utf8(error_message),
+                (error_offset < 0) ? -1 : byte_to_char_offset(regex.begin(), error_offset));
   }
 
   int capture_count = 0;
-  const int rc = pcre_fullinfo(pcre_, pcre_extra_, PCRE_INFO_CAPTURECOUNT, &capture_count);
+  const int rc = pcre_fullinfo(pcre_, 0, PCRE_INFO_CAPTURECOUNT, &capture_count);
 
   g_assert(rc == 0);
   g_assert(capture_count >= 0);
@@ -184,16 +132,23 @@ Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
 
 Pattern::~Pattern()
 {
-  (*pcre_free)(pcre_);
-  (*pcre_free)(pcre_extra_);
   g_free(ovector_);
+  (*pcre_free)(pcre_);
 }
 
 int Pattern::match(const Glib::ustring& subject, int offset, MatchOptions options)
 {
-  return pcre_exec(pcre_, pcre_extra_,
-                   subject.data(), subject.bytes(), offset,
-                   options, ovector_, ovecsize_);
+  const int rc = pcre_exec(pcre_, 0, subject.data(), subject.bytes(),
+                           offset, options, ovector_, ovecsize_);
+  if (rc >= -1)
+    return rc;
+
+  // Of all possible error conditions pcre_exec() might return, hitting
+  // the match limit is the only one that could be triggered by user input.
+  if (rc == PCRE_ERROR_MATCHLIMIT)
+    throw Error(_("Reached the recursion and backtracking limit of the regular expression engine."));
+
+  g_return_val_if_reached(rc);
 }
 
 std::pair<int,int> Pattern::get_substring_bounds(int index) const
@@ -206,7 +161,7 @@ Glib::ustring Pattern::get_substring(const Glib::ustring& subject, int index) co
   const int begin = ovector_[2 * index];
   const int end   = ovector_[2 * index + 1];
 
-  if(begin >= 0 && end > begin)
+  if (begin >= 0 && begin < end)
   {
     const char *const data = subject.data();
     return Glib::ustring(data + begin, data + end);

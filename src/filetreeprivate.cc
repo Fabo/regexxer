@@ -20,11 +20,11 @@
 
 #include "filetreeprivate.h"
 
-#include <sigc++/class_slot.h>
+#include <glib.h>
 #include <gtkmm/treestore.h>
 
-#include <glib.h>
 #include <cstring> /* for fucked up libstdc++-v2, see collatekey_sort_func() */
+#include <algorithm>
 
 
 namespace Regexxer
@@ -43,8 +43,8 @@ int default_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel:
 {
   const FileTreeColumns& columns = filetree_columns();
 
-  const std::string lhs_key ((*lhs)[columns.collatekey]);
-  const std::string rhs_key ((*rhs)[columns.collatekey]);
+  const std::string lhs_key = (*lhs)[columns.collatekey];
+  const std::string rhs_key = (*rhs)[columns.collatekey];
 
   return lhs_key.compare(rhs_key);
 }
@@ -53,18 +53,26 @@ int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeMod
 {
   const FileTreeColumns& columns = filetree_columns();
 
-  const std::string lhs_key ((*lhs)[columns.collatekey]);
-  const std::string rhs_key ((*rhs)[columns.collatekey]);
+  const std::string lhs_key = (*lhs)[columns.collatekey];
+  const std::string rhs_key = (*rhs)[columns.collatekey];
 
-  if(lhs_key.empty() || rhs_key.empty())
-    return (lhs_key.empty() && rhs_key.empty()) ? 0 : (lhs_key.empty() ? -1 : 1);
+  const std::string::size_type minsize = std::min(lhs_key.size(), rhs_key.size());
+  int order = 0;
 
-  // Can't use the following absolutely correct code due to the fucked up
-  // libstdc++-v2 GCC 2.95.x comes with.  Resort to strcmp().  Damn.
-  //
-  // return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
+  if (minsize > 0)
+  {
+    // Can't use the following absolutely correct code due to the fucked up
+    // libstdc++-v2 GCC 2.95.x comes with.  Resort to memcmp().  Damn.
+    //
+    // return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
 
-  return std::strcmp(lhs_key.c_str() + 1, rhs_key.c_str() + 1);
+    order = std::memcmp(lhs_key.data() + 1, rhs_key.data() + 1, minsize - 1);
+  }
+
+  if (order == 0)
+    order = lhs_key.size() - rhs_key.size();
+
+  return order;
 }
 
 } // namespace FileTreePrivate
@@ -177,9 +185,9 @@ FileTree::ScopedBlockSorting::ScopedBlockSorting(FileTree& filetree)
   // If we're currently sorting on the match count column, we have to switch
   // temporarily to the default sort column because changes to the match count
   // could cause reordering of the model.  Gtk::TreeModel::foreach() won't
-  // like that at all, and that's precisily why this utility class exists.
+  // like that at all, and that's precisely why this utility class exists.
   //
-  if(sort_column_ == FileTreePrivate::filetree_columns().matchcount.index())
+  if (sort_column_ == FileTreePrivate::filetree_columns().matchcount.index())
     filetree_.treestore_->set_sort_column_id(Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID, sort_order_);
 }
 
@@ -192,9 +200,9 @@ FileTree::ScopedBlockSorting::~ScopedBlockSorting()
 
 /**** Regexxer::FileTree::BufferActionShell ********************************/
 
-FileTree::BufferActionShell::BufferActionShell(
-    FileTree& filetree, const FileTree::TreeRowRefPtr& row_reference,
-    const UndoActionPtr& buffer_action)
+FileTree::BufferActionShell::BufferActionShell(FileTree& filetree,
+                                               const FileTree::TreeRowRefPtr& row_reference,
+                                               const UndoActionPtr& buffer_action)
 :
   filetree_      (filetree),
   row_reference_ (row_reference),
@@ -204,19 +212,19 @@ FileTree::BufferActionShell::BufferActionShell(
 FileTree::BufferActionShell::~BufferActionShell()
 {}
 
-bool FileTree::BufferActionShell::do_undo()
+bool FileTree::BufferActionShell::do_undo(const sigc::slot<bool>& pulse)
 {
   g_return_val_if_fail(row_reference_->is_valid(), false);
 
   const Gtk::TreePath path (row_reference_->get_path());
 
-  if(!filetree_.last_selected_rowref_ ||
+  if (!filetree_.last_selected_rowref_ ||
       filetree_.last_selected_rowref_->get_path() != path)
   {
     filetree_.expand_and_select(path);
   }
 
-  return buffer_action_->undo();
+  return buffer_action_->undo(pulse);
 }
 
 } // namespace Regexxer

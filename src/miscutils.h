@@ -21,7 +21,6 @@
 #ifndef REGEXXER_MISCUTILS_H_INCLUDED
 #define REGEXXER_MISCUTILS_H_INCLUDED
 
-
 namespace Util
 {
 
@@ -50,12 +49,9 @@ inline Iterator next(Iterator pos) { return ++pos; }
 template <class Iterator>
 inline Iterator prior(Iterator pos) { return --pos; }
 
-/* Return true if the GTK+ version is GTK_MAJOR_VERSION.minor.micro
- * or higher.  There is no parameter for the major version since using
- * a different major release would require (at least) recompiling the
- * program anyway.
- */
-bool gtk_version_at_least(unsigned int minor, unsigned int micro);
+
+void check_for_broken_gconfmm_value_changed();
+bool has_broken_gconfmm_value_changed();
 
 } // namespace Util
 

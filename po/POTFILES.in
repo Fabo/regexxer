@@ -1,0 +1,10 @@
+src/filebuffer.cc
+src/filetree.cc
+src/main.cc
+src/mainwindow.cc
+src/pcreshell.cc
+src/prefdialog.cc
+src/statusline.cc
+ui/aboutdialog.glade
+ui/mainwindow.glade
+ui/prefdialog.glade

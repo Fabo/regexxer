@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<gconfschemafile>
+  <schemalist>
+
+    <schema>
+      <key>/schemas/apps/regexxer/textview_font</key>
+      <applyto>/apps/regexxer/textview_font</applyto>
+      <owner>regexxer</owner>
+      <type>string</type>
+      <default>Monospace 10</default>
+      <locale name="C">
+	 <short>Text view font</short>
+	 <long>
+	   The font used in the file editor.
+	 </long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/regexxer/match_color</key>
+      <applyto>/apps/regexxer/match_color</applyto>
+      <owner>regexxer</owner>
+      <type>string</type>
+      <default>#FFA500</default>
+      <locale name="C">
+	 <short>Match color</short>
+	 <long>
+	   The background color used to highlight matches of the search expression.
+	 </long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/regexxer/current_match_color</key>
+      <applyto>/apps/regexxer/current_match_color</applyto>
+      <owner>regexxer</owner>
+      <type>string</type>
+      <default>#FFFF00</default>
+      <locale name="C">
+	 <short>Current-match color</short>
+	 <long>
+	   The background color used to highlight the currently selected
+	   match of the search expression.
+	 </long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/regexxer/toolbar_style</key>
+      <applyto>/apps/regexxer/toolbar_style</applyto>
+      <owner>regexxer</owner>
+      <type>string</type>
+      <default>both-horiz</default>
+      <locale name="C">
+	 <short>Toolbar style</short>
+	 <long>
+	   The style of the application&apos;s toolbar.
+	   Possible values are &quot;icons&quot;, &quot;text&quot;,
+	   &quot;both&quot;, and &quot;both-horiz&quot;.
+	 </long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/regexxer/fallback_encoding</key>
+      <applyto>/apps/regexxer/fallback_encoding</applyto>
+      <owner>regexxer</owner>
+      <type>string</type>
+      <default>ISO-8859-15</default>
+      <locale name="C">
+	 <short>Fallback encoding</short>
+	 <long>
+	   Name of the character encoding to use if a file is not readable
+	   in either UTF-8 or the codeset specified by the current locale.
+	   Try `iconv --list&apos; for a complete list of possible values.
+	 </long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/regexxer/override_direction</key>
+      <applyto>/apps/regexxer/override_direction</applyto>
+      <owner>regexxer</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+	 <short>Override text direction</short>
+	 <long>
+	   If enabled, the text direction of the file editor, preview area,
+	   and all file-related entry boxes is always set to left-to-right
+	   no matter what the locale&apos;s default direction is.
+	 </long>
+      </locale>
+    </schema>
+
+  </schemalist>  
+</gconfschemafile>

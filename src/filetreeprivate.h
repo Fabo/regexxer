@@ -31,7 +31,8 @@
 namespace Regexxer
 {
 
-/* This namespace contains all types and functions which are used exclusively by
+/*
+ * This namespace contains all types and functions which are used exclusively by
  * the FileTree implementation, but aren't members of class Regexxer::FileTree.
  */
 namespace FileTreePrivate
@@ -155,7 +156,7 @@ struct FileTree::ReplaceMatchesData
   const Glib::ustring                   substitution;
   FileTree::TreeRowRefPtr               row_reference;
   UndoStackPtr                          undo_stack;
-  const sigc::slot<void, UndoActionPtr> slot_undo_stack_push;
+  const sigc::slot<void,UndoActionPtr>  slot_undo_stack_push;
 
   void undo_stack_push(UndoActionPtr undo_action);
 
@@ -193,7 +194,7 @@ private:
   FileTree::TreeRowRefPtr row_reference_;
   UndoActionPtr           buffer_action_;
 
-  virtual bool do_undo();
+  virtual bool do_undo(const sigc::slot<bool>& pulse);
 };
 
 } // namespace Regexxer

@@ -85,7 +85,6 @@ struct MatchData : public Util::SharedObject
   ~MatchData();
 
   void install_mark(const Gtk::TextBuffer::iterator& pos);
-  int  get_match_length() const { return length; }
 
   static bool                       is_match_mark(const Glib::RefPtr<Gtk::TextMark>& textmark);
   static Util::SharedPtr<MatchData> get_from_mark(const Glib::RefPtr<Gtk::TextMark>& textmark);

@@ -21,9 +21,11 @@
 #ifndef REGEXXER_STRINGUTILS_H_INCLUDED
 #define REGEXXER_STRINGUTILS_H_INCLUDED
 
+#include <glibmm/ustring.h>
+#include <glibmm/value.h>
+
 #include <string>
 #include <vector>
-#include <glibmm/ustring.h>
 
 namespace Gdk { class Color; }
 
@@ -33,7 +35,6 @@ namespace Util
 
 typedef std::vector< std::pair<int,int> > CaptureVector;
 
-void trim_whitespace(Glib::ustring::const_iterator& pbegin, Glib::ustring::const_iterator& pend);
 bool validate_encoding(const std::string& encoding);
 bool encodings_equal(const std::string& lhs, const std::string& rhs);
 Glib::ustring shell_pattern_to_regex(const Glib::ustring& pattern);
@@ -46,15 +47,21 @@ Glib::ustring filename_to_utf8_fallback(const std::string& filename);
 Glib::ustring convert_to_ascii(const std::string& str);
 Glib::ustring int_to_string(int number);
 
-Glib::ustring transform_pathname(const Glib::ustring& path, bool shorten);
-
-inline Glib::ustring shorten_pathname(const Glib::ustring& path)
-  { return transform_pathname(path, true); }
-
-inline Glib::ustring expand_pathname(const Glib::ustring& path)
-  { return transform_pathname(path, false); }
+Glib::ustring shorten_pathname(const Glib::ustring& path);
+Glib::ustring expand_pathname(const Glib::ustring& path);
 
 Glib::ustring color_to_string(const Gdk::Color& color);
+
+int enum_from_nick_impl(GType type, const Glib::ustring& nick);
+Glib::ustring enum_to_nick_impl(GType type, int value);
+
+template <class T> inline
+T enum_from_nick(const Glib::ustring& nick)
+  { return static_cast<T>(Util::enum_from_nick_impl(Glib::Value<T>::value_type(), nick)); }
+
+template <class T> inline
+Glib::ustring enum_to_nick(T value)
+  { return Util::enum_to_nick_impl(Glib::Value<T>::value_type(), value); }
 
 } // namespace Util
 

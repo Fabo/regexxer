@@ -109,7 +109,7 @@ SharedPtr<T>::SharedPtr()
 template <class T> inline
 SharedPtr<T>::~SharedPtr()
 {
-  if(ptr_ && --ptr_->refcount_ <= 0)
+  if (ptr_ && --ptr_->refcount_ <= 0)
     delete ptr_;
 }
 
@@ -118,7 +118,7 @@ SharedPtr<T>::SharedPtr(T* ptr)
 :
   ptr_ (ptr)
 {
-  if(ptr_)
+  if (ptr_)
     ++ptr_->refcount_;
 }
 
@@ -151,7 +151,7 @@ SharedPtr<T>::SharedPtr(const SharedPtr<T>& other)
 :
   ptr_ (other.ptr_)
 {
-  if(ptr_)
+  if (ptr_)
     ++ptr_->refcount_;
 }
 
@@ -169,7 +169,7 @@ SharedPtr<T>::SharedPtr(const SharedPtr<U>& other)
 :
   ptr_ (other.get())
 {
-  if(ptr_)
+  if (ptr_)
     ++ptr_->refcount_;
 }
 

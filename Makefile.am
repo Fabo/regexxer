@@ -19,13 +19,46 @@
 
 
 ACLOCAL_AMFLAGS = -I $(top_srcdir)/macros
-DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=hardcore
+DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install --enable-warnings=hardcore
 
-SUBDIRS = pixmaps src
+SUBDIRS = pixmaps ui src po
 
-dist_noinst_SCRIPTS = autogen.sh
-dist_noinst_DATA    = macros/cxx.m4 macros/pcre.m4
+dist_noinst_SCRIPTS = autogen.sh config.rpath
+dist_noinst_DATA    = macros/cxx.m4 macros/misc.m4 macros/pcre.m4
 
-dist_desktop_DATA = regexxer.desktop
-desktopdir        = $(datadir)/applications
+desktopdir          = $(datadir)/applications
+dist_desktop_DATA   = regexxer.desktop
+
+schemadir           = $(GCONF_SCHEMA_FILE_DIR)
+dist_schema_DATA    = regexxer.schemas
+
+gconftool_command   = GCONF_CONFIG_SOURCE='$(GCONF_SCHEMA_CONFIG_SOURCE)' $(GCONFTOOL)
+
+if GCONF_SCHEMAS_INSTALL
+install-data-hook: install-schemas
+uninstall-hook: uninstall-schemas
+else
+install-data-hook:
+uninstall-hook:
+endif
+
+install-schemas: $(dist_schema_DATA)
+	@$(POST_INSTALL)
+	@file='$(dist_schema_DATA)'; test -f "$$file" || file="$(srcdir)/$$file"; \
+	echo " $(gconftool_command) --makefile-install-rule $$file"; \
+	$(gconftool_command) --makefile-install-rule $$file
+	@echo; \
+	echo "*** NOTE ***"; \
+	echo "If you executed src/regexxer before running 'make install' as privileged user,"; \
+	echo "it might be necessary to restart the GConf daemon now in order for the default"; \
+	echo "configuration values to take effect.  Do to so, run (as ordinary user):"; \
+	echo; \
+	echo "  gconftool-2 --shutdown; gconftool-2 --spawn"; \
+	echo
+
+uninstall-schemas:
+	@$(NORMAL_UNINSTALL)
+	@file='$(dist_schema_DATA)'; test -f "$$file" || file="$(srcdir)/$$file"; \
+	echo " $(gconftool_command) --makefile-uninstall-rule $$file"; \
+	$(gconftool_command) --makefile-uninstall-rule $$file
 

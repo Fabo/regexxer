@@ -32,10 +32,10 @@ class FileBuffer;
 
 class FileBufferAction : public UndoAction
 {
-public:
-  explicit FileBufferAction(FileBuffer& filebuffer) : buffer_ (filebuffer) {}
-
 protected:
+  explicit FileBufferAction(FileBuffer& filebuffer)
+    : buffer_ (filebuffer) {}
+
   FileBuffer& buffer() { return buffer_; }
 
 private:
@@ -52,7 +52,7 @@ private:
   Glib::ustring text_;
   int           offset_;
 
-  virtual bool do_undo();
+  virtual bool do_undo(const sigc::slot<bool>& pulse);
 };
 
 class FileBufferActionErase : public FileBufferAction
@@ -65,7 +65,7 @@ private:
   Glib::ustring text_;
   int           offset_;
 
-  virtual bool do_undo();
+  virtual bool do_undo(const sigc::slot<bool>& pulse);
 };
 
 class FileBufferActionRemoveMatch : public FileBufferAction
@@ -74,11 +74,13 @@ public:
   FileBufferActionRemoveMatch(FileBuffer& filebuffer, int offset, const MatchDataPtr& match);
   virtual ~FileBufferActionRemoveMatch();
 
+  void weak_notify();
+
 private:
   MatchDataPtr  match_;
   int           offset_;
 
-  virtual bool do_undo();
+  virtual bool do_undo(const sigc::slot<bool>& pulse);
 };
 
 } // namespace Regexxer

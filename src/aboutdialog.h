@@ -1,6 +1,6 @@
 /* $Id$
  *
- * Copyright (c) 2002  Daniel Elstner  <daniel.elstner@gmx.net>
+ * Copyright (c) 2004  Daniel Elstner  <daniel.elstner@gmx.net>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License VERSION 2 as
@@ -21,27 +21,17 @@
 #ifndef REGEXXER_ABOUTDIALOG_H_INCLUDED
 #define REGEXXER_ABOUTDIALOG_H_INCLUDED
 
-#include <gtkmm/dialog.h>
-
 namespace Gtk
 {
-class Entry;
-class RadioButton;
+class Dialog;
+class Window;
 }
 
 
 namespace Regexxer
 {
 
-class AboutDialog : public Gtk::Dialog
-{
-public:
-  explicit AboutDialog(Gtk::Window& parent);
-  virtual ~AboutDialog();
-
-protected:
-  virtual void on_response(int response_id);
-};
+namespace AboutDialog { Gtk::Dialog* create(Gtk::Window& parent); }
 
 } // namespace Regexxer
 

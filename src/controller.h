@@ -22,6 +22,7 @@
 #define REGEXXER_CONTROLLER_H_INCLUDED
 
 #include <sigc++/sigc++.h>
+#include <glibmm/refptr.h>
 
 
 namespace Gtk
@@ -30,6 +31,8 @@ class MenuBar;
 class Toolbar;
 class Widget;
 }
+
+namespace Gnome { namespace Glade { class Xml; } }
 
 
 namespace Regexxer
@@ -47,16 +50,18 @@ public:
   void connect(const sigc::slot<void>& slot_activated);
 
   void add_widget(Gtk::Widget& widget);
+  void add_widgets(const Glib::RefPtr<Gnome::Glade::Xml>& xml,
+                   const char* menuitem_name, const char* button_name);
 
   void set_enabled(bool enable);
   void set_group_enabled(bool enable);
   bool is_enabled() const;
 
 private:
-  sigc::signal<void>       signal_activate_;
-  sigc::signal<void,bool>  signal_set_sensitive_;
-  bool                      enabled_;
-  bool                      group_enabled_;
+  sigc::signal<void>      signal_activate_;
+  sigc::signal<void,bool> signal_set_sensitive_;
+  bool                    enabled_;
+  bool                    group_enabled_;
 
   ControlItem(const ControlItem&);
   ControlItem& operator=(const ControlItem&);
@@ -73,8 +78,8 @@ public:
   void set_enabled(bool enable);
 
 private:
-  SigC::Signal1<void,bool>  signal_set_enabled_;
-  bool                      enabled_;
+  sigc::signal<void,bool> signal_set_enabled_;
+  bool                    enabled_;
 
   ControlGroup(const ControlGroup&);
   ControlGroup& operator=(const ControlGroup&);
@@ -96,7 +101,7 @@ public:
   ControlItem   undo;
   ControlItem   preferences;
   ControlItem   quit;
-  ControlItem   info;
+  ControlItem   about;
 
   ControlItem   find_files;
   ControlItem   find_matches;
@@ -110,9 +115,7 @@ public:
   ControlItem   replace_file;
   ControlItem   replace_all;
 
-  Gtk::MenuBar* create_menubar();
-  Gtk::Toolbar* create_toolbar();
-  Gtk::Widget*  create_action_area();
+  void load_xml(const Glib::RefPtr<Gnome::Glade::Xml>& xml);
 
 private:
   Controller(const Controller&);

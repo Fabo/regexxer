@@ -21,15 +21,23 @@
 #ifndef REGEXXER_PREFDIALOG_H_INCLUDED
 #define REGEXXER_PREFDIALOG_H_INCLUDED
 
-#include <gdkmm/color.h>
-#include <gtkmm/dialog.h>
-#include <gtkmm/toolbar.h>
+#include "signalutils.h"
+
+#include <sigc++/sigc++.h>
+#include <glibmm/ustring.h>
+#include <memory>
 
 namespace Gtk
 {
+class CheckButton;
+class Dialog;
 class Entry;
 class OptionMenu;
+class Widget;
+class Window;
 }
+
+namespace Gnome { namespace Conf { class Value; } }
 
 
 namespace Regexxer
@@ -38,42 +46,42 @@ namespace Regexxer
 class ColorSelectionButton;
 class FontSelectionButton;
 
-class PrefDialog : public Gtk::Dialog
+class PrefDialog : public sigc::trackable
 {
 public:
   explicit PrefDialog(Gtk::Window& parent);
   virtual ~PrefDialog();
 
-  void set_pref_textview_font(const Pango::FontDescription& textview_font);
-  void set_pref_match_color(const Gdk::Color& match_color);
-  void set_pref_current_color(const Gdk::Color& current_color);
-  void set_pref_toolbar_style(Gtk::ToolbarStyle toolbar_style);
-  void set_pref_fallback_encoding(const std::string& fallback_encoding);
-
-  sigc::signal<void, const Pango::FontDescription&> signal_pref_textview_font_changed;
-  sigc::signal<void, const Gdk::Color&>             signal_pref_match_color_changed;
-  sigc::signal<void, const Gdk::Color&>             signal_pref_current_color_changed;
-  sigc::signal<void, Gtk::ToolbarStyle>             signal_pref_toolbar_style_changed;
-  sigc::signal<void, const std::string&>            signal_pref_fallback_encoding_changed;
-
-protected:
-  virtual void on_response(int response_id);
+  Gtk::Dialog* get_dialog() { return dialog_.get(); }
 
 private:
-  FontSelectionButton*  button_textview_font_;
-  ColorSelectionButton* button_match_color_;
-  ColorSelectionButton* button_current_color_;
-  Gtk::OptionMenu*      option_toolbar_style_;
-  Gtk::Entry*           entry_fallback_;
+  std::auto_ptr<Gtk::Dialog>  dialog_;
+  FontSelectionButton*        button_textview_font_;
+  ColorSelectionButton*       button_match_color_;
+  ColorSelectionButton*       button_current_color_;
+  Gtk::OptionMenu*            option_toolbar_style_;
+  Gtk::Entry*                 entry_fallback_;
+  Gtk::CheckButton*           button_direction_;
+  Util::AutoConnection        conn_toolbar_style_;
+  Util::AutoConnection        conn_direction_;
+  bool                        entry_fallback_changed_;
 
-  Gtk::Widget* create_page_look();
-  Gtk::Widget* create_page_file();
+  void load_xml();
+  void connect_signals();
+
+  void on_response(int response_id);
+
+  void on_conf_value_changed_hack(const Glib::ustring& key, const Gnome::Conf::Value& value);
+  void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
+  void initialize_configuration();
 
   void on_textview_font_selected();
   void on_match_color_selected();
   void on_current_color_selected();
   void on_option_toolbar_style_changed();
+  void on_entry_fallback_changed();
   void on_entry_fallback_activate();
+  void on_button_direction_toggled();
 };
 
 } // namespace Regexxer

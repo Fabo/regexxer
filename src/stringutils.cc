@@ -21,12 +21,13 @@
 #include "stringutils.h"
 
 #include <glib.h>
+#include <glib-object.h>
 #include <glibmm.h>
 #include <gdkmm/color.h>
-#include <cstring>
 #include <algorithm>
 #include <iomanip>
 #include <sstream>
+#include <stdexcept>
 #include <utility>
 #include <vector>
 
@@ -42,24 +43,30 @@ namespace
 
 typedef std::pair<int,char> ModPos;
 
-struct IsSignificantEncodingChar
+class ScopedTypeClass
 {
-  inline bool operator()(char c) const;
-};
+private:
+  void* class_;
 
-inline bool ascii_isodigit    (char c) G_GNUC_CONST;
-std::string apply_modifiers   (const std::string& subject, const std::vector<ModPos>& modifiers);
-std::string parse_control_char(std::string::const_iterator& p, std::string::const_iterator pend);
-std::string parse_hex_unichar (std::string::const_iterator& p, std::string::const_iterator pend);
-std::string parse_oct_unichar (std::string::const_iterator& p, std::string::const_iterator pend);
+  ScopedTypeClass(const ScopedTypeClass&);
+  ScopedTypeClass& operator=(const ScopedTypeClass&);
+
+public:
+  explicit ScopedTypeClass(GType type)
+    : class_ (g_type_class_ref(type)) {}
+
+  ~ScopedTypeClass() { g_type_class_unref(class_); }
+
+  void* get() const { return class_; }
+};
 
 
 inline
-bool IsSignificantEncodingChar::operator()(char c) const
+bool is_significant_encoding_char(char c)
 {
-  switch(c)
+  switch (c)
   {
-    case '-': case '_': case '.': case ':': case ' ':
+    case ' ': case '-': case '_': case '.': case ':':
       return false;
   }
 
@@ -69,7 +76,7 @@ bool IsSignificantEncodingChar::operator()(char c) const
 inline
 unsigned int scale_to_8bit(unsigned int value)
 {
-  return (value >> 8) & 0xFF;
+  return (value & 0xFF00) >> 8;
 }
 
 inline
@@ -83,62 +90,62 @@ std::string apply_modifiers(const std::string& subject, const std::vector<ModPos
   std::string result;
   result.reserve(subject.size());
 
-  typedef std::string::size_type size_type;
-  size_type idx = 0;
+  int idx = 0;
 
-  std::vector<ModPos>::const_iterator       p    = modifiers.begin();
   const std::vector<ModPos>::const_iterator pend = modifiers.end();
+  std::vector<ModPos>::const_iterator       p    = modifiers.begin();
 
-  while(p != pend)
+  while (p != pend)
   {
-    const size_type start = p->first;
+    const int start = p->first;
     result.append(subject, idx, start - idx);
     idx = start;
 
     const char mod = p->second;
     ++p;
 
-    switch(mod)
+    switch (mod)
     {
       case 'L': case 'U':
       {
-        while(p != pend && (p->second == 'l' || p->second == 'u')) { ++p; }
+        while (p != pend && (p->second == 'l' || p->second == 'u'))
+          ++p;
 
-        const size_type stop = (p == pend) ? subject.size() : p->first;
-        const Glib::ustring str (subject.begin() + start, subject.begin() + stop);
+        const int stop = (p == pend) ? subject.size() : p->first;
+        const Glib::ustring slice (subject.begin() + start, subject.begin() + stop);
+        const Glib::ustring str = (mod == 'L') ? slice.lowercase() : slice.uppercase();
 
-        result.append((mod == 'L') ? str.lowercase() : str.uppercase());
+        result.append(str.raw());
         idx = stop;
         break;
       }
       case 'l': case 'u': // TODO: Simplify.  This code is way too complicated.
       {
-        if(start < subject.size())
+        if (unsigned(start) < subject.size())
         {
-          while(p != pend && p->first == int(start) &&
-                (p->second == 'E' || p->second == 'l' || p->second == 'u')) { ++p; }
+          while (p != pend && p->first == start && p->second != 'L' && p->second != 'U')
+            ++p;
 
-          if(p != pend && p->first == int(start))
+          if (p != pend && p->first == start)
           {
             const char submod = p->second;
-            g_assert(submod == 'L' || submod == 'U');
 
-            do { ++p; } while(p != pend && (p->second == 'l' || p->second == 'u'));
+            do
+              ++p;
+            while (p != pend && (p->second == 'l' || p->second == 'u'));
 
-            const size_type stop = (p == pend) ? subject.size() : p->first;
-            Glib::ustring str (subject.begin() + start, subject.begin() + stop);
-            str = (submod == 'L') ? str.lowercase() : str.uppercase();
+            const int stop = (p == pend) ? subject.size() : p->first;
+            const Glib::ustring slice (subject.begin() + start, subject.begin() + stop);
+            const Glib::ustring str = (submod == 'L') ? slice.lowercase() : slice.uppercase();
 
-            if(!str.empty())
+            if (!str.empty())
             {
-              Glib::ustring::iterator pstr = str.begin();
-
-              gunichar uc = *pstr++;
+              Glib::ustring::const_iterator cpos = str.begin();
+              gunichar uc = *cpos++;
               uc = (mod == 'l') ? Glib::Unicode::tolower(uc) : Glib::Unicode::totitle(uc);
-              const Glib::ustring str_uc (1, uc);
 
-              result.append(str_uc.raw());
-              result.append(pstr.base(), str.end().base());
+              result.append(Glib::ustring(1, uc).raw());
+              result.append(cpos.base(), str.end().base());
             }
             idx = stop;
           }
@@ -146,11 +153,9 @@ std::string apply_modifiers(const std::string& subject, const std::vector<ModPos
           {
             Glib::ustring::const_iterator cpos (subject.begin() + start);
             gunichar uc = *cpos++;
-
             uc = (mod == 'l') ? Glib::Unicode::tolower(uc) : Glib::Unicode::totitle(uc);
-            const Glib::ustring str (1, uc);
 
-            result.append(str.raw());
+            result.append(Glib::ustring(1, uc).raw());
             idx = cpos.base() - subject.begin();
           }
         }
@@ -168,157 +173,174 @@ std::string apply_modifiers(const std::string& subject, const std::vector<ModPos
     }
   }
 
-  result.append(subject.begin() + idx, subject.end());
+  result.append(subject, idx, std::string::npos);
 
   return result;
 }
 
-std::string parse_control_char(std::string::const_iterator& p, std::string::const_iterator pend)
+void parse_control_char(std::string::const_iterator& p, std::string::const_iterator pend,
+                        std::string& dest)
 {
   const std::string::const_iterator pnext = p + 1;
 
-  if(pnext != pend && (*pnext & '\x80') == 0)
+  if (pnext != pend && (*pnext & '\x80') == 0)
   {
     p = pnext;
 
-    char c = Glib::Ascii::toupper(*pnext);
-    c ^= '\x40'; // flip bit 6
+    // Flip bit 6 of the upcased character.
+    const char c = Glib::Ascii::toupper(*pnext) ^ '\x40';
 
-    return (c != 0) ? std::string(1, c) : std::string();
+    // TextBuffer can't handle NUL; interpret it as empty string instead.
+    if (c != '\0')
+      dest += c;
   }
-
-  return std::string("c");
+  else
+    dest += 'c';
 }
 
-std::string parse_hex_unichar(std::string::const_iterator& p, std::string::const_iterator pend)
+void parse_hex_unichar(std::string::const_iterator& p, std::string::const_iterator pend,
+                       std::string& dest)
 {
   using namespace Glib;
 
   std::string::const_iterator pstart = p + 1;
 
-  if(pstart != pend)
+  if (pstart != pend)
   {
-    if(*pstart == '{')
+    if (*pstart == '{')
     {
       const std::string::const_iterator pstop = std::find(++pstart, pend, '}');
 
-      if(pstop != pend)
+      if (pstop != pend)
       {
         p = pstop;
         gunichar uc = 0;
 
-        for(; pstart != pstop; ++pstart)
+        for (; pstart != pstop; ++pstart)
         {
-          if(!Ascii::isxdigit(*pstart))
-            return std::string();
+          if (!Ascii::isxdigit(*pstart))
+            return;
 
           uc *= 0x10;
           uc += Ascii::xdigit_value(*pstart);
         }
 
-        if(uc == 0 || !Unicode::validate(uc))
-          return std::string();
+        if (uc != 0 && Unicode::validate(uc))
+          dest += ustring(1, uc).raw();
 
-        return ustring(1, uc).raw();
+        return;
       }
     }
-    else if(pstart + 1 != pend && Ascii::isxdigit(pstart[0]) && Ascii::isxdigit(pstart[1]))
+    else if (pstart + 1 != pend && Ascii::isxdigit(pstart[0]) && Ascii::isxdigit(pstart[1]))
     {
       p = pstart + 1;
-      gunichar uc = 0x10 * Ascii::xdigit_value(pstart[0]) + Ascii::xdigit_value(pstart[1]);
+      const gunichar uc = 0x10 * Ascii::xdigit_value(pstart[0]) + Ascii::xdigit_value(pstart[1]);
 
-      if(uc == 0 || !Unicode::validate(uc))
-        return std::string();
+      if (uc != 0 && Unicode::validate(uc))
+        dest += ustring(1, uc).raw();
 
-      return ustring(1, uc).raw();
+      return;
     }
   }
 
-  return std::string("x");
+  dest += 'x';
 }
 
-std::string parse_oct_unichar(std::string::const_iterator& p, std::string::const_iterator pend)
+void parse_oct_unichar(std::string::const_iterator& p, std::string::const_iterator pend,
+                       std::string& dest)
 {
   gunichar uc = 0;
   std::string::const_iterator pnum = p;
 
-  for(; pnum != pend && (pnum - p) < 3; ++pnum)
+  for (; pnum != pend && (pnum - p) < 3; ++pnum)
   {
-    if(!ascii_isodigit(*pnum))
+    if (!ascii_isodigit(*pnum))
       break;
 
     uc *= 010;
     uc += Glib::Ascii::digit_value(*pnum);
   }
 
-  if(pnum > p)
+  if (pnum > p)
   {
     p = pnum - 1;
 
-    if(uc != 0 && Glib::Unicode::validate(uc))
-      return Glib::ustring(1, uc).raw();
-    else
-      return std::string();
+    if (uc != 0 && Glib::Unicode::validate(uc))
+      dest += Glib::ustring(1, uc).raw();
+  }
+  else
+    dest += *p;
+}
+
+/*
+ * On entry, p _must_ point to either a digit or a starting bracket '{'.  Also,
+ * if p points to '{' the closing bracket '}' is assumed to follow before pend.
+ */
+int parse_capture_index(std::string::const_iterator& p, std::string::const_iterator pend)
+{
+  std::string::const_iterator pnum = p;
+
+  if (*pnum == '{' && *++pnum == '}')
+  {
+    p = pnum;
+    return -1;
   }
 
-  return std::string(1, *p);
+  int result = 0;
+
+  while (pnum != pend && Glib::Ascii::isdigit(*pnum))
+  {
+    result *= 10;
+    result += Glib::Ascii::digit_value(*pnum++);
+  }
+
+  if (*p != '{') // case "$digits": set position to last digit
+  {
+    p = pnum - 1;
+  }
+  else if (*pnum == '}') // case "${digits}": set position to '}'
+  {
+    p = pnum;
+  }
+  else // case "${invalid}": return -1 but still skip until '}'
+  {
+    p = std::find(pnum, pend, '}');
+    return -1;
+  }
+
+  return result;
 }
 
 } // anonymous namespace
 
 
-/* Trim leading and trailing whitespace characters from the [pbegin,pend) range.
- */
-void Util::trim_whitespace(Glib::ustring::const_iterator& pbegin,
-                           Glib::ustring::const_iterator& pend)
-{
-  // Copy iterators into local variables to help the compiler.
-  Glib::ustring::const_iterator begin (pbegin);
-  Glib::ustring::const_iterator end   (pend);
-
-  while(begin != end && Glib::Unicode::isspace(*begin))
-    ++begin;
-
-  Glib::ustring::const_iterator temp (end);
-
-  while(begin != temp && Glib::Unicode::isspace(*--temp))
-    end = temp;
-
-  pbegin = begin;
-  pend   = end;
-}
-
 bool Util::validate_encoding(const std::string& encoding)
 {
-  std::string::const_iterator       p    = encoding.begin();
-  const std::string::const_iterator pend = encoding.end();
-
   // GLib just ignores some characters that aren't used in encoding names,
   // so we have to parse the string for invalid characters ourselves.
 
-  for(; p != pend; ++p)
+  for (std::string::const_iterator p = encoding.begin(); p != encoding.end(); ++p)
   {
-    if(!Glib::Ascii::isalnum(*p))
-      switch(*p)
-      {
-        case ' ': case '-': case '_': case '.': case ':': break;
-        default: return false;
-      }
+    if (!Glib::Ascii::isalnum(*p) && is_significant_encoding_char(*p))
+      return false;
   }
 
   try
   {
     Glib::convert("", "UTF-8", encoding);
   }
-  catch(const Glib::ConvertError&)
+  catch (const Glib::ConvertError& error)
   {
-    return false;
+    if (error.code() == Glib::ConvertError::NO_CONVERSION)
+      return false;
+    throw;
   }
 
   return true;
 }
 
-/* Test lhs and rhs for equality while ignoring case
+/*
+ * Test lhs and rhs for equality while ignoring case
  * and several separation characters used in encoding names.
  */
 bool Util::encodings_equal(const std::string& lhs, const std::string& rhs)
@@ -330,15 +352,17 @@ bool Util::encodings_equal(const std::string& lhs, const std::string& rhs)
   const Iterator lhs_end = lhs.end();
   const Iterator rhs_end = rhs.end();
 
-  for(;;)
+  for (;;)
   {
-    lhs_pos = std::find_if(lhs_pos, lhs_end, IsSignificantEncodingChar());
-    rhs_pos = std::find_if(rhs_pos, rhs_end, IsSignificantEncodingChar());
+    while (lhs_pos != lhs_end && !is_significant_encoding_char(*lhs_pos))
+      ++lhs_pos;
+    while (rhs_pos != rhs_end && !is_significant_encoding_char(*rhs_pos))
+      ++rhs_pos;
 
-    if(lhs_pos == lhs_end || rhs_pos == rhs_end)
+    if (lhs_pos == lhs_end || rhs_pos == rhs_end)
       break;
 
-    if(Glib::Ascii::toupper(*lhs_pos) != Glib::Ascii::toupper(*rhs_pos))
+    if (Glib::Ascii::toupper(*lhs_pos) != Glib::Ascii::toupper(*rhs_pos))
       return false;
 
     ++lhs_pos;
@@ -350,25 +374,38 @@ bool Util::encodings_equal(const std::string& lhs, const std::string& rhs)
 
 Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
 {
+  // Don't use Glib::ustring to accumulate the result since we might append
+  // partial UTF-8 characters during processing.  Although this would work with
+  // the current Glib::ustring implementation, it's definitely not a good idea.
   std::string result;
   result.reserve(std::max<std::string::size_type>(32, 2 * pattern.bytes()));
 
-  result += "\\A";
+  result.append("\\A", 2);
 
-  std::string::const_iterator       p    = pattern.raw().begin();
-  const std::string::const_iterator pend = pattern.raw().end();
-
-  bool in_cclass   = false;
   int  brace_level = 0;
+  bool in_cclass   = false;
 
-  for(; p != pend; ++p)
+  const std::string::const_iterator pend = pattern.end().base();
+  std::string::const_iterator       p    = pattern.begin().base();
+
+  for (; p != pend; ++p)
   {
-    if(!in_cclass)
+    if (*p == '\\')
     {
-      switch(*p)
+      // Always escape a single trailing '\' to avoid mangling the "\z"
+      // terminator.  Never escape multi-byte or alpha-numeric characters.
+
+      if (p + 1 == pend || Glib::Ascii::ispunct(*++p))
+        result += '\\';
+
+      result += *p;
+    }
+    else if (!in_cclass)
+    {
+      switch (*p)
       {
         case '*':
-          result += ".*";
+          result.append(".*", 2);
           break;
 
         case '?':
@@ -381,7 +418,7 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
           break;
 
         case '{':
-          result += "(?:";
+          result.append("(?:", 3);
           ++brace_level;
           break;
 
@@ -394,8 +431,7 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
           result += (brace_level > 0) ? '|' : ',';
           break;
 
-        case ']': case '^': case '$': case '.': case '+':
-        case '(': case ')': case '|': case '\\':
+        case '^': case '$': case '.': case '+': case '(': case ')': case '|':
           result += '\\';
           // fallthrough
 
@@ -406,7 +442,9 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
     }
     else // in_cclass == true
     {
-      switch(*p)
+      // Note that the negative indices below are safe because at least
+      // the opening '[' must have been preceding in order to get here.
+      switch (*p)
       {
         case ']':
           result += ']';
@@ -417,10 +455,6 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
           result += (p[-1] == '[') ? '^' : '!';
           break;
 
-        case '\\':
-          result += '\\';
-          // fallthrough
-
         default:
           result += *p;
           break;
@@ -428,7 +462,7 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
     }
   }
 
-  result += "\\z";
+  result.append("\\z", 2);
 
   return result;
 }
@@ -442,19 +476,14 @@ std::string Util::substitute_references(const std::string&   substitution,
 
   std::vector<ModPos> modifiers;
 
-  std::string::const_iterator       p    = substitution.begin();
   const std::string::const_iterator pend = substitution.end();
+  std::string::const_iterator       p    = substitution.begin();
 
-  for(; p != pend; ++p)
+  for (; p != pend; ++p)
   {
-    if(*p == '\\')
+    if (*p == '\\' && p + 1 != pend)
     {
-      if(++p == pend)
-      {
-        result += '\\';
-        break;
-      }
-      else switch(*p)
+      switch (*++p)
       {
         case 'L': case 'U': case 'l': case 'u': case 'E':
           modifiers.push_back(ModPos(result.size(), *p));
@@ -465,7 +494,7 @@ std::string Util::substitute_references(const std::string&   substitution,
           break;
 
         case 'e':
-          result += '\x1B';
+          result += '\033';
           break;
 
         case 'f':
@@ -485,44 +514,39 @@ std::string Util::substitute_references(const std::string&   substitution,
           break;
 
         case 'c':
-          result += parse_control_char(p, pend);
+          parse_control_char(p, pend, result);
           break;
 
         case 'x':
-          result += parse_hex_unichar(p, pend);
+          parse_hex_unichar(p, pend, result);
+          break;
+
+        case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7':
+          parse_oct_unichar(p, pend, result);
           break;
 
         default:
-          if(ascii_isodigit(*p))
-            result += parse_oct_unichar(p, pend);
-          else
-            result += *p;
+          result += *p;
           break;
       }
     }
-    else if(*p == '$')
+    else if (*p == '$' && p + 1 != pend)
     {
-      if(++p == pend)
-      {
-        result += '$';
-        break;
-      }
-
       std::pair<int,int> bounds;
 
-      if(Glib::Ascii::isdigit(*p))
+      if (Glib::Ascii::isdigit(*++p) || (*p == '{' && std::find(p, pend, '}') != pend))
       {
-        const unsigned index = Glib::Ascii::digit_value(*p);
+        const int index = parse_capture_index(p, pend);
 
-        if(index < captures.size())
+        if (index >= 0 && unsigned(index) < captures.size())
           bounds = captures[index];
         else
           continue;
       }
-      else switch(*p)
+      else switch (*p)
       {
         case '+':
-          if(captures.size() > 1)
+          if (captures.size() > 1)
             bounds = captures.back();
           break;
 
@@ -546,19 +570,16 @@ std::string Util::substitute_references(const std::string&   substitution,
           continue;
       }
 
-      if(bounds.first >= 0 && bounds.second > bounds.first)
-      {
-        const std::string::const_iterator begin = subject.begin();
-        result.append(begin + bounds.first, begin + bounds.second);
-      }
+      if (bounds.first >= 0 && bounds.second > bounds.first)
+        result.append(subject, bounds.first, bounds.second - bounds.first);
     }
-    else // *p != '\\' && *p != '$'
+    else // (*p != '\\' && *p != '$') || (p + 1 == pend)
     {
       result += *p;
     }
   }
 
-  if(!modifiers.empty())
+  if (!modifiers.empty())
     result = apply_modifiers(result, modifiers);
 
   return result;
@@ -570,13 +591,13 @@ Glib::ustring Util::filename_to_utf8_fallback(const std::string& filename)
   {
     return Glib::filename_to_utf8(filename);
   }
-  catch(const Glib::ConvertError& error)
+  catch (const Glib::ConvertError& error)
   {
-    if(error.code() != Glib::ConvertError::ILLEGAL_SEQUENCE)
+    if (error.code() != Glib::ConvertError::ILLEGAL_SEQUENCE)
       throw;
   }
 
-  const Glib::ustring filename_utf8 (Glib::locale_to_utf8(filename));
+  const Glib::ustring filename_utf8 = Glib::locale_to_utf8(filename);
 
   g_warning("The filename encoding of `%s' is not UTF-8 but G_BROKEN_FILENAMES is unset. "
             "Falling back to locale encoding for backward compatibility, but you should "
@@ -588,14 +609,14 @@ Glib::ustring Util::filename_to_utf8_fallback(const std::string& filename)
 
 Glib::ustring Util::convert_to_ascii(const std::string& str)
 {
-  std::string result (str);
+  std::string result = str;
 
   std::string::iterator p    = result.begin();
   std::string::iterator pend = result.end();
 
-  for(; p != pend; ++p)
+  for (; p != pend; ++p)
   {
-    if((*p & '\x80') != 0)
+    if ((*p & '\x80') != 0)
       *p = '?';
   }
 
@@ -607,7 +628,14 @@ Glib::ustring Util::int_to_string(int number)
   std::ostringstream output;
 
 #if REGEXXER_HAVE_STD_LOCALE
-  output.imbue(std::locale(""));
+  try // don't abort if the user-specified locale doesn't exist
+  {
+    output.imbue(std::locale(""));
+  }
+  catch (const std::runtime_error& error)
+  {
+    g_warning("%s", error.what());
+  }
 #endif
 
   output << number;
@@ -615,29 +643,34 @@ Glib::ustring Util::int_to_string(int number)
   return Glib::locale_to_utf8(output.str());
 }
 
-Glib::ustring Util::transform_pathname(const Glib::ustring& path, bool shorten)
+Glib::ustring Util::shorten_pathname(const Glib::ustring& path)
 {
-  using Glib::ustring;
+  const Glib::ustring homedir = Util::filename_to_utf8_fallback(Glib::get_home_dir());
+  const Glib::ustring::size_type len = homedir.bytes();
 
-  static const ustring homedir (Util::filename_to_utf8_fallback(Glib::get_home_dir()));
-
-  if(shorten)
+  if (path.bytes() >= len
+      && (path.bytes() == len || path.raw()[len] == G_DIR_SEPARATOR)
+      && path.raw().compare(0, len, homedir.raw()) == 0)
   {
-    if(std::strncmp(path.c_str(), homedir.c_str(), homedir.bytes()) == 0)
-    {
-      ustring result ("~");
-      result.append(ustring::const_iterator(path.begin().base() + homedir.bytes()), path.end());
-      return result;
-    }
+    std::string result (1, '~');
+    result.append(path.raw(), len, std::string::npos);
+    return result;
   }
-  else
+
+  return path;
+}
+
+Glib::ustring Util::expand_pathname(const Glib::ustring& path)
+{
+  const std::string::const_iterator pend   = path.end().base();
+  std::string::const_iterator       pbegin = path.begin().base();
+
+  if (pbegin != pend && *pbegin == '~'
+      && (++pbegin == pend || *pbegin == G_DIR_SEPARATOR))
   {
-    if(!path.empty() && *path.begin() == '~')
-    {
-      ustring result (homedir);
-      result.append(path, 1, ustring::npos);
-      return result;
-    }
+    Glib::ustring result = Util::filename_to_utf8_fallback(Glib::get_home_dir());
+    result.append(path, 1, Glib::ustring::npos);
+    return result;
   }
 
   return path;
@@ -660,5 +693,29 @@ Glib::ustring Util::color_to_string(const Gdk::Color& color)
                 << std::setw(2) << scale_to_8bit(color.get_blue());
 
   return output.str();
+}
+
+int Util::enum_from_nick_impl(GType type, const Glib::ustring& nick)
+{
+  const ScopedTypeClass type_class (type);
+
+  GEnumClass *const enum_class = G_ENUM_CLASS(type_class.get());
+  GEnumValue *const enum_value = g_enum_get_value_by_nick(enum_class, nick.c_str());
+
+  g_return_val_if_fail(enum_value != 0, enum_class->minimum);
+
+  return enum_value->value;
+}
+
+Glib::ustring Util::enum_to_nick_impl(GType type, int value)
+{
+  const ScopedTypeClass type_class (type);
+
+  GEnumClass *const enum_class = G_ENUM_CLASS(type_class.get());
+  GEnumValue *const enum_value = g_enum_get_value(enum_class, value);
+
+  g_return_val_if_fail(enum_value != 0, "");
+
+  return enum_value->value_nick;
 }
 

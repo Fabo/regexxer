@@ -1,22 +1,27 @@
+regexxer 0.7 (2004-05-08)
+
+	* gnome-vfs dependency dropped
+	* support for translation
+	* several undo feature bugfixes
+	* live synchronization with GConf
+	* other minor fixes
+
 regexxer 0.6 (2003-12-07)
 
-* Use GConf for preferences, instead
-  of a text file.
-* Use gnome-vfs to allow search/replace
-  of files at any URI, not just on
-  local file system.
-  (Murray Cumming)
+	* Use GConf for preferences, instead of a text file.
+	* Use gnome-vfs to allow search/replace of files at any URI,
+	not just on local file system. (Murray Cumming)
 
 regexxer 0.5 (2003-10-31)
 
-  * Undo feature (Daniel Elstner)
-  * Drop-down list of common file extensions. (Murray Cumming)
-  * Allow configuration of colors via color buttons (Daniel Elstner)
-  * Accessibility improvements (tab sequences and widget names)
-    (Daniel Elstner)
-  * Very slight HIGification (Murray Cumming)
-  * new application icon (jimmac, Daniel Elstner)
-  * Danish Translation (Morten Brix Petersen)
+	* Undo feature (Daniel Elstner)
+	* Drop-down list of common file extensions. (Murray Cumming)
+	* Allow configuration of colors via color buttons (Daniel Elstner)
+	* Accessibility improvements (tab sequences and widget names)
+	(Daniel Elstner)
+	* Very slight HIGification (Murray Cumming)
+	* new application icon (jimmac, Daniel Elstner)
+	* Danish Translation of regexxer.desktop (Morten Brix Petersen)
     
 regexxer 0.4 (2002-11-18)
 

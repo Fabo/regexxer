@@ -33,8 +33,9 @@
 #include <list>
 #include <stack>
 
-namespace Gtk  { class TreeStore; }
-namespace Pcre { class Pattern;   }
+namespace Gtk   { class TreeStore; }
+namespace Pcre  { class Pattern;   }
+namespace Gnome { namespace Conf { class Value; } }
 
 
 namespace Regexxer
@@ -67,21 +68,16 @@ public:
 
   int get_modified_count() const;
 
-  void set_fallback_encoding(const std::string& fallback_encoding);
-  std::string get_fallback_encoding() const;
-
-  sigc::signal<void, FileInfoPtr, int> signal_switch_buffer;
-  sigc::signal<void>                 signal_bound_state_changed;
-  sigc::signal<void>                 signal_file_count_changed;
-  sigc::signal<void>                 signal_match_count_changed;
-  sigc::signal<void>                 signal_modified_count_changed;
-  sigc::signal<bool>                 signal_pulse;
-  sigc::signal<void, UndoActionPtr>   signal_undo_stack_push;
+  sigc::signal<void,FileInfoPtr,int>  signal_switch_buffer;
+  sigc::signal<void>                  signal_bound_state_changed;
+  sigc::signal<void>                  signal_file_count_changed;
+  sigc::signal<void>                  signal_match_count_changed;
+  sigc::signal<void>                  signal_modified_count_changed;
+  sigc::signal<bool>                  signal_pulse;
+  sigc::signal<void,UndoActionPtr>    signal_undo_stack_push;
 
 protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
-
-  virtual bool on_buffer_pulse();
 
 private:
   class  TreeRowRef;
@@ -145,7 +141,7 @@ private:
 
   void on_treestore_sort_column_changed();
   void on_selection_changed();
-  void on_buffer_match_count_changed(int match_count);
+  void on_buffer_match_count_changed();
   void on_buffer_modified_changed();
   void on_buffer_undo_stack_push(UndoActionPtr undo_action);
 
@@ -155,6 +151,8 @@ private:
   void propagate_modified_change(const Gtk::TreeModel::iterator& pos, bool modified);
 
   void load_file_with_fallback(const Gtk::TreeModel::iterator& iter, const FileInfoPtr& fileinfo);
+
+  void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
 
   // Work-around for silly, stupid, and annoying gcc 2.95.x.
   friend class FileTree::ScopedBlockSorting;

@@ -59,7 +59,6 @@ public:
 
 protected:
   virtual void on_hierarchy_changed(Gtk::Widget* previous_toplevel);
-  virtual void on_button_stop();
 
 private:
   Gtk::Button*        stop_button_;

@@ -43,7 +43,7 @@ sigc::connection QueuedSignal::connect(const sigc::slot<void>& slot)
 
 void QueuedSignal::queue()
 {
-  if(!queued_)
+  if (!queued_)
   {
     Glib::signal_idle().connect(sigc::mem_fun(*this, &QueuedSignal::idle_handler), priority_);
     queued_ = true;

@@ -42,7 +42,7 @@ FileBufferActionInsert::FileBufferActionInsert(FileBuffer& filebuffer, int offse
 FileBufferActionInsert::~FileBufferActionInsert()
 {}
 
-bool FileBufferActionInsert::do_undo()
+bool FileBufferActionInsert::do_undo(const sigc::slot<bool>&)
 {
   g_return_val_if_fail(!buffer().in_user_action(), false);
 
@@ -75,7 +75,7 @@ FileBufferActionErase::FileBufferActionErase(FileBuffer& filebuffer, int offset,
 FileBufferActionErase::~FileBufferActionErase()
 {}
 
-bool FileBufferActionErase::do_undo()
+bool FileBufferActionErase::do_undo(const sigc::slot<bool>&)
 {
   g_return_val_if_fail(!buffer().in_user_action(), false);
 
@@ -98,17 +98,30 @@ FileBufferActionRemoveMatch::FileBufferActionRemoveMatch(
   FileBufferAction(filebuffer),
   match_          (match),
   offset_         (offset)
-{}
+{
+  if (match_)
+    buffer().undo_add_weak(this);
+}
 
 FileBufferActionRemoveMatch::~FileBufferActionRemoveMatch()
-{}
-
-bool FileBufferActionRemoveMatch::do_undo()
 {
-  g_return_val_if_fail(!buffer().in_user_action(), true);
+  if (match_)
+    buffer().undo_remove_weak(this);
+}
 
-  buffer().undo_remove_match(match_, offset_);
+void FileBufferActionRemoveMatch::weak_notify()
+{
+  match_.reset();
+}
 
+bool FileBufferActionRemoveMatch::do_undo(const sigc::slot<bool>&)
+{
+  if (match_)
+  {
+    g_return_val_if_fail(!buffer().in_user_action(), true);
+
+    buffer().undo_remove_match(match_, offset_);
+  }
   return true;
 }
 

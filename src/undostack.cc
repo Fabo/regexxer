@@ -22,6 +22,16 @@
 #include <glib.h>
 
 
+namespace
+{
+
+enum { PULSE_INTERVAL = 8 };
+
+class StopUndo {};
+
+} // anonymous namespace
+
+
 namespace Regexxer
 {
 
@@ -30,9 +40,9 @@ namespace Regexxer
 UndoAction::~UndoAction()
 {}
 
-bool UndoAction::undo()
+bool UndoAction::undo(const sigc::slot<bool>& pulse)
 {
-  return do_undo();
+  return do_undo(pulse);
 }
 
 
@@ -42,7 +52,11 @@ UndoStack::UndoStack()
 {}
 
 UndoStack::~UndoStack()
-{}
+{
+  // Ensure LIFO order on destruction too.
+  while (!actions_.empty())
+    actions_.pop();
+}
 
 void UndoStack::push(const UndoActionPtr& action)
 {
@@ -54,32 +68,42 @@ bool UndoStack::empty() const
   return actions_.empty();
 }
 
-void UndoStack::undo_step()
+void UndoStack::undo_step(const sigc::slot<bool>& pulse)
 {
-  bool skip = false;
-
-  do
+  try
   {
-    g_return_if_fail(!actions_.empty());
+    bool skip = false;
 
-    const UndoActionPtr action = actions_.top();
-    actions_.pop();
+    do
+    {
+      g_return_if_fail(!actions_.empty());
 
-    skip = action->undo();
+      skip = actions_.top()->undo(pulse);
+      actions_.pop();
+    }
+    while (skip);
   }
-  while(skip);
+  catch (const StopUndo&)
+  {}
 }
 
-bool UndoStack::do_undo()
+bool UndoStack::do_undo(const sigc::slot<bool>& pulse)
 {
+  unsigned int iteration = 0;
   bool skip = true;
 
-  while(!actions_.empty())
+  while (!actions_.empty())
   {
-    const UndoActionPtr action = actions_.top();
+    const bool skip_this = actions_.top()->undo(pulse);
     actions_.pop();
 
-    skip = (action->undo() && skip);
+    if (!skip_this)
+    {
+      skip = false;
+
+      if ((++iteration % PULSE_INTERVAL) == 0 && sigc::slot<bool>(pulse)())
+        throw StopUndo();
+    }
   }
 
   return skip;

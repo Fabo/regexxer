@@ -1,5 +1,559 @@
-0.7.0:
-	
+2004-05-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ui/prefdialog.glade: Removes the <requires lib="gnome"/> line
+	that was inserted by buggy glade-2.
+
+2004-05-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filetree.cc: Replace instances of `...' in message strings
+	with "...".  Since the translator is supposed to use double-quotes
+	it would be confusing to use single quotes in the original string.
+	* src/mainwindow.cc: ditto
+	* src/prefdialog.cc: ditto.
+
+2004-05-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ui/mainwindow.glade (button_find_files): Use a custom image and
+	label instead of a stock item as button content, so that it can be
+	more clearly distinguished from button_find_matches.
+
+2004-05-13  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ui/mainwindow.glade: Reintroduce tearoff menu items by manually
+	inserting the necessary XML elements.
+
+2004-05-12  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/fileio.cc: Remove the libgnome-vfsmm code already enclosed
+	by #if 0 ... #endif.  It's all in the CVS history anyway.
+	* src/filetree.cc: ditto.
+
+2004-05-12  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/imagebutton.{cc,h}: Remove files as they're no longer used.
+	* src/Makefile.am (regexxer_SOURCES): Remove imagebutton.{cc,h}.
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/globalstrings.h (glade_mainwindow_filename): New string.
+
+	* src/mainwindow.{cc,h}: Use libglademm to load the UI at runtime,
+	and make the actual Gtk::Window a member of class MainWindow.
+	Remove the old UI creation code.
+
+	* src/controller.{cc,h} (Controller::load_xml): The menu bar,
+	toolbar and action area is now contained in mainwindow.glade,
+	and thus this new method wholly replaces the old code which
+	generated those widgets.
+	(ControlItem::add_widgets): New helper method intented to help
+	reducing the code size.
+
+	* src/filetree.cc (regexxer_create_file_tree): New function.
+	* src/statusline.cc (regexxer_create_status_line): New function.
+
+	* src/main.cc (main): Access the Gtk::Window by using the new
+	accessor method Regexxer::MainWindow::get_window().
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ui/mainwindow.glade: New file defining the main window's UI.
+	* ui/Makefile.am (dist_glade_DATA): Add mainwindow.glade.
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/globalstrings.h (glade_aboutdialog_filename): New string.
+
+	* src/aboutdialog.{cc,h}: Use libglademm to load the dialog UI
+	at runtime, and replace class AboutDialog by a single create()
+	function in namespace Regexxer::AboutDialog.  Remove the old
+	UI creation code.
+
+	* src/mainwindow.{cc,h} (MainWindow::about_dialog_): Change type
+	to std::auto_ptr<Gtk::Dialog> since AboutDialog no longer exists.
+	Replace all references to AboutDialog in the implementation too.
+	(MainWindow::on_about): Make use of the new AboutDialog::create().
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ui/aboutdialog.glade: New file defining the UI of the about
+	dialog.
+	* ui/Makefile.am (dist_glade_DATA): Add aboutdialog.glade.
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/prefdialog.cc (PrefDialog::load_xml): Remove superfluous
+	sub-block.
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/prefdialog.cc (regexxer_create_font_selection_button):
+	Add missing parameters to the function signature.
+	(regexxer_create_color_selection_button): ditto.
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/Makefile.am (global_defines): Define REGEXXER_PKGDATADIR.
+
+	* src/globalstrings.h (glade_prefdialog_filename): New string.
+
+	* src/prefdialog.{cc,h}: Use libglademm to load the dialog UI
+	at runtime, and make the actual dialog widget a data member of
+	class PrefDialog.  Remove the old UI creation code.
+
+	* src/mainwindow.cc (MainWindow::on_preferences): Use the new
+	PrefDialog::get_dialog() accessor to get the actual widget.
+
+2004-05-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ui: New directory for glade XML files.
+	* ui/.cvsignore: New file.
+	* ui/Makefile.am: New file.
+	* ui/prefdialog.glade: New file defining the UI of the preferences
+	dialog.
+
+	* configure.ac (PKG_CHECK_MODULES): Check for libglademm-2.0.
+	(AC_CONFIG_FILES): Add ui/Makefile.
+
+	* Makefile.am (SUBDIRS): Add ui.
+
+0.7:
+
+2004-05-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* AUTHORS: Add Murray Cumming.
+	* NEWS: Update.
+
+2004-05-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/translation.{cc,h} (sgettext): Ditch the sgettext() approach,
+	because it's not likely to be supported by libglade when regexxer
+	starts using that at some point.  Until now there are no ambiguous
+	messages in regexxer, and we can switch back when the need arises.
+
+	* src/controller.cc: Remove the disambiguing "...|" prefix from all
+	translatable messages.
+	* src/filebuffer.cc: ditto
+	* src/filetree.cc: ditto
+	* src/mainwindow.cc: ditto
+	* src/prefdialog.cc: ditto
+	* src/statusline.cc: ditto.
+
+2004-05-07  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/main.cc (stock_icon_info): Rename to 'stock_icon_about',
+	as it should have been called in the first place.  Apparently
+	I misinterpreted a change in the German GNOME translation as
+	project-wide switch to a new name for "About".  Now I realize
+	why Murray changed that string a while ago...
+
+	* src/controller.{cc,h} (Controller::info): Rename to 'about'.
+	* src/mainwindow.{cc,h} (MainWindow::on_info): Rename to 'on_about'.
+
+2004-05-06  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/translation.cc (compose_impl): Simplify the loop in order to
+	avoid the need for look-ahead via Util::next().
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/translation.cc (compose_impl): Apparently there's no need
+	to use Glib::Unicode::isdigit() since digit_value() is defined to
+	return -1 for non-digits anyway.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/translation.{cc,h} (compose): Add a set of overloaded utility
+	functions to be used to compose a text message from a format string
+	and up to three string arguments.  This allows the translator to
+	arrange the arguments as required by the language.
+
+	* src/filetree.cc (FileTree::save_file_at_iter): Make use of
+	Util::compose() instead of separately piecing strings together.
+	Also, translate the format string via gettext().
+	(load_file_with_fallback): ditto
+	* src/mainwindow.cc (MainWindow::on_exec_search): ditto
+	* src/prefdialog.cc (PrefDialog::on_entry_fallback_activate):
+	ditto.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/miscutils.cc: Compile the runtime check for that gconfmm
+	bug only if REGEXXER_ENABLE_GCONFMM_VALUE_HACK is defined, as it
+	currently always is.
+
+	* src/main.cc (main): Test for REGEXXER_ENABLE_GCONFMM_VALUE_HACK
+	around the call to Util::check_for_broken_gconfmm_value_changed().
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/translation.{cc,h} (initialize_gettext): New utility
+	function to take care of setting up the text domain.
+
+	* src/main.cc (main): Use initialize_gettext().
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ABOUT-NLS: Add missing file to fix the build.
+
+	* src/aboutdialog.cc: Translate all user-visible strings except
+	for those instances where positional parameter substitution is
+	required for proper results.  I'll deal with those ones later.
+	* src/controller.cc: ditto
+	* src/filebuffer.cc: ditto
+	* src/filetree.cc: ditto
+	* src/main.cc: ditto
+	* src/mainwindow.cc: ditto
+	* src/pcreshell.cc: ditto
+	* src/prefdialog.cc: ditto
+	* src/statusline.cc: ditto.
+
+	* src/translation.h (N_): #define to gettext_noop(s) rather than
+	simply (s).  This doesn't actually make a difference but I think
+	the intent is clearer that way.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	Add support for message translation via gettext.
+
+	* po: New directory, containing all the gettext stuff.
+	* config.rpath: New file added by gettextize.
+	* mkinstalldirs: ditto.
+
+	* Makefile.am (dist_noinst_SCRIPTS): Add config.rpath.
+
+	* autogen.sh: Don't remove mkinstalldirs because it's not
+	installed by automake --add-missing, and gettext uses it.
+	(WARNINGS): Comment-out in order to reduce the flood of warnings
+	triggered by all the old m4 code in system macros.
+
+	* configure.ac: Invoke AM_GNU_GETTEXT().
+	(AC_CONFIG_FILES): Add po/Makefile.in.
+
+	* NEWS: Update.
+
+	* src/translation.{cc,h}: New files implementing gettext() support.
+	* src/statusline.cc: Translate the label of the "Stop" button.
+	* src/main.cc (main): Add code to initialize the text domain.
+
+	* src/Makefile.am (regexxer_SOURCES): Add translation.{cc,h}.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/miscutils.{cc,h} (check_for_broken_gconfmm_value_changed):
+	Implement a truly evil run-time check for that gconfmm bug.
+	Although this one is already fixed in CVS, there's no release out
+	yet and for now I wouldn't like regexxer to depend on it anyway.
+	(has_broken_gconfmm_value_changed): Provide an accessor function
+	to the global flag indicating whether gconfmm is broken.
+
+	* src/main.cc (main): Call check_for_broken_gconfmm_value_changed().
+
+	* configure.ac (REGEXXER_GCONFMM_VALUE_HACK): Make this macro
+	call has_broken_gconfmm_value_changed() to determine whether the
+	work-around has to be applied.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filebuffer.cc (FileBuffer::replace_match): Invoke on_insert()
+	directly in case of empty-by-empty replace in order to avoid this
+	nasty special-case where a FileBufferActionRemoveMatch object in
+	the stack is not followed by either an insert or an erase action.
+	This finally fixes the last one of undo system bugs known to me.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* configure.ac (AC_INIT): Bump version number to 0.7.
+
+2004-05-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/*.{cc,h}: Apply a minor change of my coding style.  From
+	now on, I put a space between a keyword and the following opening
+	parenthesis.  That is, after for, while, if, switch and catch, with
+	sizeof being the only (I think rather intuitive) exception.
+
+	* src/globalstrings.h: New file containing (you guess it) global
+	string definitions.  Currently these are mostly fully qualified
+	GConf key names.
+
+	* src/configdata.{cc,h}: Delete, as we're now using GConf.
+
+	* src/Makefile.am (regexxer_SOURCES): Modify accordingly.
+
+	* src/aboutdialog.cc: Prefix URL and mail strings with U+202D
+	LEFT-TO-RIGHT OVERRIDE in order to avoid the current mess in
+	RTL environments.
+	(ContributorBox::ContributorBox): Escape the 'what' string by
+	passing it to Glib::Markup::escape_text(), just in case.
+
+	* src/controller.cc (add_widget_button): Reverse parameters
+	for consistency with the other helper functions.
+	(Controller::create_action_area): Make the implementation reflect
+	this change.
+
+	* src/filebuffer.{cc,h} (RegexxerTags::on_conf_value_changed):
+	New signal handler listening to GConf value changes.
+	(RegexxerTags::instance): Return the RefPtr<> by value rather
+	than by reference, because as it turns out the extra indirection
+	largely offsets the advantage gained by avoiding one additional
+	ref/unref cycle.
+	(FileBuffer::set_match_color): Remove; this setter is no longer
+	necessary since we're now listing to GConf changes and apply them
+	immediately.
+	(set_current_color): ditto
+	(get_match_color): ditto
+	(get_current_color): ditto.
+	(FileBuffer::weak_undo_stack_): Introduce a new data member used to
+	record all UndoAction objects that reference MatchData instances.
+	This is unfortunately necessary in order to be able to remove
+	UndoActions without actually doing the undo operation, for instance
+	when running find_matches() again.
+	(notify_weak_undos): New function dealing with the weak references.
+	(undo_add_weak): ditto
+	(undo_remove_weak): ditto.
+	(signal_match_count_changed): Remove the count argument as this
+	information can easily be obtained by using the appropriate getter.
+	(create_with_error_message): Invoke Unicode::ispunct() instead of
+	testing for '.' explicitely.
+	(is_freeable): Return true only if there are no UndoAction objects
+	around referencing this FileBuffer.
+	(find_matches): Call notify_weak_undos() to get rid of any
+	references by UndoAction objects to this FileBuffer.
+	(get_line_preview): Make this method strongly exception-safe.
+	(on_apply_tag): New virtual method implementation, needed in order
+	to filter tag apply operations caused by inserting from clipboard.
+	This avoids confusion caused by highlighting text as match which
+	is not recorded as such internally.
+
+	* src/undostack.{cc,h}: Provide a way to interrupt a running undo
+	operation (i.e. by clicking the 'Stop' button in the GUI).
+	(do_undo): Add a slot parameter for this purpose.
+	(undo): ditto.
+
+	* src/filebufferundo.{cc,h} (do_undo): Make use of the new slot
+	parameter in order to allow for interuption of the undo process.
+	(FileBufferActionRemoveMatch): Make use of the weak notification
+	mechanism now provided by FileBuffer.
+
+	* src/fileshared.h (MatchData::get_match_length): Remove this
+	pointless accessor function.
+
+	* src/fileshared.cc (MatchData::~MatchData): Be extra careful
+	and remove the quark pointing to the MatchData instance from the
+	mark object.
+
+	* src/filetree.{cc,h} (FileTree::on_conf_value_changed): New
+	signal handler listening to GConf value changes.
+	(set_fallback_encoding): Remove this now pointless accessor.
+	(get_fallback_encoding): ditto.
+	(expand_and_select): Get rid of compatibility code for GTK+ < 2.2.
+	(on_buffer_match_count_changed): Adapt to the changes made to
+	FileBuffer::signal_match_count_changed.
+
+	* src/filetreeprivate.cc (collatekey_sort_func): Use std::memcmp()
+	instead of std::strcmp() as the former allows for inlining of the
+	string operation by gcc.
+	(FileTree::BufferActionShell::do_undo): Make use of the new slot
+	parameter in order to allow for interuption of the undo process.
+
+	* src/main.cc (set_default_window_icon): New name, formerly
+	regexxer_set_window_icon().  Replace the pixbuf list stuff with
+	a simple call to Gtk::Window::set_default_icon_from_file().
+	(trap_gconf_exceptions): New global exception handler callback,
+	invoked whenever an exception escapes from a C++ handler of
+	a GObject signal.  Our particular handler is used to filter any
+	Gnome::Conf::Error exceptions, thus in essence ignoring them.
+	This way we don't need to deal with exceptions in each handler
+	of the GConf "value_changed" signal.
+	(initialize_configuration): New function to be invoked by main()
+	in order to load the initial configuration values.  By emitting
+	an artificial "value_changed" signal for each entry in regexxer's
+	GConf directory, the need for separate initialization code for
+	each key is neatly avoided.
+	(main): Accomodate the changes listed above.
+
+	* src/mainwindow.{cc,h} (MainWindow::on_conf_value_changed):
+	New signal handler listening to GConf value changes.
+	(on_preferences): Remove all the code dealing with individual
+	configuration values, since we're now using a decentralized change
+	notification approach instead.
+	(load_configuration): Ditch this.
+	(save_configuration): ditto.
+	(confirm_quit_request): Honor the fact that the new GTK+ file
+	selector doesn't append '/' to directories anymore.  This bug
+	is quite annoying and should have been fixed months ago :/
+	Also widen the dialog's default size to 400 pixels.
+	(on_buffer_match_count_changed): Remove, there's no need to
+	listen for this on the FileBuffer because the FileTree is
+	reflecting these changes anyway.
+	(on_buffer_bound_state_changed): ditto.
+	(on_bound_state_changed): Because there's only one now, rename
+	from on_filetree_bound_state_changed().
+	(on_filetree_match_count_changed): Take care of the FileBuffer
+	match count as well.
+	(on_go_next): Replace the 0.2 delta passed to scroll_to_mark()
+	with 0.125, as the latter looks nicer to my eyes and also happens
+	to be a 'round' number in base 2.
+	(on_undo): Accomodate the changes made to the UndoAction classes
+	in order to allow for interruption of the running undo process.
+	Also instantiate a BusyAction object for this purpose.
+	(undo_stack_clear): New method.
+	(set_title_filename): Replace the plain '-' by U+2013 EN DASH.
+
+	* src/miscutils.{cc,h} (gtk_version_at_least): Remove since it's
+	no longer used.
+
+	* src/pcreshell.{cc,h}: To my astonisment I found out that the
+	source of my constant trouble with libpcre and UTF-8 text was
+	caused by pcre_study() alone!  The great thing is of course that
+	simply not using that silly function is all that's needed to get
+	rid of this constant source of mayhem.
+	(escape_non_ascii): Remove, since no longer needed.
+	(translate_to_char_offset): Get rid of this one too.
+	(byte_to_char_offset): New little helper function.
+	(check_for_single_byte_escape): The "\C" escape sequence seems
+	to be only thing we still have to take care of manually.  This
+	particular sequence matches a single byte even of a multi-byte
+	character, and thus is likely to cause hell to break loose.
+	(Pattern::pcre_extra_): Remove.
+	(Pattern::Pattern): Get rid of the pcre_study() call, and
+	make use of the new check_for_single_byte_escape() function.
+	(Pattern::~Pattern): No need to free pcre_extra_ anymore.
+	(Pattern::match): Throw an exception if the regular expression
+	exceeds the recursion and backtracking limit of libpcre.
+	(CompileOptions): Implement the remaining bit manipulation
+	operators for completeness.
+	(MatchOptions): ditto.
+
+	* src/prefdialog.{cc,h} (get_toolbar_style_index): New helper
+	function.
+	(FontSelectionButton::set_selected_font): Take the font name
+	rather than a Pango::FontDescription object as parameter.
+	(get_selected_font): Likewise for the return type.
+	(PrefDialog::button_direction_): New Gtk::CheckButton member,
+	allowing users of RTL environments to override the direction
+	of regexxer's file editor alone.
+	(on_conf_value_changed): New signal handler listening to
+	GConf value changes.
+	(initialize_configuration): New function to load the initial
+	settings immediately after creation of the preference dialog.
+	Works just like the identically named function in main.cc,
+	except that it invokes on_conf_value_changed() directly instead
+	of triggering the global "value_changed" signal.
+	(on_textview_font_selected): Set the appropriate GConf key
+	instead of using the old internal signal feedback mechanism.
+	(on_match_color_selected): ditto
+	(on_current_color_selected): ditto
+	(on_option_toolbar_style_changed): ditto
+	(on_entry_fallback_activate): ditto.
+	(on_button_direction_toggled): New method.
+	(signal_pref_textview_font_changed): Remove.
+	(signal_pref_match_color_changed): Remove.
+	(signal_pref_current_color_changed): Remove.
+	(signal_pref_toolbar_style_changed): Remove.
+	(signal_pref_fallback_encoding_changed): Remove.
+	(on_entry_fallback_changed): Record that entry content was changed
+	by setting the boolean entry_fallback_changed_ flag.  This is just
+	to avoid superfluous commits to the GConf database every time the
+	preference dialog is closed.
+	(on_response): Evaluate entry_fallback_changed_ (see above),
+	and make sure no Gnome::Conf::Error exceptions escape from
+	on_entry_fallback_activate().
+	(create_page_look): Move the signal handler setup to the ctor.
+	(create_page_file): ditto.
+
+	* src/statusline.cc (CounterBox::CounterBox): Catch possible
+	exceptions when applying the locale to the stream object, in
+	order to avoid crashing if the user's locale is invalid.
+
+	* src/stringutils.cc (apply_modifiers): Modify the code a bit
+	to reduce the number of string copies made.
+	(parse_control_char): Add a 'dest' output parameter to avoid
+	returning a string by value.
+	(parse_hex_unichar): ditto
+	(parse_oct_unichar): ditto.
+	(parse_capture_index): New helper function to deal with both
+	"$1" and "${1}"-style references in the substitution string.
+	(validate_encoding): Simplify.  Also, don't accept any error
+	codes but NO_CONVERSION.
+	(encodings_equal): No longer use std::find_if() since it really
+	doesn't make the code any simpler in this particular case.
+	(trim_whitespace): Remove; no longer used.
+	(shell_pattern_to_regex): Various performance improvements.
+	Also take care of a possible trailing backslash to avoid escaping
+	the "\z" appended by regexxer itself.
+	(substitute_references): Restructure the loop a bit, and accomodate
+	the changes made to the parse_*_char() functions mentioned above.
+	Also, avoid the need for ascii_isodigit() in the default branch by
+	simply adding all 8 octal digits as case labels.
+	(int_to_string): Catch any exceptions that might occur when
+	applying the locale to the stream.  This could happen if the
+	user's default locale is invalid.
+	(transform_pathname): Replace this silly 2-in-1 function by
+	separate shorten_pathname() and expand_pathname() implementations.
+	There really is no need to cache the home directory in a static
+	variable.
+	(shorten_pathname): Implement separately rather than forwarding
+	to transform_pathname().
+	(expand_pathname): ditto.
+	(enum_from_nick): New utility function to convert the 'nick'
+	of a particular enumeration value to the actual integer value.
+	This of course requires the the enumeration type to be registered
+	via the GObject type system.
+	(enum_to_nick): Likewise, but the other way around.
+	(enum_from_nick_impl): Non-template implementation part.
+	(enum_to_nick_impl): ditto.
+
+2004-05-04  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* macros/cxx.m4: Make use of the new AS_IF() macro, and also
+	improve the portability of the shell code a bit.
+
+	* macros/pcre.m4: Ditto.
+
+	* macros/misc.m4: New file, introducing a REGEXXER_PKG_PATH_PROG
+	macro which can be used to look for executables that might live
+	in subdirectories indicated by pkg-config output.
+
+	* autogen.sh: Some minor shell coding-style improvements.
+
+	* configure.ac: Invoke the new REGEXXER_PKG_PATH_PROG macro in
+	order to look for gdk-pixbuf-csource.  Use the new macro to look
+	for gconftool-2 as well.
+	(AC_CHECK_HEADERS): Remove the tests for sys/types.h, sys/stat.h,
+	umask() and mode_t since they're no longer necessary.
+	(PKG_CHECK_MODULES): Substitute the GTKMM prefix by PKG (I don't
+	like MM_DEPS as introduced by Murray in HEAD.)  Also, get rid of
+	the libgnomevfsmm dependency.
+	(REGEXXER_ENABLE_GCONFMM_VALUE_HACK): New preprocessor macro to
+	be inserted into config.h.  This isn't actually used yet, I'll
+	get to that later.
+
+	* regexxer.schemas: New file.
+
+	* Makefile.am: Add rules taking care of the installation of the
+	GConf schema file.
+	(dist_schema_DATA): Add regexxer.schemas to the distribution.
+	(dist_noinst_DATA): Ditto for macros/misc.m4.
+	(DISTCHECK_CONFIGURE_FLAGS): Include --disable-schemas-install.
+
+	* src/Makefile.am: Reflect the substitution of GTKMM by PKG made
+	in configure.ac.
+	(AM_CPPFLAGS): Use this variable in place of regexxer_CPPFLAGS,
+	because executable-specific CFLAGS is not something regexxer ever
+	intended to use.
+
+	* src/main.cc: Get rid of the libgnomevfsmm dependency.  For one
+	thing, the code using it didn't actually work with remote URIs.
+	For another, as of now there's no stable release of this library
+	in sight, no to mention a widely distributed release.
+
+	* src/fileio.cc (load_try_encoding): Comment-out the gnomevfs code
+	and replace it with the original Glib::IOChannel code instead.
+	(save_file): ditto.
+
+	* src/filetree.cc (find_recursively): Comment-out and replace with
+	the previous non-gnomevfs code.
+
 2004-04-10  Murray Cumming  <murrayc@murrayc.com>
 
 	* regexxer/Makefile.am: Put the mm libs and cflags before the pcre 

@@ -38,7 +38,7 @@ public:
   void operator()() { queue(); }
 
 private:
-  sigc::signal<void> signal_;
+  sigc::signal<void>  signal_;
   int                 priority_;
   bool                queued_;
 
