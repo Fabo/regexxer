@@ -1,5 +1,14 @@
 2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetreeprivate.h (FileTreePrivate::filetree_columns):
+	Remove the G_GNUC_CONST attribute since in this function's case
+	it doesn't gain us anything anyway.
+
+	* src/translation.h (translate): Use G_GNUC_PURE rather than
+	G_GNUC_CONST because the function depends on global memory.
+
+2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/pcreshell.cc (Pattern::match): Use the symbolic constant
 	PCRE_ERROR_NOMATCH instead of comparing with -1 directly.
 

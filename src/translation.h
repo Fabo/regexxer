@@ -35,7 +35,7 @@ namespace Util
 {
 
 void initialize_gettext(const char* domain, const char* localedir);
-const char* translate(const char* msgid) G_GNUC_CONST;
+const char* translate(const char* msgid) G_GNUC_PURE;
 
 Glib::ustring compose(const Glib::ustring& format, const Glib::ustring& arg1);
 Glib::ustring compose(const Glib::ustring& format, const Glib::ustring& arg1,

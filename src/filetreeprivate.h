@@ -54,7 +54,7 @@ struct FileTreeColumns : public Gtk::TreeModel::ColumnRecord
   FileTreeColumns() { add(filename); add(collatekey); add(matchcount); add(fileinfo); }
 };
 
-const FileTreeColumns& filetree_columns() G_GNUC_CONST;
+const FileTreeColumns& filetree_columns();
 
 inline
 FileInfoPtr get_fileinfo_from_iter(const Gtk::TreeModel::iterator& iter)
