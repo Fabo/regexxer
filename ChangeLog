@@ -1,5 +1,16 @@
 2004-06-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (FileTree::find_matches_at_path_iter): Use
+	reference arguments instead of pointers.  Make use of sigc::ref()
+	to bind a reference argument to a signal handler.
+	(FileTree::replace_matches_at_path_iter): ditto
+	(FileTree::save_file_at_iter): Likewise.  Also get rid of the
+	on-demand creation of error_list, because it's unnecessary and
+	not exception-safe.  The caller is responsible for instantiating
+	the MessageList now.
+
+2004-06-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.cc (validate_encoding): Be slightly more picky
 	and demand the first and last characters of the encoding string to
 	be alpha-numeric.

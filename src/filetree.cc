@@ -171,31 +171,31 @@ void FileTree::save_current_file()
 {
   if (const Gtk::TreeModel::iterator selected = get_selection()->get_selected())
   {
-    Util::SharedPtr<MessageList> error_list;
+    Util::SharedPtr<MessageList> error_list (new MessageList());
 
     {
       Util::ScopedBlock block (conn_modified_changed_);
-      save_file_at_iter(selected, &error_list);
+      save_file_at_iter(selected, error_list);
     }
 
-    if (error_list)
+    if (!error_list->empty())
       throw Error(error_list);
   }
 }
 
 void FileTree::save_all_files()
 {
-  Util::SharedPtr<MessageList> error_list;
+  Util::SharedPtr<MessageList> error_list (new MessageList());
 
   {
     Util::ScopedBlock block (conn_modified_changed_);
 
     treestore_->foreach_iter(sigc::bind(
         sigc::mem_fun(*this, &FileTree::save_file_at_iter),
-        &error_list));
+        sigc::ref(error_list)));
   }
 
-  if (error_list)
+  if (!error_list->empty())
     throw Error(error_list);
 }
 
@@ -254,7 +254,7 @@ void FileTree::find_matches(Pcre::Pattern& pattern, bool multiple)
 
     treestore_->foreach(sigc::bind(
         sigc::mem_fun(*this, &FileTree::find_matches_at_path_iter),
-        &find_data));
+        sigc::ref(find_data)));
   }
 
   signal_bound_state_changed(); // emit
@@ -277,7 +277,7 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
 
     treestore_->foreach(sigc::bind(
         sigc::mem_fun(*this, &FileTree::replace_matches_at_path_iter),
-        &replace_data));
+        sigc::ref(replace_data)));
 
     // Adjust the boundary range if the operation has been interrupted.
     if (sum_matches_ > 0)
@@ -517,7 +517,7 @@ void FileTree::find_increment_file_count(FindData& find_data, int file_count)
 }
 
 bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
-                                 Util::SharedPtr<MessageList>* error_list)
+                                 const Util::SharedPtr<MessageList>& error_list)
 {
   const FileInfoPtr fileinfo = get_fileinfo_from_iter(iter);
 
@@ -529,12 +529,9 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
     }
     catch (const Glib::Error& error)
     {
-      if (!*error_list)
-        error_list->reset(new MessageList());
-
-      (*error_list)->push_back(Util::compose(_("Failed to save file \"%1\": %2"),
-                                             Util::filename_to_utf8_fallback(fileinfo->fullname),
-                                             error.what()));
+      error_list->push_back(Util::compose(_("Failed to save file \"%1\": %2"),
+                                          Util::filename_to_utf8_fallback(fileinfo->fullname),
+                                          error.what()));
     }
 
     if (!fileinfo->buffer->get_modified())
@@ -549,7 +546,7 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
 
 bool FileTree::find_matches_at_path_iter(const Gtk::TreeModel::Path& path,
                                          const Gtk::TreeModel::iterator& iter,
-                                         FindMatchesData* find_data)
+                                         FindMatchesData& find_data)
 {
   if (signal_pulse()) // emit
     return true;
@@ -568,13 +565,13 @@ bool FileTree::find_matches_at_path_iter(const Gtk::TreeModel::Path& path,
     Util::ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.make_slot()));
 
     const int old_match_count = buffer->get_match_count();
-    const int new_match_count = buffer->find_matches(find_data->pattern, find_data->multiple);
+    const int new_match_count = buffer->find_matches(find_data.pattern, find_data.multiple);
 
     if (new_match_count > 0)
     {
-      if (!find_data->path_match_first_set)
+      if (!find_data.path_match_first_set)
       {
-        find_data->path_match_first_set = true;
+        find_data.path_match_first_set = true;
         path_match_first_ = path;
       }
 
@@ -593,7 +590,7 @@ bool FileTree::find_matches_at_path_iter(const Gtk::TreeModel::Path& path,
 
 bool FileTree::replace_matches_at_path_iter(const Gtk::TreeModel::Path& path,
                                             const Gtk::TreeModel::iterator& iter,
-                                            ReplaceMatchesData* replace_data)
+                                            ReplaceMatchesData& replace_data)
 {
   if (signal_pulse()) // emit
     return true;
@@ -611,9 +608,9 @@ bool FileTree::replace_matches_at_path_iter(const Gtk::TreeModel::Path& path,
       path_match_first_ = path;
 
       if (fileinfo != last_selected_)
-        replace_data->row_reference.reset(new TreeRowRef(treestore_, path));
+        replace_data.row_reference.reset(new TreeRowRef(treestore_, path));
       else
-        replace_data->row_reference = last_selected_rowref_;
+        replace_data.row_reference = last_selected_rowref_;
 
       const bool was_modified = buffer->get_modified();
 
@@ -623,11 +620,11 @@ bool FileTree::replace_matches_at_path_iter(const Gtk::TreeModel::Path& path,
         // Note that the caller must block conn_undo_stack_push_ to avoid
         // double notification.
         Util::ScopedConnection conn1 (buffer->signal_undo_stack_push.
-                                      connect(replace_data->slot_undo_stack_push));
+                                      connect(replace_data.slot_undo_stack_push));
 
         Util::ScopedConnection conn2 (buffer->signal_pulse.connect(signal_pulse.make_slot()));
 
-        buffer->replace_all_matches(replace_data->substitution);
+        buffer->replace_all_matches(replace_data.substitution);
       }
 
       const bool is_modified = buffer->get_modified();

@@ -126,15 +126,15 @@ private:
   void find_increment_file_count(FindData& find_data, int file_count);
 
   bool save_file_at_iter(const Gtk::TreeModel::iterator& iter,
-                         Util::SharedPtr<MessageList>* error_list);
+                         const Util::SharedPtr<MessageList>& error_list);
 
   bool find_matches_at_path_iter(const Gtk::TreeModel::Path& path,
                                  const Gtk::TreeModel::iterator& iter,
-                                 FindMatchesData* find_data);
+                                 FindMatchesData& find_data);
 
   bool replace_matches_at_path_iter(const Gtk::TreeModel::Path& path,
                                     const Gtk::TreeModel::iterator& iter,
-                                    ReplaceMatchesData* replace_data);
+                                    ReplaceMatchesData& replace_data);
 
   void expand_and_select(const Gtk::TreePath& path);
 
