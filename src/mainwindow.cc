@@ -482,7 +482,7 @@ void MainWindow::on_exec_search()
   {
     Glib::ustring message = "Error in regular expression";
     const int offset      = error.offset();
-    int       char_index  = entry_regex_->get_text_length();
+    int       char_index  = entry_regex_->get_position();
 
     if(offset >= 0 && unsigned(offset) < regex.bytes())
     {
