@@ -49,10 +49,6 @@ inline Iterator next(Iterator pos) { return ++pos; }
 template <class Iterator>
 inline Iterator prior(Iterator pos) { return --pos; }
 
-
-void check_for_broken_gconfmm_value_changed();
-bool has_broken_gconfmm_value_changed();
-
 } // namespace Util
 
 #endif /* REGEXXER_MISCUTILS_H_INCLUDED */

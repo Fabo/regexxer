@@ -1,3 +1,20 @@
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* configure.ac (AC_INIT): Bump version to 0.8.
+	(PKG_CHECK_MODULES): Require gconfmm-2.6 >= 2.6.1.
+	(REGEXXER_GCONFMM_VALUE_HACK): Remove.
+
+	* src/miscutils.{cc,h}
+	(check_for_broken_gconfmm_value_changed): Remove.
+	(has_broken_gconfmm_value_changed): Remove.
+
+	* src/main.cc (main): Remove call to gconfmm bug runtime test.
+
+	* src/filebuffer.cc (on_config_value_changed): Remove hack.
+	* src/filetree.cc (on_config_value_changed): ditto
+	* src/mainwindow.cc (on_config_value_changed): ditto.
+	* src/prefdialog.{cc,h} (on_config_value_changed_hack): Remove.
+
 2004-05-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/mainwindow.cc (on_select_folder): Use Gtk::FileChooserDialog

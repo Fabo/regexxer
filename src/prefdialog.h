@@ -71,7 +71,6 @@ private:
 
   void on_response(int response_id);
 
-  void on_conf_value_changed_hack(const Glib::ustring& key, const Gnome::Conf::Value& value);
   void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
   void initialize_configuration();
 

@@ -18,7 +18,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-AC_INIT([regexxer], [0.7], [daniel.elstner@gmx.net], [regexxer])
+AC_INIT([regexxer], [0.8], [daniel.elstner@gmx.net], [regexxer])
 AC_PREREQ([2.53])
 
 AC_REVISION([$Revision$])
@@ -32,7 +32,7 @@ AC_PROG_CXX()
 
 AM_GNU_GETTEXT([external])
 
-PKG_CHECK_MODULES([PKG], [gtkmm-2.4 >= 2.4.0 libglademm-2.4 >= 2.4.0 gconfmm-2.6 >= 2.6.0])
+PKG_CHECK_MODULES([PKG], [gtkmm-2.4 >= 2.4.0 libglademm-2.4 >= 2.4.0 gconfmm-2.6 >= 2.6.1])
 AC_SUBST([PKG_CFLAGS])
 AC_SUBST([PKG_LIBS])
 
@@ -47,27 +47,6 @@ AC_SUBST([REGEXXER_GCONF_DIRECTORY], ['/apps/regexxer'])
 
 REGEXXER_CXX_HAS_STD_LOCALE()
 REGEXXER_ARG_ENABLE_WARNINGS()
-
-## This is a really, really nasty thing to do, but...
-##
-AC_DEFINE([REGEXXER_ENABLE_GCONFMM_VALUE_HACK], [1], [Define to 1 if this nasty hack is necessary.])
-AH_BOTTOM(
-[
-#if REGEXXER_ENABLE_GCONFMM_VALUE_HACK
-/*
- * Hardcore HACK:  Perform the copy which is missing in gconfmm
- * five minutes after twelve.
- */
-namespace Util { bool has_broken_gconfmm_value_changed(); }
-
-# define REGEXXER_GCONFMM_VALUE_HACK(value)					\
-    if (Util::has_broken_gconfmm_value_changed())				\
-      new(const_cast<Gnome::Conf::Value*>(&value))				\
-          Gnome::Conf::Value(const_cast<GConfValue*>(value.gobj()), true)
-#else
-# define REGEXXER_GCONFMM_VALUE_HACK(value) (void)0
-#endif
-])
 
 AC_CONFIG_FILES([
   Makefile

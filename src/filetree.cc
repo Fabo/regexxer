@@ -1015,8 +1015,6 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
 
 void FileTree::on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value)
 {
-  REGEXXER_GCONFMM_VALUE_HACK(value);
-
   if (value.get_type() == Gnome::Conf::VALUE_STRING)
   {
     if (key.raw() == conf_key_fallback_encoding)

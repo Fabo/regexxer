@@ -394,13 +394,6 @@ void PrefDialog::on_response(int)
   dialog_->hide();
 }
 
-void PrefDialog::on_conf_value_changed_hack(const Glib::ustring& key,
-                                            const Gnome::Conf::Value& value)
-{
-  REGEXXER_GCONFMM_VALUE_HACK(value);
-  on_conf_value_changed(key, value);
-}
-
 /*
  * Note that it isn't strictly required to block the change notifications
  * as done below for the "toolbar_style" and "override_direction" settings.
@@ -459,7 +452,7 @@ void PrefDialog::initialize_configuration()
   }
 
   client->signal_value_changed().connect(
-      sigc::mem_fun(*this, &PrefDialog::on_conf_value_changed_hack));
+      sigc::mem_fun(*this, &PrefDialog::on_conf_value_changed));
 }
 
 void PrefDialog::on_textview_font_selected()

@@ -90,8 +90,6 @@ void RegexxerTags::on_conf_value_changed(const Glib::ustring& key, const Gnome::
 {
   using namespace Regexxer;
 
-  REGEXXER_GCONFMM_VALUE_HACK(value);
-
   if (value.get_type() == Gnome::Conf::VALUE_STRING)
   {
     if (key.raw() == conf_key_match_color)
