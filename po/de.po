@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-09 01:49+0200\n"
+"POT-Creation-Date: 2004-07-13 11:10+0200\n"
 "PO-Revision-Date: 2004-05-05 11:34+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
@@ -105,15 +105,67 @@ msgstr "Fehler beim Speichern der Datei „%1“: %2"
 msgid "\"%1\" seems to be a binary file."
 msgstr "„%1“ scheint eine Binärdatei zu sein."
 
-#: src/main.cc:81
+#: src/main.cc:84
 msgid "_About"
 msgstr "_Info"
 
-#: src/main.cc:82
+#: src/main.cc:85
 msgid "Save _all"
 msgstr "_Alle speichern"
 
-#: src/mainwindow.cc:200 ui/mainwindow.glade.h:1
+#: src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "Suche Dateien die auf MUSTER passen"
+
+#: src/main.cc:100
+msgid "PATTERN"
+msgstr "MUSTER"
+
+#: src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "Steige nicht in Unterverzeichnisse hinab"
+
+#: src/main.cc:102 ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "Finde auch versteckte Dateien"
+
+#: src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "Suche Text der auf REGEX passt"
+
+#: src/main.cc:103
+msgid "REGEX"
+msgstr "REGEX"
+
+#: src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "Finde nur den ersten Treffer in einer Zeile"
+
+#: src/main.cc:105
+msgid "Ignore case distinctions"
+msgstr "Ignoriere Unterschied zwischen Groß- und Kleinschreibung"
+
+#: src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "Ersetze Treffer durch STRING"
+
+#: src/main.cc:106
+msgid "STRING"
+msgstr "STRING"
+
+#: src/main.cc:107
+msgid "Do not automatically start search"
+msgstr "Keine automatische Suche starten"
+
+#: src/main.cc:117
+msgid "[OPTION]... [FOLDER]"
+msgstr "[OPTION]... [ORDNER]"
+
+#: src/main.cc:139
+msgid "Try `regexxer --help' for more information."
+msgstr "„regexxer --help“ gibt weitere Informationen."
+
+#: src/mainwindow.cc:232 ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -122,7 +174,7 @@ msgstr ""
 "Zeichenklassen [ab] und Klammerausdrücke im csh-Stil {a,b} werden "
 "unterstützt."
 
-#: src/mainwindow.cc:341
+#: src/mainwindow.cc:373
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -130,7 +182,7 @@ msgstr ""
 "Einige Dateien wurden noch nicht gespeichert.\n"
 "Trotzdem beenden?"
 
-#: src/mainwindow.cc:369
+#: src/mainwindow.cc:401
 #, qt-format
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
@@ -139,11 +191,11 @@ msgstr ""
 "Der Ordnername „%1“ enthält Zeichen die im Zeichensatz des lokalen "
 "Dateisystems nicht darstellbar sind."
 
-#: src/mainwindow.cc:388
+#: src/mainwindow.cc:420
 msgid "Select a folder"
 msgstr "Verzeichnisauswahl"
 
-#: src/mainwindow.cc:408
+#: src/mainwindow.cc:440
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -151,15 +203,15 @@ msgstr ""
 "Einige Dateien wurden noch nicht gespeichert.\n"
 "Trotzdem fortsetzen?"
 
-#: src/mainwindow.cc:434
+#: src/mainwindow.cc:466
 msgid "The file search pattern is invalid."
 msgstr "Das Dateinamen-Suchmuster ist ungültig."
 
-#: src/mainwindow.cc:440
+#: src/mainwindow.cc:472
 msgid "The following errors occurred during search:"
 msgstr "Die folgenden Fehler sind beim Suchen aufgetreten:"
 
-#: src/mainwindow.cc:465
+#: src/mainwindow.cc:497
 #, qt-format
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
@@ -168,7 +220,7 @@ msgstr ""
 "Fehler in regulärem Ausdruck bei „%1“ (Index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:467
+#: src/mainwindow.cc:499
 #, qt-format
 msgid ""
 "Error in regular expression:\n"
@@ -177,7 +229,7 @@ msgstr ""
 "Fehler in regulärem Ausdruck:\n"
 "%1"
 
-#: src/mainwindow.cc:689
+#: src/mainwindow.cc:721
 msgid "The following errors occurred during save:"
 msgstr "Die folgenden Fehler sind beim Speichern aufgetreten:"
 
@@ -200,19 +252,19 @@ msgstr ""
 msgid "\"%1\" is not a valid encoding."
 msgstr "„%1“ ist kein gültiger Zeichensatz."
 
-#: src/statusline.cc:271
+#: src/statusline.cc:264
 msgid "Stop"
 msgstr "Stopp"
 
-#: src/statusline.cc:278
+#: src/statusline.cc:271
 msgid "File:"
 msgstr "Datei:"
 
-#: src/statusline.cc:281
+#: src/statusline.cc:274
 msgid "Match:"
 msgstr "Treffer:"
 
-#: src/statusline.cc:292
+#: src/statusline.cc:285
 msgid "Cancels the running search"
 msgstr "Bricht die laufende Suche ab"
 
@@ -244,10 +296,6 @@ msgstr "geschrieben von"
 #: ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
 msgstr "Ein regulärer Ausdruck in Perl-Syntax"
-
-#: ui/mainwindow.glade.h:3
-msgid "Also find hidden files"
-msgstr "Finde auch versteckte Dateien"
 
 #: ui/mainwindow.glade.h:4
 msgid "Backward"
