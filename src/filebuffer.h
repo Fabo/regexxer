@@ -121,9 +121,6 @@ private:
 
   void update_bound_state();
   void notify_weak_undos();
-
-  // Work-around for silly, stupid, and annoying gcc 2.95.x.
-  friend class FileBuffer::ScopedLock;
 };
 
 } // namespace Regexxer

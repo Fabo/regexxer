@@ -153,10 +153,6 @@ private:
   void load_file_with_fallback(const Gtk::TreeModel::iterator& iter, const FileInfoPtr& fileinfo);
 
   void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
-
-  // Work-around for silly, stupid, and annoying gcc 2.95.x.
-  friend class FileTree::ScopedBlockSorting;
-  friend class FileTree::BufferActionShell;
 };
 
 

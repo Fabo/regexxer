@@ -1,5 +1,16 @@
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filebuffer.cc: Mark all const_cast<> work-arounds for the
+	Gtk::TextIter API bug with // XXX comments.
+	(FileBuffer::get_match_index): Get rid of libstdc++-v2 work-around.
+
+	* src/filebuffer.h (FileBuffer): Get rid of the friend declarations
+	that were added to work around a GCC 2.95 deficiency.
+	* src/filetree.h (FileTree): ditto
+	* src/mainwindow.h (MainWindow): ditto.
+
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* Makefile.am (install-schemas): Simplify.  Since regexxer.schemas
 	is now a generated file it is always placed in the build directory.
 	(uninstall-schemas): Likewise.  Also add $(schemas_DATA) to the

@@ -351,10 +351,7 @@ int FileBuffer::get_match_count() const
 
 int FileBuffer::get_match_index() const
 {
-  // Stupid work-around for silly, silly gcc 2.95.x.
-  const MatchSet::const_iterator current_match (current_match_);
-
-  return (!match_removed_ && current_match != match_set_.end()) ? (*current_match)->index : 0;
+  return (!match_removed_ && current_match_ != match_set_.end()) ? (*current_match_)->index : 0;
 }
 
 int FileBuffer::get_original_match_count() const
@@ -794,7 +791,7 @@ void FileBuffer::replace_match(MatchSet::const_iterator pos, const Glib::ustring
 void FileBuffer::remove_match_at_iter(const FileBuffer::iterator& start)
 {
   typedef std::list< Glib::RefPtr<Mark> > MarkList;
-  const MarkList marks (const_cast<iterator&>(start).get_marks());
+  const MarkList marks (const_cast<iterator&>(start).get_marks()); // XXX
 
   for (MarkList::const_iterator pmark = marks.begin(); pmark != marks.end(); ++pmark)
   {
@@ -890,7 +887,7 @@ void FileBuffer::apply_tag_current()
 bool FileBuffer::is_match_start(const iterator& where)
 {
   typedef std::list< Glib::RefPtr<Mark> > MarkList;
-  const MarkList marks (const_cast<iterator&>(where).get_marks());
+  const MarkList marks (const_cast<iterator&>(where).get_marks()); // XXX
 
   return (std::find_if(marks.begin(), marks.end(), &MatchData::is_match_mark) != marks.end());
 }

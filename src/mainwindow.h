@@ -149,9 +149,6 @@ private:
   void on_pref_dialog_hide();
 
   void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
-
-  // Work-around for silly, stupid, and annoying gcc 2.95.x.
-  friend class MainWindow::BusyAction;
 };
 
 } // namespace Regexxer
