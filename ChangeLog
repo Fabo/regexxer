@@ -1,3 +1,11 @@
+2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filebuffer.cc (find_matches): Correctly forward one character
+	rather than one byte after matching the empty string twice.  Also,
+	improve cancellation response by moving the signal_pulse() emission
+	into the inner loop (shouldn't harm performance since we emit only
+	once for 128 iterations anyway).
+
 2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/fileio.{cc,h} src/filelist.{cc,h}: Make the fallback

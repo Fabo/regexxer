@@ -244,9 +244,6 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
 
   for(iterator line = begin(); !line.is_end(); line.forward_line())
   {
-    if((++iteration % PULSE_INTERVAL) == 0 && signal_pulse()) // emit
-      break;
-
     iterator line_end (line);
 
     if(!line_end.ends_line())
@@ -258,6 +255,12 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
 
     do
     {
+      if((++iteration % PULSE_INTERVAL) == 0 && signal_pulse()) // emit
+      {
+        signal_match_count_changed(match_count_); // emit
+        return match_count_;
+      }
+
       const int capture_count = pattern.match(
           subject, offset, (allow_empty_match) ? Pcre::MatchOptions(0) : Pcre::NOT_EMPTY);
 
@@ -265,7 +268,10 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
       {
         if(!allow_empty_match && unsigned(offset) < subject.bytes())
         {
-          ++offset;
+          const std::string::const_iterator pbegin = subject.begin().base();
+          Glib::ustring::const_iterator     poffset (pbegin + offset);
+
+          offset = (++poffset).base() - pbegin; // forward one UTF-8 character
           allow_empty_match = true;
           continue;
         }
