@@ -1,5 +1,10 @@
 2004-07-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* de.po: Get rid of unused string.
+	* en.po: ditto.
+
+2004-07-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* de.po: Update.
 	* en.po: Update.
 

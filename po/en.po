@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-14 09:58+0200\n"
+"POT-Creation-Date: 2004-07-14 10:48+0200\n"
 "PO-Revision-Date: 2004-05-05 15:35+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -139,9 +139,9 @@ msgstr "REGEX"
 msgid "Find only the first match in a line"
 msgstr "Find only the first match in a line"
 
-#: src/main.cc:105
-msgid "Ignore case distinctions"
-msgstr "Ignore case distinctions"
+#: src/main.cc:105 ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "Do case insensitive matching"
 
 #: src/main.cc:106
 msgid "Replace matches with STRING"
@@ -299,10 +299,6 @@ msgstr "A regular expression in Perl syntax"
 #: ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "Backward"
-
-#: ui/mainwindow.glade.h:5
-msgid "Do case insensitive matching"
-msgstr "Do case insensitive matching"
 
 #: ui/mainwindow.glade.h:6
 msgid "File backward"
