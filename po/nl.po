@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Head\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-14 16:14+0200\n"
-"PO-Revision-Date: 2004-07-15 02:25+0200\n"
+"POT-Creation-Date: 2004-08-29 04:13+0200\n"
+"PO-Revision-Date: 2004-08-29 10:32+0200\n"
 "Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -138,9 +138,9 @@ msgstr "REGEX"
 msgid "Find only the first match in a line"
 msgstr "Alleen de eerste  overeenkomst in een regel zoeken"
 
-#: src/main.cc:105
-msgid "Ignore case distinctions"
-msgstr "Hoofdletterongevoelig"
+#: src/main.cc:105 ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "Hoofdletterongevoelig zoeken"
 
 #: src/main.cc:106
 msgid "Replace matches with STRING"
@@ -163,8 +163,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[OPTIE]... [MAP]"
 
 #: src/main.cc:141
-msgid "Try `regexxer --help' for more information."
-msgstr "Probeer `regexxer --help' voor meer informatie"
+msgid "Try \"regexxer --help\" for more information."
+msgstr "Probeer \"regexxer --help\" voor meer informatie."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -299,10 +299,6 @@ msgstr "Een reguliere experssie in Perl syntax"
 #: ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "Achterwaards"
-
-#: ui/mainwindow.glade.h:5
-msgid "Do case insensitive matching"
-msgstr "Hoofdletterongevoelig zoeken"
 
 #: ui/mainwindow.glade.h:6
 msgid "File backward"
@@ -529,6 +525,9 @@ msgid ""
 msgstr ""
 "regexxer probeert een bestand te lezen in de volgende tekensets voordat hij "
 "opgeeft:"
+
+#~ msgid "Ignore case distinctions"
+#~ msgstr "Hoofdletterongevoelig"
 
 #~ msgid ""
 #~ "If enabled, the text direction of the file editor, preview area, and all "
