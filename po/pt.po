@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.6\n"
+"Project-Id-Version: 2.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-09 01:49+0200\n"
-"PO-Revision-Date: 2004-05-17 23:30+0000\n"
+"POT-Creation-Date: 2004-08-09 00:36+0100\n"
+"PO-Revision-Date: 2004-08-09 00:40+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -94,24 +94,78 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-#, qt-format
 msgid "Failed to save file \"%1\": %2"
 msgstr "Falha ao gravar o ficheiro \"%1\". %2"
 
-#: src/filetree.cc:941
-#, qt-format
+#: src/filetree.cc:949
 msgid "\"%1\" seems to be a binary file."
 msgstr "\"%1\" parece ser um ficheiro binário."
 
-#: src/main.cc:81
+#: src/main.cc:84
 msgid "_About"
 msgstr "_Sobre"
 
-#: src/main.cc:82
+#: src/main.cc:85
 msgid "Save _all"
 msgstr "Gravar _todos"
 
-#: src/mainwindow.cc:200 ui/mainwindow.glade.h:1
+#: src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "Procurar ficheiros com um PADRÃO coincidente"
+
+#: src/main.cc:100
+msgid "PATTERN"
+msgstr "PADRÃO"
+
+#: src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "Não efectuar recursividade sobre os subdirectórios"
+
+#: src/main.cc:102 ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "Também procurar ficheiros escondidos"
+
+#: src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "Procurar texto que coincida com a EXPREG"
+
+#: src/main.cc:103
+msgid "REGEX"
+msgstr "EXPREG"
+
+#: src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "Procurar apenas a primeira coincidência numa linha"
+
+#: src/main.cc:105 ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "Efectuar coincidências insensíveis à capitalização"
+
+#: src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "Substituir as coincidências por EXPRESSÃO"
+
+#: src/main.cc:106
+msgid "STRING"
+msgstr "EXPRESSÃO"
+
+#: src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "Imprimir a localização da coincidência para a consola"
+
+#: src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "Não iniciar a procura automaticamente"
+
+#: src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[OPÇºÃO]... [PASTA]"
+
+#: src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr "Tente \"regexxer --help\" para mais informações."
+
+#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -119,7 +173,7 @@ msgstr ""
 "Um padrão de nome de ficheiro tal como o utilizado pela consola. São "
 "suportadas classes de caracteres [ab] e expressões estilo csh como {a,b}."
 
-#: src/mainwindow.cc:341
+#: src/mainwindow.cc:403
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -127,18 +181,19 @@ msgstr ""
 "Alguns ficheiros ainda não foram gravados.\n"
 "Ainda assim terminar?"
 
-#: src/mainwindow.cc:369
-#, qt-format
+#: src/mainwindow.cc:431
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
+"A pasta de nome \"%1\" contém caracteres sem representação na codificação do "
+"sistema de ficheiros local."
 
-#: src/mainwindow.cc:388
+#: src/mainwindow.cc:450
 msgid "Select a folder"
 msgstr "Seleccione uma pasta"
 
-#: src/mainwindow.cc:408
+#: src/mainwindow.cc:470
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -146,16 +201,15 @@ msgstr ""
 "Alguns ficheiros ainda não foram gravados.\n"
 "Ainda assim prosseguir?"
 
-#: src/mainwindow.cc:434
+#: src/mainwindow.cc:496
 msgid "The file search pattern is invalid."
 msgstr "O padrão de procura de ficheiros é inválido."
 
-#: src/mainwindow.cc:440
+#: src/mainwindow.cc:502
 msgid "The following errors occurred during search:"
 msgstr "Ocorreram os seguintes erros durante a procura:"
 
-#: src/mainwindow.cc:465
-#, qt-format
+#: src/mainwindow.cc:527
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -163,8 +217,7 @@ msgstr ""
 "Erro na expressão regular em \"%1\" (índice %2):\n"
 "%3"
 
-#: src/mainwindow.cc:467
-#, qt-format
+#: src/mainwindow.cc:529
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -172,7 +225,7 @@ msgstr ""
 "Erro na expressão regular:\n"
 "%1"
 
-#: src/mainwindow.cc:689
+#: src/mainwindow.cc:751
 msgid "The following errors occurred during save:"
 msgstr "Ocorreram os seguintes erros durante a gravação:"
 
@@ -191,23 +244,22 @@ msgstr ""
 "regulares."
 
 #: src/prefdialog.cc:248
-#, qt-format
 msgid "\"%1\" is not a valid encoding."
 msgstr "\"%1\" não é uma codificação válida."
 
-#: src/statusline.cc:271
+#: src/statusline.cc:264
 msgid "Stop"
 msgstr "Parar"
 
-#: src/statusline.cc:278
+#: src/statusline.cc:271
 msgid "File:"
 msgstr "Ficheiro:"
 
-#: src/statusline.cc:281
+#: src/statusline.cc:274
 msgid "Match:"
 msgstr "Coincidência:"
 
-#: src/statusline.cc:292
+#: src/statusline.cc:285
 msgid "Cancels the running search"
 msgstr "Cancela a procura em execução"
 
@@ -226,11 +278,11 @@ msgstr "ícone do regexxer"
 
 #: ui/aboutdialog.glade.h:4
 msgid "translated by"
-msgstr ""
+msgstr "traduzido por"
 
 #: ui/aboutdialog.glade.h:5
 msgid "translator-credits"
-msgstr ""
+msgstr "Duarte Loreto <happyguy_pt@hotmail.com>"
 
 #: ui/aboutdialog.glade.h:6
 msgid "written by"
@@ -240,17 +292,9 @@ msgstr "escrito por"
 msgid "A regular expression in Perl syntax"
 msgstr "Uma expressão regular em sintaxe Perl"
 
-#: ui/mainwindow.glade.h:3
-msgid "Also find hidden files"
-msgstr "Também procurar ficheiros escondidos"
-
 #: ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "Retroceder"
-
-#: ui/mainwindow.glade.h:5
-msgid "Do case insensitive matching"
-msgstr "Efectuar coincidências insensíveis à capitalização"
 
 #: ui/mainwindow.glade.h:6
 msgid "File backward"
@@ -369,7 +413,7 @@ msgstr "_Todos os ficheiros"
 
 #: ui/mainwindow.glade.h:33
 msgid "_Edit"
-msgstr ""
+msgstr "_Editar"
 
 #: ui/mainwindow.glade.h:34
 msgid "_File"
