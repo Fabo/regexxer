@@ -1,5 +1,10 @@
 2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.cc (convert_to_ascii): Replace non-ASCII
+	characters by octal escapes rather than just a question mark.
+
+2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.cc (RegexxerTags::instance): Remove G_GNUC_CONST
 	because it causes problems on PPC, and doesn't have any effect in
 	this particular case anyway.

@@ -613,18 +613,23 @@ Glib::ustring Util::filename_to_utf8_fallback(const std::string& filename)
 
 Glib::ustring Util::convert_to_ascii(const std::string& str)
 {
-  std::string result = str;
+  std::ostringstream output;
 
-  std::string::iterator p    = result.begin();
-  std::string::iterator pend = result.end();
+#if REGEXXER_HAVE_STD_LOCALE
+  output.imbue(std::locale::classic());
+#endif
 
-  for (; p != pend; ++p)
+  output.setf(std::ios::oct, std::ios::basefield);
+
+  for (std::string::const_iterator p = str.begin(); p != str.end(); ++p)
   {
-    if ((*p & '\x80') != 0)
-      *p = '?';
+    if ((*p & '\x80') == 0)
+      output << *p;
+    else
+      output << '\\' << static_cast<unsigned int>(static_cast<unsigned char>(*p));
   }
 
-  return result;
+  return output.str();
 }
 
 Glib::ustring Util::int_to_string(int number)
