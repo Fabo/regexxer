@@ -534,10 +534,8 @@ void FileBuffer::undo_remove_match(const MatchDataPtr& match, int offset)
     apply_tag(tagtable->match, start, stop);
   }
 
-  if (match_removed_ && Util::prior(current_match_) == pos.first)
+  if (match_removed_ && Util::next(pos.first) == current_match_)
   {
-    remove_tag_current();
-
     current_match_ = pos.first;
     match_removed_ = false;
 

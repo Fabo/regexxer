@@ -1,5 +1,12 @@
 2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filebuffer.cc (FileBuffer::undo_remove_match): Avoid
+	decrementing current_match_ since it might point to the start
+	of the range.  Also remove the call to remove_tag_current()
+	because it does nothing if match_removed_ is set anyway.
+
+2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* ui/mainwindow.glade (menuitem_undo): Add accelerator key CTRL-z.
 
 2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
