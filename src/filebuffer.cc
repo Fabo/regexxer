@@ -184,6 +184,7 @@ FileBuffer::create_with_error_message(const Glib::RefPtr<Gdk::Pixbuf>& pixbuf,
     pend = buffer->insert(pend, ".");
 
   buffer->apply_tag(tagtable->error_message, buffer->begin(), pend);
+  buffer->set_modified(false);
 
   return buffer;
 }

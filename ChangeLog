@@ -1,5 +1,10 @@
 2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filebuffer.cc (create_with_error_message): Don't forget
+	set_modified(false) after filling the buffer.
+
+2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/statusline.cc: Correctly handle signal_style_changed()
 	from the labels rather than the container.
 
