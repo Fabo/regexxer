@@ -1,5 +1,9 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* regexxer.desktop.in (Categories): Prepend GNOME to the list.
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/translation.cc (compose_impl): Remove superfluous namespace
 	prefix.
 
