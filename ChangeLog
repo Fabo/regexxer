@@ -1,5 +1,16 @@
 2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filebuffer.{cc,h} (is_freeable): New method that checks
+	whether it's safe to unreference the buffer.  This can be used
+	to reduce the memory footprint.
+
+	* src/filetree.{cc,h}: Unreference the text buffer whenever
+	possible.  For instance, we really don't need to keep a buffer
+	in memory that has match_count == 0 and wasn't modified.  Also
+	fix propagation of signal_match_count_changed().
+
+2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (select_next_file): Re-add a missing
 	"return true;" that got lost in a previous change.
 

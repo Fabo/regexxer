@@ -146,6 +146,36 @@ int MatchData::get_bytes_length() const
 }
 
 
+/**** Regexxer::FileBuffer::ScopedLock *************************************/
+
+class FileBuffer::ScopedLock
+{
+private:
+  FileBuffer& buffer_;
+
+  ScopedLock(const FileBuffer::ScopedLock&);
+  FileBuffer::ScopedLock& operator=(const FileBuffer::ScopedLock&);
+
+public:
+  explicit ScopedLock(FileBuffer& buffer);
+  ~ScopedLock();
+};
+
+FileBuffer::ScopedLock::ScopedLock(FileBuffer& buffer)
+:
+  buffer_ (buffer)
+{
+  g_return_if_fail(!buffer_.locked_);
+  buffer_.locked_ = true;
+}
+
+FileBuffer::ScopedLock::~ScopedLock()
+{
+  g_return_if_fail(buffer_.locked_);
+  buffer_.locked_ = false;
+}
+
+
 /**** Regexxer::FileBuffer *************************************************/
 
 FileBuffer::FileBuffer()
@@ -157,7 +187,8 @@ FileBuffer::FileBuffer()
   current_match_        (match_list_.end()),
   match_removed_        (false),
   bound_state_          (BOUND_FIRST | BOUND_LAST),
-  preview_line_changed_ (false)
+  preview_line_changed_ (false),
+  locked_               (false)
 {}
 
 FileBuffer::~FileBuffer()
@@ -222,12 +253,19 @@ void FileBuffer::pango_context_changed(const Glib::RefPtr<Pango::Context>& conte
   tagtable->error_title->property_rise() = rise_height;
 }
 
+bool FileBuffer::is_freeable() const
+{
+  return (!locked_ && match_count_ == 0 && !get_modified());
+}
+
 /* Apply pattern on all lines in the buffer and return the number of matches.
  * If multiple is false then every line is matched only once, otherwise
  * multiple matches per line will be found (like modifier /g in Perl).
  */
 int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
 {
+  ScopedLock lock (*this);
+
   const Glib::RefPtr<Glib::MainContext> main_context = Glib::MainContext::get_default();
   const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
 
@@ -407,6 +445,8 @@ void FileBuffer::replace_current_match(const Glib::ustring& substitution)
 
 void FileBuffer::replace_all_matches(const Glib::ustring& substitution)
 {
+  ScopedLock lock (*this);
+
   unsigned int iteration = 0;
 
   while(!match_list_.empty())

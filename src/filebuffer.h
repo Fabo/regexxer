@@ -96,6 +96,8 @@ public:
 
   virtual ~FileBuffer();
 
+  bool is_freeable() const;
+
   int find_matches(Pcre::Pattern& pattern, bool multiple);
 
   int get_match_count() const;
@@ -125,6 +127,8 @@ protected:
   virtual void on_mark_deleted(const Glib::RefPtr<TextBuffer::Mark>& mark);
 
 private:
+  class ScopedLock;
+
   std::list<MatchData>            match_list_;
   int                             match_count_;
   int                             original_match_count_;
@@ -132,6 +136,7 @@ private:
   bool                            match_removed_;
   BoundState                      bound_state_;
   bool                            preview_line_changed_;
+  bool                            locked_;
 
   void replace_match(std::list<MatchData>::iterator pos, const Glib::ustring& substitution);
 
@@ -151,6 +156,9 @@ private:
   void update_bound_state();
   void trigger_preview_line_changed();
   bool preview_line_changed_idle_callback();
+
+  // Work-around for silly, stupid, and annoying gcc 2.95.x.
+  friend class FileBuffer::ScopedLock;
 };
 
 } // namespace Regexxer

@@ -80,11 +80,13 @@ protected:
 private:
   struct ErrorList;
   struct FindData;
+  struct FindMatchesData;
 
   Glib::RefPtr<Gtk::TreeStore>  treestore_;
   Gdk::Color                    color_modified_;
   Gdk::Color                    color_load_failed_;
 
+  FileInfoPtr                   last_selected_;
   DirInfo                       toplevel_;
   long                          sum_matches_;
 
@@ -112,12 +114,10 @@ private:
   bool save_file_at_iter(const Gtk::TreeModel::iterator& iter,
                          Util::SharedPtr<ErrorList>* error_list);
 
+  bool find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMatchesData* find_data);
+
   bool replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
                                const Glib::ustring* substitution);
-
-  long find_matches_recursively(const Gtk::TreeModel::Children& node,
-                                Pcre::Pattern& pattern, bool multiple,
-                                bool& patch_match_first_set);
 
   bool next_match_file(Gtk::TreeModel::iterator& iter, std::stack<Gtk::TreePath>* collapse_stack = 0);
   bool prev_match_file(Gtk::TreeModel::iterator& iter, std::stack<Gtk::TreePath>* collapse_stack = 0);

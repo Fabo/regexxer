@@ -188,6 +188,29 @@ FileTree::FindData::~FindData()
 {}
 
 
+/**** Regexxer::FileTree::FindMatchesData **********************************/
+
+struct FileTree::FindMatchesData
+{
+  FindMatchesData(Pcre::Pattern& pattern_, bool multiple_);
+
+  Pcre::Pattern&  pattern;
+  const bool      multiple;
+  bool            path_match_first_set;
+
+private:
+  FindMatchesData(const FileTree::FindMatchesData&);
+  FileTree::FindMatchesData& operator=(const FileTree::FindMatchesData&);
+};
+
+FileTree::FindMatchesData::FindMatchesData(Pcre::Pattern& pattern_, bool multiple_)
+:
+  pattern              (pattern_),
+  multiple             (multiple_),
+  path_match_first_set (false)
+{}
+
+
 /**** Regexxer::FileTree ***************************************************/
 
 FileTree::FileTree()
@@ -353,14 +376,12 @@ void FileTree::find_matches(Pcre::Pattern& pattern, bool multiple)
 {
   {
     ScopedBlock block (conn_match_count_);
+    FindMatchesData find_data (pattern, multiple);
 
-    bool path_match_first_set = false;
-    sum_matches_ = find_matches_recursively(treestore_->children(), pattern, multiple,
-                                            path_match_first_set);
+    treestore_->foreach(SigC::bind(SigC::slot(*this, &FileTree::find_matches_at_iter), &find_data));
   }
 
   signal_bound_state_changed(); // emit
-  signal_match_count_changed(); // emit
 }
 
 long FileTree::get_match_count() const
@@ -380,7 +401,6 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
   }
 
   signal_bound_state_changed(); // emit
-  signal_match_count_changed(); // emit
 }
 
 int FileTree::get_modified_count() const
@@ -634,6 +654,53 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
 
     if(!fileinfo->buffer->get_modified())
       propagate_modified_change(iter, false);
+
+    if(fileinfo != last_selected_ && fileinfo->buffer->is_freeable())
+      fileinfo->buffer.clear(); // reduce memory footprint
+  }
+
+  return false;
+}
+
+bool FileTree::find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMatchesData* find_data)
+{
+  if(signal_pulse()) // emit
+    return true;
+
+  if(const FileInfoPtr fileinfo = get_fileinfo_from_iter(iter))
+  {
+    if(!fileinfo->load_failed && !fileinfo->buffer)
+      load_file_with_fallback(fileinfo);
+
+    if(fileinfo->load_failed)
+      return false; // continue
+
+    const Glib::RefPtr<FileBuffer> buffer = fileinfo->buffer;
+    g_assert(buffer);
+
+    ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.slot()));
+
+    const int old_match_count = buffer->get_match_count();
+    const int new_match_count = buffer->find_matches(find_data->pattern, find_data->multiple);
+
+    if(new_match_count > 0)
+    {
+      const Gtk::TreePath path (iter);
+
+      if(!find_data->path_match_first_set)
+      {
+        path_match_first_ = path;
+        find_data->path_match_first_set = true;
+      }
+
+      path_match_last_ = path;
+    }
+
+    if(new_match_count != old_match_count)
+      propagate_match_count_change(iter, new_match_count - old_match_count);
+
+    if(fileinfo != last_selected_ && buffer->is_freeable())
+      fileinfo->buffer.clear(); // reduce memory footprint
   }
 
   return false;
@@ -649,83 +716,31 @@ bool FileTree::replace_matches_at_iter(const Gtk::TreeModel::iterator& iter,
 
   if(fileinfo && fileinfo->buffer)
   {
-    const int match_count = fileinfo->buffer->get_match_count();
+    const Glib::RefPtr<FileBuffer> buffer = fileinfo->buffer;
+
+    const int match_count = buffer->get_match_count();
 
     if(match_count > 0)
     {
-      const bool was_modified = fileinfo->buffer->get_modified();
+      const bool was_modified = buffer->get_modified();
 
       {
-        ScopedConnection conn (fileinfo->buffer->signal_pulse.connect(signal_pulse.slot()));
-        fileinfo->buffer->replace_all_matches(*substitution);
+        ScopedConnection conn (buffer->signal_pulse.connect(signal_pulse.slot()));
+        buffer->replace_all_matches(*substitution);
       }
 
-      const bool is_modified = fileinfo->buffer->get_modified();
+      const bool is_modified = buffer->get_modified();
 
       if(was_modified != is_modified)
         propagate_modified_change(iter, is_modified);
 
-      g_return_val_if_fail(fileinfo->buffer->get_match_count() == 0, false);
+      g_return_val_if_fail(buffer->get_match_count() == 0, false);
 
       propagate_match_count_change(iter, -match_count);
     }
   }
 
   return false;
-}
-
-long FileTree::find_matches_recursively(const Gtk::TreeModel::Children& node,
-                                        Pcre::Pattern& pattern, bool multiple,
-                                        bool& path_match_first_set)
-{
-  const FileTreeColumns& columns = filetree_columns();
-
-  long new_sum_matches = 0;
-  int  n_matches       = 0;
-
-  for(Gtk::TreeModel::iterator iter = node.begin(); iter != node.end(); ++iter)
-  {
-    if(signal_pulse()) // emit
-      break;
-
-    if(const Gtk::TreeModel::Children& children = iter->children()) // directory?
-    {
-      n_matches = find_matches_recursively(children, pattern, multiple, path_match_first_set);
-    }
-    else
-    {
-      const FileInfoBasePtr base = (*iter)[columns.fileinfo];
-      const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic_throw(base);
-
-      if(!fileinfo->load_failed && !fileinfo->buffer)
-        load_file_with_fallback(fileinfo);
-
-      if(fileinfo->load_failed)
-        continue;
-
-      g_return_val_if_fail(fileinfo->buffer, new_sum_matches);
-
-      ScopedConnection conn (fileinfo->buffer->signal_pulse.connect(signal_pulse.slot()));
-
-      n_matches = fileinfo->buffer->find_matches(pattern, multiple);
-
-      if(n_matches > 0)
-      {
-        if(!path_match_first_set)
-        {
-          path_match_first_ = Gtk::TreePath(iter);
-          path_match_first_set = true;
-        }
-
-        path_match_last_ = Gtk::TreePath(iter);
-      }
-    }
-
-    (*iter)[columns.matchcount] = n_matches;
-    new_sum_matches += n_matches;
-  }
-
-  return new_sum_matches;
 }
 
 bool FileTree::next_match_file(Gtk::TreeModel::iterator& iter,
@@ -871,6 +886,14 @@ void FileTree::on_selection_changed()
     }
   }
 
+  if(last_selected_ && last_selected_ != fileinfo &&
+     last_selected_->buffer && last_selected_->buffer->is_freeable())
+  {
+    last_selected_->buffer.clear(); // reduce memory footprint
+  }
+
+  last_selected_ = fileinfo;
+
   signal_switch_buffer(fileinfo, file_index); // emit
   signal_bound_state_changed(); // emit
 }
@@ -955,8 +978,6 @@ void FileTree::on_buffer_match_count_changed(int match_count)
 
     signal_bound_state_changed(); // emit
   }
-
-  signal_match_count_changed(); // emit
 }
 
 void FileTree::on_buffer_modified_changed()
@@ -967,6 +988,7 @@ void FileTree::on_buffer_modified_changed()
   const FileInfoBasePtr base = (*selected)[filetree_columns().fileinfo];
   const FileInfoPtr fileinfo = FileInfoPtr::cast_dynamic_throw(base);
 
+  g_return_if_fail(fileinfo == last_selected_);
   g_return_if_fail(fileinfo->buffer);
 
   propagate_modified_change(selected, fileinfo->buffer->get_modified());
@@ -1015,6 +1037,8 @@ void FileTree::propagate_match_count_change(const Gtk::TreeModel::iterator& pos,
   }
 
   sum_matches_ += difference;
+
+  signal_match_count_changed(); // emit
 }
 
 void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bool modified)
