@@ -21,13 +21,12 @@
 #ifndef REGEXXER_FILELIST_H_INCLUDED
 #define REGEXXER_FILELIST_H_INCLUDED
 
-#include <iosfwd>
 #include <gdkmm/color.h>
 #include <gtkmm/treepath.h>
 #include <gtkmm/treeview.h>
 
 #include "filebuffer.h"
-#include "sharedptr.h"
+#include "fileio.h"
 
 namespace Gtk  { class ListStore; }
 namespace Pcre { class Pattern;   }
@@ -35,20 +34,6 @@ namespace Pcre { class Pattern;   }
 
 namespace Regexxer
 {
-
-struct FileInfo : public Util::SharedObject
-{
-  std::string               fullname;
-  std::string               encoding;
-  Glib::RefPtr<FileBuffer>  buffer;
-  bool                      load_failed;
-
-  explicit FileInfo(const std::string& fullname_);
-  ~FileInfo();
-};
-
-typedef Util::SharedPtr<FileInfo> FileInfoPtr;
-
 
 class FileList : public Gtk::TreeView
 {
@@ -106,18 +91,9 @@ private:
   void on_selection_changed();
   void on_buffer_match_count_changed(int match_count);
   void on_buffer_modified_changed();
-
-  void load_file(const Util::SharedPtr<FileInfo>& fileinfo);
-  Glib::RefPtr<FileBuffer> load_stream(std::istream& input);
-  Glib::RefPtr<FileBuffer> load_convert_stream(std::istream& input, Glib::IConv& iconv);
-
-  void save_file(const Util::SharedPtr<FileInfo>& fileinfo);
-  void save_stream(std::ostream& output, const Glib::RefPtr<FileBuffer>& buffer);
-  void save_convert_stream(std::ostream& output, Glib::IConv& iconv,
-                           const Glib::RefPtr<FileBuffer>& buffer);
 };
 
 } // namespace Regexxer
 
-#endif
+#endif /* REGEXXER_FILELIST_H_INCLUDED */
 

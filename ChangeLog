@@ -1,5 +1,11 @@
 2002-10-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.{cc,h}: New files.
+	* src/filelist.{cc,h}: Separate the load/save functionality into
+	fileio.{cc,h} to improve modularity of the code.
+
+2002-10-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filelist.{cc,h} (FileList::find_recursively): Move the
 	file_test() code into a separate method find_check_file(), and
 	improve the error handling.
