@@ -784,8 +784,10 @@ void MainWindow::on_save_file()
   }
   catch(const FileList::Error& error)
   {
-    const Glib::ustring what = error.get_error_list().front();
-    Gtk::MessageDialog dialog (*this, what, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    const std::list<Glib::ustring>& error_list = error.get_error_list();
+    g_assert(error_list.size() == 1);
+
+    Gtk::MessageDialog dialog (*this, error_list.front(), Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
   }
 }
