@@ -71,6 +71,7 @@ FileTree::FileTree()
     column->set_cell_data_func(*cell_filename, sigc::mem_fun(*this, &FileTree::text_cell_data_func));
 
     column->set_resizable(true);
+    column->set_expand(true);
 
     column->set_sort_column_id(model_columns.collatekey);
   }
