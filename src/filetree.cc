@@ -921,8 +921,7 @@ void FileTree::on_buffer_undo_stack_push(UndoActionPtr undo_action)
 {
   g_return_if_fail(last_selected_rowref_);
 
-  const UndoActionPtr action_shell (
-      new BufferActionShell(*this, last_selected_rowref_, undo_action));
+  const UndoActionPtr action_shell (new BufferActionShell(*this, last_selected_rowref_, undo_action));
 
   signal_undo_stack_push(action_shell); // emit
 }
@@ -979,9 +978,10 @@ void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bo
   const int difference = (modified) ? 1 : -1;
   const FileTreeColumns& columns = filetree_columns();
 
-  treestore_->row_changed(Gtk::TreePath(pos), pos);
+  Gtk::TreePath path (pos);
+  treestore_->row_changed(path, pos);
 
-  for(Gtk::TreeModel::iterator iter = pos->parent(); iter; iter = iter->parent())
+  for(Gtk::TreeModel::iterator iter = pos->parent(); iter && path.up(); iter = iter->parent())
   {
     const FileInfoBasePtr base = (*iter)[columns.fileinfo];
     const DirInfoPtr dirinfo = shared_polymorphic_cast<DirInfo>(base);
@@ -990,7 +990,7 @@ void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bo
 
     // Update the view only if the count flipped from 0 to 1 or vice versa.
     if(dirinfo->modified_count == int(modified))
-      treestore_->row_changed(Gtk::TreePath(iter), iter);
+      treestore_->row_changed(path, iter);
   }
 
   toplevel_.modified_count += difference;
