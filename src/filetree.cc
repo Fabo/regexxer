@@ -26,6 +26,8 @@
 
 #include <gtkmm/stock.h>
 
+#include <config.h>
+
 using namespace Regexxer::FileTreePrivate;
 
 
@@ -727,7 +729,12 @@ void FileTree::expand_and_select(const Gtk::TreePath& path)
     expand_row(parents.top(), false);
 
   get_selection()->select(path);
+
+#if REGEXXER_HAVE_GTKMM_22 /* actually a GTK+ issue */
+  scroll_to_row(path);
+#else
   scroll_to_row(path, 0.5);
+#endif
 }
 
 void FileTree::on_treestore_sort_column_changed()

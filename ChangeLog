@@ -1,5 +1,11 @@
 2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (expand_and_select): Don't pass row_align to
+	Gtk::TreeView::scroll_to_row() if compiling for gtkmm 2.2 since
+	lazy scrolling has now been implemented.
+
+2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* autogen.sh: Enable Bourne shell posix mode if possible, and
 	export WARNINGS=all in order to get auto* diagnostic messages.
 
