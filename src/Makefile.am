@@ -32,6 +32,8 @@ regexxer_SOURCES =	\
 	mainwindow.h	\
 	pcreshell.cc	\
 	pcreshell.h	\
+	prefdialog.cc	\
+	prefdialog.h	\
 	sharedptr.cc	\
 	sharedptr.h	\
 	statusline.cc	\

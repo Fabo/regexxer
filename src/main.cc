@@ -47,6 +47,7 @@ struct StockData
 
 const StockData regexxer_stock_items[] =
 {
+  { "regexxer-info",     stock_menu_about,  sizeof(stock_menu_about),  "Info"      },
   { "regexxer-save-all", stock_save_all_24, sizeof(stock_save_all_24), "Save _all" }
 };
 

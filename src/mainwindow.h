@@ -24,11 +24,12 @@
 #include "filebuffer.h"
 #include "sharedptr.h"
 
-#include <list>
 #include <pangomm.h>
 #include <gtkmm/tooltips.h>
 #include <gtkmm/window.h>
 
+#include <list>
+#include <memory>
 
 namespace Gtk
 {
@@ -37,7 +38,9 @@ class CheckButton;
 class Entry;
 class TextBuffer;
 class TextView;
+class Toolbar;
 }
+
 
 namespace Regexxer
 {
@@ -45,6 +48,7 @@ namespace Regexxer
 class FileBuffer;
 struct FileInfo;
 class FileList;
+class PrefDialog;
 class StatusLine;
 
 class MainWindow : public Gtk::Window
@@ -61,6 +65,7 @@ private:
 
   Gtk::Tooltips     tooltips_;
 
+  Gtk::Toolbar*     toolbar_;
   Gtk::Widget*      toolbutton_save_;
   Gtk::Widget*      toolbutton_save_all_;
 
@@ -97,11 +102,12 @@ private:
 
   Pango::FontDescription      fileview_font_;
   std::list<SigC::Connection> buffer_connections_;
+  std::auto_ptr<PrefDialog>   pref_dialog_;
 
-  Gtk::Widget* create_toolbar();
-  Gtk::Widget* create_action_area();
-  Gtk::Widget* create_left_pane();
-  Gtk::Widget* create_right_pane();
+  Gtk::Toolbar* create_toolbar();
+  Gtk::Widget*  create_action_area();
+  Gtk::Widget*  create_left_pane();
+  Gtk::Widget*  create_right_pane();
 
   void on_select_folder();
   void on_find_files();
@@ -131,6 +137,9 @@ private:
   void busy_action_leave();
   bool on_busy_action_pulse();
   void on_busy_action_cancel();
+
+  void on_preferences();
+  void on_pref_dialog_hide();
 };
 
 } // namespace Regexxer

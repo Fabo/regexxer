@@ -21,6 +21,7 @@
 #include "mainwindow.h"
 #include "filelist.h"
 #include "pcreshell.h"
+#include "prefdialog.h"
 #include "statusline.h"
 #include "stringutils.h"
 
@@ -118,6 +119,7 @@ public:
 
 MainWindow::MainWindow()
 :
+  toolbar_                (0),
   toolbutton_save_        (0),
   toolbutton_save_all_    (0),
   entry_folder_           (0),
@@ -162,7 +164,8 @@ MainWindow::MainWindow()
     Box *const vbox_main = new VBox();
     add(*manage(vbox_main));
 
-    vbox_main->pack_start(*manage(create_toolbar()), PACK_SHRINK);
+    toolbar_ = create_toolbar();
+    vbox_main->pack_start(*manage(toolbar_), PACK_SHRINK);
 
     Box *const vbox_interior = new VBox();
     vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);
@@ -215,7 +218,7 @@ void MainWindow::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style
   FileBuffer::pango_context_changed(get_pango_context());
 }
 
-Gtk::Widget* MainWindow::create_toolbar()
+Gtk::Toolbar* MainWindow::create_toolbar()
 {
   using namespace Gtk;
   using namespace Gtk::Toolbar_Helpers;
@@ -233,7 +236,7 @@ Gtk::Widget* MainWindow::create_toolbar()
   //tools.push_back(Space());
   //tools.push_back(StockElem(Stock::UNDO, &dummy_handler));
   tools.push_back(Space());
-  tools.push_back(StockElem(Stock::PREFERENCES, &dummy_handler));
+  tools.push_back(StockElem(Stock::PREFERENCES, slot(*this, &MainWindow::on_preferences)));
   tools.push_back(Space());
   tools.push_back(StockElem(Stock::QUIT, slot(*this, &Widget::hide)));
 
@@ -782,6 +785,31 @@ void MainWindow::on_busy_action_cancel()
 {
   if(busy_action_running_)
     busy_action_cancel_ = true;
+}
+
+void MainWindow::on_preferences()
+{
+  if(pref_dialog_.get())
+  {
+    pref_dialog_->raise();
+  }
+  else
+  {
+    pref_dialog_.reset(new PrefDialog(*this));
+
+    pref_dialog_->set_pref_toolbar_style(toolbar_->get_toolbar_style());
+
+    pref_dialog_->signal_pref_toolbar_style_changed.connect(
+        SigC::slot(*toolbar_, &Gtk::Toolbar::set_toolbar_style));
+
+    pref_dialog_->signal_hide().connect(SigC::slot(*this, &MainWindow::on_pref_dialog_hide));
+    pref_dialog_->show();
+  }
+}
+
+void MainWindow::on_pref_dialog_hide()
+{
+  pref_dialog_.reset();
 }
 
 } // namespace Regexxer

@@ -1,5 +1,16 @@
 2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* pixmaps/stock_menu_about.png: New image stolen from Gnome2.
+	* pixmaps/Makefile.am src/main.cc: Register the new stock image.
+
+	* src/prefdialog.{cc,h}: New files, implemening the preferences
+	dialog.  The about box is integrated as second notebook page,
+	because I couldn't think of a better place to put it.
+
+	* src/mainwindow.{cc,h}: Make the preferences tool button work.
+
+2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/main.cc: Set a global window icon list.
 
 	* src/mainwindow.cc: Consider both the movement buttons and the
