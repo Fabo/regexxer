@@ -86,11 +86,6 @@ CustomButton::CustomButton(const Gtk::StockID& stock_id, const Glib::ustring& la
 CustomButton::~CustomButton()
 {}
 
-void dummy_handler()
-{
-  std::cout << "foo!\n";
-}
-
 } // anonymous namespace
 
 
