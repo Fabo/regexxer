@@ -186,7 +186,7 @@ void Controller::load_xml(const Glib::RefPtr<Gnome::Glade::Xml>& xml)
   save_file   .add_widgets(xml, "menuitem_save",         "button_save");
   save_all    .add_widgets(xml, "menuitem_save_all",     "button_save_all");
   undo        .add_widgets(xml, "menuitem_undo",         "button_undo");
-  preferences .add_widgets(xml, "menuitem_preferences",  "button_preferences");
+  preferences .add_widgets(xml, "menuitem_preferences",  0);
   quit        .add_widgets(xml, "menuitem_quit",         "button_quit");
   about       .add_widgets(xml, "menuitem_about",        0);
   next_file   .add_widgets(xml, "menuitem_next_file",    "button_next_file");

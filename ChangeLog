@@ -1,3 +1,12 @@
+2004-05-29  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ui/mainwindow.glade (button_preferences): Remove tool button.
+	I'm not yet convinced that the "Quit" button should be removed
+	too, because I like it large and easy to hit on :)
+
+	* src/controller.cc (Controller::load_xml): No longer load
+	"button_preferences" from the glade file.
+
 2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* macros/misc.m4 (REGEXXER_PKG_PATH_PROG): There is no need to
