@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-19 23:14+0200\n"
+"POT-Creation-Date: 2004-05-28 06:45+0200\n"
 "PO-Revision-Date: 2004-05-05 15:35+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -99,19 +99,19 @@ msgstr "Toolbar style"
 msgid "Can't read file:"
 msgstr "Can’t read file:"
 
-#: src/filetree.cc:60
+#: src/filetree.cc:81
 msgid "File"
 msgstr "File"
 
-#: src/filetree.cc:80
+#: src/filetree.cc:101
 msgid "#"
 msgstr "#"
 
-#: src/filetree.cc:509
+#: src/filetree.cc:529
 msgid "Failed to save file \"%1\": %2"
 msgstr "Failed to save file “%1”: %2"
 
-#: src/filetree.cc:1002
+#: src/filetree.cc:1023
 msgid "\"%1\" seems to be a binary file."
 msgstr "“%1” seems to be a binary file."
 
@@ -139,11 +139,19 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 
-#: src/mainwindow.cc:323
+#: src/mainwindow.cc:337
+msgid ""
+"The folder name \"%1\" contains characters not representable in the encoding "
+"of the local file system."
+msgstr ""
+"The folder name “%1” contains characters not representable in the encoding "
+"of the local file system."
+
+#: src/mainwindow.cc:356
 msgid "Select a folder"
 msgstr "Select a folder"
 
-#: src/mainwindow.cc:354
+#: src/mainwindow.cc:376
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -151,15 +159,15 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 
-#: src/mainwindow.cc:381
+#: src/mainwindow.cc:402
 msgid "The file search pattern is invalid."
 msgstr "The file search pattern is invalid."
 
-#: src/mainwindow.cc:387
+#: src/mainwindow.cc:408
 msgid "The following errors occurred during search:"
 msgstr "The following errors occurred during search:"
 
-#: src/mainwindow.cc:412
+#: src/mainwindow.cc:433
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -167,7 +175,7 @@ msgstr ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:414
+#: src/mainwindow.cc:435
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -175,7 +183,7 @@ msgstr ""
 "Error in regular expression:\n"
 "%1"
 
-#: src/mainwindow.cc:633
+#: src/mainwindow.cc:655
 msgid "The following errors occurred during save:"
 msgstr "The following errors occurred during save:"
 
@@ -195,19 +203,19 @@ msgstr ""
 msgid "\"%1\" is not a valid encoding."
 msgstr "“%1” is not a valid encoding."
 
-#: src/statusline.cc:250
+#: src/statusline.cc:271
 msgid "Stop"
 msgstr "Stop"
 
-#: src/statusline.cc:257
+#: src/statusline.cc:278
 msgid "File:"
 msgstr "File:"
 
-#: src/statusline.cc:260
+#: src/statusline.cc:281
 msgid "Match:"
 msgstr "Match:"
 
-#: src/statusline.cc:271
+#: src/statusline.cc:292
 msgid "Cancels the running search"
 msgstr "Cancels the running search"
 

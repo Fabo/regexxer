@@ -1,3 +1,8 @@
+2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* de.po: Translate new string.
+	* en.po: ditto.
+
 2004-05-24  Adam Weinberger  <adamw@gnome.org>
 
 	* LINGUAS: Added en_CA to the list
