@@ -1,3 +1,9 @@
+2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/aboutdialog.cc (SelectableLabel): Add accessibility hints.
+	(ContributorBox): Likewise, and also improve the widget arrangement
+	if the dialog gets resized.
+
 2002-12-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/mainwindow.{cc,h}: Get rid of the menubar_handle_ and

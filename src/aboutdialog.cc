@@ -21,6 +21,7 @@
 #include "aboutdialog.h"
 
 #include <glib.h>
+#include <atkmm.h>
 #include <gtkmm/alignment.h>
 #include <gtkmm/box.h>
 #include <gtkmm/image.h>
@@ -44,7 +45,7 @@ const char regexxer_debian_mail[]   = "Ross Burton <ross@burtonini.com>";
 class SelectableLabel : public Gtk::Label
 {
 public:
-  SelectableLabel(const Glib::ustring& label);
+  explicit SelectableLabel(const Glib::ustring& label);
   virtual ~SelectableLabel();
 
 protected:
@@ -90,7 +91,16 @@ ContributorBox::ContributorBox(const Glib::ustring& what, const Glib::ustring& w
   pack_start(*manage(label_what), PACK_SHRINK);
   label_what->set_markup("<span size=\"small\">" + what + "</span>");
 
-  pack_start(*manage(new SelectableLabel(who)), PACK_SHRINK);
+  Label *const label_who = new SelectableLabel(who);
+  pack_start(*manage(label_who), PACK_SHRINK);
+
+#if REGEXXER_HAVE_GTKMM_22
+  const Glib::RefPtr<Atk::Object> accessible_what = label_what->get_accessible();
+  const Glib::RefPtr<Atk::Object> accessible_who  = label_who ->get_accessible();
+
+  accessible_what->add_relationship(Atk::RELATION_FLOWS_TO,   accessible_who);
+  accessible_who ->add_relationship(Atk::RELATION_FLOWS_FROM, accessible_what);
+#endif
 }
 
 ContributorBox::~ContributorBox()
@@ -109,9 +119,10 @@ AboutDialog::AboutDialog(Gtk::Window& parent)
   using namespace Gtk;
 
   add_button(Stock::OK, RESPONSE_OK)->grab_focus();
+  set_default_response(RESPONSE_OK);
 
   Box& box_dialog = *get_vbox();
-  Alignment *const alignment = new Alignment(0.5, 0.33, 0.0, 0.0);
+  Alignment *const alignment = new Alignment(0.5, 1./3., 0.5, 0.5);
   box_dialog.pack_start(*manage(alignment), PACK_EXPAND_WIDGET);
   alignment->set_border_width(20);
 
@@ -120,7 +131,7 @@ AboutDialog::AboutDialog(Gtk::Window& parent)
 
   {
     Box *const box_title = new HBox(false, 10);
-    box->pack_start(*manage(box_title), PACK_SHRINK);
+    box->pack_start(*manage(box_title), PACK_EXPAND_PADDING);
 
     Image *const image = new Image(regexxer_icon_filename);
     box_title->pack_start(*manage(image), PACK_EXPAND_WIDGET);
@@ -130,25 +141,32 @@ AboutDialog::AboutDialog(Gtk::Window& parent)
     box_title->pack_start(*manage(label_title), PACK_EXPAND_WIDGET);
     label_title->set_alignment(0.0, 0.5);
     label_title->set_markup("<span size=\"xx-large\" weight=\"heavy\">" PACKAGE_STRING "</span>");
+
+#if REGEXXER_HAVE_GTKMM_22
+    const Glib::RefPtr<Atk::Object> image_accessible = image->get_accessible();
+    image_accessible->set_name("regexxer icon");
+
+#if 0 /* TODO: enable this when gtkmm-2.1.3 has been released */
+    Glib::RefPtr<Atk::Image>::cast_dynamic(image_accessible)
+        ->set_image_description("The application icon of regexxer");
+#endif
+#endif
   }
   {
     Box *const box_text = new VBox(false, 10);
-    box->pack_start(*manage(box_text), PACK_SHRINK);
+    box->pack_start(*manage(box_text), PACK_EXPAND_WIDGET);
 
-    Label *const label_url = new Label(regexxer_project_url);
-    box_text->pack_start(*manage(label_url), PACK_SHRINK, 5);
-    label_url->set_selectable(true);
+    Widget *const label_url = new SelectableLabel(regexxer_project_url);
+    box_text->pack_start(*manage(label_url), PACK_EXPAND_PADDING, 5);
 
     Widget *const box_author = new ContributorBox("written by", regexxer_author_mail);
-    box_text->pack_start(*manage(box_author), PACK_SHRINK);
+    box_text->pack_start(*manage(box_author), PACK_EXPAND_PADDING);
 
     Widget *const box_debian = new ContributorBox("Debian package by", regexxer_debian_mail);
-    box_text->pack_start(*manage(box_debian), PACK_SHRINK);
+    box_text->pack_start(*manage(box_debian), PACK_EXPAND_PADDING);
   }
 
   alignment->show_all();
-
-  set_default_response(RESPONSE_OK);
 }
 
 AboutDialog::~AboutDialog()
