@@ -114,16 +114,16 @@ PrefDialog::PrefDialog(Gtk::Window& parent)
   box->pack_start(*manage(notebook));
 
   {
-    std::auto_ptr<Widget> label_options (new ImageLabel(Stock::PROPERTIES, "Options"));
-    Widget *const page_options = create_page_options();
+    std::auto_ptr<Widget> label (new ImageLabel(Stock::PROPERTIES, "Options"));
+    Widget *const page = create_page_options();
 
-    notebook->append_page(*manage(page_options), *manage(label_options.release()));
+    notebook->append_page(*manage(page), *manage(label.release()));
   }
   {
-    std::auto_ptr<Widget> label_info (new ImageLabel(StockID("regexxer-info"), "Info"));
-    Widget *const page_info = create_page_info();
+    std::auto_ptr<Widget> label (new ImageLabel(StockID("regexxer-info"), "Info"));
+    Widget *const page = create_page_info();
 
-    notebook->append_page(*manage(page_info), *manage(label_info.release()));
+    notebook->append_page(*manage(page), *manage(label.release()));
   }
 
   notebook->show_all();
