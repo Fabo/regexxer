@@ -59,6 +59,50 @@ Regexxer::FileInfoPtr get_fileinfo_from_iter(const Gtk::TreeModel::iterator& ite
   return Regexxer::FileInfoPtr::cast_dynamic(base);
 }
 
+int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs)
+{
+  const FileTreeColumns& columns = filetree_columns();
+
+  const std::string lhs_key ((*lhs)[columns.collatekey]);
+  const std::string rhs_key ((*rhs)[columns.collatekey]);
+
+  if(lhs_key.empty() || rhs_key.empty())
+    return (lhs_key.empty() && rhs_key.empty()) ? 0 : (lhs_key.empty() ? -1 : 1);
+
+  return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
+}
+
+int collatekey_sort_func_dirs_first(const Gtk::TreeModel::iterator& lhs,
+                                    const Gtk::TreeModel::iterator& rhs)
+{
+  const FileTreeColumns& columns = filetree_columns();
+
+  const std::string lhs_key ((*lhs)[columns.collatekey]);
+  const std::string rhs_key ((*rhs)[columns.collatekey]);
+
+  return lhs_key.compare(rhs_key);
+}
+
+int collatekey_sort_func_dirs_first_descending(const Gtk::TreeModel::iterator& lhs,
+                                               const Gtk::TreeModel::iterator& rhs)
+{
+  const FileTreeColumns& columns = filetree_columns();
+
+  const std::string lhs_key ((*lhs)[columns.collatekey]);
+  const std::string rhs_key ((*rhs)[columns.collatekey]);
+
+  if(lhs_key.empty() || rhs_key.empty())
+    return (lhs_key.empty() && rhs_key.empty()) ? 0 : (lhs_key.empty() ? -1 : 1);
+
+  if(lhs_key[0] < rhs_key[0])
+    return 1;
+  else if(lhs_key[0] > rhs_key[0])
+    return -1;
+
+  return lhs_key.compare(rhs_key);
+}
+
+
 class ScopedConnection
 {
 private:
@@ -238,7 +282,7 @@ FileTree::FileTree()
   count_column.set_alignment(1.0);
   count_renderer.property_xalign() = 1.0;
 
-  treestore_->set_sort_func(model_columns.collatekey.index(), &FileTree::collatekey_sort_func);
+  treestore_->set_sort_func(model_columns.collatekey.index(), &collatekey_sort_func_dirs_first);
   treestore_->set_sort_column_id(model_columns.collatekey, Gtk::SORT_ASCENDING);
 
   set_search_column(0);
@@ -460,18 +504,6 @@ void FileTree::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::ite
   }
 
   renderer->property_foreground_gdk().reset_value();
-}
-
-// static
-int FileTree::collatekey_sort_func(const Gtk::TreeModel::iterator& lhs,
-                                   const Gtk::TreeModel::iterator& rhs)
-{
-  const FileTreeColumns& columns = filetree_columns();
-
-  const std::string lhs_key ((*lhs)[columns.collatekey]);
-  const std::string rhs_key ((*rhs)[columns.collatekey]);
-
-  return lhs_key.compare(rhs_key);
 }
 
 // static

@@ -1,5 +1,15 @@
 2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (collatekey_sort_func): Make this the sort
+	function for mixed directory/file view.
+	(collatekey_sort_func_dirs_first): Move the content of the former
+	collatekey_sort_func() into here.
+	(collatekey_sort_func_dirs_first_descending): Extra sort function
+	which correctly reverses the meaning of the first byte in the key.
+	This is for use with Gtk::SORT_DESCENDING.
+
+2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h}: Speed up and simplify sorting by merging
 	the directory/file information into the collate key (directories
 	get a leading '0', files get a leading '1').  This is amazingly
