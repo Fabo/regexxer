@@ -1,5 +1,10 @@
 2004-06-29  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* Makevars: Temporarily remove this file, until dobey realizes
+	that he's neither infallible nor the God of Perl. (#144725)
+
+2004-06-29  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* de.po: Translate new strings.
 	* en.po: ditto.
 
