@@ -474,9 +474,11 @@ std::string FileTree::get_fallback_encoding() const
 
 void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
 {
-  pixbuf_directory_   = render_icon(Gtk::Stock::OPEN,          Gtk::ICON_SIZE_MENU);
-  pixbuf_file_        = render_icon(Gtk::Stock::NEW,           Gtk::ICON_SIZE_MENU);
-  pixbuf_load_failed_ = render_icon(Gtk::Stock::MISSING_IMAGE, Gtk::ICON_SIZE_MENU);
+  const Glib::ustring detail = "regexxer-filetree";
+
+  pixbuf_directory_   = render_icon(Gtk::Stock::OPEN,          Gtk::ICON_SIZE_MENU, detail);
+  pixbuf_file_        = render_icon(Gtk::Stock::NEW,           Gtk::ICON_SIZE_MENU, detail);
+  pixbuf_load_failed_ = render_icon(Gtk::Stock::MISSING_IMAGE, Gtk::ICON_SIZE_MENU, detail);
 
   color_load_failed_ = get_style()->get_text(Gtk::STATE_INSENSITIVE);
 
