@@ -68,8 +68,6 @@ private:
   Controller        controller_;
   Gtk::Tooltips     tooltips_;
 
-  Gtk::HandleBox*   menubar_handle_;
-  Gtk::HandleBox*   toolbar_handle_;
   Gtk::Toolbar*     toolbar_;
 
   Gtk::Entry*       entry_folder_;

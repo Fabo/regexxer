@@ -138,8 +138,6 @@ public:
 
 MainWindow::MainWindow()
 :
-  menubar_handle_         (0),
-  toolbar_handle_         (0),
   toolbar_                (0),
   entry_folder_           (0),
   entry_pattern_          (0),
@@ -257,22 +255,17 @@ Gtk::Widget* MainWindow::create_main_vbox()
 
   std::auto_ptr<Box> vbox_main (new VBox());
 
-  menubar_handle_ = new HandleBox();
-  vbox_main->pack_start(*manage(menubar_handle_), PACK_SHRINK);
+  HandleBox *const menubar_handle = new HandleBox();
+  vbox_main->pack_start(*manage(menubar_handle), PACK_SHRINK);
 
   MenuBar *const menubar = controller_.create_menubar();
-  menubar_handle_->add(*manage(menubar));
+  menubar_handle->add(*manage(menubar));
 
-  // We have to call accelerate() manually, because otherwise the menu
-  // accelerators wouldn't be available if the menu bar is never shown
-  // due to user preference.
-  menubar->accelerate(*this);
-
-  toolbar_handle_ = new HandleBox();
-  vbox_main->pack_start(*manage(toolbar_handle_), PACK_SHRINK);
+  HandleBox *const toolbar_handle = new HandleBox();
+  vbox_main->pack_start(*manage(toolbar_handle), PACK_SHRINK);
 
   toolbar_ = controller_.create_toolbar();
-  toolbar_handle_->add(*manage(toolbar_));
+  toolbar_handle->add(*manage(toolbar_));
 
   Box *const vbox_interior = new VBox();
   vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);

@@ -1,5 +1,11 @@
 2002-12-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.{cc,h}: Get rid of the menubar_handle_ and
+	toolbar_handle_ data members.  We don't need to keep them around
+	anymore since the config option to hide one or the other is gone.
+
+2002-12-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/aboutdialog.cc (SelectableLabel): New fancy experiment to
 	make labels both selectable _and_ focusable, so that they end up
 	in the Tab chain.
