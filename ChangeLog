@@ -1,5 +1,10 @@
 2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* macros/cxx.m4: Get rid of all deprecated autoconf constructs.
+	* macros/pcre.m4: ditto.
+
+2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac: Replace the check for gtkmm >= 2.1.0 with a test
 	for Glib::set_application_name().  This should be much safer.
 

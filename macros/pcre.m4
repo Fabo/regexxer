@@ -76,43 +76,44 @@ AC_DEFUN([PCRE_CHECK_UTF8],
 [
 AC_REQUIRE([PCRE_CHECK_VERSION])
 
-AC_MSG_CHECKING([whether libpcre was compiled with UTF-8 support])
-AC_LANG_PUSH(C)
-pcre_saved_CFLAGS=$CFLAGS
-pcre_saved_LIBS=$LIBS
-CFLAGS="$CFLAGS $PCRE_CFLAGS"
-LIBS="$LIBS $PCRE_LIBS"
-
-AC_TRY_RUN(
+AC_CACHE_CHECK(
+  [whether libpcre was compiled with UTF-8 support],
+  [pcre_cv_has_utf8_support],
 [
-  #include <stdio.h>
-  #include <stdlib.h>
-  #include <pcre.h>
+  AC_LANG_PUSH([C])
+  pcre_saved_CFLAGS=$CFLAGS
+  pcre_saved_LIBS=$LIBS
+  CFLAGS="$CFLAGS $PCRE_CFLAGS"
+  LIBS="$LIBS $PCRE_LIBS"
 
-  int main(int argc, char** argv)
-  {
-    const char* errmessage = NULL;
-    int erroffset = 0;
+  AC_RUN_IFELSE(
+  [
+    AC_LANG_PROGRAM(
+    [[
+      #include <stdio.h>
+      #include <stdlib.h>
+      #include <pcre.h>
+    ]],[[
+      const char* errmessage = NULL;
+      int erroffset = 0;
 
-    if(pcre_compile(".", PCRE_UTF8, &errmessage, &erroffset, NULL))
-      exit(0);
+      if(pcre_compile(".", PCRE_UTF8, &errmessage, &erroffset, NULL))
+        exit(0);
 
-    fprintf(stderr, "%s\n", errmessage);
-    exit(1);
+      fprintf(stderr, "%s\n", errmessage);
+      exit(1);
+    ]])
+  ],
+    [pcre_cv_has_utf8_support=yes],
+    [pcre_cv_has_utf8_support=no],
+    [pcre_cv_has_utf8_support="cross compile: assuming yes"])
 
-    return 0;
-  }
-],
-[pcre_supports_utf8=yes],
-[pcre_supports_utf8=no],
-[pcre_supports_utf8="cross compile: assuming yes"])
+  CFLAGS=$pcre_saved_CFLAGS
+  LIBS=$pcre_saved_LIBS
+  AC_LANG_POP([C])
+])
 
-CFLAGS=$pcre_saved_CFLAGS
-LIBS=$pcre_saved_LIBS
-AC_LANG_POP(C)
-AC_MSG_RESULT([${pcre_supports_utf8}])
-
-if test "x$pcre_supports_utf8" = xno; then
+if test "x$pcre_cv_has_utf8_support" = xno; then
 {
 AC_MSG_ERROR([[
 *** Sorry, the PCRE library installed on your system doesn't support

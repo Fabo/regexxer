@@ -28,18 +28,21 @@ AC_DEFUN([REGEXXER_CXX_HAS_STD_LOCALE],
 AC_CACHE_CHECK(
   [whether the C++ library supports std::locale],
   [regexxer_cv_cxx_has_std_locale],
+[
+  AC_LANG_PUSH([C++])
+  AC_LINK_IFELSE(
   [
-  AC_LANG_PUSH(C++)
-  AC_TRY_LINK(
-  [
-    #include <iostream>
-    #include <locale>
-  ],[
-    std::cout.imbue(std::locale(""));
+    AC_LANG_PROGRAM(
+    [[
+      #include <iostream>
+      #include <locale>
+    ]],[[
+      std::cout.imbue(std::locale(""));
+    ]])
   ],
     [regexxer_cv_cxx_has_std_locale=yes],
     [regexxer_cv_cxx_has_std_locale=no])
-  AC_LANG_POP(C++)
+  AC_LANG_POP([C++])
 ])
 
 if test "x$regexxer_cv_cxx_has_std_locale" = xyes; then
@@ -77,22 +80,26 @@ esac
 
 tested_flags=
 
-if test "x$warning_flags" != x
-then
-  echo 'int foo() { return 0; }' > conftest.cc
+if test "x$warning_flags" != x; then
+{
+  AC_LANG_PUSH([C++])
+  AC_LANG_CONFTEST([AC_LANG_SOURCE([[int foo() { return 0; }]])])
+  conftest_source="conftest.${ac_ext:-cc}"
 
   for flag in $warning_flags
   do
     # Test whether the compiler accepts the flag.  GCC doesn't bail
     # out when given an unsupported flag but prints a warning, so
     # check the compiler output instead.
-    regexxer_cxx_out=`$CXX $tested_flags $flag -c conftest.cc 2>&1 || echo failed`
+    regexxer_cxx_out=`$CXX $tested_flags $flag -c $conftest_source 2>&1 || echo failed`
     rm -f "conftest.$OBJEXT"
     test "x$regexxer_cxx_out" = x && tested_flags=${tested_flags:+"$tested_flags "}$flag
   done
 
-  rm -f conftest.cc
+  rm -f "$conftest_source"
   regexxer_cxx_out=
+  AC_LANG_POP([C++])
+}
 fi
 
 if test "x$tested_flags" != x
