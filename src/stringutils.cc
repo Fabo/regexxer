@@ -37,7 +37,6 @@ struct IsSignificantEncodingChar
   inline bool operator()(char c) const;
 };
 
-inline char ascii_toupper     (char c);
 inline bool ascii_isodigit    (char c);
 std::string apply_modifiers   (const std::string& subject, const std::vector<ModPos>& modifiers);
 std::string parse_control_char(std::string::const_iterator& p, std::string::const_iterator pend);
@@ -55,12 +54,6 @@ bool IsSignificantEncodingChar::operator()(char c) const
   }
 
   return true;
-}
-
-inline
-char ascii_toupper(char c)
-{
-  return (Glib::Ascii::islower(c)) ? (c & '\xDF') : c;
 }
 
 inline
@@ -142,7 +135,7 @@ std::string parse_control_char(std::string::const_iterator& p, std::string::cons
   {
     p = pnext;
 
-    char c = ascii_toupper(*pnext);
+    char c = Util::ascii_toupper(*pnext);
     c ^= '\x40'; // flip bit 6
 
     return (c != 0) ? std::string(1, c) : std::string();

@@ -1,5 +1,13 @@
 2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.{cc,h} (ascii_toupper): Make this utility function
+	publically available.
+
+	* src/prefdialog.cc (on_entry_fallback_activate): Convert the
+	encoding name to upper case.
+
+2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.{cc,h}: Explicitely delete the preferences dialog
 	on exit.  Although this isn't really necessary, it does look neater
 	if we have a lot of cleanup to do on exit.

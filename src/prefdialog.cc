@@ -19,9 +19,11 @@
  */
 
 #include "prefdialog.h"
+#include "stringutils.h"
 
 #include <glib.h>
 #include <gtkmm.h>
+#include <algorithm>
 #include <memory>
 
 #include <config.h>
@@ -292,11 +294,14 @@ void PrefDialog::on_radio_toggled()
 
 void PrefDialog::on_entry_fallback_activate()
 {
-  const std::string fallback_encoding = entry_fallback_->get_text();
+  std::string fallback_encoding = entry_fallback_->get_text();
 
   if(validate_encoding(fallback_encoding))
   {
-    signal_pref_fallback_encoding_changed(entry_fallback_->get_text()); // emit
+    std::transform(fallback_encoding.begin(), fallback_encoding.end(),
+                   fallback_encoding.begin(), &Util::ascii_toupper);
+
+    signal_pref_fallback_encoding_changed(fallback_encoding); // emit
   }
   else
   {
