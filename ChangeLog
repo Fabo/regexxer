@@ -1,3 +1,11 @@
+2003-10-29  Murray Cumming  <murrayc@usa.net>
+
+	* I'm taking over maintainership until Daniel reappears. I hope
+	that he does.
+	* src/Makefile.am: Removed *DEPRECATED* defines so that it builds 
+	with GTK+ 2.3/2.4. These should only be active during maintainer
+	mode if they are added back.
+
 2003-02-06  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* regexxer.desktop: Add Danish translation contributed by

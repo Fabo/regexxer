@@ -62,11 +62,8 @@ regexxer_SOURCES =		\
 	undostack.h
 
 DEFS = @DEFS@ \
--DG_DISABLE_DEPRECATED \
--DGDK_DISABLE_DEPRECATED \
--DGDK_PIXBUF_DISABLE_DEPRECATED \
--DGTK_DISABLE_DEPRECATED \
 -DREGEXXER_DATADIR=\""$(datadir)"\"
+
 
 regexxer_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir) $(PCRE_CFLAGS) $(GTKMM_CFLAGS)
 regexxer_LDADD    = $(PCRE_LIBS) $(GTKMM_LIBS)
