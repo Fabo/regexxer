@@ -1,3 +1,8 @@
+2002-11-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filebuffer.cc (pango_context_changed): Ooops, I accidentally
+	reversed the arguments to Gtk::IconSize::lookup().  Fixed.
+
 2002-11-23  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filetree.{cc,h} (FileTree::ScopedBlockSorting): Introduce new

@@ -240,8 +240,8 @@ void FileBuffer::pango_context_changed(const Glib::RefPtr<Pango::Context>& conte
   if(font_size <= 0) // urgh, fall back to some reasonable value
     font_size = 10 * Pango::SCALE;
 
-  int icon_height = 0, icon_width = 0;
-  Gtk::IconSize::lookup(Gtk::ICON_SIZE_DIALOG, icon_height, icon_width);
+  int icon_width = 0, icon_height = 0;
+  Gtk::IconSize::lookup(Gtk::ICON_SIZE_DIALOG, icon_width, icon_height);
 
   g_return_if_fail(icon_height > 0); // the lookup should never fail for builtin icon sizes
 
