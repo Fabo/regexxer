@@ -37,6 +37,6 @@ stockimages.h: $(stockimages)
 	  dir=''; test -f "$$file" || dir='$(srcdir)/'; \
 	  build_list="$$build_list $$name $$dir$$file"; \
 	done; \
-	echo "$(gdk_pixbuf_csource_command) --build-list $$build_list > $@"; \
+	echo " $(gdk_pixbuf_csource_command) --build-list $$build_list > $@"; \
 	$(gdk_pixbuf_csource_command) --build-list $$build_list > $@
 
