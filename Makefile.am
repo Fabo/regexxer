@@ -35,8 +35,11 @@ schemas_DATA        = regexxer.schemas
 
 @INTLTOOL_SCHEMAS_RULE@
 
-dist_noinst_SCRIPTS = autogen.sh config.rpath intltool-extract.in intltool-merge.in intltool-update.in
-dist_noinst_DATA    = $(desktop_in_files) $(schemas_in_files) macros/cxx.m4 macros/misc.m4 macros/pcre.m4
+dist_macros         = macros/cxx.m4 macros/misc.m4 macros/pcre.m4
+dist_intltool       = intltool-extract.in intltool-merge.in intltool-update.in
+
+dist_noinst_SCRIPTS = autogen.sh
+dist_noinst_DATA    = $(dist_macros) $(dist_intltool) $(desktop_in_files) $(schemas_in_files)
 
 CLEANFILES          = $(desktop_DATA) $(schemas_DATA)
 DISTCLEANFILES      = intltool-extract intltool-merge intltool-update

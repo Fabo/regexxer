@@ -1,5 +1,14 @@
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* Makefile.am (dist_noinst_SCRIPTS): Remove config.rpath because
+	automake distributes this file automatically.  List intltool-*.in
+	files in the separate variable dist_intltool.
+	(dist_noinst_DATA): List all *.m4 files in the separate variable
+	dist_macros.  Move $(dist_intltool) from dist_noinst_SCRIPTS here
+	because the .in files aren't scripts.
+
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* regexxer.desktop (Name): Use _Name to make it translatable, and
 	change the string to "regexxer Search Tool".  Idea from Dag Wieers.
 
