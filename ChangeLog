@@ -1,5 +1,12 @@
 2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/aboutdialog.{cc,h}: New files, implementing stand-alone
+	about dialog for regexxer.
+
+	* src/Makefile.am: Add new files.
+
+2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/configdata.{cc,h}: Add support for menutool_mode config
 	option, specifying whether to show menu bar, toolbar or both.
 

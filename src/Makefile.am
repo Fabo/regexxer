@@ -21,6 +21,8 @@
 bin_PROGRAMS = regexxer
 
 regexxer_SOURCES =	\
+	aboutdialog.cc	\
+	aboutdialog.h	\
 	configdata.cc	\
 	configdata.h	\
 	controller.cc	\
