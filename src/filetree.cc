@@ -160,7 +160,7 @@ void FileTree::find_files(const std::string& dirname, Pcre::Pattern& pattern,
   // slightly.  This in turn confuses TreeView::set_cursor() -- the first
   // call after the tree was completely filled just doesn't scroll.
   if (toplevel_.file_count > 0)
-    scroll_to_row(Gtk::TreePath(1));
+    scroll_to_row(Gtk::TreePath(1U, 0));
 
   signal_bound_state_changed(); // emit
 

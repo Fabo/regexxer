@@ -1,5 +1,10 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (FileTree::find_files): Slightly clarify
+	the call to Gtk::TreePath's constructor.
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* Makefile.am (ACLOCAL_AMFLAGS): Remove because automake-1.7
 	complains about the undefined variable ${ACLOCAL_FLAGS} even
 	though it's a shell substitution.
