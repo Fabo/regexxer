@@ -1,5 +1,13 @@
 2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc: Make the column headers trigger sorting when
+	clicked.  Again use a default sort function in order to get three
+	modes of sorting.  That is, the default is ascending sort with
+	directories first, but when clicking a column header no difference
+	is made between files and directories.
+
+2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (load_file_with_fallback): Ooops, I forgot
 	that buffers are now freed whenever possible, thus we shouldn't
 	just return even if fileinfo->load_failed has already been set.
