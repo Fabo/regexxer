@@ -51,15 +51,17 @@ struct FileTreeColumns : public Gtk::TreeModel::ColumnRecord
   Gtk::TreeModelColumn<int>             matchcount;
   Gtk::TreeModelColumn<FileInfoBasePtr> fileinfo;
 
+  static const FileTreeColumns& instance();
+
+private:
   FileTreeColumns() { add(filename); add(collatekey); add(matchcount); add(fileinfo); }
 };
 
-const FileTreeColumns& filetree_columns();
 
 inline
 FileInfoPtr get_fileinfo_from_iter(const Gtk::TreeModel::iterator& iter)
 {
-  const FileInfoBasePtr base ((*iter)[filetree_columns().fileinfo]);
+  const FileInfoBasePtr base ((*iter)[FileTreeColumns::instance().fileinfo]);
   return shared_dynamic_cast<FileInfo>(base);
 }
 

@@ -1,5 +1,15 @@
 2004-05-31  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetreeprivate.{cc,h} (FileTreeColumns::instance): New
+	static method which replaces the filetree_columns() function,
+	for consistency with RegexxerTags::instance().
+	(filetree_columns): Remove.
+
+	* src/filetree.cc: Replace all instances of filetree_columns()
+	with FileTreeColumns::instance().
+
+2004-05-31  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* ui/aboutdialog.glade (label_url): Get rid of the prefixed U+202D
 	LEFT-TO-RIGHT OVERRIDE since Pango gets that right on its own now.
 	(label_author_who): ditto

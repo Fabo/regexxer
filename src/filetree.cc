@@ -61,14 +61,14 @@ namespace Regexxer
 
 FileTree::FileTree()
 :
-  treestore_      (Gtk::TreeStore::create(filetree_columns())),
+  treestore_      (Gtk::TreeStore::create(FileTreeColumns::instance())),
   color_modified_ ("#DF421E"), // accent red
   sum_matches_    (0)
 {
   using namespace Gtk;
 
   set_model(treestore_);
-  const FileTreeColumns& model_columns = filetree_columns();
+  const FileTreeColumns& model_columns = FileTreeColumns::instance();
 
   treestore_->set_default_sort_func(&default_sort_func);
   treestore_->set_sort_func(model_columns.collatekey, &collatekey_sort_func);
@@ -269,7 +269,7 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
     Util::ScopedBlock block_match_count      (conn_match_count_);
     Util::ScopedBlock block_modified_changed (conn_modified_changed_);
     Util::ScopedBlock block_undo_stack_push  (conn_undo_stack_push_);
-    ScopedBlockSorting block_sort (*this);
+    ScopedBlockSorting block_sort   (*this);
     ReplaceMatchesData replace_data (*this, substitution);
 
     treestore_->foreach_iter(sigc::bind(
@@ -281,7 +281,7 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
     {
       Gtk::TreeModel::iterator first = treestore_->get_iter(path_match_first_);
 
-      if ((*first)[filetree_columns().matchcount] == 0 && next_match_file(first))
+      if ((*first)[FileTreeColumns::instance().matchcount] == 0 && next_match_file(first))
         path_match_first_ = first;
     }
 
@@ -317,7 +317,7 @@ void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
 void FileTree::icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
 {
   Gtk::CellRendererPixbuf& renderer = dynamic_cast<Gtk::CellRendererPixbuf&>(*cell);
-  const FileInfoBasePtr    infobase = (*iter)[filetree_columns().fileinfo];
+  const FileInfoBasePtr    infobase = (*iter)[FileTreeColumns::instance().fileinfo];
 
   if (const FileInfoPtr fileinfo = shared_dynamic_cast<FileInfo>(infobase))
   {
@@ -336,7 +336,7 @@ void FileTree::icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel
 void FileTree::text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
 {
   Gtk::CellRendererText& renderer = dynamic_cast<Gtk::CellRendererText&>(*cell);
-  const FileInfoBasePtr  infobase = (*iter)[filetree_columns().fileinfo];
+  const FileInfoBasePtr  infobase = (*iter)[FileTreeColumns::instance().fileinfo];
 
   const Gdk::Color* color = 0;
 
@@ -449,7 +449,7 @@ bool FileTree::find_check_file(const std::string& basename, const std::string& f
         row = *treestore_->prepend(find_data.dirstack.back().second->children());
       }
 
-      const FileTreeColumns& columns = filetree_columns();
+      const FileTreeColumns& columns = FileTreeColumns::instance();
 
       row[columns.filename]   = basename_utf8;
       row[columns.collatekey] = collate_key;
@@ -464,7 +464,7 @@ bool FileTree::find_check_file(const std::string& basename, const std::string& f
 
 void FileTree::find_fill_dirstack(FindData& find_data)
 {
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
 
   const DirStack::iterator pend  = find_data.dirstack.end();
   DirStack::iterator       pprev = pend;
@@ -500,7 +500,7 @@ void FileTree::find_increment_file_count(FindData& find_data, int file_count)
   if (file_count <= 0)
     return;
 
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
 
   DirStack::reverse_iterator       pdir = find_data.dirstack.rbegin();
   const DirStack::reverse_iterator pend = find_data.dirstack.rend();
@@ -645,7 +645,7 @@ bool FileTree::next_match_file(Gtk::TreeModel::iterator& iter,
 {
   g_return_val_if_fail(iter, false);
 
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
   Gtk::TreeModel::iterator parent = iter->parent();
 
   for (++iter;;)
@@ -691,7 +691,7 @@ bool FileTree::prev_match_file(Gtk::TreeModel::iterator& iter,
 {
   g_return_val_if_fail(iter, false);
 
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
   Gtk::TreeModel::iterator parent = iter->parent();
   Gtk::TreePath path (iter);
 
@@ -738,7 +738,7 @@ void FileTree::expand_and_select(const Gtk::TreePath& path)
 
 void FileTree::on_treestore_sort_column_changed()
 {
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
 
   if (sum_matches_ > 0)
   {
@@ -784,7 +784,7 @@ void FileTree::on_selection_changed()
 
   if (const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
   {
-    const FileInfoBasePtr base = (*iter)[filetree_columns().fileinfo];
+    const FileInfoBasePtr base = (*iter)[FileTreeColumns::instance().fileinfo];
 
     fileinfo   = shared_polymorphic_cast<FileInfo>(base);
     file_index = calculate_file_index(iter) + 1;
@@ -821,7 +821,7 @@ void FileTree::on_selection_changed()
 
 void FileTree::on_buffer_match_count_changed()
 {
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
 
   // There has to be a selection since we receive signal_match_count_changed()
   // from the currently selected FileBuffer.
@@ -912,7 +912,7 @@ void FileTree::on_buffer_modified_changed()
   const Gtk::TreeModel::iterator selected = get_selection()->get_selected();
   g_return_if_fail(selected);
 
-  const FileInfoBasePtr base = (*selected)[filetree_columns().fileinfo];
+  const FileInfoBasePtr base = (*selected)[FileTreeColumns::instance().fileinfo];
   const FileInfoPtr fileinfo = shared_polymorphic_cast<FileInfo>(base);
 
   g_return_if_fail(fileinfo == last_selected_);
@@ -946,7 +946,7 @@ int FileTree::calculate_file_index(const Gtk::TreeModel::iterator& pos)
     iter = treestore_->children().begin();
   }
 
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
 
   for (; iter != pos; ++iter)
   {
@@ -964,7 +964,7 @@ int FileTree::calculate_file_index(const Gtk::TreeModel::iterator& pos)
 
 void FileTree::propagate_match_count_change(const Gtk::TreeModel::iterator& pos, int difference)
 {
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
 
   for (Gtk::TreeModel::iterator iter = pos; iter; iter = iter->parent())
   {
@@ -980,7 +980,7 @@ void FileTree::propagate_match_count_change(const Gtk::TreeModel::iterator& pos,
 void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bool modified)
 {
   const int difference = (modified) ? 1 : -1;
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
 
   Gtk::TreePath path (pos);
   treestore_->row_changed(path, pos);

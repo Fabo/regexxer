@@ -30,7 +30,8 @@ namespace Regexxer
 namespace FileTreePrivate
 {
 
-const FileTreeColumns& filetree_columns()
+// static
+const FileTreeColumns& FileTreeColumns::instance()
 {
   static FileTreeColumns column_record;
   return column_record;
@@ -38,7 +39,7 @@ const FileTreeColumns& filetree_columns()
 
 int default_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs)
 {
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
 
   const std::string lhs_key = (*lhs)[columns.collatekey];
   const std::string rhs_key = (*rhs)[columns.collatekey];
@@ -48,7 +49,7 @@ int default_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel:
 
 int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs)
 {
-  const FileTreeColumns& columns = filetree_columns();
+  const FileTreeColumns& columns = FileTreeColumns::instance();
 
   const std::string lhs_key = (*lhs)[columns.collatekey];
   const std::string rhs_key = (*rhs)[columns.collatekey];
@@ -171,7 +172,7 @@ FileTree::ScopedBlockSorting::ScopedBlockSorting(FileTree& filetree)
   // could cause reordering of the model.  Gtk::TreeModel::foreach() won't
   // like that at all, and that's precisely why this utility class exists.
   //
-  if (sort_column_ == FileTreePrivate::filetree_columns().matchcount.index())
+  if (sort_column_ == FileTreePrivate::FileTreeColumns::instance().matchcount.index())
     filetree_.treestore_->set_sort_column_id(Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID, sort_order_);
 }
 
