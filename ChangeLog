@@ -1,3 +1,8 @@
+2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/main.cc (main): Use Glib::set_application_name() if building
+	for gtkmm 2.1.
+
 2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): On make distcheck,
