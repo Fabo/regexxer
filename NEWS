@@ -1,0 +1,9 @@
+
+regexxer 0.2 (2002-11-08)
+
+	* file list replaced with file tree
+	* more eye candy
+	* confirmation dialog on exit if some files haven't been saved
+	* less huge memory footprint (still room for improvement though)
+	* various bug fixes
+

@@ -1,3 +1,11 @@
+regexxer 0.2:
+
+2002-11-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* AUTHORS: Add myself ;)
+	* NEWS: List major changes in 0.2.
+	* README: Fix typos.
+
 2002-11-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filetree.cc (load_file_with_fallback): Emit row_changed()
