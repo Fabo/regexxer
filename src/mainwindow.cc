@@ -643,6 +643,8 @@ void MainWindow::on_replace_file()
 void MainWindow::on_replace_all()
 {
   filelist_->replace_all_matches(entry_substitution_->get_text());
+
+  statusline_->stop_pulse();
   statusline_->set_match_index(0);
 }
 

@@ -373,6 +373,7 @@ void FileList::replace_all_matches(const Glib::ustring& substitution)
 
   for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
   {
+    signal_pulse(); // emit
     while(main_context->iteration(false)) {}
 
     const FileInfoPtr fileinfo = (*iter)[columns.fileinfo];
