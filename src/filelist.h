@@ -120,6 +120,9 @@ public:
   explicit FindError(const Util::SharedPtr<FileList::FindErrorList>& error_list);
   virtual ~FindError();
 
+  FindError(const FileList::FindError& other);
+  FileList::FindError& operator=(const FileList::FindError& other);
+
   const std::list<Glib::FileError>& get_error_list() const;
 
 private:

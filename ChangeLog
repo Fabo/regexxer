@@ -1,3 +1,11 @@
+2002-10-29  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filelist.{cc,h} (FileList::FindError): Explicitly implement
+	copy ctor and assignment operator.
+
+	* src/filelist.cc (on_buffer_match_count_changed): Clutter the
+	code with assertions, just to be sure.
+
 2002-10-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/statusline.cc (CounterBox): Improve size calculation of the

@@ -110,6 +110,17 @@ FileList::FindError::FindError(const Util::SharedPtr<FileList::FindErrorList>& e
 FileList::FindError::~FindError()
 {}
 
+FileList::FindError::FindError(const FileList::FindError& other)
+:
+  error_list_ (other.error_list_)
+{}
+
+FileList::FindError& FileList::FindError::operator=(const FileList::FindError& other)
+{
+  error_list_ = other.error_list_;
+  return *this;
+}
+
 const std::list<Glib::FileError>& FileList::FindError::get_error_list() const
 {
   return error_list_->errors;
@@ -199,6 +210,7 @@ void FileList::find_files(const Glib::ustring& dirname,
   if(chop_off > 0 && *startdir.rbegin() != G_DIR_SEPARATOR)
     ++chop_off;
 
+  // The FindData ctor may throw Pcre::Error.
   FindData find_data (Util::shell_pattern_to_regex(pattern), chop_off, recursive, hidden);
 
   const bool modified_count_changed = (modified_count_ != 0);
@@ -206,6 +218,8 @@ void FileList::find_files(const Glib::ustring& dirname,
   get_selection()->unselect_all(); // workaround for GTK+ <= 2.0.6 (#94868)
   liststore_->clear();
 
+  // Don't keep the pixbuf around if we don't need it.
+  // It's recreated on demand if necessary.
   error_pixbuf_.clear();
 
   file_count_     = 0;
@@ -224,7 +238,7 @@ void FileList::find_files(const Glib::ustring& dirname,
   }
   catch(const Glib::FileError& error)
   {
-    find_data.errors().push_back(error);
+    find_data.errors().push_back(error); // collect errors but don't fail
   }
 
   signal_bound_state_changed(); // emit
@@ -249,7 +263,7 @@ void FileList::save_current_file()
       if(fileinfo->buffer)
         save_file(fileinfo);
     }
-    catch(...)
+    catch(...) // TODO: make the caller handle the exception
     {
       const Glib::ustring filename = Util::filename_to_utf8_fallback(fileinfo->fullname);
       g_warning("writing to file `%s' failed", filename.c_str());
@@ -273,7 +287,7 @@ void FileList::save_all_files()
         save_file(fileinfo);
         --new_modified_count;
       }
-      catch(...)
+      catch(...) // TODO: make the caller handle the exception
       {
         const Glib::ustring filename = Util::filename_to_utf8_fallback(fileinfo->fullname);
         g_warning("writing to file `%s' failed", filename.c_str());
@@ -543,9 +557,10 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
     }
     catch(const Glib::FileError& error)
     {
+      // Collect errors but don't interrupt the search.
       find_data.errors().push_back(error);
     }
-    catch(const Glib::ConvertError& error)
+    catch(const Glib::ConvertError& error) // unlikely due to use of our own fallback conversion
     {
       // Don't use Glib::locale_to_utf8() because we already
       // tried that in Util::filename_to_utf8_fallback().
@@ -634,13 +649,15 @@ void FileList::on_buffer_match_count_changed(int match_count)
 {
   const FileListColumns& columns = filelist_columns();
 
+  // There has to be a selection since we receive signal_match_count_changed()
+  // from the currently selected FileBuffer.
   Gtk::TreeModel::iterator iter = get_selection()->get_selected();
   g_return_if_fail(iter);
 
   const int old_match_count = (*iter)[columns.matchcount];
 
   if(match_count == old_match_count)
-    return;
+    return; // spurious emission -- do nothing
 
   const long old_sum_matches = sum_matches_;
   sum_matches_ += (match_count - old_match_count);
@@ -666,41 +683,52 @@ void FileList::on_buffer_match_count_changed(int match_count)
     // 3) old_match_count == 0 || match_count == 0
     // 4) old_match_count != match_count
 
-    g_return_if_fail(path_match_first_ < path_match_last_);
+    g_assert(old_sum_matches > 0);
+    g_assert(old_match_count != match_count);
+
+    // The range should've been set up already since old_sum_matches > 0.
+    g_return_if_fail(path_match_first_ <= path_match_last_);
 
     Gtk::TreePath path (iter);
 
-    if(old_match_count == 0) // implies match_count > 0
+    if(old_match_count == 0)
     {
+      g_assert(match_count > 0);
+      g_return_if_fail(path != path_match_first_ && path != path_match_last_);
+
       // Expand the range if necessary.
       if(path < path_match_first_)
         path_match_first_ = path;
       else if(path > path_match_last_)
         path_match_last_ = path;
     }
-    else if(path == path_match_first_) // implies match_count == 0
+    else
     {
-      // Find the new start boundary of the range.
-      do
-      {
-        ++iter;
-        g_return_if_fail(iter);
-      }
-      while((*iter)[columns.matchcount] == 0);
+      g_assert(match_count == 0);
+      g_return_if_fail(path >= path_match_first_ && path <= path_match_last_);
 
-      path_match_first_ = Gtk::TreePath(iter);
-    }
-    else if(path == path_match_last_) // implies match_count == 0
-    {
-      // Find the new end boundary of the range.
-      do
+      if(path == path_match_first_)
       {
-        const bool path_valid = path.prev();
-        g_return_if_fail(path_valid);
-      }
-      while((*liststore_->get_iter(path))[columns.matchcount] == 0);
+        do // find the new start boundary of the range
+        {
+          ++iter;
+          g_return_if_fail(iter);
+        }
+        while((*iter)[columns.matchcount] == 0);
 
-      path_match_last_ = path;
+        path_match_first_ = Gtk::TreePath(iter);
+      }
+      else if(path == path_match_last_)
+      {
+        do // find the new end boundary of the range
+        {
+          const bool path_valid = path.prev();
+          g_return_if_fail(path_valid);
+        }
+        while((*liststore_->get_iter(path))[columns.matchcount] == 0);
+
+        path_match_last_ = path;
+      }
     }
 
     signal_bound_state_changed(); // emit
