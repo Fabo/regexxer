@@ -1,5 +1,19 @@
 2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (on_hide): For safety, transfer ownership of
+	the preferences and about dialogs into local variables, rather than
+	invoking hide() to delete them.  That way delete won't be called
+	before hide() actually returned.
+
+	(on_about_dialog_hide): Don't use std::auto_ptr<>::reset() but
+	transfer ownership into local variables.  I had a look at the
+	libstdc++-v3 headers and it gave me the creeps -- reset() deletes
+	_before_ assigning the new pointer.
+
+	(on_preferences): ditto.
+
+2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (error_pixbuf_): Get rid of this silly cache,
 	since it became useless a while ago.
 

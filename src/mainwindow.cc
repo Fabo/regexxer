@@ -221,16 +221,21 @@ void MainWindow::on_hide()
 {
   on_busy_action_cancel();
 
-  // Hide the dialogs if they're mapped right now.  This isn't really necessary
+  // Kill the dialogs if they're mapped right now.  This isn't really necessary
   // since they'd be deleted in the destructor anyway.  But if we have to do a
   // lot of cleanup the dialogs would stay open for that time, which doesn't
   // look neat.
 
-  if(about_dialog_.get())
-    about_dialog_->hide();
+  {
+    // Play safe and transfer ownership, and let the dtor do the delete.
+    const std::auto_ptr<AboutDialog> temp (about_dialog_);
+  }
 
   if(pref_dialog_.get())
-    pref_dialog_->hide();
+  {
+    const std::auto_ptr<PrefDialog> temp (pref_dialog_);
+    temp->hide(); // trigger our signal_hide() handler to save the configuration
+  }
 
   Gtk::Window::on_hide();
 }
@@ -939,7 +944,8 @@ void MainWindow::on_info()
 
 void MainWindow::on_about_dialog_hide()
 {
-  about_dialog_.reset();
+  // Play safe and transfer ownership, and let the dtor do the delete.
+  const std::auto_ptr<AboutDialog> temp (about_dialog_);
 }
 
 void MainWindow::on_preferences()
@@ -982,7 +988,9 @@ void MainWindow::on_preferences()
 
 void MainWindow::on_pref_dialog_hide()
 {
-  pref_dialog_.reset();
+  // Play safe and transfer ownership, and let the dtor do the delete.
+  const std::auto_ptr<PrefDialog> temp (pref_dialog_);
+
   save_configuration();
 }
 
