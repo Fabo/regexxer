@@ -1,3 +1,13 @@
+2002-12-02  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/controller.cc (create_action_area):
+	* src/mainwindow.cc (create_left_pane): Add preliminary support
+	for accessibility using ATK.  Unfortunately atkmm is badly broken
+	in a way that prevents it from being used at all.  And due to a
+	missing reference in Gtk::Widget::get_accessible_vfunc() I can't
+	even resort to the C interface for custom derived classes.  Thus
+	most of the code is enclosed in #if 0 / #endif at the moment.
+
 2002-11-29  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filetree.cc (on_selection_changed): Ooops, forgot to

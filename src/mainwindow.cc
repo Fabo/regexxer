@@ -28,6 +28,7 @@
 #include "stringutils.h"
 
 #include <glib.h>
+#include <atk/atk.h> /* TODO: fix atkmm instead */
 #include <gtkmm.h>
 #include <algorithm>
 #include <functional>
@@ -315,9 +316,11 @@ Gtk::Widget* MainWindow::create_left_pane()
   table->attach(*manage(button_folder), 0, 1, 0, 1, FILL, AttachOptions(0));
   button_folder->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_select_folder));
 
-  table->attach(*manage(new Label("Pattern:", 0.0, 0.5)), 0, 1, 1, 2, FILL, AttachOptions(0));
+  Label *const label_pattern = new Label("Pattern:", 0.0, 0.5);
+  table->attach(*manage(label_pattern), 0, 1, 1, 2, FILL, AttachOptions(0));
   table->attach(*manage(entry_folder_  = new Entry()), 1, 2, 0, 1, EXPAND|FILL, AttachOptions(0));
   table->attach(*manage(entry_pattern_ = new Entry()), 1, 2, 1, 2, EXPAND|FILL, AttachOptions(0));
+  label_pattern->set_mnemonic_widget(*entry_pattern_);
 
   entry_folder_ ->signal_activate().connect(controller_.find_files.slot());
   entry_pattern_->signal_activate().connect(controller_.find_files.slot());
@@ -371,10 +374,15 @@ Gtk::Widget* MainWindow::create_right_pane()
   table->set_border_width(1);
   table->set_spacings(2);
 
-  table->attach(*manage(new Label("Search:",  0.0, 0.5)), 0, 1, 0, 1, FILL, AttachOptions(0));
-  table->attach(*manage(new Label("Replace:", 0.0, 0.5)), 0, 1, 1, 2, FILL, AttachOptions(0));
-  table->attach(*manage(entry_regex_        = new Entry()),  1, 2, 0, 1, EXPAND|FILL, AttachOptions(0));
+  Label *const label_search = new Label("Search:",  0.0, 0.5);
+  table->attach(*manage(label_search), 0, 1, 0, 1, FILL, AttachOptions(0));
+  table->attach(*manage(entry_regex_ = new Entry()),  1, 2, 0, 1, EXPAND|FILL, AttachOptions(0));
+  label_search->set_mnemonic_widget(*entry_regex_);
+
+  Label *const label_replace = new Label("Replace:",  0.0, 0.5);
+  table->attach(*manage(label_replace), 0, 1, 1, 2, FILL, AttachOptions(0));
   table->attach(*manage(entry_substitution_ = new Entry()),  1, 2, 1, 2, EXPAND|FILL, AttachOptions(0));
+  label_replace->set_mnemonic_widget(*entry_substitution_);
 
   entry_regex_       ->signal_activate().connect(controller_.find_matches.slot());
   entry_substitution_->signal_activate().connect(controller_.find_matches.slot());
@@ -411,6 +419,10 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_preview_->set_editable(false);
   entry_preview_->unset_flags(CAN_FOCUS);
   entry_preview_->modify_font(fileview_font_);
+
+  // TODO: Fix atkmm instead.
+  atk_object_set_description(gtk_widget_get_accessible(entry_preview_->Widget::gobj()),
+                             "Preview of the substitution in the current line");
 
   tooltips_.set_tip(*entry_regex_,        "A regular expression in Perl syntax");
   tooltips_.set_tip(*entry_substitution_, "The new string to substitute. As in Perl, you can "

@@ -76,6 +76,15 @@ void add_widget_button(Regexxer::ControlItem& control, Gtk::Button& button)
   control.add_widget(button);
 }
 
+#if 0
+/* TODO: Fix atkmm instead.  And gtkmm.  Fuck.
+ */
+void set_atk_description(Gtk::Widget& widget, const Glib::ustring& description)
+{
+  atk_object_set_description(gtk_widget_get_accessible(widget.gobj()), description.c_str());
+}
+#endif
+
 } // anonymous namespace
 
 
@@ -324,6 +333,16 @@ Gtk::Widget* Controller::create_action_area()
 
   Button *const button_replace_all = new ImageLabelButton(Stock::CONVERT, "_All files", true);
   box_replace->pack_start(*manage(button_replace_all));
+
+#if 0
+  set_atk_description(*button_prev_file,    "Go to the previous matching file");
+  set_atk_description(*button_prev,         "Go to previous match");
+  set_atk_description(*button_next,         "Go to next match");
+  set_atk_description(*button_next_file,    "Go to the next matching file");
+  set_atk_description(*button_replace,      "Replace current match");
+  set_atk_description(*button_replace_file, "Replace all matches in the current file");
+  set_atk_description(*button_replace_all,  "Replace all matches in all files");
+#endif
 
   add_widget_button(next_file,    *button_next_file);
   add_widget_button(prev_file,    *button_prev_file);
