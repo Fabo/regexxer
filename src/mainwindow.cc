@@ -70,9 +70,9 @@ FileErrorDialog::FileErrorDialog(Gtk::Window& parent, const Glib::ustring& messa
     buffer_end = buffer->insert(buffer_end, "\n");
   }
 
-  Box *const box = get_vbox();
+  Box& box = *get_vbox();
   Frame *const frame = new Frame();
-  box->pack_start(*manage(frame), PACK_EXPAND_WIDGET);
+  box.pack_start(*manage(frame), PACK_EXPAND_WIDGET);
   frame->set_border_width(5);
   frame->set_shadow_type(SHADOW_IN);
 
