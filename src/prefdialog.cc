@@ -94,6 +94,9 @@ PrefDialog::PrefDialog(Gtk::Window& parent)
   }
 
   notebook->show_all();
+  notebook->grab_focus();
+
+  set_default_response(RESPONSE_CLOSE);
 }
 
 PrefDialog::~PrefDialog()

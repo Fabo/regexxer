@@ -119,6 +119,8 @@ AboutDialog::AboutDialog(Gtk::Window& parent)
   }
 
   alignment->show_all();
+
+  set_default_response(RESPONSE_OK);
 }
 
 AboutDialog::~AboutDialog()
