@@ -1,9 +1,9 @@
 2004-05-31  Daniel Elstner  <daniel.elstner@gmx.net>
 
-	* src/statusline.cc (Status::set_file_encoding): Work around the
-	GTK+ bug with right-aligned labels by calling check_resize(), just
-	as already done in CounterBox::set_index().  Note that the status
-	bar is right-aligned only in RTL locales.
+	* src/statusline.cc (StatusLine::set_file_encoding): Work around
+	the GTK+ bug with right-aligned labels by calling check_resize(),
+	just as already done in CounterBox::set_index().  Note that the
+	status bar is right-aligned only in RTL locales.
 
 2004-05-31  Daniel Elstner  <daniel.elstner@gmx.net>
 
