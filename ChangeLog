@@ -1,5 +1,10 @@
 2002-10-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (on_exec_search): I changed my mind, there is
+	absolutely no need to show off Util::next() here :)
+
+2002-10-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.h: Introduce next() and prev() templates,
 	shamelessly stolen from boost.
 
