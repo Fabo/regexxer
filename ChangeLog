@@ -1,5 +1,10 @@
 2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/configdata.{cc,h}: Add support for menutool_mode config
+	option, specifying whether to show menu bar, toolbar or both.
+
+2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/main.cc (regexxer_register_stock_items): Always set the
 	intended icon size, but disable wildcarding for all but the last
 	pixbuf in an icon set.

@@ -29,8 +29,16 @@
 namespace Regexxer
 {
 
+enum MenuToolMode
+{
+  MODE_MENU_AND_TOOL,
+  MODE_MENU_ONLY,
+  MODE_TOOL_ONLY
+};
+
 struct ConfigData
 {
+  MenuToolMode      menutool_mode;
   Gtk::ToolbarStyle toolbar_style;
   std::string       fallback_encoding;
 
@@ -41,6 +49,9 @@ struct ConfigData
   void save();
 
 private:
+  void set_menutool_mode_from_string(const Glib::ustring& value);
+  Glib::ustring get_string_from_menutool_mode() const;
+
   void set_toolbar_style_from_string(const Glib::ustring& value);
   Glib::ustring get_string_from_toolbar_style() const;
 

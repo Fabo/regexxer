@@ -91,6 +91,13 @@ public:
 };
 
 
+const NickValuePair menutool_mode_value_map[] =
+{
+  { "menu_and_tool", Regexxer::MODE_MENU_AND_TOOL },
+  { "menu_only",     Regexxer::MODE_MENU_ONLY     },
+  { "tool_only",     Regexxer::MODE_TOOL_ONLY     }
+};
+
 const NickValuePair toolbar_style_value_map[] =
 {
   { "icons",      Gtk::TOOLBAR_ICONS      },
@@ -102,7 +109,7 @@ const NickValuePair toolbar_style_value_map[] =
 
 void print_warning(const char* text)
 {
-  g_warning(text);
+  g_warning("%s", text);
 }
 
 void print_warning(const char* text, const Glib::ustring& what)
@@ -190,6 +197,7 @@ namespace Regexxer
 
 ConfigData::ConfigData()
 :
+  menutool_mode     (MODE_MENU_AND_TOOL),
   toolbar_style     (Gtk::TOOLBAR_BOTH_HORIZ),
   fallback_encoding ("ISO-8859-15")
 {}
@@ -208,7 +216,9 @@ void ConfigData::load()
 
     while(read_config_entry(channel, key, value))
     {
-      if(key.raw() == "toolbar_style")
+      if(key.raw() == "menutool_mode")
+        set_menutool_mode_from_string(value);
+      else if(key.raw() == "toolbar_style")
         set_toolbar_style_from_string(value);
       else if(key.raw() == "fallback_encoding")
         set_fallback_encoding_from_string(value);
@@ -238,6 +248,7 @@ void ConfigData::save()
 
     channel->write("# regexxer configuration file\n");
 
+    write_config_entry(channel, "menutool_mode",     get_string_from_menutool_mode());
     write_config_entry(channel, "toolbar_style",     get_string_from_toolbar_style());
     write_config_entry(channel, "fallback_encoding", get_string_from_fallback_encoding());
 
@@ -251,6 +262,29 @@ void ConfigData::save()
   {
     print_warning("Failed to write configuration file: %s", error.what());
   }
+}
+
+void ConfigData::set_menutool_mode_from_string(const Glib::ustring& value)
+{
+  const NickValuePair *const pend = &menutool_mode_value_map[G_N_ELEMENTS(menutool_mode_value_map)];
+  const NickValuePair *const pfound =
+      std::find_if(&menutool_mode_value_map[0], pend, NickEqual(value));
+
+  if(pfound != pend)
+    menutool_mode = MenuToolMode(pfound->value);
+  else
+    print_warning("Error in configuration file: invalid value `%s' for key `menutool_mode'", value);
+}
+
+Glib::ustring ConfigData::get_string_from_menutool_mode() const
+{
+  const NickValuePair *const pend = &menutool_mode_value_map[G_N_ELEMENTS(menutool_mode_value_map)];
+  const NickValuePair *const pfound =
+      std::find_if(&menutool_mode_value_map[0], pend, ValueEqual(menutool_mode));
+
+  g_return_val_if_fail(pfound != pend, "");
+
+  return pfound->nick;
 }
 
 void ConfigData::set_toolbar_style_from_string(const Glib::ustring& value)
