@@ -25,7 +25,7 @@ AC_REVISION([$Revision$])
 AC_CONFIG_SRCDIR([src/pcreshell.cc])
 AC_CONFIG_HEADERS([config.h])
 
-AM_INIT_AUTOMAKE([1.6 gnu no-define nostdinc check-news])
+AM_INIT_AUTOMAKE([1.7 gnu no-define nostdinc check-news])
 
 AC_PROG_CC()
 AC_PROG_CXX()

@@ -1,5 +1,10 @@
 2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* autogen.sh: Require automake >= 1.7.
+	* configure.ac: ditto.
+
+2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/sharedptr.h (SharedPtr<>::swap): Implement.
 
 2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>

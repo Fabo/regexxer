@@ -32,7 +32,7 @@ elif test -n "${BASH_VERSION+set}" && (set -o posix) >/dev/null 2>&1; then
 fi
 
 PROJECT=regexxer
-MIN_AUTOMAKE_VERSION=1.6
+MIN_AUTOMAKE_VERSION=1.7
 
 srcdir=`dirname "$0"`
 test -z $srcdir && srcdir=.
