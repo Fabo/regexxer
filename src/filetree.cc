@@ -248,6 +248,48 @@ FileTree::FindMatchesData::FindMatchesData(Pcre::Pattern& pattern_, bool multipl
 {}
 
 
+/**** Regexxer::FileTree::ScopedBlockSorting *******************************/
+
+class FileTree::ScopedBlockSorting
+{
+public:
+  explicit ScopedBlockSorting(FileTree& filetree);
+  ~ScopedBlockSorting();
+
+private:
+  FileTree&     filetree_;
+  int           sort_column_;
+  Gtk::SortType sort_order_;
+
+  ScopedBlockSorting(const FileTree::ScopedBlockSorting&);
+  FileTree::ScopedBlockSorting& operator=(const FileTree::ScopedBlockSorting&);
+};
+
+FileTree::ScopedBlockSorting::ScopedBlockSorting(FileTree& filetree)
+:
+  filetree_     (filetree),
+  sort_column_  (Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID),
+  sort_order_   (Gtk::SORT_ASCENDING)
+{
+  filetree_.set_headers_clickable(false);
+  filetree_.treestore_->get_sort_column_id(sort_column_, sort_order_);
+
+  // If we're currently sorting on the match count column, we have to switch
+  // temporarily to the default sort column because changes to the match count
+  // could cause reordering of the model.  Gtk::TreeModel::foreach() won't
+  // like that at all, and that's precisily why this utility class exists.
+  //
+  if(sort_column_ == filetree_columns().matchcount.index())
+    filetree_.treestore_->set_sort_column_id(Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID, sort_order_);
+}
+
+FileTree::ScopedBlockSorting::~ScopedBlockSorting()
+{
+  filetree_.treestore_->set_sort_column_id(sort_column_, sort_order_);
+  filetree_.set_headers_clickable(true);
+}
+
+
 /**** Regexxer::FileTree ***************************************************/
 
 FileTree::FileTree()
@@ -440,7 +482,8 @@ BoundState FileTree::get_bound_state()
 void FileTree::find_matches(Pcre::Pattern& pattern, bool multiple)
 {
   {
-    ScopedBlock block (conn_match_count_);
+    ScopedBlock block_conn (conn_match_count_);
+    ScopedBlockSorting block_sort (*this);
     FindMatchesData find_data (pattern, multiple);
 
     treestore_->foreach(SigC::bind(SigC::slot(*this, &FileTree::find_matches_at_iter), &find_data));
@@ -460,6 +503,7 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
   {
     ScopedBlock block_match_count      (conn_match_count_);
     ScopedBlock block_modified_changed (conn_modified_changed_);
+    ScopedBlockSorting block_sort (*this);
 
     treestore_->foreach(SigC::bind(
         SigC::slot(*this, &FileTree::replace_matches_at_iter),

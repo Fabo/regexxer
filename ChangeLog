@@ -1,5 +1,15 @@
 2002-11-23  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (FileTree::ScopedBlockSorting): Introduce new
+	utility class used to temporarily disable the column headers and to
+	switch to the default sort column if the current one is the match
+	count column.  This is necessary because Gtk::TreeModel::foreach()
+	doesn't like it at all if model rows are reordered underneath its
+	feet.  regexxer didn't handle that correctly until now, and the only
+	reason this bug hasn't been observed before is #96647 :)
+
+2002-11-23  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (FileTree::ErrorList): Rename to MessageList
 	since it's not specifically intended for errors.  Use MI to combine
 	Util::SharedObject and std::list<> instead of making the std::list

@@ -82,6 +82,7 @@ private:
   struct MessageList;
   struct FindData;
   struct FindMatchesData;
+  class  ScopedBlockSorting;
 
   Glib::RefPtr<Gtk::TreeStore>  treestore_;
 
@@ -140,6 +141,9 @@ private:
 
   void load_file_with_fallback(const Gtk::TreeModel::iterator& iter, const FileInfoPtr& fileinfo);
   Glib::RefPtr<FileBuffer> create_error_message_buffer(const Glib::ustring& message);
+
+  // Work-around for silly, stupid, and annoying gcc 2.95.x.
+  friend class FileTree::ScopedBlockSorting;
 };
 
 
