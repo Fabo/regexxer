@@ -194,16 +194,15 @@ FileBuffer::create_with_error_message(const Glib::RefPtr<Gdk::Pixbuf>& pixbuf,
                                       const Glib::ustring& message)
 {
   const Glib::RefPtr<FileBuffer> buffer (new FileBuffer());
-
   const Glib::RefPtr<RegexxerTags> tagtable = RegexxerTags::instance();
-  iterator pend = buffer->end();
+
+  iterator pend = buffer->insert_pixbuf(buffer->end(), pixbuf);
 
   Glib::ustring title = "\302\240";
   // TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
   title += _("Can't read file:");
   title += '\n';
 
-  pend = buffer->insert_pixbuf(pend, pixbuf);
   pend = buffer->insert_with_tag(pend, title, tagtable->error_title);
   pend = buffer->insert(pend, message);
 

@@ -1,3 +1,8 @@
+2004-06-02  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filebuffer.cc (FileBuffer::create_with_error_message):
+	Minor code rearrangement.
+
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filetree.cc (FileTree::find_files): Slightly clarify
