@@ -1,5 +1,9 @@
 2003-01-11  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (propagate_modified_change): Simplify.
+
+2003-01-11  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/signalutils.{cc,h} (AutoConnection): New utility class that
 	breaks the previous connection on assignment, and also remembers the
 	blocked state of the connection permanently.

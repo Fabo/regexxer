@@ -976,6 +976,7 @@ void FileTree::propagate_match_count_change(const Gtk::TreeModel::iterator& pos,
 
 void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bool modified)
 {
+  const int difference = (modified) ? 1 : -1;
   const FileTreeColumns& columns = filetree_columns();
 
   treestore_->row_changed(Gtk::TreePath(pos), pos);
@@ -985,22 +986,14 @@ void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bo
     const FileInfoBasePtr base = (*iter)[columns.fileinfo];
     const DirInfoPtr dirinfo = shared_polymorphic_cast<DirInfo>(base);
 
-    if(modified)
-    {
-      if(dirinfo->modified_count++ == 0)
-        treestore_->row_changed(Gtk::TreePath(iter), iter);
-    }
-    else
-    {
-      if(--dirinfo->modified_count == 0)
-        treestore_->row_changed(Gtk::TreePath(iter), iter);
-    }
+    dirinfo->modified_count += difference;
+
+    // Update the view only if the count flipped from 0 to 1 or vice versa.
+    if(dirinfo->modified_count == int(modified))
+      treestore_->row_changed(Gtk::TreePath(iter), iter);
   }
 
-  if(modified)
-    ++toplevel_.modified_count;
-  else
-    --toplevel_.modified_count;
+  toplevel_.modified_count += difference;
 
   signal_modified_count_changed(); // emit
 }
