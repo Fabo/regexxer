@@ -1,3 +1,9 @@
+2002-11-15  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/sharedptr.h (SharedObject): Remove the namespace prefix from
+	the friend declaration.  This will hopefully fix a compilation
+	problem with GCC 2.95.x -- once again.
+
 2002-11-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/mainwindow.cc (on_busy_action_pulse): Simplify by reducing

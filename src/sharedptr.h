@@ -44,7 +44,7 @@ private:
   SharedObject(const SharedObject&);
   SharedObject& operator=(const SharedObject&);
 
-  template <class> friend class Util::SharedPtr;
+  template <class> friend class SharedPtr;
 };
 
 
