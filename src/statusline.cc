@@ -46,8 +46,6 @@ public:
 private:
   Gtk::Label*         label_index_;
   Gtk::Label*         label_count_;
-  unsigned int        index_;
-  bool                refreshing_;
   unsigned int        digit_range_;
   std::ostringstream  stringstream_;
 
@@ -56,7 +54,6 @@ private:
   static void set_width_from_string(Gtk::Label& label, const Glib::ustring& text);
 
   void on_label_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style, Gtk::Label* label);
-  bool idle_refresh_label_index();
 };
 
 
@@ -64,8 +61,6 @@ CounterBox::CounterBox(const Glib::ustring& label)
 :
   label_index_  (0),
   label_count_  (0),
-  index_        (0),
-  refreshing_   (false),
   digit_range_  (100)
 {
   using namespace Gtk;
@@ -109,20 +104,11 @@ CounterBox::~CounterBox()
 
 void CounterBox::set_index(unsigned int index)
 {
+  label_index_->set_text(number_to_string(index));
+
   // Work around a bug in GTK+ that causes right-aligned labels to be
-  // cut off at the end.  The label magically displays correctly if the
-  // text is changed in an idle callback.
-
-  index_ = index; // remember value for use in idle callback
-
-  if(!refreshing_)
-  {
-    refreshing_ = true;
-
-    Glib::signal_idle().connect(
-        SigC::slot(*this, &CounterBox::idle_refresh_label_index),
-        Glib::PRIORITY_HIGH_IDLE + 50);
-  }
+  // cut off at the end.  Forcing resize seems to solve the problem.
+  check_resize();
 }
 
 void CounterBox::set_count(unsigned int count)
@@ -174,26 +160,22 @@ void CounterBox::on_label_style_changed(const Glib::RefPtr<Gtk::Style>&, Gtk::La
   set_width_from_string(*label, number_to_string(digit_range_ - 1));
 }
 
-bool CounterBox::idle_refresh_label_index()
-{
-  label_index_->set_text(number_to_string(index_));
-
-  refreshing_ = false;
-  return false;
-}
-
 
 /**** Regexxer::StatusLine *************************************************/
 
 StatusLine::StatusLine()
 :
   Gtk::HBox(false, 1),
+  cancel_button_  (0),
   progressbar_    (0),
   file_counter_   (0),
   match_counter_  (0),
   statusbar_      (0)
 {
   using namespace Gtk;
+
+  cancel_button_ = new Button("Cancel");
+  pack_start(*manage(cancel_button_), PACK_SHRINK);
 
   progressbar_ = new ProgressBar();
   pack_start(*manage(progressbar_), PACK_SHRINK);
@@ -206,6 +188,13 @@ StatusLine::StatusLine()
 
   statusbar_ = new Statusbar();
   pack_start(*manage(statusbar_), PACK_EXPAND_WIDGET);
+
+  cancel_button_->set_sensitive(false);
+  cancel_button_->signal_clicked().connect(signal_cancel_clicked.slot());
+  cancel_button_->signal_style_changed().connect(
+      SigC::slot(*this, &StatusLine::on_button_style_changed));
+
+  progressbar_->set_pulse_step(0.025);
 
   show_all_children();
 }
@@ -233,14 +222,30 @@ void StatusLine::set_match_count(int match_count)
   match_counter_->set_count(match_count);
 }
 
+void StatusLine::pulse_start()
+{
+  cancel_button_->set_sensitive(true);
+}
+
 void StatusLine::pulse()
 {
   progressbar_->pulse();
 }
 
-void StatusLine::stop_pulse()
+void StatusLine::pulse_stop()
 {
   progressbar_->set_fraction(0.0);
+  cancel_button_->set_sensitive(false);
+}
+
+void StatusLine::on_button_style_changed(const Glib::RefPtr<Gtk::Style>&)
+{
+  // The statusbar looks ugly if the cancel button gets its default size,
+  // so reduce the button's size request to a reasonable amount.
+
+  int width = 0, height = 0;
+  cancel_button_->create_pango_layout("Cancel")->get_pixel_size(width, height);
+  cancel_button_->set_size_request(-1, height + 4);
 }
 
 } // namespace Regexxer

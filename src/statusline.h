@@ -25,6 +25,7 @@
 
 namespace Gtk
 {
+class Button;
 class ProgressBar;
 class Statusbar;
 }
@@ -47,14 +48,20 @@ public:
   void set_match_index(int match_index);
   void set_match_count(int match_count);
 
+  void pulse_start();
   void pulse();
-  void stop_pulse();
+  void pulse_stop();
+
+  SigC::Signal0<void> signal_cancel_clicked;
 
 private:
+  Gtk::Button*        cancel_button_;
   Gtk::ProgressBar*   progressbar_;
   CounterBox*         file_counter_;
   CounterBox*         match_counter_;
   Gtk::Statusbar*     statusbar_;
+
+  void on_button_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 };
 
 } // namespace Regexxer

@@ -35,6 +35,8 @@
 namespace
 {
 
+enum { BUSY_GUI_UPDATE_INTERVAL = 8 };
+
 const char regexxer_icon_filename[] = REGEXXER_DATADIR G_DIR_SEPARATOR_S
                                       "pixmaps" G_DIR_SEPARATOR_S "regexxer.png";
 
@@ -97,30 +99,56 @@ void dummy_handler()
 namespace Regexxer
 {
 
+/**** Regexxer::MainWindow::BusyAction *************************************/
+
+class MainWindow::BusyAction
+{
+private:
+  MainWindow& object_;
+
+  BusyAction(const BusyAction&);
+  BusyAction& operator=(const BusyAction&);
+
+public:
+  explicit BusyAction(MainWindow& object)
+    : object_ (object) { object_.busy_action_enter(); }
+
+  ~BusyAction() { object_.busy_action_leave(); }
+};
+
+
+/**** Regexxer::MainWindow *************************************************/
+
 MainWindow::MainWindow()
 :
-  toolbutton_save_      (0),
-  toolbutton_save_all_  (0),
-  entry_folder_         (0),
-  entry_pattern_        (0),
-  button_recursive_     (0),
-  button_hidden_        (0),
-  entry_regex_          (0),
-  entry_substitution_   (0),
-  button_multiple_      (0),
-  button_caseless_      (0),
-  filelist_             (0),
-  textview_             (0),
-  entry_preview_        (0),
-  button_prev_file_     (0),
-  button_prev_          (0),
-  button_next_          (0),
-  button_next_file_     (0),
-  button_replace_       (0),
-  button_replace_file_  (0),
-  button_replace_all_   (0),
-  statusline_           (0),
-  fileview_font_        ("mono")
+  toolbutton_save_        (0),
+  toolbutton_save_all_    (0),
+  entry_folder_           (0),
+  entry_pattern_          (0),
+  button_recursive_       (0),
+  button_hidden_          (0),
+  button_find_files_      (0),
+  entry_regex_            (0),
+  entry_substitution_     (0),
+  button_multiple_        (0),
+  button_caseless_        (0),
+  button_find_matches_    (0),
+  filelist_               (0),
+  textview_               (0),
+  entry_preview_          (0),
+  action_area_            (0),
+  button_prev_file_       (0),
+  button_prev_            (0),
+  button_next_            (0),
+  button_next_file_       (0),
+  button_replace_         (0),
+  button_replace_file_    (0),
+  button_replace_all_     (0),
+  statusline_             (0),
+  busy_action_running_    (false),
+  busy_action_cancel_     (false),
+  busy_action_iteration_  (0),
+  fileview_font_          ("mono")
 {
   using namespace Gtk;
 
@@ -156,7 +184,7 @@ MainWindow::MainWindow()
     statusline_ = new StatusLine();
     vbox_main->pack_start(*manage(statusline_), PACK_SHRINK);
 
-    vbox_interior->pack_start(*manage(paned.release()),    PACK_EXPAND_WIDGET);
+    vbox_interior->pack_start(*manage(paned.release()), PACK_EXPAND_WIDGET);
     vbox_interior->pack_start(*manage(create_buttonbox()), PACK_SHRINK);
   }
 
@@ -166,7 +194,8 @@ MainWindow::MainWindow()
   entry_pattern_->set_text("*");
   button_recursive_->set_active(true);
 
-  signal_hide().connect_notify(SigC::slot(*filelist_, &FileList::stop_find_files));
+  signal_hide().connect_notify(SigC::slot(*this, &MainWindow::on_busy_action_cancel));
+  statusline_->signal_cancel_clicked.connect(SigC::slot(*this, &MainWindow::on_busy_action_cancel));
 
   filelist_->signal_switch_buffer.connect(
       SigC::slot(*this, &MainWindow::on_filelist_switch_buffer));
@@ -183,7 +212,8 @@ MainWindow::MainWindow()
   filelist_->signal_modified_count_changed.connect(
       SigC::slot(*this, &MainWindow::on_filelist_modified_count_changed));
 
-  filelist_->signal_pulse.connect(SigC::slot(*statusline_, &StatusLine::pulse));
+  filelist_->signal_pulse.connect(
+      SigC::slot(*this, &MainWindow::on_busy_action_pulse));
 }
 
 MainWindow::~MainWindow()
@@ -235,8 +265,8 @@ Gtk::Widget* MainWindow::create_buttonbox()
   std::auto_ptr<Box> buttonbox (new HBox(false, 10));
   buttonbox->set_border_width(2);
 
-  Box *const box_action = new HBox(true, 5);
-  buttonbox->pack_end(*manage(box_action), PACK_SHRINK);
+  action_area_ = new HBox(true, 5);
+  buttonbox->pack_end(*manage(action_area_), PACK_SHRINK);
 
   Box *const box_move = new HBox(true, 5);
   buttonbox->pack_end(*manage(box_move), PACK_SHRINK);
@@ -254,13 +284,13 @@ Gtk::Widget* MainWindow::create_buttonbox()
   box_move->pack_start(*manage(button_next_file_));
 
   button_replace_ = new CustomButton(Stock::CONVERT, "_Replace", true);
-  box_action->pack_start(*manage(button_replace_));
+  action_area_->pack_start(*manage(button_replace_));
 
   button_replace_file_ = new CustomButton(Stock::CONVERT, "_This file", true);
-  box_action->pack_start(*manage(button_replace_file_));
+  action_area_->pack_start(*manage(button_replace_file_));
 
   button_replace_all_ = new CustomButton(Stock::CONVERT, "_All files", true);
-  box_action->pack_start(*manage(button_replace_all_));
+  action_area_->pack_start(*manage(button_replace_all_));
 
   button_prev_file_   ->set_sensitive(false);
   button_prev_        ->set_sensitive(false);
@@ -310,9 +340,9 @@ Gtk::Widget* MainWindow::create_left_pane()
   button_hidden_ = new CheckButton("hidden");
   hbox->pack_start(*manage(button_hidden_), PACK_SHRINK);
 
-  Button *const button_find = new Button(Stock::FIND);
-  hbox->pack_end(*manage(button_find), PACK_SHRINK);
-  button_find->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_find_files));
+  button_find_files_ = new Button(Stock::FIND);
+  hbox->pack_end(*manage(button_find_files_), PACK_SHRINK);
+  button_find_files_->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_find_files));
 
   Frame *const frame = new Frame();
   vbox->pack_start(*manage(frame), PACK_EXPAND_WIDGET);
@@ -358,9 +388,9 @@ Gtk::Widget* MainWindow::create_right_pane()
   hbox_options->pack_start(*manage(button_multiple_ = new CheckButton("/g")), PACK_SHRINK);
   hbox_options->pack_start(*manage(button_caseless_ = new CheckButton("/i")), PACK_SHRINK);
 
-  Button *const button_find = new Button(Stock::FIND);
-  table->attach(*manage(button_find), 2, 3, 1, 2, FILL, AttachOptions(0));
-  button_find->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_exec_search));
+  button_find_matches_ = new Button(Stock::FIND);
+  table->attach(*manage(button_find_matches_), 2, 3, 1, 2, FILL, AttachOptions(0));
+  button_find_matches_->signal_clicked().connect(SigC::slot(*this, &MainWindow::on_exec_search));
 
   Frame *const frame = new Frame();
   vbox->pack_start(*manage(frame), PACK_EXPAND_WIDGET);
@@ -423,6 +453,8 @@ void MainWindow::on_select_folder()
 
 void MainWindow::on_find_files()
 {
+  BusyAction busy (*this);
+
   filelist_->find_files(
       Util::expand_pathname(entry_folder_->get_text()),
       entry_pattern_->get_text(),
@@ -430,11 +462,12 @@ void MainWindow::on_find_files()
       button_hidden_->get_active());
 
   statusline_->set_file_count(filelist_->get_file_count());
-  statusline_->stop_pulse();
 }
 
 void MainWindow::on_exec_search()
 {
+  BusyAction busy (*this);
+
   try
   {
     Pcre::Pattern pattern (
@@ -446,11 +479,8 @@ void MainWindow::on_exec_search()
   catch(const Pcre::Error& e)
   {
     std::cerr << e.what() << std::endl;
-    statusline_->stop_pulse();
     return;
   }
-
-  statusline_->stop_pulse();
 
   if(const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
   {
@@ -642,9 +672,9 @@ void MainWindow::on_replace_file()
 
 void MainWindow::on_replace_all()
 {
-  filelist_->replace_all_matches(entry_substitution_->get_text());
+  BusyAction busy (*this);
 
-  statusline_->stop_pulse();
+  filelist_->replace_all_matches(entry_substitution_->get_text());
   statusline_->set_match_index(0);
 }
 
@@ -705,6 +735,64 @@ void MainWindow::set_title_filename(const Glib::ustring& filename)
   title += PACKAGE_NAME;
 
   set_title(title);
+}
+
+void MainWindow::busy_action_enter()
+{
+  g_return_if_fail(!busy_action_running_);
+
+  button_find_files_  ->set_sensitive(false);
+  button_find_matches_->set_sensitive(false);
+  action_area_        ->set_sensitive(false);
+
+  statusline_->pulse_start();
+
+  busy_action_running_    = true;
+  busy_action_cancel_     = false;
+  busy_action_iteration_  = 0;
+}
+
+void MainWindow::busy_action_leave()
+{
+  g_return_if_fail(busy_action_running_);
+
+  busy_action_running_ = false;
+  busy_action_cancel_  = false;
+
+  statusline_->pulse_stop();
+
+  button_find_files_  ->set_sensitive(true);
+  button_find_matches_->set_sensitive(true);
+  action_area_        ->set_sensitive(true);
+}
+
+bool MainWindow::on_busy_action_pulse()
+{
+  g_return_val_if_fail(busy_action_running_, true);
+
+  if(busy_action_cancel_)
+    return true;
+
+  if((++busy_action_iteration_ % BUSY_GUI_UPDATE_INTERVAL) == 0)
+  {
+    statusline_->pulse();
+
+    const Glib::RefPtr<Glib::MainContext> context (Glib::MainContext::get_default());
+
+    while(context->iteration(false))
+    {
+      if(busy_action_cancel_)
+        return true;
+    }
+  }
+
+  return false;
+}
+
+void MainWindow::on_busy_action_cancel()
+{
+  if(busy_action_running_)
+    busy_action_cancel_ = true;
 }
 
 } // namespace Regexxer

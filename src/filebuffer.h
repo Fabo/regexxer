@@ -115,6 +115,7 @@ public:
   SigC::Signal1<void,int>         signal_match_count_changed;
   SigC::Signal1<void,BoundState>  signal_bound_state_changed;
   SigC::Signal0<void>             signal_preview_line_changed;
+  SigC::Signal0<bool>             signal_pulse;
 
 protected:
   FileBuffer();

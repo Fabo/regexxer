@@ -32,6 +32,7 @@
 
 namespace Gtk
 {
+class Box;
 class Button;
 class CheckButton;
 class Entry;
@@ -57,6 +58,8 @@ protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 
 private:
+  class BusyAction;
+
   Gtk::Tooltips     tooltips_;
 
   Gtk::Widget*      toolbutton_save_;
@@ -66,16 +69,19 @@ private:
   Gtk::Entry*       entry_pattern_;
   Gtk::CheckButton* button_recursive_;
   Gtk::CheckButton* button_hidden_;
+  Gtk::Button*      button_find_files_;
 
   Gtk::Entry*       entry_regex_;
   Gtk::Entry*       entry_substitution_;
   Gtk::CheckButton* button_multiple_;
   Gtk::CheckButton* button_caseless_;
+  Gtk::Button*      button_find_matches_;
 
   FileList*         filelist_;
   Gtk::TextView*    textview_;
   Gtk::Entry*       entry_preview_;
 
+  Gtk::Box*         action_area_;
   Gtk::Button*      button_prev_file_;
   Gtk::Button*      button_prev_;
   Gtk::Button*      button_next_;
@@ -85,6 +91,10 @@ private:
   Gtk::Button*      button_replace_all_;
 
   StatusLine*       statusline_;
+
+  bool              busy_action_running_;
+  bool              busy_action_cancel_;
+  unsigned int      busy_action_iteration_;
 
   Pango::FontDescription      fileview_font_;
   std::list<SigC::Connection> buffer_connections_;
@@ -117,6 +127,11 @@ private:
 
   void update_preview();
   void set_title_filename(const Glib::ustring& filename = Glib::ustring());
+
+  void busy_action_enter();
+  void busy_action_leave();
+  bool on_busy_action_pulse();
+  void on_busy_action_cancel();
 };
 
 } // namespace Regexxer

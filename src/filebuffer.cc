@@ -29,6 +29,9 @@
 namespace
 {
 
+enum { PULSE_INTERVAL = 128 };
+
+
 class MatchDataMarkEqual // unary predicate
 {
   Glib::RefPtr<Gtk::TextMark> mark_;
@@ -237,9 +240,12 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
   g_return_val_if_fail(match_count_ == 0, 0);
   original_match_count_ = 0;
 
+  unsigned int iteration = 0;
+
   for(iterator line = begin(); !line.is_end(); line.forward_line())
   {
-    while(main_context->iteration(false)) {}
+    if((++iteration % PULSE_INTERVAL) == 0 && signal_pulse()) // emit
+      break;
 
     iterator line_end (line);
 
@@ -392,8 +398,15 @@ void FileBuffer::replace_current_match(const Glib::ustring& substitution)
 
 void FileBuffer::replace_all_matches(const Glib::ustring& substitution)
 {
+  unsigned int iteration = 0;
+
   while(!match_list_.empty())
+  {
     replace_match(match_list_.begin(), substitution);
+
+    if((++iteration % PULSE_INTERVAL) == 0 && signal_pulse()) // emit
+      break;
+  }
 }
 
 /* Build a preview of what replace_current_match() would do to the current

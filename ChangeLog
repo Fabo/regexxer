@@ -1,5 +1,18 @@
 2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filelist.{cc,h} src/mainwindow.{cc,h}: Major cleanup of the
+	busy action cancelation code.  The new code is now centralized in
+	class MainWindow, and has been merged with the progressbar pulse
+	notification and busy GUI updating.
+
+	* src/filebuffer.{cc,h}: Implement support for cancelation of busy
+	actions such as find_matches(), using the new scheme described
+	above.
+
+	* src/statusline.{cc,h}: Add cancel button to the GUI.
+
+2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.cc (create_with_error_message): Improve message
 	title: s/Load failed/Can't read file/
 

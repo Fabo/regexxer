@@ -44,7 +44,7 @@ public:
   void find_files(const Glib::ustring& dirname,
                   const Glib::ustring& pattern,
                   bool recursive, bool hidden);
-  void stop_find_files();
+
   int  get_file_count() const;
 
   void save_current_file();
@@ -66,20 +66,19 @@ public:
   SigC::Signal0<void>                 signal_file_count_changed;
   SigC::Signal0<void>                 signal_match_count_changed;
   SigC::Signal0<void>                 signal_modified_count_changed;
-  SigC::Signal0<void>                 signal_pulse;
+  SigC::Signal0<bool>                 signal_pulse;
 
 protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 
 private:
   struct FindData;
+  class  ScopedAction;
 
   Glib::RefPtr<Gtk::ListStore>  liststore_;
   Gdk::Color                    color_modified_;
   Gdk::Color                    color_load_failed_;
 
-  bool                          find_running_;
-  bool                          find_stop_;
   int                           file_count_;
   int                           modified_count_;
   long                          sum_matches_;
