@@ -155,6 +155,13 @@ void FileTree::find_files(const std::string& dirname, Pcre::Pattern& pattern,
     find_data.error_list->push_back(error.what()); // collect errors but don't fail
   }
 
+  // Work around a strange misbehavior: the tree is kept sorted while the
+  // file search is in progress, which causes the scroll offset to change
+  // slightly.  This in turn confuses TreeView::set_cursor() -- the first
+  // call after the tree was completely filled just doesn't scroll.
+  if (toplevel_.file_count > 0)
+    scroll_to_row(Gtk::TreePath(1));
+
   signal_bound_state_changed(); // emit
 
   if (!find_data.error_list->empty())
@@ -737,9 +744,7 @@ bool FileTree::prev_match_file(Gtk::TreeModel::iterator& iter,
 void FileTree::expand_and_select(const Gtk::TreePath& path)
 {
   expand_to_path(path);
-  get_selection()->select(path);
-
-  scroll_to_row(path); // lazy scrolling implemented since GTK+ 2.1.4
+  set_cursor(path);
 }
 
 void FileTree::on_treestore_rows_reordered(const Gtk::TreeModel::Path& path,

@@ -1,5 +1,16 @@
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (FileTree::expand_and_select): Replace the
+	calls to TreeSelection::select() and TreeView::scroll_to_row()
+	by a single TreeView::set_cursor() call.
+	(FileTree::find_files): After the tree has been filled in, the
+	first call to expand_and_select() doesn't always scroll to the
+	selected row (no matter if set_cursor() or scroll_to_row() is
+	used there).  Explicitely scroll to the first row after filling
+	the tree to work around this problem.
+
+2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* regexxer.desktop.in (Categories): Prepend GNOME to the list.
 
 2004-06-01  Daniel Elstner  <daniel.elstner@gmx.net>
