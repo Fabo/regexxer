@@ -18,7 +18,7 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-AC_INIT([regexxer], [0.1], [daniel.elstner@gmx.net], [regexxer])
+AC_INIT([regexxer], [0.2], [daniel.elstner@gmx.net], [regexxer])
 AC_CONFIG_SRCDIR([src/pcreshell.cc])
 AC_CANONICAL_BUILD()
 AC_CANONICAL_HOST()
@@ -33,7 +33,7 @@ AC_PROG_CXX()
 AC_CHECK_HEADERS([sys/types.h sys/stat.h])
 AC_CHECK_FUNCS([umask])
 
-PKG_CHECK_MODULES([GTKMM], [glib-2.0 >= 2.0.7 sigc++-1.2 >= 1.2.1 gtkmm-2.0 >= 2.0.0])
+PKG_CHECK_MODULES([GTKMM], [glib-2.0 >= 2.0.7 gtk+-2.0 >= 2.0.6 sigc++-1.2 >= 1.2.1 gtkmm-2.0 >= 2.0.0])
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 

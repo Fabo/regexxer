@@ -1,5 +1,11 @@
 2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac (PKG_CHECK_MODULES): Require gtk+-2.0 >= 2.0.6 in
+	order to match the web page.
+	(AC_INIT): Bump version to 0.2.  Yay!
+
+2002-11-06  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac (PKG_CHECK_MODULES): Require glib-2.0 >= 2.0.7.
 	This is necessary due to GLib bug #91222 -- I don't want people
 	thinking regexxer segfaulted randomly all the time because it
