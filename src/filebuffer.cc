@@ -20,6 +20,7 @@
 
 #include "filebuffer.h"
 #include "filebufferundo.h"
+#include "miscutils.h"
 #include "pcreshell.h"
 #include "stringutils.h"
 

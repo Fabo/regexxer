@@ -44,6 +44,8 @@ regexxer_SOURCES =		\
 	main.cc			\
 	mainwindow.cc		\
 	mainwindow.h		\
+	miscutils.cc		\
+	miscutils.h		\
 	pcreshell.cc		\
 	pcreshell.h		\
 	prefdialog.cc		\

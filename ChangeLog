@@ -1,5 +1,17 @@
 2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/miscutils.{cc,h}: New files.  Move Util::prior() and next()
+	hitherto, and add Util::gtk_version_at_least() to do a runtime
+	version check.
+	* src/Makefile.am: Add miscutils.{cc,h}.
+
+	* src/stringutils.h: Move prior() and next() into miscutils.h.
+	* src/filebuffer.cc: #include "miscutils.h".
+	* src/filetree.cc (expand_and_select): Use the lazy scrolling
+	feature if GTK+ >= 2.1.4 is available at runtime.
+
+2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (expand_and_select): Don't pass row_align to
 	Gtk::TreeView::scroll_to_row() if compiling for gtkmm 2.2 since
 	lazy scrolling has now been implemented.

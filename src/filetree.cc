@@ -20,13 +20,12 @@
 
 #include "filetree.h"
 #include "filetreeprivate.h"
+#include "miscutils.h"
 #include "pcreshell.h"
 #include "signalutils.h"
 #include "stringutils.h"
 
 #include <gtkmm/stock.h>
-
-#include <config.h>
 
 using namespace Regexxer::FileTreePrivate;
 
@@ -730,11 +729,10 @@ void FileTree::expand_and_select(const Gtk::TreePath& path)
 
   get_selection()->select(path);
 
-#if REGEXXER_HAVE_GTKMM_22 /* actually a GTK+ issue */
-  scroll_to_row(path);
-#else
-  scroll_to_row(path, 0.5);
-#endif
+  if(Util::gtk_version_at_least(1, 4)) // GTK+ >= 2.1.4
+    scroll_to_row(path);
+  else
+    scroll_to_row(path, 0.5);
 }
 
 void FileTree::on_treestore_sort_column_changed()

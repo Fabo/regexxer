@@ -31,14 +31,6 @@ namespace Util
 
 typedef std::vector< std::pair<int,int> > CaptureVector;
 
-// next() and prior(): Idea shamelessly stolen from boost.
-//
-template <class Iterator>
-inline Iterator next(Iterator pos) { return ++pos; }
-
-template <class Iterator>
-inline Iterator prior(Iterator pos) { return --pos; }
-
 void trim_whitespace(Glib::ustring::const_iterator& pbegin, Glib::ustring::const_iterator& pend);
 bool validate_encoding(const std::string& encoding);
 bool encodings_equal(const std::string& lhs, const std::string& rhs);
