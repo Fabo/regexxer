@@ -43,8 +43,8 @@ AC_MSG_CHECKING([[for libpcre >= ]$1])
 
 pcre_version_string=`$PCRE_CONFIG --version`
 
-pcre_num='\(@<:@0123456789@:>@\+\)'
-pcre_transform='s/^'$pcre_num'\.'$pcre_num'\.\?'$pcre_num'\?$/\1 \\* 1000000 + \2 \\* 1000 + 0\3/p'
+pcre_num='\(@<:@0123456789@:>@\{1,\}\)'
+pcre_transform='s/^'$pcre_num'\.'$pcre_num'\.\{0,1\}'$pcre_num'\{0,1\}$/\1 \\* 1000000 + \2 \\* 1000 + 0\3/p'
 pcre_required=`echo "$1" | sed -n "$pcre_transform"`
 pcre_version=`echo "$pcre_version_string" | sed -n "$pcre_transform"`
 
@@ -63,12 +63,12 @@ AC_MSG_ERROR([[
 ])
 
 AC_MSG_CHECKING([[PCRE_CFLAGS]])
-PCRE_CFLAGS=`$PCRE_CONFIG --cflags`
+PCRE_CFLAGS=`$PCRE_CONFIG --cflags | sed 's,-I/usr/include$,,;s,-I/usr/include ,,g'`
 AC_MSG_RESULT([${PCRE_CFLAGS}])
 AC_SUBST([PCRE_CFLAGS])
 
 AC_MSG_CHECKING([[PCRE_LIBS]])
-PCRE_LIBS=`$PCRE_CONFIG --libs`
+PCRE_LIBS=`$PCRE_CONFIG --libs | sed 's,-L/usr/lib$,,;s,-L/usr/lib ,,g'`
 AC_MSG_RESULT([${PCRE_LIBS}])
 AC_SUBST([PCRE_LIBS])
 ])

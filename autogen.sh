@@ -1,4 +1,5 @@
 #! /bin/sh
+# vim:sta:sw=2:sts=2:
 
 # $Id$
 #
@@ -40,7 +41,7 @@ test -n "$srcdir" || srcdir=.
 origdir=`pwd`
 cd "$srcdir"
 
-ACLOCAL_FLAGS="-I ./macros $ACLOCAL_FLAGS"
+ACLOCAL_FLAGS="-I macros $ACLOCAL_FLAGS"
 AUTOMAKE_FLAGS="--add-missing --gnu $AUTOMAKE_FLAGS"
 
 if test -z "$AUTOGEN_SUBDIR_MODE" && test "x$*" = x
@@ -59,11 +60,11 @@ auto_version=0
 # For instance, "1.7.2" becomes "1 \* 1000000 + 7 \* 1000 + 02".  This string
 # can be fed to 'eval expr' in order to compare version numbers.
 #
-num='\([0123456789]\+\)'
-get_version='s/^.*(GNU automake) '$num'\.'$num'\.\?'$num'\?.*$'
+num='\([0123456789]\{1,\}\)'
+get_version='s/^.*(GNU automake) '$num'\.'$num'\.\{0,1\}'$num'\{0,1\}.*$'
 get_version=$get_version'/\1 \\* 1000000 + \2 \\* 1000 + 0\3/p'
 
-for suffix in -1.5 -1.6 -1.7 -1.8 ""
+for suffix in -1.6 -1.7 -1.8 -1.9 ""
 do
   aclocal_version=`aclocal$suffix --version </dev/null 2>&1 | sed -n "$get_version"`
   automake_version=`automake$suffix --version </dev/null 2>&1 | sed -n "$get_version"`
@@ -94,8 +95,8 @@ rm -rf autom4te.cache
 #WARNINGS=all
 #export WARNINGS
 
-set_option=':'
-test -n "${BASH_VERSION+set}" && set_option='set'
+set_option=:
+test -z "${BASH_VERSION+set}" || set_option=set
 
 $set_option -x
 
@@ -106,7 +107,6 @@ intltoolize --automake		|| exit 1
 "$automake" $AUTOMAKE_FLAGS	|| exit 1
 "$autoconf"			|| exit 1
 cd "$origdir"			|| exit 1
-
 
 if test -z "$AUTOGEN_SUBDIR_MODE"
 then

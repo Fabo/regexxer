@@ -1,3 +1,15 @@
+2004-05-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* macros/pcre.m4 (PCRE_CHECK_VERSION): Strip "-L/usr/lib" from
+	PCRE_LIBS if necessary.  Strip "-I/usr/include" from PCRE_CFLAGS
+	too -- although not required on Debian, it's better not to rely
+	on this.
+
+	* autogen.sh: Standard POSIX regexps suck: according to the sed
+	documentation, both "\?" and "\+" are GNU extensions.  Replace by
+	"\{0,1\}" and "\{1,\}", respectively.
+	* macros/pcre.m4 (PCRE_CHECK_VERSION): ditto.
+
 2004-05-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/mainwindow.cc (MainWindow::on_find_files): Minor coding style
