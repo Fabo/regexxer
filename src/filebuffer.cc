@@ -145,14 +145,13 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
   const Glib::RefPtr<Glib::MainContext> main_context = Glib::MainContext::get_default();
   const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
 
-  remove_tag_current();
+  forget_current_match();
   remove_tag(tagtable->match, begin(), end());
 
-  match_list_.clear();
-  match_count_   = 0;
-  current_match_ = match_list_.end();
-  match_removed_ = false;
-  bound_state_   = (BOUND_FIRST | BOUND_LAST);
+  while(!match_list_.empty())
+    delete_mark(match_list_.front().mark);
+
+  g_return_val_if_fail(match_count_ == 0, 0);
 
   for(iterator line = begin(); !line.is_end(); line.forward_line())
   {
@@ -188,27 +187,13 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
     }
   }
 
+  signal_match_count_changed(match_count_); // emit
   return match_count_;
 }
 
-BoundState FileBuffer::get_bound_state()
+int FileBuffer::get_match_count() const
 {
-  bound_state_ = BOUND_NONE;
-
-  if(match_list_.empty())
-  {
-    bound_state_ = BOUND_FIRST | BOUND_LAST;
-  }
-  else if(current_match_ != match_list_.end())
-  {
-    if(current_match_ == match_list_.begin())
-      bound_state_ |= BOUND_FIRST;
-
-    if(!match_removed_ && current_match_ == --match_list_.end())
-      bound_state_ |= BOUND_LAST;
-  }
-
-  return bound_state_;
+  return match_count_;
 }
 
 /* Move to the next match in the buffer.  If there is a next match
@@ -259,6 +244,26 @@ void FileBuffer::forget_current_match()
   match_removed_ = false;
 }
 
+BoundState FileBuffer::get_bound_state()
+{
+  bound_state_ = BOUND_NONE;
+
+  if(match_list_.empty())
+  {
+    bound_state_ = BOUND_FIRST | BOUND_LAST;
+  }
+  else if(current_match_ != match_list_.end())
+  {
+    if(current_match_ == match_list_.begin())
+      bound_state_ |= BOUND_FIRST;
+
+    if(!match_removed_ && current_match_ == --match_list_.end())
+      bound_state_ |= BOUND_LAST;
+  }
+
+  return bound_state_;
+}
+
 /* Replace the currently selected match with substitution.  References
  * to captured substrings in substitution will be interpolated.  This
  * method indirectly triggers emission of signal_match_count_changed()
@@ -268,23 +273,14 @@ void FileBuffer::replace_current_match(const Glib::ustring& substitution)
 {
   if(!match_removed_ && current_match_ != match_list_.end())
   {
-    const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
-
-    const Glib::ustring substituted_text (Util::substitute_references(
-        substitution.raw(), current_match_->subject.raw(), current_match_->captures));
-
-    // Get the start of the match.
-    const iterator start (current_match_->mark->get_iter());
-    g_return_if_fail(start.begins_tag(tagtable->current));
-
-    // Find the end of the match.
-    iterator stop (start);
-    if(!stop.ends_tag(tagtable->current))
-      stop.forward_to_tag_toggle(tagtable->current);
-
-    // Replace match with new substituted text.
-    insert(erase(start, stop), substituted_text); // triggers on_erase() and on_insert()
+    replace_match(current_match_, substitution);
   }
+}
+
+void FileBuffer::replace_all_matches(const Glib::ustring& substitution)
+{
+  while(!match_list_.empty())
+    replace_match(match_list_.begin(), substitution);
 }
 
 /* Build a preview of what replace_current_match() would do to the current
@@ -433,6 +429,28 @@ void FileBuffer::on_mark_deleted(const Glib::RefPtr<TextBuffer::Mark>& mark)
       update_bound_state();
     }
   }
+}
+
+/**** Regexxer::FileBuffer -- private **************************************/
+
+void FileBuffer::replace_match(std::list<MatchData>::iterator pos, const Glib::ustring& substitution)
+{
+  const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
+
+  const Glib::ustring substituted_text
+      (Util::substitute_references(substitution.raw(), pos->subject.raw(), pos->captures));
+
+  // Get the start of the match.
+  const iterator start (pos->mark->get_iter());
+  g_return_if_fail(start.begins_tag(tagtable->match));
+
+  // Find the end of the match.
+  iterator stop (start);
+  if(!stop.ends_tag(tagtable->match))
+    stop.forward_to_tag_toggle(tagtable->match);
+
+  // Replace match with new substituted text.
+  insert(erase(start, stop), substituted_text); // triggers on_erase() and on_insert()
 }
 
 Glib::RefPtr<FileBuffer::Mark> FileBuffer::create_match_mark(const FileBuffer::iterator& where)

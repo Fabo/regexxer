@@ -160,7 +160,11 @@ MainWindow::MainWindow()
 
   signal_hide().connect_notify(SigC::slot(*filelist_, &FileList::stop_find_files));
 
-  filelist_->signal_switch_buffer.connect(SigC::slot(*this, &MainWindow::on_filelist_switch_buffer));
+  filelist_->signal_match_count_changed.connect(
+      SigC::slot(*this, &MainWindow::on_filelist_match_count_changed));
+
+  filelist_->signal_switch_buffer.connect(
+      SigC::slot(*this, &MainWindow::on_filelist_switch_buffer));
 }
 
 MainWindow::~MainWindow()
@@ -402,9 +406,11 @@ void MainWindow::on_exec_search()
 
   try
   {
-    pcre_pattern_.reset(new Pcre::Pattern(
+    Pcre::Pattern pattern (
         entry_regex_->get_text(),
-        button_caseless_->get_active() ? Pcre::CASELESS : Pcre::CompileOptions(0)));
+        button_caseless_->get_active() ? Pcre::CASELESS : Pcre::CompileOptions(0));
+
+    filelist_->find_matches(pattern, button_multiple_->get_active());
   }
   catch(const Pcre::Error& e)
   {
@@ -412,13 +418,16 @@ void MainWindow::on_exec_search()
     return;
   }
 
-  const long match_count = filelist_->find_matches(*pcre_pattern_, button_multiple_->get_active());
-
-  if(match_count > 0)
+  if(filelist_->get_match_count() > 0)
   {
     filelist_->select_first_file();
     on_go_next(true);
   }
+}
+
+void MainWindow::on_filelist_match_count_changed(long match_count)
+{
+  button_replace_all_->set_sensitive(match_count > 0);
 }
 
 void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState bound)
@@ -430,6 +439,7 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
 
   if(old_buffer)
   {
+    conn_match_count_changed_.disconnect();
     conn_bound_state_changed_.disconnect();
     conn_preview_changed_.disconnect();
 
@@ -441,33 +451,44 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
 
   if(fileinfo && fileinfo->buffer)
   {
-    textview_->set_buffer(fileinfo->buffer);
+    const FileBufferPtr buffer = fileinfo->buffer;
+
+    textview_->set_buffer(buffer);
     set_title_filename(Glib::filename_to_utf8(fileinfo->fullname));
 
-    conn_bound_state_changed_ = fileinfo->buffer->signal_bound_state_changed.
-        connect(SigC::slot(*this, &MainWindow::on_bound_state_changed));
+    conn_match_count_changed_ = buffer->signal_match_count_changed.
+        connect(SigC::slot(*this, &MainWindow::on_buffer_match_count_changed));
 
-    conn_preview_changed_ = fileinfo->buffer->signal_preview_line_changed.
+    conn_bound_state_changed_ = buffer->signal_bound_state_changed.
+        connect(SigC::slot(*this, &MainWindow::on_buffer_bound_state_changed));
+
+    conn_preview_changed_ = buffer->signal_preview_line_changed.
         connect(SigC::slot(*this, &MainWindow::update_preview));
 
-    on_bound_state_changed(fileinfo->buffer->get_bound_state());
+    on_buffer_match_count_changed(buffer->get_match_count());
+    on_buffer_bound_state_changed(buffer->get_bound_state());
   }
   else
   {
     textview_->set_buffer(FileBuffer::create());
     set_title_filename();
 
-    on_bound_state_changed(BOUND_FIRST | BOUND_LAST);
+    on_buffer_match_count_changed(0);
+    on_buffer_bound_state_changed(BOUND_FIRST | BOUND_LAST);
   }
 
   update_preview();
 }
 
-void MainWindow::on_bound_state_changed(BoundState bound)
+void MainWindow::on_buffer_match_count_changed(int match_count)
+{
+  button_replace_file_->set_sensitive(match_count > 0);
+}
+
+void MainWindow::on_buffer_bound_state_changed(BoundState bound)
 {
   button_prev_->set_sensitive((bound & BOUND_FIRST) == 0 || button_prev_file_->sensitive());
   button_next_->set_sensitive((bound & BOUND_LAST)  == 0 || button_next_file_->sensitive());
-  button_replace_file_->set_sensitive((bound & BOUND_MASK) != BOUND_MASK);
 }
 
 void MainWindow::on_go_next_file(bool move_forward)
@@ -498,41 +519,26 @@ void MainWindow::on_replace()
   if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer()))
   {
     buffer->replace_current_match(entry_substitution_->get_text());
+    on_go_next(true);
   }
 }
 
 void MainWindow::on_replace_file()
 {
+  if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer()))
+  {
+    buffer->replace_all_matches(entry_substitution_->get_text());
+  }
 }
 
 void MainWindow::on_replace_all()
 {
-  const Glib::RefPtr<Glib::MainContext> main_context = Glib::MainContext::get_default();
-  const Glib::ustring substitution = entry_substitution_->get_text();
+  filelist_->replace_all_matches(entry_substitution_->get_text());
 
-  Glib::RefPtr<Gtk::TextMark> mark;
-
-  do
-  {
-    while(main_context->iteration(false)) {}
-
-    if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(textview_->get_buffer()))
-    {
-      do
-      {
-        buffer->replace_current_match(substitution);
-        mark = buffer->get_next_match(true);
-      }
-      while(mark);
-    }
-  }
-  while(filelist_->select_next_file(true));
-
-  if(mark)
-  {
-    if(const FileBufferPtr buffer = FileBufferPtr::cast_dynamic(mark->get_buffer()))
-      textview_->scroll_to_mark(mark, 0.2);
-  }
+  button_prev_file_->set_sensitive(false);
+  button_prev_     ->set_sensitive(false);
+  button_next_     ->set_sensitive(false);
+  button_next_file_->set_sensitive(false);
 }
 
 void MainWindow::update_preview()
@@ -543,8 +549,7 @@ void MainWindow::update_preview()
     const int pos = buffer->get_line_preview(entry_substitution_->get_text(), preview);
     entry_preview_->set_text(preview);
 
-    button_replace_    ->set_sensitive(pos >= 0);
-    button_replace_all_->set_sensitive(pos >= 0);
+    button_replace_->set_sensitive(pos >= 0);
 
     // Beware, strange code ahead!
     //

@@ -21,7 +21,6 @@
 #ifndef REGEXXER_MAINWINDOW_H_INCLUDED
 #define REGEXXER_MAINWINDOW_H_INCLUDED
 
-#include <memory>
 #include <gtkmm/tooltips.h>
 #include <gtkmm/window.h>
 
@@ -69,6 +68,8 @@ private:
   FileList*         filelist_;
   Gtk::TextView*    textview_;
   Gtk::Entry*       entry_preview_;
+
+  SigC::Connection  conn_match_count_changed_;
   SigC::Connection  conn_bound_state_changed_;
   SigC::Connection  conn_preview_changed_;
 
@@ -80,8 +81,6 @@ private:
   Gtk::Button*      button_replace_file_;
   Gtk::Button*      button_replace_all_;
 
-  std::auto_ptr<Pcre::Pattern> pcre_pattern_;
-
   Gtk::Widget* create_toolbar();
   Gtk::Widget* create_buttonbox();
   Gtk::Widget* create_left_pane();
@@ -91,8 +90,11 @@ private:
   void on_find_files();
   void on_exec_search();
 
+  void on_filelist_match_count_changed(long match_count);
   void on_filelist_switch_buffer(Util::SharedPtr<FileInfo> fileinfo, BoundState bound);
-  void on_bound_state_changed(BoundState bound);
+
+  void on_buffer_match_count_changed(int match_count);
+  void on_buffer_bound_state_changed(BoundState bound);
 
   void on_go_next_file(bool move_forward);
   void on_go_next(bool move_forward);

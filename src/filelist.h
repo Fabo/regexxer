@@ -62,9 +62,12 @@ public:
   void select_first_file();
   bool select_next_file(bool move_forward);
 
-  long find_matches(Pcre::Pattern& pattern, bool multiple);
+  void find_matches(Pcre::Pattern& pattern, bool multiple);
+  long get_match_count() const;
+  void replace_all_matches(const Glib::ustring& substitution);
 
-  SigC::Signal2<void,FileInfoPtr,BoundState> signal_switch_buffer;
+  SigC::Signal2<void,FileInfoPtr,BoundState>  signal_switch_buffer;
+  SigC::Signal1<void,long>                    signal_match_count_changed;
 
 private:
   struct FindData;

@@ -219,11 +219,10 @@ void FileList::select_first_file()
   }
 }
 
-long FileList::find_matches(Pcre::Pattern& pattern, bool multiple)
+void FileList::find_matches(Pcre::Pattern& pattern, bool multiple)
 {
   const FileListColumns& columns = filelist_columns();
-  Gtk::TreeModel::iterator iter_match_last;
-  sum_matches_ = 0;
+  long new_sum_matches = 0;
 
   for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
   {
@@ -237,26 +236,58 @@ long FileList::find_matches(Pcre::Pattern& pattern, bool multiple)
         continue;
     }
 
-    const int matches = fileinfo->buffer->find_matches(pattern, multiple);
+    const int n_matches = fileinfo->buffer->find_matches(pattern, multiple);
 
-    if(matches > 0)
+    if(n_matches > 0)
     {
-      if(sum_matches_ == 0)
+      if(new_sum_matches == 0)
         path_match_first_ = Gtk::TreePath(iter);
 
-      iter_match_last = iter;
+      path_match_last_ = Gtk::TreePath(iter);
     }
 
-    (*iter)[columns.matchcount] = matches;
-
-    sum_matches_ += matches;
+    (*iter)[columns.matchcount] = n_matches;
+    new_sum_matches += n_matches;
   }
 
-  if(iter_match_last)
-    path_match_last_ = Gtk::TreePath(iter_match_last);
+  sum_matches_ = new_sum_matches;
+  signal_match_count_changed(sum_matches_); // emit
+}
 
+long FileList::get_match_count() const
+{
   return sum_matches_;
 }
+
+void FileList::replace_all_matches(const Glib::ustring& substitution)
+{
+  const Glib::RefPtr<Glib::MainContext> main_context = Glib::MainContext::get_default();
+  const FileListColumns& columns = filelist_columns();
+
+  for(Gtk::TreeModel::iterator iter = liststore_->children().begin(); iter; ++iter)
+  {
+    while(main_context->iteration(false)) {}
+
+    const FileInfoPtr fileinfo = (*iter)[columns.fileinfo];
+    g_return_if_fail(fileinfo);
+
+    if(fileinfo->buffer)
+    {
+      fileinfo->buffer->replace_all_matches(substitution);
+
+      sum_matches_ -= (*iter)[columns.matchcount];
+      (*iter)[columns.matchcount] = 0;
+
+      g_return_if_fail(fileinfo->buffer->get_match_count() == 0);
+    }
+  }
+
+  g_return_if_fail(sum_matches_ == 0);
+
+  signal_match_count_changed(sum_matches_); // emit
+}
+
+/**** Regexxer::FileList -- private ****************************************/
 
 void FileList::find_recursively(const std::string& dirname, FileList::FindData& find_data)
 {
@@ -413,6 +444,8 @@ void FileList::on_buffer_match_count_changed(int match_count)
       path_match_last_ = path;
     }
   }
+
+  signal_match_count_changed(sum_matches_); // emit
 }
 
 void FileList::load_file(const Util::SharedPtr<FileInfo>& fileinfo)

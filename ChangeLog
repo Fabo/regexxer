@@ -1,5 +1,11 @@
 2002-10-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filebuffer.{cc,h} src/filelist.{cc,h} src/mainwindow.{cc,h}:
+	Implement match substitution for the current file and all files,
+	and get notification on match count changes working correctly.
+
+2002-10-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/Makefile.am (DEFS): Define all the *_DISABLE_DEPRECATED
 	macros just to prove regexxer is legacy-free ;)
 

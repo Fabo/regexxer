@@ -90,10 +90,14 @@ public:
 
   int find_matches(Pcre::Pattern& pattern, bool multiple);
 
-  BoundState get_bound_state();
+  int get_match_count() const;
   Glib::RefPtr<Mark> get_next_match(bool move_forward);
   void forget_current_match();
+
+  BoundState get_bound_state();
+
   void replace_current_match(const Glib::ustring& substitution);
+  void replace_all_matches(const Glib::ustring& substitution);
 
   int get_line_preview(const Glib::ustring& substitution, Glib::ustring& preview);
 
@@ -115,6 +119,8 @@ private:
   bool                            match_removed_;
   BoundState                      bound_state_;
   bool                            preview_line_changed_;
+
+  void replace_match(std::list<MatchData>::iterator pos, const Glib::ustring& substitution);
 
   Glib::RefPtr<Mark> create_match_mark(const iterator& where);
   bool is_match_mark(const Glib::RefPtr<Mark>& mark);
