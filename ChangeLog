@@ -1,5 +1,9 @@
 2002-10-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac: Require gtkmm-2.0 >= 2.0.0.
+
+2002-10-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/fileio.cc: Dump std::[io]fstream in favor of Glib::IOChannel.
 	It's less code now and the error reporting should be better too.
 
