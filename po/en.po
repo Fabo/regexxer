@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.7\n"
 "Report-Msgid-Bugs-To: daniel.elstner@gmx.net\n"
-"POT-Creation-Date: 2004-05-16 01:19+0200\n"
+"POT-Creation-Date: 2004-05-16 07:04+0200\n"
 "PO-Revision-Date: 2004-05-05 15:35+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -53,11 +53,11 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 
-#: src/mainwindow.cc:304
+#: src/mainwindow.cc:305
 msgid "Select a folder"
 msgstr "Select a folder"
 
-#: src/mainwindow.cc:343
+#: src/mainwindow.cc:336
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -65,15 +65,15 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 
-#: src/mainwindow.cc:370
+#: src/mainwindow.cc:363
 msgid "The file search pattern is invalid."
 msgstr "The file search pattern is invalid."
 
-#: src/mainwindow.cc:376
+#: src/mainwindow.cc:369
 msgid "The following errors occurred during search:"
 msgstr "The following errors occurred during search:"
 
-#: src/mainwindow.cc:401
+#: src/mainwindow.cc:394
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -81,7 +81,7 @@ msgstr ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:403
+#: src/mainwindow.cc:396
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -89,7 +89,7 @@ msgstr ""
 "Error in regular expression:\n"
 "%1"
 
-#: src/mainwindow.cc:622
+#: src/mainwindow.cc:615
 msgid "The following errors occurred during save:"
 msgstr "The following errors occurred during save:"
 
