@@ -22,7 +22,8 @@ ACLOCAL_AMFLAGS = -I $(top_srcdir)/macros
 
 SUBDIRS = pixmaps src
 
-EXTRA_DIST = autogen.sh macros/cxx.m4 macros/pcre.m4
+dist_noinst_SCRIPTS = autogen.sh
+dist_noinst_DATA    = macros/cxx.m4 macros/pcre.m4
 
 dist_desktop_DATA = regexxer.desktop
 desktopdir        = $(datadir)/applications

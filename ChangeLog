@@ -1,5 +1,13 @@
 2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac (AM_INIT_AUTOMAKE): Require automake >= 1.6 and
+	make use of the "check-news" option.
+
+	* Makefile.am (EXTRA_DIST): Get rid of EXTRA_DIST and properly
+	put the files into dist_noinst_SCRIPTS and dist_noinst_DATA.
+
+2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* autogen.sh: Delete all scripts and symbolic links that will
 	be recreated by automake --add-missing.
 
