@@ -63,7 +63,8 @@ namespace Regexxer
 
 FileInfo::FileInfo(const std::string& fullname_)
 :
-  fullname (fullname_)
+  fullname    (fullname_),
+  load_failed (false)
 {}
 
 FileInfo::~FileInfo()
@@ -115,10 +116,15 @@ FileList::FileList()
   append_column("File", columns.filename);
   append_column("#",    columns.matchcount);
 
-  get_column(0)->set_resizable(true);
+  Gtk::TreeView::Column *const file_column = get_column(0);
+  file_column->set_cell_data_func(*file_column->get_first_cell_renderer(),
+                                  SigC::slot(*this, &FileList::cell_data_func));
+  file_column->set_resizable(true);
   set_search_column(0);
 
   Gtk::TreeView::Column *const count_column = get_column(1);
+  count_column->set_cell_data_func(*count_column->get_first_cell_renderer(),
+                                   SigC::slot(*this, &FileList::cell_data_func));
   count_column->set_alignment(1.0);
   count_column->get_first_cell_renderer()->property_xalign() = 1.0;
 
@@ -289,6 +295,30 @@ void FileList::replace_all_matches(const Glib::ustring& substitution)
 
 /**** Regexxer::FileList -- private ****************************************/
 
+void FileList::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)
+{
+  Gtk::CellRendererText *const renderer = dynamic_cast<Gtk::CellRendererText*>(cell);
+
+  g_return_if_fail(renderer != 0);
+  g_return_if_fail(iter);
+
+  if(const FileInfoPtr fileinfo = (*iter)[filelist_columns().fileinfo])
+  {
+    if(fileinfo->load_failed)
+    {
+      renderer->property_foreground_gdk() = get_style()->get_text(Gtk::STATE_INSENSITIVE);
+      return;
+    }
+    else if(fileinfo->buffer && fileinfo->buffer->get_modified())
+    {
+      renderer->property_foreground_gdk() = Gdk::Color("red");
+      return;
+    }
+  }
+
+  renderer->property_foreground_gdk().reset_value();
+}
+
 void FileList::find_recursively(const std::string& dirname, FileList::FindData& find_data)
 {
   using namespace Glib;
@@ -349,11 +379,15 @@ void FileList::on_selection_changed()
       load_file(fileinfo);
 
     conn_match_count_.disconnect();
+    conn_modified_changed_.disconnect();
 
     if(fileinfo->buffer)
     {
       conn_match_count_ = fileinfo->buffer->signal_match_count_changed.
           connect(SigC::slot(*this, &FileList::on_buffer_match_count_changed));
+
+      conn_modified_changed_ = fileinfo->buffer->signal_modified_changed().
+          connect(SigC::slot(*this, &FileList::on_buffer_modified_changed));
     }
 
     if(sum_matches_ > 0)
@@ -448,6 +482,14 @@ void FileList::on_buffer_match_count_changed(int match_count)
   signal_match_count_changed(sum_matches_); // emit
 }
 
+void FileList::on_buffer_modified_changed()
+{
+  if(const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
+  {
+    liststore_->row_changed(Gtk::TreePath(iter), iter);
+  }
+}
+
 void FileList::load_file(const Util::SharedPtr<FileInfo>& fileinfo)
 {
   std::ifstream input_stream (fileinfo->fullname.c_str(), std::ios::in | std::ios::binary);
@@ -475,6 +517,7 @@ void FileList::load_file(const Util::SharedPtr<FileInfo>& fileinfo)
     }
     if(!buffer)
     {
+      fileinfo->load_failed = true;
       std::cerr << "Couldn't convert `"
                 << Glib::filename_to_utf8(fileinfo->fullname)
                 << "' to UTF-8.\n";
@@ -482,8 +525,10 @@ void FileList::load_file(const Util::SharedPtr<FileInfo>& fileinfo)
     }
   }
 
-  fileinfo->encoding = encoding;
-  fileinfo->buffer   = buffer;
+  buffer->set_modified(false);
+  fileinfo->load_failed = false;
+  fileinfo->encoding    = encoding;
+  fileinfo->buffer      = buffer;
 }
 
 Glib::RefPtr<FileBuffer> FileList::load_stream(std::istream& input)

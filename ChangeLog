@@ -1,5 +1,9 @@
 2002-10-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filelist.{cc,h}: Paint rows of modified files in red.
+
+2002-10-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc: Make the TextView non-editable if no file
 	is loaded.
 

@@ -37,9 +37,10 @@ namespace Regexxer
 
 struct FileInfo : public Util::SharedObject
 {
-  std::string              fullname;
-  Glib::ustring            encoding;
-  Glib::RefPtr<FileBuffer> buffer;
+  std::string               fullname;
+  std::string               encoding;
+  Glib::RefPtr<FileBuffer>  buffer;
+  bool                      load_failed;
 
   explicit FileInfo(const std::string& fullname_);
   ~FileInfo();
@@ -77,13 +78,17 @@ private:
   bool                          find_stop_;
   long                          sum_matches_;
   SigC::Connection              conn_match_count_;
+  SigC::Connection              conn_modified_changed_;
   Gtk::TreePath                 path_match_first_;
   Gtk::TreePath                 path_match_last_;
+
+  void cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
 
   void find_recursively(const std::string& dirname, FindData& find_data);
 
   void on_selection_changed();
   void on_buffer_match_count_changed(int match_count);
+  void on_buffer_modified_changed();
 
   void load_file(const Util::SharedPtr<FileInfo>& fileinfo);
   Glib::RefPtr<FileBuffer> load_stream(std::istream& input);
