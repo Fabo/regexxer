@@ -1028,6 +1028,7 @@
 			  <child>
 			    <widget class="GtkEntry" id="entry_preview">
 			      <property name="visible">True</property>
+			      <property name="can_focus">False</property>
 			      <property name="tooltip" translatable="yes">Preview of the substitution</property>
 			      <property name="editable">False</property>
 			      <property name="visibility">True</property>
