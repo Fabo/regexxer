@@ -20,14 +20,14 @@
 
 ## REGEXXER_PKG_PATH_PROG(variable, package, executable)
 ##
-## Like AC_PATH_PROG(variable, executable, [not found], <extra_path>), where
-## <extra_path> is set to the contents of $PATH prepended by the package's
-## binary executable directory.  This should catch even the weirdest setups.
-## An error message is generated if the executable cannot be found anywhere
-## in the resulting path.
+## Like AC_PATH_PROG(variable, executable,, <extra_path>), where <extra_path>
+## is set to the contents of $PATH prepended by the package's binary executable
+## directory.  This should catch even the weirdest setups.  An error message is
+## generated if the executable cannot be found anywhere in the resulting path.
 ##
 AC_DEFUN([REGEXXER_PKG_PATH_PROG],
 [
+m4_if([$3],, [AC_FATAL([3 arguments required])])
 AC_REQUIRE([PKG_CHECK_MODULES])
 
 pkg_search_path=$PATH
@@ -38,7 +38,7 @@ AC_PATH_PROG([$1], [$3],, [$pkg_search_path])
 
 AS_IF([test "x$$1" = x],
 [
-AC_MSG_ERROR([[
+AC_MSG_FAILURE([[
 *** Ooops, couldn't find ]$3[.  Actually this should
 *** never happen at this point, which means your system is really broken.
 ]])

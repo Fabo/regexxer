@@ -1,5 +1,15 @@
 2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* macros/misc.m4 (REGEXXER_PKG_PATH_PROG): Replace AC_MSG_ERROR()
+	by AC_MSG_FAILURE(), and add an autoconf-time check to make sure
+	all necessary arguments are specified.
+
+	* macros/pcre.m4: Replace AC_MSG_ERROR() by AC_MSG_FAILURE(), and
+	add a few redirections of stderr to the config.log file descriptor
+	where appropriate.
+
+2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetreeprivate.h (FileTreePrivate::filetree_columns):
 	Remove the G_GNUC_CONST attribute since in this function's case
 	it doesn't gain us anything anyway.
