@@ -23,6 +23,7 @@
 #include "miscutils.h"
 #include "translation.h"
 
+#include <popt.h>
 #include <glib.h>
 #include <glibmm.h>
 #include <gconfmm.h>
@@ -34,6 +35,8 @@
 #include <gtkmm/stockitem.h>
 #include <gtkmm/window.h>
 
+#include <cstdio>
+#include <cstdlib>
 #include <exception>
 #include <list>
 
@@ -84,6 +87,75 @@ const StockItemData regexxer_stock_items[] =
 
 const char *const locale_directory = REGEXXER_DATADIR G_DIR_SEPARATOR_S "locale";
 
+
+std::auto_ptr<Regexxer::InitState> parse_command_line(int argc, char** argv)
+{
+  enum
+  {
+    NONE   = POPT_ARG_NONE,
+    STRING = POPT_ARG_STRING
+  };
+  static const poptOption option_table[] =
+  {
+    { "pattern",      'p', STRING, 0, 'p', N_("Find files matching PATTERN"), N_("PATTERN") },
+    { "no-recursion", 'R', NONE,   0, 'R', N_("Do not recurse into subdirectories"),  0     },
+    { "hidden",       'h', NONE,   0, 'h', N_("Also find hidden files"),              0     },
+    { "regex",        'e', STRING, 0, 'e', N_("Find text matching REGEX"),    N_("REGEX")   },
+    { "no-global",    'G', NONE,   0, 'G', N_("Find only the first match in a line"), 0     },
+    { "ignore-case",  'i', NONE,   0, 'i', N_("Ignore case distinctions"),            0     },
+    { "substitution", 's', STRING, 0, 's', N_("Replace matches with STRING"), N_("STRING")  },
+    { "no-autorun",   'A', NONE,   0, 'A', N_("Do not automatically start search"),   0     },
+    POPT_AUTOHELP
+    POPT_TABLEEND
+  };
+
+  std::auto_ptr<Regexxer::InitState> init (new Regexxer::InitState());
+
+  const poptContext context = poptGetContext(0, argc, const_cast<const char**>(argv),
+                                             option_table, 0);
+
+  poptSetOtherOptionHelp(context, _("[OPTION]... [FOLDER]"));
+
+  bool autorun = true;
+  int  rc;
+
+  while ((rc = poptGetNextOpt(context)) >= 0)
+    switch (rc)
+    {
+      case 'p': init->pattern      = Glib::locale_to_utf8(poptGetOptArg(context)); break;
+      case 'e': init->regex        = Glib::locale_to_utf8(poptGetOptArg(context)); break;
+      case 's': init->substitution = Glib::locale_to_utf8(poptGetOptArg(context)); break;
+      case 'R': init->recursive    = false; break;
+      case 'h': init->hidden       = true;  break;
+      case 'G': init->global       = false; break;
+      case 'i': init->ignorecase   = true;  break;
+      case 'A': autorun            = false; break;
+    }
+
+  if (rc < -1)
+  {
+    std::fprintf(stderr, "%s: %s\n%s\n",
+                 poptBadOption(context, 0), poptStrerror(rc),
+                 _("Try `regexxer --help' for more information."));
+    std::exit(1);
+  }
+
+  if (const char *const folder = poptGetArg(context))
+  {
+    init->folder  = folder;
+    init->autorun = autorun;
+
+    if (poptPeekArg(context)) // more leftover arguments?
+    {
+      poptPrintUsage(context, stderr, 0);
+      std::exit(1);
+    }
+  }
+
+  poptFreeContext(context);
+
+  return init;
+}
 
 void register_stock_items()
 {
@@ -177,16 +249,23 @@ int main(int argc, char** argv)
   {
     Gnome::Conf::init();
     Gtk::Main main_instance (&argc, &argv);
-
-    Util::initialize_gettext(PACKAGE_TARNAME, locale_directory);
-
     Glib::set_application_name(PACKAGE_NAME);
+
+    // Set the target encoding of the translation domain to UTF-8 only after
+    // parse_command_line() finished, so that the help message is displayed
+    // correctly on the console in locale encoding.
+    Util::initialize_gettext(PACKAGE_TARNAME, locale_directory);
+    std::auto_ptr<Regexxer::InitState> init_state = parse_command_line(argc, argv);
+    Util::enable_utf8_gettext(PACKAGE_TARNAME);
+
     register_stock_items();
     set_default_window_icon();
 
     Regexxer::MainWindow window;
 
     initialize_configuration();
+    window.initialize(init_state);
+
     Gtk::Main::run(*window.get_window());
   }
   catch (const Glib::Error& error)

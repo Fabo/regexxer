@@ -82,15 +82,22 @@ Glib::ustring compose_impl(const Glib::ustring& format,
 void Util::initialize_gettext(const char* domain, const char* localedir)
 {
   bindtextdomain(domain, localedir);
-# if HAVE_BIND_TEXTDOMAIN_CODESET
-  bind_textdomain_codeset(domain, "UTF-8");
-# endif
   textdomain(domain);
 }
 #else
 void Util::initialize_gettext(const char*, const char*)
 {}
 #endif /* !ENABLE_NLS */
+
+#if ENABLE_NLS && HAVE_BIND_TEXTDOMAIN_CODESET
+void Util::enable_utf8_gettext(const char* domain)
+{
+  bind_textdomain_codeset(domain, "UTF-8");
+}
+#else
+void Util::enable_utf8_gettext(const char*)
+{}
+#endif /* !(ENABLE_NLS && HAVE_BIND_TEXTDOMAIN_CODESET) */
 
 const char* Util::translate(const char* msgid)
 {

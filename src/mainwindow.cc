@@ -104,6 +104,25 @@ FileErrorDialog::~FileErrorDialog()
 namespace Regexxer
 {
 
+/**** Regexxer::InitState **************************************************/
+
+InitState::InitState()
+:
+  folder        (Glib::get_current_dir()),
+  pattern       ("*"),
+  regex         (),
+  substitution  (),
+  recursive     (true),
+  hidden        (false),
+  global        (true),
+  ignorecase    (false),
+  autorun       (false)
+{}
+
+InitState::~InitState()
+{}
+
+
 /**** Regexxer::MainWindow::BusyAction *************************************/
 
 class MainWindow::BusyAction
@@ -149,16 +168,29 @@ MainWindow::MainWindow()
   textview_->set_buffer(FileBuffer::create());
   window_->set_title(PACKAGE_NAME);
 
-  entry_folder_->set_text(
-      Util::filename_to_utf8_fallback(Util::shorten_pathname(Glib::get_current_dir())));
-
   connect_signals();
-
-  entry_pattern_->set_text("*");
 }
 
 MainWindow::~MainWindow()
 {}
+
+void MainWindow::initialize(std::auto_ptr<InitState> init)
+{
+  entry_folder_->set_text(
+      Util::filename_to_utf8_fallback(Util::shorten_pathname(init->folder)));
+
+  entry_pattern_     ->set_text(init->pattern);
+  entry_regex_       ->set_text(init->regex);
+  entry_substitution_->set_text(init->substitution);
+
+  button_recursive_->set_active(init->recursive);
+  button_hidden_   ->set_active(init->hidden);
+  button_multiple_ ->set_active(init->global);
+  button_caseless_ ->set_active(init->ignorecase);
+
+  if (init->autorun)
+    Glib::signal_idle().connect(sigc::bind_return(controller_.find_files.slot(), false));
+}
 
 /**** Regexxer::MainWindow -- private **************************************/
 

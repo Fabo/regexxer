@@ -97,9 +97,9 @@ AC_CACHE_CHECK(
   [
     AC_LANG_PROGRAM(
     [[
-      #include <stdio.h>
-      #include <stdlib.h>
-      #include <pcre.h>
+#     include <stdio.h>
+#     include <stdlib.h>
+#     include <pcre.h>
     ]],[[
       const char* errmessage = NULL;
       int erroffset = 0;

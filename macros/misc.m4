@@ -45,3 +45,50 @@ AC_MSG_FAILURE([[
 ])
 ])
 
+
+## REGEXXER_LIB_POPT()
+##
+## Check whether the popt library and its header file <popt.h> are
+## available.  On success, the output variable POPT_LIBS will be set.
+##
+AC_DEFUN([REGEXXER_LIB_POPT],
+[
+AC_CACHE_CHECK(
+  [for libpopt],
+  [regexxer_cv_has_lib_popt],
+[
+  AC_LANG_PUSH([C])
+  regexxer_save_LIBS=$LIBS
+  LIBS="$LIBS -lpopt"
+
+  AC_LINK_IFELSE(
+  [
+    AC_LANG_PROGRAM(
+    [[
+#     include <popt.h>
+    ]],[[
+      static struct poptOption option_table@<:@@:>@ = { POPT_TABLEEND };
+      poptContext context;
+
+      context = poptGetContext(0, 0, 0, option_table, 0);
+      poptFreeContext(context);
+    ]])
+  ],
+    [regexxer_cv_has_lib_popt=yes],
+    [regexxer_cv_has_lib_popt=no])
+
+  LIBS=$regexxer_save_LIBS
+  AC_LANG_POP([C])
+])
+
+AS_IF([test "x$regexxer_cv_has_lib_popt" = xno],
+[
+AC_MSG_FAILURE([[
+*** The popt library is required in order to compile $PACKAGE.
+*** Please install the libpopt development package of your distribution.
+]])
+])
+
+AC_SUBST([POPT_LIBS], ['-lpopt'])
+])
+

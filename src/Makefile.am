@@ -70,5 +70,5 @@ global_defines = \
 AM_CPPFLAGS = -I$(top_builddir) -I$(top_srcdir) $(global_defines) $(PKG_CFLAGS) $(PCRE_CFLAGS)
 regexxer_DEPENDENCIES = exported-symbols
 regexxer_LDFLAGS = $(REGEXXER_VERSION_SCRIPT)
-regexxer_LDADD = $(LIBINTL) $(PKG_LIBS) $(PCRE_LIBS)
+regexxer_LDADD = $(LIBINTL) $(PKG_LIBS) $(PCRE_LIBS) $(POPT_LIBS)
 

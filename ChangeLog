@@ -1,3 +1,32 @@
+2004-07-13  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* macros/pcre.m4 (PCRE_CHECK_UTF8): Make sure the preprocessor
+	directives in the test program start in the first column, just
+	in case we do hit on some ancient compiler that requires it.
+
+	* macros/misc.m4 (REGEXXER_LIB_POPT): New macro that checks
+	whether libpopt and popt.h are available and usable.
+
+	* configure.ac: Use REGEXXER_LIB_POPT().
+	* src/Makefile.am (regexxer_LDADD): Add $(POPT_LIBS).
+
+	* src/mainwindow.{cc,h} (InitState): New struct that defines
+	the initial state of main window's entry boxes and check buttons.
+	(MainWindow::initialize): New method to initialize the UI elements
+	with the values defined by a InitState object.
+
+	* src/translation.{cc,h} (initialize_gettext): Remove the call to
+	bind_textdomain_codeset().
+	(enable_utf8_gettext): New function that calls
+	bind_textdomain_codeset() if available.  The separation became
+	necessary in order to allow for the command line help message to
+	be printed to the console in locale encoding.
+
+	* src/main.cc (parse_command_line): New function which parses the
+	command line arguments and returns an InitState object.
+	(main): Invoke parse_command_line(), enable_utf8_gettext() and
+	MainWindow::initialize() as appropriate.
+
 2004-07-12  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/stringutils.cc (shell_pattern_to_regex): Handle ']' and '!'
