@@ -1,3 +1,11 @@
+2002-10-19  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* pixmaps/stock_save_all_24.png: New file.
+	* pixmaps/Makefile.am: Use gdk-pixbuf-csource to generate inline
+	stock pixbufs.
+	* configure.ac: Check for gdk-pixbuf-csource.
+	* src/main.cc: Register new stock items for regexxer.
+
 2002-10-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filelist.{cc,h}: Paint rows of modified files in red.

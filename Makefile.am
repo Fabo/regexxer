@@ -20,7 +20,7 @@
 
 ACLOCAL_AMFLAGS = -I $(top_srcdir)/macros
 
-SUBDIRS = src pixmaps
+SUBDIRS = pixmaps src
 
-EXTRA_DIST = autogen.sh
+EXTRA_DIST = autogen.sh macros/pcre.m4
 

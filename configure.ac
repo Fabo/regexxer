@@ -42,13 +42,27 @@ PKG_CHECK_MODULES(GTKMM, sigc++-1.2 >= 1.2.1 gtkmm-2.0 >= 1.3.27)
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 
+gdk_pixbuf_exec_prefix=`${PKG_CONFIG:-pkg-config} --variable=exec_prefix gdk-pixbuf-2.0 2>&5`
+prog_search_path="${gdk_pixbuf_exec_prefix:+$gdk_pixbuf_exec_prefix/bin$PATH_SEPARATOR}$PATH"
+
+AC_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-csource], [not found], [$prog_search_path])
+if test "x$GDK_PIXBUF_CSOURCE" = "xnot found"
+then
+{
+AC_MSG_ERROR([[
+*** Ooops, couldn't find gdk-pixbuf-csource.  Actually this should
+*** never happen at this point, which means your system is really broken.
+]])
+}
+fi
+
 PCRE_CHECK_VERSION([3.4])
 PCRE_CHECK_UTF8()
 
 AC_CONFIG_FILES([
   Makefile
-  src/Makefile
   pixmaps/Makefile
+  src/Makefile
 ])
 
 AC_OUTPUT()
