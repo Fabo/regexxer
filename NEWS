@@ -2,6 +2,7 @@
 regexxer 0.4 (2002-11-18)
 
 	* menu bar added (can be disabled)
+	* install regexxer.desktop file provided by Ross Burton
 	* new rock-solid user input handling (internal)
 	* fixed a nasty bug that occured when changing the sort order
 	* fixed an annoying bug in the unsaved files counter
