@@ -479,6 +479,20 @@ void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
   Gtk::TreeView::on_style_changed(previous_style);
 }
 
+/* Expand a directory node if it got the activate signal.
+ * That is, when the spacebar was pressed.
+ */
+void FileTree::on_row_activated(const Gtk::TreePath& path, Column*)
+{
+  if(treestore_->get_iter(path)->children())
+  {
+    if(row_expanded(path))
+      collapse_row(path);
+    else
+      expand_row(path, false);
+  }
+}
+
 /* Expand a directory node when the user clicked anywhere inside the row.
  * It's probably easier to hit the row than the little expander arrow :)
  */

@@ -1,5 +1,10 @@
 2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (on_row_activated): Override, in order to
+	expand/collapse a directory node when the spacebar was pressed.
+
+2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (on_button_release_event): Override, in
 	order to expand a directory node when the user clicked anywhere
 	inside the row.  This might improve usability a bit.
