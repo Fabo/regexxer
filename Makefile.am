@@ -53,9 +53,7 @@ endif
 
 install-schemas: $(schemas_DATA)
 	@$(POST_INSTALL)
-	@file='$(schemas_DATA)'; test -f "$$file" || file="$(srcdir)/$$file"; \
-	echo " $(gconftool_command) --makefile-install-rule $$file"; \
-	$(gconftool_command) --makefile-install-rule $$file
+	$(gconftool_command) --makefile-install-rule $^
 	@echo; \
 	echo "*** NOTE ***"; \
 	echo "If you executed src/regexxer before running 'make install' as privileged user,"; \
@@ -65,9 +63,7 @@ install-schemas: $(schemas_DATA)
 	echo "  gconftool-2 --shutdown; gconftool-2 --spawn"; \
 	echo
 
-uninstall-schemas:
+uninstall-schemas: $(schemas_DATA)
 	@$(NORMAL_UNINSTALL)
-	@file='$(schemas_DATA)'; test -f "$$file" || file="$(srcdir)/$$file"; \
-	echo " $(gconftool_command) --makefile-uninstall-rule $$file"; \
-	$(gconftool_command) --makefile-uninstall-rule $$file
+	$(gconftool_command) --makefile-uninstall-rule $^
 

@@ -1,5 +1,14 @@
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* Makefile.am (install-schemas): Simplify.  Since regexxer.schemas
+	is now a generated file it is always placed in the build directory.
+	(uninstall-schemas): Likewise.  Also add $(schemas_DATA) to the
+	prerequisites so that the rule will work with a clean tree.  Having
+	make uninstall generate files is a little awkward, but I cannot see
+	a way around that :/
+
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* Makefile.am (CLEANFILES): List build-time generated files
 	$(desktop_DATA) and $(schemas_DATA).
 	(DISTCLEANFILES): List configure-time generated files
