@@ -1,3 +1,13 @@
+2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/stringutils.{cc,h} (substitute_references): Change return
+	type and parameter types to Glib::ustring.  I have no idea as to
+	why the interface used std::string in the first place...
+
+	* src/filebuffer.cc (FileBuffer::get_line_preview): Adapt to the
+	changed parameter types of Util::substitute_references().
+	(FileBuffer::replace_match): ditto.
+
 2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filebuffer.cc (FileBuffer::find_matches): Remove bogus

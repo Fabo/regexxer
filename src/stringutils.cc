@@ -471,17 +471,17 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
   return result;
 }
 
-std::string Util::substitute_references(const std::string&   substitution,
-                                        const std::string&   subject,
-                                        const CaptureVector& captures)
+Glib::ustring Util::substitute_references(const Glib::ustring& substitution,
+                                          const Glib::ustring& subject,
+                                          const CaptureVector& captures)
 {
   std::string result;
-  result.reserve(2 * std::max(substitution.size(), subject.size()));
+  result.reserve(2 * std::max(substitution.raw().size(), subject.raw().size()));
 
   std::vector<ModPos> modifiers;
 
-  const std::string::const_iterator pend = substitution.end();
-  std::string::const_iterator       p    = substitution.begin();
+  const std::string::const_iterator pend = substitution.raw().end();
+  std::string::const_iterator       p    = substitution.raw().begin();
 
   for (; p != pend; ++p)
   {
@@ -565,7 +565,7 @@ std::string Util::substitute_references(const std::string&   substitution,
 
         case '\'':
           bounds.first  = captures.front().second;
-          bounds.second = subject.size();
+          bounds.second = subject.raw().size();
           break;
 
         default:
@@ -575,7 +575,7 @@ std::string Util::substitute_references(const std::string&   substitution,
       }
 
       if (bounds.first >= 0 && bounds.second > bounds.first)
-        result.append(subject, bounds.first, bounds.second - bounds.first);
+        result.append(subject.raw(), bounds.first, bounds.second - bounds.first);
     }
     else // (*p != '\\' && *p != '$') || (p + 1 == pend)
     {

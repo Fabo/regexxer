@@ -39,9 +39,9 @@ bool validate_encoding(const std::string& encoding);
 bool encodings_equal(const std::string& lhs, const std::string& rhs);
 Glib::ustring shell_pattern_to_regex(const Glib::ustring& pattern);
 
-std::string substitute_references(const std::string&   substitution,
-                                  const std::string&   subject,
-                                  const CaptureVector& captures);
+Glib::ustring substitute_references(const Glib::ustring& substitution,
+                                    const Glib::ustring& subject,
+                                    const CaptureVector& captures);
 
 Glib::ustring filename_to_utf8_fallback(const std::string& filename);
 Glib::ustring convert_to_ascii(const std::string& str);

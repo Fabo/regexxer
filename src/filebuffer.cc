@@ -490,7 +490,7 @@ int FileBuffer::get_line_preview(const Glib::ustring& substitution, Glib::ustrin
 
     // Construct the preview line: [line_begin,start) + substitution + [stop,line_end)
     result   = get_text(line_begin, start);
-    result  += Util::substitute_references(substitution.raw(), match->subject.raw(), match->captures);
+    result  += Util::substitute_references(substitution, match->subject, match->captures);
     position = result.length();
     result  += get_text(stop, line_end);
   }
@@ -747,7 +747,7 @@ void FileBuffer::replace_match(MatchSet::const_iterator pos, const Glib::ustring
   const MatchDataPtr match = *pos;
 
   const Glib::ustring substituted_text =
-      Util::substitute_references(substitution.raw(), match->subject.raw(), match->captures);
+      Util::substitute_references(substitution, match->subject, match->captures);
 
   // Get the start of the match.
   const iterator start = match->mark->get_iter();
