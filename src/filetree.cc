@@ -438,6 +438,8 @@ void FileTree::find_add_file(const Glib::ustring& basename, const std::string& f
   std::string collate_key (1, '1');
   collate_key += basename.collate_key();
 
+  const FileInfoBasePtr fileinfo (new FileInfo(fullname));
+
   Gtk::TreeModel::Row row;
 
   if (find_data.dirstack.empty())
@@ -456,7 +458,7 @@ void FileTree::find_add_file(const Glib::ustring& basename, const std::string& f
 
   row[columns.filename]   = basename;
   row[columns.collatekey] = collate_key;
-  row[columns.fileinfo]   = FileInfoBasePtr(new FileInfo(fullname));
+  row[columns.fileinfo]   = fileinfo;
 }
 
 void FileTree::find_fill_dirstack(FindData& find_data)
@@ -479,6 +481,8 @@ void FileTree::find_fill_dirstack(FindData& find_data)
     std::string collate_key (1, '0');
     collate_key += dirname.collate_key();
 
+    const FileInfoBasePtr dirinfo (new DirInfo());
+
     if (pprev == pend)
       pdir->second = treestore_->prepend(); // new toplevel node
     else
@@ -488,7 +492,7 @@ void FileTree::find_fill_dirstack(FindData& find_data)
 
     row[columns.filename]   = dirname;
     row[columns.collatekey] = collate_key;
-    row[columns.fileinfo]   = FileInfoBasePtr(new DirInfo());
+    row[columns.fileinfo]   = dirinfo;
   }
 }
 

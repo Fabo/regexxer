@@ -1,5 +1,12 @@
 2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (FileTree::find_add_file): Create the FileInfo
+	object in advance before inserting the new row in order to improve
+	exception safety.
+	(FileTree::find_fill_dirstack): Same here for the DirInfo object.
+
+2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetreeprivate.{cc,h} (FileTreePrivate::next_match_file):
 	Move code from FileTree::next_match_file() here.
 	(FileTreePrivate::prev_match_file):
