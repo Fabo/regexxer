@@ -25,9 +25,9 @@
 
 #include "translation.h"
 
+#include <glib.h>
 #include <glibmm.h>
 #include <vector>
-#include <cstring>
 
 
 namespace
@@ -49,16 +49,24 @@ Glib::ustring compose_impl(const Glib::ustring& format, const std::vector<Glib::
     if (uc == '%' && p != pend)
     {
       uc = *p++;
-      const int index = Glib::Unicode::digit_value(uc) - 1;
-
-      if (index >= 0 && unsigned(index) < args.size())
-      {
-        result += args[index];
-        continue;
-      }
 
       if (uc != '%')
-        result += '%';
+      {
+        const int index = Glib::Unicode::digit_value(uc) - 1;
+
+        if (index >= 0 && unsigned(index) < args.size())
+        {
+          result += args[index];
+          continue;
+        }
+
+        const Glib::ustring buf (1, uc);
+
+        g_warning("Util::compose(): invalid substitution `%%%s' in format string `%s'",
+                  buf.c_str(), format.c_str());
+
+        result += '%'; // print invalid substitutions literally
+      }
     }
 
     result += uc;
