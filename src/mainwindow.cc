@@ -29,6 +29,7 @@
 #include <glib.h>
 #include <gtkmm.h>
 #include <algorithm>
+#include <functional>
 
 #include <config.h>
 

@@ -147,6 +147,9 @@ private:
 
   void load_configuration();
   void save_configuration();
+
+  // Work-around for silly, stupid, and annoying gcc 2.95.x.
+  friend class MainWindow::BusyAction;
 };
 
 } // namespace Regexxer
