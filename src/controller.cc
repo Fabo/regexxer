@@ -239,8 +239,8 @@ Gtk::MenuBar* Controller::create_menubar()
 
     add_menu_image(items, Stock::GOTO_FIRST, "_Previous file", AccelKey("<control>p"), prev_file);
     add_menu_stock(items, Stock::GO_BACK,                      AccelKey("<control>b"), prev_match);
-    add_menu_stock(items, Stock::GO_FORWARD,                   AccelKey("<control>f"), next_match);
-    add_menu_image(items, Stock::GOTO_LAST,  "_Next file",     AccelKey("<control>n"), next_file);
+    add_menu_stock(items, Stock::GO_FORWARD,                   AccelKey("<control>n"), next_match);
+    add_menu_image(items, Stock::GOTO_LAST,  "_Next file",     AccelKey("<control>e"), next_file);
 
     items.push_back(SeparatorElem());
 
