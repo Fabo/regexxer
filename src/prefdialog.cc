@@ -97,12 +97,13 @@ namespace Regexxer
 
 PrefDialog::PrefDialog(Gtk::Window& parent)
 :
-  Gtk::Dialog("Preferences", parent),
-  button_icons_       (0),
-  button_text_        (0),
-  button_both_        (0),
-  button_both_horiz_  (0),
-  entry_fallback_     (0)
+  Gtk::Dialog             ("Preferences", parent),
+  button_icons_           (0),
+  button_text_            (0),
+  button_both_            (0),
+  button_both_horiz_      (0),
+  entry_fallback_         (0),
+  current_toolbar_style_  (Gtk::TOOLBAR_ICONS)
 {
   using namespace Gtk;
 
@@ -145,6 +146,7 @@ void PrefDialog::set_pref_toolbar_style(Gtk::ToolbarStyle toolbar_style)
 
   g_return_if_fail(button != 0);
 
+  current_toolbar_style_ = toolbar_style;
   button->set_active(true);
 }
 
@@ -287,7 +289,11 @@ void PrefDialog::on_radio_toggled()
       (button_text_ ->get_active() ? Gtk::TOOLBAR_TEXT  :
       (button_both_ ->get_active() ? Gtk::TOOLBAR_BOTH  : Gtk::TOOLBAR_BOTH_HORIZ)));
 
-  signal_pref_toolbar_style_changed(toolbar_style); // emit
+  if(toolbar_style != current_toolbar_style_)
+  {
+    current_toolbar_style_ = toolbar_style;
+    signal_pref_toolbar_style_changed(toolbar_style); // emit
+  }
 }
 
 void PrefDialog::on_entry_fallback_activate()

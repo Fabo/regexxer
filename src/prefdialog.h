@@ -55,6 +55,7 @@ private:
   Gtk::RadioButton*   button_both_;
   Gtk::RadioButton*   button_both_horiz_;
   Gtk::Entry*         entry_fallback_;
+  Gtk::ToolbarStyle   current_toolbar_style_;
 
   Gtk::Widget* create_page_options();
   Gtk::Widget* create_page_info();

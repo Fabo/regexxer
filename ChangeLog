@@ -1,3 +1,8 @@
+2002-11-02  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/prefdialog.{cc,h}: Prevent double emission of
+	signal_pref_toolbar_style_changed().
+
 2002-10-31  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filelist.{cc,h} (find_files): Replace the pattern string
