@@ -798,9 +798,13 @@ void MainWindow::on_preferences()
     pref_dialog_.reset(new PrefDialog(*this));
 
     pref_dialog_->set_pref_toolbar_style(toolbar_->get_toolbar_style());
+    pref_dialog_->set_pref_fallback_encoding(filelist_->get_fallback_encoding());
 
     pref_dialog_->signal_pref_toolbar_style_changed.connect(
         SigC::slot(*toolbar_, &Gtk::Toolbar::set_toolbar_style));
+
+    pref_dialog_->signal_pref_fallback_encoding_changed.connect(
+        SigC::slot(*filelist_, &FileList::set_fallback_encoding));
 
     pref_dialog_->signal_hide().connect(SigC::slot(*this, &MainWindow::on_pref_dialog_hide));
     pref_dialog_->show();

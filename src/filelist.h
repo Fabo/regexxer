@@ -21,12 +21,12 @@
 #ifndef REGEXXER_FILELIST_H_INCLUDED
 #define REGEXXER_FILELIST_H_INCLUDED
 
+#include "filebuffer.h"
+#include "fileio.h"
+
 #include <gdkmm/color.h>
 #include <gtkmm/treepath.h>
 #include <gtkmm/treeview.h>
-
-#include "filebuffer.h"
-#include "fileio.h"
 
 namespace Gtk  { class ListStore; }
 namespace Pcre { class Pattern;   }
@@ -61,6 +61,9 @@ public:
 
   int get_modified_count() const;
 
+  void set_fallback_encoding(const std::string& fallback_encoding);
+  std::string get_fallback_encoding() const;
+
   SigC::Signal2<void,FileInfoPtr,int> signal_switch_buffer;
   SigC::Signal0<void>                 signal_bound_state_changed;
   SigC::Signal0<void>                 signal_file_count_changed;
@@ -88,6 +91,7 @@ private:
   Gtk::TreePath                 path_match_first_;
   Gtk::TreePath                 path_match_last_;
 
+  std::string                   fallback_encoding_;
   Glib::RefPtr<Gdk::Pixbuf>     error_pixbuf_;
 
   void cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);

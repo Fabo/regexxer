@@ -57,6 +57,37 @@ ImageLabel::ImageLabel(const Gtk::StockID& stock_id, const Glib::ustring& label)
 ImageLabel::~ImageLabel()
 {}
 
+
+bool validate_encoding(const std::string& encoding)
+{
+  std::string::const_iterator       p    = encoding.begin();
+  const std::string::const_iterator pend = encoding.end();
+
+  // GLib just ignores some characters that aren't used in encoding names,
+  // so we have to parse the string for invalid characters ourselves.
+
+  for(; p != pend; ++p)
+  {
+    if(!Glib::Ascii::isalnum(*p))
+      switch(*p)
+      {
+        case ' ': case '-': case '_': case '.': case ':': break;
+        default: return false;
+      }
+  }
+
+  try
+  {
+    Glib::convert("", "UTF-8", encoding);
+  }
+  catch(const Glib::ConvertError&)
+  {
+    return false;
+  }
+
+  return true;
+}
+
 } // anonymous namespace
 
 
@@ -101,19 +132,32 @@ PrefDialog::~PrefDialog()
 
 void PrefDialog::set_pref_toolbar_style(Gtk::ToolbarStyle toolbar_style)
 {
+  Gtk::RadioButton* button = 0;
+
   switch(toolbar_style)
   {
-    case Gtk::TOOLBAR_ICONS:      button_icons_     ->set_active(true); break;
-    case Gtk::TOOLBAR_TEXT:       button_text_      ->set_active(true); break;
-    case Gtk::TOOLBAR_BOTH:       button_both_      ->set_active(true); break;
-    case Gtk::TOOLBAR_BOTH_HORIZ: button_both_horiz_->set_active(true); break;
-    default:
-      g_return_if_reached();
+    case Gtk::TOOLBAR_ICONS:      button = button_icons_;      break;
+    case Gtk::TOOLBAR_TEXT:       button = button_text_;       break;
+    case Gtk::TOOLBAR_BOTH:       button = button_both_;       break;
+    case Gtk::TOOLBAR_BOTH_HORIZ: button = button_both_horiz_; break;
   }
+
+  g_return_if_fail(button != 0);
+
+  button->set_active(true);
+}
+
+void PrefDialog::set_pref_fallback_encoding(const std::string& fallback_encoding)
+{
+  const Glib::ustring encoding (fallback_encoding);
+  g_return_if_fail(encoding.is_ascii());
+
+  entry_fallback_->set_text(encoding);
 }
 
 void PrefDialog::on_response(int)
 {
+  on_entry_fallback_activate();
   hide();
 }
 
@@ -124,7 +168,7 @@ Gtk::Widget* PrefDialog::create_page_options()
   std::auto_ptr<Box> page (new VBox(false, 0));
 
   {
-    Box *const box_toolbar = new HBox(false, 5);
+    Box *const box_toolbar = new HBox(false, 10);
     page->pack_start(*manage(box_toolbar), PACK_EXPAND_PADDING);
     box_toolbar->set_border_width(10);
 
@@ -166,15 +210,17 @@ Gtk::Widget* PrefDialog::create_page_options()
 
     Table *const table = new Table(3, 2, false);
     box_encoding->pack_start(*manage(table), PACK_SHRINK);
-    table->set_row_spacings(2);
     table->set_col_spacings(3);
 
     table->attach(*manage(new Label("1.", 1.0, 0.5)), 0, 1, 0, 1, FILL, FILL);
     table->attach(*manage(new Label("2.", 1.0, 0.5)), 0, 1, 1, 2, FILL, FILL);
     table->attach(*manage(new Label("3.", 1.0, 0.5)), 0, 1, 2, 3, FILL, FILL);
-    table->attach(*manage(new Label("UTF-8", 0.0, 0.5)), 1, 2, 0, 1, FILL, FILL);
-    table->attach(*manage(new Label("The encoding specified by the current locale", 0.0, 0.5)),
-                  1, 2, 1, 2, FILL, FILL);
+
+    Label *const label_utf8 = new Label("UTF-8", 0.0, 0.5);
+    table->attach(*manage(label_utf8), 1, 2, 0, 1, FILL, FILL);
+
+    Label *const label_locale = new Label("The encoding specified by the current locale", 0.0, 0.5);
+    table->attach(*manage(label_locale), 1, 2, 1, 2, FILL, FILL);
 
     Box *const box_fallback = new HBox(false, 5);
     table->attach(*manage(box_fallback), 1, 2, 2, 3, EXPAND|FILL, FILL);
@@ -186,6 +232,14 @@ Gtk::Widget* PrefDialog::create_page_options()
     box_fallback->pack_start(*manage(entry_fallback_), PACK_EXPAND_WIDGET);
 
     label_fallback->set_mnemonic_widget(*entry_fallback_);
+
+    const Glib::RefPtr<SizeGroup> size_group = SizeGroup::create(SIZE_GROUP_VERTICAL);
+    size_group->add_widget(*label_utf8);
+    size_group->add_widget(*label_locale);
+    size_group->add_widget(*box_fallback);
+
+    entry_fallback_->signal_activate().connect(
+        SigC::slot(*this, &PrefDialog::on_entry_fallback_activate));
   }
 
   return page.release();
@@ -234,6 +288,26 @@ void PrefDialog::on_radio_toggled()
       (button_both_ ->get_active() ? Gtk::TOOLBAR_BOTH  : Gtk::TOOLBAR_BOTH_HORIZ)));
 
   signal_pref_toolbar_style_changed(toolbar_style); // emit
+}
+
+void PrefDialog::on_entry_fallback_activate()
+{
+  const std::string fallback_encoding = entry_fallback_->get_text();
+
+  if(validate_encoding(fallback_encoding))
+  {
+    signal_pref_fallback_encoding_changed(entry_fallback_->get_text()); // emit
+  }
+  else
+  {
+    Glib::ustring message = "\302\273";
+    message += fallback_encoding;
+    message += "\302\253 is not a valid encoding.";
+
+    Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+
+    dialog.run();
+  }
 }
 
 } // namespace Regexxer

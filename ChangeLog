@@ -1,5 +1,14 @@
 2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.{cc,h} src/filelist.{cc,h}: Make the fallback
+	encoding configureable, so that it can be changed from the
+	preferences dialog.
+
+	* src/prefdialog.{cc,h} src/mainwindow.cc: Honor the preference
+	setting of the fallback encoding.
+
+2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* pixmaps/stock_menu_about.png: New image stolen from Gnome2.
 	* pixmaps/Makefile.am src/main.cc: Register the new stock image.
 

@@ -44,7 +44,7 @@ struct FileInfo : public Util::SharedObject
 
 typedef Util::SharedPtr<FileInfo> FileInfoPtr;
 
-void load_file(const FileInfoPtr& fileinfo);
+void load_file(const FileInfoPtr& fileinfo, const std::string& fallback_encoding);
 void save_file(const FileInfoPtr& fileinfo);
 
 } // namespace Regexxer

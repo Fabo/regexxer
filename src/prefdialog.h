@@ -41,8 +41,10 @@ public:
   virtual ~PrefDialog();
 
   void set_pref_toolbar_style(Gtk::ToolbarStyle toolbar_style);
+  void set_pref_fallback_encoding(const std::string& fallback_encoding);
 
-  SigC::Signal1<void,Gtk::ToolbarStyle> signal_pref_toolbar_style_changed;
+  SigC::Signal1<void,Gtk::ToolbarStyle>   signal_pref_toolbar_style_changed;
+  SigC::Signal1<void,const std::string&>  signal_pref_fallback_encoding_changed;
 
 protected:
   virtual void on_response(int response_id);
@@ -58,6 +60,7 @@ private:
   Gtk::Widget* create_page_info();
 
   void on_radio_toggled();
+  void on_entry_fallback_activate();
 };
 
 } // namespace Regexxer

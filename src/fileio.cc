@@ -33,8 +33,6 @@ using Regexxer::FileBuffer;
 
 enum { BUFSIZE = 4096 };
 
-const char fallback_encoding[] = "ISO-8859-1";
-
 
 Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& input)
 {
@@ -111,7 +109,7 @@ FileInfo::~FileInfo()
 
 /**** Regexxer -- file I/O functions ***************************************/
 
-void load_file(const FileInfoPtr& fileinfo)
+void load_file(const FileInfoPtr& fileinfo, const std::string& fallback_encoding)
 {
   fileinfo->load_failed = true;
 

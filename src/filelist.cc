@@ -116,11 +116,12 @@ FileList::FindData::~FindData()
 
 FileList::FileList()
 :
-  liststore_      (Gtk::ListStore::create(filelist_columns())),
-  color_modified_ ("red"),
-  file_count_     (0),
-  modified_count_ (0),
-  sum_matches_    (0)
+  liststore_          (Gtk::ListStore::create(filelist_columns())),
+  color_modified_     ("red"),
+  file_count_         (0),
+  modified_count_     (0),
+  sum_matches_        (0),
+  fallback_encoding_  ("ISO-8859-15")
 {
   set_model(liststore_);
 
@@ -425,6 +426,16 @@ int FileList::get_modified_count() const
   return modified_count_;
 }
 
+void FileList::set_fallback_encoding(const std::string& fallback_encoding)
+{
+  fallback_encoding_ = fallback_encoding;
+}
+
+std::string FileList::get_fallback_encoding() const
+{
+  return fallback_encoding_;
+}
+
 /**** Regexxer::FileList -- protected **************************************/
 
 void FileList::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
@@ -687,7 +698,7 @@ void FileList::load_file_with_fallback(const FileInfoPtr& fileinfo)
 {
   try
   {
-    load_file(fileinfo);
+    load_file(fileinfo, fallback_encoding_);
   }
   catch(const Glib::Error& error)
   {
