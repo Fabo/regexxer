@@ -30,9 +30,11 @@
 namespace Gtk
 {
 class CheckButton;
+class ColorButton;
+class ComboBox;
 class Dialog;
 class Entry;
-class OptionMenu;
+class FontButton;
 class Widget;
 class Window;
 }
@@ -42,9 +44,6 @@ namespace Gnome { namespace Conf { class Value; } }
 
 namespace Regexxer
 {
-
-class ColorSelectionButton;
-class FontSelectionButton;
 
 class PrefDialog : public sigc::trackable
 {
@@ -56,10 +55,10 @@ public:
 
 private:
   std::auto_ptr<Gtk::Dialog>  dialog_;
-  FontSelectionButton*        button_textview_font_;
-  ColorSelectionButton*       button_match_color_;
-  ColorSelectionButton*       button_current_color_;
-  Gtk::OptionMenu*            option_toolbar_style_;
+  Gtk::FontButton*            button_textview_font_;
+  Gtk::ColorButton*           button_match_color_;
+  Gtk::ColorButton*           button_current_color_;
+  Gtk::ComboBox*              combo_toolbar_style_;
   Gtk::Entry*                 entry_fallback_;
   Gtk::CheckButton*           button_direction_;
   Util::AutoConnection        conn_toolbar_style_;
@@ -74,9 +73,9 @@ private:
   void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
   void initialize_configuration();
 
-  void on_textview_font_selected();
-  void on_match_color_selected();
-  void on_current_color_selected();
+  void on_textview_font_set();
+  void on_match_color_set();
+  void on_current_color_set();
   void on_option_toolbar_style_changed();
   void on_entry_fallback_changed();
   void on_entry_fallback_activate();

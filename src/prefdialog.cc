@@ -43,7 +43,7 @@ const Gtk::ToolbarStyle toolbar_style_values[] =
   Gtk::TOOLBAR_BOTH_HORIZ
 };
 
-unsigned int get_toolbar_style_index(const Glib::ustring& value)
+int get_toolbar_style_index(const Glib::ustring& value)
 {
   const Gtk::ToolbarStyle toolbar_style = Util::enum_from_nick<Gtk::ToolbarStyle>(value);
 
@@ -62,250 +62,6 @@ unsigned int get_toolbar_style_index(const Glib::ustring& value)
 namespace Regexxer
 {
 
-/**** Regexxer::FontSelectionButton ****************************************/
-
-class FontSelectionButton : public Gtk::Button
-{
-public:
-  FontSelectionButton();
-  virtual ~FontSelectionButton();
-
-  void set_selected_font(const Glib::ustring& font_name);
-  Glib::ustring get_selected_font() const;
-
-  sigc::signal<void> signal_font_selected;
-
-protected:
-  virtual void on_clicked();
-
-private:
-  Gtk::Label* label_font_;
-  Gtk::Label* label_size_;
-};
-
-FontSelectionButton::FontSelectionButton()
-:
-  label_font_ (0),
-  label_size_ (0)
-{
-  using namespace Gtk;
-
-  Box *const box = new HBox(false, 0);
-  add(*manage(box));
-
-  box->pack_start(*manage(label_font_ = new Label()), PACK_EXPAND_WIDGET, 6 /* HIG */);
-  box->pack_start(*manage(new VSeparator()),          PACK_SHRINK);
-  box->pack_start(*manage(label_size_ = new Label()), PACK_SHRINK, 6 /* HIG */);
-}
-
-FontSelectionButton::~FontSelectionButton()
-{}
-
-void FontSelectionButton::set_selected_font(const Glib::ustring& font_name)
-{
-  const Pango::FontDescription font (font_name);
-
-  label_font_->set_text(font.get_family());
-  label_size_->set_text(Util::int_to_string((font.get_size() + Pango::SCALE / 2) / Pango::SCALE));
-
-  label_font_->modify_font(font);
-
-  get_accessible()->set_name(font.to_string());
-}
-
-Glib::ustring FontSelectionButton::get_selected_font() const
-{
-  return label_font_->get_pango_context()->get_font_description().to_string();
-}
-
-void FontSelectionButton::on_clicked()
-{
-  Gtk::FontSelectionDialog dialog;
-
-  dialog.set_modal(true);
-
-  if (Gtk::Window *const toplevel = dynamic_cast<Gtk::Window*>(get_toplevel()))
-    dialog.set_transient_for(*toplevel);
-
-  dialog.set_font_name(get_selected_font());
-
-  if (dialog.run() == Gtk::RESPONSE_OK)
-  {
-    set_selected_font(dialog.get_font_name());
-    signal_font_selected(); // emit
-  }
-}
-
-extern "C"
-GtkWidget* regexxer_create_font_selection_button(char*, char*, char*, int, int)
-{
-  try
-  {
-    Gtk::Widget *const widget = new FontSelectionButton();
-    widget->show_all();
-    return Gtk::manage(widget)->gobj();
-  }
-  catch (...)
-  {
-    g_return_val_if_reached(0);
-  }
-}
-
-
-/**** Regexxer::ColorSelectionButton ***************************************/
-
-class ColorSelectionButton : public Gtk::Button
-{
-public:
-  ColorSelectionButton();
-  virtual ~ColorSelectionButton();
-
-  void set_selected_color(const Gdk::Color& color);
-  Gdk::Color get_selected_color() const;
-
-  sigc::signal<void> signal_color_selected;
-
-protected:
-  virtual void on_clicked();
-
-private:
-  class ColorLabel : public Gtk::Label
-  {
-  public:
-    ColorLabel();
-    virtual ~ColorLabel();
-
-    void adapt_activity_colors();
-
-  protected:
-    virtual void on_realize();
-    virtual bool on_expose_event(GdkEventExpose* event);
-  };
-
-  ColorLabel* colorlabel_;
-};
-
-
-ColorSelectionButton::ColorSelectionButton()
-{
-  add(*Gtk::manage(colorlabel_ = new ColorLabel()));
-}
-
-ColorSelectionButton::~ColorSelectionButton()
-{}
-
-void ColorSelectionButton::set_selected_color(const Gdk::Color& color)
-{
-  colorlabel_->modify_bg(Gtk::STATE_NORMAL, color);
-
-  if (colorlabel_->is_realized())
-    colorlabel_->adapt_activity_colors();
-
-  colorlabel_->set_text(Util::color_to_string(color));
-}
-
-Gdk::Color ColorSelectionButton::get_selected_color() const
-{
-  return colorlabel_->get_style()->get_bg(Gtk::STATE_NORMAL);
-}
-
-void ColorSelectionButton::on_clicked()
-{
-  Gtk::ColorSelectionDialog dialog;
-
-  dialog.set_modal(true);
-  dialog.set_title(_("Color Selection"));
-
-  if (Gtk::Window *const toplevel = dynamic_cast<Gtk::Window*>(get_toplevel()))
-    dialog.set_transient_for(*toplevel);
-
-  Gtk::ColorSelection& colorsel = *dialog.get_colorsel();
-
-  colorsel.set_has_palette(true);
-  colorsel.set_current_color(get_selected_color());
-
-  if (dialog.run() == Gtk::RESPONSE_OK)
-  {
-    set_selected_color(colorsel.get_current_color());
-    signal_color_selected(); // emit
-  }
-}
-
-ColorSelectionButton::ColorLabel::ColorLabel()
-{
-  const Glib::RefPtr<Gtk::RcStyle> rcstyle = get_modifier_style();
-  const Glib::ustring none = "<none>";
-
-  rcstyle->set_bg_pixmap_name(Gtk::STATE_NORMAL,   none);
-  rcstyle->set_bg_pixmap_name(Gtk::STATE_ACTIVE,   none);
-  rcstyle->set_bg_pixmap_name(Gtk::STATE_PRELIGHT, none);
-
-  modify_style(rcstyle);
-}
-
-ColorSelectionButton::ColorLabel::~ColorLabel()
-{}
-
-void ColorSelectionButton::ColorLabel::adapt_activity_colors()
-{
-  const Glib::RefPtr<Gtk::Style> style = get_style();
-
-  modify_bg(Gtk::STATE_ACTIVE,   style->get_mid  (Gtk::STATE_NORMAL));
-  modify_bg(Gtk::STATE_PRELIGHT, style->get_light(Gtk::STATE_NORMAL));
-}
-
-void ColorSelectionButton::ColorLabel::on_realize()
-{
-  Gtk::Label::on_realize();
-  adapt_activity_colors();
-}
-
-/*
- * Note that the Gtk::Label expose event handler is not called.  Thus the
- * label text is invisible, but we still provide accessibility information.
- * Displaying the hex color string in the button to all users is probably
- * a bad idea.
- */
-bool ColorSelectionButton::ColorLabel::on_expose_event(GdkEventExpose* event)
-{
-  int focus_padding    = 0;
-  int focus_line_width = 0;
-
-  Gtk::Widget& button = *get_parent();
-
-  button.get_style_property("focus_padding",    focus_padding);
-  button.get_style_property("focus_line_width", focus_line_width);
-
-  const int margin = focus_padding + focus_line_width;
-  const Gtk::Allocation alloc = get_allocation();
-
-  get_style()->paint_box(
-      get_window(), get_state(), Gtk::SHADOW_ETCHED_OUT,
-      Glib::wrap(&event->area), *this, "regexxer-color-label",
-      alloc.get_x() + margin,
-      alloc.get_y() + margin,
-      std::max(0, alloc.get_width()  - 2 * margin),
-      std::max(0, alloc.get_height() - 2 * margin));
-
-  return false;
-}
-
-extern "C"
-GtkWidget* regexxer_create_color_selection_button(char*, char*, char*, int, int)
-{
-  try
-  {
-    Gtk::Widget *const widget = new ColorSelectionButton();
-    widget->show_all();
-    return Gtk::manage(widget)->gobj();
-  }
-  catch (...)
-  {
-    g_return_val_if_reached(0);
-  }
-}
-
-
 /**** Regexxer::PrefDialog *************************************************/
 
 PrefDialog::PrefDialog(Gtk::Window& parent)
@@ -314,7 +70,7 @@ PrefDialog::PrefDialog(Gtk::Window& parent)
   button_textview_font_   (0),
   button_match_color_     (0),
   button_current_color_   (0),
-  option_toolbar_style_   (0),
+  combo_toolbar_style_    (0),
   entry_fallback_         (0),
   button_direction_       (0),
   entry_fallback_changed_ (false)
@@ -342,7 +98,7 @@ void PrefDialog::load_xml()
   xml->get_widget("button_textview_font", button_textview_font_);
   xml->get_widget("button_match_color",   button_match_color_);
   xml->get_widget("button_current_color", button_current_color_);
-  xml->get_widget("option_toolbar_style", option_toolbar_style_);
+  xml->get_widget("combo_toolbar_style",  combo_toolbar_style_);
   xml->get_widget("entry_fallback",       entry_fallback_);
   xml->get_widget("button_direction",     button_direction_);
 
@@ -358,16 +114,16 @@ void PrefDialog::connect_signals()
   dialog_->signal_response().connect(
       sigc::mem_fun(*this, &PrefDialog::on_response));
 
-  button_textview_font_->signal_font_selected.connect(
-      sigc::mem_fun(*this, &PrefDialog::on_textview_font_selected));
+  button_textview_font_->signal_font_set().connect(
+      sigc::mem_fun(*this, &PrefDialog::on_textview_font_set));
 
-  button_match_color_->signal_color_selected.connect(
-      sigc::mem_fun(*this, &PrefDialog::on_match_color_selected));
+  button_match_color_->signal_color_set().connect(
+      sigc::mem_fun(*this, &PrefDialog::on_match_color_set));
 
-  button_current_color_->signal_color_selected.connect(
-      sigc::mem_fun(*this, &PrefDialog::on_current_color_selected));
+  button_current_color_->signal_color_set().connect(
+      sigc::mem_fun(*this, &PrefDialog::on_current_color_set));
 
-  conn_toolbar_style_ = option_toolbar_style_->signal_changed().connect(
+  conn_toolbar_style_ = combo_toolbar_style_->signal_changed().connect(
       sigc::mem_fun(*this, &PrefDialog::on_option_toolbar_style_changed));
 
   entry_fallback_->signal_changed().connect(
@@ -408,20 +164,20 @@ void PrefDialog::on_conf_value_changed(const Glib::ustring& key, const Gnome::Co
   {
     if (key.raw() == conf_key_textview_font)
     {
-      button_textview_font_->set_selected_font(value.get_string());
+      button_textview_font_->set_font_name(value.get_string());
     }
     else if (key.raw() == conf_key_match_color)
     {
-      button_match_color_->set_selected_color(Gdk::Color(value.get_string()));
+      button_match_color_->set_color(Gdk::Color(value.get_string()));
     }
     else if (key.raw() == conf_key_current_match_color)
     {
-      button_current_color_->set_selected_color(Gdk::Color(value.get_string()));
+      button_current_color_->set_color(Gdk::Color(value.get_string()));
     }
     else if (key.raw() == conf_key_toolbar_style)
     {
       Util::ScopedBlock block (conn_toolbar_style_);
-      option_toolbar_style_->set_history(get_toolbar_style_index(value.get_string()));
+      combo_toolbar_style_->set_active(get_toolbar_style_index(value.get_string()));
     }
     else if (key.raw() == conf_key_fallback_encoding)
     {
@@ -455,32 +211,35 @@ void PrefDialog::initialize_configuration()
       sigc::mem_fun(*this, &PrefDialog::on_conf_value_changed));
 }
 
-void PrefDialog::on_textview_font_selected()
+void PrefDialog::on_textview_font_set()
 {
-  const Glib::ustring value = button_textview_font_->get_selected_font();
+  const Glib::ustring value = button_textview_font_->get_font_name();
   Gnome::Conf::Client::get_default_client()->set(conf_key_textview_font, value);
 }
 
-void PrefDialog::on_match_color_selected()
+void PrefDialog::on_match_color_set()
 {
-  const Glib::ustring value = Util::color_to_string(button_match_color_->get_selected_color());
+  const Glib::ustring value = Util::color_to_string(button_match_color_->get_color());
   Gnome::Conf::Client::get_default_client()->set(conf_key_match_color, value);
 }
 
-void PrefDialog::on_current_color_selected()
+void PrefDialog::on_current_color_set()
 {
-  const Glib::ustring value = Util::color_to_string(button_current_color_->get_selected_color());
+  const Glib::ustring value = Util::color_to_string(button_current_color_->get_color());
   Gnome::Conf::Client::get_default_client()->set(conf_key_current_match_color, value);
 }
 
 void PrefDialog::on_option_toolbar_style_changed()
 {
-  const unsigned int option_index = option_toolbar_style_->get_history();
+  const int index = combo_toolbar_style_->get_active_row_number();
 
-  g_return_if_fail(option_index < G_N_ELEMENTS(toolbar_style_values));
+  if (index >= 0)
+  {
+    g_return_if_fail(unsigned(index) < G_N_ELEMENTS(toolbar_style_values));
 
-  const Glib::ustring value = Util::enum_to_nick(toolbar_style_values[option_index]);
-  Gnome::Conf::Client::get_default_client()->set(conf_key_toolbar_style, value);
+    const Glib::ustring value = Util::enum_to_nick(toolbar_style_values[index]);
+    Gnome::Conf::Client::get_default_client()->set(conf_key_toolbar_style, value);
+  }
 }
 
 void PrefDialog::on_entry_fallback_changed()

@@ -1,5 +1,22 @@
 2004-05-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* ui/prefdialog.glade (button_textview_font): Replace custom font
+	selection button with the new GtkFontButton.
+	(button_match_color): Replace custom color selection button with
+	the new GtkColorButton.
+	(button_current_color): ditto.
+	(combo_toolbar_style): Rename from option_toolbar_style.  Use the
+	new GtkComboBox widget instead of GtkOptionMenu.
+
+	* src/prefdialog.{cc,h} (FontSelectionButton): Remove.
+	(ColorSelectionButton): Remove.
+	(PrefDialog): Accomodate to changes in the glade file.
+	(on_textview_font_set): Rename from on_textview_font_selected().
+	(on_match_color_set): Rename from on_match_color_selected().
+	(on_current_color_set): Rename from on_current_color_selected().
+
+2004-05-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (MainWindow::load_xml): Make the folder button
 	grab focus because otherwise the Preferences tool button will be
 	focused after startup.  I blame libglade -- its whole tool button
