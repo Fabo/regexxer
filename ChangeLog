@@ -1,5 +1,9 @@
 2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* ui/mainwindow.glade (menuitem_undo): Add accelerator key CTRL-z.
+
+2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/pcreshell.h: Eliminate the include dependency on the pcre.h
 	header.  This requires defining the numeric values of the bit flag
 	enums directly, but fortunately these cannot be changed without
