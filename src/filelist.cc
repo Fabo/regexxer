@@ -133,21 +133,25 @@ const std::list<Glib::ustring>& FileList::Error::get_error_list() const
 
 struct FileList::FindData
 {
-  FindData(const Glib::ustring&   pattern_,
+  FindData(Pcre::Pattern& pattern_,
            std::string::size_type chop_off_,
            bool recursive_, bool hidden_);
   ~FindData();
 
-  Pcre::Pattern                         pattern;
+  Pcre::Pattern&                        pattern;
   const std::string::size_type          chop_off;
   const bool                            recursive;
   const bool                            hidden;
   Util::SharedPtr<FileList::ErrorList>  error_list;
 
   std::list<Glib::ustring>& errors() { return error_list->errors; }
+
+private:
+  FindData(const FileList::FindData&);
+  FileList::FindData& operator=(const FileList::FindData&);
 };
 
-FileList::FindData::FindData(const Glib::ustring&   pattern_,
+FileList::FindData::FindData(Pcre::Pattern& pattern_,
                              std::string::size_type chop_off_,
                              bool recursive_, bool hidden_)
 :
@@ -202,8 +206,7 @@ FileList::FileList()
 FileList::~FileList()
 {}
 
-void FileList::find_files(const Glib::ustring& dirname,
-                          const Glib::ustring& pattern,
+void FileList::find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
                           bool recursive, bool hidden)
 {
   const std::string startdir = Glib::filename_from_utf8(dirname);
@@ -212,8 +215,7 @@ void FileList::find_files(const Glib::ustring& dirname,
   if(chop_off > 0 && *startdir.rbegin() != G_DIR_SEPARATOR)
     ++chop_off;
 
-  // The FindData ctor may throw Pcre::Error.
-  FindData find_data (Util::shell_pattern_to_regex(pattern), chop_off, recursive, hidden);
+  FindData find_data (pattern, chop_off, recursive, hidden);
 
   const bool modified_count_changed = (modified_count_ != 0);
 

@@ -511,9 +511,11 @@ void MainWindow::on_find_files()
 
   try
   {
+    Pcre::Pattern pattern (Util::shell_pattern_to_regex(entry_pattern_->get_text()));
+
     filelist_->find_files(
         Util::expand_pathname(entry_folder_->get_text()),
-        entry_pattern_->get_text(),
+        pattern,
         button_recursive_->get_active(),
         button_hidden_->get_active());
   }

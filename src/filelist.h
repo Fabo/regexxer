@@ -44,8 +44,7 @@ public:
   FileList();
   virtual ~FileList();
 
-  void find_files(const Glib::ustring& dirname,
-                  const Glib::ustring& pattern,
+  void find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
                   bool recursive, bool hidden);
 
   int  get_file_count() const;

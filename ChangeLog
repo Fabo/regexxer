@@ -1,3 +1,11 @@
+2002-10-31  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filelist.{cc,h} (find_files): Replace the pattern string
+	argument with Pcre::Pattern& for consistency with find_matches().
+
+	* src/mainwindow.cc (on_find_files): Construct the Pcre::Pattern
+	for use with find_files().
+
 2002-10-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filelist.{cc,h} (FileList::FindError): Store a list of
