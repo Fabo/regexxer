@@ -60,5 +60,5 @@ inline Glib::ustring expand_pathname(const Glib::ustring& path)
 
 } // namespace Util
 
-#endif
+#endif /* REGEXXER_STRINGUTILS_H_INCLUDED */
 
