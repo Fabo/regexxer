@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-22 22:49+0200\n"
+"POT-Creation-Date: 2004-09-26 15:35+0200\n"
 "PO-Revision-Date: 2004-09-21 20:47+02000\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: regexxer.desktop.in.h:1
 msgid "Search and replace using regular expressions"
-msgstr ""
+msgstr "Wyszukuje i zastępuje przy użyciu wyrażeń regularnych"
 
 #: regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
-msgstr "Narzędzie do wyszukiwania regexxer"
+msgstr "regexxer - narzędzie do wyszukiwania"
 
 #: regexxer.schemas.in.h:1
 msgid "Current-match color"
@@ -81,27 +81,27 @@ msgstr ""
 
 #: src/filetree.cc:81
 msgid "File"
-msgstr ""
+msgstr "Plik"
 
 #: src/filetree.cc:101
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: src/filetree.cc:532
 msgid "Failed to save file \"%1\": %2"
-msgstr ""
+msgstr "Nie można zapisać pliku \"%1\": %2"
 
 #: src/filetree.cc:949
 msgid "\"%1\" seems to be a binary file."
-msgstr ""
+msgstr "\"%1\" wygląda na plik binarny."
 
 #: src/main.cc:84
 msgid "_About"
-msgstr ""
+msgstr "_O programie"
 
 #: src/main.cc:85
 msgid "Save _all"
-msgstr ""
+msgstr "Zapisz _wszystko"
 
 #: src/main.cc:100
 msgid "Find files matching PATTERN"
@@ -113,11 +113,11 @@ msgstr ""
 
 #: src/main.cc:101
 msgid "Do not recurse into subdirectories"
-msgstr ""
+msgstr "Bez podkatalogów"
 
 #: src/main.cc:102 ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
-msgstr ""
+msgstr "Wyszukiwanie również ukrytych plików"
 
 #: src/main.cc:103
 msgid "Find text matching REGEX"
@@ -133,7 +133,7 @@ msgstr ""
 
 #: src/main.cc:105 ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
-msgstr ""
+msgstr "Wyszukiwanie niezależne od wielkości liter"
 
 #: src/main.cc:106
 msgid "Replace matches with STRING"
@@ -170,50 +170,62 @@ msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
 msgstr ""
+"Część plików nie została jeszcze zapisana.\n"
+"Czy mimo to wyjść?"
 
 #: src/mainwindow.cc:431
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
+"Nazwa folderu \"%1\" zawiera znaki, które nie występują w kodowaniu "
+"lokalnego systemu plików."
 
 #: src/mainwindow.cc:450
 msgid "Select a folder"
-msgstr ""
+msgstr "Wybór folderu"
 
 #: src/mainwindow.cc:470
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
 msgstr ""
+"Część plików nie została jeszcze zapisana.\n"
+"Czy mimo to kontynuować?"
 
 #: src/mainwindow.cc:496
 msgid "The file search pattern is invalid."
-msgstr ""
+msgstr "Wzorzec wyszukiwania pliku nie jest poprawny."
 
 #: src/mainwindow.cc:502
 msgid "The following errors occurred during search:"
-msgstr ""
+msgstr "Podczas wyszukiwania wystąpiły następujące błędy:"
 
 #: src/mainwindow.cc:527
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
 msgstr ""
+"Błąd w wyrażeniu regularnym w \"%1\" (indeks %2):\n"
+"%3"
 
 #: src/mainwindow.cc:529
 msgid ""
 "Error in regular expression:\n"
 "%1"
 msgstr ""
+"Błąd w wyrażeniu regularnym:\n"
+"%1"
 
 #: src/mainwindow.cc:751
 msgid "The following errors occurred during save:"
-msgstr ""
+msgstr "Podczas zapisu wystąpiły następujące błędy:"
 
 #: src/pcreshell.cc:59
 msgid "Using the \\C escape sequence to match a single byte is not supported."
 msgstr ""
+"Używanie sekwencji sterującej \\C do dopasowania pojednyczego bajtu nie jest "
+"obsługiwane."
 
 #: src/pcreshell.cc:151
 msgid ""
@@ -223,156 +235,156 @@ msgstr ""
 
 #: src/prefdialog.cc:248
 msgid "\"%1\" is not a valid encoding."
-msgstr ""
+msgstr "\"%1\" nie jest poprawnym kodowaniem."
 
 #: src/statusline.cc:264
 msgid "Stop"
-msgstr ""
+msgstr "Stop"
 
 #: src/statusline.cc:271
 msgid "File:"
-msgstr ""
+msgstr "Plik:"
 
 #: src/statusline.cc:274
 msgid "Match:"
-msgstr ""
+msgstr "Dopasowanie:"
 
 #: src/statusline.cc:285
 msgid "Cancels the running search"
-msgstr ""
+msgstr "Przerywa uruchomine wyszukiwanie"
 
 #. namespace Regexxer
 #: ui/aboutdialog.glade.h:1
 msgid "About regexxer"
-msgstr ""
+msgstr "Informacje o regexxer"
 
 #: ui/aboutdialog.glade.h:2
 msgid "The application icon of regexxer"
-msgstr ""
+msgstr "Ikona aplikacji regexxer"
 
 #: ui/aboutdialog.glade.h:3
 msgid "regexxer icon"
-msgstr ""
+msgstr "ikona regexxer"
 
 #: ui/aboutdialog.glade.h:4
 msgid "translated by"
-msgstr ""
+msgstr "tłumaczenie"
 
 #: ui/aboutdialog.glade.h:5
 msgid "translator-credits"
-msgstr ""
+msgstr "GNOME PL Team <translators@gnomepl.org>"
 
 #: ui/aboutdialog.glade.h:6
 msgid "written by"
-msgstr ""
+msgstr "napisany przez"
 
 #: ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
-msgstr ""
+msgstr "Wyrażenie regularne w składni Perla"
 
 #: ui/mainwindow.glade.h:4
 msgid "Backward"
-msgstr ""
+msgstr "Wstecz"
 
 #: ui/mainwindow.glade.h:6
 msgid "File backward"
-msgstr ""
+msgstr "Plik wstecz"
 
 #: ui/mainwindow.glade.h:7
 msgid "File forward"
-msgstr ""
+msgstr "Plik naprzód"
 
 #: ui/mainwindow.glade.h:8
 msgid "Find all files that match the filename pattern"
-msgstr ""
+msgstr "Wyszukanie wszystkich plików pasujących do wzorca"
 
 #: ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
-msgstr ""
+msgstr "Wyszukanie wszystkich dopasowań wyrażenia regularnego"
 
 #: ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
-msgstr ""
+msgstr "Wyszukanie wszystkich możliwych dopasowań w linii"
 
 #: ui/mainwindow.glade.h:11
 msgid "Find fi_les"
-msgstr ""
+msgstr "Znajdź p_liki"
 
 #: ui/mainwindow.glade.h:12
 msgid "Fol_der:"
-msgstr ""
+msgstr "Fol_der:"
 
 #: ui/mainwindow.glade.h:13
 msgid "Forward"
-msgstr ""
+msgstr "Naprzód"
 
 #: ui/mainwindow.glade.h:14
 msgid "Go to next match"
-msgstr ""
+msgstr "Przechodzi do następnego dopasowania"
 
 #: ui/mainwindow.glade.h:15
 msgid "Go to previous match"
-msgstr ""
+msgstr "Przechodzi do poprzedniefo dopasowania"
 
 #: ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
-msgstr ""
+msgstr "Przechodzi do następnego pasującego pliku"
 
 #: ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
-msgstr ""
+msgstr "Przechodzi do poprzedniego pasującego pliku"
 
 #: ui/mainwindow.glade.h:18
 msgid "Pattern:"
-msgstr ""
+msgstr "Wzorzec:"
 
 #: ui/mainwindow.glade.h:19
 msgid "Preview"
-msgstr ""
+msgstr "Podgląd"
 
 #: ui/mainwindow.glade.h:20
 msgid "Preview of the substitution"
-msgstr ""
+msgstr "Podgląd przypisania"
 
 #: ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
-msgstr ""
+msgstr "Z podkatalogami"
 
 #: ui/mainwindow.glade.h:22
 msgid "Replace _current"
-msgstr ""
+msgstr "Zastąp bieżą_ce"
 
 #: ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
-msgstr ""
+msgstr "Zastępuje wszystkie dopasowania we wszystkich plikach"
 
 #: ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
-msgstr ""
+msgstr "Zastępuje wszystkie dopasowania w bieżącym pliku"
 
 #: ui/mainwindow.glade.h:25
 msgid "Replace current match"
-msgstr ""
+msgstr "Zastępuje bieżące dopasowanie"
 
 #: ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
-msgstr ""
+msgstr "Z_astąp we wszystkich plikach"
 
 #: ui/mainwindow.glade.h:27
 msgid "Replace in _this file"
-msgstr ""
+msgstr "Zastąp w _tym pliku"
 
 #: ui/mainwindow.glade.h:28
 msgid "Replace:"
-msgstr ""
+msgstr "Zastąp:"
 
 #: ui/mainwindow.glade.h:29
 msgid "Search:"
-msgstr ""
+msgstr "Wyszukaj:"
 
 #: ui/mainwindow.glade.h:30
 msgid "The directory to be searched"
-msgstr ""
+msgstr "Przeszukiwany katalog"
 
 #: ui/mainwindow.glade.h:31
 msgid ""
@@ -380,6 +392,9 @@ msgid ""
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
 "\\L, \\U and \\E are supported as well."
 msgstr ""
+"Nowy ciąg do przypisania. Tak jak w Perlu, można się odwoływać do części "
+"pasujących przy pomocy $1, $2, itd. lub nawet $+, $&, $` i $'. Operatory "
+"\\l, \\u, \\L, \\U i \\E są również obsługiwane."
 
 #: ui/mainwindow.glade.h:32
 msgid "_All files"
@@ -399,7 +414,7 @@ msgstr "P_omoc"
 
 #: ui/mainwindow.glade.h:36
 msgid "_Match"
-msgstr ""
+msgstr "_Dopasowanie"
 
 #: ui/mainwindow.glade.h:37
 msgid "_Next file"
@@ -411,19 +426,19 @@ msgstr "_Poprzedni plik"
 
 #: ui/mainwindow.glade.h:39
 msgid "_Replace"
-msgstr ""
+msgstr "_Zastąp"
 
 #: ui/mainwindow.glade.h:40
 msgid "_This file"
-msgstr ""
+msgstr "_Ten plik"
 
 #: ui/mainwindow.glade.h:41
 msgid "hidden"
-msgstr ""
+msgstr "ukryte"
 
 #: ui/mainwindow.glade.h:42
 msgid "recursive"
-msgstr ""
+msgstr "rekursywnie"
 
 #: ui/prefdialog.glade.h:1
 msgid "1."
@@ -439,11 +454,11 @@ msgstr "3."
 
 #: ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
-msgstr ""
+msgstr "Kolor _bieżącego dopasowania:"
 
 #: ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
-msgstr ""
+msgstr "_Kodowanie zastępcze:"
 
 #: ui/prefdialog.glade.h:6
 msgid ""
@@ -475,7 +490,7 @@ msgstr "UTF-8"
 
 #: ui/prefdialog.glade.h:14
 msgid "_File access"
-msgstr ""
+msgstr "_Dostęp plików"
 
 #: ui/prefdialog.glade.h:15
 msgid "_Look'n'feel"
@@ -483,13 +498,15 @@ msgstr "_Wygląd i zachowanie"
 
 #: ui/prefdialog.glade.h:16
 msgid "_Match color:"
-msgstr ""
+msgstr "Kolor _dopasowania:"
 
 #: ui/prefdialog.glade.h:17
 msgid "_Text view font:"
-msgstr ""
+msgstr "Czcionka wyświetlania _tekstu:"
 
 #: ui/prefdialog.glade.h:18
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
+"Program regexxer będzie próbował odczytać plik w następujących kodowaniach "
+"zanim się podda:"
