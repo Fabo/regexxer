@@ -1,3 +1,8 @@
+2004-06-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* po/Makevars (XGETTEXT_OPTIONS): Recent intltool now parses the
+	Makevars file, thus set this variable to the options we want.
+
 2004-06-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/Makefile.am (global_defines): Get rid of the redundant
