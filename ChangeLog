@@ -1,5 +1,11 @@
 2004-06-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.cc (validate_encoding): Better don't try to call
+	Glib::convert() with identical input and output encodings.  I heard
+	the iconv on Solaris doesn't like that idea at all.
+
+2004-06-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/prefdialog.cc (PrefDialog::on_response): Suggest a sync
 	to the GConf client when the dialog is closed.
 

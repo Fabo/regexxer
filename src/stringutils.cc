@@ -329,16 +329,20 @@ bool Util::validate_encoding(const std::string& encoding)
       return false;
   }
 
-  try
-  {
-    Glib::convert("", "UTF-8", encoding);
-  }
-  catch (const Glib::ConvertError& error)
-  {
-    if (error.code() == Glib::ConvertError::NO_CONVERSION)
-      return false;
-    throw;
-  }
+  // Better don't try to call Glib::convert() with identical input and output
+  // encodings.  I heard the iconv on Solaris doesn't like that idea at all.
+
+  if (!Util::encodings_equal(encoding, "UTF-8"))
+    try
+    {
+      Glib::convert("", "UTF-8", encoding);
+    }
+    catch (const Glib::ConvertError& error)
+    {
+      if (error.code() == Glib::ConvertError::NO_CONVERSION)
+        return false;
+      throw;
+    }
 
   return true;
 }
