@@ -1,5 +1,10 @@
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* de.po: Translate new desktop file strings.
+	* en.po: ditto.
+
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* de.po (ui/prefdialog.glade.h:16): Fix translation.
 
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-17 19:11+0200\n"
+"POT-Creation-Date: 2004-05-17 19:28+0200\n"
 "PO-Revision-Date: 2004-05-05 15:35+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -17,8 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: regexxer.desktop.in.h:1
-msgid "An interactive tool for performing search and replace operations"
-msgstr "An interactive tool for performing search and replace operations"
+msgid "Search and replace using regular expressions"
+msgstr "Search and replace using regular expressions"
+
+#: regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "regexxer Search Tool"
 
 #: regexxer.schemas.in.h:1
 msgid "Current-match color"
@@ -479,3 +483,6 @@ msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "regexxer attempts to read a file in the following encodings before giving up:"
+
+#~ msgid "An interactive tool for performing search and replace operations"
+#~ msgstr "An interactive tool for performing search and replace operations"
