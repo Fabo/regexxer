@@ -27,42 +27,8 @@
 
 #include <config.h>
 
-#if HAVE_UMASK
-
-#if HAVE_SYS_TYPES_H
-#include <sys/types.h>
-#endif
-
-#if HAVE_SYS_STAT_H
-#include <sys/stat.h>
-#endif
-
-#if !HAVE_MODE_T
-typedef int mode_t;
-#endif
-
-#endif /* HAVE_UMASK */
-
-
 namespace
 {
-
-#if HAVE_UMASK
-
-class ScopedUmask
-{
-private:
-  mode_t old_mask_;
-
-  ScopedUmask(const ScopedUmask&);
-  ScopedUmask& operator=(const ScopedUmask&);
-
-public:
-  explicit ScopedUmask(mode_t mask) : old_mask_ (umask(mask)) {}
-  ~ScopedUmask()                    { umask(old_mask_); }
-};
-
-#endif /* HAVE_UMASK */
 
 
 void print_warning(const char* text)
@@ -75,11 +41,13 @@ void print_warning(const char* text, const Glib::ustring& what)
   g_warning(text, what.c_str());
 }
 
+/*
 void print_invalid_value_warning(const Glib::ustring& value, const Glib::ustring& key)
 {
   g_warning("Error in configuration file: invalid value `%s' for key `%s'",
             value.c_str(), key.c_str());
 }
+*/
 
 
 struct NickValuePair
@@ -88,8 +56,7 @@ struct NickValuePair
   int         value;
 };
 
-int enum_from_string(const Glib::ustring& value, const Glib::ustring& key,
-                     const NickValuePair* value_map)
+int enum_from_string(const Glib::ustring& value, const NickValuePair* value_map)
 {
   const NickValuePair* p = value_map;
 
@@ -99,7 +66,7 @@ int enum_from_string(const Glib::ustring& value, const Glib::ustring& key,
       return p->value;
   }
 
-  print_invalid_value_warning(value, key);
+  //print_invalid_value_warning(value);
 
   return p->value; // return some fallback value
 }
@@ -115,91 +82,10 @@ Glib::ustring enum_to_string(int value, const NickValuePair* value_map)
   g_return_val_if_reached("");
 }
 
-void color_from_string(Gdk::Color& color, const Glib::ustring& value, const Glib::ustring& key)
+void color_from_string(Gdk::Color& color, const Glib::ustring& value)
 {
-  if(!color.parse(value))
-    print_invalid_value_warning(value, key);
-}
-
-
-const NickValuePair toolbar_style_values[] =
-{
-  { "icons",      Gtk::TOOLBAR_ICONS      },
-  { "text",       Gtk::TOOLBAR_TEXT       },
-  { "both",       Gtk::TOOLBAR_BOTH       },
-  { "both_horiz", Gtk::TOOLBAR_BOTH_HORIZ },
-  { 0,            Gtk::TOOLBAR_BOTH_HORIZ }
-};
-
-
-Glib::RefPtr<Glib::IOChannel> open_config_file(const std::string& mode)
-{
-  const std::string filename = Glib::build_filename(Glib::get_home_dir(), ".regexxer");
-
-  return Glib::IOChannel::create_from_file(filename, mode);
-}
-
-bool read_config_entry(const Glib::RefPtr<Glib::IOChannel>& channel,
-                       Glib::ustring& key, Glib::ustring& value)
-{
-  using Glib::ustring;
-
-  ustring line;
-
-  while(channel->read_line(line) == Glib::IO_STATUS_NORMAL)
-  {
-    ustring::const_iterator pbegin = line.begin();
-    ustring::const_iterator pend   = line.end();
-
-    Util::trim_whitespace(pbegin, pend);
-
-    if(pbegin == pend || *pbegin == '#')
-      continue;
-
-    // Use byte-wise std::string iterators because it's faster.
-    // It's possible to do this when searching for an ASCII character.
-    const ustring::const_iterator passign (std::find(pbegin.base(), pend.base(), '='));
-
-    if(passign == pend)
-    {
-      print_warning("Error in configuration file: missing `='");
-      continue;
-    }
-
-    ustring::const_iterator pend_key = passign;
-    Util::trim_whitespace(pbegin, pend_key);
-
-    if(pend_key == pbegin)
-    {
-      print_warning("Error in configuration file: missing key before `='");
-      continue;
-    }
-
-    ustring::const_iterator pbegin_value = passign;
-    Util::trim_whitespace(++pbegin_value, pend);
-
-    if(pbegin_value == pend)
-    {
-      print_warning("Error in configuration file: missing value after `='");
-      continue;
-    }
-
-    key.assign(pbegin, pend_key);
-    value.assign(pbegin_value, pend);
-
-    return true;
-  }
-
-  return false;
-}
-
-void write_config_entry(const Glib::RefPtr<Glib::IOChannel>& channel,
-                        const Glib::ustring& key, const Glib::ustring& value)
-{
-  channel->write(key);
-  channel->write("=");
-  channel->write(value);
-  channel->write("\n");
+  color.parse(value);
+    //print_invalid_value_warning(value, key);
 }
 
 } // anonymous namespace
@@ -210,14 +96,52 @@ namespace Regexxer
 
 /**** Regexxer::ConfigData *************************************************/
 
+const NickValuePair toolbar_style_values[] =
+{
+  { "icons",      Gtk::TOOLBAR_ICONS      },
+  { "text",       Gtk::TOOLBAR_TEXT       },
+  { "both",       Gtk::TOOLBAR_BOTH       },
+  { "both_horiz", Gtk::TOOLBAR_BOTH_HORIZ },
+  { 0,            Gtk::TOOLBAR_BOTH_HORIZ }
+};
+
+bool ConfigData::read_config_entry(const Glib::ustring& key, Glib::ustring& value)
+{
+  //Set the value of the key in GConf:
+  const Glib::ustring key_complete = gconf_dir_path_ + key;
+
+  try
+  {
+    value = refClient_->get_string(key_complete);
+    return true;
+  }
+  catch(const Gnome::Conf::Error& ex)
+  {
+    print_warning("Error while retrieving configuration: %s", ex.what().c_str());
+    return false;
+  }
+}
+
+void ConfigData::write_config_entry(const Glib::ustring& key, const Glib::ustring& value)
+{
+  //Set the value of the key in GConf:
+  const Glib::ustring key_complete = gconf_dir_path_ + key;
+  refClient_->set(key_complete, value);
+}
+
 ConfigData::ConfigData()
 :
   textview_font     ("Monospace"),
   match_color       ("orange"),
   current_color     ("yellow"),
   toolbar_style     (Gtk::TOOLBAR_BOTH_HORIZ),
-  fallback_encoding ("ISO-8859-15")
-{}
+  fallback_encoding ("ISO-8859-15"),
+  gconf_dir_path_("/apps/gnome/regexxer")
+{
+  //Connect to GConf:
+  refClient_ = Gnome::Conf::Client::get_default_client();
+  refClient_->add_dir(gconf_dir_path_);
+}
 
 ConfigData::~ConfigData()
 {}
@@ -225,41 +149,27 @@ ConfigData::~ConfigData()
 void ConfigData::load()
 {
   try
-  {
-    const Glib::RefPtr<Glib::IOChannel> channel = open_config_file("r");
+  {   
+    read_config_entry("textview_font", textview_font);
 
-    Glib::ustring key;
-    Glib::ustring value;
+    Glib::ustring color_string;
+    read_config_entry("match_color", color_string);
+    color_from_string(match_color, color_string);
+    
+    read_config_entry("current_match_color", color_string);
+    color_from_string(current_color, color_string);
 
-    while(read_config_entry(channel, key, value))
-    {
-      if(key.raw() == "textview_font")
-        textview_font = value;
+    Glib::ustring style_string;
+    read_config_entry("toolbar_style", style_string);
+    toolbar_style = Gtk::ToolbarStyle(enum_from_string(style_string, toolbar_style_values));
 
-      else if(key.raw() == "match_color")
-        color_from_string(match_color, value, key);
-
-      else if(key.raw() == "current_match_color")
-        color_from_string(current_color, value, key);
-
-      else if(key.raw() == "toolbar_style")
-        toolbar_style = Gtk::ToolbarStyle(enum_from_string(value, key, toolbar_style_values));
-
-      else if(key.raw() == "fallback_encoding")
-        set_fallback_encoding_from_string(value);
-
-      else if(key.raw() != "menutool_mode") // ignore key: menutool_mode is no longer supported
-        print_warning("Error in configuration file: unknown key `%s'", key);
-    }
+    Glib::ustring value_string; 
+    read_config_entry("fallback_encoding", value_string);
+    set_fallback_encoding_from_string(value_string);
   }
-  catch(const Glib::FileError& error)
+  catch(const Gnome::Conf::Error& error)
   {
-    if(error.code() != Glib::FileError::NO_SUCH_ENTITY)
-      print_warning("Failed to open configuration file: %s", error.what());
-  }
-  catch(const Glib::Error& error)
-  {
-    print_warning("Failed to read configuration file: %s", error.what());
+    print_warning("Failed to read configuration: %s", error.what());
   }
 }
 
@@ -267,28 +177,15 @@ void ConfigData::save()
 {
   try
   {
-#if HAVE_UMASK
-    ScopedUmask scoped_umask (077); // set -rw------- for newly created files
-#endif
-    const Glib::RefPtr<Glib::IOChannel> channel = open_config_file("w");
-
-    channel->write("# " PACKAGE_STRING " configuration file\n");
-
-    write_config_entry(channel, "textview_font", textview_font);
-    write_config_entry(channel, "match_color", Util::color_to_string(match_color));
-    write_config_entry(channel, "current_match_color", Util::color_to_string(current_color));
-    write_config_entry(channel, "toolbar_style", enum_to_string(toolbar_style, toolbar_style_values));
-    write_config_entry(channel, "fallback_encoding", get_string_from_fallback_encoding());
-
-    channel->close(); // close explicitly because it might fail
+    write_config_entry("textview_font", textview_font);
+    write_config_entry("match_color", Util::color_to_string(match_color));
+    write_config_entry("current_match_color", Util::color_to_string(current_color));
+    write_config_entry("toolbar_style", enum_to_string(toolbar_style, toolbar_style_values));
+    write_config_entry("fallback_encoding", get_string_from_fallback_encoding());
   }
-  catch(const Glib::FileError& error)
+  catch(const Gnome::Conf::Error& error)
   {
-    print_warning("Failed to open configuration file: %s", error.what());
-  }
-  catch(const Glib::Error& error)
-  {
-    print_warning("Failed to write configuration file: %s", error.what());
+    print_warning("Failed to write configuration: %s", error.what());
   }
 }
 
@@ -303,7 +200,7 @@ void ConfigData::set_fallback_encoding_from_string(const Glib::ustring& value)
   }
   else
   {
-    print_invalid_value_warning(value, "fallback_encoding");
+    //print_invalid_value_warning(value, "fallback_encoding");
   }
 }
 

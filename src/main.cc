@@ -21,6 +21,8 @@
 #include "mainwindow.h"
 
 #include <glib.h>
+
+#include <gconfmm.h>
 #include <gtkmm/iconfactory.h>
 #include <gtkmm/iconset.h>
 #include <gtkmm/iconsource.h>
@@ -133,11 +135,11 @@ int main(int argc, char** argv)
 {
   try
   {
+    Gnome::Conf::init();
     Gtk::Main main_instance (&argc, &argv);
 
-#if REGEXXER_HAVE_GTKMM_22
     Glib::set_application_name("regexxer");
-#endif
+
     regexxer_register_stock_items();
     regexxer_set_window_icon();
 

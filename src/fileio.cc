@@ -77,6 +77,7 @@ void save_iochannel(const Glib::RefPtr<Glib::IOChannel>& output, const Glib::Ref
 
 Glib::RefPtr<FileBuffer> load_try_encoding(const std::string& filename, const std::string& encoding)
 {
+  //TODO: Use gnome-vfsmm: murrayc.
   const Glib::RefPtr<Glib::IOChannel> channel = Glib::IOChannel::create_from_file(filename, "r");
 
   channel->set_buffer_size(BUFSIZE);

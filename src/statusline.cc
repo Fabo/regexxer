@@ -257,9 +257,7 @@ StatusLine::StatusLine()
 
   progressbar_->set_pulse_step(0.025);
 
-#if REGEXXER_HAVE_GTKMM_22
   stop_button_->get_accessible()->set_description("Cancels the running search");
-#endif
 
   show_all_children();
 }

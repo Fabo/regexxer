@@ -1,3 +1,12 @@
+2003-11-29  Murray Cumming  <murrayc@usa.net>
+
+	* configure.ac: regexxer now depends on gconfmm. Removed the check
+	for 2.2-specific features.
+	* Remoevd all gtkmm 2.2-specific #ifdefs because 2.2 is everywhere
+	now..
+	* src/configdata.[h|cc]: Changed the implemention to use GConfmm
+	instead of the text file.
+
 2003-10-31  Murray Cumming  <murrayc@usa.net>
 
 	* src/mainwindow.cc: Used larger HIG-like borders and spacings to

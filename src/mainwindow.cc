@@ -349,9 +349,7 @@ Gtk::Widget* MainWindow::create_left_pane()
   scrollwin->add(*manage(filetree_));
   scrollwin->set_policy(POLICY_AUTOMATIC, POLICY_ALWAYS);
 
-#if REGEXXER_HAVE_GTKMM_22
   entry_folder_->get_accessible()->set_name("Folder");
-#endif
 
   tooltips_.set_tip(*entry_folder_,     "The directory to be searched");
   tooltips_.set_tip(*entry_pattern_,    "A filename pattern as used by the shell. "
@@ -421,9 +419,7 @@ Gtk::Widget* MainWindow::create_right_pane()
   entry_preview_->set_editable(false);
   entry_preview_->unset_flags(CAN_FOCUS);
 
-#if REGEXXER_HAVE_GTKMM_22
   entry_preview_->get_accessible()->set_name("Preview");
-#endif
 
   tooltips_.set_tip(*entry_regex_,        "A regular expression in Perl syntax");
   tooltips_.set_tip(*entry_substitution_, "The new string to substitute. As in Perl, you can "

@@ -28,12 +28,6 @@
 
 #include <config.h>
 
-#if !REGEXXER_HAVE_GTKMM_22
-#include <gtk/gtkrc.h>
-#include <gtk/gtkwidget.h>
-#endif
-
-
 namespace
 {
 
@@ -230,19 +224,9 @@ ColorSelectionButton::ColorLabel::ColorLabel()
   const Glib::RefPtr<Gtk::RcStyle> rcstyle = get_modifier_style();
   const Glib::ustring none = "<none>";
 
-#if REGEXXER_HAVE_GTKMM_22
   rcstyle->set_bg_pixmap_name(Gtk::STATE_NORMAL,   none);
   rcstyle->set_bg_pixmap_name(Gtk::STATE_ACTIVE,   none);
   rcstyle->set_bg_pixmap_name(Gtk::STATE_PRELIGHT, none);
-#else
-  g_free(rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_NORMAL]);
-  g_free(rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_ACTIVE]);
-  g_free(rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_PRELIGHT]);
-
-  rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_NORMAL]   = g_strdup(none.c_str());
-  rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_ACTIVE]   = g_strdup(none.c_str());
-  rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_PRELIGHT] = g_strdup(none.c_str());
-#endif
 
   modify_style(rcstyle);
 }
@@ -276,15 +260,8 @@ bool ColorSelectionButton::ColorLabel::on_expose_event(GdkEventExpose* event)
 
   Gtk::Widget& button = *get_parent();
 
-#if REGEXXER_HAVE_GTKMM_22
   button.get_style_property("focus_padding",    focus_padding);
   button.get_style_property("focus_line_width", focus_line_width);
-#else
-  gtk_widget_style_get(button.gobj(),
-                       "focus_padding",    &focus_padding,
-                       "focus_line_width", &focus_line_width,
-                       static_cast<char*>(0));
-#endif
 
   const int margin = focus_padding + focus_line_width + 1;
   const GdkRectangle alloc = get_allocation();

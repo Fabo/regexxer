@@ -21,6 +21,7 @@
 #ifndef REGEXXER_CONFIGDATA_H_INCLUDED
 #define REGEXXER_CONFIGDATA_H_INCLUDED
 
+#include <gconfmm.h>
 #include <gdkmm/color.h>
 #include <glibmm/ustring.h>
 #include <gtkmm/toolbar.h>
@@ -29,8 +30,11 @@
 namespace Regexxer
 {
 
-struct ConfigData
+// This class is a bit strange because it originally read/wrote a text configuration file,
+// but now it is implemented with GConf instead (which is much simpler).
+class ConfigData
 {
+public:
   Glib::ustring     textview_font;
   Gdk::Color        match_color;
   Gdk::Color        current_color;
@@ -46,6 +50,12 @@ struct ConfigData
 private:
   void set_fallback_encoding_from_string(const Glib::ustring& value);
   Glib::ustring get_string_from_fallback_encoding() const;
+
+  bool read_config_entry(const Glib::ustring& key, Glib::ustring& value);
+  void write_config_entry(const Glib::ustring& key, const Glib::ustring& value);
+
+  Glib::RefPtr<Gnome::Conf::Client> refClient_;
+  Glib::ustring gconf_dir_path_;
 };
 
 } // namespace Regexxer

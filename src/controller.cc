@@ -327,7 +327,6 @@ Gtk::Widget* Controller::create_action_area()
   Button *const button_replace_all = new ImageLabelButton(Stock::CONVERT, "_All files", true);
   box_replace->pack_start(*manage(button_replace_all));
 
-#if REGEXXER_HAVE_GTKMM_22
   button_prev_file   ->get_accessible()->set_description("Go to the previous matching file");
   button_prev        ->get_accessible()->set_description("Go to previous match");
   button_next        ->get_accessible()->set_description("Go to next match");
@@ -335,7 +334,6 @@ Gtk::Widget* Controller::create_action_area()
   button_replace     ->get_accessible()->set_description("Replace current match");
   button_replace_file->get_accessible()->set_description("Replace all matches in the current file");
   button_replace_all ->get_accessible()->set_description("Replace all matches in all files");
-#endif
 
   add_widget_button(next_file,    *button_next_file);
   add_widget_button(prev_file,    *button_prev_file);

@@ -94,13 +94,11 @@ ContributorBox::ContributorBox(const Glib::ustring& what, const Glib::ustring& w
   Label *const label_who = new SelectableLabel(who);
   pack_start(*manage(label_who), PACK_SHRINK);
 
-#if REGEXXER_HAVE_GTKMM_22
   const Glib::RefPtr<Atk::Object> accessible_what = label_what->get_accessible();
   const Glib::RefPtr<Atk::Object> accessible_who  = label_who ->get_accessible();
 
   accessible_what->add_relationship(Atk::RELATION_FLOWS_TO,   accessible_who);
   accessible_who ->add_relationship(Atk::RELATION_FLOWS_FROM, accessible_what);
-#endif
 }
 
 ContributorBox::~ContributorBox()
@@ -142,15 +140,11 @@ AboutDialog::AboutDialog(Gtk::Window& parent)
     label_title->set_alignment(0.0, 0.5);
     label_title->set_markup("<span size=\"xx-large\" weight=\"heavy\">" PACKAGE_STRING "</span>");
 
-#if REGEXXER_HAVE_GTKMM_22
     const Glib::RefPtr<Atk::Object> image_accessible = image->get_accessible();
     image_accessible->set_name("regexxer icon");
 
-#if 0 /* TODO: enable this when gtkmm-2.1.3 has been released */
     Glib::RefPtr<Atk::Image>::cast_dynamic(image_accessible)
         ->set_image_description("The application icon of regexxer");
-#endif
-#endif
   }
   {
     Box *const box_text = new VBox(false, 10);
