@@ -1,3 +1,9 @@
+2002-10-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/mainwindow.cc (on_exec_search): If there was an error in
+	the regex, move the Gtk::Entry cursor to the character reported
+	by Pcre::Error::offset().
+
 2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/stringutils.{cc,h} (int_to_string): New function.
