@@ -1,3 +1,10 @@
+2004-06-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/sharedptr.h (SharedObject::refcount_): Change type to long,
+	so that a full word will be used on 64 bit machines.
+	(SharedPtr): Add a paragraph about operator const void*() to the
+	class description.
+
 2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* autogen.sh: Append an XGETTEXT_KEYWORDS = ... line to the

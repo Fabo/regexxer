@@ -29,8 +29,8 @@ namespace Util
 
 template <class> class SharedPtr;
 
-
-/* Common base class of objects managed by SharedPtr<>.
+/*
+ * Common base class of objects managed by SharedPtr<>.
  */
 class SharedObject
 {
@@ -39,7 +39,7 @@ protected:
   ~SharedObject();
 
 private:
-  mutable int refcount_;
+  mutable long refcount_;
 
   SharedObject(const SharedObject&);
   SharedObject& operator=(const SharedObject&);
@@ -47,8 +47,8 @@ private:
   template <class> friend class SharedPtr;
 };
 
-
-/* Intrusive smart pointer implementation.  It requires the managed types
+/*
+ * Intrusive smart pointer implementation.  It requires the managed types
  * to be derived from class SharedObject, in order to do reference counting
  * as efficient as possible.
  *
@@ -68,7 +68,19 @@ private:
  * I didn't implement shared_polymorphic_downcast<T> because it seems to be
  * just a debug check for those who don't want to ship with debugging enabled.
  * This would be silly IMHO, considering that the dynamic_cast<> overhead is
- * neglible in a GUI application like regexxer.
+ * negligible in a GUI application like regexxer.
+ *
+ * About operator const void*() const:
+ *
+ * This operator fulfills the same task operator bool() would, but safer.
+ * A SharedPtr<> will never be implicitely converted to an integer type,
+ * which is particularly important in the context of overload resolution.
+ * An additional advantage is that operator const void*() gets us equality
+ * and non-equality tests for free.
+ *
+ * Note that boost is using an operator that converts to a PMF (pointer to
+ * member function) for this purpose.  However, I consider this solution
+ * to be somewhat over the top.
  */
 template <class T>
 class SharedPtr
