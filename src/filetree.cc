@@ -479,53 +479,6 @@ void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
   Gtk::TreeView::on_style_changed(previous_style);
 }
 
-/* Expand a directory node if it got the activate signal.
- * That is, when the spacebar was pressed.
- */
-void FileTree::on_row_activated(const Gtk::TreePath& path, Column*)
-{
-  if(treestore_->get_iter(path)->children())
-  {
-    if(row_expanded(path))
-      collapse_row(path);
-    else
-      expand_row(path, false);
-  }
-}
-
-/* Expand a directory node when the user clicked anywhere inside the row.
- * It's probably easier to hit the row than the little expander arrow :)
- */
-bool FileTree::on_button_release_event(GdkEventButton* event)
-{
-  if(Gtk::TreeView::on_button_release_event(event))
-    return true;
-
-  switch(event->button)
-  {
-    case 1: case 2: case 3:
-    {
-      Gtk::TreePath path;
-      Column* column = 0;
-      int cell_x = 0;
-      int cell_y = 0;
-
-      if(get_path_at_pos(int(event->x), int(event->y), path, column, cell_x, cell_y) &&
-         treestore_->get_iter(path)->children())
-      {
-        if(row_expanded(path))
-          collapse_row(path);
-        else
-          expand_row(path, false);
-
-        return true; // event handled
-      }
-    }
-  }
-
-  return false; // continue emission
-}
-
 /**** Regexxer::FileTree -- private ****************************************/
 
 void FileTree::icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter)

@@ -1,5 +1,12 @@
 2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h}: Get rid of the code that expanded/collapsed
+	directory nodes on row clicks and the activated signal.  The GTK+
+	people persuaded me that the inconsistency is worse than the little
+	annoyance of having to hit the expander arrow.
+
+2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (on_row_activated): Override, in order to
 	expand/collapse a directory node when the spacebar was pressed.
 
