@@ -1,5 +1,10 @@
 2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/pcreshell.cc (Pattern::get_substring_bounds): Sanity-check
+	for index >= 0 too.
+
+2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (MainWindow::on_conf_value_changed): Remove
 	"using namespace Gtk" directive which became pointless after the
 	last change.

@@ -154,7 +154,7 @@ int Pattern::match(const Glib::ustring& subject, int offset, MatchOptions option
 
 std::pair<int,int> Pattern::get_substring_bounds(int index) const
 {
-  g_return_val_if_fail(3 * index < ovecsize_, std::make_pair(-1, -1));
+  g_return_val_if_fail(index >= 0 && 3 * index < ovecsize_, std::make_pair(-1, -1));
 
   return std::make_pair(ovector_[2 * index], ovector_[2 * index + 1]);
 }
