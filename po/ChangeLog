@@ -1,3 +1,8 @@
+2004-05-17  Duarte Loreto <happyguy_pt@hotmail.com>
+
+	* pt.po: Added Portuguese translation.
+	* LINGUAS: Added Portuguese (pt).
+
 2004-05-17  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Added an incomplete Swedish translation.
