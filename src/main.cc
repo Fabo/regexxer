@@ -138,7 +138,7 @@ std::auto_ptr<Regexxer::InitState> parse_command_line(int argc, char** argv)
   {
     std::fprintf(stderr, "%s: %s\n%s\n",
                  poptBadOption(context, 0), poptStrerror(rc),
-                 _("Try `regexxer --help' for more information."));
+                 _("Try \"regexxer --help\" for more information."));
     std::exit(1);
   }
 

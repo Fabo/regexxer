@@ -1,5 +1,10 @@
 2004-07-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/main.cc (parse_command_line): Replace `...' with \"...\" in
+	message strings, for consistency with the rest of the application.
+
+2004-07-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.{cc,h} (FileBuffer::find_matches): Add a feedback
 	slot parameter and invoke it for every matching line.  The current
 	line number and the subject string are passed as arguments to the
