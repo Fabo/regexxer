@@ -127,7 +127,7 @@ Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
   g_assert(capture_count >= 0);
 
   ovecsize_ = 3 * (capture_count + 1);
-  ovector_  = g_new(int, ovecsize_);
+  ovector_  = g_new0(int, ovecsize_);
 }
 
 Pattern::~Pattern()
@@ -153,18 +153,19 @@ int Pattern::match(const Glib::ustring& subject, int offset, MatchOptions option
 
 std::pair<int,int> Pattern::get_substring_bounds(int index) const
 {
-  return std::pair<int,int>(ovector_[2 * index], ovector_[2 * index + 1]);
+  g_return_val_if_fail(3 * index < ovecsize_, std::make_pair(-1, -1));
+
+  return std::make_pair(ovector_[2 * index], ovector_[2 * index + 1]);
 }
 
 Glib::ustring Pattern::get_substring(const Glib::ustring& subject, int index) const
 {
-  const int begin = ovector_[2 * index];
-  const int end   = ovector_[2 * index + 1];
+  const std::pair<int,int> bounds = get_substring_bounds(index);
 
-  if (begin >= 0 && begin < end)
+  if (bounds.first >= 0 && bounds.first < bounds.second)
   {
     const char *const data = subject.data();
-    return Glib::ustring(data + begin, data + end);
+    return Glib::ustring(data + bounds.first, data + bounds.second);
   }
 
   return Glib::ustring();
