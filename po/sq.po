@@ -1,0 +1,573 @@
+# Përkthimi i mesazheve të regexxer në shqip
+# This file is distributed under the same license as the regexxer package.
+# Copyright (C) 2004 Free Software Foundation, Inc.
+# Laurent Dhima <laurenti@alblinux.net>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-09-02 12:26+0200\n"
+"PO-Revision-Date: 2004-09-03 13:09+0200\n"
+"Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
+"Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: regexxer.desktop.in.h:1
+msgid "Search and replace using regular expressions"
+msgstr "Kërko dhe zëvendëso shprehje të rregullta"
+
+#: regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "Instrumenti i kërkimit regexxer"
+
+#: regexxer.schemas.in.h:1
+#, fuzzy
+msgid "Current-match color"
+msgstr "Aktual"
+
+#: regexxer.schemas.in.h:2
+msgid "Fallback encoding"
+msgstr ""
+
+#: regexxer.schemas.in.h:3
+msgid "Match color"
+msgstr ""
+
+#: regexxer.schemas.in.h:4
+#, fuzzy
+msgid ""
+"Name of the character encoding to use if a file is not readable in either "
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
+msgstr "Emri nga a është nuk në nga lokale lista për a lista nga."
+
+#: regexxer.schemas.in.h:5
+#, fuzzy
+msgid "Text view font"
+msgstr "Teksti shfaq gërmë"
+
+#: regexxer.schemas.in.h:6
+#, fuzzy
+msgid "The background color used to highlight matches of the search expression."
+msgstr "nga kërko shprehje."
+
+#: regexxer.schemas.in.h:7
+#, fuzzy
+msgid ""
+"The background color used to highlight the currently selected match of the "
+"search expression."
+msgstr "nga kërko shprehje."
+
+#: regexxer.schemas.in.h:8
+msgid "The font used in the file editor."
+msgstr "Gërmat e përdorura në editor."
+
+#: regexxer.schemas.in.h:9
+#, fuzzy
+msgid ""
+"The style of the application's toolbar. Possible values are \"icons\", \"text"
+"\", \"both\", and \"both-horiz\"."
+msgstr "nga programi tekst dhe."
+
+#: regexxer.schemas.in.h:10
+#, fuzzy
+msgid "Toolbar style"
+msgstr "Stili i panelit të instrumenteve"
+
+#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+#: src/filebuffer.cc:203
+msgid "Can't read file:"
+msgstr ""
+
+#: src/filetree.cc:81
+#, fuzzy
+msgid "File"
+msgstr "File"
+
+#: src/filetree.cc:101
+msgid "#"
+msgstr ""
+
+#: src/filetree.cc:532
+#, fuzzy
+msgid "Failed to save file \"%1\": %2"
+msgstr "Dështoi ruaj 2"
+
+#: src/filetree.cc:949
+#, fuzzy
+msgid "\"%1\" seems to be a binary file."
+msgstr "a."
+
+#: src/main.cc:84
+#, fuzzy
+msgid "_About"
+msgstr "_Informacione"
+
+#: src/main.cc:85
+#, fuzzy
+msgid "Save _all"
+msgstr "Ruaj"
+
+#: src/main.cc:100
+#, fuzzy
+msgid "Find files matching PATTERN"
+msgstr "Gjej"
+
+#: src/main.cc:100
+msgid "PATTERN"
+msgstr ""
+
+#: src/main.cc:101
+#, fuzzy
+msgid "Do not recurse into subdirectories"
+msgstr "Bëje nuk"
+
+#: src/main.cc:102 ui/mainwindow.glade.h:3
+#, fuzzy
+msgid "Also find hidden files"
+msgstr "gjej"
+
+#: src/main.cc:103
+#, fuzzy
+msgid "Find text matching REGEX"
+msgstr "Gjej tekst"
+
+#: src/main.cc:103
+msgid "REGEX"
+msgstr ""
+
+#: src/main.cc:104
+#, fuzzy
+msgid "Find only the first match in a line"
+msgstr "Gjej i pari në a"
+
+#: src/main.cc:105 ui/mainwindow.glade.h:5
+#, fuzzy
+msgid "Do case insensitive matching"
+msgstr "Bëje"
+
+#: src/main.cc:106
+#, fuzzy
+msgid "Replace matches with STRING"
+msgstr "Zëvendëso me STRINGË"
+
+#: src/main.cc:106
+#, fuzzy
+msgid "STRING"
+msgstr "STRINGË"
+
+#: src/main.cc:107
+#, fuzzy
+msgid "Print match location to standard output"
+msgstr "Printo pozicioni"
+
+#: src/main.cc:108
+#, fuzzy
+msgid "Do not automatically start search"
+msgstr "Bëje nuk nisje kërko"
+
+#: src/main.cc:118
+#, fuzzy
+msgid "[OPTION]... [FOLDER]"
+msgstr "KARTELA"
+
+#: src/main.cc:141
+#, fuzzy
+msgid "Try \"regexxer --help\" for more information."
+msgstr "ndihmë për tjetër."
+
+#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
+#, fuzzy
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr "A nga Simboli dhe a."
+
+#: src/mainwindow.cc:403
+msgid ""
+"Some files haven't been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+
+#: src/mainwindow.cc:431
+#, fuzzy
+msgid ""
+"The folder name \"%1\" contains characters not representable in the encoding "
+"of the local file system."
+msgstr "kartelë emri përmban nuk në nga lokal sistemi."
+
+#: src/mainwindow.cc:450
+#, fuzzy
+msgid "Select a folder"
+msgstr "Zgjidh a kartelë"
+
+#: src/mainwindow.cc:470
+msgid ""
+"Some files haven't been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+
+#: src/mainwindow.cc:496
+#, fuzzy
+msgid "The file search pattern is invalid."
+msgstr "kërko është I pavlefshëm."
+
+#: src/mainwindow.cc:502
+#, fuzzy
+msgid "The following errors occurred during search:"
+msgstr "kërko:"
+
+#: src/mainwindow.cc:527
+#, fuzzy
+msgid ""
+"Error in regular expression at \"%1\" (index %2):\n"
+"%3"
+msgstr "Gabim në i rregullt shprehje treguesi j 3"
+
+#: src/mainwindow.cc:529
+#, fuzzy
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr "Gabim në i rregullt shprehje j"
+
+#: src/mainwindow.cc:751
+#, fuzzy
+msgid "The following errors occurred during save:"
+msgstr "ruaj:"
+
+#: src/pcreshell.cc:59
+#, fuzzy
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr "C escape a është nuk."
+
+#: src/pcreshell.cc:151
+#, fuzzy
+msgid ""
+"Reached the recursion and backtracking limit of the regular expression "
+"engine."
+msgstr "dhe nga i rregullt shprehje."
+
+#: src/prefdialog.cc:248
+#, fuzzy
+msgid "\"%1\" is not a valid encoding."
+msgstr "është nuk a."
+
+#: src/statusline.cc:264
+#, fuzzy
+msgid "Stop"
+msgstr "Ndal"
+
+#: src/statusline.cc:271
+#, fuzzy
+msgid "File:"
+msgstr "File:"
+
+#: src/statusline.cc:274
+#, fuzzy
+msgid "Match:"
+msgstr "Përputhja:"
+
+#: src/statusline.cc:285
+#, fuzzy
+msgid "Cancels the running search"
+msgstr "në punim e sipër kërko"
+
+#. namespace Regexxer
+#: ui/aboutdialog.glade.h:1
+#, fuzzy
+msgid "About regexxer"
+msgstr "Informacione"
+
+#: ui/aboutdialog.glade.h:2
+#, fuzzy
+msgid "The application icon of regexxer"
+msgstr "programi ikonë nga"
+
+#: ui/aboutdialog.glade.h:3
+#, fuzzy
+msgid "regexxer icon"
+msgstr "ikonë"
+
+#: ui/aboutdialog.glade.h:4
+#, fuzzy
+msgid "translated by"
+msgstr "nga"
+
+#: ui/aboutdialog.glade.h:5
+#, fuzzy
+msgid "translator-credits"
+msgstr "Laurent Dhima <laurenti@alblinux.net>"
+
+#: ui/aboutdialog.glade.h:6
+#, fuzzy
+msgid "written by"
+msgstr "nga"
+
+#: ui/mainwindow.glade.h:2
+#, fuzzy
+msgid "A regular expression in Perl syntax"
+msgstr "A i rregullt shprehje në Perl"
+
+#: ui/mainwindow.glade.h:4
+#, fuzzy
+msgid "Backward"
+msgstr "Mbrapa"
+
+#: ui/mainwindow.glade.h:6
+#, fuzzy
+msgid "File backward"
+msgstr "File"
+
+#: ui/mainwindow.glade.h:7
+#, fuzzy
+msgid "File forward"
+msgstr "File"
+
+#: ui/mainwindow.glade.h:8
+#, fuzzy
+msgid "Find all files that match the filename pattern"
+msgstr "Gjej"
+
+#: ui/mainwindow.glade.h:9
+#, fuzzy
+msgid "Find all matches of the regular expression"
+msgstr "Gjej nga i rregullt shprehje"
+
+#: ui/mainwindow.glade.h:10
+#, fuzzy
+msgid "Find all possible matches in a line"
+msgstr "Gjej në a"
+
+#: ui/mainwindow.glade.h:11
+#, fuzzy
+msgid "Find fi_les"
+msgstr "Gjej"
+
+#: ui/mainwindow.glade.h:12
+msgid "Fol_der:"
+msgstr ""
+
+#: ui/mainwindow.glade.h:13
+#, fuzzy
+msgid "Forward"
+msgstr "Vazhdo"
+
+#: ui/mainwindow.glade.h:14
+#, fuzzy
+msgid "Go to next match"
+msgstr "në vazhdim"
+
+#: ui/mainwindow.glade.h:15
+#, fuzzy
+msgid "Go to previous match"
+msgstr "paraardhësja"
+
+#: ui/mainwindow.glade.h:16
+#, fuzzy
+msgid "Go to the next matching file"
+msgstr "në vazhdim"
+
+#: ui/mainwindow.glade.h:17
+#, fuzzy
+msgid "Go to the previous matching file"
+msgstr "paraardhësja"
+
+#: ui/mainwindow.glade.h:18
+#, fuzzy
+msgid "Pattern:"
+msgstr "Motivi:"
+
+#: ui/mainwindow.glade.h:19
+#, fuzzy
+msgid "Preview"
+msgstr "Shikoje"
+
+#: ui/mainwindow.glade.h:20
+#, fuzzy
+msgid "Preview of the substitution"
+msgstr "Shikoje nga"
+
+#: ui/mainwindow.glade.h:21
+msgid "Recurse into subdirectories"
+msgstr ""
+
+#: ui/mainwindow.glade.h:22
+#, fuzzy
+msgid "Replace _current"
+msgstr "Zëvendëso"
+
+#: ui/mainwindow.glade.h:23
+#, fuzzy
+msgid "Replace all matches in all files"
+msgstr "Zëvendëso në"
+
+#: ui/mainwindow.glade.h:24
+#, fuzzy
+msgid "Replace all matches in the current file"
+msgstr "Zëvendëso në"
+
+#: ui/mainwindow.glade.h:25
+#, fuzzy
+msgid "Replace current match"
+msgstr "Zëvendëso"
+
+#: ui/mainwindow.glade.h:26
+#, fuzzy
+msgid "Replace in _all files"
+msgstr "Zëvendëso në"
+
+#: ui/mainwindow.glade.h:27
+#, fuzzy
+msgid "Replace in _this file"
+msgstr "Zëvendëso në"
+
+#: ui/mainwindow.glade.h:28
+#, fuzzy
+msgid "Replace:"
+msgstr "Zëvendëso:"
+
+#: ui/mainwindow.glade.h:29
+#, fuzzy
+msgid "Search:"
+msgstr "Kërko:"
+
+#: ui/mainwindow.glade.h:30
+msgid "The directory to be searched"
+msgstr ""
+
+#: ui/mainwindow.glade.h:31
+#, fuzzy
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
+"\\L, \\U and \\E are supported as well."
+msgstr "i ri në Perl nga dhe L U dhe E."
+
+#: ui/mainwindow.glade.h:32
+#, fuzzy
+msgid "_All files"
+msgstr "_Të gjithë files"
+
+#: ui/mainwindow.glade.h:33
+#, fuzzy
+msgid "_Edit"
+msgstr "_Ndrysho"
+
+#: ui/mainwindow.glade.h:34
+#, fuzzy
+msgid "_File"
+msgstr "_File"
+
+#: ui/mainwindow.glade.h:35
+#, fuzzy
+msgid "_Help"
+msgstr "_Ndihmë"
+
+#: ui/mainwindow.glade.h:36
+msgid "_Match"
+msgstr ""
+
+#: ui/mainwindow.glade.h:37
+#, fuzzy
+msgid "_Next file"
+msgstr "Vazhdo"
+
+#: ui/mainwindow.glade.h:38
+#, fuzzy
+msgid "_Previous file"
+msgstr "Paraardhëse"
+
+#: ui/mainwindow.glade.h:39
+#, fuzzy
+msgid "_Replace"
+msgstr "_Zëvendëso"
+
+#: ui/mainwindow.glade.h:40
+msgid "_This file"
+msgstr ""
+
+#: ui/mainwindow.glade.h:41
+msgid "hidden"
+msgstr ""
+
+#: ui/mainwindow.glade.h:42
+msgid "recursive"
+msgstr ""
+
+#: ui/prefdialog.glade.h:1
+msgid "1."
+msgstr ""
+
+#: ui/prefdialog.glade.h:2
+msgid "2."
+msgstr ""
+
+#: ui/prefdialog.glade.h:3
+msgid "3."
+msgstr ""
+
+#: ui/prefdialog.glade.h:4
+#, fuzzy
+msgid "C_urrent match color:"
+msgstr "C:"
+
+#: ui/prefdialog.glade.h:5
+msgid "Fallback _encoding:"
+msgstr ""
+
+#: ui/prefdialog.glade.h:6
+#, fuzzy
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr "dhe tekst"
+
+#: ui/prefdialog.glade.h:10
+#, fuzzy
+msgid "Preferences"
+msgstr "Preferimet"
+
+#: ui/prefdialog.glade.h:11
+#, fuzzy
+msgid "The encoding specified by the current locale"
+msgstr "nga lokale"
+
+#: ui/prefdialog.glade.h:12
+msgid "Tool_bar style:"
+msgstr ""
+
+#: ui/prefdialog.glade.h:13
+#, fuzzy
+msgid "UTF-8"
+msgstr "8"
+
+#: ui/prefdialog.glade.h:14
+#, fuzzy
+msgid "_File access"
+msgstr "File hyrje"
+
+#: ui/prefdialog.glade.h:15
+#, fuzzy
+msgid "_Look'n'feel"
+msgstr "Paraqitja j"
+
+#: ui/prefdialog.glade.h:16
+msgid "_Match color:"
+msgstr ""
+
+#: ui/prefdialog.glade.h:17
+#, fuzzy
+msgid "_Text view font:"
+msgstr "Teksti shfaq gërmë:"
+
+#: ui/prefdialog.glade.h:18
+#, fuzzy
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "a në përpara sipër:"
+
