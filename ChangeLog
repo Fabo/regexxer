@@ -83,10 +83,10 @@
 
 	* src/main.cc (main): Remove call to gconfmm bug runtime test.
 
-	* src/filebuffer.cc (on_config_value_changed): Remove hack.
-	* src/filetree.cc (on_config_value_changed): ditto
-	* src/mainwindow.cc (on_config_value_changed): ditto.
-	* src/prefdialog.{cc,h} (on_config_value_changed_hack): Remove.
+	* src/filebuffer.cc (on_conf_value_changed): Remove hack.
+	* src/filetree.cc (on_conf_value_changed): ditto
+	* src/mainwindow.cc (on_conf_value_changed): ditto.
+	* src/prefdialog.{cc,h} (on_conf_value_changed_hack): Remove.
 
 2004-05-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
