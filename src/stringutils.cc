@@ -601,12 +601,12 @@ Glib::ustring Util::filename_to_utf8_fallback(const std::string& filename)
       throw;
   }
 
-  const Glib::ustring filename_utf8 = Glib::locale_to_utf8(filename);
+  const Glib::ustring filename_utf8 = Util::convert_to_ascii(filename);
 
-  g_warning("The filename encoding of `%s' is not UTF-8 but G_BROKEN_FILENAMES is unset. "
-            "Falling back to locale encoding for backward compatibility, but you should "
-            "either set the environment variable G_BROKEN_FILENAMES=1 or convert all your "
-            "filenames to UTF-8 encoding, as it should be.", filename_utf8.c_str());
+  g_warning("The filename `%s' is not valid UTF-8.  To work around that, please "
+            "set G_FILENAME_ENCODING to the local encoding used for filenames.  "
+            "Alternatively, convert all your legacy filenames to UTF-8 encoding.",
+            filename_utf8.c_str());
 
   return filename_utf8;
 }

@@ -395,16 +395,6 @@ void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
       // Collect errors but don't interrupt the search.
       find_data.error_list->push_back(error.what());
     }
-    catch (const Glib::ConvertError& error) // unlikely due to use of our own fallback conversion
-    {
-      // Don't use Glib::locale_to_utf8() because we already
-      // tried that in Util::filename_to_utf8_fallback().
-      //
-      const Glib::ustring name = Util::convert_to_ascii(fullname);
-      const Glib::ustring what = error.what();
-
-      g_warning("Eeeek, can't convert filename `%s' to UTF-8: %s", name.c_str(), what.c_str());
-    }
   }
 
   find_increment_file_count(find_data, file_count);

@@ -1,3 +1,14 @@
+2004-05-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/stringutils.cc (filename_to_utf8_fallback): On failure,
+	don't fall back to the locale encoding anymore but straight to
+	plain ASCII.  Thus from now on, this function will never throw
+	for errors of type ConvertError::ILLEGAL_SEQUENCE.  Also cover
+	the new G_FILENAME_ENCODING variable in the warning message.
+
+	* src/filetree.cc (FileTree::find_files): Remove the explicit
+	handling of Glib::ConvertError.
+
 2004-05-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* regexxer.schemas.in: Use colors from the basic GNOME 32-color
