@@ -24,15 +24,7 @@ AC_CANONICAL_BUILD()
 AC_CANONICAL_HOST()
 AC_CANONICAL_TARGET()
 
-##
-## If the user didn't predefine any flags, set them to `space'.
-## This prevents autoconf from setting them to defaults.
-##
-##test "x${CFLAGS}" = "x"   && CFLAGS=' '
-##test "x${CXXFLAGS}" = "x" && CXXFLAGS=' '
-##test "x${LDFLAGS}" = "x"  && LDFLAGS=' '
-
-AM_CONFIG_HEADER(config.h)
+AM_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([gnu dist-bzip2 no-define nostdinc])
 
 AC_PROG_CC()
@@ -41,7 +33,7 @@ AC_PROG_CXX()
 AC_CHECK_HEADERS([sys/types.h sys/stat.h])
 AC_CHECK_FUNCS([umask])
 
-PKG_CHECK_MODULES(GTKMM, glib-2.0 >= 2.0.7 sigc++-1.2 >= 1.2.1 gtkmm-2.0 >= 2.0.0)
+PKG_CHECK_MODULES([GTKMM], [glib-2.0 >= 2.0.7 sigc++-1.2 >= 1.2.1 gtkmm-2.0 >= 2.0.0])
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 
