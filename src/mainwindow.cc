@@ -19,7 +19,7 @@
  */
 
 #include "mainwindow.h"
-#include "configdata.h"
+#include "aboutdialog.h"
 #include "filetree.h"
 #include "imagebutton.h"
 #include "pcreshell.h"
@@ -122,6 +122,8 @@ public:
 
 MainWindow::MainWindow()
 :
+  menubar_handle_         (0),
+  toolbar_handle_         (0),
   toolbar_                (0),
   entry_folder_           (0),
   entry_pattern_          (0),
@@ -145,7 +147,7 @@ MainWindow::MainWindow()
   using SigC::slot;
 
   set_title_filename();
-  set_default_size(600, 450);
+  set_default_size(640, 450);
 
   {
     std::auto_ptr<Paned> paned (new HPaned());
@@ -157,13 +159,13 @@ MainWindow::MainWindow()
     Box *const vbox_main = new VBox();
     add(*manage(vbox_main));
 
-    HandleBox *const menubar_handle = new HandleBox();
-    vbox_main->pack_start(*manage(menubar_handle), PACK_SHRINK);
-    menubar_handle->add(*manage(controller_.create_menubar()));
+    menubar_handle_ = new HandleBox();
+    vbox_main->pack_start(*manage(menubar_handle_), PACK_SHRINK);
+    menubar_handle_->add(*manage(controller_.create_menubar()));
 
-    HandleBox *const toolbar_handle = new HandleBox();
-    vbox_main->pack_start(*manage(toolbar_handle), PACK_SHRINK);
-    toolbar_handle->add(*manage(toolbar_ = controller_.create_toolbar()));
+    toolbar_handle_ = new HandleBox();
+    vbox_main->pack_start(*manage(toolbar_handle_), PACK_SHRINK);
+    toolbar_handle_->add(*manage(toolbar_ = controller_.create_toolbar()));
 
     Box *const vbox_interior = new VBox();
     vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);
@@ -180,6 +182,7 @@ MainWindow::MainWindow()
   controller_.save_all    .connect(slot(*this, &MainWindow::on_save_all));
   controller_.preferences .connect(slot(*this, &MainWindow::on_preferences));
   controller_.quit        .connect(slot(*this, &MainWindow::on_quit));
+  controller_.info        .connect(slot(*this, &MainWindow::on_info));
   controller_.find_files  .connect(slot(*this, &MainWindow::on_find_files));
   controller_.find_matches.connect(slot(*this, &MainWindow::on_exec_search));
   controller_.next_file   .connect(bind(slot(*this, &MainWindow::on_go_next_file), true));
@@ -190,6 +193,7 @@ MainWindow::MainWindow()
   controller_.replace_file.connect(slot(*this, &MainWindow::on_replace_file));
   controller_.replace_all .connect(slot(*this, &MainWindow::on_replace_all));
 
+  show_all_children();
   load_configuration();
 
   entry_folder_->set_text(Util::shorten_pathname(
@@ -197,31 +201,51 @@ MainWindow::MainWindow()
   entry_pattern_->set_text("*");
   button_recursive_->set_active(true);
 
-  show_all_children();
-
-  statusline_->signal_cancel_clicked.connect(SigC::slot(*this, &MainWindow::on_busy_action_cancel));
+  statusline_->signal_cancel_clicked.connect(slot(*this, &MainWindow::on_busy_action_cancel));
 
   filetree_->signal_switch_buffer.connect(
-      SigC::slot(*this, &MainWindow::on_filetree_switch_buffer));
+      slot(*this, &MainWindow::on_filetree_switch_buffer));
 
   filetree_->signal_bound_state_changed.connect(
-      SigC::slot(*this, &MainWindow::on_filetree_bound_state_changed));
+      slot(*this, &MainWindow::on_filetree_bound_state_changed));
 
   filetree_->signal_file_count_changed.connect(
-      SigC::slot(*this, &MainWindow::on_filetree_file_count_changed));
+      slot(*this, &MainWindow::on_filetree_file_count_changed));
 
   filetree_->signal_match_count_changed.connect(
-      SigC::slot(*this, &MainWindow::on_filetree_match_count_changed));
+      slot(*this, &MainWindow::on_filetree_match_count_changed));
 
   filetree_->signal_modified_count_changed.connect(
-      SigC::slot(*this, &MainWindow::on_filetree_modified_count_changed));
+      slot(*this, &MainWindow::on_filetree_modified_count_changed));
 
   filetree_->signal_pulse.connect(
-      SigC::slot(*this, &MainWindow::on_busy_action_pulse));
+      slot(*this, &MainWindow::on_busy_action_pulse));
 }
 
 MainWindow::~MainWindow()
 {}
+
+void MainWindow::set_menutool_mode(MenuToolMode menutool_mode)
+{
+  switch(menutool_mode)
+  {
+    case MODE_MENU_AND_TOOL: menubar_handle_->show(); toolbar_handle_->show(); break;
+    case MODE_MENU_ONLY:     toolbar_handle_->hide(); menubar_handle_->show(); break;
+    case MODE_TOOL_ONLY:     menubar_handle_->hide(); toolbar_handle_->show(); break;
+  }
+}
+
+MenuToolMode MainWindow::get_menutool_mode() const
+{
+  const bool menubar_shown = menubar_handle_->is_visible();
+  const bool toolbar_shown = toolbar_handle_->is_visible();
+
+  if(menubar_shown && toolbar_shown) return MODE_MENU_AND_TOOL;
+  else if(menubar_shown)             return MODE_MENU_ONLY;
+  else if(toolbar_shown)             return MODE_TOOL_ONLY;
+
+  g_return_val_if_reached(MODE_MENU_AND_TOOL);
+}
 
 /**** Regexxer::MainWindow -- protected ************************************/
 
@@ -229,10 +253,13 @@ void MainWindow::on_hide()
 {
   on_busy_action_cancel();
 
-  // Hide the preferences dialog if it's mapped right now.  This isn't
-  // really necessary since it'd be deleted in the destructor anyway.
-  // But if we have to do a lot of cleanup the dialog would stay open
-  // for that time, which doesn't look neat.
+  // Hide the dialogs if they're mapped right now.  This isn't really necessary
+  // since they'd be deleted in the destructor anyway.  But if we have to do a
+  // lot of cleanup the dialogs would stay open for that time, which doesn't
+  // look neat.
+
+  if(about_dialog_.get())
+    about_dialog_->hide();
 
   if(pref_dialog_.get())
     pref_dialog_->hide();
@@ -863,6 +890,28 @@ void MainWindow::on_busy_action_cancel()
     busy_action_cancel_ = true;
 }
 
+void MainWindow::on_info()
+{
+  if(about_dialog_.get())
+  {
+    about_dialog_->present();
+  }
+  else
+  {
+    std::auto_ptr<AboutDialog> dialog (new AboutDialog(*this));
+
+    dialog->signal_hide().connect(SigC::slot(*this, &MainWindow::on_about_dialog_hide));
+    dialog->show();
+
+    about_dialog_ = dialog;
+  }
+}
+
+void MainWindow::on_about_dialog_hide()
+{
+  about_dialog_.reset();
+}
+
 void MainWindow::on_preferences()
 {
   if(pref_dialog_.get())
@@ -873,8 +922,12 @@ void MainWindow::on_preferences()
   {
     std::auto_ptr<PrefDialog> dialog (new PrefDialog(*this));
 
+    dialog->set_pref_menutool_mode(get_menutool_mode());
     dialog->set_pref_toolbar_style(toolbar_->get_toolbar_style());
     dialog->set_pref_fallback_encoding(filetree_->get_fallback_encoding());
+
+    dialog->signal_pref_menutool_mode_changed.connect(
+        SigC::slot(*this, &MainWindow::set_menutool_mode));
 
     dialog->signal_pref_toolbar_style_changed.connect(
         SigC::slot(*toolbar_, &Gtk::Toolbar::set_toolbar_style));
@@ -901,6 +954,7 @@ void MainWindow::load_configuration()
 
   config.load();
 
+  set_menutool_mode(config.menutool_mode);
   toolbar_->set_toolbar_style(config.toolbar_style);
   filetree_->set_fallback_encoding(config.fallback_encoding);
 }
@@ -909,6 +963,7 @@ void MainWindow::save_configuration()
 {
   ConfigData config;
 
+  config.menutool_mode = get_menutool_mode();
   config.toolbar_style = toolbar_->get_toolbar_style();
   config.fallback_encoding = filetree_->get_fallback_encoding();
 

@@ -1,5 +1,11 @@
 2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.{cc,h}: Implement necessary bits to allow hiding
+	menu bar or toolbar, and honor the menutool_mode config setting.
+	Popup the new stand-alone about dialog on menubar/Help/Info.
+
+2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/prefdialog.{cc,h}: Remove "regexxer info" page.  Split up
 	configuration into "Look'n'feel" and "File access" pages.  Add
 	UI and class interface for the new menutool_mode config option.

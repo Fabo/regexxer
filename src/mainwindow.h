@@ -21,6 +21,7 @@
 #ifndef REGEXXER_MAINWINDOW_H_INCLUDED
 #define REGEXXER_MAINWINDOW_H_INCLUDED
 
+#include "configdata.h"
 #include "controller.h"
 #include "filebuffer.h"
 #include "sharedptr.h"
@@ -37,6 +38,7 @@ namespace Gtk
 class Button;
 class CheckButton;
 class Entry;
+class HandleBox;
 class TextBuffer;
 class TextView;
 }
@@ -45,17 +47,20 @@ class TextView;
 namespace Regexxer
 {
 
-class FileBuffer;
-struct FileInfo;
+class AboutDialog;
 class FileTree;
 class PrefDialog;
 class StatusLine;
+struct FileInfo;
 
 class MainWindow : public Gtk::Window
 {
 public:
   MainWindow();
   virtual ~MainWindow();
+
+  void set_menutool_mode(MenuToolMode menutool_mode);
+  MenuToolMode get_menutool_mode() const;
 
 protected:
   virtual void on_hide();
@@ -68,6 +73,8 @@ private:
   Controller        controller_;
   Gtk::Tooltips     tooltips_;
 
+  Gtk::HandleBox*   menubar_handle_;
+  Gtk::HandleBox*   toolbar_handle_;
   Gtk::Toolbar*     toolbar_;
 
   Gtk::Entry*       entry_folder_;
@@ -92,6 +99,8 @@ private:
 
   Pango::FontDescription      fileview_font_;
   std::list<SigC::Connection> buffer_connections_;
+
+  std::auto_ptr<AboutDialog>  about_dialog_;
   std::auto_ptr<PrefDialog>   pref_dialog_;
 
   Gtk::Widget* create_left_pane();
@@ -132,6 +141,9 @@ private:
   void busy_action_leave();
   bool on_busy_action_pulse();
   void on_busy_action_cancel();
+
+  void on_info();
+  void on_about_dialog_hide();
 
   void on_preferences();
   void on_pref_dialog_hide();
