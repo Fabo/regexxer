@@ -33,6 +33,27 @@
 using namespace Regexxer::FileTreePrivate;
 
 
+namespace
+{
+
+extern "C"
+GtkWidget* regexxer_create_file_tree(char*, char*, char*, int, int)
+{
+  try
+  {
+    Gtk::Widget *const widget = new Regexxer::FileTree();
+    widget->show();
+    return Gtk::manage(widget)->gobj();
+  }
+  catch (...)
+  {
+    g_return_val_if_reached(0);
+  }
+}
+
+} // anonymous namespace
+
+
 namespace Regexxer
 {
 
@@ -515,10 +536,9 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
       if (!*error_list)
         error_list->reset(new MessageList());
 
-      const Glib::ustring message = Util::compose(_("Failed to save file \"%1\": %2"),
-                                                  Util::filename_to_utf8_fallback(fileinfo->fullname),
-                                                  error.what());
-      (*error_list)->push_back(message);
+      (*error_list)->push_back(Util::compose(_("Failed to save file \"%1\": %2"),
+                                             Util::filename_to_utf8_fallback(fileinfo->fullname),
+                                             error.what()));
     }
 
     if (!fileinfo->buffer->get_modified())
@@ -1027,21 +1047,6 @@ void FileTree::on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf
   {
     if (key.raw() == conf_key_fallback_encoding)
       fallback_encoding_ = value.get_string();
-  }
-}
-
-extern "C"
-GtkWidget* regexxer_create_file_tree(char*, char*, char*, int, int)
-{
-  try
-  {
-    Gtk::Widget *const widget = new FileTree();
-    widget->show();
-    return Gtk::manage(widget)->gobj();
-  }
-  catch (...)
-  {
-    g_return_val_if_reached(0);
   }
 }
 

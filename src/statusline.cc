@@ -33,6 +33,27 @@
 #endif
 
 
+namespace
+{
+
+extern "C"
+GtkWidget* regexxer_create_status_line(char*, char*, char*, int, int)
+{
+  try
+  {
+    Gtk::Widget *const widget = new Regexxer::StatusLine();
+    widget->show();
+    return Gtk::manage(widget)->gobj();
+  }
+  catch (...)
+  {
+    g_return_val_if_reached(0);
+  }
+}
+
+} // anonymous namespace
+
+
 namespace Regexxer
 {
 
@@ -337,21 +358,6 @@ void StatusLine::on_hierarchy_changed(Gtk::Widget* previous_toplevel)
     stop_button_->add_accelerator(
         "activate", window->get_accel_group(),
         GDK_Escape, Gdk::ModifierType(0), Gtk::AccelFlags(0));
-  }
-}
-
-extern "C"
-GtkWidget* regexxer_create_status_line(char*, char*, char*, int, int)
-{
-  try
-  {
-    Gtk::Widget *const widget = new StatusLine();
-    widget->show();
-    return Gtk::manage(widget)->gobj();
-  }
-  catch (...)
-  {
-    g_return_val_if_reached(0);
   }
 }
 
