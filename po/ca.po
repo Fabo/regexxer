@@ -1,0 +1,524 @@
+# Traducció de Regexxer.
+# Copyright © 2004, 2005 Free Software Foundation
+# This file is distributed under the same license as the Regexxer package.
+# Jordi Ivars <ear@oronetes.net>, 2004, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-02-07 12:01+0100\n"
+"PO-Revision-Date: 2005-01-28 12:47+0100\n"
+"Last-Translator: Jordi Ivars <ear@oronetes.net>\n"
+"Language-Team: Catalan <tradgnome@softcatala.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../regexxer.desktop.in.h:1
+msgid "Search and replace using regular expressions"
+msgstr "Cerca i reemplaça utilitzant expressions regulars"
+
+#: ../regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "Eina de cerca de regexxer"
+
+#: ../regexxer.schemas.in.h:1
+msgid "Current-match color"
+msgstr "Color de la coincidència actual"
+
+#: ../regexxer.schemas.in.h:2
+msgid "Fallback encoding"
+msgstr "Codificació alternativa"
+
+#: ../regexxer.schemas.in.h:3
+msgid "Match color"
+msgstr "Color de la coincidència"
+
+#: ../regexxer.schemas.in.h:4
+msgid ""
+"Name of the character encoding to use if a file is not readable in either "
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
+msgstr ""
+"El nom de la codificació dels caràcters a utilitzar si el fitxer no és "
+"llegible ambUTF-8 o amb la codificació especificada en l'actual "
+"localització. Proveu amb\"iconv --list\" per a un llistat complet dels "
+"possibles valors."
+
+#: ../regexxer.schemas.in.h:5
+msgid "Text view font"
+msgstr "Tipus de lletra"
+
+#: ../regexxer.schemas.in.h:6
+msgid ""
+"The background color used to highlight matches of the search expression."
+msgstr ""
+"El color de fons utilitzat per a ressaltar les coincidències en "
+"l'expressió de cerca."
+
+#: ../regexxer.schemas.in.h:7
+msgid ""
+"The background color used to highlight the currently selected match of the "
+"search expression."
+msgstr ""
+"El color de fons utilitzat per ressaltar l'actual coincidència seleccionada "
+"de la cerca de l'expressió."
+
+#: ../regexxer.schemas.in.h:8
+msgid "The font used in the file editor."
+msgstr "Tipus de lletra utilitzat en l'editor de fitxers."
+
+#: ../regexxer.schemas.in.h:9
+msgid ""
+"The style of the application's toolbar. Possible values are \"icons\", \"text"
+"\", \"both\", and \"both-horiz\"."
+msgstr ""
+"L'estil de la barra d'eines. Els possibles valors són \"icons\", \"text\", "
+"\"both\",i \"both-horiz\"."
+
+#: ../regexxer.schemas.in.h:10
+msgid "Toolbar style"
+msgstr "Estil de la barra d'eines"
+
+#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+#: ../src/filebuffer.cc:203
+msgid "Can't read file:"
+msgstr "No s'ha pogut llegir el fitxer:"
+
+#: ../src/filetree.cc:81
+msgid "File"
+msgstr "Fitxer"
+
+#: ../src/filetree.cc:101
+msgid "#"
+msgstr "#"
+
+#: ../src/filetree.cc:532
+msgid "Failed to save file \"%1\": %2"
+msgstr "S'ha produït un error en desar el fitxer \"%1\": %2"
+
+#: ../src/filetree.cc:949
+msgid "\"%1\" seems to be a binary file."
+msgstr "\"%1\" sembla que es un fitxer binari."
+
+#: ../src/main.cc:84
+msgid "_About"
+msgstr "Qu_ant a"
+
+#: ../src/main.cc:85
+msgid "Save _all"
+msgstr "Des_a-ho tot"
+
+#: ../src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "Cerca fitxers en coincidència amb el PATRÓ"
+
+#: ../src/main.cc:100
+msgid "PATTERN"
+msgstr "PATRÓ"
+
+#: ../src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "No incloure els subdirectoris"
+
+#: ../src/main.cc:102 ../ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "Cerca també els fitxers ocults"
+
+#: ../src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "Cerca les coincidències amb EXPREG en un text"
+
+#: ../src/main.cc:103
+msgid "REGEX"
+msgstr "EXPREG"
+
+#: ../src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "Cerca solament la primera coincidència en una línia"
+
+#: ../src/main.cc:105 ../ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "No diferènciïs majúscules i minúscules en les coincidències"
+
+#: ../src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "Reemplaça coincidències amb la CADENA"
+
+#: ../src/main.cc:106
+msgid "STRING"
+msgstr "CADENA"
+
+#: ../src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "Imprimeix la ubicació de la coincidència per la sortida estàndard"
+
+#: ../src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "No comencis la cerca automáticament"
+
+#: ../src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[OPCIÓ]... [CARPETA]"
+
+#: ../src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr "Proveu \"regexxer --help\" per a més informació."
+
+#: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Un patró de nom de fitxer, com els emprats per l'intèrpret de comandes. Se "
+"suporten les classes de caràcters [ab] i les expressions al estil de csh {a,"
+"b}."
+
+#: ../src/mainwindow.cc:403
+msgid ""
+"Some files haven't been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+"Alguns fitxers no s'han desat encara.\n"
+"Voleu continuar?"
+
+#: ../src/mainwindow.cc:431
+msgid ""
+"The folder name \"%1\" contains characters not representable in the encoding "
+"of the local file system."
+msgstr ""
+"El nom de la carpeta \"%1\" conté caràcters no representables en la "
+"codificaciódel sistema de fitxers local."
+
+#: ../src/mainwindow.cc:450
+msgid "Select a folder"
+msgstr "Selecciona una carpeta"
+
+#: ../src/mainwindow.cc:470
+msgid ""
+"Some files haven't been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+"Alguns fitxers encara no s'han desat.\n"
+"Voleu continuar?"
+
+#: ../src/mainwindow.cc:496
+msgid "The file search pattern is invalid."
+msgstr "El patró de cerca de fitxers es incorrecte."
+
+#: ../src/mainwindow.cc:502
+msgid "The following errors occurred during search:"
+msgstr "S'han produït els següents errors durant la cerca:"
+
+#: ../src/mainwindow.cc:527
+msgid ""
+"Error in regular expression at \"%1\" (index %2):\n"
+"%3"
+msgstr ""
+"Hi ha un error en l'expressió regular a \"%1\" (índex %2):\n"
+"%3"
+
+#: ../src/mainwindow.cc:529
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"Hi ha un error en l'expressió regular:\n"
+"%1"
+
+#: ../src/mainwindow.cc:751
+msgid "The following errors occurred during save:"
+msgstr "Han ocorregut els següents error en desar:"
+
+#: ../src/pcreshell.cc:59
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr ""
+"No està suportat fer servir la seqüència d'escapada \\C per fer coincidir "
+"un únic byte."
+
+#: ../src/pcreshell.cc:151
+msgid ""
+"Reached the recursion and backtracking limit of the regular expression "
+"engine."
+msgstr ""
+"S'ha arribat al limit de recursivitat i retrocés del motor de la expressió "
+"regular."
+
+#: ../src/prefdialog.cc:248
+msgid "\"%1\" is not a valid encoding."
+msgstr "\"%1\" no es una codificació vàlida."
+
+#: ../src/statusline.cc:264
+msgid "Stop"
+msgstr "Atura"
+
+#: ../src/statusline.cc:271
+msgid "File:"
+msgstr "Fitxer:"
+
+#: ../src/statusline.cc:274
+msgid "Match:"
+msgstr "Coincidència:"
+
+#: ../src/statusline.cc:285
+msgid "Cancels the running search"
+msgstr "Cancel·la la cerca en marxa"
+
+#. namespace Regexxer
+#: ../ui/aboutdialog.glade.h:1
+msgid "About regexxer"
+msgstr "Quant a regexxer"
+
+#: ../ui/aboutdialog.glade.h:2
+msgid "The application icon of regexxer"
+msgstr "La icona de l'aplicació regexxer"
+
+#: ../ui/aboutdialog.glade.h:3
+msgid "regexxer icon"
+msgstr "icona de regexxer"
+
+#: ../ui/aboutdialog.glade.h:4
+msgid "translated by"
+msgstr "traduït per"
+
+#: ../ui/aboutdialog.glade.h:5
+msgid "translator-credits"
+msgstr "Jordi Ivars <ear@oronetes.net>"
+
+#: ../ui/aboutdialog.glade.h:6
+msgid "written by"
+msgstr "escrit per"
+
+#: ../ui/mainwindow.glade.h:2
+msgid "A regular expression in Perl syntax"
+msgstr "Una expressió regular en sintaxi de Perl"
+
+#: ../ui/mainwindow.glade.h:4
+msgid "Backward"
+msgstr "Endarrere"
+
+#: ../ui/mainwindow.glade.h:6
+msgid "File backward"
+msgstr "Fitxer endarrere"
+
+#: ../ui/mainwindow.glade.h:7
+msgid "File forward"
+msgstr "Fitxer endavant"
+
+#: ../ui/mainwindow.glade.h:8
+msgid "Find all files that match the filename pattern"
+msgstr ""
+"Cerca tots els fitxers que coincideixen amb el patró del nom de fitxer"
+
+#: ../ui/mainwindow.glade.h:9
+msgid "Find all matches of the regular expression"
+msgstr "Cerca totes les coincidències en una expressió regular"
+
+#: ../ui/mainwindow.glade.h:10
+msgid "Find all possible matches in a line"
+msgstr "Cerca totes les possibles coincidències en una línia"
+
+#: ../ui/mainwindow.glade.h:11
+msgid "Find fi_les"
+msgstr "Cerca f_itxers"
+
+#: ../ui/mainwindow.glade.h:12
+msgid "Fol_der:"
+msgstr "_Carpeta:"
+
+#: ../ui/mainwindow.glade.h:13
+msgid "Forward"
+msgstr "Endavant"
+
+#: ../ui/mainwindow.glade.h:14
+msgid "Go to next match"
+msgstr "Ves a la següent coincidència"
+
+#: ../ui/mainwindow.glade.h:15
+msgid "Go to previous match"
+msgstr "Ves a la coincidència prèvia"
+
+#: ../ui/mainwindow.glade.h:16
+msgid "Go to the next matching file"
+msgstr "Ves al pròxim fitxer coincident"
+
+#: ../ui/mainwindow.glade.h:17
+msgid "Go to the previous matching file"
+msgstr "Ves a l'anterior fitxer coincident"
+
+#: ../ui/mainwindow.glade.h:18
+msgid "Pattern:"
+msgstr "Patró:"
+
+#: ../ui/mainwindow.glade.h:19
+msgid "Preview"
+msgstr "Previsualitza"
+
+#: ../ui/mainwindow.glade.h:20
+msgid "Preview of the substitution"
+msgstr "Previsualitza les substitucions"
+
+#: ../ui/mainwindow.glade.h:21
+msgid "Recurse into subdirectories"
+msgstr "Inclou recursivament els subdirectoris"
+
+#: ../ui/mainwindow.glade.h:22
+msgid "Replace _current"
+msgstr "Reemplaça l'a_ctual"
+
+#: ../ui/mainwindow.glade.h:23
+msgid "Replace all matches in all files"
+msgstr "Reemplaça totes les coincidències en tots els fitxers"
+
+#: ../ui/mainwindow.glade.h:24
+msgid "Replace all matches in the current file"
+msgstr "Reemplaça totes les coincidències en el fitxer actual"
+
+#: ../ui/mainwindow.glade.h:25
+msgid "Replace current match"
+msgstr "Reemplaça la coincidència actual"
+
+#: ../ui/mainwindow.glade.h:26
+msgid "Replace in _all files"
+msgstr "Reemplaç_a en tots els fitxers"
+
+#: ../ui/mainwindow.glade.h:27
+msgid "Replace in _this file"
+msgstr "Reemplaça en aques_t fitxer"
+
+#: ../ui/mainwindow.glade.h:28
+msgid "Replace:"
+msgstr "Reemplaça:"
+
+#: ../ui/mainwindow.glade.h:29
+msgid "Search:"
+msgstr "Cerca:"
+
+#: ../ui/mainwindow.glade.h:30
+msgid "The directory to be searched"
+msgstr "El directori per cercar"
+
+#: ../ui/mainwindow.glade.h:31
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
+"\\L, \\U and \\E are supported as well."
+msgstr ""
+"La nova cadena a substituir. Es com en Perl, podeu fer referències a "
+"partsde la coincidència utilitzant $1, $2, etc. o $+, $&, $` i $'. Els "
+"operadors\\|, \\u, \\L, \\U i \\E també estan suportats."
+
+#: ../ui/mainwindow.glade.h:32
+msgid "_All files"
+msgstr "_Tots els fitxers"
+
+#: ../ui/mainwindow.glade.h:33
+msgid "_Edit"
+msgstr "_Edita"
+
+#: ../ui/mainwindow.glade.h:34
+msgid "_File"
+msgstr "_Fitxer"
+
+#: ../ui/mainwindow.glade.h:35
+msgid "_Help"
+msgstr "_Ajuda"
+
+#: ../ui/mainwindow.glade.h:36
+msgid "_Match"
+msgstr "_Coincidència"
+
+#: ../ui/mainwindow.glade.h:37
+msgid "_Next file"
+msgstr "_Pròxim fitxer"
+
+#: ../ui/mainwindow.glade.h:38
+msgid "_Previous file"
+msgstr "F_itxer anterior"
+
+#: ../ui/mainwindow.glade.h:39
+msgid "_Replace"
+msgstr "_Reemplaça"
+
+#: ../ui/mainwindow.glade.h:40
+msgid "_This file"
+msgstr "Aques_t fitxer"
+
+#: ../ui/mainwindow.glade.h:41
+msgid "hidden"
+msgstr "ocult"
+
+#: ../ui/mainwindow.glade.h:42
+msgid "recursive"
+msgstr "recursiu"
+
+#: ../ui/prefdialog.glade.h:1
+msgid "1."
+msgstr "1."
+
+#: ../ui/prefdialog.glade.h:2
+msgid "2."
+msgstr "2."
+
+#: ../ui/prefdialog.glade.h:3
+msgid "3."
+msgstr "3."
+
+#: ../ui/prefdialog.glade.h:4
+msgid "C_urrent match color:"
+msgstr "Actual coincidència de color"
+
+#: ../ui/prefdialog.glade.h:5
+msgid "Fallback _encoding:"
+msgstr "Codificació alt_ernativa:"
+
+#: ../ui/prefdialog.glade.h:6
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
+"Només icones\n"
+"Només text\n"
+"Icones i text\n"
+"Els dos horitzontalment"
+
+#: ../ui/prefdialog.glade.h:10
+msgid "Preferences"
+msgstr "Preferències"
+
+#: ../ui/prefdialog.glade.h:11
+msgid "The encoding specified by the current locale"
+msgstr "La codificació especificada en la localització actual"
+
+#: ../ui/prefdialog.glade.h:12
+msgid "Tool_bar style:"
+msgstr "Estil de la _barra d'eines:"
+
+#: ../ui/prefdialog.glade.h:13
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ../ui/prefdialog.glade.h:14
+msgid "_File access"
+msgstr "Accés al _fitxer"
+
+#: ../ui/prefdialog.glade.h:15
+msgid "_Look'n'feel"
+msgstr "_Aspecte"
+
+#: ../ui/prefdialog.glade.h:16
+msgid "_Match color:"
+msgstr "_Coincideix color:"
+
+#: ../ui/prefdialog.glade.h:17
+msgid "_Text view font:"
+msgstr "_Tipus de lletra de la visualització de text:"
+
+#: ../ui/prefdialog.glade.h:18
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr ""
+"El regexxer prova de llegir un fitxer en les següents codificacions abans "
+"d'abandonar els intents:"
