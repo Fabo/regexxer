@@ -1,5 +1,10 @@
 2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/statusline.{cc,h}: Install an accelerator key (Escape) for
+	the cancel button.
+
+2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filelist.{cc,h} src/mainwindow.{cc,h}: Major cleanup of the
 	busy action cancelation code.  The new code is now centralized in
 	class MainWindow, and has been merged with the progressbar pulse

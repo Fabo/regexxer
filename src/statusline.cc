@@ -19,6 +19,8 @@
  */
 
 #include "statusline.h"
+
+#include <gdk/gdkkeysyms.h>
 #include <gtkmm.h>
 #include <sstream>
 
@@ -174,7 +176,7 @@ StatusLine::StatusLine()
 {
   using namespace Gtk;
 
-  cancel_button_ = new Button("Cancel");
+  cancel_button_ = new Button("Stop");
   pack_start(*manage(cancel_button_), PACK_SHRINK);
 
   progressbar_ = new ProgressBar();
@@ -238,13 +240,31 @@ void StatusLine::pulse_stop()
   cancel_button_->set_sensitive(false);
 }
 
+void StatusLine::on_hierarchy_changed(Gtk::Widget* previous_toplevel)
+{
+  if(Gtk::Window *const window = dynamic_cast<Gtk::Window*>(previous_toplevel))
+  {
+    cancel_button_->remove_accelerator(
+        window->get_accel_group(), GDK_Escape, Gdk::ModifierType(0));
+  }
+
+  Gtk::HBox::on_hierarchy_changed(previous_toplevel);
+
+  if(Gtk::Window *const window = dynamic_cast<Gtk::Window*>(get_toplevel()))
+  {
+    cancel_button_->add_accelerator(
+        "activate", window->get_accel_group(),
+        GDK_Escape, Gdk::ModifierType(0), Gtk::AccelFlags(0));
+  }
+}
+
 void StatusLine::on_button_style_changed(const Glib::RefPtr<Gtk::Style>&)
 {
   // The statusbar looks ugly if the cancel button gets its default size,
   // so reduce the button's size request to a reasonable amount.
 
   int width = 0, height = 0;
-  cancel_button_->create_pango_layout("Cancel")->get_pixel_size(width, height);
+  cancel_button_->create_pango_layout("Stop")->get_pixel_size(width, height);
   cancel_button_->set_size_request(-1, height + 4);
 }
 

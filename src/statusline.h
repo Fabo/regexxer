@@ -54,6 +54,9 @@ public:
 
   SigC::Signal0<void> signal_cancel_clicked;
 
+protected:
+  virtual void on_hierarchy_changed(Gtk::Widget* previous_toplevel);
+
 private:
   Gtk::Button*        cancel_button_;
   Gtk::ProgressBar*   progressbar_;
