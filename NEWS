@@ -1,4 +1,13 @@
 
+regexxer 0.4 (2002-11-18)
+
+	* menu bar added (can be disabled)
+	* new rock-solid user input handling (internal)
+	* fixed a nasty bug that occured when changing the sort order
+	* fixed an annoying bug in the unsaved files counter
+	* minor UI cleanups and refinements
+	* other minor bugfixes
+
 regexxer 0.3 (2002-11-10)
 
 	* fix build with GCC 2.95.x (libstdc++-v2 is broken)

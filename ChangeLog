@@ -1,3 +1,9 @@
+regexxer 0.4:
+
+2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* NEWS: Update.
+
 2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/configdata.{cc,h}: Generalize the enumeration handling in
