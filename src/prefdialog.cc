@@ -22,13 +22,16 @@
 #include "stringutils.h"
 
 #include <glib.h>
-#include <gtk/gtkrc.h>
-#include <gtk/gtkwidget.h>
 #include <gtkmm.h>
 #include <algorithm>
 #include <memory>
 
 #include <config.h>
+
+#if !REGEXXER_HAVE_GTKMM_22
+#include <gtk/gtkrc.h>
+#include <gtk/gtkwidget.h>
+#endif
 
 
 namespace
@@ -274,11 +277,17 @@ bool ColorSelectionButton::ColorLabel::on_expose_event(GdkEventExpose* event)
   int focus_padding    = 0;
   int focus_line_width = 0;
 
-  // TODO: wrapped in gtkmm-2.2
-  gtk_widget_style_get(get_parent()->Gtk::Widget::gobj(),
+  Gtk::Widget& button = *get_parent();
+
+#if REGEXXER_HAVE_GTKMM_22
+  button.get_style_property("focus-padding",    focus_padding);
+  button.get_style_property("focus-line-width", focus_line_width);
+#else
+  gtk_widget_style_get(button.gobj(),
                        "focus-padding",    &focus_padding,
                        "focus-line-width", &focus_line_width,
                        static_cast<char*>(0));
+#endif
 
   const int margin = focus_padding + focus_line_width + 1;
   const GdkRectangle alloc = get_allocation();

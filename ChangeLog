@@ -1,5 +1,14 @@
 2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/prefdialog.cc: Don't #include GTK+ headers if gtkmm 2.2
+	API is available.
+
+	(ColorLabel::on_expose_event): When building with gtkmm 2.2, use
+	Gtk::Widget::get_style_property() instead of the ugly varargs
+	function gtk_widget_style_get().
+
+2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/prefdialog.cc (ColorSelectionButton::on_clicked): Convert
 	the dialog window title to title case.
 
