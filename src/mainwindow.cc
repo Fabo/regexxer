@@ -655,6 +655,7 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, int file_index)
 
     statusline_->set_match_count(buffer->get_original_match_count());
     statusline_->set_match_index(buffer->get_match_index());
+    statusline_->set_file_encoding(fileinfo->encoding);
   }
   else
   {
@@ -671,6 +672,7 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, int file_index)
 
     statusline_->set_match_count(0);
     statusline_->set_match_index(0);
+    statusline_->set_file_encoding("");
   }
 
   statusline_->set_file_index(file_index);

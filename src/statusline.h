@@ -22,6 +22,7 @@
 #define REGEXXER_STATUSLINE_H_INCLUDED
 
 #include <gtkmm/box.h>
+#include <string>
 
 namespace Gtk
 {
@@ -47,6 +48,8 @@ public:
 
   void set_match_index(int match_index);
   void set_match_count(int match_count);
+
+  void set_file_encoding(const std::string& file_encoding);
 
   void pulse_start();
   void pulse();

@@ -1,5 +1,13 @@
 2002-10-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/statusline.cc (CounterBox): Improve size calculation of the
+	counter labels -- it no longer depends on '9' being the widest digit.
+
+	* src/statusline.{cc,h} src/mainwindow.cc: Show the encoding of the
+	currently displayed file in the statusbar.
+
+2002-10-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filelist.{cc,h}: Collect file access errors during execution
 	of find_files() and, when finished, return the list of errors via
 	an exception to the caller.

@@ -48,22 +48,26 @@ public:
 private:
   Gtk::Label*         label_index_;
   Gtk::Label*         label_count_;
-  unsigned int        digit_range_;
+  unsigned int        digits_range_;
+  unsigned int        widest_digit_;
+  unsigned int        second_widest_digit_;
+  int                 diff_9_to_0_;
   std::ostringstream  stringstream_;
 
   Glib::ustring number_to_string(unsigned int number);
-  void recalculate_label_width();
-  static void set_width_from_string(Gtk::Label& label, const Glib::ustring& text);
 
-  void on_label_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style, Gtk::Label* label);
+  void recalculate_label_width();
+  void on_label_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 };
 
 
 CounterBox::CounterBox(const Glib::ustring& label)
 :
-  label_index_  (0),
-  label_count_  (0),
-  digit_range_  (100)
+  label_index_          (0),
+  label_count_          (0),
+  digits_range_         (100),
+  widest_digit_         (0),
+  second_widest_digit_  (9)
 {
   using namespace Gtk;
 
@@ -75,7 +79,7 @@ CounterBox::CounterBox(const Glib::ustring& label)
   Box *const box = new HBox(false, 0);
   paddingbox->pack_start(*manage(box), PACK_SHRINK, 2);
 
-  box->pack_start(*manage(new Label(label)), PACK_SHRINK);
+  box->pack_start(*manage(new Label(label + ' ')), PACK_SHRINK);
 
   label_index_ = new Label("", 1.0, 0.5);
   box->pack_start(*manage(label_index_), PACK_SHRINK);
@@ -86,10 +90,7 @@ CounterBox::CounterBox(const Glib::ustring& label)
   box->pack_start(*manage(label_count_), PACK_SHRINK);
 
   label_index_->signal_style_changed().connect(
-      SigC::bind(SigC::slot(*this, &CounterBox::on_label_style_changed), label_index_));
-
-  label_count_->signal_style_changed().connect(
-      SigC::bind(SigC::slot(*this, &CounterBox::on_label_style_changed), label_count_));
+      SigC::slot(*this, &CounterBox::on_label_style_changed));
 
 #if REGEXXER_HAVE_STD_LOCALE
   stringstream_.imbue(std::locale(""));
@@ -115,7 +116,7 @@ void CounterBox::set_index(unsigned int index)
 
 void CounterBox::set_count(unsigned int count)
 {
-  unsigned int range = digit_range_;
+  unsigned int range = digits_range_;
 
   while(range <= count)
     range *= 10;
@@ -123,9 +124,9 @@ void CounterBox::set_count(unsigned int count)
   while(range > 100 && range / 10 > count)
     range /= 10;
 
-  if(range != digit_range_)
+  if(range != digits_range_)
   {
-    digit_range_ = range;
+    digits_range_ = range;
     recalculate_label_width();
   }
 
@@ -139,27 +140,74 @@ Glib::ustring CounterBox::number_to_string(unsigned int number)
   return Glib::locale_to_utf8(stringstream_.str());
 }
 
+/* This tricky piece of code calculates the optimal label width for any
+ * number < digits_range_.  It does assume the decimal system is used,
+ * but it relies neither on the string representation of the digits nor
+ * on the font of the label.
+ */
 void CounterBox::recalculate_label_width()
 {
-  const Glib::ustring text = number_to_string(digit_range_ - 1);
+  unsigned int widest_number = 0;
 
-  set_width_from_string(*label_index_, text);
-  set_width_from_string(*label_count_, text);
-}
+  if(widest_digit_ != 0)
+  {
+    // E.g. range 1000 becomes 222 if '2' is the widest digit of the font.
+    widest_number = ((digits_range_ - 1) / 9) * widest_digit_;
+  }
+  else // eeeks, 0 has to be special-cased
+  {
+    g_assert(second_widest_digit_ != 0);
 
-// static
-void CounterBox::set_width_from_string(Gtk::Label& label, const Glib::ustring& text)
-{
+    // E.g. range 1000 becomes 900 if '9' is the 2nd-widest digit.
+    widest_number = (digits_range_ / 10) * second_widest_digit_;
+  }
+
   int width = 0, height = 0, xpad = 0, ypad = 0;
 
-  label.create_pango_layout(text)->get_pixel_size(width, height);
-  label.get_padding(xpad, ypad);
-  label.set_size_request(width + 2 * xpad, -1);
+  const Glib::ustring text = number_to_string(widest_number);
+  label_index_->create_pango_layout(text)->get_pixel_size(width, height);
+
+  label_index_->get_padding(xpad, ypad);
+  label_index_->set_size_request(width + 2 * xpad, -1);
+
+  label_count_->get_padding(xpad, ypad);
+  label_count_->set_size_request(width + 2 * xpad, -1);
 }
 
-void CounterBox::on_label_style_changed(const Glib::RefPtr<Gtk::Style>&, Gtk::Label* label)
+/* The code relies on both labels having the same style.
+ * I think that's a quite safe assumption to make ;)
+ */
+void CounterBox::on_label_style_changed(const Glib::RefPtr<Gtk::Style>&)
 {
-  set_width_from_string(*label, number_to_string(digit_range_ - 1));
+  const Glib::RefPtr<Pango::Layout> layout = label_index_->create_pango_layout("");
+
+  widest_digit_        = 0;
+  second_widest_digit_ = 9;
+
+  int max_width        = 0;
+  int second_max_width = 0;
+
+  int width  = 0;
+  int height = 0;
+
+  for(unsigned int digit = 0; digit <= 9; ++digit)
+  {
+    layout->set_text(number_to_string(digit));
+    layout->get_pixel_size(width, height);
+
+    if(width > max_width)
+    {
+      max_width = width;
+      widest_digit_ = digit;
+    }
+    else if(width > second_max_width)
+    {
+      second_max_width = width;
+      second_widest_digit_ = digit;
+    }
+  }
+
+  recalculate_label_width();
 }
 
 
@@ -182,10 +230,10 @@ StatusLine::StatusLine()
   progressbar_ = new ProgressBar();
   pack_start(*manage(progressbar_), PACK_SHRINK);
 
-  file_counter_ = new CounterBox("File: ");
+  file_counter_ = new CounterBox("File:");
   pack_start(*manage(file_counter_), PACK_SHRINK);
 
-  match_counter_ = new CounterBox("Match: ");
+  match_counter_ = new CounterBox("Match:");
   pack_start(*manage(match_counter_), PACK_SHRINK);
 
   statusbar_ = new Statusbar();
@@ -222,6 +270,16 @@ void StatusLine::set_match_index(int match_index)
 void StatusLine::set_match_count(int match_count)
 {
   match_counter_->set_count(match_count);
+}
+
+void StatusLine::set_file_encoding(const std::string& file_encoding)
+{
+  statusbar_->pop();
+
+  const Glib::ustring encoding (file_encoding);
+  g_return_if_fail(encoding.is_ascii());
+
+  statusbar_->push(encoding);
 }
 
 void StatusLine::pulse_start()
