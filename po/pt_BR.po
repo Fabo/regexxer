@@ -229,7 +229,7 @@ msgstr "traduzido por"
 
 #: ui/aboutdialog.glade.h:5
 msgid "translator-credits"
-msgstr "créditos do tradutor"
+msgstr "João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>"
 
 #: ui/aboutdialog.glade.h:6
 msgid "written by"

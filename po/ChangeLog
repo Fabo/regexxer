@@ -1,3 +1,9 @@
+2004-06-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* pt_BR.po ("translator-credits"): Replace literal translation
+	with "João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>" who
+	contributed this file.
+
 2004-06-10  Gustavo Noronha Silva  <kov@debian.org>
 
 	* LINGUAS: added pt_BR
