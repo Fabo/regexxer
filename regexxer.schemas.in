@@ -21,7 +21,7 @@
       <applyto>/apps/regexxer/match_color</applyto>
       <owner>regexxer</owner>
       <type>string</type>
-      <default>#FFA500</default>
+      <default>#9DB8D2</default>
       <locale name="C">
 	 <short>Match color</short>
 	 <long>
@@ -35,7 +35,7 @@
       <applyto>/apps/regexxer/current_match_color</applyto>
       <owner>regexxer</owner>
       <type>string</type>
-      <default>#FFFF00</default>
+      <default>#EED680</default>
       <locale name="C">
 	 <short>Current-match color</short>
 	 <long>
