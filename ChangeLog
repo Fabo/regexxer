@@ -1,3 +1,23 @@
+2004-05-19  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* ui/mainwindow.glade (toolbar): Make glade-2 replace its old-style
+	magic "class names" with proper GtkToolItem and derivated elements.
+	Note that you'll need to apply the patch for #142761 in order to
+	make changing the toolbar style at runtime work.
+	(combo_pattern): Replace deprecated GtkCombo with GtkComboBoxEntry.
+
+	* src/controller.cc (ControlItem::add_widgets): Allow for both
+	Gtk::ToolButton and Gtk::Button widgets, and detect at runtime
+	which type to use.
+
+	* src/mainwindow.cc (MainWindow::load_xml): Due to #142755, we
+	currently have to use get_child() on combo_pattern to gain access
+	to the entry widget.  Also, a hack was necessary to attach the
+	tooltip to the entry without instantiating another Gtk::Tooltips
+	object.
+
+	* src/mainwindow.h: Remove a couple of unused forward declarations.
+
 2004-05-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/prefdialog.cc (PrefDialog::on_response): Invoke

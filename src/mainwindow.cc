@@ -29,8 +29,10 @@
 #include "translation.h"
 
 #include <glib.h>
+#include <gtk/gtktooltips.h>  /* XXX: see load_xml() */
 #include <gconfmm.h>
 #include <gtkmm.h>
+#include <gtkmm/comboboxentry.h>
 #include <libglademm.h>
 #include <algorithm>
 #include <functional>
@@ -169,7 +171,6 @@ void MainWindow::load_xml()
 
   xml->get_widget("toolbar",             toolbar_);
   xml->get_widget("entry_folder",        entry_folder_);
-  xml->get_widget("combo_pattern-entry", entry_pattern_);
   xml->get_widget("button_recursive",    button_recursive_);
   xml->get_widget("button_hidden",       button_hidden_);
   xml->get_widget("entry_regex",         entry_regex_);
@@ -181,10 +182,26 @@ void MainWindow::load_xml()
   xml->get_widget("entry_preview",       entry_preview_);
   xml->get_widget("statusline",          statusline_);
 
+  Gtk::ComboBoxEntry* combo_pattern = 0;
+  xml->get_widget("combo_pattern", combo_pattern);
+  entry_pattern_ = dynamic_cast<Gtk::Entry*>(combo_pattern->get_child());
+
+  // Current libglade does not yet provide access to the internal child of
+  // GtkComboBoxEntry.  However, I want a tooltip to be assigned to the entry
+  // and not to the combo box as a whole (by means of GtkEventBox).  I hope
+  // libglade will be fixed soon -- until then, this hack assigns the tooltip
+  // manually using the group created by libglade.
+
+  if (GtkTooltipsData *const tipdata = gtk_tooltips_data_get(entry_folder_->Gtk::Widget::gobj()))
+  {
+    gtk_tooltips_set_tip(tipdata->tooltips, entry_pattern_->Gtk::Widget::gobj(),
+                         _("A filename pattern as used by the shell. Character classes "
+                           "[ab] and csh style brace expressions {a,b} are supported."), 0);
+  }
+
   Gtk::Button* button_folder = 0;
   xml->get_widget("button_folder", button_folder);
   button_folder->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_select_folder));
-  button_folder->grab_focus();
 
   controller_.load_xml(xml);
 }

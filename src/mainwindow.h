@@ -37,9 +37,8 @@ class Button;
 class CheckButton;
 class Dialog;
 class Entry;
-class HandleBox;
-class TextBuffer;
 class TextView;
+class Toolbar;
 class Window;
 }
 
