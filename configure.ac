@@ -41,7 +41,7 @@ AC_PROG_CXX()
 AC_CHECK_HEADERS([sys/types.h sys/stat.h])
 AC_CHECK_FUNCS([umask])
 
-PKG_CHECK_MODULES(GTKMM, sigc++-1.2 >= 1.2.1 gtkmm-2.0 >= 2.0.0)
+PKG_CHECK_MODULES(GTKMM, glib-2.0 >= 2.0.7 sigc++-1.2 >= 1.2.1 gtkmm-2.0 >= 2.0.0)
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 
