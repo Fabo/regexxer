@@ -1,5 +1,11 @@
 2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (on_buffer_modified_changed): Work around a nasty
+	gtkmm bug:  Glib::SignalProxy seems to ignore the 'blocked' flag of
+	the SigC::Connection object.  I'll fix this later in gtkmm itself.
+
+2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* macros/pcre.m4 (PCRE_CHECK_UTF8): Mention libpcre's --enable-utf8
 	option in the error message.
 

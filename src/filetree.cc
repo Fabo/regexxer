@@ -350,6 +350,7 @@ void FileTree::find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
 
 int FileTree::get_file_count() const
 {
+  g_return_val_if_fail(toplevel_.file_count >= 0, 0);
   return toplevel_.file_count;
 }
 
@@ -359,7 +360,10 @@ void FileTree::save_current_file()
   {
     Util::SharedPtr<ErrorList> error_list;
 
-    save_file_at_iter(selected, &error_list);
+    {
+      ScopedBlock block (conn_modified_changed_);
+      save_file_at_iter(selected, &error_list);
+    }
 
     if(error_list)
       throw Error(error_list);
@@ -441,6 +445,7 @@ void FileTree::find_matches(Pcre::Pattern& pattern, bool multiple)
 
 long FileTree::get_match_count() const
 {
+  g_return_val_if_fail(sum_matches_ >= 0, 0);
   return sum_matches_;
 }
 
@@ -460,6 +465,7 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
 
 int FileTree::get_modified_count() const
 {
+  g_return_val_if_fail(toplevel_.modified_count >= 0, 0);
   return toplevel_.modified_count;
 }
 
@@ -1087,6 +1093,9 @@ void FileTree::on_buffer_match_count_changed(int match_count)
 
 void FileTree::on_buffer_modified_changed()
 {
+  if(conn_modified_changed_.blocked()) // work around a bug in gtkmm <= 2.0.0
+    return;
+
   const Gtk::TreeModel::iterator selected = get_selection()->get_selected();
   g_return_if_fail(selected);
 
