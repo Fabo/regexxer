@@ -1,5 +1,10 @@
 2002-10-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/Makefile.am (DEFS): Define all the *_DISABLE_DEPRECATED
+	macros just to prove regexxer is legacy-free ;)
+
+2002-10-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.h (BoundState): Define operator|=() and friends.
 	* src/filebuffer.cc: Use the new operator.
 

@@ -35,7 +35,8 @@ sharedptr.h		\
 stringutils.cc		\
 stringutils.h
 
-DEFS     = @DEFS@ -DREGEXXER_DATADIR="\"$(datadir)\""
+DEFS     = @DEFS@ -DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DREGEXXER_DATADIR="\"$(datadir)\""
+
 INCLUDES = -I$(top_builddir) -I$(top_srcdir) -I$(top_srcdir)/src $(PCRE_CFLAGS) $(GTKMM_CFLAGS)
 LIBS     = $(PCRE_LIBS) $(GTKMM_LIBS)
 
