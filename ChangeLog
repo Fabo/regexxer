@@ -1,5 +1,10 @@
 2002-12-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/prefdialog.cc (ColorLabel::ColorLabel): Modify the whole
+	Gtk::RcStyle in one go rather than setting the bg pixmap thrice.
+
+2002-12-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/configdata.{cc,h}: Remove config option "menutool_mode"
 	because it's crack now that we have undo et al.  Add config options
 	"textview_font", "match_color" and "current_match_color".

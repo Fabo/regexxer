@@ -227,25 +227,24 @@ void ColorSelectionButton::on_clicked()
 
 ColorSelectionButton::ColorLabel::ColorLabel()
 {
-#if REGEXXER_HAVE_GTKMM_22
+  const Glib::RefPtr<Gtk::RcStyle> rcstyle = get_modifier_style();
   const Glib::ustring none = "<none>";
 
-  modify_bg_pixmap(Gtk::STATE_NORMAL,   none);
-  modify_bg_pixmap(Gtk::STATE_ACTIVE,   none);
-  modify_bg_pixmap(Gtk::STATE_PRELIGHT, none);
+#if REGEXXER_HAVE_GTKMM_22
+  rcstyle->set_bg_pixmap_name(Gtk::STATE_NORMAL,   none);
+  rcstyle->set_bg_pixmap_name(Gtk::STATE_ACTIVE,   none);
+  rcstyle->set_bg_pixmap_name(Gtk::STATE_PRELIGHT, none);
 #else
-  const Glib::RefPtr<Gtk::RcStyle> rcstyle = get_modifier_style();
-
   g_free(rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_NORMAL]);
   g_free(rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_ACTIVE]);
   g_free(rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_PRELIGHT]);
 
-  rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_NORMAL]   = g_strdup("<none>");
-  rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_ACTIVE]   = g_strdup("<none>");
-  rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_PRELIGHT] = g_strdup("<none>");
+  rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_NORMAL]   = g_strdup(none.c_str());
+  rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_ACTIVE]   = g_strdup(none.c_str());
+  rcstyle->gobj()->bg_pixmap_name[Gtk::STATE_PRELIGHT] = g_strdup(none.c_str());
+#endif
 
   modify_style(rcstyle);
-#endif
 }
 
 ColorSelectionButton::ColorLabel::~ColorLabel()
