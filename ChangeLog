@@ -1,3 +1,11 @@
+2002-11-23  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filetree.{cc,h} (FileTree::ErrorList): Rename to MessageList
+	since it's not specifically intended for errors.  Use MI to combine
+	Util::SharedObject and std::list<> instead of making the std::list
+	a data member.  IS-A really makes sense here and this kind of class
+	enhancement is what MI exists for, after all.
+
 2002-11-22  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/Makefile.am (DEFS): Don't use backslash quoting inside the

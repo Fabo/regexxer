@@ -146,28 +146,27 @@ public:
 namespace Regexxer
 {
 
-/**** Regexxer::FileTree::ErrorList ****************************************/
+/**** Regexxer::FileTree::MessageList ****************************************/
 
 /* This is just a std::list<> wrapper that can be used with Util::SharedPtr<>.
  */
-struct FileTree::ErrorList : public Util::SharedObject
+class FileTree::MessageList : public Util::SharedObject, public std::list<Glib::ustring>
 {
-  ErrorList();
-  ~ErrorList();
-
-  std::list<Glib::ustring> errors;
+public:
+  MessageList();
+  ~MessageList();
 };
 
-FileTree::ErrorList::ErrorList()
+FileTree::MessageList::MessageList()
 {}
 
-FileTree::ErrorList::~ErrorList()
+FileTree::MessageList::~MessageList()
 {}
 
 
 /**** Regexxer::FileTree::Error ********************************************/
 
-FileTree::Error::Error(const Util::SharedPtr<FileTree::ErrorList>& error_list)
+FileTree::Error::Error(const Util::SharedPtr<FileTree::MessageList>& error_list)
 :
   error_list_ (error_list)
 {}
@@ -188,7 +187,7 @@ FileTree::Error& FileTree::Error::operator=(const FileTree::Error& other)
 
 const std::list<Glib::ustring>& FileTree::Error::get_error_list() const
 {
-  return error_list_->errors;
+  return *error_list_;
 }
 
 
@@ -199,13 +198,11 @@ struct FileTree::FindData
   FindData(Pcre::Pattern& pattern_, bool recursive_, bool hidden_);
   ~FindData();
 
-  Pcre::Pattern&                        pattern;
-  const bool                            recursive;
-  const bool                            hidden;
-  DirStack                              dirstack;
-  Util::SharedPtr<FileTree::ErrorList>  error_list;
-
-  std::list<Glib::ustring>& errors() { return error_list->errors; }
+  Pcre::Pattern&                          pattern;
+  const bool                              recursive;
+  const bool                              hidden;
+  DirStack                                dirstack;
+  Util::SharedPtr<FileTree::MessageList>  error_list;
 
 private:
   FindData(const FileTree::FindData&);
@@ -217,7 +214,7 @@ FileTree::FindData::FindData(Pcre::Pattern& pattern_, bool recursive_, bool hidd
   pattern     (pattern_),
   recursive   (recursive_),
   hidden      (hidden_),
-  error_list  (new FileTree::ErrorList())
+  error_list  (new FileTree::MessageList())
 {}
 
 FileTree::FindData::~FindData()
@@ -344,12 +341,12 @@ void FileTree::find_files(const std::string& dirname, Pcre::Pattern& pattern,
   }
   catch(const Glib::FileError& error)
   {
-    find_data.errors().push_back(error.what()); // collect errors but don't fail
+    find_data.error_list->push_back(error.what()); // collect errors but don't fail
   }
 
   signal_bound_state_changed(); // emit
 
-  if(!find_data.errors().empty())
+  if(!find_data.error_list->empty())
     throw Error(find_data.error_list);
 }
 
@@ -363,7 +360,7 @@ void FileTree::save_current_file()
 {
   if(const Gtk::TreeModel::iterator selected = get_selection()->get_selected())
   {
-    Util::SharedPtr<ErrorList> error_list;
+    Util::SharedPtr<MessageList> error_list;
 
     {
       ScopedBlock block (conn_modified_changed_);
@@ -377,7 +374,7 @@ void FileTree::save_current_file()
 
 void FileTree::save_all_files()
 {
-  Util::SharedPtr<ErrorList> error_list;
+  Util::SharedPtr<MessageList> error_list;
 
   {
     ScopedBlock block (conn_modified_changed_);
@@ -582,7 +579,7 @@ void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
     catch(const Glib::FileError& error)
     {
       // Collect errors but don't interrupt the search.
-      find_data.errors().push_back(error.what());
+      find_data.error_list->push_back(error.what());
     }
     catch(const Glib::ConvertError& error) // unlikely due to use of our own fallback conversion
     {
@@ -710,7 +707,7 @@ void FileTree::find_increment_file_count(FindData& find_data, int file_count)
 }
 
 bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
-                                 Util::SharedPtr<ErrorList>* error_list)
+                                 Util::SharedPtr<MessageList>* error_list)
 {
   const FileInfoPtr fileinfo = get_fileinfo_from_iter(iter);
 
@@ -723,14 +720,14 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
     catch(const Glib::Error& error)
     {
       if(!*error_list)
-        error_list->reset(new ErrorList());
+        error_list->reset(new MessageList());
 
       Glib::ustring message = "Failed to save file '";
       message += Util::filename_to_utf8_fallback(fileinfo->fullname);
       message += "': ";
       message += error.what();
 
-      (*error_list)->errors.push_back(message);
+      (*error_list)->push_back(message);
     }
 
     if(!fileinfo->buffer->get_modified())

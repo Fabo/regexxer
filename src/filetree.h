@@ -79,7 +79,7 @@ protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 
 private:
-  struct ErrorList;
+  struct MessageList;
   struct FindData;
   struct FindMatchesData;
 
@@ -116,7 +116,7 @@ private:
   void find_increment_file_count(FindData& find_data, int file_count);
 
   bool save_file_at_iter(const Gtk::TreeModel::iterator& iter,
-                         Util::SharedPtr<ErrorList>* error_list);
+                         Util::SharedPtr<MessageList>* error_list);
 
   bool find_matches_at_iter(const Gtk::TreeModel::iterator& iter, FindMatchesData* find_data);
 
@@ -146,7 +146,7 @@ private:
 class FileTree::Error
 {
 public:
-  explicit Error(const Util::SharedPtr<FileTree::ErrorList>& error_list);
+  explicit Error(const Util::SharedPtr<FileTree::MessageList>& error_list);
   virtual ~Error();
 
   Error(const FileTree::Error& other);
@@ -155,7 +155,7 @@ public:
   const std::list<Glib::ustring>& get_error_list() const;
 
 private:
-  Util::SharedPtr<FileTree::ErrorList> error_list_;
+  Util::SharedPtr<FileTree::MessageList> error_list_;
 };
 
 } // namespace Regexxer
