@@ -1,5 +1,9 @@
 2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/translation.h (translate): Add G_GNUC_FORMAT(1) attribute.
+
+2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc (FileTree::find_add_file): Create the FileInfo
 	object in advance before inserting the new row in order to improve
 	exception safety.
