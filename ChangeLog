@@ -1,5 +1,11 @@
 2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (load_file_with_fallback): Ooops, I forgot
+	that buffers are now freed whenever possible, thus we shouldn't
+	just return even if fileinfo->load_failed has already been set.
+
+2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (text_cell_data_func): Simplify.
 	(load_file_with_fallback): Improve robustness of the code, and
 	trigger row_changed() if load_failed has been set.  For some

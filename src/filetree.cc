@@ -1152,9 +1152,6 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
 {
   g_return_if_fail(!fileinfo->buffer);
 
-  if(fileinfo->load_failed)
-    return; // we already tried loading this file
-
   try
   {
     load_file(fileinfo, fallback_encoding_);
@@ -1174,8 +1171,8 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
 
     fileinfo->buffer = create_error_message_buffer(message);
 
-    // Trigger signal_row_changed() because fileinfo->load_failed has been set,
-    // which means we have to change icon and color of the row.
+    // Trigger signal_row_changed() because fileinfo->load_failed has
+    // been set, which means we have to change icon and color of the row.
     treestore_->row_changed(Gtk::TreePath(iter), iter);
   }
 }
