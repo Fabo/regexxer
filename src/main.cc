@@ -37,30 +37,65 @@ namespace
 
 #include <pixmaps/stockimages.h>
 
-struct StockData
+struct StockIconData
 {
-  const char*   id;
-  const guint8* icondata;
-  unsigned int  iconsize;
-  const char*   label;
+  const guint8*         data;
+  unsigned int          length;
+  Gtk::BuiltinIconSize  size;
 };
 
-const StockData regexxer_stock_items[] =
+struct StockItemData
 {
-  { "regexxer-info",     stock_menu_about,  sizeof(stock_menu_about),  "Info"      },
-  { "regexxer-save-all", stock_save_all_24, sizeof(stock_save_all_24), "Save _all" }
+  const char*           id;
+  const StockIconData*  icons;
+  unsigned int          n_icons;
+  const char*           label;
 };
+
+const StockIconData stock_icon_info[] =
+{
+  { stock_menu_about, sizeof(stock_menu_about), Gtk::ICON_SIZE_INVALID }
+};
+
+const StockIconData stock_icon_save_all[] =
+{
+  { stock_save_all_16, sizeof(stock_save_all_16), Gtk::ICON_SIZE_MENU    },
+  { stock_save_all_24, sizeof(stock_save_all_24), Gtk::ICON_SIZE_INVALID }
+};
+
+const StockItemData regexxer_stock_items[] =
+{
+  { "regexxer-info",     stock_icon_info,     G_N_ELEMENTS(stock_icon_info),     "_Info"     },
+  { "regexxer-save-all", stock_icon_save_all, G_N_ELEMENTS(stock_icon_save_all), "Save _all" }
+};
+
 
 void regexxer_register_stock_items()
 {
   const Glib::RefPtr<Gtk::IconFactory> factory = Gtk::IconFactory::create();
 
-  for(unsigned i = 0; i < G_N_ELEMENTS(regexxer_stock_items); ++i)
+  for(unsigned item = 0; item < G_N_ELEMENTS(regexxer_stock_items); ++item)
   {
-    const StockData& stock = regexxer_stock_items[i];
-    const Gtk::StockID stock_id (stock.id);
+    const StockItemData& stock = regexxer_stock_items[item];
+    Gtk::IconSet icon_set;
 
-    const Gtk::IconSet icon_set (Gdk::Pixbuf::create_from_inline(stock.iconsize, stock.icondata));
+    for(unsigned icon = 0; icon < stock.n_icons; ++icon)
+    {
+      const StockIconData& icon_data = stock.icons[icon];
+
+      Gtk::IconSource source;
+      source.set_pixbuf(Gdk::Pixbuf::create_from_inline(icon_data.length, icon_data.data));
+
+      if(icon_data.size != Gtk::ICON_SIZE_INVALID)
+      {
+        source.set_size(icon_data.size);
+        source.set_size_wildcarded(false);
+      }
+
+      icon_set.add_source(source);
+    }
+
+    const Gtk::StockID stock_id (stock.id);
     factory->add(stock_id, icon_set);
     Gtk::Stock::add(Gtk::StockItem(stock_id, stock.label));
   }

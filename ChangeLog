@@ -1,5 +1,11 @@
 2002-11-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* pixmaps/stock_save_all_16.png: New menu icon.
+	* pixmaps/Makefile.am: Add new icon.
+	* src/main.cc: Register new icon.
+
+2002-11-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/controller.cc (ControlItem::add_widget): Honor group_enabled_.
 
 2002-11-17  Daniel Elstner  <daniel.elstner@gmx.net>

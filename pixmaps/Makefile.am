@@ -21,11 +21,12 @@
 pixmapdir = $(datadir)/pixmaps
 dist_pixmap_DATA = regexxer.png
 
-stockimages = stock_menu_about.png stock_save_all_24.png
+stockimages = stock_menu_about.png stock_save_all_16.png stock_save_all_24.png
 dist_noinst_DATA = $(stockimages)
 
 pixbuf_build_list = \
 stock_menu_about $(srcdir)/stock_menu_about.png \
+stock_save_all_16 $(srcdir)/stock_save_all_16.png \
 stock_save_all_24 $(srcdir)/stock_save_all_24.png
 
 BUILT_SOURCES = stockimages.h
