@@ -20,6 +20,7 @@
 
 #include "fileio.h"
 #include "filebuffer.h"
+#include "miscutils.h"
 #include "stringutils.h"
 
 #include <glib.h>
@@ -40,12 +41,12 @@ Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& inp
   const Glib::RefPtr<FileBuffer> text_buffer = FileBuffer::create();
   FileBuffer::iterator text_end (text_buffer->end());
 
-  const Glib::ScopedPtr<char> inbuf (g_new(char, BUFSIZE));
+  const Util::ScopedArray<char> inbuf (new char[BUFSIZE]);
   gsize bytes_read = 0;
 
   while(input->read(inbuf.get(), BUFSIZE, bytes_read) == Glib::IO_STATUS_NORMAL)
   {
-    if(std::memchr(inbuf.get(), '\0', bytes_read))
+    if(std::memchr(inbuf.get(), '\0', bytes_read)) // binary file?
       return Glib::RefPtr<FileBuffer>();
 
     text_end = text_buffer->insert(text_end, inbuf.get(), inbuf.get() + bytes_read);

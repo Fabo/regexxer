@@ -25,6 +25,23 @@
 namespace Util
 {
 
+template <class T>
+class ScopedArray
+{
+private:
+  T* array_;
+
+  ScopedArray(const ScopedArray<T>&);
+  ScopedArray<T>& operator=(const ScopedArray<T>&);
+
+public:
+  explicit ScopedArray(T* array) : array_ (array) {}
+  ~ScopedArray() { delete[] array_; }
+
+  T* get() const { return array_; }
+};
+
+
 /* next() and prior(): Idea shamelessly stolen from boost.
  */
 template <class Iterator>

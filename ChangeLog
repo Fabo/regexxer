@@ -1,3 +1,11 @@
+2002-12-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/miscutils.h (ScopedArray<>): New little utility template
+	to manage a dynamically allocated array.
+
+	* src/fileio.cc (load_iochannel): Ditch Glib::ScopedPtr<> (glibmm
+	internal :) in favor of Util::ScopedArray<>.
+
 2002-12-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/fileio.cc (load_iochannel): Use std::memchr() rather than
