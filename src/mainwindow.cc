@@ -384,6 +384,9 @@ Gtk::Widget* MainWindow::create_left_pane()
   table->attach(*manage(entry_folder_  = new Entry()), 1, 2, 0, 1, EXPAND|FILL, AttachOptions(0));
   table->attach(*manage(entry_pattern_ = new Entry()), 1, 2, 1, 2, EXPAND|FILL, AttachOptions(0));
 
+  entry_folder_ ->signal_activate().connect(SigC::slot(*this, &MainWindow::on_find_files));
+  entry_pattern_->signal_activate().connect(SigC::slot(*this, &MainWindow::on_find_files));
+
   HBox *const hbox = new HBox(false, 5);
   table->attach(*manage(hbox), 0, 2, 2, 3, EXPAND|FILL, AttachOptions(0));
 
@@ -434,7 +437,9 @@ Gtk::Widget* MainWindow::create_right_pane()
   table->attach(*manage(entry_regex_        = new Entry()),  1, 2, 0, 1, EXPAND|FILL, AttachOptions(0));
   table->attach(*manage(entry_substitution_ = new Entry()),  1, 2, 1, 2, EXPAND|FILL, AttachOptions(0));
 
-  entry_substitution_->signal_changed().connect(SigC::slot(*this, &MainWindow::update_preview));
+  entry_regex_       ->signal_activate().connect(SigC::slot(*this, &MainWindow::on_exec_search));
+  entry_substitution_->signal_activate().connect(SigC::slot(*this, &MainWindow::on_exec_search));
+  entry_substitution_->signal_changed ().connect(SigC::slot(*this, &MainWindow::update_preview));
 
   HBox *const hbox_options = new HBox(false, 5);
   table->attach(*manage(hbox_options), 2, 3, 0, 1, FILL, AttachOptions(0));

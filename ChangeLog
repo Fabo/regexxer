@@ -1,5 +1,10 @@
 2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc: Invoke file search respectively regex search
+	on the entry widgets' signal_activate().
+
+2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.cc (apply_modifiers): Handle modifier sequences
 	like "\u\L$2" correctly.  Since it's not an recursive function the
 	code got pretty messy.  Needs to be refactored at some point.
