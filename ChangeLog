@@ -1,5 +1,11 @@
 2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* Makefile.am (install-schemas): Don't use $^ since it probably
+	isn't portable.
+	(uninstall-schemas): ditto.
+
+2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac (PCRE_CHECK_VERSION): Bump version requirement to
 	libpcre 4.0.  Apparently the code required this version for quite
 	some time now, but without configure checking for it.
