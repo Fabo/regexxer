@@ -1,3 +1,11 @@
+2004-06-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/Makefile.am (global_defines): Get rid of the redundant
+	-DREGEXXER_LOCALEDIR=\""$(datadir)/locale"\" definition.
+
+	* src/main.cc (locale_directory): New string constant.
+	(main): Replace REGEXXER_LOCALEDIR with locale_directory.
+
 2004-06-19  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/Makefile.am (global_defines): Add -DGTKMM_DISABLE_DEPRECATED.

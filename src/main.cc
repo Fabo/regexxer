@@ -82,6 +82,8 @@ const StockItemData regexxer_stock_items[] =
   { "regexxer-save-all", stock_icon_save_all, G_N_ELEMENTS(stock_icon_save_all), N_("Save _all") }
 };
 
+const char *const locale_directory = REGEXXER_DATADIR G_DIR_SEPARATOR_S "locale";
+
 
 void register_stock_items()
 {
@@ -176,7 +178,7 @@ int main(int argc, char** argv)
     Gnome::Conf::init();
     Gtk::Main main_instance (&argc, &argv);
 
-    Util::initialize_gettext(PACKAGE_TARNAME, REGEXXER_LOCALEDIR);
+    Util::initialize_gettext(PACKAGE_TARNAME, locale_directory);
 
     Glib::set_application_name(PACKAGE_NAME);
     register_stock_items();

@@ -62,7 +62,6 @@ regexxer_SOURCES =		\
 global_defines = \
 -DREGEXXER_DATADIR=\""$(datadir)"\" \
 -DREGEXXER_PKGDATADIR=\""$(pkgdatadir)"\" \
--DREGEXXER_LOCALEDIR=\""$(datadir)/locale"\" \
 -DREGEXXER_GCONF_DIRECTORY=\""$(REGEXXER_GCONF_DIRECTORY)"\" \
 -DGTKMM_DISABLE_DEPRECATED
 
