@@ -134,9 +134,9 @@ bool read_config_entry(const Glib::RefPtr<Glib::IOChannel>& channel,
     if(pbegin == pend || *pbegin == '#')
       continue;
 
-    // Use basic std::string iterators because it's faster.
+    // Use byte-wise std::string iterators because it's faster.
     // It's possible to do this when searching for an ASCII character.
-    ustring::const_iterator passign (std::find(pbegin.base(), pend.base(), '='));
+    const ustring::const_iterator passign (std::find(pbegin.base(), pend.base(), '='));
 
     if(passign == pend)
     {
