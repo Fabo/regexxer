@@ -208,8 +208,7 @@ SharedPtr<T> shared_dynamic_cast(const SharedPtr<U>& other)
 template <class T, class U> inline
 SharedPtr<T> shared_polymorphic_cast(const SharedPtr<U>& other)
 {
-  dynamic_cast<T&>(*other); // may throw std::bad_cast
-  return SharedPtr<T>(static_cast<T*>(other.get()));
+  return SharedPtr<T>(&dynamic_cast<T&>(*other)); // may throw std::bad_cast
 }
 
 } // namespace Util
