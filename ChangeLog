@@ -1,5 +1,10 @@
 2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* macros/pcre.m4 (PCRE_CHECK_UTF8): Mention libpcre's --enable-utf8
+	option in the error message.
+
+2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.{cc,h} (on_treestore_sort_column_changed): New signal
 	handler, used to recalculate path_match_first_ and path_match_last_.
 	This fixes a serious bug -- the code relies on the validity of this

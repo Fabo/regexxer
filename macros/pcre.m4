@@ -111,9 +111,10 @@ AC_MSG_RESULT([${pcre_supports_utf8}])
 if test "x$pcre_supports_utf8" = xno; then
 {
 AC_MSG_ERROR([[
-*** Sorry, the libpcre installed on your system doesn't support
+*** Sorry, the PCRE library installed on your system doesn't support
 *** UTF-8 encoding.  Please install a libpcre package which includes
-*** support for UTF-8, or compile PCRE from source code.
+*** support for UTF-8.  Note that if you compile libpcre from source
+*** you have to pass the --enable-utf8 flag to its ./configure script.
 ]])
 }
 fi
