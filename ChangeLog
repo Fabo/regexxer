@@ -1,5 +1,13 @@
 2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.h (AsciiToupper): New unary predicate that
+	forwards to ascii_toupper().
+
+	* src/prefdialog.cc (on_entry_fallback_activate): Use the
+	AsciiToupper predicate so that the call can be inlined.
+
+2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.{cc,h} (ascii_toupper): Make this utility function
 	publically available.
 

@@ -34,6 +34,11 @@ typedef std::vector< std::pair<int,int> > CaptureVector;
 inline char ascii_toupper(char c)
   { return (Glib::Ascii::islower(c)) ? (c & '\xDF') : c; }
 
+struct AsciiToupper
+{
+  inline char operator()(char c) const { return ascii_toupper(c); }
+};
+
 bool encodings_equal(const std::string& lhs, const std::string& rhs);
 bool contains_null(const char* pbegin, const char* pend);
 Glib::ustring shell_pattern_to_regex(const Glib::ustring& pattern);

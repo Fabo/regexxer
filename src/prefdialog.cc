@@ -299,7 +299,7 @@ void PrefDialog::on_entry_fallback_activate()
   if(validate_encoding(fallback_encoding))
   {
     std::transform(fallback_encoding.begin(), fallback_encoding.end(),
-                   fallback_encoding.begin(), &Util::ascii_toupper);
+                   fallback_encoding.begin(), Util::AsciiToupper());
 
     signal_pref_fallback_encoding_changed(fallback_encoding); // emit
   }
