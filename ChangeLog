@@ -1,5 +1,10 @@
 2004-05-19  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac (CONFIG_STATUS_DEPENDENCIES): AC_SUBST() this
+	variable with '$(top_srcdir)/po/LINGUAS' for utmost perfection ;-)
+
+2004-05-19  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* ui/mainwindow.glade (toolbar): Make glade-2 replace its old-style
 	magic "class names" with proper GtkToolItem and derivated elements.
 	Note that you'll need to apply the patch for #142761 in order to
