@@ -184,6 +184,7 @@ void MainWindow::load_xml()
   Gtk::Button* button_folder = 0;
   xml->get_widget("button_folder", button_folder);
   button_folder->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_select_folder));
+  button_folder->grab_focus();
 
   controller_.load_xml(xml);
 }

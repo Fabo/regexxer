@@ -1,5 +1,12 @@
 2004-05-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (MainWindow::load_xml): Make the folder button
+	grab focus because otherwise the Preferences tool button will be
+	focused after startup.  I blame libglade -- its whole tool button
+	handling seems to be somewhat shaky.
+
+2004-05-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac (ALL_LINGUAS): Use `cat "$srcdir/po/LINGUAS"` to
 	assign this variable, so that there is only one file to edit when
 	adding a new language.
