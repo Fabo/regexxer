@@ -46,9 +46,9 @@ Error::Error(const Error& other)
 
 Error& Error::operator=(const Error& other)
 {
-  // Note that this is exception safe because only one of the assignments
-  // below could throw.  If that changes the copy-and-swap technique should
-  // be used instead.
+  // Note that this is exception safe because only the first assignment below
+  // could throw.  If that changes the copy-and-swap technique should be used
+  // instead.
   message_ = other.message_;
   offset_  = other.offset_;
 

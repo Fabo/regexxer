@@ -93,7 +93,7 @@ class Pattern
 {
 public:
   explicit Pattern(const Glib::ustring& regex, CompileOptions options = CompileOptions(0));
-  ~Pattern();
+  virtual ~Pattern();
 
   int match(const Glib::ustring& subject, int offset = 0, MatchOptions options = MatchOptions(0));
 
