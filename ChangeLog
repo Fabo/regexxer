@@ -1,3 +1,17 @@
+2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/configdata.{cc,h}: New files, implementing load/save of
+	configuration data to a file.
+
+	* src/Makefile.am: Add new files.
+	* configure.ac: Check for umask() and its header files.
+
+	* src/mainwindow.{cc,h}: Make use of the new code to load and
+	save the configuration data.
+
+	* src/stringutils.{cc,h} (trim_whitespace): New utility function.
+	* src/prefdialog.cc (validate_encoding): Move to stringutils.{cc,h}.
+
 2002-11-02  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/prefdialog.{cc,h}: Prevent double emission of

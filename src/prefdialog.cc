@@ -19,6 +19,7 @@
  */
 
 #include "prefdialog.h"
+#include "stringutils.h"
 
 #include <glib.h>
 #include <gtkmm.h>
@@ -57,37 +58,6 @@ ImageLabel::ImageLabel(const Gtk::StockID& stock_id, const Glib::ustring& label)
 
 ImageLabel::~ImageLabel()
 {}
-
-
-bool validate_encoding(const std::string& encoding)
-{
-  std::string::const_iterator       p    = encoding.begin();
-  const std::string::const_iterator pend = encoding.end();
-
-  // GLib just ignores some characters that aren't used in encoding names,
-  // so we have to parse the string for invalid characters ourselves.
-
-  for(; p != pend; ++p)
-  {
-    if(!Glib::Ascii::isalnum(*p))
-      switch(*p)
-      {
-        case ' ': case '-': case '_': case '.': case ':': break;
-        default: return false;
-      }
-  }
-
-  try
-  {
-    Glib::convert("", "UTF-8", encoding);
-  }
-  catch(const Glib::ConvertError&)
-  {
-    return false;
-  }
-
-  return true;
-}
 
 } // anonymous namespace
 
@@ -300,7 +270,7 @@ void PrefDialog::on_entry_fallback_activate()
 {
   std::string fallback_encoding = entry_fallback_->get_text();
 
-  if(validate_encoding(fallback_encoding))
+  if(Util::validate_encoding(fallback_encoding))
   {
     std::transform(fallback_encoding.begin(), fallback_encoding.end(),
                    fallback_encoding.begin(), &Glib::Ascii::toupper);

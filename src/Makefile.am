@@ -21,6 +21,8 @@
 bin_PROGRAMS = regexxer
 
 regexxer_SOURCES =	\
+	configdata.cc	\
+	configdata.h	\
 	filebuffer.cc	\
 	filebuffer.h	\
 	fileio.cc	\

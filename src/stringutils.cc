@@ -228,6 +228,57 @@ std::string parse_oct_unichar(std::string::const_iterator& p, std::string::const
 } // anonymous namespace
 
 
+/* Trim leading and trailing whitespace characters from the [pbegin,pend) range.
+ */
+void Util::trim_whitespace(Glib::ustring::const_iterator& pbegin,
+                           Glib::ustring::const_iterator& pend)
+{
+  // Copy iterators into local variables to help the compiler.
+  Glib::ustring::const_iterator begin (pbegin);
+  Glib::ustring::const_iterator end   (pend);
+
+  while(begin != end && Glib::Unicode::isspace(*begin))
+    ++begin;
+
+  Glib::ustring::const_iterator temp (end);
+
+  while(begin != temp && Glib::Unicode::isspace(*--temp))
+    end = temp;
+
+  pbegin = begin;
+  pend   = end;
+}
+
+bool Util::validate_encoding(const std::string& encoding)
+{
+  std::string::const_iterator       p    = encoding.begin();
+  const std::string::const_iterator pend = encoding.end();
+
+  // GLib just ignores some characters that aren't used in encoding names,
+  // so we have to parse the string for invalid characters ourselves.
+
+  for(; p != pend; ++p)
+  {
+    if(!Glib::Ascii::isalnum(*p))
+      switch(*p)
+      {
+        case ' ': case '-': case '_': case '.': case ':': break;
+        default: return false;
+      }
+  }
+
+  try
+  {
+    Glib::convert("", "UTF-8", encoding);
+  }
+  catch(const Glib::ConvertError&)
+  {
+    return false;
+  }
+
+  return true;
+}
+
 /* Test lhs and rhs for equality while ignoring case
  * and several separation characters used in encoding names.
  */

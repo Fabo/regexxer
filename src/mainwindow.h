@@ -144,6 +144,9 @@ private:
 
   void on_preferences();
   void on_pref_dialog_hide();
+
+  void load_configuration();
+  void save_configuration();
 };
 
 } // namespace Regexxer

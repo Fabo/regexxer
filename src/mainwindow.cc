@@ -19,6 +19,7 @@
  */
 
 #include "mainwindow.h"
+#include "configdata.h"
 #include "filelist.h"
 #include "pcreshell.h"
 #include "prefdialog.h"
@@ -226,11 +227,13 @@ MainWindow::MainWindow()
     vbox_interior->pack_start(*manage(action_area_), PACK_SHRINK);
   }
 
-  show_all_children();
+  load_configuration();
 
   entry_folder_->set_text(Util::shorten_pathname(Glib::filename_to_utf8(Glib::get_current_dir())));
   entry_pattern_->set_text("*");
   button_recursive_->set_active(true);
+
+  show_all_children();
 
   statusline_->signal_cancel_clicked.connect(SigC::slot(*this, &MainWindow::on_busy_action_cancel));
 
@@ -297,8 +300,6 @@ Gtk::Toolbar* MainWindow::create_toolbar()
   tools.push_back(StockElem(Stock::PREFERENCES, slot(*this, &MainWindow::on_preferences)));
   tools.push_back(Space());
   tools.push_back(StockElem(Stock::QUIT, slot(*this, &Widget::hide)));
-
-  toolbar->set_toolbar_style(TOOLBAR_BOTH_HORIZ);
 
   toolbutton_save_    ->set_sensitive(false);
   toolbutton_save_all_->set_sensitive(false);
@@ -952,6 +953,27 @@ void MainWindow::on_preferences()
 void MainWindow::on_pref_dialog_hide()
 {
   pref_dialog_.reset();
+  save_configuration();
+}
+
+void MainWindow::load_configuration()
+{
+  ConfigData config;
+
+  config.load();
+
+  toolbar_->set_toolbar_style(config.toolbar_style);
+  filelist_->set_fallback_encoding(config.fallback_encoding);
+}
+
+void MainWindow::save_configuration()
+{
+  ConfigData config;
+
+  config.toolbar_style = toolbar_->get_toolbar_style();
+  config.fallback_encoding = filelist_->get_fallback_encoding();
+
+  config.save();
 }
 
 } // namespace Regexxer
