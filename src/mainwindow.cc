@@ -427,26 +427,28 @@ void MainWindow::on_select_folder()
   using namespace Glib;
 
   Gtk::FileSelection filesel ("Select a folder");
+
+  filesel.set_modal(true);
   filesel.set_transient_for(*this);
   filesel.hide_fileop_buttons();
+  filesel.get_file_list()->get_parent()->hide();
+  filesel.set_default_size(350, -1);
 
   std::string filename = filename_from_utf8(Util::expand_pathname(entry_folder_->get_text()));
 
-  if(!filename.empty())
-  {
-    if(*filename.rbegin() != G_DIR_SEPARATOR)
-      filename += G_DIR_SEPARATOR;
+  if(!filename.empty() && *filename.rbegin() != G_DIR_SEPARATOR)
+    filename += G_DIR_SEPARATOR;
 
-    filesel.set_filename(filename);
-  }
+  filesel.set_filename(filename);
 
   if(filesel.run() == Gtk::RESPONSE_OK)
   {
-    filename = filesel.get_filename();
-    entry_folder_->set_text(Util::shorten_pathname(filename_to_utf8(path_get_dirname(filename))));
+    const Glib::ustring filename_utf8 = filename_to_utf8(filesel.get_filename());
 
-    if(!filename.empty() && *filename.rbegin() != G_DIR_SEPARATOR)
-      entry_pattern_->set_text(filename_to_utf8(path_get_basename(filename)));
+    entry_folder_->set_text(Util::shorten_pathname(path_get_dirname(filename_utf8)));
+
+    if(!filename_utf8.empty() && *filename_utf8.rbegin() != G_DIR_SEPARATOR)
+      entry_pattern_->set_text(path_get_basename(filename_utf8));
   }
 }
 

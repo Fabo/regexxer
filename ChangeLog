@@ -1,5 +1,11 @@
 2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (on_select_folder): Hide the file selection
+	pane in the Gtk::FileSelection dialog, since we only need the
+	directory part.
+
+2002-10-27  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.{cc,h} src/prefdialog.cc: Get rid of
 	ascii_toupper() and AsciiToupper because I just added the
 	formerly missing Glib::Ascii::toupper() to glibmm :-P
