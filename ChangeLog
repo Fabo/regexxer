@@ -1,5 +1,10 @@
 2002-11-15  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/sharedptr.cc: Remove already unused debug code.  The
+	reference counting is rock solid thanks to SharedPtr<>.
+
+2002-11-15  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/sharedptr.h (SharedObject): Remove the namespace prefix from
 	the friend declaration.  This will hopefully fix a compilation
 	problem with GCC 2.95.x -- once again.

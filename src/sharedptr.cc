@@ -18,16 +18,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <glib.h>
 #include "sharedptr.h"
-
-
-namespace
-{
-
-int instance_count = 0;
-
-} // anonymous namespace
+#include <glib.h>
 
 
 namespace Util
@@ -36,16 +28,10 @@ namespace Util
 SharedObject::SharedObject()
 :
   refcount_ (0)
-{
-  ++instance_count;
-  //g_print("SharedObject ctor: %d\n", instance_count);
-}
+{}
 
 SharedObject::~SharedObject()
 {
-  --instance_count;
-  //g_print("SharedObject dtor: %d\n", instance_count);
-
   g_return_if_fail(refcount_ == 0);
 }
 
