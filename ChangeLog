@@ -14,7 +14,7 @@
 	libstdc++-v3 headers and it gave me the creeps -- reset() deletes
 	_before_ assigning the new pointer.
 
-	(on_preferences): ditto.
+	(on_pref_dialog_hide): ditto.
 
 2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
