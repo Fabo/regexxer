@@ -1,3 +1,7 @@
+2004-05-17  Duarte Loreto <happyguy_pt@hotmail.com>
+
+	* configure.ac: Added Portuguese (pt) to ALL_LINGUAS.
+
 2004-05-17  Christian Rose  <menthos@menthos.com>
 
 	* configure.ac: Added "sv" to ALL_LINGUAS.
