@@ -320,6 +320,8 @@ bool FileTree::select_next_file(bool move_forward)
         collapse_row(collapse_stack.top());
 
       expand_and_select(Gtk::TreePath(iter));
+
+      return true;
     }
   }
 

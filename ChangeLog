@@ -1,5 +1,10 @@
 2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (select_next_file): Re-add a missing
+	"return true;" that got lost in a previous change.
+
+2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/fileio.{cc,h} (FileInfo): Split this data structure into
 	DirInfo and FileInfo, with a common base class FileInfoBase.
 	This should be cleaner than having data members that can be
