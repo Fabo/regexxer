@@ -26,7 +26,7 @@ msgstr "Outil de recherche regexxer"
 #: regexxer.schemas.in.h:1
 #, fuzzy
 msgid "Current-match color"
-msgstr "Couleur de l'occurence actuelle"
+msgstr "Couleur de l'occurrence actuelle"
 
 #: regexxer.schemas.in.h:2
 msgid "Fallback encoding"
@@ -129,7 +129,7 @@ msgstr "REGEX"
 
 #: src/main.cc:104
 msgid "Find only the first match in a line"
-msgstr "Rechercher uniquement la première occurence dans une ligne"
+msgstr "Rechercher uniquement la première occurrence dans une ligne"
 
 #: src/main.cc:105 ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
@@ -138,7 +138,7 @@ msgstr "Effectuer une recherche insensible à la casse"
 #: src/main.cc:106
 #, fuzzy
 msgid "Replace matches with STRING"
-msgstr "Remplacer les occurences avec CHAINE"
+msgstr "Remplacer les occurrences avec CHAINE"
 
 #: src/main.cc:106
 msgid "STRING"
@@ -146,7 +146,7 @@ msgstr "CHAINE"
 
 #: src/main.cc:107
 msgid "Print match location to standard output"
-msgstr "Afficher la localisation de l'occurence sur la sortie standard"
+msgstr "Afficher la localisation de l'occurrence sur la sortie standard"
 
 #: src/main.cc:108
 msgid "Do not automatically start search"
@@ -254,7 +254,7 @@ msgstr "Fichier :"
 
 #: src/statusline.cc:274
 msgid "Match:"
-msgstr "Occurence :"
+msgstr "occurrence :"
 
 #: src/statusline.cc:285
 msgid "Cancels the running search"
@@ -307,11 +307,11 @@ msgstr "Rechercher tous les fichiers qui correspondent au motif du nom de fichie
 
 #: ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
-msgstr "Rechercher toutes les occurences de l'expression régulière"
+msgstr "Rechercher toutes les occurrences de l'expression régulière"
 
 #: ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
-msgstr "Rechercher toutes les occurences possibles dans une ligne"
+msgstr "Rechercher toutes les occurrences possibles dans une ligne"
 
 #: ui/mainwindow.glade.h:11
 msgid "Find fi_les"
@@ -327,11 +327,11 @@ msgstr "En avant"
 
 #: ui/mainwindow.glade.h:14
 msgid "Go to next match"
-msgstr "Aller à l'occurence suivante"
+msgstr "Aller à l'occurrence suivante"
 
 #: ui/mainwindow.glade.h:15
 msgid "Go to previous match"
-msgstr "Aller à l'occurence précédente"
+msgstr "Aller à l'occurrence précédente"
 
 #: ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
@@ -363,15 +363,15 @@ msgstr "Remplacer l'o_ccurence actuelle"
 
 #: ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
-msgstr "Remplacer toutes les occurences dans tous les fichiers"
+msgstr "Remplacer toutes les occurrences dans tous les fichiers"
 
 #: ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
-msgstr "Remplacer toutes les occurences dans ce fichier"
+msgstr "Remplacer toutes les occurrences dans ce fichier"
 
 #: ui/mainwindow.glade.h:25
 msgid "Replace current match"
-msgstr "Remplacer l'occurence actuelle"
+msgstr "Remplacer l'occurrence actuelle"
 
 #: ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
@@ -418,7 +418,7 @@ msgstr "_Aide"
 
 #: ui/mainwindow.glade.h:36
 msgid "_Match"
-msgstr "_Occurence"
+msgstr "_occurrence"
 
 #: ui/mainwindow.glade.h:37
 msgid "_Next file"
