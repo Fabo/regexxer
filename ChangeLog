@@ -1,5 +1,9 @@
 2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac (AC_INIT): Bump version to 0.4.
+
+2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.{cc,h}: Implement necessary bits to allow hiding
 	menu bar or toolbar, and honor the menutool_mode config setting.
 	Popup the new stand-alone about dialog on menubar/Help/Info.
