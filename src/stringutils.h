@@ -47,8 +47,8 @@ Glib::ustring filename_to_utf8_fallback(const std::string& filename);
 Glib::ustring convert_to_ascii(const std::string& str);
 Glib::ustring int_to_string(int number);
 
-Glib::ustring shorten_pathname(const Glib::ustring& path);
-Glib::ustring expand_pathname(const Glib::ustring& path);
+std::string shorten_pathname(const std::string& path);
+std::string expand_pathname(const std::string& path);
 
 Glib::ustring color_to_string(const Gdk::Color& color);
 

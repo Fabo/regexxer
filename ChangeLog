@@ -1,3 +1,25 @@
+2004-05-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/stringutils.{cc,h} (expand_pathname): Operate directly in
+	filename encoding since all callers need to convert one way or
+	the other anyway.  Change type of parameter and return value to
+	std::string accordingly.
+	(shorten_pathname): ditto.
+
+	* src/mainwindow.cc (MainWindow::MainWindow): Reverse order of
+	the calls to filename_to_utf8_fallback() and shorten_pathname().
+	(MainWindow::on_select_folder): ditto
+	(MainWindow::on_find_files): ditto.
+
+	* src/mainwindow.{cc,h} (MainWindow::set_title_filename): Change
+	parameter type to std::string and call filename_to_utf8_fallback().
+	Also remove the default argument from the declaration, and get rid
+	of the logic that handles the empty string.
+	(MainWindow::MainWindow): Call window_->set_title() directly in
+	order to set the default title, instead of passing an empty string
+	to set_title_filename().
+	(MainWindow::on_filetree_switch_buffer): ditto.
+
 2004-05-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/stringutils.cc (filename_to_utf8_fallback): On failure,

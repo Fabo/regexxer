@@ -647,33 +647,30 @@ Glib::ustring Util::int_to_string(int number)
   return Glib::locale_to_utf8(output.str());
 }
 
-Glib::ustring Util::shorten_pathname(const Glib::ustring& path)
+std::string Util::shorten_pathname(const std::string& path)
 {
-  const Glib::ustring homedir = Util::filename_to_utf8_fallback(Glib::get_home_dir());
-  const Glib::ustring::size_type len = homedir.bytes();
+  const std::string homedir = Glib::get_home_dir();
+  const std::string::size_type len = homedir.length();
 
-  if (path.bytes() >= len
-      && (path.bytes() == len || path.raw()[len] == G_DIR_SEPARATOR)
-      && path.raw().compare(0, len, homedir.raw()) == 0)
+  if (path.length() >= len
+      && (path.length() == len || path[len] == G_DIR_SEPARATOR)
+      && path.compare(0, len, homedir) == 0)
   {
     std::string result (1, '~');
-    result.append(path.raw(), len, std::string::npos);
+    result.append(path, len, std::string::npos);
     return result;
   }
 
   return path;
 }
 
-Glib::ustring Util::expand_pathname(const Glib::ustring& path)
+std::string Util::expand_pathname(const std::string& path)
 {
-  const std::string::const_iterator pend   = path.end().base();
-  std::string::const_iterator       pbegin = path.begin().base();
-
-  if (pbegin != pend && *pbegin == '~'
-      && (++pbegin == pend || *pbegin == G_DIR_SEPARATOR))
+  if (path.length() > 0 && path[0] == '~'
+      && (path.length() == 1 || path[1] == G_DIR_SEPARATOR))
   {
-    Glib::ustring result = Util::filename_to_utf8_fallback(Glib::get_home_dir());
-    result.append(path, 1, Glib::ustring::npos);
+    std::string result = Glib::get_home_dir();
+    result.append(path, 1, std::string::npos);
     return result;
   }
 

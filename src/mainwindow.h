@@ -134,7 +134,7 @@ private:
 
   void on_entry_pattern_changed();
   void update_preview();
-  void set_title_filename(const Glib::ustring& filename = Glib::ustring());
+  void set_title_filename(const std::string& filename);
 
   void busy_action_enter();
   void busy_action_leave();

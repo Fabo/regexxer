@@ -145,10 +145,10 @@ MainWindow::MainWindow()
   load_xml();
 
   textview_->set_buffer(FileBuffer::create());
-  set_title_filename();
+  window_->set_title(PACKAGE_NAME);
 
-  entry_folder_->set_text(Util::shorten_pathname(
-      Util::filename_to_utf8_fallback(Glib::get_current_dir())));
+  entry_folder_->set_text(
+      Util::filename_to_utf8_fallback(Util::shorten_pathname(Glib::get_current_dir())));
 
   connect_signals();
 
@@ -325,15 +325,15 @@ void MainWindow::on_select_folder()
   chooser.add_button(Stock::OK,     RESPONSE_OK);
   chooser.set_default_response(RESPONSE_OK);
   chooser.set_modal(true);
-
   chooser.set_local_only(true);
-  chooser.set_current_folder(Glib::filename_from_utf8(
-      Util::expand_pathname(entry_folder_->get_text())));
+
+  chooser.set_current_folder(Util::expand_pathname(
+      Glib::filename_from_utf8(entry_folder_->get_text())));
 
   if (chooser.run() == RESPONSE_OK)
   {
-    const Glib::ustring dirname = Util::filename_to_utf8_fallback(chooser.get_filename());
-    entry_folder_->set_text(Util::shorten_pathname(dirname));
+    const std::string dirname = Util::shorten_pathname(chooser.get_filename());
+    entry_folder_->set_text(Util::filename_to_utf8_fallback(dirname));
   }
 }
 
@@ -350,7 +350,7 @@ void MainWindow::on_find_files()
 
   undo_stack_clear();
 
-  std::string folder = Glib::filename_from_utf8(Util::expand_pathname(entry_folder_->get_text()));
+  std::string folder = Util::expand_pathname(Glib::filename_from_utf8(entry_folder_->get_text()));
 
   if (folder.empty())
     folder = Glib::get_current_dir();
@@ -477,7 +477,7 @@ void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
           connect(sigc::mem_fun(*this, &MainWindow::update_preview)));
     }
 
-    set_title_filename(Util::filename_to_utf8_fallback(fileinfo->fullname));
+    set_title_filename(fileinfo->fullname);
 
     controller_.replace_file.set_enabled(buffer->get_match_count() > 0);
     controller_.save_file.set_enabled(buffer->get_modified());
@@ -492,7 +492,7 @@ void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
     textview_->set_editable(false);
     textview_->set_cursor_visible(false);
 
-    set_title_filename();
+    window_->set_title(PACKAGE_NAME);
 
     controller_.replace_file.set_enabled(false);
     controller_.save_file.set_enabled(false);
@@ -692,18 +692,13 @@ void MainWindow::update_preview()
   }
 }
 
-void MainWindow::set_title_filename(const Glib::ustring& filename)
+void MainWindow::set_title_filename(const std::string& filename)
 {
-  Glib::ustring title;
+  Glib::ustring title = Util::filename_to_utf8_fallback(Glib::path_get_basename(filename));
 
-  if (!filename.empty())
-  {
-    title  = Glib::path_get_basename(filename);
-    title += " (";
-    title += Util::shorten_pathname(Glib::path_get_dirname(filename));
-    title += ") \342\200\223 "; // U+2013 EN DASH
-  }
-
+  title += " (";
+  title += Util::filename_to_utf8_fallback(Util::shorten_pathname(Glib::path_get_dirname(filename)));
+  title += ") \342\200\223 "; // U+2013 EN DASH
   title += PACKAGE_NAME;
 
   window_->set_title(title);
