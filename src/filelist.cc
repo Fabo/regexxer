@@ -500,6 +500,8 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
   }
 }
 
+/* Return value: whether fullname is a subdirectory to be searched recursively.
+ */
 bool FileList::find_check_file(const std::string& basename,
                                const std::string& fullname,
                                FindData& find_data)
@@ -510,11 +512,10 @@ bool FileList::find_check_file(const std::string& basename,
     return false;
 
   if(find_data.recursive && file_test(fullname, FILE_TEST_IS_DIR))
-  {
     return true;
-  }
-  else if(file_test(fullname, FILE_TEST_IS_REGULAR) &&
-          find_data.pattern.match(Util::filename_to_utf8_fallback(basename)) > 0)
+
+  if(file_test(fullname, FILE_TEST_IS_REGULAR) &&
+     find_data.pattern.match(Util::filename_to_utf8_fallback(basename)) > 0)
   {
     const FileInfoPtr fileinfo (new FileInfo(fullname));
 
