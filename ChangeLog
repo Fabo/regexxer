@@ -1,3 +1,8 @@
+2004-06-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/prefdialog.cc (PrefDialog::on_response): Suggest a sync
+	to the GConf client when the dialog is closed.
+
 2004-06-29  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* ui/mainwindow.glade: Remove empty string properties and all

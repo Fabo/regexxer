@@ -136,6 +136,8 @@ void PrefDialog::on_response(int)
   if (entry_fallback_changed_)
     entry_fallback_->activate();
 
+  Gnome::Conf::Client::get_default_client()->suggest_sync();
+
   dialog_->hide();
 }
 
