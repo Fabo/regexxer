@@ -338,6 +338,7 @@ Gtk::Widget* MainWindow::create_right_pane()
 
   textview_ = new TextView();
   scrollwin->add(*manage(textview_));
+  textview_->set_editable(false);
 
   entry_preview_ = new Entry();
   vbox_textview->pack_start(*manage(entry_preview_), PACK_SHRINK);
@@ -454,6 +455,8 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
     const FileBufferPtr buffer = fileinfo->buffer;
 
     textview_->set_buffer(buffer);
+    textview_->set_editable(true);
+
     set_title_filename(Glib::filename_to_utf8(fileinfo->fullname));
 
     conn_match_count_changed_ = buffer->signal_match_count_changed.
@@ -471,6 +474,8 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, BoundState boun
   else
   {
     textview_->set_buffer(FileBuffer::create());
+    textview_->set_editable(false);
+
     set_title_filename();
 
     on_buffer_match_count_changed(0);
