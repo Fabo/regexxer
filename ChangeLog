@@ -1,5 +1,10 @@
 2004-05-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (FileTree::replace_all_matches): Substitute
+	Gtk::TreeIter with Gtk::TreeModel::iterator for consistency.
+
+2004-05-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/undostack.cc (UndoStack::do_undo): Don't create a temporary
 	copy of the pulse slot since libsigc++2 allows calling const slots.
 

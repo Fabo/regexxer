@@ -258,7 +258,7 @@ void FileTree::replace_all_matches(const Glib::ustring& substitution)
     // Adjust the boundary range if the operation has been interrupted.
     if (sum_matches_ > 0)
     {
-      Gtk::TreeIter first = treestore_->get_iter(path_match_first_);
+      Gtk::TreeModel::iterator first = treestore_->get_iter(path_match_first_);
 
       if ((*first)[filetree_columns().matchcount] == 0 && next_match_file(first))
         path_match_first_ = first;
