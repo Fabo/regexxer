@@ -1,5 +1,10 @@
 2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.cc (save_iochannel): Use Gtk::TextBuffer::get_slice()
+	rather than get_text().
+
+2004-06-09  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.cc (substitute_references): Reduce usage of
 	Glib::ustring::raw() in favor of native ustring accessor methods.
 

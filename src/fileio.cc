@@ -64,7 +64,7 @@ void save_iochannel(const Glib::RefPtr<Glib::IOChannel>& output, const Glib::Ref
   for (; start; start = stop)
   {
     stop.forward_chars(BUFSIZE); // inaccurate, but doesn't matter
-    const Glib::ustring chunk = buffer->get_text(start, stop);
+    const Glib::ustring chunk = buffer->get_slice(start, stop);
 
     gsize bytes_written = 0;
     const Glib::IOStatus status = output->write(chunk.data(), chunk.bytes(), bytes_written);
