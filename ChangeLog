@@ -1,5 +1,10 @@
 2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.cc (expand_and_select): Make use of
+	Gtk::TreeView::expand_to_path() if available.
+
+2002-12-15  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/miscutils.{cc,h}: New files.  Move Util::prior() and next()
 	hitherto, and add Util::gtk_version_at_least() to do a runtime
 	version check.

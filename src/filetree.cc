@@ -27,6 +27,8 @@
 
 #include <gtkmm/stock.h>
 
+#include <config.h>
+
 using namespace Regexxer::FileTreePrivate;
 
 
@@ -719,6 +721,9 @@ bool FileTree::prev_match_file(Gtk::TreeModel::iterator& iter,
 
 void FileTree::expand_and_select(const Gtk::TreePath& path)
 {
+#if REGEXXER_HAVE_GTKMM_22
+  expand_to_path(path);
+#else
   std::stack<Gtk::TreePath> parents;
 
   for(Gtk::TreePath parent (path); parent.up(); )
@@ -726,6 +731,7 @@ void FileTree::expand_and_select(const Gtk::TreePath& path)
 
   for(; !parents.empty(); parents.pop())
     expand_row(parents.top(), false);
+#endif
 
   get_selection()->select(path);
 
