@@ -1,5 +1,14 @@
 2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* autogen.sh: In the regex used to extract version numbers, avoid
+	any use of quantifiers other than * for maximum portability.
+
+	* macros/pcre.m4 (PCRE_CHECK_VERSION): Same here, and also be more
+	forgiving about extra characters possibly following the version
+	number.
+
+2004-05-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* macros/misc.m4 (REGEXXER_PKG_PATH_PROG): Replace AC_MSG_ERROR()
 	by AC_MSG_FAILURE(), and add an autoconf-time check to make sure
 	all necessary arguments are specified.
