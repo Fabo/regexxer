@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-18 13:26+0200\n"
+"POT-Creation-Date: 2004-05-19 23:14+0200\n"
 "PO-Revision-Date: 2004-05-05 15:35+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: English <en@translate.freefriends.org>\n"
@@ -123,7 +123,15 @@ msgstr "_About"
 msgid "Save _all"
 msgstr "Save _all"
 
-#: src/mainwindow.cc:292
+#: src/mainwindow.cc:198 ui/mainwindow.glade.h:2
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+
+#: src/mainwindow.cc:309
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -131,11 +139,11 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 
-#: src/mainwindow.cc:306
+#: src/mainwindow.cc:323
 msgid "Select a folder"
 msgstr "Select a folder"
 
-#: src/mainwindow.cc:337
+#: src/mainwindow.cc:354
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -143,15 +151,15 @@ msgstr ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 
-#: src/mainwindow.cc:364
+#: src/mainwindow.cc:381
 msgid "The file search pattern is invalid."
 msgstr "The file search pattern is invalid."
 
-#: src/mainwindow.cc:370
+#: src/mainwindow.cc:387
 msgid "The following errors occurred during search:"
 msgstr "The following errors occurred during search:"
 
-#: src/mainwindow.cc:395
+#: src/mainwindow.cc:412
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -159,7 +167,7 @@ msgstr ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:397
+#: src/mainwindow.cc:414
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -167,7 +175,7 @@ msgstr ""
 "Error in regular expression:\n"
 "%1"
 
-#: src/mainwindow.cc:616
+#: src/mainwindow.cc:633
 msgid "The following errors occurred during save:"
 msgstr "The following errors occurred during save:"
 
@@ -183,7 +191,7 @@ msgstr ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
 
-#: src/prefdialog.cc:266
+#: src/prefdialog.cc:260
 msgid "\"%1\" is not a valid encoding."
 msgstr "“%1” is not a valid encoding."
 
@@ -209,32 +217,28 @@ msgid "About regexxer"
 msgstr "About regexxer"
 
 #: ui/aboutdialog.glade.h:2
-msgid "Debian package by"
-msgstr "Debian package by"
-
-#: ui/aboutdialog.glade.h:3
 msgid "The application icon of regexxer"
 msgstr "The application icon of regexxer"
 
-#: ui/aboutdialog.glade.h:4
+#: ui/aboutdialog.glade.h:3
 msgid "regexxer icon"
 msgstr "regexxer icon"
 
+#: ui/aboutdialog.glade.h:4
+msgid "translated by"
+msgstr "translated by"
+
 #: ui/aboutdialog.glade.h:5
+msgid "translator-credits"
+msgstr "Daniel Elstner <daniel.elstner@gmx.net>"
+
+#: ui/aboutdialog.glade.h:6
 msgid "written by"
 msgstr "written by"
 
 #: ui/mainwindow.glade.h:1 ui/prefdialog.glade.h:1
 msgid "*"
 msgstr "*"
-
-#: ui/mainwindow.glade.h:2
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
-msgstr ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
 
 #: ui/mainwindow.glade.h:3
 msgid "A regular expression in Perl syntax"

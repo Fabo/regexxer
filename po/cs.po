@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-19 04:43+0200\n"
+"POT-Creation-Date: 2004-05-19 23:14+0200\n"
 "PO-Revision-Date: 2004-05-19 11:22+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -122,7 +122,15 @@ msgstr "O _aplikaci"
 msgid "Save _all"
 msgstr "Uložit _vše"
 
-#: src/mainwindow.cc:292
+#: src/mainwindow.cc:198 ui/mainwindow.glade.h:2
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Vzor názvů souborů jako v shellu. Třídy znaků [ab] a výrazy se složenými "
+"závorkami ve stylu csh {a,b} jsou podporovány."
+
+#: src/mainwindow.cc:309
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -130,11 +138,11 @@ msgstr ""
 "Některé soubory dosud nebyly uloženy.\n"
 "Přesto skončit?"
 
-#: src/mainwindow.cc:306
+#: src/mainwindow.cc:323
 msgid "Select a folder"
 msgstr "Zvolte adresář"
 
-#: src/mainwindow.cc:337
+#: src/mainwindow.cc:354
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -142,15 +150,15 @@ msgstr ""
 "Některé soubory dosud nebyly uloženy.\n"
 "Přesto pokračovat?"
 
-#: src/mainwindow.cc:364
+#: src/mainwindow.cc:381
 msgid "The file search pattern is invalid."
 msgstr "Vzor pro hledání souborů je neplatný."
 
-#: src/mainwindow.cc:370
+#: src/mainwindow.cc:387
 msgid "The following errors occurred during search:"
 msgstr "Při hledání došlo k následujícím chybám:"
 
-#: src/mainwindow.cc:395
+#: src/mainwindow.cc:412
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -158,7 +166,7 @@ msgstr ""
 "Chyba v regulárním výrazu na \"%1\" (index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:397
+#: src/mainwindow.cc:414
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -166,7 +174,7 @@ msgstr ""
 "Chyba v regulárním výrazu:\n"
 "%1"
 
-#: src/mainwindow.cc:616
+#: src/mainwindow.cc:633
 msgid "The following errors occurred during save:"
 msgstr "Při ukládání došlo k následujícím chybám:"
 
@@ -207,32 +215,28 @@ msgid "About regexxer"
 msgstr "O regexxeru"
 
 #: ui/aboutdialog.glade.h:2
-msgid "Debian package by"
-msgstr "Balíček pro Debian od"
-
-#: ui/aboutdialog.glade.h:3
 msgid "The application icon of regexxer"
 msgstr "Ikona aplikace regexxer"
 
-#: ui/aboutdialog.glade.h:4
+#: ui/aboutdialog.glade.h:3
 msgid "regexxer icon"
 msgstr "ikona regexxeru"
 
+#: ui/aboutdialog.glade.h:4
+msgid "translated by"
+msgstr ""
+
 #: ui/aboutdialog.glade.h:5
+msgid "translator-credits"
+msgstr ""
+
+#: ui/aboutdialog.glade.h:6
 msgid "written by"
 msgstr "napsali"
 
 #: ui/mainwindow.glade.h:1 ui/prefdialog.glade.h:1
 msgid "*"
 msgstr "*"
-
-#: ui/mainwindow.glade.h:2
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
-msgstr ""
-"Vzor názvů souborů jako v shellu. Třídy znaků [ab] a výrazy se složenými "
-"závorkami ve stylu csh {a,b} jsou podporovány."
 
 #: ui/mainwindow.glade.h:3
 msgid "A regular expression in Perl syntax"
@@ -472,6 +476,9 @@ msgstr "_Písmo textového pohledu:"
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr "Než se regexxer vzdá, zkouší soubor načíst v následujících kódováních:"
+
+#~ msgid "Debian package by"
+#~ msgstr "Balíček pro Debian od"
 
 #~ msgid "Color Selection"
 #~ msgstr "Výběr barev"

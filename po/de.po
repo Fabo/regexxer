@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-18 13:26+0200\n"
+"POT-Creation-Date: 2004-05-19 23:14+0200\n"
 "PO-Revision-Date: 2004-05-05 11:34+0200\n"
 "Last-Translator: Daniel Elstner <daniel.elstner@gmx.net>\n"
 "Language-Team: German <de@li.org>\n"
@@ -126,7 +126,16 @@ msgstr "_Info"
 msgid "Save _all"
 msgstr "_Alle speichern"
 
-#: src/mainwindow.cc:292
+#: src/mainwindow.cc:198 ui/mainwindow.glade.h:2
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Ein Dateinamen-Suchmuster wie es in der Kommandozeile benutzt wird. "
+"Zeichenklassen [ab] und Klammerausdrücke im csh-Stil {a,b} werden "
+"unterstützt."
+
+#: src/mainwindow.cc:309
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -134,11 +143,11 @@ msgstr ""
 "Einige Dateien wurden noch nicht gespeichert.\n"
 "Trotzdem beenden?"
 
-#: src/mainwindow.cc:306
+#: src/mainwindow.cc:323
 msgid "Select a folder"
 msgstr "Verzeichnisauswahl"
 
-#: src/mainwindow.cc:337
+#: src/mainwindow.cc:354
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -146,15 +155,15 @@ msgstr ""
 "Einige Dateien wurden noch nicht gespeichert.\n"
 "Trotzdem fortsetzen?"
 
-#: src/mainwindow.cc:364
+#: src/mainwindow.cc:381
 msgid "The file search pattern is invalid."
 msgstr "Das Dateinamen-Suchmuster ist ungültig."
 
-#: src/mainwindow.cc:370
+#: src/mainwindow.cc:387
 msgid "The following errors occurred during search:"
 msgstr "Die folgenden Fehler sind beim Suchen aufgetreten:"
 
-#: src/mainwindow.cc:395
+#: src/mainwindow.cc:412
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -162,7 +171,7 @@ msgstr ""
 "Fehler in regulärem Ausdruck bei „%1” (Index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:397
+#: src/mainwindow.cc:414
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -170,7 +179,7 @@ msgstr ""
 "Fehler in regulärem Ausdruck:\n"
 "%1"
 
-#: src/mainwindow.cc:616
+#: src/mainwindow.cc:633
 msgid "The following errors occurred during save:"
 msgstr "Die folgenden Fehler sind beim Speichern aufgetreten:"
 
@@ -188,7 +197,7 @@ msgstr ""
 "Das Rekursions- und Rückreferenz-Limit der Reguläre-Ausdrücke-"
 "Implementierung wurde erreicht."
 
-#: src/prefdialog.cc:266
+#: src/prefdialog.cc:260
 msgid "\"%1\" is not a valid encoding."
 msgstr "„%1” ist kein gültiger Zeichensatz."
 
@@ -214,33 +223,28 @@ msgid "About regexxer"
 msgstr "Info zu regexxer"
 
 #: ui/aboutdialog.glade.h:2
-msgid "Debian package by"
-msgstr "Debian-Paket von"
-
-#: ui/aboutdialog.glade.h:3
 msgid "The application icon of regexxer"
 msgstr "Das Anwendungsicon von regexxer"
 
-#: ui/aboutdialog.glade.h:4
+#: ui/aboutdialog.glade.h:3
 msgid "regexxer icon"
 msgstr "regexxer-Icon"
 
+#: ui/aboutdialog.glade.h:4
+msgid "translated by"
+msgstr "übersetzt von"
+
 #: ui/aboutdialog.glade.h:5
+msgid "translator-credits"
+msgstr "Daniel Elstner <daniel.elstner@gmx.net>"
+
+#: ui/aboutdialog.glade.h:6
 msgid "written by"
 msgstr "geschrieben von"
 
 #: ui/mainwindow.glade.h:1 ui/prefdialog.glade.h:1
 msgid "*"
 msgstr "*"
-
-#: ui/mainwindow.glade.h:2
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
-msgstr ""
-"Ein Dateinamen-Suchmuster wie es in der Kommandozeile benutzt wird. "
-"Zeichenklassen [ab] und Klammerausdrücke im csh-Stil {a,b} werden "
-"unterstützt."
 
 #: ui/mainwindow.glade.h:3
 msgid "A regular expression in Perl syntax"

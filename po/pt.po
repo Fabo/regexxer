@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-18 13:26+0200\n"
+"POT-Creation-Date: 2004-05-19 23:14+0200\n"
 "PO-Revision-Date: 2004-05-17 23:30+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -124,7 +124,15 @@ msgstr "_Sobre"
 msgid "Save _all"
 msgstr "Gravar _todos"
 
-#: src/mainwindow.cc:292
+#: src/mainwindow.cc:198 ui/mainwindow.glade.h:2
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Um padrão de nome de ficheiro tal como o utilizado pela consola. São "
+"suportadas classes de caracteres [ab] e expressões estilo csh como {a,b}."
+
+#: src/mainwindow.cc:309
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -132,11 +140,11 @@ msgstr ""
 "Alguns ficheiros ainda não foram gravados.\n"
 "Ainda assim terminar?"
 
-#: src/mainwindow.cc:306
+#: src/mainwindow.cc:323
 msgid "Select a folder"
 msgstr "Seleccione uma pasta"
 
-#: src/mainwindow.cc:337
+#: src/mainwindow.cc:354
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -144,15 +152,15 @@ msgstr ""
 "Alguns ficheiros ainda não foram gravados.\n"
 "Ainda assim prosseguir?"
 
-#: src/mainwindow.cc:364
+#: src/mainwindow.cc:381
 msgid "The file search pattern is invalid."
 msgstr "O padrão de procura de ficheiros é inválido."
 
-#: src/mainwindow.cc:370
+#: src/mainwindow.cc:387
 msgid "The following errors occurred during search:"
 msgstr "Ocorreram os seguintes erros durante a procura:"
 
-#: src/mainwindow.cc:395
+#: src/mainwindow.cc:412
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -160,7 +168,7 @@ msgstr ""
 "Erro na expressão regular em \"%1\" (índice %2):\n"
 "%3"
 
-#: src/mainwindow.cc:397
+#: src/mainwindow.cc:414
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -168,7 +176,7 @@ msgstr ""
 "Erro na expressão regular:\n"
 "%1"
 
-#: src/mainwindow.cc:616
+#: src/mainwindow.cc:633
 msgid "The following errors occurred during save:"
 msgstr "Ocorreram os seguintes erros durante a gravação:"
 
@@ -186,7 +194,7 @@ msgstr ""
 "Atingido o limite de recursividade e retrocesso do motor de expressões "
 "regulares."
 
-#: src/prefdialog.cc:266
+#: src/prefdialog.cc:260
 msgid "\"%1\" is not a valid encoding."
 msgstr "\"%1\" não é uma codificação válida."
 
@@ -212,32 +220,28 @@ msgid "About regexxer"
 msgstr "Sobre o regexxer"
 
 #: ui/aboutdialog.glade.h:2
-msgid "Debian package by"
-msgstr "Pacote Debian por"
-
-#: ui/aboutdialog.glade.h:3
 msgid "The application icon of regexxer"
 msgstr "O ícone da aplicação regexxer"
 
-#: ui/aboutdialog.glade.h:4
+#: ui/aboutdialog.glade.h:3
 msgid "regexxer icon"
 msgstr "ícone do regexxer"
 
+#: ui/aboutdialog.glade.h:4
+msgid "translated by"
+msgstr ""
+
 #: ui/aboutdialog.glade.h:5
+msgid "translator-credits"
+msgstr ""
+
+#: ui/aboutdialog.glade.h:6
 msgid "written by"
 msgstr "escrito por"
 
 #: ui/mainwindow.glade.h:1 ui/prefdialog.glade.h:1
 msgid "*"
 msgstr "*"
-
-#: ui/mainwindow.glade.h:2
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
-msgstr ""
-"Um padrão de nome de ficheiro tal como o utilizado pela consola. São "
-"suportadas classes de caracteres [ab] e expressões estilo csh como {a,b}."
 
 #: ui/mainwindow.glade.h:3
 msgid "A regular expression in Perl syntax"
@@ -480,6 +484,9 @@ msgid ""
 msgstr ""
 "regexxer tentará ler um ficheiro nas seguintes codificações, antes de "
 "desistir:"
+
+#~ msgid "Debian package by"
+#~ msgstr "Pacote Debian por"
 
 #~ msgid "Color Selection"
 #~ msgstr "Selecção de Cor"
