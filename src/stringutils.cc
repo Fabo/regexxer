@@ -323,7 +323,11 @@ bool Util::validate_encoding(const std::string& encoding)
   // GLib just ignores some characters that aren't used in encoding names,
   // so we have to parse the string for invalid characters ourselves.
 
-  for (std::string::const_iterator p = encoding.begin(); p != encoding.end(); ++p)
+  if (encoding.empty() || !Glib::Ascii::isalnum(*encoding.begin())
+                       || !Glib::Ascii::isalnum(*encoding.rbegin()))
+    return false;
+
+  for (std::string::const_iterator p = encoding.begin() + 1; p != encoding.end(); ++p)
   {
     if (!Glib::Ascii::isalnum(*p) && is_significant_encoding_char(*p))
       return false;

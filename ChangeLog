@@ -1,5 +1,11 @@
 2004-06-30  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.cc (validate_encoding): Be slightly more picky
+	and demand the first and last characters of the encoding string to
+	be alpha-numeric.
+
+2004-06-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.cc (validate_encoding): Better don't try to call
 	Glib::convert() with identical input and output encodings.  I heard
 	the iconv on Solaris doesn't like that idea at all.
