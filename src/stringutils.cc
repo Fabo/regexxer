@@ -29,6 +29,10 @@
 
 #include <config.h>
 
+#if REGEXXER_HAVE_STD_LOCALE
+#include <locale>
+#endif
+
 
 namespace
 {
