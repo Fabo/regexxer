@@ -21,23 +21,30 @@
 bin_PROGRAMS = regexxer
 
 regexxer_SOURCES =	\
-filebuffer.cc		\
-filebuffer.h		\
-fileio.cc		\
-fileio.h		\
-filelist.cc		\
-filelist.h		\
-main.cc			\
-mainwindow.cc		\
-mainwindow.h		\
-pcreshell.cc		\
-pcreshell.h		\
-sharedptr.cc		\
-sharedptr.h		\
-stringutils.cc		\
-stringutils.h
+	filebuffer.cc	\
+	filebuffer.h	\
+	fileio.cc	\
+	fileio.h	\
+	filelist.cc	\
+	filelist.h	\
+	main.cc		\
+	mainwindow.cc	\
+	mainwindow.h	\
+	pcreshell.cc	\
+	pcreshell.h	\
+	sharedptr.cc	\
+	sharedptr.h	\
+	statusline.cc	\
+	statusline.h	\
+	stringutils.cc	\
+	stringutils.h
 
-DEFS     = @DEFS@ -DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DREGEXXER_DATADIR="\"$(datadir)\""
+DEFS = @DEFS@ \
+-DG_DISABLE_DEPRECATED \
+-DGDK_DISABLE_DEPRECATED \
+-DGDK_PIXBUF_DISABLE_DEPRECATED \
+-DGTK_DISABLE_DEPRECATED \
+-DREGEXXER_DATADIR="\"$(datadir)\""
 
 INCLUDES = -I$(top_builddir) -I$(top_srcdir) $(PCRE_CFLAGS) $(GTKMM_CFLAGS)
 LIBS     = $(PCRE_LIBS) $(GTKMM_LIBS)

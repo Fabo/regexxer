@@ -1,5 +1,16 @@
 2002-10-24  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/statusline.{cc,h}: New files, implementing the status box
+	at the bottom of the main window.
+
+	* src/mainwindow.{cc,h} src/filelist.{cc,h}: Implement file and
+	match counter using the new StatusLine object.
+
+	* src/filelist.{cc,h}: Speed up sorting by defining a custom sort
+	function that makes use of collate keys.
+
+2002-10-24  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* macros/cxx.m4: New file, implementing custom autoconf macros
 	related to checking the C++ compiler/environment.
 	(REGEXXER_CXX_HAS_STD_LOCALE): New m4 macro.

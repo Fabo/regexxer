@@ -21,6 +21,7 @@
 #include "mainwindow.h"
 #include "filelist.h"
 #include "pcreshell.h"
+#include "statusline.h"
 #include "stringutils.h"
 
 #include <iostream>
@@ -117,7 +118,8 @@ MainWindow::MainWindow()
   button_next_file_     (0),
   button_replace_       (0),
   button_replace_file_  (0),
-  button_replace_all_   (0)
+  button_replace_all_   (0),
+  statusline_           (0)
 {
   using namespace Gtk;
 
@@ -150,12 +152,10 @@ MainWindow::MainWindow()
     vbox_main->pack_start(*manage(vbox_interior), PACK_EXPAND_WIDGET);
     vbox_interior->set_border_width(2);
 
-    Box *const hbox_bottom = new HBox(false, 1);
-    vbox_main->pack_start(*manage(hbox_bottom), PACK_SHRINK);
-    hbox_bottom->pack_start(*manage(new ProgressBar()), PACK_SHRINK);
-    hbox_bottom->pack_start(*manage(new Statusbar()), PACK_EXPAND_WIDGET);
+    statusline_ = new StatusLine();
+    vbox_main->pack_start(*manage(statusline_), PACK_SHRINK);
 
-    vbox_interior->pack_start(*manage(paned.release()), PACK_EXPAND_WIDGET);
+    vbox_interior->pack_start(*manage(paned.release()),    PACK_EXPAND_WIDGET);
     vbox_interior->pack_start(*manage(create_buttonbox()), PACK_SHRINK);
   }
 
@@ -178,6 +178,9 @@ MainWindow::MainWindow()
 
   filelist_->signal_modified_count_changed.connect(
       SigC::slot(*this, &MainWindow::on_filelist_modified_count_changed));
+
+  filelist_->signal_pulse.connect(
+      SigC::slot(*this, &MainWindow::on_filelist_pulse));
 }
 
 MainWindow::~MainWindow()
@@ -418,6 +421,9 @@ void MainWindow::on_find_files()
       entry_pattern_->get_text(),
       button_recursive_->get_active(),
       button_hidden_->get_active());
+
+  statusline_->set_file_count(filelist_->get_file_count());
+  statusline_->stop_pulse();
 }
 
 void MainWindow::on_exec_search()
@@ -527,12 +533,21 @@ void MainWindow::on_filelist_bound_state_changed()
 
 void MainWindow::on_filelist_match_count_changed()
 {
-  button_replace_all_->set_sensitive(filelist_->get_match_count() > 0);
+  const long match_count = filelist_->get_match_count();
+
+  statusline_->set_match_count(match_count);
+  button_replace_all_->set_sensitive(match_count > 0);
 }
 
 void MainWindow::on_filelist_modified_count_changed()
 {
   toolbutton_save_all_->set_sensitive(filelist_->get_modified_count() > 0);
+}
+
+void MainWindow::on_filelist_pulse()
+{
+  statusline_->set_file_count(filelist_->get_file_count());
+  statusline_->pulse();
 }
 
 void MainWindow::on_buffer_match_count_changed(int match_count)

@@ -42,8 +42,9 @@ namespace Regexxer
 {
 
 class FileBuffer;
-class FileList;
 struct FileInfo;
+class FileList;
+class StatusLine;
 
 class MainWindow : public Gtk::Window
 {
@@ -79,6 +80,8 @@ private:
   Gtk::Button*      button_replace_file_;
   Gtk::Button*      button_replace_all_;
 
+  StatusLine*       statusline_;
+
   std::list<SigC::Connection> buffer_connections_;
 
   Gtk::Widget* create_toolbar();
@@ -95,6 +98,7 @@ private:
   void on_filelist_match_count_changed();
   void on_filelist_modified_count_changed();
   void on_filelist_bound_state_changed();
+  void on_filelist_pulse();
 
   void on_buffer_match_count_changed(int match_count);
   void on_buffer_modified_changed();
@@ -112,5 +116,5 @@ private:
 
 } // namespace Regexxer
 
-#endif
+#endif /* REGEXXER_MAINWINDOW_H_INCLUDED */
 

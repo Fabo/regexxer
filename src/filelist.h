@@ -45,6 +45,7 @@ public:
                   const Glib::ustring& pattern,
                   bool recursive, bool hidden);
   void stop_find_files();
+  int  get_file_count() const;
 
   void save_current_file();
   void save_all_files();
@@ -64,6 +65,7 @@ public:
   SigC::Signal0<void>             signal_bound_state_changed;
   SigC::Signal0<void>             signal_match_count_changed;
   SigC::Signal0<void>             signal_modified_count_changed;
+  SigC::Signal0<void>             signal_pulse;
 
 protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
@@ -74,16 +76,22 @@ private:
   Glib::RefPtr<Gtk::ListStore>  liststore_;
   Gdk::Color                    color_modified_;
   Gdk::Color                    color_load_failed_;
+
   bool                          find_running_;
   bool                          find_stop_;
-  long                          sum_matches_;
+  int                           file_count_;
   int                           modified_count_;
+  long                          sum_matches_;
+
   SigC::Connection              conn_match_count_;
   SigC::Connection              conn_modified_changed_;
   Gtk::TreePath                 path_match_first_;
   Gtk::TreePath                 path_match_last_;
 
   void cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
+
+  static int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs,
+                                  const Gtk::TreeModel::iterator& rhs);
 
   void find_recursively(const std::string& dirname, FindData& find_data);
   bool find_check_file(const std::string& basename, const std::string& fullname, FindData& find_data);

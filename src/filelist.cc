@@ -27,15 +27,16 @@
 namespace
 {
 
-enum { FIND_UPDATE_INTERVAL = 16 };
+enum { FIND_UPDATE_INTERVAL = 8 };
 
 struct FileListColumns : public Gtk::TreeModel::ColumnRecord
 {
   Gtk::TreeModelColumn<Glib::ustring>         filename;
+  Gtk::TreeModelColumn<std::string>           collatekey;
   Gtk::TreeModelColumn<int>                   matchcount;
   Gtk::TreeModelColumn<Regexxer::FileInfoPtr> fileinfo;
 
-  FileListColumns() { add(filename); add(matchcount); add(fileinfo); }
+  FileListColumns() { add(filename); add(collatekey); add(matchcount); add(fileinfo); }
 };
 
 const FileListColumns& filelist_columns() G_GNUC_CONST;
@@ -90,8 +91,9 @@ FileList::FileList()
   color_modified_ ("red"),
   find_running_   (false),
   find_stop_      (false),
-  sum_matches_    (0),
-  modified_count_ (0)
+  file_count_     (0),
+  modified_count_ (0),
+  sum_matches_    (0)
 {
   set_model(liststore_);
 
@@ -111,7 +113,9 @@ FileList::FileList()
   count_column.set_alignment(1.0);
   count_renderer.property_xalign() = 1.0;
 
-  liststore_->set_sort_column_id(model_columns.filename, Gtk::SORT_ASCENDING);
+  liststore_->set_sort_func(model_columns.collatekey.index(), &FileList::collatekey_sort_func);
+  liststore_->set_sort_column_id(model_columns.collatekey, Gtk::SORT_ASCENDING);
+
   set_search_column(0);
 
   get_selection()->signal_changed().connect(SigC::slot(*this, &FileList::on_selection_changed));
@@ -141,8 +145,9 @@ void FileList::find_files(const Glib::ustring& dirname,
   get_selection()->unselect_all(); // workaround for GTK+ <= 2.0.6 (#94868)
   liststore_->clear();
 
-  sum_matches_    = 0;
+  file_count_     = 0;
   modified_count_ = 0;
+  sum_matches_    = 0;
 
   signal_bound_state_changed(); // emit
   signal_match_count_changed(); // emit
@@ -177,6 +182,11 @@ void FileList::find_files(const Glib::ustring& dirname,
 void FileList::stop_find_files()
 {
   find_stop_ = true;
+}
+
+int FileList::get_file_count() const
+{
+  return file_count_;
 }
 
 void FileList::save_current_file()
@@ -428,6 +438,19 @@ void FileList::cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::ite
   renderer->property_foreground_gdk().reset_value();
 }
 
+/** This custom sort function speeds up sorting of huge lists.
+ */
+int FileList::collatekey_sort_func(const Gtk::TreeModel::iterator& lhs,
+                                   const Gtk::TreeModel::iterator& rhs)
+{
+  const FileListColumns& columns = filelist_columns();
+
+  const std::string lhs_key ((*lhs)[columns.collatekey]);
+  const std::string rhs_key ((*rhs)[columns.collatekey]);
+
+  return lhs_key.compare(rhs_key);
+}
+
 void FileList::find_recursively(const std::string& dirname, FileList::FindData& find_data)
 {
   using namespace Glib;
@@ -438,6 +461,8 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
   {
     if((++find_data.iteration % FIND_UPDATE_INTERVAL) == 0)
     {
+      signal_pulse(); // emit
+
       const RefPtr<MainContext> main_context = MainContext::get_default();
       while(!find_stop_ && main_context->iteration(false)) {}
 
@@ -501,10 +526,13 @@ bool FileList::find_check_file(const std::string& basename,
         std::string(fullname, find_data.chop_off, std::string::npos)));
 
     const FileListColumns& columns = filelist_columns();
-    Gtk::TreeModel::Row row (*liststore_->append());
+    Gtk::TreeModel::Row row (*liststore_->prepend());
 
-    row[columns.filename] = chopped_filename;
-    row[columns.fileinfo] = fileinfo;
+    row[columns.filename]   = chopped_filename;
+    row[columns.collatekey] = chopped_filename.collate_key();
+    row[columns.fileinfo]   = fileinfo;
+
+    ++file_count_;
   }
 
   return false;
