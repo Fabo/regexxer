@@ -1,3 +1,8 @@
+2004-06-12  Takeshi AIHANA <aihana@gnome.gr.jp>
+
+	*LINGUAS: Added ja.
+	* ja.po: Added Japanese translation.
+
 2004-06-10  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* pt_BR.po ("translator-credits"): Replace literal translation
