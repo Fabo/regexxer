@@ -1,5 +1,11 @@
 2002-11-10  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/stringutils.cc (transform_pathname): Use byte-wise comparison
+	because filenames should match exactly.  The Glib::ustring collation
+	methods depend on the user's locale and might even ignore case.
+
+2002-11-10  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (on_preferences): Make this strongly exception
 	safe, just to demonstrate how to use std::auto_ptr<> properly :)
 

@@ -20,8 +20,9 @@
 
 #include "stringutils.h"
 
-#include <glib/gmessages.h>
+#include <glib.h>
 #include <glibmm.h>
+#include <cstring>
 #include <algorithm>
 #include <sstream>
 #include <utility>
@@ -614,14 +615,13 @@ Glib::ustring Util::transform_pathname(const Glib::ustring& path, bool shorten)
   using Glib::ustring;
 
   static const ustring homedir (Util::filename_to_utf8_fallback(Glib::get_home_dir()));
-  static const ustring::size_type homedir_length = homedir.length();
 
   if(shorten)
   {
-    if(path.length() >= homedir_length && path.compare(0, homedir_length, homedir) == 0)
+    if(std::strncmp(path.c_str(), homedir.c_str(), homedir.bytes()) == 0)
     {
       ustring result ("~");
-      result.append(path, homedir_length, ustring::npos);
+      result.append(ustring::const_iterator(path.begin().base() + homedir.bytes()), path.end());
       return result;
     }
   }
