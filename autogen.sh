@@ -88,7 +88,7 @@ cd "$origdir"
 if test -z "$AUTOGEN_SUBDIR_MODE"
 then
   echo "$srcdir/configure $*"
-  "$srcdir/configure" "$@" || exit 1
+  "$srcdir/configure" ${1+"$@"} || exit 1
 
   echo
   echo "Now type 'make' to compile $PROJECT."
