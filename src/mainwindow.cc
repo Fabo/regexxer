@@ -774,7 +774,7 @@ void MainWindow::on_about()
   }
   else
   {
-    std::auto_ptr<Gtk::Dialog> dialog (AboutDialog::create(*window_));
+    std::auto_ptr<Gtk::Dialog> dialog = AboutDialog::create(*window_);
 
     dialog->signal_hide().connect(sigc::mem_fun(*this, &MainWindow::on_about_dialog_hide));
     dialog->show();

@@ -1,3 +1,14 @@
+2004-05-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/aboutdialog.cc (package_title): New string constant which
+	defines the package title string plus surrounding markup.
+	(AboutDialog::create): Use the separated package_title constant.
+
+	* src/aboutdialog.{cc,h} (AboutDialog::create): Change the return
+	type to std::auto_ptr<Gtk::Dialog> because copying-destroys-source
+	is just what we want.   Calling release() to achieve exactly that
+	was a silly idea to begin with.
+
 2004-05-19  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* ui/aboutdialog.glade (label_debian_*): Remove.  The Debian

@@ -21,6 +21,8 @@
 #ifndef REGEXXER_ABOUTDIALOG_H_INCLUDED
 #define REGEXXER_ABOUTDIALOG_H_INCLUDED
 
+#include <memory>
+
 namespace Gtk
 {
 class Dialog;
@@ -31,7 +33,10 @@ class Window;
 namespace Regexxer
 {
 
-namespace AboutDialog { Gtk::Dialog* create(Gtk::Window& parent); }
+namespace AboutDialog
+{
+  std::auto_ptr<Gtk::Dialog> create(Gtk::Window& parent);
+}
 
 } // namespace Regexxer
 
