@@ -1,3 +1,7 @@
+2004-06-03  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filetree.cc (FileTree::calculate_file_index): Simplify.
+
 2004-06-02  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filebuffer.cc (FileBuffer::create_with_error_message):

@@ -960,18 +960,11 @@ int FileTree::calculate_file_index(const Gtk::TreeModel::iterator& pos)
   Gtk::TreeModel::iterator iter = pos->parent();
 
   if (iter) // calculate the parent's index first if there is one
-  {
     index = calculate_file_index(iter); // recurse
-    iter = iter->children().begin();
-  }
-  else // toplevel reached
-  {
-    iter = treestore_->children().begin();
-  }
 
   const FileTreeColumns& columns = FileTreeColumns::instance();
 
-  for (; iter != pos; ++iter)
+  for (iter = iter->children().begin(); iter != pos; ++iter)
   {
     const FileInfoBasePtr base = (*iter)[columns.fileinfo];
     g_return_val_if_fail(base, index);
