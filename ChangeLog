@@ -1,5 +1,10 @@
 2002-12-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/fileio.cc (load_iochannel): Use std::memchr() rather than
+	the silly Util::contains_null() utility function.
+
+2002-12-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac: Put -I flags into CPPFLAGS instead of CXXFLAGS.
 	* macros/pcre.m4 (PCRE_CHECK_UTF8): Likewise for CFLAGS.
 

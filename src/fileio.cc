@@ -24,6 +24,7 @@
 
 #include <glib.h>
 #include <glibmm.h>
+#include <cstring>
 
 
 namespace
@@ -44,7 +45,7 @@ Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& inp
 
   while(input->read(inbuf.get(), BUFSIZE, bytes_read) == Glib::IO_STATUS_NORMAL)
   {
-    if(Util::contains_null(inbuf.get(), inbuf.get() + bytes_read))
+    if(std::memchr(inbuf.get(), '\0', bytes_read))
       return Glib::RefPtr<FileBuffer>();
 
     text_end = text_buffer->insert(text_end, inbuf.get(), inbuf.get() + bytes_read);
