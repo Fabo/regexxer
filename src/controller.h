@@ -57,7 +57,11 @@ private:
   SigC::Signal1<void,bool>  signal_set_sensitive_;
   bool                      enabled_;
   bool                      group_enabled_;
+
+  ControlItem(const ControlItem&);
+  ControlItem& operator=(const ControlItem&);
 };
+
 
 class ControlGroup
 {
