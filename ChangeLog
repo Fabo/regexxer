@@ -1,5 +1,10 @@
 2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (error_pixbuf_): Get rid of this silly cache,
+	since it became useless a while ago.
+
+2003-01-01  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/aboutdialog.cc (SelectableLabel): Add accessibility hints.
 	(ContributorBox): Likewise, and also improve the widget arrangement
 	if the dialog gets resized.

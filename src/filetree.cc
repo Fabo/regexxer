@@ -112,10 +112,6 @@ void FileTree::find_files(const std::string& dirname, Pcre::Pattern& pattern,
   get_selection()->unselect_all(); // workaround for GTK+ <= 2.0.6 (#94868)
   treestore_->clear();
 
-  // Don't keep the pixbuf around if we don't need it.
-  // It's recreated on demand if necessary.
-  error_pixbuf_.clear();
-
   toplevel_.file_count     = 0;
   toplevel_.modified_count = 0;
   sum_matches_ = 0;
@@ -289,8 +285,6 @@ void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
   pixbuf_load_failed_ = render_icon(Gtk::Stock::MISSING_IMAGE, Gtk::ICON_SIZE_MENU, detail);
 
   color_load_failed_ = get_style()->get_text(Gtk::STATE_INSENSITIVE);
-
-  error_pixbuf_.clear();
 
   Gtk::TreeView::on_style_changed(previous_style);
 }
@@ -1040,7 +1034,8 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
   }
   catch(const Glib::Error& error)
   {
-    fileinfo->buffer = create_error_message_buffer(error.what());
+    fileinfo->buffer = FileBuffer::create_with_error_message(
+        render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG), error.what());
   }
 
   if(!fileinfo->buffer)
@@ -1051,7 +1046,8 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
     message += Util::filename_to_utf8_fallback(Glib::path_get_basename(fileinfo->fullname));
     message += "\302\253 seems to be a binary file.";
 
-    fileinfo->buffer = create_error_message_buffer(message);
+    fileinfo->buffer = FileBuffer::create_with_error_message(
+        render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG), message);
   }
 
   if(old_load_failed != fileinfo->load_failed)
@@ -1060,14 +1056,6 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
     // changed, which means we have to change icon and color of the row.
     treestore_->row_changed(Gtk::TreePath(iter), iter);
   }
-}
-
-Glib::RefPtr<FileBuffer> FileTree::create_error_message_buffer(const Glib::ustring& message)
-{
-  if(!error_pixbuf_)
-    error_pixbuf_ = render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG);
-
-  return FileBuffer::create_with_error_message(error_pixbuf_, message);
 }
 
 } // namespace Regexxer

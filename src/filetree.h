@@ -115,7 +115,6 @@ private:
   Gtk::TreePath                 path_match_last_;
 
   std::string                   fallback_encoding_;
-  Glib::RefPtr<Gdk::Pixbuf>     error_pixbuf_;
 
   void icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
   void text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
@@ -153,7 +152,6 @@ private:
   void propagate_modified_change(const Gtk::TreeModel::iterator& pos, bool modified);
 
   void load_file_with_fallback(const Gtk::TreeModel::iterator& iter, const FileInfoPtr& fileinfo);
-  Glib::RefPtr<FileBuffer> create_error_message_buffer(const Glib::ustring& message);
 
   // Work-around for silly, stupid, and annoying gcc 2.95.x.
   friend class FileTree::ScopedBlockSorting;
