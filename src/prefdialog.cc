@@ -53,7 +53,7 @@ int get_toolbar_style_index(const Glib::ustring& value)
       return i;
   }
 
-  g_return_val_if_reached(0);
+  g_return_val_if_reached(-1);
 }
 
 } // anonymous namespace

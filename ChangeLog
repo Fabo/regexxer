@@ -1,5 +1,10 @@
 2004-05-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/prefdialog.cc (get_toolbar_style_index): Return -1 rather
+	than 0 on failure.
+
+2004-05-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* ui/prefdialog.glade (button_textview_font): Replace custom font
 	selection button with the new GtkFontButton.
 	(button_match_color): Replace custom color selection button with
