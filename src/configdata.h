@@ -49,12 +49,6 @@ struct ConfigData
   void save();
 
 private:
-  void set_menutool_mode_from_string(const Glib::ustring& value);
-  Glib::ustring get_string_from_menutool_mode() const;
-
-  void set_toolbar_style_from_string(const Glib::ustring& value);
-  Glib::ustring get_string_from_toolbar_style() const;
-
   void set_fallback_encoding_from_string(const Glib::ustring& value);
   Glib::ustring get_string_from_fallback_encoding() const;
 };

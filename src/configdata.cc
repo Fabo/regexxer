@@ -64,46 +64,50 @@ struct NickValuePair
   int         value;
 };
 
-class NickEqual
+int enum_from_string(const Glib::ustring& value, const Glib::ustring& key,
+                     const NickValuePair* value_map)
 {
-  // Don't use Glib::ustring because we don't need locale
-  // sensitive comparison, which would be way more expensive.
-  std::string nick_;
+  const NickValuePair* p = value_map;
 
-public:
-  explicit NickEqual(const Glib::ustring& nick)
-    : nick_ (nick.raw()) {}
+  for(; p->nick != 0; ++p)
+  {
+    if(value.raw() == p->nick)
+      return p->value;
+  }
 
-  bool operator()(const NickValuePair& item) const
-    { return (item.nick == nick_); }
-};
+  g_warning("Error in configuration file: invalid value `%s' for key `%s'",
+            value.c_str(), key.c_str());
 
-class ValueEqual
+  return p->value; // return some fallback value
+}
+
+Glib::ustring enum_to_string(int value, const NickValuePair* value_map)
 {
-  int value_;
+  for(const NickValuePair* p = value_map; p->nick != 0; ++p)
+  {
+    if(value == p->value)
+      return p->nick;
+  }
 
-public:
-  explicit ValueEqual(int value)
-    : value_ (value) {}
-
-  bool operator()(const NickValuePair& item) const
-    { return (item.value == value_); }
-};
+  g_return_val_if_reached("");
+}
 
 
-const NickValuePair menutool_mode_value_map[] =
+const NickValuePair menutool_mode_values[] =
 {
   { "menu_and_tool", Regexxer::MODE_MENU_AND_TOOL },
   { "menu_only",     Regexxer::MODE_MENU_ONLY     },
-  { "tool_only",     Regexxer::MODE_TOOL_ONLY     }
+  { "tool_only",     Regexxer::MODE_TOOL_ONLY     },
+  { 0,               Regexxer::MODE_MENU_AND_TOOL }
 };
 
-const NickValuePair toolbar_style_value_map[] =
+const NickValuePair toolbar_style_values[] =
 {
   { "icons",      Gtk::TOOLBAR_ICONS      },
   { "text",       Gtk::TOOLBAR_TEXT       },
   { "both",       Gtk::TOOLBAR_BOTH       },
-  { "both_horiz", Gtk::TOOLBAR_BOTH_HORIZ }
+  { "both_horiz", Gtk::TOOLBAR_BOTH_HORIZ },
+  { 0,            Gtk::TOOLBAR_BOTH_HORIZ }
 };
 
 
@@ -217,9 +221,9 @@ void ConfigData::load()
     while(read_config_entry(channel, key, value))
     {
       if(key.raw() == "menutool_mode")
-        set_menutool_mode_from_string(value);
+        menutool_mode = MenuToolMode(enum_from_string(value, key, menutool_mode_values));
       else if(key.raw() == "toolbar_style")
-        set_toolbar_style_from_string(value);
+        toolbar_style = Gtk::ToolbarStyle(enum_from_string(value, key, toolbar_style_values));
       else if(key.raw() == "fallback_encoding")
         set_fallback_encoding_from_string(value);
       else
@@ -248,8 +252,8 @@ void ConfigData::save()
 
     channel->write("# regexxer configuration file\n");
 
-    write_config_entry(channel, "menutool_mode",     get_string_from_menutool_mode());
-    write_config_entry(channel, "toolbar_style",     get_string_from_toolbar_style());
+    write_config_entry(channel, "menutool_mode", enum_to_string(menutool_mode, menutool_mode_values));
+    write_config_entry(channel, "toolbar_style", enum_to_string(toolbar_style, toolbar_style_values));
     write_config_entry(channel, "fallback_encoding", get_string_from_fallback_encoding());
 
     channel->close(); // close explicitly because it might fail
@@ -262,52 +266,6 @@ void ConfigData::save()
   {
     print_warning("Failed to write configuration file: %s", error.what());
   }
-}
-
-void ConfigData::set_menutool_mode_from_string(const Glib::ustring& value)
-{
-  const NickValuePair *const pend = &menutool_mode_value_map[G_N_ELEMENTS(menutool_mode_value_map)];
-  const NickValuePair *const pfound =
-      std::find_if(&menutool_mode_value_map[0], pend, NickEqual(value));
-
-  if(pfound != pend)
-    menutool_mode = MenuToolMode(pfound->value);
-  else
-    print_warning("Error in configuration file: invalid value `%s' for key `menutool_mode'", value);
-}
-
-Glib::ustring ConfigData::get_string_from_menutool_mode() const
-{
-  const NickValuePair *const pend = &menutool_mode_value_map[G_N_ELEMENTS(menutool_mode_value_map)];
-  const NickValuePair *const pfound =
-      std::find_if(&menutool_mode_value_map[0], pend, ValueEqual(menutool_mode));
-
-  g_return_val_if_fail(pfound != pend, "");
-
-  return pfound->nick;
-}
-
-void ConfigData::set_toolbar_style_from_string(const Glib::ustring& value)
-{
-  const NickValuePair *const pend = &toolbar_style_value_map[G_N_ELEMENTS(toolbar_style_value_map)];
-  const NickValuePair *const pfound =
-      std::find_if(&toolbar_style_value_map[0], pend, NickEqual(value));
-
-  if(pfound != pend)
-    toolbar_style = Gtk::ToolbarStyle(pfound->value);
-  else
-    print_warning("Error in configuration file: invalid value `%s' for key `toolbar_style'", value);
-}
-
-Glib::ustring ConfigData::get_string_from_toolbar_style() const
-{
-  const NickValuePair *const pend = &toolbar_style_value_map[G_N_ELEMENTS(toolbar_style_value_map)];
-  const NickValuePair *const pfound =
-      std::find_if(&toolbar_style_value_map[0], pend, ValueEqual(toolbar_style));
-
-  g_return_val_if_fail(pfound != pend, "");
-
-  return pfound->nick;
 }
 
 void ConfigData::set_fallback_encoding_from_string(const Glib::ustring& value)

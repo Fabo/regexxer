@@ -1,5 +1,10 @@
 2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/configdata.{cc,h}: Generalize the enumeration handling in
+	two new functions, enum_to_string() and enum_from_string().
+
+2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/aboutdialog.cc: Refine the design a bit, and mention Ross
 	Burton (Debian packager) as major contributor.
 
