@@ -31,7 +31,8 @@ stockimages.h: $(stockimages)
 	build_list=''; \
 	list='$(stockimages)'; for file in $$list ; do \
 	  name=`echo $$file | sed 's|\..*$$||'`; \
-	  build_list="$$build_list $$name $(srcdir)/$$file"; \
+	  dir=''; test -f "$$file" || dir='$(srcdir)/'; \
+	  build_list="$$build_list $$name $$dir$$file"; \
 	done; \
 	$(GDK_PIXBUF_CSOURCE) --extern --raw --build-list $$build_list > $@
 

@@ -1,3 +1,9 @@
+2002-12-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* pixmaps/Makefile.am (stockimages.h): Perfectionize so that it
+	handles a case that actually never happens, but who knows who's
+	going to copy'n'paste this stuff :P
+
 2002-12-02  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* pixmaps/Makefile.am: Use shell magic to generate the build list
