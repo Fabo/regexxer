@@ -77,6 +77,7 @@ public:
 
 protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
+  virtual bool on_button_release_event(GdkEventButton* event);
 
 private:
   struct ErrorList;

@@ -1,5 +1,11 @@
 2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (on_button_release_event): Override, in
+	order to expand a directory node when the user clicked anywhere
+	inside the row.  This might improve usability a bit.
+
+2002-11-07  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filetree.cc: Make the column headers trigger sorting when
 	clicked.  Again use a default sort function in order to get three
 	modes of sorting.  That is, the default is ascending sort with

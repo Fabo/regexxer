@@ -253,7 +253,7 @@ FileTree::FileTree()
   treestore_->set_sort_column_id(Gtk::TreeStore::DEFAULT_SORT_COLUMN_ID, SORT_ASCENDING);
 
   {
-    TreeView::Column *const column = new TreeView::Column("File");
+    Column *const column = new Column("File");
     append_column(*manage(column));
 
     CellRendererPixbuf *const cell_icon = new CellRendererPixbuf();
@@ -272,7 +272,7 @@ FileTree::FileTree()
   }
 
   {
-    TreeView::Column *const column = new TreeView::Column("#");
+    Column *const column = new Column("#");
     append_column(*manage(column));
 
     CellRendererText *const cell_matchcount = new CellRendererText();
@@ -477,6 +477,36 @@ void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
   error_pixbuf_.clear();
 
   Gtk::TreeView::on_style_changed(previous_style);
+}
+
+/* Expand a directory node when the user clicked anywhere inside the row.
+ * It's probably easier to hit the row than the little expander arrow :)
+ */
+bool FileTree::on_button_release_event(GdkEventButton* event)
+{
+  if(Gtk::TreeView::on_button_release_event(event))
+    return true;
+
+  if(event->button == 1)
+  {
+    Gtk::TreePath path;
+    Column* column = 0;
+    int cell_x = 0;
+    int cell_y = 0;
+
+    if(get_path_at_pos(int(event->x), int(event->y), path, column, cell_x, cell_y) &&
+       treestore_->get_iter(path)->children())
+    {
+      if(row_expanded(path))
+        collapse_row(path);
+      else
+        expand_row(path, false);
+    }
+
+    return true; // event handled
+  }
+
+  return false; // continue emission
 }
 
 /**** Regexxer::FileTree -- private ****************************************/
