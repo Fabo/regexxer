@@ -18,13 +18,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <glib/gmem.h>
-#include <glibmm.h>
 #include "pcreshell.h"
+
+#include <glib.h>
+#include <glibmm.h>
 
 
 namespace Pcre
 {
+
+/**** Pcre::Error **********************************************************/
 
 Error::Error(const Glib::ustring& message, int offset)
 :
@@ -35,6 +38,25 @@ Error::Error(const Glib::ustring& message, int offset)
 Error::~Error()
 {}
 
+Error::Error(const Error& other)
+:
+  message_  (other.message_),
+  offset_   (other.offset_)
+{}
+
+Error& Error::operator=(const Error& other)
+{
+  // Note that this is exception safe because only one of the assignments
+  // below could throw.  If that changes the copy-and-swap technique should
+  // be used instead.
+  message_ = other.message_;
+  offset_  = other.offset_;
+
+  return *this;
+}
+
+
+/**** Pcre::Pattern ********************************************************/
 
 Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
 :
@@ -44,12 +66,15 @@ Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
   ovecsize_   (0)
 {
   const char* error_message = 0;
-  int         error_offset  = 0;
+  int         error_offset  = -1;
 
   pcre_ = pcre_compile(regex.c_str(), options | PCRE_UTF8, &error_message, &error_offset, 0);
 
   if(!pcre_)
+  {
+    g_assert(error_message != 0);
     throw Error(Glib::locale_to_utf8(error_message), error_offset);
+  }
 
   pcre_extra_ = pcre_study(pcre_, 0, &error_message);
 
@@ -63,6 +88,7 @@ Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
   const int rc = pcre_fullinfo(pcre_, pcre_extra_, PCRE_INFO_CAPTURECOUNT, &capture_count);
 
   g_assert(rc == 0);
+  g_assert(capture_count >= 0);
 
   ovecsize_ = 3 * (capture_count + 1);
   ovector_  = g_new(int, ovecsize_);

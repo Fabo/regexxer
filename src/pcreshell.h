@@ -21,9 +21,9 @@
 #ifndef REGEXXER_PCRESHELL_H_INCLUDED
 #define REGEXXER_PCRESHELL_H_INCLUDED
 
-#include <utility>
 #include <glibmm/ustring.h>
 #include <pcre.h>
+#include <utility>
 
 
 namespace Pcre
@@ -74,8 +74,11 @@ public:
   explicit Error(const Glib::ustring& message, int offset = -1);
   virtual ~Error();
 
+  Error(const Error& other);
+  Error& operator=(const Error& other);
+
   Glib::ustring what()   const { return message_; }
-  int           offset() const { return offset_;  }
+  int           offset() const { return offset_;  } // in bytes
 
 private:
   Glib::ustring message_;
@@ -83,6 +86,9 @@ private:
 };
 
 
+/* Pcre::Pattern represents a compiled regular expression.
+ * Note that all offset values are in bytes, not characters.
+ */
 class Pattern
 {
 public:
@@ -106,5 +112,5 @@ private:
 
 } // namespace Pcre
 
-#endif
+#endif /* REGEXXER_PCRESHELL_H_INCLUDED */
 
