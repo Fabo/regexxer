@@ -969,23 +969,17 @@ bool MainWindow::on_busy_action_pulse()
 {
   g_return_val_if_fail(busy_action_running_, true);
 
-  if(busy_action_cancel_)
-    return true;
-
-  if((++busy_action_iteration_ % BUSY_GUI_UPDATE_INTERVAL) == 0)
+  if(!busy_action_cancel_ && (++busy_action_iteration_ % BUSY_GUI_UPDATE_INTERVAL) == 0)
   {
     statusline_->pulse();
 
     const Glib::RefPtr<Glib::MainContext> context (Glib::MainContext::get_default());
 
-    while(context->iteration(false))
-    {
-      if(busy_action_cancel_)
-        return true;
-    }
+    do {}
+    while(context->iteration(false) && !busy_action_cancel_);
   }
 
-  return false;
+  return busy_action_cancel_;
 }
 
 void MainWindow::on_busy_action_cancel()
