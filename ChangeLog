@@ -1,5 +1,11 @@
 2004-05-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (MainWindow::on_select_folder): Simplify the
+	code: with the new FileChooser we no longer have to handle the case
+	of selecting a file instead of a directory.
+
+2004-05-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/fileio.h (ErrorBinaryFile): New exception class.
 
 	* src/fileio.cc (load_iochannel): Throw ErrorBinaryFile if the

@@ -317,7 +317,6 @@ bool MainWindow::confirm_quit_request()
 
 void MainWindow::on_select_folder()
 {
-  using namespace Glib;
   using namespace Gtk;
 
   FileChooserDialog chooser (*window_, _("Select a folder"), FILE_CHOOSER_ACTION_SELECT_FOLDER);
@@ -328,22 +327,13 @@ void MainWindow::on_select_folder()
   chooser.set_modal(true);
 
   chooser.set_local_only(true);
-  chooser.set_current_folder(filename_from_utf8(Util::expand_pathname(entry_folder_->get_text())));
+  chooser.set_current_folder(Glib::filename_from_utf8(
+      Util::expand_pathname(entry_folder_->get_text())));
 
   if (chooser.run() == RESPONSE_OK)
   {
-    std::string filename = chooser.get_filename();
-
-    if (!filename.empty() && *filename.rbegin() != G_DIR_SEPARATOR)
-    {
-      // The new GTK+ file chooser doesn't append '/' to directories anymore.
-      if (file_test(filename, FILE_TEST_IS_DIR))
-        filename += G_DIR_SEPARATOR;
-      else
-        entry_pattern_->set_text(filename_to_utf8(path_get_basename(filename)));
-    }
-
-    entry_folder_->set_text(Util::shorten_pathname(filename_to_utf8(path_get_dirname(filename))));
+    const Glib::ustring dirname = Util::filename_to_utf8_fallback(chooser.get_filename());
+    entry_folder_->set_text(Util::shorten_pathname(dirname));
   }
 }
 
