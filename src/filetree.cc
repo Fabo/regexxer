@@ -155,6 +155,10 @@ class FileTree::MessageList : public Util::SharedObject, public std::list<Glib::
 public:
   MessageList();
   ~MessageList();
+
+private:
+  MessageList(const FileTree::MessageList&);
+  FileTree::MessageList& operator=(const FileTree::MessageList&);
 };
 
 FileTree::MessageList::MessageList()
