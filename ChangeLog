@@ -1,5 +1,11 @@
 2002-12-28  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac (PCRE_CHECK_VERSION): Require libpcre >= 3.9.  It
+	finally arrived in Debian unstable a while ago and there's at least
+	one UTF-8 related bug in prior releases that could cause crashes.
+
+2002-12-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/pcreshell.cc (translate_to_char_offset): New function
 	that translates the error offset returned by pcre_compile() to
 	a character offset into the original regex.  This became necessary
