@@ -423,6 +423,7 @@ std::string FileTree::get_fallback_encoding() const
 void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
 {
   color_load_failed_ = get_style()->get_text(Gtk::STATE_INSENSITIVE);
+  error_pixbuf_.clear();
 
   Gtk::TreeView::on_style_changed(previous_style);
 }
