@@ -561,7 +561,8 @@ void FileBuffer::find_line_bounds(FileBuffer::iterator& line_begin, FileBuffer::
 void FileBuffer::update_bound_state()
 {
   const BoundState old_bound_state = bound_state_;
-  bound_state_ = get_bound_state();
+
+  get_bound_state(); // recalculate bound_state_
 
   if(bound_state_ != old_bound_state)
     signal_bound_state_changed(bound_state_); // emit
