@@ -95,7 +95,7 @@ ControlItem::~ControlItem()
 
 void ControlItem::activate()
 {
-  if(enabled_)
+  if(enabled_ && group_enabled_)
     signal_activate_(); // emit
 }
 
