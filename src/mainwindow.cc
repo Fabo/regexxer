@@ -431,6 +431,7 @@ void MainWindow::on_select_folder()
   filesel.set_modal(true);
   filesel.set_transient_for(*this);
   filesel.hide_fileop_buttons();
+  filesel.set_has_separator(false);
   filesel.get_file_list()->get_parent()->hide();
   filesel.set_default_size(350, -1);
 
