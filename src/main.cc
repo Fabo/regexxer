@@ -31,6 +31,8 @@
 #include <exception>
 #include <list>
 
+#include <config.h>
+
 
 namespace
 {
