@@ -58,7 +58,7 @@ struct StockItemData
 
 const StockIconData stock_icon_info[] =
 {
-  { stock_menu_about, sizeof(stock_menu_about), Gtk::ICON_SIZE_SMALL_TOOLBAR }
+  { stock_menu_about, sizeof(stock_menu_about), Gtk::ICON_SIZE_MENU }
 };
 
 const StockIconData stock_icon_save_all[] =

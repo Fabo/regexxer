@@ -1,3 +1,9 @@
+2002-11-19  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/main.cc (stock_icon_info): It's Gtk::ICON_SIZE_MENU, not
+	Gtk::ICON_SIZE_SMALL_TOOLBAR.  This glitch fortunately didn't have
+	any real consequences since the icon size was wildcarded anyway.
+
 regexxer 0.4:
 
 2002-11-18  Daniel Elstner  <daniel.elstner@gmx.net>
