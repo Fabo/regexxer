@@ -33,7 +33,11 @@
 namespace
 {
 
-enum { BUFSIZE = 4096 };
+enum
+{
+  BUFSIZE               = 4096,
+  FIND_UPDATE_INTERVAL  = 16
+};
 
 const char fallback_encoding[] = "ISO-8859-1";
 
@@ -84,6 +88,7 @@ struct FileList::FindData
   const std::string::size_type  chop_off;
   const bool                    recursive;
   const bool                    hidden;
+  unsigned int                  iteration;
 };
 
 FileList::FindData::FindData(const Glib::ustring&   pattern_,
@@ -93,7 +98,8 @@ FileList::FindData::FindData(const Glib::ustring&   pattern_,
   pattern   (pattern_),
   chop_off  (chop_off_),
   recursive (recursive_),
-  hidden    (hidden_)
+  hidden    (hidden_),
+  iteration (0)
 {}
 
 FileList::FindData::~FindData()
@@ -437,15 +443,18 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
 {
   using namespace Glib;
 
-  const RefPtr<MainContext> main_context = MainContext::get_default();
   Dir dir (dirname);
 
   for(Dir::iterator pos = dir.begin(); pos != dir.end(); ++pos)
   {
-    while(!find_stop_ && main_context->iteration(false)) {}
+    if((++find_data.iteration % FIND_UPDATE_INTERVAL) == 0)
+    {
+      const RefPtr<MainContext> main_context = MainContext::get_default();
+      while(!find_stop_ && main_context->iteration(false)) {}
 
-    if(find_stop_)
-      break;
+      if(find_stop_)
+        break;
+    }
 
     const std::string basename = *pos;
 

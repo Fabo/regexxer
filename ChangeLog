@@ -1,5 +1,10 @@
 2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filelist.cc: Speed up find_files() by updating the GUI
+	every 16 iterations rather than all the time.
+
+2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.{cc,h} src/filelist.{cc,h}: Implement "Save" and
 	"Save all" functionality.  Also, separate the file list boundary
 	notification from signal_switch_buffer() -- should be a lot more
