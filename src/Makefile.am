@@ -44,6 +44,8 @@ regexxer_SOURCES =	\
 	prefdialog.h	\
 	sharedptr.cc	\
 	sharedptr.h	\
+	signalutils.cc	\
+	signalutils.h	\
 	statusline.cc	\
 	statusline.h	\
 	stringutils.cc	\

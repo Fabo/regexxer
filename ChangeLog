@@ -1,5 +1,14 @@
 2002-11-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/signalutils.{cc,h}: New files containing various sigc++
+	related utilities.  For now, there's only Util::QueuedSignal,
+	which implements a SigC::Signal0<void> that is emitted when the
+	main loop is idle.
+
+	* src/Makefile.am (regexxer_SOURCES): Add signalutils.{cc,h}.
+
+2002-11-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.{cc,h} (trigger_preview_line_changed): Rename to
 	queue_preview_line_changed() because that's what it does.
 
