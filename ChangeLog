@@ -1,3 +1,18 @@
+2004-06-29  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/controller.{cc,h} (Controller::edit_actions): Rename from
+	clip_actions.
+	(Controller::erase): Add action.
+	(Controller::load_xml): Fetch cut, copy, paste and delete menu
+	items from the glade file.
+
+	* src/mainwindow.{cc,h} (MainWindow::on_{cut,copy,paste,erase}):
+	Add and implement new signal handlers.
+	(MainWindow::connect_signals): Connect the cut, copy, paste and
+	erase actions to the new signal handlers.
+	(MainWindow::on_filetree_switch_buffer): Enable or disable the
+	edit actions based on the editability of the file buffer.
+
 2004-06-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/controller.{cc,h} (Controller): Add an Edit menu, as well

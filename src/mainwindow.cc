@@ -226,6 +226,10 @@ void MainWindow::connect_signals()
   controller_.save_file   .connect(mem_fun(*this, &MainWindow::on_save_file));
   controller_.save_all    .connect(mem_fun(*this, &MainWindow::on_save_all));
   controller_.undo        .connect(mem_fun(*this, &MainWindow::on_undo));
+  controller_.cut         .connect(mem_fun(*this, &MainWindow::on_cut));
+  controller_.copy        .connect(mem_fun(*this, &MainWindow::on_copy));
+  controller_.paste       .connect(mem_fun(*this, &MainWindow::on_paste));
+  controller_.erase       .connect(mem_fun(*this, &MainWindow::on_erase));
   controller_.preferences .connect(mem_fun(*this, &MainWindow::on_preferences));
   controller_.quit        .connect(mem_fun(*this, &MainWindow::on_quit));
   controller_.about       .connect(mem_fun(*this, &MainWindow::on_about));
@@ -293,6 +297,30 @@ void MainWindow::on_style_changed(const Glib::RefPtr<Gtk::Style>&)
 bool MainWindow::on_delete_event(GdkEventAny*)
 {
   return !confirm_quit_request();
+}
+
+void MainWindow::on_cut()
+{
+  if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
+    buffer->cut_clipboard(textview_->get_clipboard("CLIPBOARD"), textview_->get_editable());
+}
+
+void MainWindow::on_copy()
+{
+  if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
+    buffer->copy_clipboard(textview_->get_clipboard("CLIPBOARD"));
+}
+
+void MainWindow::on_paste()
+{
+  if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
+    buffer->paste_clipboard(textview_->get_clipboard("CLIPBOARD"), textview_->get_editable());
+}
+
+void MainWindow::on_erase()
+{
+  if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
+    buffer->erase_selection(true, textview_->get_editable());
 }
 
 void MainWindow::on_quit()
@@ -512,6 +540,7 @@ void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
 
     controller_.replace_file.set_enabled(buffer->get_match_count() > 0);
     controller_.save_file.set_enabled(buffer->get_modified());
+    controller_.edit_actions.set_enabled(!fileinfo->load_failed);
 
     statusline_->set_match_count(buffer->get_original_match_count());
     statusline_->set_match_index(buffer->get_match_index());
@@ -527,6 +556,7 @@ void MainWindow::on_filetree_switch_buffer(FileInfoPtr fileinfo, int file_index)
 
     controller_.replace_file.set_enabled(false);
     controller_.save_file.set_enabled(false);
+    controller_.edit_actions.set_enabled(false);
 
     statusline_->set_match_count(0);
     statusline_->set_match_index(0);

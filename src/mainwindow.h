@@ -103,6 +103,11 @@ private:
   void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
   bool on_delete_event(GdkEventAny* event);
 
+  void on_cut();
+  void on_copy();
+  void on_paste();
+  void on_erase();
+
   void on_quit();
   bool confirm_quit_request();
 

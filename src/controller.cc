@@ -150,7 +150,7 @@ void ControlGroup::set_enabled(bool enable)
 Controller::Controller()
 :
   match_actions (true),
-  clip_actions  (false),
+  edit_actions  (false),
   save_file     (false),
   save_all      (false),
   undo          (false),
@@ -166,9 +166,10 @@ Controller::Controller()
   replace       (false),
   replace_file  (false),
   replace_all   (false),
-  cut           (false),
+  cut           (true),
   copy          (true),
-  paste         (false)
+  paste         (true),
+  erase         (true)
 {
   match_actions.add(undo);
   match_actions.add(find_files);
@@ -180,9 +181,10 @@ Controller::Controller()
   match_actions.add(replace);
   match_actions.add(replace_file);
   match_actions.add(replace_all);
-  clip_actions.add(cut);
-  clip_actions.add(copy);
-  clip_actions.add(paste);
+  edit_actions.add(cut);
+  edit_actions.add(copy);
+  edit_actions.add(paste);
+  edit_actions.add(erase);
 }
 
 Controller::~Controller()
@@ -194,6 +196,10 @@ void Controller::load_xml(const Glib::RefPtr<Gnome::Glade::Xml>& xml)
   save_all    .add_widgets(xml, "menuitem_save_all",     "button_save_all");
   quit        .add_widgets(xml, "menuitem_quit",         "button_quit");
   undo        .add_widgets(xml, "menuitem_undo",         "button_undo");
+  cut         .add_widgets(xml, "menuitem_cut",          0);
+  copy        .add_widgets(xml, "menuitem_copy",         0);
+  paste       .add_widgets(xml, "menuitem_paste",        0);
+  erase       .add_widgets(xml, "menuitem_delete",       0);
   preferences .add_widgets(xml, "menuitem_preferences",  0);
   next_file   .add_widgets(xml, "menuitem_next_file",    "button_next_file");
   prev_file   .add_widgets(xml, "menuitem_prev_file",    "button_prev_file");
