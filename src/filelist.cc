@@ -469,7 +469,7 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
         break;
     }
 
-    const std::string basename = *pos;
+    const std::string basename (*pos);
 
     if(!find_data.hidden && *basename.begin() == '.')
       continue;
@@ -477,42 +477,58 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
     const std::string fullname (build_filename(dirname, basename));
     g_assert(fullname.size() > find_data.chop_off);
 
-    if(file_test(fullname, FILE_TEST_IS_SYMLINK))
-      continue;
-
-    if(find_data.recursive && file_test(fullname, FILE_TEST_IS_DIR))
+    try
     {
-      find_recursively(fullname, find_data);
+      if(find_check_file(basename, fullname, find_data))
+        find_recursively(fullname, find_data); // recurse
     }
-    else if(file_test(fullname, FILE_TEST_IS_REGULAR))
+    catch(const Glib::FileError& error)
     {
-      try
-      {
-        if(find_data.pattern.match(Util::filename_to_utf8_fallback(basename)) > 0)
-        {
-          const FileInfoPtr fileinfo (new FileInfo(fullname));
-          const ustring chopped_filename = Util::filename_to_utf8_fallback(
-              std::string(fullname, find_data.chop_off, std::string::npos));
+      const Glib::ustring what = error.what();
+      g_message("%s", what.c_str());
+    }
+    catch(const Glib::ConvertError& error)
+    {
+      // Don't use Glib::locale_to_utf8() because we already
+      // tried that in Util::filename_to_utf8_fallback().
+      //
+      const Glib::ustring name = Util::convert_to_ascii(fullname);
+      const Glib::ustring what = error.what();
 
-          const FileListColumns& columns = filelist_columns();
-          Gtk::TreeModel::Row row = *liststore_->append();
-
-          row[columns.filename] = chopped_filename;
-          row[columns.fileinfo] = fileinfo;
-        }
-      }
-      catch(const Glib::ConvertError& error)
-      {
-        // Don't use Glib::locale_to_utf8() because we already
-        // tried that in Util::filename_to_utf8_fallback().
-        //
-        const Glib::ustring name = Util::convert_to_ascii(fullname);
-        const Glib::ustring what = error.what();
-
-        g_warning("Eeeek, can't convert filename `%s' to UTF-8: %s", name.c_str(), what.c_str());
-      }
+      g_warning("Eeeek, can't convert filename `%s' to UTF-8: %s", name.c_str(), what.c_str());
     }
   }
+}
+
+bool FileList::find_check_file(const std::string& basename,
+                               const std::string& fullname,
+                               FindData& find_data)
+{
+  using namespace Glib;
+
+  if(file_test(fullname, FILE_TEST_IS_SYMLINK))
+    return false;
+
+  if(find_data.recursive && file_test(fullname, FILE_TEST_IS_DIR))
+  {
+    return true;
+  }
+  else if(file_test(fullname, FILE_TEST_IS_REGULAR) &&
+          find_data.pattern.match(Util::filename_to_utf8_fallback(basename)) > 0)
+  {
+    const FileInfoPtr fileinfo (new FileInfo(fullname));
+
+    const ustring chopped_filename (Util::filename_to_utf8_fallback(
+        std::string(fullname, find_data.chop_off, std::string::npos)));
+
+    const FileListColumns& columns = filelist_columns();
+    Gtk::TreeModel::Row row (*liststore_->append());
+
+    row[columns.filename] = chopped_filename;
+    row[columns.fileinfo] = fileinfo;
+  }
+
+  return false;
 }
 
 void FileList::on_selection_changed()

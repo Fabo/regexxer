@@ -1,5 +1,11 @@
 2002-10-21  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filelist.{cc,h} (FileList::find_recursively): Move the
+	file_test() code into a separate method find_check_file(), and
+	improve the error handling.
+
+2002-10-21  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filelist.{cc,h}: Cache the Gdk::Color object used for
 	files which failed to load.
 

@@ -101,6 +101,7 @@ private:
   void cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
 
   void find_recursively(const std::string& dirname, FindData& find_data);
+  bool find_check_file(const std::string& basename, const std::string& fullname, FindData& find_data);
 
   void on_selection_changed();
   void on_buffer_match_count_changed(int match_count);
