@@ -1,5 +1,10 @@
 2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filelist.cc (FileList::find_files): Catch exceptions from
+	Glib::Dir and Glib::file_test().
+
+2002-10-20  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/stringutils.{cc,h} (Util::convert_to_ascii): New function
 	which replaces all non-ASCII characters with '?'.  This should be
 	used for error messages when everything else failed.

@@ -182,9 +182,15 @@ void FileList::find_files(const Glib::ustring& dirname,
     FindData find_data (Util::shell_pattern_to_regex(pattern), chop_off, recursive, hidden);
     find_recursively(startdir, find_data);
   }
-  catch(const Pcre::Error& e)
+  catch(const Pcre::Error& error)
   {
-    std::cerr << e.what() << std::endl;
+    const Glib::ustring what = error.what();
+    g_message("Invalid filename search pattern: %s", what.c_str());
+  }
+  catch(const Glib::FileError& error)
+  {
+    const Glib::ustring what = error.what();
+    g_message("%s", what.c_str());
   }
 
   find_running_ = false;
