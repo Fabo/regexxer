@@ -313,7 +313,10 @@ int FileBuffer::get_match_count() const
 
 int FileBuffer::get_match_index() const
 {
-  return (!match_removed_ && current_match_ != match_list_.end()) ? current_match_->index : 0;
+  // Stupid work-around for silly, silly gcc 2.95.x.
+  const std::list<MatchData>::const_iterator current_match (current_match_);
+
+  return (!match_removed_ && current_match != match_list_.end()) ? current_match_->index : 0;
 }
 
 int FileBuffer::get_original_match_count() const
