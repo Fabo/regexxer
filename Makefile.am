@@ -1,6 +1,6 @@
 ## $Id$
 ##
-## Copyright (c) 2002  Daniel Elstner  <daniel.elstner@gmx.net>
+## Copyright (c) 2004  Daniel Elstner  <daniel.elstner@gmx.net>
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License VERSION 2 as
@@ -37,6 +37,9 @@ schemas_DATA        = regexxer.schemas
 
 dist_noinst_SCRIPTS = autogen.sh config.rpath intltool-extract.in intltool-merge.in intltool-update.in
 dist_noinst_DATA    = $(desktop_in_files) $(schemas_in_files) macros/cxx.m4 macros/misc.m4 macros/pcre.m4
+
+CLEANFILES          = $(desktop_DATA) $(schemas_DATA)
+DISTCLEANFILES      = intltool-extract intltool-merge intltool-update
 
 gconftool_command   = GCONF_CONFIG_SOURCE='$(GCONF_SCHEMA_CONFIG_SOURCE)' $(GCONFTOOL)
 

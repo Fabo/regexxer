@@ -1,5 +1,12 @@
 2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* Makefile.am (CLEANFILES): List build-time generated files
+	$(desktop_DATA) and $(schemas_DATA).
+	(DISTCLEANFILES): List configure-time generated files
+	intltool-extract, intltool-merge and intltool-update.
+
+2004-05-17  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* autogen.sh: Execute glib-gettextize and intltoolize.
 
 	* configure.ac: Call AC_PROG_INTLTOOL().  Assign ALL_LINGUAS and
