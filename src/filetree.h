@@ -18,8 +18,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef REGEXXER_FILELIST_H_INCLUDED
-#define REGEXXER_FILELIST_H_INCLUDED
+#ifndef REGEXXER_FILETREE_H_INCLUDED
+#define REGEXXER_FILETREE_H_INCLUDED
 
 #include "filebuffer.h"
 #include "fileio.h"
@@ -155,5 +155,5 @@ private:
 
 } // namespace Regexxer
 
-#endif /* REGEXXER_FILELIST_H_INCLUDED */
+#endif /* REGEXXER_FILETREE_H_INCLUDED */
 
