@@ -1,0 +1,508 @@
+#  Vietnamese Translation for regexxer.HEAD.
+#  Copyright (C) 2005 Free Software Foundation, Inc.
+#  Clytie Siddall <clytie@riverland.net.au>, 2005.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer.HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-03-03 03:40+0100\n"
+"PO-Revision-Date: 2005-03-09 22:31+1000\n"
+"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: regexxer.desktop.in.h:1
+msgid "Search and replace using regular expressions"
+msgstr "Tìm kiếm và thay thế bằng sử dụng biểu thức chính quy"
+
+#: regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "Công cụ Tìm kiếm regexxer"
+
+#: regexxer.schemas.in.h:1
+msgid "Current-match color"
+msgstr "Màu cho điều khớp hiện có"
+
+#: regexxer.schemas.in.h:2
+msgid "Fallback encoding"
+msgstr "Mã dự trữ"
+
+#: regexxer.schemas.in.h:3
+msgid "Match color"
+msgstr "Màu cho điều khớp"
+
+#: regexxer.schemas.in.h:4
+msgid ""
+"Name of the character encoding to use if a file is not readable in either "
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
+msgstr ""
+"Sử dụng mã ký tự này nếu không đọc được một tập tin nào đó bằng UTF-8 hay bằng bộ mã được ghi rõ cho miền địa phương hiện có. Hãy thử lệnh \"iconv --list\" để tìm thấy một danh sách các giá trị co thể."
+
+#: regexxer.schemas.in.h:5
+msgid "Text view font"
+msgstr "Phông chữ khi xem câu"
+
+#: regexxer.schemas.in.h:6
+msgid ""
+"The background color used to highlight matches of the search expression."
+msgstr ""
+"Màu nền được sử dụng để nổi bật điều khớp với biểu thức tìm kiếm."
+
+#: regexxer.schemas.in.h:7
+msgid ""
+"The background color used to highlight the currently selected match of the "
+"search expression."
+msgstr ""
+"Màu nền được sử dụng để nổi bật điều đã chọn hiện có mà khớp với biểu thức tìm kiếm."
+
+#: regexxer.schemas.in.h:8
+msgid "The font used in the file editor."
+msgstr "Phông chữ được sử dụng trong bộ hiệu chỉnh tập tin."
+
+#: regexxer.schemas.in.h:9
+msgid ""
+"The style of the application's toolbar. Possible values are \"icons\", \"text"
+"\", \"both\", and \"both-horiz\"."
+msgstr ""
+"Kiểu thanh công cụ của ứng dụng. Những giá trị có thể là \"icons\" (biểu tượng), \"text"
+"\" (chữ), \"both\" (cả hai), and \"both-horiz\" (cả hai, ngang)."
+
+#: regexxer.schemas.in.h:10
+msgid "Toolbar style"
+msgstr "Kiểu thanh công cụ"
+
+#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+#: src/filebuffer.cc:203
+msgid "Can't read file:"
+msgstr "Không đọc được tập tin:"
+
+#: src/filetree.cc:81
+msgid "File"
+msgstr "Tập tin"
+
+#: src/filetree.cc:101
+msgid "#"
+msgstr "#"
+
+#: src/filetree.cc:532
+msgid "Failed to save file \"%1\": %2"
+msgstr "Không lưu được tập tin \"%1\": %2"
+
+#: src/filetree.cc:949
+msgid "\"%1\" seems to be a binary file."
+msgstr "Hình như \"%1\" là một tập tin nhị phân."
+
+#: src/main.cc:84
+msgid "_About"
+msgstr "_Về trình..."
+
+#: src/main.cc:85
+msgid "Save _all"
+msgstr "Lưu tất _cả"
+
+#: src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "Tìm mọi tập tin khớp với MẪU"
+
+#: src/main.cc:100
+msgid "PATTERN"
+msgstr "MẪU"
+
+#: src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "Không đệ qui vào thư mục con"
+
+#: src/main.cc:102 ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "Cũng tìm mọi tập tin bị ẩn"
+
+#: src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "Tìm mọi câu khớp với BIỂU THỨC CHÍNH QUY"
+
+#: src/main.cc:103
+msgid "REGEX"
+msgstr "BIỂU THỨC CHÍNH QUY"
+
+#: src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "Tìm chỉ điều khớp đầu trong mọi dòng thôi"
+
+#: src/main.cc:105 ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "Khi khớp thì bỏ qua hoa/thường"
+
+#: src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "Chèn CHUỖI để thay thế mọi điều khớp"
+
+#: src/main.cc:106
+msgid "STRING"
+msgstr "CHUỖI"
+
+#: src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "In vị trí của điều khớp ra thiết bị xuất chuẩn"
+
+#: src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "Không tự động bắt đầu tìm kiếm"
+
+#: src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[TÙY_CHỌN]... [DANH_MỤC]"
+
+#: src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr "Hãy thử lệnh \"regexxer --help\" (help = trợ giúp) để tìm kiếm thông tin thêm."
+
+#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Một mẫu tên tập tin như được sử dụng bởi hệ vỏ. Hỗ trợ hạng ký tự [ab] và biểu thức dấu nháy kép kiểu csh [a,b]."
+
+#: src/mainwindow.cc:403
+msgid ""
+"Some files haven't been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+"Chưa lưu một số tập tin.\n"
+"Còn thoát không?"
+
+#: src/mainwindow.cc:431
+msgid ""
+"The folder name \"%1\" contains characters not representable in the encoding "
+"of the local file system."
+msgstr ""
+"Tên danh mục \"%1\" bao gồm ký tự không thể được miêu tả bằng mã của hệ thống tập tin địa phương."
+
+#: src/mainwindow.cc:450
+msgid "Select a folder"
+msgstr "Hãy chọn danh mục"
+
+#: src/mainwindow.cc:470
+msgid ""
+"Some files haven't been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+"Chưa lưu một số tập tin.\n"
+"Còn thoát không?"
+
+#: src/mainwindow.cc:496
+msgid "The file search pattern is invalid."
+msgstr "Mẫu tìm kiếm tập tin ấy không hợp lệ."
+
+#: src/mainwindow.cc:502
+msgid "The following errors occurred during search:"
+msgstr "Gặp những lỗi theo đây trong khi tìm kiếm:"
+
+#: src/mainwindow.cc:527
+msgid ""
+"Error in regular expression at \"%1\" (index %2):\n"
+"%3"
+msgstr ""
+"Gặp lỗi trong biểu thức chính quy tại \"%1\" (chỉ mục %2):\n"
+"%3"
+
+#: src/mainwindow.cc:529
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"Gặp lỗi trong biểu thức chính quy:\n"
+"%1"
+
+#: src/mainwindow.cc:751
+msgid "The following errors occurred during save:"
+msgstr "Gặp những lỗi theo đây trong khi lưu:"
+
+#: src/pcreshell.cc:59
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr "Không hô trợ sử dụng dãy thoát \\C để khớp với một byte riêng lẻ."
+
+#: src/pcreshell.cc:151
+msgid ""
+"Reached the recursion and backtracking limit of the regular expression "
+"engine."
+msgstr ""
+"Đã đến giới hạn đệ qui và rút lui của dụng cụ biểu thức chính quy."
+
+#: src/prefdialog.cc:248
+msgid "\"%1\" is not a valid encoding."
+msgstr "\"%1\" không phải là mã hợp lệ."
+
+#: src/statusline.cc:264
+msgid "Stop"
+msgstr "Ngừng"
+
+#: src/statusline.cc:271
+msgid "File:"
+msgstr "Tập tin:"
+
+#: src/statusline.cc:274
+msgid "Match:"
+msgstr "Khớp:"
+
+#: src/statusline.cc:285
+msgid "Cancels the running search"
+msgstr "Thôi việc tìm kiếm đang chạy"
+
+#. namespace Regexxer
+#: ui/aboutdialog.glade.h:1
+msgid "About regexxer"
+msgstr "Về trinh regexxer"
+
+#: ui/aboutdialog.glade.h:2
+msgid "The application icon of regexxer"
+msgstr "Biểu tượng ứng dụng của regexxer"
+
+#: ui/aboutdialog.glade.h:3
+msgid "regexxer icon"
+msgstr "biểu tượng regexxer"
+
+#: ui/aboutdialog.glade.h:4
+msgid "translated by"
+msgstr "người dịch"
+
+#: ui/aboutdialog.glade.h:5
+msgid "translator-credits"
+msgstr "Clytie Siddall <clytie@riverland.net.au>"
+
+#: ui/aboutdialog.glade.h:6
+msgid "written by"
+msgstr "tác giả"
+
+#: ui/mainwindow.glade.h:2
+msgid "A regular expression in Perl syntax"
+msgstr "Một biểu thức chính quy bằng cú pháp Perl"
+
+#: ui/mainwindow.glade.h:4
+msgid "Backward"
+msgstr "Ngược"
+
+#: ui/mainwindow.glade.h:6
+msgid "File backward"
+msgstr "Tập tin ngược"
+
+#: ui/mainwindow.glade.h:7
+msgid "File forward"
+msgstr "Tập tin tiếp"
+
+#: ui/mainwindow.glade.h:8
+msgid "Find all files that match the filename pattern"
+msgstr "Tìm mọi tập tin khớp với mẫu tên tập tin"
+
+#: ui/mainwindow.glade.h:9
+msgid "Find all matches of the regular expression"
+msgstr "Tìm mọi điều khớp với biểu thức chính quy ấy"
+
+#: ui/mainwindow.glade.h:10
+msgid "Find all possible matches in a line"
+msgstr "Tìm mọi điều khớp có thể trong một dòng nào đó"
+
+#: ui/mainwindow.glade.h:11
+msgid "Find fi_les"
+msgstr "Tìm _tập tin"
+
+#: ui/mainwindow.glade.h:12
+msgid "Fol_der:"
+msgstr "Danh _mục:"
+
+#: ui/mainwindow.glade.h:13
+msgid "Forward"
+msgstr "Tiếp"
+
+#: ui/mainwindow.glade.h:14
+msgid "Go to next match"
+msgstr "Tiếp đến điều khớp sau"
+
+#: ui/mainwindow.glade.h:15
+msgid "Go to previous match"
+msgstr "Trở về điều khớp trước"
+
+#: ui/mainwindow.glade.h:16
+msgid "Go to the next matching file"
+msgstr "Tiếp đến tập tin khớp sau"
+
+#: ui/mainwindow.glade.h:17
+msgid "Go to the previous matching file"
+msgstr "Trở về tập tin khớp trước"
+
+#: ui/mainwindow.glade.h:18
+msgid "Pattern:"
+msgstr "Mẫu:"
+
+#: ui/mainwindow.glade.h:19
+msgid "Preview"
+msgstr "Xem trước"
+
+#: ui/mainwindow.glade.h:20
+msgid "Preview of the substitution"
+msgstr "Xem trước điều thay thế"
+
+#: ui/mainwindow.glade.h:21
+msgid "Recurse into subdirectories"
+msgstr "Đệ qui vào thư mục con"
+
+#: ui/mainwindow.glade.h:22
+msgid "Replace _current"
+msgstr "Thay thế _hiện có"
+
+#: ui/mainwindow.glade.h:23
+msgid "Replace all matches in all files"
+msgstr "Thay thế mọi điều khớp trong mọi tập tin"
+
+#: ui/mainwindow.glade.h:24
+msgid "Replace all matches in the current file"
+msgstr "Thay thế mọi điều khớp trong tập tin hiện có"
+
+#: ui/mainwindow.glade.h:25
+msgid "Replace current match"
+msgstr "Thay thế điều khớp hiện có"
+
+#: ui/mainwindow.glade.h:26
+msgid "Replace in _all files"
+msgstr "Thay thế trong _mọi tập tin"
+
+#: ui/mainwindow.glade.h:27
+msgid "Replace in _this file"
+msgstr "Thay thế trong tập tin _này"
+
+#: ui/mainwindow.glade.h:28
+msgid "Replace:"
+msgstr "Thay thế:"
+
+#: ui/mainwindow.glade.h:29
+msgid "Search:"
+msgstr "Tìm kiếm:"
+
+#: ui/mainwindow.glade.h:30
+msgid "The directory to be searched"
+msgstr "Tìm kiếm thư mục này"
+
+#: ui/mainwindow.glade.h:31
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
+"\\L, \\U and \\E are supported as well."
+msgstr ""
+"Chèn chuỗi mới này khi thay thế. Giống như bằng ngôn ngữ Perl, bạn có thể tra cứu phần điều khớp bằng sử dụng biến $1, $2, v.v., hay ngay cả biến $+, $&, $` và $'. Cũng hỗ trợ những toán tử \\l, \\u, \\L, \\U và \\E."
+
+#: ui/mainwindow.glade.h:32
+msgid "_All files"
+msgstr "_Mọi tập tin"
+
+#: ui/mainwindow.glade.h:33
+msgid "_Edit"
+msgstr "_Hiệu chỉnh"
+
+#: ui/mainwindow.glade.h:34
+msgid "_File"
+msgstr "_Tập tin"
+
+#: ui/mainwindow.glade.h:35
+msgid "_Help"
+msgstr "Trợ _giúp"
+
+#: ui/mainwindow.glade.h:36
+msgid "_Match"
+msgstr "_Khớp"
+
+#: ui/mainwindow.glade.h:37
+msgid "_Next file"
+msgstr "Tập tin _sau"
+
+#: ui/mainwindow.glade.h:38
+msgid "_Previous file"
+msgstr "Tập tin _trước"
+
+#: ui/mainwindow.glade.h:39
+msgid "_Replace"
+msgstr "_Thay thế"
+
+#: ui/mainwindow.glade.h:40
+msgid "_This file"
+msgstr "Tập tin _này"
+
+#: ui/mainwindow.glade.h:41
+msgid "hidden"
+msgstr "bị ẩn"
+
+#: ui/mainwindow.glade.h:42
+msgid "recursive"
+msgstr "đệ  qui"
+
+#: ui/prefdialog.glade.h:1
+msgid "1."
+msgstr "1."
+
+#: ui/prefdialog.glade.h:2
+msgid "2."
+msgstr "2."
+
+#: ui/prefdialog.glade.h:3
+msgid "3."
+msgstr "3."
+
+#: ui/prefdialog.glade.h:4
+msgid "C_urrent match color:"
+msgstr "Màu cho điều khớp hiện có:"
+
+#: ui/prefdialog.glade.h:5
+msgid "Fallback _encoding:"
+msgstr "Mã hóa _dự trữ:"
+
+#: ui/prefdialog.glade.h:6
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
+"Chỉ biểu tượng thôi\n"
+"Chỉ chữ thôi\n"
+"Cả hai biểu tượng và chữ\n"
+"Cả hai ngang"
+
+#: ui/prefdialog.glade.h:10
+msgid "Preferences"
+msgstr "Sở thích"
+
+#: ui/prefdialog.glade.h:11
+msgid "The encoding specified by the current locale"
+msgstr "Mã hóa được ghi rõ cho miền địa phương hiện có"
+
+#: ui/prefdialog.glade.h:12
+msgid "Tool_bar style:"
+msgstr "Kiểu thanh _công cụ:"
+
+#: ui/prefdialog.glade.h:13
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ui/prefdialog.glade.h:14
+msgid "_File access"
+msgstr "_Truy cập tập tin"
+
+#: ui/prefdialog.glade.h:15
+msgid "_Look'n'feel"
+msgstr "_Hình thức và cảm giác"
+
+#: ui/prefdialog.glade.h:16
+msgid "_Match color:"
+msgstr "Màu _khớp:"
+
+#: ui/prefdialog.glade.h:17
+msgid "_Text view font:"
+msgstr "Phông chữ khi xem _câu:"
+
+#: ui/prefdialog.glade.h:18
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "Trình regexxer sẽ cố đọc một tập tin nào đó bằng những mã hóa theo đây trước khi thoát:"
+
