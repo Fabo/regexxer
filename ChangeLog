@@ -1,3 +1,10 @@
+2002-12-01  Murray Cumming  <murrayc@usa.net>
+
+	[ SF patch 646526, slightly modified ]
+
+	* src/mainwindow.cc: Change the file pattern entry to a combo,
+	with some commonly-used file extensions.
+
 2002-12-02  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/controller.cc (create_action_area):

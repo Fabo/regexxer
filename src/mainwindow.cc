@@ -39,6 +39,21 @@
 namespace
 {
 
+const char *const builtin_filename_patterns[] =
+{
+  "*.[ch]",                                   // C
+  "*.{c,cc,cpp,cxx,c++,C,h,hh,hpp,hxx,h++}",  // C/C++
+  "*.{ccg,hg}",                               // gtkmmproc
+  "*.idl",                                    // CORBA/COM
+  "*.{java,jsp}",                             // Java/JSP
+  "*.{pl,pm,cgi}",                            // Perl
+  "*.py",                                     // Python
+  "*.php3",                                   // PHP
+  "*.{html,htm,shtml,js,wml}",                // HTML
+  "*.{xml,xsl,css,dtd,xsd}",                  // XML/XSLT
+  0
+};
+
 enum { BUSY_GUI_UPDATE_INTERVAL = 16 };
 
 typedef Glib::RefPtr<Regexxer::FileBuffer> FileBufferPtr;
@@ -318,8 +333,15 @@ Gtk::Widget* MainWindow::create_left_pane()
 
   Label *const label_pattern = new Label("Pattern:", 0.0, 0.5);
   table->attach(*manage(label_pattern), 0, 1, 1, 2, FILL, AttachOptions(0));
-  table->attach(*manage(entry_folder_  = new Entry()), 1, 2, 0, 1, EXPAND|FILL, AttachOptions(0));
-  table->attach(*manage(entry_pattern_ = new Entry()), 1, 2, 1, 2, EXPAND|FILL, AttachOptions(0));
+
+  entry_folder_ = new Entry();
+  table->attach(*manage(entry_folder_), 1, 2, 0, 1, EXPAND|FILL, AttachOptions(0));
+
+  Combo *const combo_pattern = new Combo();
+  table->attach(*manage(combo_pattern), 1, 2, 1, 2, EXPAND|FILL, AttachOptions(0));
+  combo_pattern->set_popdown_strings(builtin_filename_patterns);
+
+  entry_pattern_ = combo_pattern->get_entry();
   label_pattern->set_mnemonic_widget(*entry_pattern_);
 
   entry_folder_ ->signal_activate().connect(controller_.find_files.slot());
