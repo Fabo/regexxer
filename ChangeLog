@@ -1,5 +1,11 @@
 2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/mainwindow.cc (on_hide): hide() the preferences dialog
+	instead of deleting it, so that on_pref_dialog_hide() is executed
+	to save the configuration data.
+
+2002-11-03  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/configdata.{cc,h}: New files, implementing load/save of
 	configuration data to a file.
 

@@ -263,11 +263,13 @@ void MainWindow::on_hide()
 {
   on_busy_action_cancel();
 
-  // Kill the preferences dialog if it's mapped right now.  This isn't
+  // Hide the preferences dialog if it's mapped right now.  This isn't
   // really necessary since it'd be deleted in the destructor anyway.
   // But if we have to do a lot of cleanup the dialog would stay open
   // for that time, which doesn't look neat.
-  pref_dialog_.reset();
+
+  if(pref_dialog_.get())
+    pref_dialog_->hide();
 
   Gtk::Window::on_hide();
 }
