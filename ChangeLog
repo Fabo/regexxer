@@ -1,3 +1,20 @@
+2004-07-16  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* macros/cxx.m4 (REGEXXER_LINK_VERSION_SCRIPT): Rename from
+	REGEXXER_CXXLINK_VERSION_SCRIPT() and make the macro language-
+	acnostic.  Also, take the name of the output variable to set as
+	first parameter instead of hardcoding it.
+	(REGEXXER_ARG_ENABLE_WARNINGS): Don't change the current language
+	but use AC_LANG_ASSERT() instead to make sure it's C++.  The user
+	is required to select the approriate language by himself then, as
+	recommended in the autoconf manual.
+
+	* macros/misc.m4 (REGEXXER_LIB_POPT): Make language-acnostic.
+	* macros/pcre.m4 (PCRE_CHECK_UTF8): ditto.
+
+	* configure.ac: Reorder a couple of macro invocations and insert
+	a call to AC_LANG([C++]).
+
 2004-07-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/main.cc (parse_command_line): Fix the help string of the

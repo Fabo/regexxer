@@ -52,7 +52,7 @@ AS_IF([eval "expr $pcre_version \\>= $pcre_required" >/dev/null 2>&5],
       [pcre_version_ok=yes],
       [pcre_version_ok=no])
 
-AC_MSG_RESULT([${pcre_version_ok}])
+AC_MSG_RESULT([$pcre_version_ok])
 
 AS_IF([test "x$pcre_version_ok" = xno],
 [
@@ -87,7 +87,6 @@ AC_CACHE_CHECK(
   [whether libpcre was compiled with UTF-8 support],
   [pcre_cv_has_utf8_support],
 [
-  AC_LANG_PUSH([C])
   pcre_saved_CPPFLAGS=$CPPFLAGS
   pcre_saved_LIBS=$LIBS
   CPPFLAGS="$CPPFLAGS $PCRE_CFLAGS"
@@ -101,10 +100,10 @@ AC_CACHE_CHECK(
 #     include <stdlib.h>
 #     include <pcre.h>
     ]],[[
-      const char* errmessage = NULL;
+      const char* errmessage = 0;
       int erroffset = 0;
 
-      if (pcre_compile(".", PCRE_UTF8, &errmessage, &erroffset, NULL))
+      if (pcre_compile(".", PCRE_UTF8, &errmessage, &erroffset, 0))
         exit(0);
 
       fprintf(stderr, "%s\n", errmessage);
@@ -117,7 +116,6 @@ AC_CACHE_CHECK(
 
   CPPFLAGS=$pcre_saved_CPPFLAGS
   LIBS=$pcre_saved_LIBS
-  AC_LANG_POP([C])
 ])
 
 AS_IF([test "x$pcre_cv_has_utf8_support" = xno],

@@ -25,7 +25,7 @@
 ##
 AC_DEFUN([REGEXXER_ARG_ENABLE_WARNINGS],
 [
-AC_REQUIRE([AC_PROG_CXX])
+AC_LANG_ASSERT([C++])
 
 AC_ARG_ENABLE([warnings], AS_HELP_STRING(
   [--enable-warnings=@<:@none|minimum|maximum|hardcore@:>@],
@@ -46,9 +46,8 @@ tested_flags=
 
 AS_IF([test "x$warning_flags" != x],
 [
-  AC_LANG_PUSH([C++])
   AC_LANG_CONFTEST([AC_LANG_SOURCE([[int foo() { return 0; }]])])
-  conftest_source="conftest.${ac_ext-cc}"
+  conftest_source=conftest.${ac_ext-cc}
 
   for flag in $warning_flags
   do
@@ -65,7 +64,6 @@ AS_IF([test "x$warning_flags" != x],
 
   rm -f "$conftest_source"
   regexxer_cxx_out=
-  AC_LANG_POP([C++])
 ])
 
 AS_IF([test "x$tested_flags" != x],
@@ -82,42 +80,40 @@ AS_IF([test "x$tested_flags" != x],
   tested_flags=none
 ])
 
-AC_MSG_RESULT([${tested_flags}])
+AC_MSG_RESULT([$tested_flags])
 ])
 
 
-## REGEXXER_CXXLINK_VERSION_SCRIPT(filename)
+## REGEXXER_LINK_VERSION_SCRIPT(variable, filename)
 ##
 ## Check whether the C++ linker accepts the --version-script flag.
 ## On success, assign the flag complete with filename to the output
-## variable REGEXXER_VERSION_SCRIPT.  The filename should be a path
-## relative to the top source directory.
+## variable.  The filename should be a path relative to the top
+## source directory.
 ##
-AC_DEFUN([REGEXXER_CXXLINK_VERSION_SCRIPT],
+AC_DEFUN([REGEXXER_LINK_VERSION_SCRIPT],
 [
-m4_if([$1],, [AC_FATAL([argument required])])
+m4_if([$2],, [AC_FATAL([2 arguments required])])
 
 AC_CACHE_CHECK(
-  [whether the C++ linker accepts -Wl,--version-script],
-  [regexxer_cv_cxxlink_version_script],
+  [whether the linker accepts -Wl,--version-script],
+  [regexxer_cv_link_version_script],
 [
-  AC_LANG_PUSH([C++])
   regexxer_save_ldflags=$LDFLAGS
-  LDFLAGS="$LDFLAGS -Wl,--version-script=$srcdir/$1"
+  LDFLAGS="$LDFLAGS -Wl,--version-script=$srcdir/$2"
   AC_LINK_IFELSE([AC_LANG_PROGRAM([], [])],
-                 [regexxer_cv_cxxlink_version_script=yes],
-                 [regexxer_cv_cxxlink_version_script=no])
+                 [regexxer_cv_link_version_script=yes],
+                 [regexxer_cv_link_version_script=no])
   LDFLAGS=$regexxer_save_ldflags
-  AC_LANG_POP([C++])
 ])
 
-AS_IF([test "x$regexxer_cv_cxxlink_version_script" = xyes],
+AS_IF([test "x$regexxer_cv_link_version_script" = xyes],
 [
-  REGEXXER_VERSION_SCRIPT='-Wl,--version-script=$(top_srcdir)/'"$1"
+  $1='-Wl,--version-script=$(top_srcdir)/'"$2"
 ],[
-  REGEXXER_VERSION_SCRIPT=
+  $1=
 ])
 
-AC_SUBST([REGEXXER_VERSION_SCRIPT])
+AC_SUBST([$1])
 ])
 

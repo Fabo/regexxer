@@ -57,7 +57,6 @@ AC_CACHE_CHECK(
   [for libpopt],
   [regexxer_cv_has_lib_popt],
 [
-  AC_LANG_PUSH([C])
   regexxer_save_LIBS=$LIBS
   LIBS="$LIBS -lpopt"
 
@@ -78,7 +77,6 @@ AC_CACHE_CHECK(
     [regexxer_cv_has_lib_popt=no])
 
   LIBS=$regexxer_save_LIBS
-  AC_LANG_POP([C])
 ])
 
 AS_IF([test "x$regexxer_cv_has_lib_popt" = xno],
