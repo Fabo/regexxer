@@ -1,5 +1,10 @@
 2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* regexxer.desktop: Set StartupNotify=true in order to take
+	advantage of the startup notification feature in GNOME 2.1.
+
+2002-12-14  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* autogen.sh: Incorporate bits of the standard GNOME autogen.sh,
 	and make use of aclocal-1.7 and automake-1.7 if available.
 
