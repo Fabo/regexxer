@@ -23,10 +23,6 @@ AC_INIT([regexxer], [0.4], [daniel.elstner@gmx.net], [regexxer])
 AC_REVISION([$Revision$])
 AC_CONFIG_SRCDIR([src/pcreshell.cc])
 
-AC_CANONICAL_BUILD()
-AC_CANONICAL_HOST()
-AC_CANONICAL_TARGET()
-
 AM_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE([gnu dist-bzip2 no-define nostdinc])
 
