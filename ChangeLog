@@ -1,3 +1,8 @@
+2002-10-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filebuffer.{cc,h}: Implement support for matching empty
+	strings, while emulating the behaviour of Perl's /g modifier.
+
 2002-10-24  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/statusline.{cc,h}: New files, implementing the status box

@@ -76,6 +76,8 @@ struct MatchData
             const Glib::ustring& line, const Pcre::Pattern& pattern, int capture_count);
   ~MatchData();
 
+  int get_bytes_length() const;
+
   Glib::RefPtr<Gtk::TextMark>       mark;
   Glib::ustring                     subject;
   std::vector< std::pair<int,int> > captures;
@@ -122,12 +124,16 @@ private:
 
   void replace_match(std::list<MatchData>::iterator pos, const Glib::ustring& substitution);
 
-  Glib::RefPtr<Mark> create_match_mark(const iterator& where);
-  bool is_match_mark(const Glib::RefPtr<Mark>& mark);
+  Glib::RefPtr<Mark> create_match_mark(const iterator& where, int length);
+  static bool is_match_mark(const Glib::RefPtr<Mark>& mark);
+  static int get_match_length(const Glib::RefPtr<Mark>& mark);
+
+  static bool is_match_start(const iterator& where);
 
   void remove_tag_current();
   void apply_tag_current();
-  void remove_match_at_iter(const iterator& where);
+
+  void remove_match_at_iter(const iterator& start);
 
   static void find_line_bounds(iterator& line_begin, iterator& line_end);
 

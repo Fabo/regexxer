@@ -61,8 +61,8 @@ protected:
 RegexxerTags::RegexxerTags()
 :
   Gtk::TextTagTable(),
-  match   (Gtk::TextTag::create("regexxer-match")),
-  current (Gtk::TextTag::create("regexxer-current-match"))
+  match         (Gtk::TextTag::create("regexxer-match")),
+  current       (Gtk::TextTag::create("regexxer-current-match"))
 {
   match  ->property_background() = "orange";
   current->property_background() = "yellow";
@@ -90,6 +90,16 @@ Glib::Quark file_buffer_match_quark()
   return quark;
 }
 
+int calculate_match_length(const Glib::ustring& subject, const std::pair<int,int>& bounds)
+{
+  const std::string::const_iterator begin = subject.begin().base();
+
+  const Glib::ustring::const_iterator start (begin + bounds.first);
+  const Glib::ustring::const_iterator stop  (begin + bounds.second);
+
+  return std::distance(start, stop);
+}
+
 } // anonymous namespace
 
 
@@ -112,6 +122,12 @@ MatchData::MatchData(const Glib::RefPtr<Gtk::TextMark>& position,
 
 MatchData::~MatchData()
 {}
+
+int MatchData::get_bytes_length() const
+{
+  const std::pair<int,int>& whole_match = captures.front();
+  return (whole_match.second - whole_match.first);
+}
 
 
 /**** Regexxer::FileBuffer *************************************************/
@@ -163,13 +179,29 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
       line_end.forward_to_line_end();
 
     const Glib::ustring subject (get_slice(line, line_end));
-    int offset = 0;
-    int capture_count = 0;
+    int  offset = 0;
+    bool do_match_empty = true;
 
-    while((capture_count = pattern.match(subject, offset, Pcre::NOT_EMPTY)) > 0)
+    do
     {
+      const int capture_count = pattern.match(
+          subject, offset, (do_match_empty) ? Pcre::MatchOptions(0) : Pcre::NOT_EMPTY);
+
+      if(capture_count <= 0)
+      {
+        if(!do_match_empty && unsigned(offset) < subject.bytes())
+        {
+          ++offset;
+          do_match_empty = true;
+          continue;
+        }
+        break;
+      }
+
       ++match_count_;
+
       const std::pair<int,int> bounds (pattern.get_substring_bounds(0));
+      const int match_length = calculate_match_length(subject, bounds);
 
       iterator start (line);
       iterator stop  (line);
@@ -177,14 +209,15 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple)
       start.set_line_index(bounds.first);
       stop .set_line_index(bounds.second);
 
-      match_list_.push_back(MatchData(create_match_mark(start), subject, pattern, capture_count));
+      match_list_.push_back(MatchData(
+          create_match_mark(start, match_length), subject, pattern, capture_count));
+
       apply_tag(tagtable->match, start, stop);
 
-      if(!multiple)
-        break;
-
+      do_match_empty = (match_length > 0);
       offset = bounds.second;
     }
+    while(multiple);
   }
 
   signal_match_count_changed(match_count_); // emit
@@ -295,16 +328,12 @@ int FileBuffer::get_line_preview(const Glib::ustring& substitution, Glib::ustrin
 
   if(!match_removed_ && current_match_ != match_list_.end())
   {
-    const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
-
     // Get the start of the match.
     const iterator start (current_match_->mark->get_iter());
-    g_return_val_if_fail(start.begins_tag(tagtable->current), position);
 
     // Find the end of the match.
     iterator stop (start);
-    if(!stop.ends_tag(tagtable->current))
-      stop.forward_to_tag_toggle(tagtable->current);
+    stop.set_line_index(start.get_line_index() + current_match_->get_bytes_length());
 
     // Find begin and end of the line containing the match.
     iterator line_begin (start);
@@ -322,6 +351,8 @@ int FileBuffer::get_line_preview(const Glib::ustring& substitution, Glib::ustrin
 
   return position;
 }
+
+/**** Regexxer::FileBuffer -- protected ************************************/
 
 void FileBuffer::on_insert(const FileBuffer::iterator& pos, const Glib::ustring& text, int bytes)
 {
@@ -343,8 +374,12 @@ void FileBuffer::on_insert(const FileBuffer::iterator& pos, const Glib::ustring&
     const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
 
     // If pos is within a match then remove this match.
-    if(!pos.toggles_tag(tagtable->match) && pos.has_tag(tagtable->match))
-      remove_match_at_iter(pos);
+    if(pos.has_tag(tagtable->match) && !is_match_start(pos))
+    {
+      iterator start (pos);
+      start.backward_to_tag_toggle(tagtable->match);
+      remove_match_at_iter(start);
+    }
   }
 
   Gtk::TextBuffer::on_insert(pos, text, bytes);
@@ -352,49 +387,48 @@ void FileBuffer::on_insert(const FileBuffer::iterator& pos, const Glib::ustring&
 
 void FileBuffer::on_erase(const FileBuffer::iterator& rbegin, const FileBuffer::iterator& rend)
 {
-  if(rbegin != rend)
+  if(!match_removed_ && current_match_ != match_list_.end())
   {
-    g_return_if_fail(rbegin < rend);
+    // Test whether [rbegin,rend) overlaps with the current match
+    // and push signal_preview_line_changed() on the queue if true.
 
-    if(!match_removed_ && current_match_ != match_list_.end())
-    {
-      // Test whether [rbegin,rend) overlaps with the current match
-      // and push signal_preview_line_changed() on the queue if true.
+    iterator lbegin (current_match_->mark->get_iter());
+    iterator lend   (lbegin);
+    find_line_bounds(lbegin, lend);
 
-      iterator lbegin (current_match_->mark->get_iter());
-      iterator lend   (lbegin);
-      find_line_bounds(lbegin, lend);
+    if(lbegin.in_range(rbegin, rend) || rbegin.in_range(lbegin, lend))
+      trigger_preview_line_changed();
+  }
 
-      if(lbegin.in_range(rbegin, rend) || rbegin.in_range(lbegin, lend))
-        trigger_preview_line_changed();
-    }
+  const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
 
-    const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
+  if(!rbegin.starts_line() && rbegin.has_tag(tagtable->match))
+  {
+    g_return_if_fail(!rbegin.ends_tag(tagtable->match)); // just to be sure...
+
+    int backward_chars = 0;
+    int match_length = -1;
     iterator pos (rbegin);
 
-    // We have to check for pos.has_tag() at rbegin, but for the remaining
-    // range until rend we can use pos.toggles_tag() (see below), which
-    // should be a lot faster.
-
-    if(pos.has_tag(tagtable->match) || pos.begins_tag(tagtable->match))
+    do
     {
-      g_return_if_fail(!pos.ends_tag(tagtable->match));
+      ++backward_chars;
+      --pos;
+
+      typedef std::list< Glib::RefPtr<Mark> > MarkList;
+      const MarkList marks (pos.get_marks());
+
+      for(MarkList::const_iterator pmark = marks.begin(); pmark != marks.end(); ++pmark)
+        match_length = std::max(match_length, get_match_length(*pmark));
+    }
+    while(match_length < 0 && !pos.starts_line() && !pos.toggles_tag(tagtable->match));
+
+    if(match_length > backward_chars)
       remove_match_at_iter(pos);
-    }
-
-    // Iterating over single characters is probably somewhat slower than
-    // pos.forward_to_tag_toggle(), but has better predictable worst case
-    // performance in case the buffer is large and the next match (if any)
-    // is far beyond rend.  Of course this is under the assumption that
-    // [rbegin,rend) is relatively small, but I think this is more likely
-    // than the buffer being small.
-
-    for(++pos; pos != rend; ++pos)
-    {
-      if(pos.toggles_tag(tagtable->match))
-        remove_match_at_iter(pos);
-    }
   }
+
+  for(iterator pos = rbegin; pos != rend; ++pos)
+    remove_match_at_iter(pos);
 
   Gtk::TextBuffer::on_erase(rbegin, rend);
 }
@@ -435,37 +469,64 @@ void FileBuffer::on_mark_deleted(const Glib::RefPtr<TextBuffer::Mark>& mark)
 
 void FileBuffer::replace_match(std::list<MatchData>::iterator pos, const Glib::ustring& substitution)
 {
-  const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
-
   const Glib::ustring substituted_text
       (Util::substitute_references(substitution.raw(), pos->subject.raw(), pos->captures));
 
   // Get the start of the match.
   const iterator start (pos->mark->get_iter());
-  g_return_if_fail(start.begins_tag(tagtable->match));
 
-  // Find the end of the match.
-  iterator stop (start);
-  if(!stop.ends_tag(tagtable->match))
-    stop.forward_to_tag_toggle(tagtable->match);
+  const int bytes_length = current_match_->get_bytes_length();
 
-  // Replace match with new substituted text.
-  insert(erase(start, stop), substituted_text); // triggers on_erase() and on_insert()
+  if(bytes_length > 0)
+  {
+    // Find end of match.
+    iterator stop (start);
+    stop.set_line_index(start.get_line_index() + bytes_length);
+
+    // Replace match with new substituted text.
+    insert(erase(start, stop), substituted_text); // triggers on_erase() and on_insert()
+  }
+  else // empty match
+  {
+    // Manually remove match mark and insert the new text.
+    delete_mark(current_match_->mark); // triggers on_mark_deleted()
+    insert(start, substituted_text);   // triggers on_insert()
+  }
 }
 
-Glib::RefPtr<FileBuffer::Mark> FileBuffer::create_match_mark(const FileBuffer::iterator& where)
+Glib::RefPtr<FileBuffer::Mark>
+FileBuffer::create_match_mark(const FileBuffer::iterator& where, int length)
 {
   const Glib::RefPtr<Mark> mark (create_mark(where, false)); // right gravity
 
   // Mark this anonymous mark as match mark ;)
-  mark->set_data(file_buffer_match_quark(), this);
+  mark->set_data(file_buffer_match_quark(), GINT_TO_POINTER(length + 1));
 
   return mark;
 }
 
+// static
 bool FileBuffer::is_match_mark(const Glib::RefPtr<FileBuffer::Mark>& mark)
 {
-  return (mark->get_data(file_buffer_match_quark()) == this);
+  return (mark->get_data(file_buffer_match_quark()) != 0);
+}
+
+// static
+int FileBuffer::get_match_length(const Glib::RefPtr<FileBuffer::Mark>& mark)
+{
+  if(void *const qdata = mark->get_data(file_buffer_match_quark()))
+    return GPOINTER_TO_INT(qdata) - 1;
+
+  return -1;
+}
+
+// static
+bool FileBuffer::is_match_start(const iterator& where)
+{
+  typedef std::list< Glib::RefPtr<Mark> > MarkList;
+  const MarkList marks (where.get_marks());
+
+  return (std::find_if(marks.begin(), marks.end(), &FileBuffer::is_match_mark) != marks.end());
 }
 
 void FileBuffer::remove_tag_current()
@@ -478,17 +539,23 @@ void FileBuffer::remove_tag_current()
   {
     const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
 
-    // Get the start position of tag "current".
+    // Get the start position of the current match.
     const iterator start (current_match_->mark->get_iter());
-    g_return_if_fail(start.begins_tag(tagtable->current));
 
-    // Get the end position of tag "current".
-    iterator stop (start);
-    if(!stop.ends_tag(tagtable->current))
-      stop.forward_to_tag_toggle(tagtable->current);
+    const int bytes_length = current_match_->get_bytes_length();
 
-    // Remove tag "current" from the range.
-    remove_tag(tagtable->current, start, stop);
+    if(bytes_length > 0)
+    {
+      // Find the end position of the current match.
+      iterator stop (start);
+      stop.set_line_index(start.get_line_index() + bytes_length);
+
+      remove_tag(tagtable->current, start, stop);
+    }
+    else // empty match
+    {
+      current_match_->mark->set_visible(false);
+    }
 
     trigger_preview_line_changed();
   }
@@ -500,53 +567,63 @@ void FileBuffer::apply_tag_current()
   {
     const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
 
-    // Get the start position of tag "match".
+    // Get the start position of the match.
     const iterator start (current_match_->mark->get_iter());
-    g_return_if_fail(start.begins_tag(tagtable->match));
 
-    // Find the end position of tag "match".
-    iterator stop (start);
-    if(!stop.ends_tag(tagtable->match))
-      stop.forward_to_tag_toggle(tagtable->match);
+    const int bytes_length = current_match_->get_bytes_length();
 
-    // Apply tag "current" on the same range as tag "match".
-    apply_tag(tagtable->current, start, stop);
+    if(bytes_length > 0)
+    {
+      // Find the end position of the match.
+      iterator stop (start);
+      stop.set_line_index(start.get_line_index() + bytes_length);
+
+      apply_tag(tagtable->current, start, stop);
+    }
+    else // empty match
+    {
+      current_match_->mark->set_visible(true);
+    }
+
     place_cursor(start);
 
     trigger_preview_line_changed();
   }
 }
 
-/* Remove the match at position where.  where doesn't have to be at the
- * start or end of the tagged range.  The removal includes the match's
+/* Remove the match at position start.  The removal includes the match's
  * Mark object and the tags applied to it.
  */
-void FileBuffer::remove_match_at_iter(const FileBuffer::iterator& where)
+void FileBuffer::remove_match_at_iter(const FileBuffer::iterator& start)
 {
-  const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
-
-  iterator start (where);
-  iterator stop  (where);
-
-  if(!start.begins_tag(tagtable->match))
-    start.backward_to_tag_toggle(tagtable->match);
-
-  if(!stop.ends_tag(tagtable->match))
-    stop.forward_to_tag_toggle(tagtable->match);
-
-  typedef std::list< Glib::RefPtr<Mark> > MarkList;
-  const MarkList marks (start.get_marks());
-
-  for(MarkList::const_iterator pmark = marks.begin(); pmark != marks.end(); ++pmark)
+  if(!start.get_marks().empty())
   {
-    if(is_match_mark(*pmark))
+    typedef std::list< Glib::RefPtr<Mark> > MarkList;
+    const MarkList marks (start.get_marks());
+
+    for(MarkList::const_iterator pmark = marks.begin(); pmark != marks.end(); ++pmark)
+    {
+      const int match_length = get_match_length(*pmark);
+
+      if(match_length < 0)
+        continue; // not a match mark
+
+      if(match_length > 0)
+      {
+        const Glib::RefPtr<RegexxerTags>& tagtable = RegexxerTags::instance();
+
+        iterator stop (start);
+        stop.forward_chars(match_length);
+
+        remove_tag(tagtable->match, start, stop);
+
+        if(start.begins_tag(tagtable->current))
+          remove_tag(tagtable->current, start, stop);
+      }
+
       delete_mark(*pmark); // triggers on_mark_deleted()
+    }
   }
-
-  remove_tag(tagtable->match, start, stop);
-
-  if(start.begins_tag(tagtable->current))
-    remove_tag(tagtable->current, start, stop);
 }
 
 // static
