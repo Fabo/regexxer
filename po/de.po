@@ -56,7 +56,7 @@ msgid ""
 msgstr ""
 "Name des zu benutzenden Zeichensatzes wenn eine Datei weder in UTF-8 noch "
 "dem in der Sprachumgebung eingestellten Zeichensatzes gelesen werden kann. "
-"„iconv --list” zeigt eine komplette Liste möglicher Werte an."
+"„iconv --list“ zeigt eine komplette Liste möglicher Werte an."
 
 #: regexxer.schemas.in.h:6
 msgid "Override text direction"
@@ -90,8 +90,8 @@ msgid ""
 "The style of the application's toolbar. Possible values are \"icons\", \"text"
 "\", \"both\", and \"both-horiz\"."
 msgstr ""
-"Der Stil der Werkzeugleiste der Anwendung. Mögliche Werte sind „icons”, "
-"„text”, „both” und „both-horiz”."
+"Der Stil der Werkzeugleiste der Anwendung. Mögliche Werte sind „icons“, "
+"„text“, „both“ und „both-horiz“."
 
 #: regexxer.schemas.in.h:12
 msgid "Toolbar style"
@@ -112,11 +112,11 @@ msgstr "#"
 
 #: src/filetree.cc:509
 msgid "Failed to save file \"%1\": %2"
-msgstr "Fehler beim Speichern der Datei „%1”: %2"
+msgstr "Fehler beim Speichern der Datei „%1“: %2"
 
 #: src/filetree.cc:1002
 msgid "\"%1\" seems to be a binary file."
-msgstr "„%1” scheint eine Binärdatei zu sein."
+msgstr "„%1“ scheint eine Binärdatei zu sein."
 
 #: src/main.cc:81
 msgid "_About"
@@ -168,7 +168,7 @@ msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
 msgstr ""
-"Fehler in regulärem Ausdruck bei „%1” (Index %2):\n"
+"Fehler in regulärem Ausdruck bei „%1“ (Index %2):\n"
 "%3"
 
 #: src/mainwindow.cc:414
@@ -199,7 +199,7 @@ msgstr ""
 
 #: src/prefdialog.cc:260
 msgid "\"%1\" is not a valid encoding."
-msgstr "„%1” ist kein gültiger Zeichensatz."
+msgstr "„%1“ ist kein gültiger Zeichensatz."
 
 #: src/statusline.cc:250
 msgid "Stop"
