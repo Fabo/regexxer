@@ -306,16 +306,16 @@ Gtk::Widget* Controller::create_action_area()
   Box *const box_move = new HBox(true, 5);
   action_area->pack_end(*manage(box_move), PACK_SHRINK);
 
-  Button *const button_prev_file = new ImageButton(Stock::GOTO_FIRST);
+  Button *const button_prev_file = new ImageButton(Stock::GOTO_FIRST, "File backward");
   box_move->pack_start(*manage(button_prev_file));
 
-  Button *const button_prev = new ImageButton(Stock::GO_BACK);
+  Button *const button_prev = new ImageButton(Stock::GO_BACK, "Backward");
   box_move->pack_start(*manage(button_prev));
 
-  Button *const button_next = new ImageButton(Stock::GO_FORWARD);
+  Button *const button_next = new ImageButton(Stock::GO_FORWARD, "Forward");
   box_move->pack_start(*manage(button_next));
 
-  Button *const button_next_file = new ImageButton(Stock::GOTO_LAST);
+  Button *const button_next_file = new ImageButton(Stock::GOTO_LAST, "File forward");
   box_move->pack_start(*manage(button_next_file));
 
   Button *const button_replace = new ImageLabelButton(Stock::CONVERT, "_Replace", true);

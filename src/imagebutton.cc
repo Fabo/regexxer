@@ -20,20 +20,27 @@
 
 #include "imagebutton.h"
 
+#include <atkmm.h>
 #include <gtkmm/alignment.h>
 #include <gtkmm/box.h>
 #include <gtkmm/image.h>
 #include <gtkmm/label.h>
 
+#include <config.h>
+
 
 namespace Regexxer
 {
 
-ImageButton::ImageButton(const Gtk::StockID& stock_id)
+ImageButton::ImageButton(const Gtk::StockID& stock_id, const Glib::ustring& name)
 {
   Gtk::Image *const image = new Gtk::Image(stock_id, Gtk::ICON_SIZE_BUTTON);
   add(*Gtk::manage(image));
   image->show();
+
+#if REGEXXER_HAVE_GTKMM_22
+  get_accessible()->set_name(name);
+#endif
 }
 
 ImageButton::~ImageButton()

@@ -30,7 +30,7 @@ namespace Regexxer
 class ImageButton : public Gtk::Button
 {
 public:
-  explicit ImageButton(const Gtk::StockID& stock_id);
+  ImageButton(const Gtk::StockID& stock_id, const Glib::ustring& name);
   virtual ~ImageButton();
 };
 

@@ -1,5 +1,13 @@
 2002-12-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/imagebutton.{cc,h} (ImageButton): Add a 'name' argument to
+	the ctor which is used to set the accessibility object's name.
+
+	* src/controller.cc (create_action_area): Set accessibility
+	names for all image-only buttons.
+
+2002-12-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac: Check for gtkmm >= 2.1.0 and #define
 	REGEXXER_HAVE_GTKMM_22 if available.
 
