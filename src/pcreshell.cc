@@ -66,6 +66,43 @@ Glib::ustring escape_non_ascii(const Glib::ustring& regex)
   return output.str();
 }
 
+int translate_to_char_offset(int error_offset, const Glib::ustring& regex,
+                                               const Glib::ustring& escaped)
+{
+  if(error_offset < 0)
+    return -1;
+
+  const int escaped_size = escaped.bytes();
+
+  g_return_val_if_fail(error_offset <= escaped_size, -1);
+  g_return_val_if_fail(int(regex.bytes()) <= escaped_size, -1);
+
+  int byte_offset = 0;
+  int char_offset = 0;
+
+  Glib::ustring::const_iterator       pregex     = regex.begin();
+  const Glib::ustring::const_iterator pregex_end = regex.end();
+
+  for(; byte_offset < error_offset && pregex < pregex_end; ++pregex)
+  {
+    if(*pregex >= 0x80)
+    {
+      while(byte_offset < error_offset && escaped.raw()[byte_offset] != '}')
+        ++byte_offset;
+
+      if(byte_offset == error_offset)
+        break;
+    }
+
+    ++byte_offset;
+    ++char_offset;
+  }
+
+  g_return_val_if_fail(byte_offset == error_offset, -1);
+
+  return char_offset;
+}
+
 } // anonymous namespace
 
 
@@ -111,17 +148,20 @@ Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
   ovecsize_   (0)
 {
   const char* error_message = 0;
-  int         error_offset  = -1;
 
   {
     const Glib::ustring escaped = escape_non_ascii(regex);
-    pcre_ = pcre_compile(escaped.c_str(), options | PCRE_UTF8, &error_message, &error_offset, 0);
-  }
 
-  if(!pcre_)
-  {
-    g_assert(error_message != 0);
-    throw Error(Glib::locale_to_utf8(error_message), error_offset);
+    int error_offset = -1;
+    pcre_ = pcre_compile(escaped.c_str(), options | PCRE_UTF8, &error_message, &error_offset, 0);
+
+    if(!pcre_)
+    {
+      g_assert(error_message != 0);
+
+      throw Error(Glib::locale_to_utf8(error_message),
+                  translate_to_char_offset(error_offset, regex, escaped));
+    }
   }
 
   pcre_extra_ = pcre_study(pcre_, 0, &error_message);

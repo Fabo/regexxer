@@ -78,7 +78,7 @@ public:
   Error& operator=(const Error& other);
 
   Glib::ustring what()   const { return message_; }
-  int           offset() const { return offset_;  } // in bytes
+  int           offset() const { return offset_;  } // in characters
 
 private:
   Glib::ustring message_;
@@ -95,8 +95,10 @@ public:
   explicit Pattern(const Glib::ustring& regex, CompileOptions options = CompileOptions(0));
   virtual ~Pattern();
 
+  // takes byte offset
   int match(const Glib::ustring& subject, int offset = 0, MatchOptions options = MatchOptions(0));
 
+  // returns byte offsets
   std::pair<int,int> get_substring_bounds(int index) const;
   Glib::ustring get_substring(const Glib::ustring& subject, int index) const;
 

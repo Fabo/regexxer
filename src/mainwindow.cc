@@ -551,18 +551,14 @@ void MainWindow::on_exec_search()
   catch(const Pcre::Error& error)
   {
     Glib::ustring message = "Error in regular expression";
-    const int byte_offset = error.offset();
-    int       char_index  = entry_regex_->get_position();
+    const int offset = error.offset();
 
-    if(byte_offset >= 0 && unsigned(byte_offset) < regex.bytes())
+    if(offset >= 0 && unsigned(offset) < regex.length())
     {
-      const Glib::ustring::const_iterator pos (regex.begin().base() + byte_offset);
-      char_index = std::distance(regex.begin(), pos);
-
       message += " at \302\273";
-      message += *pos;
+      message += regex[offset];
       message += "\302\253 (index ";
-      message += Util::int_to_string(char_index + 1);
+      message += Util::int_to_string(offset + 1);
       message += ")";
     }
 
@@ -572,8 +568,11 @@ void MainWindow::on_exec_search()
     Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
 
-    entry_regex_->grab_focus(); // XXX: kills PRIMARY selection (GTK+ problem)
-    entry_regex_->set_position(char_index);
+    if(offset >= 0 && offset < entry_regex_->get_text_length())
+    {
+      entry_regex_->grab_focus();
+      entry_regex_->select_region(offset, offset + 1);
+    }
 
     return;
   }

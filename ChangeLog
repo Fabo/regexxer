@@ -1,3 +1,15 @@
+2002-12-28  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/pcreshell.cc (translate_to_char_offset): New function
+	that translates the error offset returned by pcre_compile() to
+	a character offset into the original regex.  This became necessary
+	since due to the recent introduction of escape_non_ascii(), and
+	is more robust anyway.
+
+	* src/mainwindow.cc (on_exec_search): Deal with character offsets
+	instead of byte offsets.  Also, set the regex entry's selection on
+	the character where the error occurred.
+
 2002-12-27  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/statusline.{cc,h}: Use Gtk::RC::parse_string() and the
