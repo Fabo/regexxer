@@ -1,5 +1,11 @@
 2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* configure.ac: Check for gtkmm >= 2.1.1 instead of the compile
+	test based on Glib::set_application_name().  (Don't worry, gtkmm
+	2.1.x is not yet a requirement.)
+
+2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/prefdialog.cc: Don't #include GTK+ headers if gtkmm 2.2
 	API is available.
 
