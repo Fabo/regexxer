@@ -32,7 +32,6 @@
 
 namespace Gtk
 {
-class Box;
 class Button;
 class CheckButton;
 class Entry;
@@ -81,7 +80,7 @@ private:
   Gtk::TextView*    textview_;
   Gtk::Entry*       entry_preview_;
 
-  Gtk::Box*         action_area_;
+  Gtk::Widget*      action_area_;
   Gtk::Button*      button_prev_file_;
   Gtk::Button*      button_prev_;
   Gtk::Button*      button_next_;
@@ -100,7 +99,7 @@ private:
   std::list<SigC::Connection> buffer_connections_;
 
   Gtk::Widget* create_toolbar();
-  Gtk::Widget* create_buttonbox();
+  Gtk::Widget* create_action_area();
   Gtk::Widget* create_left_pane();
   Gtk::Widget* create_right_pane();
 

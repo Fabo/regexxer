@@ -1,5 +1,13 @@
 2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/main.cc: Set a global window icon list.
+
+	* src/mainwindow.cc: Consider both the movement buttons and the
+	replace buttons as part of the "action area".  This fixes wrong
+	sensitivity of the movement buttons during busy actions.
+
+2002-10-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/statusline.{cc,h}: Install an accelerator key (Escape) for
 	the cancel button.
 

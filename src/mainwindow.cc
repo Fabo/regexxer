@@ -37,9 +37,6 @@ namespace
 
 enum { BUSY_GUI_UPDATE_INTERVAL = 8 };
 
-const char regexxer_icon_filename[] = REGEXXER_DATADIR G_DIR_SEPARATOR_S
-                                      "pixmaps" G_DIR_SEPARATOR_S "regexxer.png";
-
 typedef Glib::RefPtr<Regexxer::FileBuffer> FileBufferPtr;
 
 
@@ -152,16 +149,6 @@ MainWindow::MainWindow()
 {
   using namespace Gtk;
 
-  try
-  {
-    set_icon(Gdk::Pixbuf::create_from_file(regexxer_icon_filename));
-  }
-  catch(const Glib::Error& error)
-  {
-    const Glib::ustring what = error.what();
-    g_warning(what.c_str());
-  }
-
   set_title_filename();
   set_default_size(600, 400);
 
@@ -185,7 +172,9 @@ MainWindow::MainWindow()
     vbox_main->pack_start(*manage(statusline_), PACK_SHRINK);
 
     vbox_interior->pack_start(*manage(paned.release()), PACK_EXPAND_WIDGET);
-    vbox_interior->pack_start(*manage(create_buttonbox()), PACK_SHRINK);
+
+    action_area_ = create_action_area();
+    vbox_interior->pack_start(*manage(action_area_), PACK_SHRINK);
   }
 
   show_all_children();
@@ -256,20 +245,20 @@ Gtk::Widget* MainWindow::create_toolbar()
   return toolbar.release();
 }
 
-Gtk::Widget* MainWindow::create_buttonbox()
+Gtk::Widget* MainWindow::create_action_area()
 {
   using namespace Gtk;
   using SigC::bind;
   using SigC::slot;
 
-  std::auto_ptr<Box> buttonbox (new HBox(false, 10));
-  buttonbox->set_border_width(2);
+  std::auto_ptr<Box> action_area (new HBox(false, 10));
+  action_area->set_border_width(2);
 
-  action_area_ = new HBox(true, 5);
-  buttonbox->pack_end(*manage(action_area_), PACK_SHRINK);
+  Box *const box_action = new HBox(true, 5);
+  action_area->pack_end(*manage(box_action), PACK_SHRINK);
 
   Box *const box_move = new HBox(true, 5);
-  buttonbox->pack_end(*manage(box_move), PACK_SHRINK);
+  action_area->pack_end(*manage(box_move), PACK_SHRINK);
 
   button_prev_file_ = new ImageButton(Stock::GOTO_FIRST);
   box_move->pack_start(*manage(button_prev_file_));
@@ -284,13 +273,13 @@ Gtk::Widget* MainWindow::create_buttonbox()
   box_move->pack_start(*manage(button_next_file_));
 
   button_replace_ = new CustomButton(Stock::CONVERT, "_Replace", true);
-  action_area_->pack_start(*manage(button_replace_));
+  box_action->pack_start(*manage(button_replace_));
 
   button_replace_file_ = new CustomButton(Stock::CONVERT, "_This file", true);
-  action_area_->pack_start(*manage(button_replace_file_));
+  box_action->pack_start(*manage(button_replace_file_));
 
   button_replace_all_ = new CustomButton(Stock::CONVERT, "_All files", true);
-  action_area_->pack_start(*manage(button_replace_all_));
+  box_action->pack_start(*manage(button_replace_all_));
 
   button_prev_file_   ->set_sensitive(false);
   button_prev_        ->set_sensitive(false);
@@ -308,7 +297,7 @@ Gtk::Widget* MainWindow::create_buttonbox()
   button_replace_file_->signal_clicked().connect(slot(*this, &MainWindow::on_replace_file));
   button_replace_all_ ->signal_clicked().connect(slot(*this, &MainWindow::on_replace_all));
 
-  return buttonbox.release();
+  return action_area.release();
 }
 
 Gtk::Widget* MainWindow::create_left_pane()

@@ -21,13 +21,15 @@
 #include "mainwindow.h"
 
 #include <glib.h>
-#include <exception>
 #include <gtkmm/iconfactory.h>
 #include <gtkmm/iconset.h>
 #include <gtkmm/iconsource.h>
 #include <gtkmm/main.h>
 #include <gtkmm/stock.h>
 #include <gtkmm/stockitem.h>
+
+#include <exception>
+#include <list>
 
 
 namespace
@@ -65,6 +67,24 @@ void regexxer_register_stock_items()
   factory->add_default();
 }
 
+void regexxer_set_window_icon()
+{
+  const char *const regexxer_icon_filename =
+      REGEXXER_DATADIR G_DIR_SEPARATOR_S "pixmaps" G_DIR_SEPARATOR_S "regexxer.png";
+
+  try
+  {
+    std::list< Glib::RefPtr<Gdk::Pixbuf> > icons;
+    icons.push_back(Gdk::Pixbuf::create_from_file(regexxer_icon_filename));
+    Gtk::Window::set_default_icon_list(icons);
+  }
+  catch(const Glib::Error& error)
+  {
+    const Glib::ustring what = error.what();
+    g_warning(what.c_str());
+  }
+}
+
 } // anonymous namespace
 
 
@@ -73,7 +93,9 @@ int main(int argc, char** argv)
   try
   {
     Gtk::Main main_instance (&argc, &argv);
+
     regexxer_register_stock_items();
+    regexxer_set_window_icon();
 
     Regexxer::MainWindow window;
     Gtk::Main::run(window);
