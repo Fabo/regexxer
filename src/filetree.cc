@@ -24,6 +24,8 @@
 
 #include <gtkmm/treestore.h>
 #include <gtkmm/stock.h>
+
+#include <cstring> /* for fucked up libstdc++-v2, see collatekey_sort_func() */
 #include <utility>
 
 
@@ -78,7 +80,12 @@ int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeMod
   if(lhs_key.empty() || rhs_key.empty())
     return (lhs_key.empty() && rhs_key.empty()) ? 0 : (lhs_key.empty() ? -1 : 1);
 
-  return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
+  // Can't use the following absolutely correct code due to the fucked up
+  // libstdc++-v2 GCC 2.95.x comes with.  Resort to strcmp().  Damn.
+  //
+  // return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
+
+  return std::strcmp(lhs_key.c_str() + 1, rhs_key.c_str() + 1);
 }
 
 
