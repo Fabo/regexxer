@@ -38,7 +38,7 @@ AM_INIT_AUTOMAKE([gnu dist-bzip2 no-define nostdinc])
 AC_PROG_CC()
 AC_PROG_CXX()
 
-PKG_CHECK_MODULES(GTKMM, sigc++-1.2 >= 1.1.13 gtkmm-2.0 >= 1.3.23)
+PKG_CHECK_MODULES(GTKMM, sigc++-1.2 >= 1.2.1 gtkmm-2.0 >= 1.3.27)
 AC_SUBST([GTKMM_CFLAGS])
 AC_SUBST([GTKMM_LIBS])
 
