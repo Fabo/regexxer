@@ -1,3 +1,10 @@
+2002-11-05  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/mainwindow.cc: In on_find_files() and on_exec_search(), make
+	sure the corresponding button is sensitive before starting the busy
+	action.  This is necessary since these callbacks are invoked from
+	the entries' signal_activate() too.
+
 2002-11-04  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/pcreshell.{cc,h}: Minor code cleanup.  Add a few assertions

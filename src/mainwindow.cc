@@ -37,7 +37,7 @@
 namespace
 {
 
-enum { BUSY_GUI_UPDATE_INTERVAL = 8 };
+enum { BUSY_GUI_UPDATE_INTERVAL = 16 };
 
 typedef Glib::RefPtr<Regexxer::FileBuffer> FileBufferPtr;
 
@@ -517,6 +517,9 @@ void MainWindow::on_select_folder()
 
 void MainWindow::on_find_files()
 {
+  if(!button_find_files_->is_sensitive())
+    return; // This could happen if we were invoked from from an entry's activate signal.
+
   BusyAction busy (*this);
 
   try
@@ -547,6 +550,9 @@ void MainWindow::on_find_files()
 
 void MainWindow::on_exec_search()
 {
+  if(!button_find_matches_->is_sensitive())
+    return; // This could happen if we were invoked from from an entry's activate signal.
+
   BusyAction busy (*this);
 
   const Glib::ustring regex = entry_regex_->get_text();
