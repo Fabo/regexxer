@@ -46,7 +46,7 @@ public:
   FileTree();
   virtual ~FileTree();
 
-  void find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
+  void find_files(const std::string& dirname, Pcre::Pattern& pattern,
                   bool recursive, bool hidden);
 
   int  get_file_count() const;

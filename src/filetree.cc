@@ -308,10 +308,9 @@ FileTree::FileTree()
 FileTree::~FileTree()
 {}
 
-void FileTree::find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
+void FileTree::find_files(const std::string& dirname, Pcre::Pattern& pattern,
                           bool recursive, bool hidden)
 {
-  const std::string startdir = Glib::filename_from_utf8(dirname);
   FindData find_data (pattern, recursive, hidden);
 
   const bool modified_count_changed = (toplevel_.modified_count != 0);
@@ -335,7 +334,7 @@ void FileTree::find_files(const Glib::ustring& dirname, Pcre::Pattern& pattern,
 
   try
   {
-    find_recursively(startdir, find_data);
+    find_recursively(dirname, find_data);
   }
   catch(const Glib::FileError& error)
   {

@@ -1,5 +1,15 @@
 2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/filetree.{cc,h} (find_files): Use std::string instead
+	of Glib::ustring for 'dirname' and get rid of the call to
+	Glib::filename_from_utf8().  This doesn't really belong here.
+
+	* src/mainwindow.cc (on_find_files): Convert the directory name
+	to filename encoding, and use the current directory as fallback
+	if it's empty.
+
+2002-11-11  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.{cc,h} (button_find_matches_): Set this button
 	insensitive unless there is at least one file to search in.
 	Suggested by Murray Cumming <murrayc@usa.net>.

@@ -559,6 +559,11 @@ void MainWindow::on_find_files()
       return;
   }
 
+  std::string folder = Glib::filename_from_utf8(Util::expand_pathname(entry_folder_->get_text()));
+
+  if(folder.empty())
+    folder = Glib::get_current_dir();
+
   BusyAction busy (*this);
 
   try
@@ -566,8 +571,7 @@ void MainWindow::on_find_files()
     Pcre::Pattern pattern (Util::shell_pattern_to_regex(entry_pattern_->get_text()));
 
     filetree_->find_files(
-        Util::expand_pathname(entry_folder_->get_text()),
-        pattern,
+        folder, pattern,
         button_recursive_->get_active(),
         button_hidden_->get_active());
   }
