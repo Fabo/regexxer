@@ -1,5 +1,13 @@
 2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/pcreshell.cc (escape_non_ascii): New function to work around
+	a crash in libpcre when using literal UTF-8 in character classes.
+	This still won't make it work, but prevents the crash and forces
+	an error message if characters in classes are outside the Latin1
+	range.
+
+2002-12-26  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* configure.ac: Check for gtkmm >= 2.1.1 instead of the compile
 	test based on Glib::set_application_name().  (Don't worry, gtkmm
 	2.1.x is not yet a requirement.)

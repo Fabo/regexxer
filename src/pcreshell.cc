@@ -22,6 +22,51 @@
 
 #include <glib.h>
 #include <glibmm.h>
+#include <sstream>
+
+#include <config.h>
+
+#if REGEXXER_HAVE_STD_LOCALE
+#include <locale>
+#endif
+
+
+namespace
+{
+
+/* Work around a bug in PCRE that makes it crash on literal UTF-8 characters
+ * in character classes.  Hexadecimal escapes help a bit, though non-ASCII
+ * characters in classes still won't work.  But it doesn't crash and PCRE
+ * gives us a proper error message if the UCS-4 value is above 255.
+ */
+Glib::ustring escape_non_ascii(const Glib::ustring& regex)
+{
+  std::ostringstream output;
+
+#if REGEXXER_HAVE_STD_LOCALE
+  output.imbue(std::locale::classic());
+#endif
+
+  output.setf(std::ios::hex, std::ios::basefield);
+  output.setf(std::ios::uppercase);
+
+  Glib::ustring::const_iterator       p    = regex.begin();
+  const Glib::ustring::const_iterator pend = regex.end();
+
+  for(; p != pend; ++p)
+  {
+    const gunichar uc = *p;
+
+    if(uc < 0x80)
+      output << static_cast<char>(uc);
+    else
+      output << "\\x{" << uc << '}';
+  }
+
+  return output.str();
+}
+
+} // anonymous namespace
 
 
 namespace Pcre
@@ -68,7 +113,10 @@ Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
   const char* error_message = 0;
   int         error_offset  = -1;
 
-  pcre_ = pcre_compile(regex.c_str(), options | PCRE_UTF8, &error_message, &error_offset, 0);
+  {
+    const Glib::ustring escaped = escape_non_ascii(regex);
+    pcre_ = pcre_compile(escaped.c_str(), options | PCRE_UTF8, &error_message, &error_offset, 0);
+  }
 
   if(!pcre_)
   {
