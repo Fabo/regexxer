@@ -466,7 +466,7 @@ msgstr "_Dateizugriff"
 
 #: ui/prefdialog.glade.h:16
 msgid "_Ignore the text direction of the locale"
-msgstr "_Ignoriere die Textausrichtung der Sprachumgebung"
+msgstr "_Ignoriere die Schriftrichtung der Sprachumgebung"
 
 #: ui/prefdialog.glade.h:17
 msgid "_Look'n'feel"
