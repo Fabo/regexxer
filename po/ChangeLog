@@ -1,3 +1,8 @@
+2004-07-11  Takeshi AIHANA <aihana@gnome.gr.jp>
+
+	* ja.po: Updated Japanese translation.
+		 Thanks for the fixing bellow :)
+
 2004-07-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* ja.po: Fix serious %<digit> vs. %s typo.

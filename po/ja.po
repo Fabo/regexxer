@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-09 01:49+0200\n"
-"PO-Revision-Date: 2004-06-12 19:32+0900\n"
+"POT-Creation-Date: 2004-07-11 15:44+0900\n"
+"PO-Revision-Date: 2004-07-11 15:43+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -92,12 +92,10 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-#, qt-format
 msgid "Failed to save file \"%1\": %2"
 msgstr "ファイル \"%1\" の保存に失敗: %2"
 
 #: src/filetree.cc:941
-#, qt-format
 msgid "\"%1\" seems to be a binary file."
 msgstr "\"%1\" はバイナリ・ファイルのようです。"
 
@@ -126,7 +124,6 @@ msgstr ""
 "とにかく終了しますか？"
 
 #: src/mainwindow.cc:369
-#, qt-format
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
@@ -155,7 +152,6 @@ msgid "The following errors occurred during search:"
 msgstr "検索の実行中に次のエラーが発生しました:"
 
 #: src/mainwindow.cc:465
-#, qt-format
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -164,7 +160,6 @@ msgstr ""
 "%3"
 
 #: src/mainwindow.cc:467
-#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -189,23 +184,22 @@ msgid ""
 msgstr "正規表現エンジンで再帰とバックトラッキングの上限に到達しました。"
 
 #: src/prefdialog.cc:248
-#, qt-format
 msgid "\"%1\" is not a valid encoding."
 msgstr "エンコーディング \"%1\" が間違っています。"
 
-#: src/statusline.cc:271
+#: src/statusline.cc:264
 msgid "Stop"
 msgstr "停止"
 
-#: src/statusline.cc:278
+#: src/statusline.cc:271
 msgid "File:"
 msgstr "対象ファイル:"
 
-#: src/statusline.cc:281
+#: src/statusline.cc:274
 msgid "Match:"
 msgstr "マッチした数:"
 
-#: src/statusline.cc:292
+#: src/statusline.cc:285
 msgid "Cancels the running search"
 msgstr "実行中の検索をキャンセルします"
 
@@ -368,7 +362,7 @@ msgstr "全てのファイル(_A)"
 
 #: ui/mainwindow.glade.h:33
 msgid "_Edit"
-msgstr ""
+msgstr "編集(_E)"
 
 #: ui/mainwindow.glade.h:34
 msgid "_File"
@@ -475,6 +469,3 @@ msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "regexxer は次の順番でエンコーディングを解決しながらファイルを読み込みます:"
-
-#~ msgid "*"
-#~ msgstr "*"
