@@ -46,6 +46,8 @@ public:
   void set_count(unsigned int count);
 
 private:
+  enum { MIN_RANGE = 100 };
+
   Gtk::Label*         label_index_;
   Gtk::Label*         label_count_;
   unsigned int        digits_range_;
@@ -64,7 +66,7 @@ CounterBox::CounterBox(const Glib::ustring& label)
 :
   label_index_          (0),
   label_count_          (0),
-  digits_range_         (100),
+  digits_range_         (MIN_RANGE),
   widest_digit_         (0),
   second_widest_digit_  (9)
 {
@@ -120,7 +122,7 @@ void CounterBox::set_count(unsigned int count)
   while(range <= count)
     range *= 10;
 
-  while(range > 100 && range / 10 > count)
+  while(range > MIN_RANGE && range / 10 > count)
     range /= 10;
 
   if(range != digits_range_)
