@@ -61,11 +61,11 @@ public:
 
   int get_modified_count() const;
 
-  SigC::Signal1<void,FileInfoPtr> signal_switch_buffer;
-  SigC::Signal0<void>             signal_bound_state_changed;
-  SigC::Signal0<void>             signal_match_count_changed;
-  SigC::Signal0<void>             signal_modified_count_changed;
-  SigC::Signal0<void>             signal_pulse;
+  SigC::Signal2<void,FileInfoPtr,int> signal_switch_buffer;
+  SigC::Signal0<void>                 signal_bound_state_changed;
+  SigC::Signal0<void>                 signal_match_count_changed;
+  SigC::Signal0<void>                 signal_modified_count_changed;
+  SigC::Signal0<void>                 signal_pulse;
 
 protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);

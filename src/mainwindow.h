@@ -94,7 +94,7 @@ private:
   void on_exec_search();
   bool after_exec_search();
 
-  void on_filelist_switch_buffer(Util::SharedPtr<FileInfo> fileinfo);
+  void on_filelist_switch_buffer(Util::SharedPtr<FileInfo> fileinfo, int file_index);
   void on_filelist_match_count_changed();
   void on_filelist_modified_count_changed();
   void on_filelist_bound_state_changed();

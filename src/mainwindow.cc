@@ -461,7 +461,7 @@ bool MainWindow::after_exec_search()
   return false;
 }
 
-void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo)
+void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo, int file_index)
 {
   const FileBufferPtr old_buffer = FileBufferPtr::cast_static(textview_->get_buffer());
 
@@ -514,6 +514,7 @@ void MainWindow::on_filelist_switch_buffer(FileInfoPtr fileinfo)
     on_buffer_bound_state_changed(BOUND_FIRST | BOUND_LAST);
   }
 
+  statusline_->set_file_index(file_index);
   update_preview();
 }
 

@@ -541,13 +541,18 @@ bool FileList::find_check_file(const std::string& basename,
 void FileList::on_selection_changed()
 {
   const FileListColumns& columns = filelist_columns();
+
   FileInfoPtr fileinfo;
+  int file_index = 0;
 
   conn_match_count_.disconnect();
   conn_modified_changed_.disconnect();
 
-  if(Gtk::TreeModel::iterator iter = get_selection()->get_selected())
+  if(const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
   {
+    Gtk::TreePath path (iter);
+    file_index = *path.get_indices().begin() + 1;
+
     fileinfo = (*iter)[columns.fileinfo];
 
     if(!fileinfo->buffer)
@@ -563,8 +568,8 @@ void FileList::on_selection_changed()
     }
   }
 
-  signal_switch_buffer(fileinfo); // emit
-  signal_bound_state_changed();   // emit
+  signal_switch_buffer(fileinfo, file_index); // emit
+  signal_bound_state_changed(); // emit
 }
 
 void FileList::on_buffer_match_count_changed(int match_count)

@@ -1,5 +1,15 @@
 2002-10-25  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/statusline.{cc,h} (CounterBox): New class encapsulating a
+	single "index/count"-style counter, for use by class StatusLine.
+	Further improve calculation of the label lengths.
+
+	* src/filelist.{cc,h} src/mainwindow.{cc,h}: Add a file_index
+	parameter to FileList::signal_switch_buffer() and display it in
+	the status line.
+
+2002-10-25  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/filebuffer.{cc,h}: Implement support for matching empty
 	strings, while emulating the behaviour of Perl's /g modifier.
 

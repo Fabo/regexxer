@@ -22,11 +22,9 @@
 #define REGEXXER_STATUSLINE_H_INCLUDED
 
 #include <gtkmm/box.h>
-#include <sstream>
 
 namespace Gtk
 {
-class Label;
 class ProgressBar;
 class Statusbar;
 }
@@ -35,13 +33,18 @@ class Statusbar;
 namespace Regexxer
 {
 
+class CounterBox;
+
 class StatusLine : public Gtk::HBox
 {
 public:
   StatusLine();
   virtual ~StatusLine();
 
+  void set_file_index(int file_index);
   void set_file_count(int file_count);
+
+  void set_match_index(long match_index);
   void set_match_count(long match_count);
 
   void pulse();
@@ -49,13 +52,9 @@ public:
 
 private:
   Gtk::ProgressBar*   progressbar_;
-  Gtk::Label*         label_files_;
-  Gtk::Label*         label_matches_;
+  CounterBox*         file_counter_;
+  CounterBox*         match_counter_;
   Gtk::Statusbar*     statusbar_;
-  std::ostringstream  stringstream_;
-
-  Glib::ustring number_to_string(unsigned long number);
-  void on_label_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style, Gtk::Label* label);
 };
 
 } // namespace Regexxer
