@@ -325,6 +325,11 @@ void StatusLine::set_file_encoding(const std::string& file_encoding)
   g_return_if_fail(encoding.is_ascii());
 
   statusbar_->push(encoding);
+
+  // Work around a bug in GTK+ that causes right-aligned labels (note that
+  // the status bar text is right-aligned in RTL locales) to be cut off at
+  // the end.  Forcing resize seems to solve the problem.
+  statusbar_->check_resize();
 }
 
 void StatusLine::pulse_start()
