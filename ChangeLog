@@ -1,5 +1,22 @@
 2004-05-19  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* ui/aboutdialog.glade (label_debian_*): Remove.  The Debian
+	package of regexxer is not the only one out there, and I cannot
+	list all of them in the about dialog.  Sorry Ross :/
+	(label_translator_{what,who}): Give credit to the translator(s)
+	for the user's locale as listed in the translation of the string
+	"translator-credits".
+	(label_url): Get rid of the custom SelectableLabel widget class.
+	The only feature provided by the custom widget was tab-navigation
+	to labels -- I figured one can simply use C-Tab to do just that.
+	(label_author_who): ditto
+	(label_translator_who): ditto.
+
+	* src/aboutdialog.cc (SelectableLabel): Remove custom widget.
+	(AboutDialog::create): Acommodate to glade file modifications.
+
+2004-05-19  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* Makefile.am (ACLOCAL_AMFLAGS): No need to explicitely specify
 	$(top_srcdir)/ in the directory name because the aclocal rule
 	changes to that directory anyway.  This also avoids confusing
