@@ -267,8 +267,7 @@ Gtk::Widget* PrefDialog::create_page_info()
   Label *const label_title = new Label();
   box_title->pack_start(*manage(label_title), PACK_EXPAND_WIDGET);
   label_title->set_alignment(0.0, 0.5);
-  label_title->set_markup("<span size=\"xx-large\" weight=\"heavy\">"
-                          PACKAGE_NAME " " PACKAGE_VERSION "</span>");
+  label_title->set_markup("<span size=\"xx-large\" weight=\"heavy\">" PACKAGE_STRING "</span>");
 
   Label *const label_mail = new Label(regexxer_author_list);
   box->pack_start(*manage(label_mail), PACK_SHRINK);
