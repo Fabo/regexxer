@@ -1,6 +1,13 @@
+2004-06-18  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* it.po: New translation, contributed by
+	Alberto Paro <alberto@paro.homeunix.org>.
+
+	* LINGUAS: Add it.
+
 2004-06-12  Takeshi AIHANA <aihana@gnome.gr.jp>
 
-	*LINGUAS: Added ja.
+	* LINGUAS: Added ja.
 	* ja.po: Added Japanese translation.
 
 2004-06-10  Daniel Elstner  <daniel.elstner@gmx.net>
