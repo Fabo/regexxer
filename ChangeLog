@@ -1,3 +1,8 @@
+2003-02-06  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* regexxer.desktop: Add Danish translation contributed by
+	Morten Brix Petersen <mbp@wtf.dk>.  Thanks!
+
 2003-01-11  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* configure.ac: Check for gtkmm >= 2.2.0 rather than 2.1.1.  Note

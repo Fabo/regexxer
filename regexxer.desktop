@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=regexxer
 Comment=An interactive tool for performing search and replace operations
+Comment[da]=Et interaktivt værktøj til at udføre søg og erstat handlinger
 Comment[de]=Ein interaktives Werkzeug zum Suchen und Ersetzen
 Exec=regexxer
 Icon=regexxer.png
