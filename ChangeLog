@@ -1,3 +1,17 @@
+2002-10-30  Daniel Elstner  <daniel.elstner@gmx.net>
+
+	* src/filelist.{cc,h} (FileList::FindError): Store a list of
+	strings instead of Glib::Error objects.  We don't need the extra
+	information from Glib::Error, and plain strings gives us more
+	flexibility with regards to message strings.
+
+	* src/filelist.cc (save_current_file): Report errors to the caller
+	using FileList::FileError exceptions.
+	* src/filelist.cc (save_all_files): ditto.
+
+	* src/mainwindow.{cc,h}: Generalize FindErrorDialog into
+	FileErrorDialog and use it to report file saving errors too.
+
 2002-10-29  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* src/filelist.{cc,h} (FileList::FindError): Explicitly implement

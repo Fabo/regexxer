@@ -131,6 +131,9 @@ private:
   void on_replace_file();
   void on_replace_all();
 
+  void on_save_file();
+  void on_save_all();
+
   void update_preview();
   void set_title_filename(const Glib::ustring& filename = Glib::ustring());
 

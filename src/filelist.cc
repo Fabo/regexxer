@@ -83,45 +83,47 @@ public:
 namespace Regexxer
 {
 
-/**** Regexxer::FileList::FindErrorList ************************************/
+/**** Regexxer::FileList::ErrorList ****************************************/
 
-struct FileList::FindErrorList : public Util::SharedObject
+/* This is just a std::list<> wrapper that can be used with Util::SharedPtr<>.
+ */
+struct FileList::ErrorList : public Util::SharedObject
 {
-  FindErrorList();
-  ~FindErrorList();
+  ErrorList();
+  ~ErrorList();
 
-  std::list<Glib::FileError> errors;
+  std::list<Glib::ustring> errors;
 };
 
-FileList::FindErrorList::FindErrorList()
+FileList::ErrorList::ErrorList()
 {}
 
-FileList::FindErrorList::~FindErrorList()
+FileList::ErrorList::~ErrorList()
 {}
 
 
-/**** Regexxer::FileList::FindError ****************************************/
+/**** Regexxer::FileList::Error ********************************************/
 
-FileList::FindError::FindError(const Util::SharedPtr<FileList::FindErrorList>& error_list)
+FileList::Error::Error(const Util::SharedPtr<FileList::ErrorList>& error_list)
 :
   error_list_ (error_list)
 {}
 
-FileList::FindError::~FindError()
+FileList::Error::~Error()
 {}
 
-FileList::FindError::FindError(const FileList::FindError& other)
+FileList::Error::Error(const FileList::Error& other)
 :
   error_list_ (other.error_list_)
 {}
 
-FileList::FindError& FileList::FindError::operator=(const FileList::FindError& other)
+FileList::Error& FileList::Error::operator=(const FileList::Error& other)
 {
   error_list_ = other.error_list_;
   return *this;
 }
 
-const std::list<Glib::FileError>& FileList::FindError::get_error_list() const
+const std::list<Glib::ustring>& FileList::Error::get_error_list() const
 {
   return error_list_->errors;
 }
@@ -136,13 +138,13 @@ struct FileList::FindData
            bool recursive_, bool hidden_);
   ~FindData();
 
-  Pcre::Pattern                             pattern;
-  const std::string::size_type              chop_off;
-  const bool                                recursive;
-  const bool                                hidden;
-  Util::SharedPtr<FileList::FindErrorList>  error_list;
+  Pcre::Pattern                         pattern;
+  const std::string::size_type          chop_off;
+  const bool                            recursive;
+  const bool                            hidden;
+  Util::SharedPtr<FileList::ErrorList>  error_list;
 
-  std::list<Glib::FileError>& errors() { return error_list->errors; }
+  std::list<Glib::ustring>& errors() { return error_list->errors; }
 };
 
 FileList::FindData::FindData(const Glib::ustring&   pattern_,
@@ -153,7 +155,7 @@ FileList::FindData::FindData(const Glib::ustring&   pattern_,
   chop_off    (chop_off_),
   recursive   (recursive_),
   hidden      (hidden_),
-  error_list  (new FileList::FindErrorList())
+  error_list  (new FileList::ErrorList())
 {}
 
 FileList::FindData::~FindData()
@@ -238,13 +240,13 @@ void FileList::find_files(const Glib::ustring& dirname,
   }
   catch(const Glib::FileError& error)
   {
-    find_data.errors().push_back(error); // collect errors but don't fail
+    find_data.errors().push_back(error.what()); // collect errors but don't fail
   }
 
   signal_bound_state_changed(); // emit
 
   if(!find_data.errors().empty())
-    throw FindError(find_data.error_list);
+    throw Error(find_data.error_list);
 }
 
 int FileList::get_file_count() const
@@ -254,7 +256,7 @@ int FileList::get_file_count() const
 
 void FileList::save_current_file()
 {
-  if(Gtk::TreeModel::iterator iter = get_selection()->get_selected())
+  if(const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
   {
     const FileInfoPtr fileinfo = (*iter)[filelist_columns().fileinfo];
 
@@ -263,16 +265,26 @@ void FileList::save_current_file()
       if(fileinfo->buffer)
         save_file(fileinfo);
     }
-    catch(...) // TODO: make the caller handle the exception
+    catch(const Glib::Error& error)
     {
-      const Glib::ustring filename = Util::filename_to_utf8_fallback(fileinfo->fullname);
-      g_warning("writing to file `%s' failed", filename.c_str());
+      const Util::SharedPtr<ErrorList> error_list (new ErrorList());
+
+      Glib::ustring message = "Failed to save file '";
+      message += Util::filename_to_utf8_fallback(fileinfo->fullname);
+      message += "': ";
+      message += error.what();
+
+      error_list->errors.push_back(message);
+
+      throw Error(error_list);
     }
   }
 }
 
 void FileList::save_all_files()
 {
+  const Util::SharedPtr<ErrorList> error_list (new ErrorList());
+
   const FileListColumns& columns = filelist_columns();
   int new_modified_count = modified_count_;
 
@@ -287,10 +299,14 @@ void FileList::save_all_files()
         save_file(fileinfo);
         --new_modified_count;
       }
-      catch(...) // TODO: make the caller handle the exception
+      catch(const Glib::Error& error)
       {
-        const Glib::ustring filename = Util::filename_to_utf8_fallback(fileinfo->fullname);
-        g_warning("writing to file `%s' failed", filename.c_str());
+        Glib::ustring message = "Failed to save file '";
+        message += Util::filename_to_utf8_fallback(fileinfo->fullname);
+        message += "': ";
+        message += error.what();
+
+        error_list->errors.push_back(message);
       }
 
       liststore_->row_changed(Gtk::TreePath(iter), iter);
@@ -302,6 +318,9 @@ void FileList::save_all_files()
     modified_count_ = new_modified_count;
     signal_modified_count_changed(); // emit
   }
+
+  if(!error_list->errors.empty())
+    throw Error(error_list);
 }
 
 void FileList::select_first_file()
@@ -558,7 +577,7 @@ void FileList::find_recursively(const std::string& dirname, FileList::FindData& 
     catch(const Glib::FileError& error)
     {
       // Collect errors but don't interrupt the search.
-      find_data.errors().push_back(error);
+      find_data.errors().push_back(error.what());
     }
     catch(const Glib::ConvertError& error) // unlikely due to use of our own fallback conversion
     {

@@ -86,31 +86,30 @@ CustomButton::~CustomButton()
 {}
 
 
-class FindErrorDialog : public Gtk::MessageDialog
+class FileErrorDialog : public Gtk::MessageDialog
 {
 public:
-  FindErrorDialog(Gtk::Window& parent, const Regexxer::FileList::FindError& error);
-  virtual ~FindErrorDialog();
+  FileErrorDialog(Gtk::Window& parent, const Glib::ustring& message,
+                  Gtk::MessageType type, const Regexxer::FileList::Error& error);
+  virtual ~FileErrorDialog();
 };
 
-FindErrorDialog::FindErrorDialog(Gtk::Window& parent, const Regexxer::FileList::FindError& error)
+FileErrorDialog::FileErrorDialog(Gtk::Window& parent, const Glib::ustring& message,
+                                 Gtk::MessageType type, const Regexxer::FileList::Error& error)
 :
-  Gtk::MessageDialog(
-      parent, "The following errors occurred during search:",
-      Gtk::MESSAGE_WARNING, // warning instead of error because the search hasn't been interrupted
-      Gtk::BUTTONS_OK, true)
+  Gtk::MessageDialog(parent, message, type, Gtk::BUTTONS_OK, true)
 {
   using namespace Gtk;
 
   const Glib::RefPtr<TextBuffer> buffer = TextBuffer::create();
   TextBuffer::iterator buffer_end = buffer->end();
 
-  typedef std::list<Glib::FileError> ErrorList;
+  typedef std::list<Glib::ustring> ErrorList;
   const ErrorList& error_list = error.get_error_list();
 
   for(ErrorList::const_iterator perr = error_list.begin(); perr != error_list.end(); ++perr)
   {
-    buffer_end = buffer->insert(buffer_end, perr->what());
+    buffer_end = buffer->insert(buffer_end, *perr);
     buffer_end = buffer->insert(buffer_end, "\n");
   }
 
@@ -135,7 +134,7 @@ FindErrorDialog::FindErrorDialog(Gtk::Window& parent, const Regexxer::FileList::
   frame->show_all();
 }
 
-FindErrorDialog::~FindErrorDialog()
+FileErrorDialog::~FileErrorDialog()
 {}
 
 } // anonymous namespace
@@ -286,10 +285,10 @@ Gtk::Toolbar* MainWindow::create_toolbar()
   std::auto_ptr<Toolbar> toolbar (new Toolbar());
   ToolList& tools = toolbar->tools();
 
-  tools.push_back(StockElem(Stock::SAVE, slot(*filelist_, &FileList::save_current_file)));
+  tools.push_back(StockElem(Stock::SAVE, slot(*this, &MainWindow::on_save_file)));
   toolbutton_save_ = tools.back().get_widget();
 
-  tools.push_back(StockElem(StockID("regexxer-save-all"), slot(*filelist_, &FileList::save_all_files)));
+  tools.push_back(StockElem(StockID("regexxer-save-all"), slot(*this, &MainWindow::on_save_all)));
   toolbutton_save_all_ = tools.back().get_widget();
 
   //tools.push_back(Space());
@@ -524,9 +523,10 @@ void MainWindow::on_find_files()
     Gtk::MessageDialog dialog (*this, message, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
   }
-  catch(const FileList::FindError& error)
+  catch(const FileList::Error& error)
   {
-    FindErrorDialog dialog (*this, error);
+    const Glib::ustring message = "The following errors occurred during search:";
+    FileErrorDialog dialog (*this, message, Gtk::MESSAGE_WARNING, error);
     dialog.run();
   }
 
@@ -774,6 +774,34 @@ void MainWindow::on_replace_all()
 
   filelist_->replace_all_matches(entry_substitution_->get_text());
   statusline_->set_match_index(0);
+}
+
+void MainWindow::on_save_file()
+{
+  try
+  {
+    filelist_->save_current_file();
+  }
+  catch(const FileList::Error& error)
+  {
+    const Glib::ustring what = error.get_error_list().front();
+    Gtk::MessageDialog dialog (*this, what, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    dialog.run();
+  }
+}
+
+void MainWindow::on_save_all()
+{
+  try
+  {
+    filelist_->save_all_files();
+  }
+  catch(const FileList::Error& error)
+  {
+    const Glib::ustring message = "The following errors occurred during save:";
+    FileErrorDialog dialog (*this, message, Gtk::MESSAGE_ERROR, error);
+    dialog.run();
+  }
 }
 
 void MainWindow::update_preview()

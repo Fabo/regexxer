@@ -39,7 +39,7 @@ namespace Regexxer
 class FileList : public Gtk::TreeView
 {
 public:
-  class FindError; // exception class
+  class Error; // exception class
 
   FileList();
   virtual ~FileList();
@@ -78,7 +78,7 @@ protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 
 private:
-  struct FindErrorList;
+  struct ErrorList;
   struct FindData;
 
   Glib::RefPtr<Gtk::ListStore>  liststore_;
@@ -114,19 +114,19 @@ private:
 };
 
 
-class FileList::FindError
+class FileList::Error
 {
 public:
-  explicit FindError(const Util::SharedPtr<FileList::FindErrorList>& error_list);
-  virtual ~FindError();
+  explicit Error(const Util::SharedPtr<FileList::ErrorList>& error_list);
+  virtual ~Error();
 
-  FindError(const FileList::FindError& other);
-  FileList::FindError& operator=(const FileList::FindError& other);
+  Error(const FileList::Error& other);
+  FileList::Error& operator=(const FileList::Error& other);
 
-  const std::list<Glib::FileError>& get_error_list() const;
+  const std::list<Glib::ustring>& get_error_list() const;
 
 private:
-  Util::SharedPtr<FileList::FindErrorList> error_list_;
+  Util::SharedPtr<FileList::ErrorList> error_list_;
 };
 
 } // namespace Regexxer
