@@ -1,5 +1,15 @@
 2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/pcreshell.h: Eliminate the include dependency on the pcre.h
+	header.  This requires defining the numeric values of the bit flag
+	enums directly, but fortunately these cannot be changed without
+	breaking ABI anyway.
+
+	* src/pcreshell.cc: Include pcre.h, and use static_cast<> where
+	necessary to allow for Pattern::pcre_ to be declared as void*.
+
+2004-06-08  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/mainwindow.cc (MainWindow::set_title_filename): Concatenate
 	with the string literal PACKAGE_NAME at compile time.
 

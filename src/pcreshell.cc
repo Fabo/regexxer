@@ -21,6 +21,7 @@
 #include "pcreshell.h"
 #include "translation.h"
 
+#include <pcre.h>
 #include <glib.h>
 #include <glibmm.h>
 #include <algorithm>
@@ -121,7 +122,7 @@ Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
   }
 
   int capture_count = 0;
-  const int rc = pcre_fullinfo(pcre_, 0, PCRE_INFO_CAPTURECOUNT, &capture_count);
+  const int rc = pcre_fullinfo(static_cast<pcre*>(pcre_), 0, PCRE_INFO_CAPTURECOUNT, &capture_count);
 
   g_assert(rc == 0);
   g_assert(capture_count >= 0);
@@ -138,7 +139,7 @@ Pattern::~Pattern()
 
 int Pattern::match(const Glib::ustring& subject, int offset, MatchOptions options)
 {
-  const int rc = pcre_exec(pcre_, 0, subject.data(), subject.bytes(),
+  const int rc = pcre_exec(static_cast<pcre*>(pcre_), 0, subject.data(), subject.bytes(),
                            offset, options, ovector_, ovecsize_);
 
   if (rc >= 0 || rc == PCRE_ERROR_NOMATCH)

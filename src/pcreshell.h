@@ -22,23 +22,26 @@
 #define REGEXXER_PCRESHELL_H_INCLUDED
 
 #include <glibmm/ustring.h>
-#include <pcre.h>
 #include <utility>
 
 
 namespace Pcre
 {
 
+/*
+ * The numeric values are copied from pcre.h.  This is quite safe
+ * because they cannot be changed without breaking ABI.
+ */
 enum CompileOptions
 {
-  ANCHORED        = PCRE_ANCHORED,
-  CASELESS        = PCRE_CASELESS,
-  DOLLAR_ENDONLY  = PCRE_DOLLAR_ENDONLY,
-  DOTALL          = PCRE_DOTALL,
-  EXTENDED        = PCRE_EXTENDED,
-  EXTRA           = PCRE_EXTRA,
-  MULTILINE       = PCRE_MULTILINE,
-  UNGREEDY        = PCRE_UNGREEDY
+  CASELESS        = 0x0001,
+  MULTILINE       = 0x0002,
+  DOTALL          = 0x0004,
+  EXTENDED        = 0x0008,
+  ANCHORED        = 0x0010,
+  DOLLAR_ENDONLY  = 0x0020,
+  EXTRA           = 0x0040,
+  UNGREEDY        = 0x0200
 };
 
 inline CompileOptions operator|(CompileOptions lhs, CompileOptions rhs)
@@ -63,11 +66,15 @@ inline CompileOptions& operator^=(CompileOptions& lhs, CompileOptions rhs)
   { return (lhs = static_cast<CompileOptions>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs))); }
 
 
+/*
+ * The numeric values are copied from pcre.h.  This is quite safe
+ * because they cannot be changed without breaking ABI.
+ */
 enum MatchOptions
 {
-  NOT_BOL   = PCRE_NOTBOL,
-  NOT_EOL   = PCRE_NOTEOL,
-  NOT_EMPTY = PCRE_NOTEMPTY
+  NOT_BOL   = 0x0080,
+  NOT_EOL   = 0x0100,
+  NOT_EMPTY = 0x0400
 };
 
 inline MatchOptions operator|(MatchOptions lhs, MatchOptions rhs)
@@ -128,7 +135,7 @@ public:
   Glib::ustring get_substring(const Glib::ustring& subject, int index) const;
 
 private:
-  pcre* pcre_;
+  void* pcre_;
   int*  ovector_;
   int   ovecsize_;
 
