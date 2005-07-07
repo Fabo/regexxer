@@ -1,0 +1,488 @@
+# # traditional Chinese translation of regexxer
+# # Copyright (C) 2003, 05 Free Software Foundation, Inc.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer 0.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-04-12 19:31+0000\n"
+"PO-Revision-Date: 2005-07-08 06:27+0800\n"
+"Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
+"Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+#: ../regexxer.desktop.in.h:1
+msgid "Search and replace using regular expressions"
+msgstr "使用正規表示式搜尋或取代"
+
+#: ../regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "regexxer 搜尋工具"
+
+#: ../regexxer.schemas.in.h:1
+msgid "Current-match color"
+msgstr "表示目前符合的色彩"
+
+#: ../regexxer.schemas.in.h:2
+msgid "Fallback encoding"
+msgstr "備用編碼"
+
+#: ../regexxer.schemas.in.h:3
+msgid "Match color"
+msgstr "符合色彩"
+
+#: ../regexxer.schemas.in.h:4
+msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" for a complete list of possible values."
+msgstr "在檔案無法以 UTF-8 或目前的地區所指定的編碼讀取時 使用的字元編碼名稱。使用「iconv --list」可以查看 所有可使用編碼的清單。"
+
+#: ../regexxer.schemas.in.h:5
+msgid "Text view font"
+msgstr "純文字檢視字型"
+
+#: ../regexxer.schemas.in.h:6
+msgid "The background color used to highlight matches of the search expression."
+msgstr "用來突顯搜尋表示式比對結果的背景顏色。"
+
+#: ../regexxer.schemas.in.h:7
+msgid "The background color used to highlight the currently selected match of the search expression."
+msgstr "用來突顯目前選擇的搜尋表示式比對結果的背景顏色。"
+
+#: ../regexxer.schemas.in.h:8
+msgid "The font used in the file editor."
+msgstr "在檔案編輯器中使用的字型。"
+
+#: ../regexxer.schemas.in.h:9
+msgid "The style of the application's toolbar. Possible values are \"icons\", \"text\", \"both\", and \"both-horiz\"."
+msgstr "應用程式的工具列風格。可用的數值有「圖示」、「文字」、「兩者」與「兩者(水平)」。"
+
+#: ../regexxer.schemas.in.h:10
+msgid "Toolbar style"
+msgstr "工具列風格"
+
+#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+#: ../src/filebuffer.cc:203
+msgid "Can't read file:"
+msgstr "無法讀取檔案："
+
+#: ../src/filetree.cc:81
+msgid "File"
+msgstr "檔案"
+
+#: ../src/filetree.cc:101
+msgid "#"
+msgstr "#"
+
+#: ../src/filetree.cc:532
+msgid "Failed to save file \"%1\": %2"
+msgstr "儲存檔案「%1」時失敗：%2"
+
+#: ../src/filetree.cc:949
+msgid "\"%1\" seems to be a binary file."
+msgstr "「%1」似乎是二元檔。"
+
+#: ../src/main.cc:84
+msgid "_About"
+msgstr "關於(_A)"
+
+#: ../src/main.cc:85
+msgid "Save _all"
+msgstr "儲存全部(_A)"
+
+#: ../src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "尋找符合 PATTERN 的檔案"
+
+#: ../src/main.cc:100
+msgid "PATTERN"
+msgstr "PATTERN"
+
+#: ../src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "不繼續搜尋子目錄"
+
+#: ../src/main.cc:102
+#: ../ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "同時尋找隱藏的檔案"
+
+#: ../src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "尋找符合 REGEX 的文字"
+
+#: ../src/main.cc:103
+msgid "REGEX"
+msgstr "REGEX"
+
+#: ../src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "只尋找一行中第一個符合的"
+
+#: ../src/main.cc:105
+#: ../ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "進行區分大小寫的比對"
+
+#: ../src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "以 STRING 置換符合的項目"
+
+#: ../src/main.cc:106
+msgid "STRING"
+msgstr "STRING"
+
+#: ../src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "將符合的位置列印至標準輸出"
+
+#: ../src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "不要自動開始搜尋"
+
+#: ../src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[選項]... [資料夾]"
+
+#: ../src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr "使用「regexxer --help」以獲得更多資訊。"
+
+#: ../src/mainwindow.cc:252
+#: ../ui/mainwindow.glade.h:1
+msgid "A filename pattern as used by the shell. Character classes [ab] and csh style brace expressions {a,b} are supported."
+msgstr "如同 shelt使用的檔案名稱。支援字元類別 [ab] 與 csh 式括弧表示式 {a,b} 。"
+
+#: ../src/mainwindow.cc:403
+msgid ""
+"Some files haven't been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+"某些檔案尚未儲存。\n"
+"無論如何都要離開？"
+
+#: ../src/mainwindow.cc:431
+msgid "The folder name \"%1\" contains characters not representable in the encoding of the local file system."
+msgstr "資料夾名稱「%1」包含本地檔案系統編碼中沒有出現的字元。"
+
+#: ../src/mainwindow.cc:450
+msgid "Select a folder"
+msgstr "選擇資料夾"
+
+#: ../src/mainwindow.cc:470
+msgid ""
+"Some files haven't been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+"某些檔案尚未儲存。\n"
+"無論如何都要繼續？"
+
+#: ../src/mainwindow.cc:496
+msgid "The file search pattern is invalid."
+msgstr "檔案搜尋樣式無效。"
+
+#: ../src/mainwindow.cc:502
+msgid "The following errors occurred during search:"
+msgstr "在搜尋時發生下列錯誤："
+
+#: ../src/mainwindow.cc:527
+msgid ""
+"Error in regular expression at \"%1\" (index %2):\n"
+"%3"
+msgstr ""
+"正規表示式發生錯誤於「%1」 (索引 %2)：\n"
+"%3"
+
+#: ../src/mainwindow.cc:529
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"正規表示式發生錯誤：\n"
+"%1"
+
+#: ../src/mainwindow.cc:751
+msgid "The following errors occurred during save:"
+msgstr "在儲存過程中發生了下列錯誤："
+
+#: ../src/pcreshell.cc:59
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr "使用 \\C 逸出字列以比對不支援的單位元。"
+
+#: ../src/pcreshell.cc:151
+msgid "Reached the recursion and backtracking limit of the regular expression engine."
+msgstr "已到達正規表示式引擎循環與返回的極限。"
+
+#: ../src/prefdialog.cc:248
+msgid "\"%1\" is not a valid encoding."
+msgstr "「%1」不是有效的編碼。"
+
+#: ../src/statusline.cc:264
+msgid "Stop"
+msgstr "停止"
+
+#: ../src/statusline.cc:271
+msgid "File:"
+msgstr "檔案:"
+
+#: ../src/statusline.cc:274
+msgid "Match:"
+msgstr "符合:"
+
+#: ../src/statusline.cc:285
+msgid "Cancels the running search"
+msgstr "取消正在執行的搜尋"
+
+#. namespace Regexxer
+#: ../ui/aboutdialog.glade.h:1
+msgid "About regexxer"
+msgstr "關於 regexxer"
+
+#: ../ui/aboutdialog.glade.h:2
+msgid "The application icon of regexxer"
+msgstr "regexxer 的應用程式圖示"
+
+#: ../ui/aboutdialog.glade.h:3
+msgid "regexxer icon"
+msgstr "regexxer 圖示"
+
+#: ../ui/aboutdialog.glade.h:4
+msgid "translated by"
+msgstr "翻譯者："
+
+#: ../ui/aboutdialog.glade.h:5
+msgid "translator-credits"
+msgstr ""
+"\"如對翻譯有任何意見，請送一封電子郵件給\n"
+"\"\"以下地址，GNOME 翻譯團隊會盡快回覆您：\n"
+"\"\"community@linuxhall.org\n"
+"\""
+
+#: ../ui/aboutdialog.glade.h:6
+msgid "written by"
+msgstr "作者："
+
+#: ../ui/mainwindow.glade.h:2
+msgid "A regular expression in Perl syntax"
+msgstr "Perl 語法的正規表示式"
+
+#: ../ui/mainwindow.glade.h:4
+msgid "Backward"
+msgstr "向後"
+
+#: ../ui/mainwindow.glade.h:6
+msgid "File backward"
+msgstr "檔案向後"
+
+#: ../ui/mainwindow.glade.h:7
+msgid "File forward"
+msgstr "檔案向前"
+
+#: ../ui/mainwindow.glade.h:8
+msgid "Find all files that match the filename pattern"
+msgstr "尋找所有符合檔案名稱樣式的檔案"
+
+#: ../ui/mainwindow.glade.h:9
+msgid "Find all matches of the regular expression"
+msgstr "尋找所有符合的正規表示式"
+
+#: ../ui/mainwindow.glade.h:10
+msgid "Find all possible matches in a line"
+msgstr "尋找一行中所有可能符合的項目"
+
+#: ../ui/mainwindow.glade.h:11
+msgid "Find fi_les"
+msgstr "尋找檔案(_L)"
+
+#: ../ui/mainwindow.glade.h:12
+msgid "Fol_der:"
+msgstr "資料夾(_D):"
+
+#: ../ui/mainwindow.glade.h:13
+msgid "Forward"
+msgstr "向前"
+
+#: ../ui/mainwindow.glade.h:14
+msgid "Go to next match"
+msgstr "移至下個符合的項目"
+
+#: ../ui/mainwindow.glade.h:15
+msgid "Go to previous match"
+msgstr "移至上個符合的項目"
+
+#: ../ui/mainwindow.glade.h:16
+msgid "Go to the next matching file"
+msgstr "移至下個符合的檔案"
+
+#: ../ui/mainwindow.glade.h:17
+msgid "Go to the previous matching file"
+msgstr "移至上個符合的檔案"
+
+#: ../ui/mainwindow.glade.h:18
+msgid "Pattern:"
+msgstr "樣式:"
+
+#: ../ui/mainwindow.glade.h:19
+msgid "Preview"
+msgstr "預覽"
+
+#: ../ui/mainwindow.glade.h:20
+msgid "Preview of the substitution"
+msgstr "取代後的預覽"
+
+#: ../ui/mainwindow.glade.h:21
+msgid "Recurse into subdirectories"
+msgstr "循環至子目錄"
+
+#: ../ui/mainwindow.glade.h:22
+msgid "Replace _current"
+msgstr "取代目前項目(_C)"
+
+#: ../ui/mainwindow.glade.h:23
+msgid "Replace all matches in all files"
+msgstr "取代所有檔案中所有符合的項目"
+
+#: ../ui/mainwindow.glade.h:24
+msgid "Replace all matches in the current file"
+msgstr "取代目前檔案中所有符合的項目"
+
+#: ../ui/mainwindow.glade.h:25
+msgid "Replace current match"
+msgstr "取代目前符合的項目"
+
+#: ../ui/mainwindow.glade.h:26
+msgid "Replace in _all files"
+msgstr "在所有檔案取代(_A)"
+
+#: ../ui/mainwindow.glade.h:27
+msgid "Replace in _this file"
+msgstr "在這個檔案中取代(_T)"
+
+#: ../ui/mainwindow.glade.h:28
+msgid "Replace:"
+msgstr "取代:"
+
+#: ../ui/mainwindow.glade.h:29
+msgid "Search:"
+msgstr "搜尋:"
+
+#: ../ui/mainwindow.glade.h:30
+msgid "The directory to be searched"
+msgstr "要搜尋的目錄"
+
+#: ../ui/mainwindow.glade.h:31
+msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
+msgstr "要用來替換的字串。如同 Perl ，您可以使用 $1、$2 等甚至 $+ 、 $&、 %` 和 $' 來代表符合項目的一部分。同時也支授 \\l 、 \\u 、 \\L 與 \\E 。"
+
+#: ../ui/mainwindow.glade.h:32
+msgid "_All files"
+msgstr "所有檔案(_A)"
+
+#: ../ui/mainwindow.glade.h:33
+msgid "_Edit"
+msgstr "編輯 (_E)"
+
+#: ../ui/mainwindow.glade.h:34
+msgid "_File"
+msgstr "檔案(_F)"
+
+#: ../ui/mainwindow.glade.h:35
+msgid "_Help"
+msgstr "說明(_H)"
+
+#: ../ui/mainwindow.glade.h:36
+msgid "_Match"
+msgstr "符合(_M)"
+
+#: ../ui/mainwindow.glade.h:37
+msgid "_Next file"
+msgstr "下個檔案(_N)"
+
+#: ../ui/mainwindow.glade.h:38
+msgid "_Previous file"
+msgstr "上個檔案(_P)"
+
+#: ../ui/mainwindow.glade.h:39
+msgid "_Replace"
+msgstr "取代(_R)"
+
+#: ../ui/mainwindow.glade.h:40
+msgid "_This file"
+msgstr "這個檔案(_T)"
+
+#: ../ui/mainwindow.glade.h:41
+msgid "hidden"
+msgstr "隱藏"
+
+#: ../ui/mainwindow.glade.h:42
+msgid "recursive"
+msgstr "循環的"
+
+#: ../ui/prefdialog.glade.h:1
+msgid "1."
+msgstr "1."
+
+#: ../ui/prefdialog.glade.h:2
+msgid "2."
+msgstr "2."
+
+#: ../ui/prefdialog.glade.h:3
+msgid "3."
+msgstr "3."
+
+#: ../ui/prefdialog.glade.h:4
+msgid "C_urrent match color:"
+msgstr "目前符合項目的色彩(_U):"
+
+#: ../ui/prefdialog.glade.h:5
+msgid "Fallback _encoding:"
+msgstr "備用編碼(_E):"
+
+#: ../ui/prefdialog.glade.h:6
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
+"只有圖示\n"
+"只有文字\n"
+"圖示與文字\n"
+"兩者(水平)"
+
+#: ../ui/prefdialog.glade.h:10
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: ../ui/prefdialog.glade.h:11
+msgid "The encoding specified by the current locale"
+msgstr "依目前地區設定指定的編碼"
+
+#: ../ui/prefdialog.glade.h:12
+msgid "Tool_bar style:"
+msgstr "工具列風格(_B):"
+
+#: ../ui/prefdialog.glade.h:13
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ../ui/prefdialog.glade.h:14
+msgid "_File access"
+msgstr "檔案存取(_F)"
+
+#: ../ui/prefdialog.glade.h:15
+msgid "_Look'n'feel"
+msgstr "外觀與感覺(_L)"
+
+#: ../ui/prefdialog.glade.h:16
+msgid "_Match color:"
+msgstr "符合項目色彩(_M):"
+
+#: ../ui/prefdialog.glade.h:17
+msgid "_Text view font:"
+msgstr "文字檢視字型(_T):"
+
+#: ../ui/prefdialog.glade.h:18
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "regexxer 在放棄前會嘗試以下列編碼來讀取檔案："
+
