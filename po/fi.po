@@ -287,7 +287,7 @@ msgid "translator-credits"
 msgstr ""
 "Ilkka Tuohela, 2004\n"
 "\n"
-"http://gnome-fi.org/"
+"http://gnome.fi/"
 
 #: ui/aboutdialog.glade.h:6
 msgid "written by"
