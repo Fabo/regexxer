@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Head\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-29 04:13+0200\n"
+"POT-Creation-Date: 2005-08-01 04:19+0000\n"
 "PO-Revision-Date: 2004-08-29 10:32+0200\n"
 "Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: regexxer.desktop.in.h:1
+#: ../regexxer.desktop.in.h:1
 msgid "Search and replace using regular expressions"
 msgstr "Zoeken en vervangen door reguliere expressies"
 
-#: regexxer.desktop.in.h:2
+#: ../regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
 msgstr "regexxer zoekmachine"
 
-#: regexxer.schemas.in.h:1
+#: ../regexxer.schemas.in.h:1
 msgid "Current-match color"
 msgstr "Huidige overeenkomst kleur"
 
-#: regexxer.schemas.in.h:2
+#: ../regexxer.schemas.in.h:2
 msgid "Fallback encoding"
 msgstr "Terugvallen tekenset"
 
-#: regexxer.schemas.in.h:3
+#: ../regexxer.schemas.in.h:3
 msgid "Match color"
 msgstr "Overeenkomst kleur"
 
-#: regexxer.schemas.in.h:4
+#: ../regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
 "UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
@@ -47,17 +47,17 @@ msgstr ""
 "ofwel UTF-8 of de tekenset gespecificeerd door de huidige locale. Probeer "
 "\"iconv --list\" voor een volledige lijst met mogelijke waarden."
 
-#: regexxer.schemas.in.h:5
+#: ../regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Tekstweergave lettertype"
 
-#: regexxer.schemas.in.h:6
+#: ../regexxer.schemas.in.h:6
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr ""
 "De achtergrondkleur voor het oplichten van de overeenkomsten van de zoekterm."
 
-#: regexxer.schemas.in.h:7
+#: ../regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
@@ -65,11 +65,11 @@ msgstr ""
 "De achtergrondkleur voor het oplichten van de huidige overeenkomst van de "
 "zoekterm."
 
-#: regexxer.schemas.in.h:8
+#: ../regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
 msgstr "Het gebruikte lettertype in de bestandseditor."
 
-#: regexxer.schemas.in.h:9
+#: ../regexxer.schemas.in.h:9
 msgid ""
 "The style of the application's toolbar. Possible values are \"icons\", \"text"
 "\", \"both\", and \"both-horiz\"."
@@ -77,96 +77,96 @@ msgstr ""
 "De werkbalkstijl van de toepassing. Mogelijke waarden zijn \"icons\", \"text"
 "\", \"both\", en \"both-horiz\"."
 
-#: regexxer.schemas.in.h:10
+#: ../regexxer.schemas.in.h:10
 msgid "Toolbar style"
 msgstr "Werkbalkstijl"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
-#: src/filebuffer.cc:203
+#: ../src/filebuffer.cc:203
 msgid "Can't read file:"
 msgstr "Kan bestand niet lezen:"
 
-#: src/filetree.cc:81
+#: ../src/filetree.cc:81
 msgid "File"
 msgstr "Bestand"
 
-#: src/filetree.cc:101
+#: ../src/filetree.cc:101
 msgid "#"
 msgstr "#"
 
-#: src/filetree.cc:532
+#: ../src/filetree.cc:532
 msgid "Failed to save file \"%1\": %2"
 msgstr "Opslaan van bestand \"%1\" is mislukt: %2"
 
-#: src/filetree.cc:949
+#: ../src/filetree.cc:949
 msgid "\"%1\" seems to be a binary file."
 msgstr "\"%1\" is blijkbaar een binair bestand."
 
-#: src/main.cc:84
+#: ../src/main.cc:84
 msgid "_About"
 msgstr "I_nfo"
 
-#: src/main.cc:85
+#: ../src/main.cc:85
 msgid "Save _all"
 msgstr "_Alles opslaan"
 
-#: src/main.cc:100
+#: ../src/main.cc:100
 msgid "Find files matching PATTERN"
 msgstr "Bestanden zoeken volgensPATROON"
 
-#: src/main.cc:100
+#: ../src/main.cc:100
 msgid "PATTERN"
 msgstr "PATROON"
 
-#: src/main.cc:101
+#: ../src/main.cc:101
 msgid "Do not recurse into subdirectories"
 msgstr "Submappen niet doorzoeken"
 
-#: src/main.cc:102 ui/mainwindow.glade.h:3
+#: ../src/main.cc:102 ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "Ook verborgen bestanden zoeken"
 
-#: src/main.cc:103
+#: ../src/main.cc:103
 msgid "Find text matching REGEX"
 msgstr "Tekst zoeken volgens REGEX"
 
-#: src/main.cc:103
+#: ../src/main.cc:103
 msgid "REGEX"
 msgstr "REGEX"
 
-#: src/main.cc:104
+#: ../src/main.cc:104
 msgid "Find only the first match in a line"
 msgstr "Alleen de eerste  overeenkomst in een regel zoeken"
 
-#: src/main.cc:105 ui/mainwindow.glade.h:5
+#: ../src/main.cc:105 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr "Hoofdletterongevoelig zoeken"
 
-#: src/main.cc:106
+#: ../src/main.cc:106
 msgid "Replace matches with STRING"
 msgstr "Bij overeenkomst vervangen door TEKENREEKS"
 
-#: src/main.cc:106
+#: ../src/main.cc:106
 msgid "STRING"
 msgstr "TEKENREEKS"
 
-#: src/main.cc:107
+#: ../src/main.cc:107
 msgid "Print match location to standard output"
-msgstr "Lokatie van overeenkomst tonen op de standaard-uitvoer"
+msgstr "Locatie van overeenkomst tonen op de standaard-uitvoer"
 
-#: src/main.cc:108
+#: ../src/main.cc:108
 msgid "Do not automatically start search"
 msgstr "Niet automatisch beginnen met zoeken"
 
-#: src/main.cc:118
+#: ../src/main.cc:118
 msgid "[OPTION]... [FOLDER]"
 msgstr "[OPTIE]... [MAP]"
 
-#: src/main.cc:141
+#: ../src/main.cc:141
 msgid "Try \"regexxer --help\" for more information."
 msgstr "Probeer \"regexxer --help\" voor meer informatie."
 
-#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
+#: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
@@ -175,7 +175,7 @@ msgstr ""
 "Tekenklassen [ab] en csh-stijl haakjes {a,b} worden ondersteund."
 
 # bepaalde bestanden
-#: src/mainwindow.cc:403
+#: ../src/mainwindow.cc:403
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
@@ -183,7 +183,7 @@ msgstr ""
 "Sommige bestanden zijn nog niet opgeslagen.\n"
 "Toch afsluiten?"
 
-#: src/mainwindow.cc:431
+#: ../src/mainwindow.cc:431
 msgid ""
 "The folder name \"%1\" contains characters not representable in the encoding "
 "of the local file system."
@@ -192,11 +192,11 @@ msgstr ""
 "tekenset van het lokale bestandsyssteem."
 
 # een map selecteren
-#: src/mainwindow.cc:450
+#: ../src/mainwindow.cc:450
 msgid "Select a folder"
 msgstr "Selecteer een map"
 
-#: src/mainwindow.cc:470
+#: ../src/mainwindow.cc:470
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
@@ -204,16 +204,16 @@ msgstr ""
 "Sommige bestanden zijn nog niet opgeslagen.\n"
 "Toch doorgaan?"
 
-#: src/mainwindow.cc:496
+#: ../src/mainwindow.cc:496
 msgid "The file search pattern is invalid."
 msgstr "Het bestandszoekpatroon is ongeldig."
 
 # gedurende het zoeken
-#: src/mainwindow.cc:502
+#: ../src/mainwindow.cc:502
 msgid "The following errors occurred during search:"
 msgstr "De volgende fouten traden op gedurende de zoekopdracht:"
 
-#: src/mainwindow.cc:527
+#: ../src/mainwindow.cc:527
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
@@ -221,7 +221,7 @@ msgstr ""
 "Fout in reguliere expressie bij \"%1\" (index %2):\n"
 "%3"
 
-#: src/mainwindow.cc:529
+#: ../src/mainwindow.cc:529
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -229,17 +229,17 @@ msgstr ""
 "Fout in reguliere extressie:\n"
 "%1"
 
-#: src/mainwindow.cc:751
+#: ../src/mainwindow.cc:751
 msgid "The following errors occurred during save:"
 msgstr "De volgende fouten traden op tijden opslaan:"
 
-#: src/pcreshell.cc:59
+#: ../src/pcreshell.cc:59
 msgid "Using the \\C escape sequence to match a single byte is not supported."
 msgstr ""
 "Het gebruik van het ontsnappingsteken \\C voor de overeenkomst met een "
 "enkele byte wordt niet ondersteund."
 
-#: src/pcreshell.cc:151
+#: ../src/pcreshell.cc:151
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
@@ -247,160 +247,160 @@ msgstr ""
 "De recursie- en 'backtracing'-limiet van de reguliere expressie motor is "
 "bereikt."
 
-#: src/prefdialog.cc:248
+#: ../src/prefdialog.cc:248
 msgid "\"%1\" is not a valid encoding."
 msgstr "\"%1\" is geen geldige tekenset."
 
-#: src/statusline.cc:264
+#: ../src/statusline.cc:264
 msgid "Stop"
 msgstr "Stoppen"
 
-#: src/statusline.cc:271
+#: ../src/statusline.cc:271
 msgid "File:"
 msgstr "Bestand:"
 
-#: src/statusline.cc:274
+#: ../src/statusline.cc:274
 msgid "Match:"
 msgstr "Overeenkomst:"
 
-#: src/statusline.cc:285
+#: ../src/statusline.cc:285
 msgid "Cancels the running search"
 msgstr "Annuleert de huidige zoekopdracht"
 
 #. namespace Regexxer
-#: ui/aboutdialog.glade.h:1
+#: ../ui/aboutdialog.glade.h:1
 msgid "About regexxer"
 msgstr "Over regexxer"
 
-#: ui/aboutdialog.glade.h:2
+#: ../ui/aboutdialog.glade.h:2
 msgid "The application icon of regexxer"
 msgstr "Het pictogram van regexxer"
 
-#: ui/aboutdialog.glade.h:3
+#: ../ui/aboutdialog.glade.h:3
 msgid "regexxer icon"
 msgstr "regexxer pictogram"
 
-#: ui/aboutdialog.glade.h:4
+#: ../ui/aboutdialog.glade.h:4
 msgid "translated by"
 msgstr "vertaald door"
 
-#: ui/aboutdialog.glade.h:5
+#: ../ui/aboutdialog.glade.h:5
 msgid "translator-credits"
 msgstr "Tino Meinen <a.t.meinen@chello.nl>"
 
-#: ui/aboutdialog.glade.h:6
+#: ../ui/aboutdialog.glade.h:6
 msgid "written by"
 msgstr "geschreven door"
 
-#: ui/mainwindow.glade.h:2
+#: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
 msgstr "Een reguliere experssie in Perl syntax"
 
-#: ui/mainwindow.glade.h:4
+#: ../ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "Achterwaards"
 
-#: ui/mainwindow.glade.h:6
+#: ../ui/mainwindow.glade.h:6
 msgid "File backward"
 msgstr "Bestand achterwaards"
 
-#: ui/mainwindow.glade.h:7
+#: ../ui/mainwindow.glade.h:7
 msgid "File forward"
 msgstr "Bestand voorwaards"
 
-#: ui/mainwindow.glade.h:8
+#: ../ui/mainwindow.glade.h:8
 msgid "Find all files that match the filename pattern"
 msgstr "Alle bestanden zoeken die overeenkomen met het bestandsnaampatroon"
 
-#: ui/mainwindow.glade.h:9
+#: ../ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
 msgstr "Alle overeenkomsten van de reguliere expressie zoeken"
 
-#: ui/mainwindow.glade.h:10
+#: ../ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
 msgstr "Alle mogelijke overeenkomsten in een regel zoeken"
 
-#: ui/mainwindow.glade.h:11
+#: ../ui/mainwindow.glade.h:11
 msgid "Find fi_les"
 msgstr "Alle _bestanden zoeken"
 
-#: ui/mainwindow.glade.h:12
+#: ../ui/mainwindow.glade.h:12
 msgid "Fol_der:"
 msgstr "_Map:"
 
-#: ui/mainwindow.glade.h:13
+#: ../ui/mainwindow.glade.h:13
 msgid "Forward"
 msgstr "Voorwaards"
 
-#: ui/mainwindow.glade.h:14
+#: ../ui/mainwindow.glade.h:14
 msgid "Go to next match"
 msgstr "Ga naar volgende overeenkomst"
 
-#: ui/mainwindow.glade.h:15
+#: ../ui/mainwindow.glade.h:15
 msgid "Go to previous match"
 msgstr "Ga naar vorige overeenkomst"
 
-#: ui/mainwindow.glade.h:16
+#: ../ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
 msgstr "Ga naar de volgende bestandsovereenkomst"
 
-#: ui/mainwindow.glade.h:17
+#: ../ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
 msgstr "Ga naar de vorige bestandsovereenkomst"
 
-#: ui/mainwindow.glade.h:18
+#: ../ui/mainwindow.glade.h:18
 msgid "Pattern:"
 msgstr "Patroon:"
 
-#: ui/mainwindow.glade.h:19
+#: ../ui/mainwindow.glade.h:19
 msgid "Preview"
 msgstr "Voorbeeld"
 
-#: ui/mainwindow.glade.h:20
+#: ../ui/mainwindow.glade.h:20
 msgid "Preview of the substitution"
 msgstr "Voorbeeld van de substitutie"
 
-#: ui/mainwindow.glade.h:21
+#: ../ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
 msgstr "Ook submappen doorzoeken"
 
-#: ui/mainwindow.glade.h:22
+#: ../ui/mainwindow.glade.h:22
 msgid "Replace _current"
 msgstr "Huidige _vervangen"
 
-#: ui/mainwindow.glade.h:23
+#: ../ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
 msgstr "Alle overeenkomsten in alle bestanden vervangen"
 
-#: ui/mainwindow.glade.h:24
+#: ../ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
 msgstr "Alle overeenkomsten in het huidige bestand vervangen"
 
-#: ui/mainwindow.glade.h:25
+#: ../ui/mainwindow.glade.h:25
 msgid "Replace current match"
 msgstr "Huidige overeenkomst vervangen"
 
-#: ui/mainwindow.glade.h:26
+#: ../ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
 msgstr "In _alle bestanden vervangen"
 
-#: ui/mainwindow.glade.h:27
+#: ../ui/mainwindow.glade.h:27
 msgid "Replace in _this file"
 msgstr "In _dit bestand vervangen"
 
-#: ui/mainwindow.glade.h:28
+#: ../ui/mainwindow.glade.h:28
 msgid "Replace:"
 msgstr "Vervangen:"
 
-#: ui/mainwindow.glade.h:29
+#: ../ui/mainwindow.glade.h:29
 msgid "Search:"
 msgstr "Zoeken:"
 
-#: ui/mainwindow.glade.h:30
+#: ../ui/mainwindow.glade.h:30
 msgid "The directory to be searched"
 msgstr "De te doorzoeken map"
 
-#: ui/mainwindow.glade.h:31
+#: ../ui/mainwindow.glade.h:31
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
@@ -410,71 +410,71 @@ msgstr ""
 "delen van de overeenkomst door $1, $2, enz. of zelfs $+, $` en $'. De "
 "operators \\l, \\u, \\L, \\U en \\E worden ook ondersteund."
 
-#: ui/mainwindow.glade.h:32
+#: ../ui/mainwindow.glade.h:32
 msgid "_All files"
 msgstr "_Alle bestanden"
 
-#: ui/mainwindow.glade.h:33
+#: ../ui/mainwindow.glade.h:33
 msgid "_Edit"
 msgstr "Be_werken"
 
-#: ui/mainwindow.glade.h:34
+#: ../ui/mainwindow.glade.h:34
 msgid "_File"
 msgstr "_Bestand"
 
-#: ui/mainwindow.glade.h:35
+#: ../ui/mainwindow.glade.h:35
 msgid "_Help"
 msgstr "_Hulp"
 
-#: ui/mainwindow.glade.h:36
+#: ../ui/mainwindow.glade.h:36
 msgid "_Match"
 msgstr "_Overeenkomst"
 
-#: ui/mainwindow.glade.h:37
+#: ../ui/mainwindow.glade.h:37
 msgid "_Next file"
 msgstr "V_orig bestand"
 
-#: ui/mainwindow.glade.h:38
+#: ../ui/mainwindow.glade.h:38
 msgid "_Previous file"
 msgstr "_Volgend bestand"
 
-#: ui/mainwindow.glade.h:39
+#: ../ui/mainwindow.glade.h:39
 msgid "_Replace"
 msgstr "_Vervangen"
 
-#: ui/mainwindow.glade.h:40
+#: ../ui/mainwindow.glade.h:40
 msgid "_This file"
 msgstr "_Dit bestand"
 
-#: ui/mainwindow.glade.h:41
+#: ../ui/mainwindow.glade.h:41
 msgid "hidden"
 msgstr "verborgen"
 
-#: ui/mainwindow.glade.h:42
+#: ../ui/mainwindow.glade.h:42
 msgid "recursive"
 msgstr "recursief"
 
-#: ui/prefdialog.glade.h:1
+#: ../ui/prefdialog.glade.h:1
 msgid "1."
 msgstr "1."
 
-#: ui/prefdialog.glade.h:2
+#: ../ui/prefdialog.glade.h:2
 msgid "2."
 msgstr "2."
 
-#: ui/prefdialog.glade.h:3
+#: ../ui/prefdialog.glade.h:3
 msgid "3."
 msgstr "3."
 
-#: ui/prefdialog.glade.h:4
+#: ../ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
 msgstr "H_uidige overeenkomst kleur:"
 
-#: ui/prefdialog.glade.h:5
+#: ../ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
 msgstr "_Terugval tekenset:"
 
-#: ui/prefdialog.glade.h:6
+#: ../ui/prefdialog.glade.h:6
 msgid ""
 "Icons only\n"
 "Text only\n"
@@ -486,40 +486,40 @@ msgstr ""
 "Pictogrammen en tekst\n"
 "Beide horizontaal"
 
-#: ui/prefdialog.glade.h:10
+#: ../ui/prefdialog.glade.h:10
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: ui/prefdialog.glade.h:11
+#: ../ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
 msgstr "De tekenset gespecificeerd door de huidige locale"
 
-#: ui/prefdialog.glade.h:12
+#: ../ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
 msgstr "_Werkbalkstijl:"
 
-#: ui/prefdialog.glade.h:13
+#: ../ui/prefdialog.glade.h:13
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: ui/prefdialog.glade.h:14
+#: ../ui/prefdialog.glade.h:14
 msgid "_File access"
 msgstr "_Bestandstoegang"
 
 # wat is een goede vertaling?
-#: ui/prefdialog.glade.h:15
+#: ../ui/prefdialog.glade.h:15
 msgid "_Look'n'feel"
 msgstr "_Look'n'feel"
 
-#: ui/prefdialog.glade.h:16
+#: ../ui/prefdialog.glade.h:16
 msgid "_Match color:"
 msgstr "_Overeenkomst kleur:"
 
-#: ui/prefdialog.glade.h:17
+#: ../ui/prefdialog.glade.h:17
 msgid "_Text view font:"
 msgstr "_Tekstweergave lettertype:"
 
-#: ui/prefdialog.glade.h:18
+#: ../ui/prefdialog.glade.h:18
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
