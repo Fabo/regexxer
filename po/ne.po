@@ -1,0 +1,517 @@
+# translation of regexxer.HEAD.po to Nepali
+# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Pawan Chitrakar <pawan@mpp.org.np>, 2005.
+# Jaydeep Bhusal <zaydeep@hotmail.com>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer.HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-08-21 08:17+0545\n"
+"PO-Revision-Date: 2005-06-27 13:40+0545\n"
+"Last-Translator: Jaydeep Bhusal <zaydeep@hotmail.com>\n"
+"Language-Team: Nepali <info@mpp.org.np>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: Nplurals=2;plural=(n!=0)\n"
+
+#: ../regexxer.desktop.in.h:1
+msgid "Search and replace using regular expressions"
+msgstr "नियमित अभिव्यक्तिहरु प्रयोग गरेर खोज्नुहोस र बदल्नुहोस"
+
+#: ../regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "रेजेक्सर खोजि उपकरण"
+
+#: ../regexxer.schemas.in.h:1
+msgid "Current-match color"
+msgstr "हालको-जोडा रंग"
+
+#: ../regexxer.schemas.in.h:2
+msgid "Fallback encoding"
+msgstr "फलब्याक संकेतन"
+
+#: ../regexxer.schemas.in.h:3
+msgid "Match color"
+msgstr "रंग जोडा मिलाउनुहोस"
+
+#: ../regexxer.schemas.in.h:4
+msgid ""
+"Name of the character encoding to use if a file is not readable in either "
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
+msgstr ""
+"यदि एउटा फाइल दुवै युटिएफ-८ अथवा हालको स्थानीय बाट तोकिएको संकेतसेट मा पढ्न योग्य छैन "
+"भने प्रयोग गरिने क्यारेक्टर संकेतनको नाम. संभावित मानहरुको एउटा पुर्ण सुचिको लागि "
+"\"प्रतिमाभि --सुचि\" प्रयास गर्नुहोस"
+
+#: ../regexxer.schemas.in.h:5
+msgid "Text view font"
+msgstr "पाठ दृश्य फन्ट"
+
+#: ../regexxer.schemas.in.h:6
+msgid ""
+"The background color used to highlight matches of the search expression."
+msgstr "खोजि अभिव्यक्ति को जोडाहरु हाइलाइट गर्नको लागि प्रयोग गरिएको पृष्ठभुमि रंग"
+
+#: ../regexxer.schemas.in.h:7
+msgid ""
+"The background color used to highlight the currently selected match of the "
+"search expression."
+msgstr ""
+"खोजि अभिव्यक्ति को हालको छानिएको जोडा हाइलाइट गर्नको लागि प्रयोग गरिएको पृष्ठभुमि रंग"
+
+#: ../regexxer.schemas.in.h:8
+msgid "The font used in the file editor."
+msgstr "फाइल सम्पादक मा प्रयोग गरिएको फन्ट"
+
+#: ../regexxer.schemas.in.h:9
+msgid ""
+"The style of the application's toolbar. Possible values are \"icons\", \"text"
+"\", \"both\", and \"both-horiz\"."
+msgstr ""
+"अनुप्रयोगको उपकरणपट्टिको शैली. संभावित मानहरु हुन \"प्रतिमाहरु\", \"पाठ\", \"दुवै\", र "
+"\"दुवै-तेर्सो\"."
+
+#: ../regexxer.schemas.in.h:10
+msgid "Toolbar style"
+msgstr "उपकरणपट्टि शैलि"
+
+#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+#: ../src/filebuffer.cc:203
+msgid "Can't read file:"
+msgstr "फाइल पढ्न सकेन"
+
+#: ../src/filetree.cc:81
+msgid "File"
+msgstr "फाईल"
+
+#: ../src/filetree.cc:101
+msgid "#"
+msgstr "#"
+
+#: ../src/filetree.cc:532
+msgid "Failed to save file \"%1\": %2"
+msgstr "फाइल बचत गर्न असफल \"%1\": %2"
+
+#: ../src/filetree.cc:949
+msgid "\"%1\" seems to be a binary file."
+msgstr "\"%1\" बाइनरी फाइल जस्तो देखिन्छ"
+
+#: ../src/main.cc:84
+msgid "_About"
+msgstr "_बारेमा"
+
+#: ../src/main.cc:85
+msgid "Save _all"
+msgstr "सबै बचत गर्नुहोस"
+
+#: ../src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "बान्की संग जोडा मिल्ने फाइलहरु खोज्नुहोस"
+
+#: ../src/main.cc:100
+msgid "PATTERN"
+msgstr "बान्की"
+
+#: ../src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "उपनिर्देशिकाहरु मा पुनरावृत नगर्नुहोस"
+
+#: ../src/main.cc:102 ../ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "लिकेका फाइलहरु पनि खोज्नुहोस"
+
+#: ../src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "पाठसंग जोडा मिल्ने रेजेक्स खोज्नुहोस"
+
+#: ../src/main.cc:103
+msgid "REGEX"
+msgstr "रेजेक्स"
+
+#: ../src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "एउटा हरफमा पहिलो जोडा मात्र खोज्नुहोस"
+
+#: ../src/main.cc:105 ../ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "केस असंवेदनशील जोडा मिलाउनुहोस"
+
+#: ../src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "स्ट्रिंग संग जोडाहरु बदल्नुहोस"
+
+#: ../src/main.cc:106
+msgid "STRING"
+msgstr "स्ट्रिङ्ग"
+
+#: ../src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "जोडा स्थानलाइ मानक प्रतिफलमा छाप्नुहोस"
+
+#: ../src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "खोजी स्वत: शुरु नगर्नुहोस"
+
+#: ../src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[विकल्प]... [फोल्डर]"
+
+#: ../src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr "बढि जानकारीको लागि \"रेजेक्सर --मद्दत\" प्रयास गर्नुहोस"
+
+#: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"शेल द्वारा प्रयोग गरिएकोजस्तो फाइलनाम बान्की. क्यारेक्टर तहहरु [एबि] र सिएसएच शैली ब्रेस "
+"अभिव्यक्तिहरु {ए,बि}समर्थित छन"
+
+#: ../src/mainwindow.cc:403
+msgid ""
+"Some files haven't been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+"केहि फाइलहरु अझै बचत गरिएको छैन.\n"
+"अन्त्य गर्न चाहनुहुन्छ?"
+
+#: ../src/mainwindow.cc:431
+msgid ""
+"The folder name \"%1\" contains characters not representable in the encoding "
+"of the local file system."
+msgstr ""
+"स्थानीय फाइल प्रणाली को संकेतन मा प्रतिनिधित्व गर्न लायक नभएका क्यारेक्टरहरु \"%1"
+"\"फोल्डर नाममा समाहित छन"
+
+#: ../src/mainwindow.cc:450
+msgid "Select a folder"
+msgstr "एउटा फोल्डर छान्नुहोस"
+
+#: ../src/mainwindow.cc:470
+msgid ""
+"Some files haven't been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+"केहि फाइलहरु अझै बचत गरिएको छैन.\n"
+"जारी राख्न चाहनुहुन्छ?"
+
+#: ../src/mainwindow.cc:496
+msgid "The file search pattern is invalid."
+msgstr "फाइल खोजी बान्की अमान्य छ"
+
+#: ../src/mainwindow.cc:502
+msgid "The following errors occurred during search:"
+msgstr "खोजिको दौरान मा निम्न त्रुटिहरु भए"
+
+#: ../src/mainwindow.cc:527
+msgid ""
+"Error in regular expression at \"%1\" (index %2):\n"
+"%3"
+msgstr ""
+"\"%1\" (सुचि %2):\n"
+"%3 मा नियमित अभिव्यक्ति मा त्रुटि"
+
+#: ../src/mainwindow.cc:529
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"नियमित अभिव्यक्ति मा त्रुटि:\n"
+"%1"
+
+#: ../src/mainwindow.cc:751
+msgid "The following errors occurred during save:"
+msgstr "बचतको दौरानमा निम्न त्रुटिहरु भए"
+
+#: ../src/pcreshell.cc:59
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr ""
+"एउटा एक्लो बाइट संग जोडा मिलाउनको लागि \\सि निकास अनुक्रमको प्रयोग समर्थित छैन"
+
+#: ../src/pcreshell.cc:151
+msgid ""
+"Reached the recursion and backtracking limit of the regular expression "
+"engine."
+msgstr "नियमित अभिव्यक्ति इन्जिनको पुनरावृतिक र ब्याकट्र्याकिंग सीमा सम्म पुग्यो"
+
+#: ../src/prefdialog.cc:248
+msgid "\"%1\" is not a valid encoding."
+msgstr "\"%1\" मान्य संकेतन होइन"
+
+#: ../src/statusline.cc:264
+msgid "Stop"
+msgstr "रोक्नुहोस"
+
+#: ../src/statusline.cc:271
+msgid "File:"
+msgstr "फाईल:"
+
+#: ../src/statusline.cc:274
+msgid "Match:"
+msgstr "जोडा मिलाउनुहोस:"
+
+#: ../src/statusline.cc:285
+msgid "Cancels the running search"
+msgstr "चलिरहेको खोजी रद्द गर्दछ"
+
+#. namespace Regexxer
+#: ../ui/aboutdialog.glade.h:1
+msgid "About regexxer"
+msgstr "रेजेक्सरको बारेमा"
+
+#: ../ui/aboutdialog.glade.h:2
+msgid "The application icon of regexxer"
+msgstr "रेजेक्सर को अनुप्रयोग प्रतिमा"
+
+#: ../ui/aboutdialog.glade.h:3
+msgid "regexxer icon"
+msgstr "रेजेक्सर प्रतिमा"
+
+#: ../ui/aboutdialog.glade.h:4
+msgid "translated by"
+msgstr "द्वारा अनुवादित"
+
+#: ../ui/aboutdialog.glade.h:5
+msgid "translator-credits"
+msgstr "अनुवादकको श्रेय"
+
+#: ../ui/aboutdialog.glade.h:6
+msgid "written by"
+msgstr "द्वारा लिखित"
+
+#: ../ui/mainwindow.glade.h:2
+msgid "A regular expression in Perl syntax"
+msgstr "पर्ल सिन्टाक्स मा एउटा नियमित अभिव्यक्ति"
+
+#: ../ui/mainwindow.glade.h:4
+msgid "Backward"
+msgstr "पछिल्तिर"
+
+#: ../ui/mainwindow.glade.h:6
+msgid "File backward"
+msgstr "फाईल पछिल्तिर"
+
+#: ../ui/mainwindow.glade.h:7
+msgid "File forward"
+msgstr "फाईल अघिल्तिर"
+
+#: ../ui/mainwindow.glade.h:8
+msgid "Find all files that match the filename pattern"
+msgstr "फाइलनाम बान्की संग जोडा मिल्ने सबै फाइलहरु खोज्नुहोस"
+
+#: ../ui/mainwindow.glade.h:9
+msgid "Find all matches of the regular expression"
+msgstr "नियमित अभिव्यक्ति को सबै जोडाहरु खोज्नुहोस"
+
+#: ../ui/mainwindow.glade.h:10
+msgid "Find all possible matches in a line"
+msgstr "एउटा हरफ भित्र सबै संभावित जोडाहरु खोज्नुहोस"
+
+#: ../ui/mainwindow.glade.h:11
+msgid "Find fi_les"
+msgstr "फाइलहरु खोज्नुस"
+
+#: ../ui/mainwindow.glade.h:12
+msgid "Fol_der:"
+msgstr "फोल्डर"
+
+#: ../ui/mainwindow.glade.h:13
+msgid "Forward"
+msgstr "अघिल्तिर"
+
+#: ../ui/mainwindow.glade.h:14
+msgid "Go to next match"
+msgstr "पछिल्लो जोडामा जानुहोस"
+
+#: ../ui/mainwindow.glade.h:15
+msgid "Go to previous match"
+msgstr "अघिल्लो जोडामा जानुहोस"
+
+#: ../ui/mainwindow.glade.h:16
+msgid "Go to the next matching file"
+msgstr "पछिल्लो जोडा मिल्ने फाइलमा जानुहोस"
+
+#: ../ui/mainwindow.glade.h:17
+msgid "Go to the previous matching file"
+msgstr "अघिल्लो जोडा मिल्ने फाइलमा जानुहोस"
+
+#: ../ui/mainwindow.glade.h:18
+msgid "Pattern:"
+msgstr "बान्की"
+
+#: ../ui/mainwindow.glade.h:19
+msgid "Preview"
+msgstr "पुर्वदृश्य"
+
+#: ../ui/mainwindow.glade.h:20
+msgid "Preview of the substitution"
+msgstr "प्रतिस्थापनको पुर्वदृश्य"
+
+#: ../ui/mainwindow.glade.h:21
+msgid "Recurse into subdirectories"
+msgstr "उपनिर्देशिकाहरुमा पुनरागमन गर्नुहोस"
+
+#: ../ui/mainwindow.glade.h:22
+msgid "Replace _current"
+msgstr "हालको बदल्नुहोस"
+
+#: ../ui/mainwindow.glade.h:23
+msgid "Replace all matches in all files"
+msgstr "सबै फाइलहरु का सबै जोडाहरु बदल्नुहोस"
+
+#: ../ui/mainwindow.glade.h:24
+msgid "Replace all matches in the current file"
+msgstr "हालको फाइलका सबै जोडाहरु बदल्नुहोस"
+
+#: ../ui/mainwindow.glade.h:25
+msgid "Replace current match"
+msgstr "हालको जोडा बदल्नुहोस"
+
+#: ../ui/mainwindow.glade.h:26
+msgid "Replace in _all files"
+msgstr "सबै फाइलहरुमा बदल्नुहोस"
+
+#: ../ui/mainwindow.glade.h:27
+msgid "Replace in _this file"
+msgstr "यो फाइलमा बदल्नुहोस"
+
+#: ../ui/mainwindow.glade.h:28
+msgid "Replace:"
+msgstr "बदलनुहोस"
+
+#: ../ui/mainwindow.glade.h:29
+msgid "Search:"
+msgstr "खोज्नुहोस्:"
+
+#: ../ui/mainwindow.glade.h:30
+msgid "The directory to be searched"
+msgstr "खोजि गरिनुपर्ने निर्देशिका"
+
+#: ../ui/mainwindow.glade.h:31
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
+"\\L, \\U and \\E are supported as well."
+msgstr ""
+"प्रतिस्थापन गर्ने नयाँ स्ट्रिंग. पर्लमा जस्तो $१, $२, आदि. वा even $+, $&, $` र "
+"$'प्रयोग गर्ने जोडा को भागहरु मा तपाईंले सुपुर्द गर्न सक्नुहुन्छ. संचालकहरु \\आइ, \\यु, \\एल, "
+"\\यु र \\इ हरु पनि समर्थित छन"
+
+#: ../ui/mainwindow.glade.h:32
+msgid "_All files"
+msgstr "_सम्पुर्ण फाइलहरु"
+
+#: ../ui/mainwindow.glade.h:33
+msgid "_Edit"
+msgstr "-सम्पादन गर्नुहोस"
+
+#: ../ui/mainwindow.glade.h:34
+msgid "_File"
+msgstr "फाईल"
+
+#: ../ui/mainwindow.glade.h:35
+msgid "_Help"
+msgstr "मद्दत"
+
+#: ../ui/mainwindow.glade.h:36
+msgid "_Match"
+msgstr "जोडा मिलाउनुहोस"
+
+#: ../ui/mainwindow.glade.h:37
+msgid "_Next file"
+msgstr "पछिल्लो फाइल"
+
+#: ../ui/mainwindow.glade.h:38
+msgid "_Previous file"
+msgstr "अघिल्लो फाइल"
+
+#: ../ui/mainwindow.glade.h:39
+msgid "_Replace"
+msgstr "_बदल्नुहोस"
+
+#: ../ui/mainwindow.glade.h:40
+msgid "_This file"
+msgstr "यो फाइल"
+
+#: ../ui/mainwindow.glade.h:41
+msgid "hidden"
+msgstr "लुकेको"
+
+#: ../ui/mainwindow.glade.h:42
+msgid "recursive"
+msgstr "पुनरावृतिक"
+
+#: ../ui/prefdialog.glade.h:1
+msgid "1."
+msgstr "१"
+
+#: ../ui/prefdialog.glade.h:2
+msgid "2."
+msgstr "२"
+
+#: ../ui/prefdialog.glade.h:3
+msgid "3."
+msgstr "३"
+
+#: ../ui/prefdialog.glade.h:4
+msgid "C_urrent match color:"
+msgstr "हालको जोडा रंग"
+
+#: ../ui/prefdialog.glade.h:5
+msgid "Fallback _encoding:"
+msgstr "फलब्याक संकेतन"
+
+#: ../ui/prefdialog.glade.h:6
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
+"प्रतिमाहरु मात्र\n"
+"पाठ मात्र\n"
+"प्रतिमाहरु र पाठ\n"
+"दुवै तेर्सो"
+
+#: ../ui/prefdialog.glade.h:10
+msgid "Preferences"
+msgstr "प्राथमिकताहरु"
+
+#: ../ui/prefdialog.glade.h:11
+msgid "The encoding specified by the current locale"
+msgstr "हालको स्थानीय द्वारा तोकिएको संकेतन"
+
+#: ../ui/prefdialog.glade.h:12
+msgid "Tool_bar style:"
+msgstr "उपकरणपट्टि शैली"
+
+#: ../ui/prefdialog.glade.h:13
+msgid "UTF-8"
+msgstr "युटिएफ-८"
+
+#: ../ui/prefdialog.glade.h:14
+msgid "_File access"
+msgstr "फाईल पँहुच"
+
+#: ../ui/prefdialog.glade.h:15
+msgid "_Look'n'feel"
+msgstr "हेर्नुहोस र अनुभव गर्नुहोस"
+
+#: ../ui/prefdialog.glade.h:16
+msgid "_Match color:"
+msgstr "जोडा रंग:"
+
+#: ../ui/prefdialog.glade.h:17
+msgid "_Text view font:"
+msgstr "पाठ दृश्य फन्ट"
+
+#: ../ui/prefdialog.glade.h:18
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "छोड्नु भन्दा पहिले निम्न संकेतनहरुमा रेजेक्सर ले फाइल पढ्ने प्रयास गर्दछ"
