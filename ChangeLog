@@ -1,3 +1,12 @@
+2005-12-13  Murray Cumming  <murrayc@murrayc.com>
+
+	* autogen.sh: Use --force on intltoolize, because it was 
+	complaining about an old Makefile.in.in.
+	* configure.ac:
+	* src/Makefile.am: Change PKG_CFLAGS/LIBS to REGEXXER_CFLAGS/LIBS 
+	because the latest autoconf (or something) complains that PKG_CFLAGS 
+	may be undefined. Not sure why, but this fixes it.
+
 2004-07-16  Daniel Elstner  <daniel.elstner@gmx.net>
 
 	* macros/cxx.m4 (REGEXXER_LINK_VERSION_SCRIPT): Rename from
