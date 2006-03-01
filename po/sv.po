@@ -1,6 +1,7 @@
 # Swedish messages for regexxer.
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # Christian Rose <menthos@menthos.com>, 2004.
+# Daniel Nylander <po@danielnylander.se>, 2006.
 #
 # $Id$
 #
@@ -8,504 +9,495 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-09 01:49+0200\n"
-"PO-Revision-Date: 2004-05-17 23:01+0200\n"
-"Last-Translator: Christian Rose <menthos@menthos.com>\n"
+"POT-Creation-Date: 2006-02-09 21:31+0100\n"
+"PO-Revision-Date: 2006-02-12 19:42+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: regexxer.desktop.in.h:1
+#: ../regexxer.desktop.in.h:1
 msgid "Search and replace using regular expressions"
 msgstr "Sök och ersätt med hjälp av reguljära uttryck"
 
-#: regexxer.desktop.in.h:2
+#: ../regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
 msgstr "Sökverktyget regexxer"
 
-#: regexxer.schemas.in.h:1
-#, fuzzy
+#: ../regexxer.schemas.in.h:1
 msgid "Current-match color"
-msgstr "Aktuell kolumn"
+msgstr "Färg för aktuell träff"
 
-#: regexxer.schemas.in.h:2
-#, fuzzy
+#: ../regexxer.schemas.in.h:2
 msgid "Fallback encoding"
-msgstr "Teckenkodning"
+msgstr "Teckenkodning att falla tillbaka på"
 
-#: regexxer.schemas.in.h:3
+#: ../regexxer.schemas.in.h:3
 msgid "Match color"
 msgstr "Matchningsfärg"
 
-#: regexxer.schemas.in.h:4
-msgid ""
-"Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
-"for a complete list of possible values."
-msgstr ""
+#: ../regexxer.schemas.in.h:4
+msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" for a complete list of possible values."
+msgstr "Namn på teckenkodning att använda om en fil inte är läsbar i varken UTF-8 eller teckenuppsättningen som angivits av aktuell lokal. Försök med \"iconv --list\" för en komplett lista av möjliga värden."
 
-#: regexxer.schemas.in.h:5
+#: ../regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Typsnitt för textvy"
 
-#: regexxer.schemas.in.h:6
-msgid ""
-"The background color used to highlight matches of the search expression."
-msgstr ""
+#: ../regexxer.schemas.in.h:6
+msgid "The background color used to highlight matches of the search expression."
+msgstr "Bakgrundsfärgen som används för att framhäva träffar från sökuttrycket."
 
-#: regexxer.schemas.in.h:7
-msgid ""
-"The background color used to highlight the currently selected match of the "
-"search expression."
-msgstr ""
+#: ../regexxer.schemas.in.h:7
+msgid "The background color used to highlight the currently selected match of the search expression."
+msgstr "Bakgrundsfärgen som används för att framhäva aktuellt markerad träff från sökuttrycket."
 
-#: regexxer.schemas.in.h:8
-#, fuzzy
+#: ../regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
-msgstr "_Typsnitt som används av redigeraren: "
+msgstr "Typsnittet som används i filredigeraren."
 
-#: regexxer.schemas.in.h:9
-#, fuzzy
-msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
-msgstr ""
-"Standardsorteringsordningen för objekten i listvyn. Möjliga värden är \"name"
-"\", \"size\", \"type\" och \"modification_date\"."
+#: ../regexxer.schemas.in.h:9
+msgid "The style of the application's toolbar. Possible values are \"icons\", \"text\", \"both\", and \"both-horiz\"."
+msgstr "Stilen för programmets verktygsrad. Möjliga värden är \"icons\", \"text\", \"both\", och \"both-horiz\"."
 
-#: regexxer.schemas.in.h:10
+#: ../regexxer.schemas.in.h:10
 msgid "Toolbar style"
 msgstr "Stil på verktygsrad"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
-#: src/filebuffer.cc:203
+#: ../src/filebuffer.cc:203
 msgid "Can't read file:"
 msgstr "Kan inte läsa fil:"
 
-#: src/filetree.cc:81
+#: ../src/filetree.cc:81
 msgid "File"
 msgstr "Fil"
 
-#: src/filetree.cc:101
+#: ../src/filetree.cc:101
 msgid "#"
 msgstr "#"
 
-#: src/filetree.cc:532
-#, qt-format
+#: ../src/filetree.cc:532
 msgid "Failed to save file \"%1\": %2"
 msgstr "Misslyckades med att spara filen \"%1\": %2"
 
-#: src/filetree.cc:941
-#, qt-format
+#: ../src/filetree.cc:949
 msgid "\"%1\" seems to be a binary file."
-msgstr ""
+msgstr "\"%1\" verkar vara en binärfil."
 
-#: src/main.cc:81
+#: ../src/main.cc:84
 msgid "_About"
 msgstr "_Om"
 
-#: src/main.cc:82
+#: ../src/main.cc:85
 msgid "Save _all"
 msgstr "Spara _alla"
 
-#: src/mainwindow.cc:200 ui/mainwindow.glade.h:1
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
-msgstr ""
+#: ../src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "Hitta filer som matchar MÖNSTER"
 
-#: src/mainwindow.cc:341
+#: ../src/main.cc:100
+msgid "PATTERN"
+msgstr "MÖNSTER"
+
+#: ../src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "Gå inte rekursivt in i underkataloger"
+
+#: ../src/main.cc:102
+#: ../ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "Hitta även dolda filer"
+
+#: ../src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "Hitta text som matchar REGUTR"
+
+#: ../src/main.cc:103
+msgid "REGEX"
+msgstr "REGUTR"
+
+#: ../src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "Hitta endast första träffen på en rad"
+
+#: ../src/main.cc:105
+#: ../ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "Utför skiftlägesokänslig matchning"
+
+#: ../src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "Ersätt träffar med STRÄNG"
+
+#: ../src/main.cc:106
+msgid "STRING"
+msgstr "STRÄNG"
+
+#: ../src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "Skriv ut träffplats till standard ut"
+
+#: ../src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "Starta inte sökningen automatiskt"
+
+#: ../src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[FLAGGA]... [MAPP]"
+
+#: ../src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr "Försök med \"regexxer --help\" för mer information."
+
+#: ../src/mainwindow.cc:252
+#: ../ui/mainwindow.glade.h:1
+msgid "A filename pattern as used by the shell. Character classes [ab] and csh style brace expressions {a,b} are supported."
+msgstr "Ett filnamnsmönster som används av skalet. Teckenklasser [ab] och csh-liknande klammerparentesuttryck {a,b} stöds."
+
+#: ../src/mainwindow.cc:403
 msgid ""
 "Some files haven't been saved yet.\n"
 "Quit anyway?"
 msgstr ""
+"Vissa filer har inte sparats ännu.\n"
+"Avsluta ändå?"
 
-#: src/mainwindow.cc:369
-#, qt-format
-msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
-"of the local file system."
-msgstr ""
+#: ../src/mainwindow.cc:431
+msgid "The folder name \"%1\" contains characters not representable in the encoding of the local file system."
+msgstr "Mappnamnet \"%1\" innehåller tecken som inte finns representerade i teckenkodningen för det lokala filsystemet."
 
-#: src/mainwindow.cc:388
+#: ../src/mainwindow.cc:450
 msgid "Select a folder"
 msgstr "Välj en mapp"
 
-#: src/mainwindow.cc:408
+#: ../src/mainwindow.cc:470
 msgid ""
 "Some files haven't been saved yet.\n"
 "Continue anyway?"
 msgstr ""
+"Vissa filer har inte sparats ännu.\n"
+"Fortsätta ändå?"
 
-#: src/mainwindow.cc:434
-#, fuzzy
+#: ../src/mainwindow.cc:496
 msgid "The file search pattern is invalid."
-msgstr "Visaren som är associerad med \"%s\" är ogiltig."
+msgstr "Filsökmönstret är ogiltigt."
 
-#: src/mainwindow.cc:440
+#: ../src/mainwindow.cc:502
 msgid "The following errors occurred during search:"
-msgstr ""
+msgstr "Följande fel inträffade under sökningen:"
 
-#: src/mainwindow.cc:465
-#, qt-format
+#: ../src/mainwindow.cc:527
 msgid ""
 "Error in regular expression at \"%1\" (index %2):\n"
 "%3"
 msgstr ""
+"Fel i reguljärt utrryck vid \"%1\" (index %2):\n"
+"%3"
 
 # SUN NEW TRANSLATION
-#: src/mainwindow.cc:467
-#, fuzzy, qt-format
+#: ../src/mainwindow.cc:529
 msgid ""
 "Error in regular expression:\n"
 "%1"
-msgstr "Andra reguljära uttryck: "
+msgstr ""
+"Fel i reguljärt uttryck:\n"
+"%1"
 
-#: src/mainwindow.cc:689
+# Sparandet?
+#: ../src/mainwindow.cc:751
 msgid "The following errors occurred during save:"
-msgstr ""
+msgstr "Följande fel inträffade under sparning:"
 
-#: src/pcreshell.cc:59
+#: ../src/pcreshell.cc:59
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
+msgstr "Använd specialsekvens \\C för att matcha en enstaka byte stöds inte."
 
-#: src/pcreshell.cc:151
-msgid ""
-"Reached the recursion and backtracking limit of the regular expression "
-"engine."
-msgstr ""
+#: ../src/pcreshell.cc:151
+msgid "Reached the recursion and backtracking limit of the regular expression engine."
+msgstr "Nådde gräns för rekursion och bakspårning för reguljära uttrycksmotorn."
 
-#: src/prefdialog.cc:248
-#, fuzzy, qt-format
+#: ../src/prefdialog.cc:248
 msgid "\"%1\" is not a valid encoding."
-msgstr "\"%s\" är inte en giltig plats."
+msgstr "\"%1\" är inte en giltig teckenkodning."
 
-#: src/statusline.cc:271
+#: ../src/statusline.cc:264
 msgid "Stop"
 msgstr "Stopp"
 
-#: src/statusline.cc:278
+#: ../src/statusline.cc:271
 msgid "File:"
 msgstr "Fil:"
 
-#: src/statusline.cc:281
+#: ../src/statusline.cc:274
 msgid "Match:"
 msgstr "Träff:"
 
-#: src/statusline.cc:292
+#: ../src/statusline.cc:285
 msgid "Cancels the running search"
 msgstr "Avbryter den körande sökningen"
 
 #. namespace Regexxer
-#: ui/aboutdialog.glade.h:1
+#: ../ui/aboutdialog.glade.h:1
 msgid "About regexxer"
 msgstr "Om regexxer"
 
-#: ui/aboutdialog.glade.h:2
+#: ../ui/aboutdialog.glade.h:2
 msgid "The application icon of regexxer"
 msgstr "Programikonen för regexxer"
 
-#: ui/aboutdialog.glade.h:3
+#: ../ui/aboutdialog.glade.h:3
 msgid "regexxer icon"
 msgstr "regexxer-ikon"
 
-#: ui/aboutdialog.glade.h:4
+#: ../ui/aboutdialog.glade.h:4
 msgid "translated by"
-msgstr ""
+msgstr "Översatt av"
 
-#: ui/aboutdialog.glade.h:5
+#: ../ui/aboutdialog.glade.h:5
 msgid "translator-credits"
 msgstr ""
+"Daniel Nylander\n"
+"Christian Rose\n"
+"Skicka synpunkter på översättningen till tp-sv@listor.tp-sv.se"
 
-#: ui/aboutdialog.glade.h:6
+#: ../ui/aboutdialog.glade.h:6
 msgid "written by"
 msgstr "skrivet av"
 
-#: ui/mainwindow.glade.h:2
-#, fuzzy
+#: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
-msgstr "Reguljära uttryck"
+msgstr "Ett reguljärt uttryck i Perl-syntax"
 
-#: ui/mainwindow.glade.h:3
-#, fuzzy
-msgid "Also find hidden files"
-msgstr "Kan inte hitta inkluderingsfil: \"%s\""
-
-#: ui/mainwindow.glade.h:4
+#: ../ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "Baklänges"
 
-#: ui/mainwindow.glade.h:5
-msgid "Do case insensitive matching"
-msgstr "Utför skiftlägesokänslig matchning"
-
-#: ui/mainwindow.glade.h:6
-#, fuzzy
+#: ../ui/mainwindow.glade.h:6
 msgid "File backward"
-msgstr "Sök _baklänges"
+msgstr "Fil _baklänges"
 
-#: ui/mainwindow.glade.h:7
-#, fuzzy
+#: ../ui/mainwindow.glade.h:7
 msgid "File forward"
-msgstr "Framåt"
+msgstr "Fil framåt"
 
-#: ui/mainwindow.glade.h:8
+#: ../ui/mainwindow.glade.h:8
 msgid "Find all files that match the filename pattern"
-msgstr ""
+msgstr "Hitta alla filer som matchar filnamnsmönstret"
 
-#: ui/mainwindow.glade.h:9
-#, fuzzy
+#: ../ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
-msgstr "[Objekt ]som matchar det reguljära uttrycket \"%s\""
+msgstr "Hitta alla som matchar det reguljära uttrycket"
 
-#: ui/mainwindow.glade.h:10
+#: ../ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
 msgstr "Hitta alla möjliga träffar på en rad"
 
-#: ui/mainwindow.glade.h:11
+#: ../ui/mainwindow.glade.h:11
 msgid "Find fi_les"
 msgstr "Sök fi_ler"
 
-#: ui/mainwindow.glade.h:12
+#: ../ui/mainwindow.glade.h:12
 msgid "Fol_der:"
 msgstr "Ma_pp:"
 
-#: ui/mainwindow.glade.h:13
+#: ../ui/mainwindow.glade.h:13
 msgid "Forward"
 msgstr "Framåt"
 
-#: ui/mainwindow.glade.h:14
+#: ../ui/mainwindow.glade.h:14
 msgid "Go to next match"
 msgstr "Gå till nästa träff"
 
-#: ui/mainwindow.glade.h:15
+#: ../ui/mainwindow.glade.h:15
 msgid "Go to previous match"
 msgstr "Gå till föregående träff"
 
-#: ui/mainwindow.glade.h:16
+#: ../ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
 msgstr "Gå till nästa matchande fil"
 
-#: ui/mainwindow.glade.h:17
+#: ../ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
 msgstr "Gå till föregående matchande fil"
 
-#: ui/mainwindow.glade.h:18
+#: ../ui/mainwindow.glade.h:18
 msgid "Pattern:"
 msgstr "Mönster:"
 
-#: ui/mainwindow.glade.h:19
+#: ../ui/mainwindow.glade.h:19
 msgid "Preview"
 msgstr "Förhandsvisning"
 
-#: ui/mainwindow.glade.h:20
+#: ../ui/mainwindow.glade.h:20
 msgid "Preview of the substitution"
 msgstr "Förhandsvisning av ersättningen"
 
-#: ui/mainwindow.glade.h:21
+#: ../ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
 msgstr "Gå rekursivt in i underkataloger"
 
-#: ui/mainwindow.glade.h:22
+#: ../ui/mainwindow.glade.h:22
 msgid "Replace _current"
 msgstr "Ersätt _aktuell"
 
-#: ui/mainwindow.glade.h:23
+#: ../ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
 msgstr "Ersätt alla träffar i alla filer"
 
-#: ui/mainwindow.glade.h:24
+#: ../ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
 msgstr "Ersätt alla träffar i den aktuella filen"
 
-#: ui/mainwindow.glade.h:25
+#: ../ui/mainwindow.glade.h:25
 msgid "Replace current match"
 msgstr "Ersätt aktuell träff"
 
-#: ui/mainwindow.glade.h:26
+#: ../ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
 msgstr "Ersätt i _alla filer"
 
-#: ui/mainwindow.glade.h:27
+#: ../ui/mainwindow.glade.h:27
 msgid "Replace in _this file"
 msgstr "Ersätt i _denna fil"
 
-#: ui/mainwindow.glade.h:28
+#: ../ui/mainwindow.glade.h:28
 msgid "Replace:"
 msgstr "Ersätt:"
 
-#: ui/mainwindow.glade.h:29
+#: ../ui/mainwindow.glade.h:29
 msgid "Search:"
 msgstr "Sök:"
 
-#: ui/mainwindow.glade.h:30
+#: ../ui/mainwindow.glade.h:30
 msgid "The directory to be searched"
 msgstr "Katalogen som ska sökas i"
 
-#: ui/mainwindow.glade.h:31
-msgid ""
-"The new string to substitute. As in Perl, you can refer to parts of the "
-"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
-"\\L, \\U and \\E are supported as well."
-msgstr ""
+#: ../ui/mainwindow.glade.h:31
+msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
+msgstr "Den nya strängen att ersätta. Precis som i Perl, kan du referera till delar av träffen med $1, $2, etc. eller även $+, $&, $` och $'. Operanderna \\l, \\u, \\L, \\U och \\E stöds också."
 
-#: ui/mainwindow.glade.h:32
+#: ../ui/mainwindow.glade.h:32
 msgid "_All files"
 msgstr "_Alla filer"
 
-#: ui/mainwindow.glade.h:33
+#: ../ui/mainwindow.glade.h:33
 msgid "_Edit"
-msgstr ""
+msgstr "_Redigera"
 
-#: ui/mainwindow.glade.h:34
+#: ../ui/mainwindow.glade.h:34
 msgid "_File"
 msgstr "_Arkiv"
 
-#: ui/mainwindow.glade.h:35
+#: ../ui/mainwindow.glade.h:35
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ui/mainwindow.glade.h:36
+#: ../ui/mainwindow.glade.h:36
 msgid "_Match"
-msgstr "_Matcha"
+msgstr "_Träff"
 
-#: ui/mainwindow.glade.h:37
+#: ../ui/mainwindow.glade.h:37
 msgid "_Next file"
 msgstr "_Nästa fil"
 
-#: ui/mainwindow.glade.h:38
+#: ../ui/mainwindow.glade.h:38
 msgid "_Previous file"
 msgstr "_Föregående fil"
 
-#: ui/mainwindow.glade.h:39
+#: ../ui/mainwindow.glade.h:39
 msgid "_Replace"
 msgstr "_Ersätt"
 
-#: ui/mainwindow.glade.h:40
+#: ../ui/mainwindow.glade.h:40
 msgid "_This file"
 msgstr "_Denna fil"
 
-#: ui/mainwindow.glade.h:41
+#: ../ui/mainwindow.glade.h:41
 msgid "hidden"
 msgstr "dold"
 
-#: ui/mainwindow.glade.h:42
+#: ../ui/mainwindow.glade.h:42
 msgid "recursive"
 msgstr "rekursiv"
 
-#: ui/prefdialog.glade.h:1
+#: ../ui/prefdialog.glade.h:1
 msgid "1."
 msgstr "1."
 
-#: ui/prefdialog.glade.h:2
+#: ../ui/prefdialog.glade.h:2
 msgid "2."
 msgstr "2."
 
-#: ui/prefdialog.glade.h:3
+#: ../ui/prefdialog.glade.h:3
 msgid "3."
 msgstr "3."
 
-#: ui/prefdialog.glade.h:4
-#, fuzzy
+#: ../ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
-msgstr "Aktuell kolumn"
+msgstr "Aktuell _matchande färg:"
 
-#: ui/prefdialog.glade.h:5
-#, fuzzy
+#: ../ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
-msgstr "Tillgängliga kodningar:"
+msgstr "Teckenkodning att falla tillbaka på:"
 
-#: ui/prefdialog.glade.h:6
+#: ../ui/prefdialog.glade.h:6
 msgid ""
 "Icons only\n"
 "Text only\n"
 "Icons and text\n"
 "Both horizontal"
 msgstr ""
+"Endast ikoner\n"
+"Endast text\n"
+"Ikoner och text\n"
+"Båda horisontellt"
 
-#: ui/prefdialog.glade.h:10
+#: ../ui/prefdialog.glade.h:10
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: ui/prefdialog.glade.h:11
-#, fuzzy
+#: ../ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
-msgstr "Skicka vidare det aktuella samtalet"
+msgstr "Teckenkodningen som angivits av aktuell lokal"
 
-#: ui/prefdialog.glade.h:12
-#, fuzzy
+#: ../ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
-msgstr "Stil på verktygsradsobjekt"
+msgstr "Verktygsradsstil:"
 
-#: ui/prefdialog.glade.h:13
+#: ../ui/prefdialog.glade.h:13
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: ui/prefdialog.glade.h:14
+#: ../ui/prefdialog.glade.h:14
 msgid "_File access"
 msgstr "_Filåtkomst"
 
-#: ui/prefdialog.glade.h:15
+#: ../ui/prefdialog.glade.h:15
 msgid "_Look'n'feel"
 msgstr "_Utseende och känsla"
 
-#: ui/prefdialog.glade.h:16
+#: ../ui/prefdialog.glade.h:16
 msgid "_Match color:"
-msgstr "_Matchningsfärg:"
+msgstr "Mat_chningsfärg:"
 
-#: ui/prefdialog.glade.h:17
+#: ../ui/prefdialog.glade.h:17
 msgid "_Text view font:"
 msgstr "_Typsnitt för textvyn:"
 
-#: ui/prefdialog.glade.h:18
-msgid ""
-"regexxer attempts to read a file in the following encodings before giving up:"
-msgstr ""
+#: ../ui/prefdialog.glade.h:18
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "regexxer försöker att läsa en fil i följande teckenkodningar före den ger upp:"
 
 #~ msgid "Override text direction"
 #~ msgstr "Åsidosätt textriktning"
-
 #~ msgid "*"
 #~ msgstr "*"
-
 #~ msgid "_Ignore the text direction of the locale"
 #~ msgstr "_Ignorera lokalens textriktning"
-
 #~ msgid "Debian package by"
 #~ msgstr "Debian-paket av"
 
-# ui/prefdialog.glade.h:
-#~ msgid "Icons and text"
-#~ msgstr "Ikoner och text"
-
-#~ msgid "Icons only"
-#~ msgstr "Endast ikoner"
-
-#~ msgid "Text only"
-#~ msgstr "Endast text"
-
-#~ msgid "Search Tool"
-#~ msgstr "Sökverktyg"
-
-#~ msgid "Save all"
-#~ msgstr "Spara alla"
-
-#~ msgid "About"
-#~ msgstr "Om"
-
-#~ msgid "Find files"
-#~ msgstr "Sök filer"
-
-#~ msgid "Folder:"
-#~ msgstr "Mapp:"
-
-#~ msgid "Replace"
-#~ msgstr "Ersätt"
-
-#~ msgid "Search"
-#~ msgstr "Sök"
-
-#~ msgid "All files"
-#~ msgstr "Alla filer"
