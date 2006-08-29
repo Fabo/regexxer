@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-29 12:12+0000\n"
+"POT-Creation-Date: 2006-08-28 18:49+0000\n"
 "PO-Revision-Date: 2006-08-29 12:10+0000\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
@@ -42,28 +42,21 @@ msgid ""
 "Name of the character encoding to use if a file is not readable in either "
 "UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
 "for a complete list of possible values."
-msgstr ""
-"Erabiliko den karaktere-kodeketaren izena, uneko lokalean UTF-8 edo beste "
-"zehaztutako kodeketa multzoarekin fitxategia ezin bada irakurri. Saiatu "
-"\"iconv --list\" erabilgarri dauden balioen zerrenda ikusteko."
+msgstr "Erabiliko den karaktere-kodeketaren izena, uneko lokalean UTF-8 edo beste zehaztutako kodeketa multzoarekin fitxategia ezin bada irakurri. Saiatu \"iconv --list\" erabilgarri dauden balioen zerrenda ikusteko."
 
 #: ../regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Testu ikuspegiaren letra-tipoa"
 
 #: ../regexxer.schemas.in.h:6
-msgid ""
-"The background color used to highlight matches of the search expression."
-msgstr ""
-"Atzeko planoko kolorea bat datozenak nabarmentzeko adierazpenaren bilaketan."
+msgid "The background color used to highlight matches of the search expression."
+msgstr "Atzeko planoko kolorea bat datozenak nabarmentzeko adierazpenaren bilaketan."
 
 #: ../regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
-msgstr ""
-"Atzeko planoko kolorea unean hautatuta dagoen eta bat datorrena "
-"nabarmentzeko adierazpenaren bilaketan."
+msgstr "Atzeko planoko kolorea unean hautatuta dagoen eta bat datorrena nabarmentzeko adierazpenaren bilaketan."
 
 #: ../regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
@@ -74,9 +67,8 @@ msgid ""
 "The style of the application's toolbar. Possible values are \"icons\", \"text"
 "\", \"both\", and \"both-horiz\"."
 msgstr ""
-"Aplikazioaren tresna-barraren estiloa. Balio erabilgarriak: \"icons"
-"\" (ikonoak), \"text\" (testua), \"both\" (biak), eta \"both-horiz\" (biak-"
-"horiz)."
+"Aplikazioaren tresna-barraren estiloa. Balio erabilgarriak: \"icons\" (ikonoak), \"text"
+"\" (testua), \"both\" (biak), eta \"both-horiz\" (biak-horiz)."
 
 #: ../regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -171,9 +163,7 @@ msgstr "Exekutatu \"regexxer --help\" informazio gehiagorako."
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
-msgstr ""
-"Fitxategi-izena komando lerroan erabiltzen den bezala. Karaktere-klaseak "
-"[ab] eta csh estiloko giltzen adierazpenak {a,b} onartzen dira."
+msgstr "Fitxategi-izena komando lerroan erabiltzen den bezala. Karaktere-klaseak [ab] eta csh estiloko giltzen adierazpenak {a,b} onartzen dira."
 
 #: ../src/mainwindow.cc:403
 msgid ""
@@ -233,16 +223,15 @@ msgstr "Erroreak gordetzean:"
 
 #: ../src/pcreshell.cc:59
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
-"\\C ihes-sekuentzia erabiltzea byte bakarra bilatzeko ez dago onartuta."
+msgstr "\\C ihes-sekuentzia erabiltzea byte bakarra bilatzeko ez dago onartuta."
 
 #: ../src/pcreshell.cc:151
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
 msgstr ""
-"Adierazpen erregularreko motoreko errekurtsibitateko eta atzera-jotzeko muga "
-"gainditu da."
+"Adierazpen erregularreko motoreko errekurtsibitateko eta atzera-jotzeko "
+"muga gainditu da."
 
 #: ../src/prefdialog.cc:248
 msgid "\"%1\" is not a valid encoding."
@@ -279,7 +268,7 @@ msgstr "regexxer ikonoa"
 
 #: ../ui/aboutdialog.glade.h:4
 msgid "translated by"
-msgstr "Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>"
+msgstr "Itzultzaileak"
 
 #: ../ui/aboutdialog.glade.h:5
 msgid "translator-credits"
@@ -287,7 +276,7 @@ msgstr "Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>"
 
 #: ../ui/aboutdialog.glade.h:6
 msgid "written by"
-msgstr "idazleak "
+msgstr "Idazleak "
 
 #: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
@@ -403,9 +392,8 @@ msgid ""
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
 "\\L, \\U and \\E are supported as well."
 msgstr ""
-"Kate berria ordezteko. Perl hizkuntzan bezala, bat datorrenaren zatiari "
-"buruz aritzeko $1, $2, e.a. bezalakoak erabil ditzakezu. Baita $+, $&, $`eta "
-"$' ere. \\|, \\u, \\L, \\U eta \\E eragileak ere onartuta daude."
+"Kate berria ordezteko. Perl hizkuntzan bezala, bat datorrenaren zatiari buruz aritzeko "
+"$1, $2, e.a. bezalakoak erabil ditzakezu. Baita $+, $&, $`eta $' ere. \\|, \\u, \\L, \\U eta \\E eragileak ere onartuta daude."
 
 #: ../ui/mainwindow.glade.h:32
 msgid "_All files"
@@ -516,7 +504,6 @@ msgid "_Text view font:"
 msgstr "_Testu ikuspegiaren letra-tipoa:"
 
 #: ../ui/prefdialog.glade.h:18
-msgid ""
-"regexxer attempts to read a file in the following encodings before giving up:"
-msgstr ""
-"regexxer-ek honako kodeketekin saiatu da fitxategia irakurtzen utzi aurretik:"
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "regexxer-ek honako kodeketekin saiatu da fitxategia irakurtzen utzi aurretik:"
+
