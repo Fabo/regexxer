@@ -1,0 +1,522 @@
+# translation of eu.po to Basque
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: eu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-08-29 12:12+0000\n"
+"PO-Revision-Date: 2006-08-29 12:10+0000\n"
+"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
+"Language-Team: Basque <itzulpena@euskalgnu.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../regexxer.desktop.in.h:1
+msgid "Search and replace using regular expressions"
+msgstr "Bilatu eta ordeztu adierazpen erregularrak erabiliz"
+
+#: ../regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "regexxer bilaketa-tresna"
+
+#: ../regexxer.schemas.in.h:1
+msgid "Current-match color"
+msgstr "Uneko bat datorrenaren kolorea"
+
+#: ../regexxer.schemas.in.h:2
+msgid "Fallback encoding"
+msgstr "Kodeketa lehenetsia"
+
+#: ../regexxer.schemas.in.h:3
+msgid "Match color"
+msgstr "Bat datorrenaren kolorea"
+
+#: ../regexxer.schemas.in.h:4
+msgid ""
+"Name of the character encoding to use if a file is not readable in either "
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
+msgstr ""
+"Erabiliko den karaktere-kodeketaren izena, uneko lokalean UTF-8 edo beste "
+"zehaztutako kodeketa multzoarekin fitxategia ezin bada irakurri. Saiatu "
+"\"iconv --list\" erabilgarri dauden balioen zerrenda ikusteko."
+
+#: ../regexxer.schemas.in.h:5
+msgid "Text view font"
+msgstr "Testu ikuspegiaren letra-tipoa"
+
+#: ../regexxer.schemas.in.h:6
+msgid ""
+"The background color used to highlight matches of the search expression."
+msgstr ""
+"Atzeko planoko kolorea bat datozenak nabarmentzeko adierazpenaren bilaketan."
+
+#: ../regexxer.schemas.in.h:7
+msgid ""
+"The background color used to highlight the currently selected match of the "
+"search expression."
+msgstr ""
+"Atzeko planoko kolorea unean hautatuta dagoen eta bat datorrena "
+"nabarmentzeko adierazpenaren bilaketan."
+
+#: ../regexxer.schemas.in.h:8
+msgid "The font used in the file editor."
+msgstr "Letra-tipoa fitxategi-editorean erabiltzeko."
+
+#: ../regexxer.schemas.in.h:9
+msgid ""
+"The style of the application's toolbar. Possible values are \"icons\", \"text"
+"\", \"both\", and \"both-horiz\"."
+msgstr ""
+"Aplikazioaren tresna-barraren estiloa. Balio erabilgarriak: \"icons"
+"\" (ikonoak), \"text\" (testua), \"both\" (biak), eta \"both-horiz\" (biak-"
+"horiz)."
+
+#: ../regexxer.schemas.in.h:10
+msgid "Toolbar style"
+msgstr "Tresna-barraren estiloa"
+
+#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+#: ../src/filebuffer.cc:203
+msgid "Can't read file:"
+msgstr "Ezin da irakurri fitxategia:"
+
+#: ../src/filetree.cc:81
+msgid "File"
+msgstr "Fitxategia"
+
+#: ../src/filetree.cc:101
+msgid "#"
+msgstr "#"
+
+#: ../src/filetree.cc:532
+msgid "Failed to save file \"%1\": %2"
+msgstr "Huts egin du \"%1\" fitxategia gordetzean: %2"
+
+#: ../src/filetree.cc:949
+msgid "\"%1\" seems to be a binary file."
+msgstr "Badirudi \"%1\" fitxategi bitarra dela."
+
+#: ../src/main.cc:84
+msgid "_About"
+msgstr "Honi _buruz"
+
+#: ../src/main.cc:85
+msgid "Save _all"
+msgstr "Gorde _denak"
+
+#: ../src/main.cc:100
+msgid "Find files matching PATTERN"
+msgstr "Bilatu fitxategiak EREDUAREKIN bat datozenak"
+
+#: ../src/main.cc:100
+msgid "PATTERN"
+msgstr "EREDUA"
+
+#: ../src/main.cc:101
+msgid "Do not recurse into subdirectories"
+msgstr "Ez bilatu errekurtsiboki azpidirektorioetan"
+
+#: ../src/main.cc:102 ../ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "Bilatu ezkutuko fitxategiak ere"
+
+#: ../src/main.cc:103
+msgid "Find text matching REGEX"
+msgstr "Bilatu testua ADIERGrekin bat datorrena"
+
+#: ../src/main.cc:103
+msgid "REGEX"
+msgstr "ADIERG"
+
+#: ../src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr "Bilatu bat datorren aurrenekoa lerroan"
+
+#: ../src/main.cc:105 ../ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "Ez bereiztu maiuskulak/minuskulak"
+
+#: ../src/main.cc:106
+msgid "Replace matches with STRING"
+msgstr "Ordeztu KATEArekin bat datozenak"
+
+#: ../src/main.cc:106
+msgid "STRING"
+msgstr "KATEA"
+
+#: ../src/main.cc:107
+msgid "Print match location to standard output"
+msgstr "Bistaratu bat datorrenaren kokalekua irteera estandarrean"
+
+#: ../src/main.cc:108
+msgid "Do not automatically start search"
+msgstr "Ez hasi bilaketa automatikoki"
+
+#: ../src/main.cc:118
+msgid "[OPTION]... [FOLDER]"
+msgstr "[AUKERA]... [KARPETA]"
+
+#: ../src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr "Exekutatu \"regexxer --help\" informazio gehiagorako."
+
+#: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Fitxategi-izena komando lerroan erabiltzen den bezala. Karaktere-klaseak "
+"[ab] eta csh estiloko giltzen adierazpenak {a,b} onartzen dira."
+
+#: ../src/mainwindow.cc:403
+msgid ""
+"Some files haven't been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+"Fitxategi batzuk oraindik ez dira gorde.\n"
+"Irten dena den?"
+
+#: ../src/mainwindow.cc:431
+msgid ""
+"The folder name \"%1\" contains characters not representable in the encoding "
+"of the local file system."
+msgstr ""
+"Fitxategi-sistema lokaleko kodeketarekin bistaratu ezin daitekeen "
+"karaktereak ditu \"%1\" izeneko karpetak."
+
+#: ../src/mainwindow.cc:450
+msgid "Select a folder"
+msgstr "Hautatu karpeta"
+
+#: ../src/mainwindow.cc:470
+msgid ""
+"Some files haven't been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+"Fitxategi batzuk oraindik ez dira gorde.\n"
+"Jarraitu dena den?"
+
+#: ../src/mainwindow.cc:496
+msgid "The file search pattern is invalid."
+msgstr "Eredu baliogabea fitxategia bilatzeko."
+
+#: ../src/mainwindow.cc:502
+msgid "The following errors occurred during search:"
+msgstr "Erroreak bilaketa lantzean:"
+
+#: ../src/mainwindow.cc:527
+msgid ""
+"Error in regular expression at \"%1\" (index %2):\n"
+"%3"
+msgstr ""
+"Errorea adierazpen erregularrean \"%1\" (%2 indizea):\n"
+"%3"
+
+#: ../src/mainwindow.cc:529
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"Errorea adierazpen erregularrean:\n"
+"%1"
+
+#: ../src/mainwindow.cc:751
+msgid "The following errors occurred during save:"
+msgstr "Erroreak gordetzean:"
+
+#: ../src/pcreshell.cc:59
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr ""
+"\\C ihes-sekuentzia erabiltzea byte bakarra bilatzeko ez dago onartuta."
+
+#: ../src/pcreshell.cc:151
+msgid ""
+"Reached the recursion and backtracking limit of the regular expression "
+"engine."
+msgstr ""
+"Adierazpen erregularreko motoreko errekurtsibitateko eta atzera-jotzeko muga "
+"gainditu da."
+
+#: ../src/prefdialog.cc:248
+msgid "\"%1\" is not a valid encoding."
+msgstr "\"%1\" ez da baliozko kodeketa."
+
+#: ../src/statusline.cc:264
+msgid "Stop"
+msgstr "Gelditu"
+
+#: ../src/statusline.cc:271
+msgid "File:"
+msgstr "Fitxategia:"
+
+#: ../src/statusline.cc:274
+msgid "Match:"
+msgstr "Bat dator:"
+
+#: ../src/statusline.cc:285
+msgid "Cancels the running search"
+msgstr "Utzi bertan behera uneko bilaketa"
+
+#. namespace Regexxer
+#: ../ui/aboutdialog.glade.h:1
+msgid "About regexxer"
+msgstr "regexxer-i buruz"
+
+#: ../ui/aboutdialog.glade.h:2
+msgid "The application icon of regexxer"
+msgstr "regexxer aplikazioaren ikonoa"
+
+#: ../ui/aboutdialog.glade.h:3
+msgid "regexxer icon"
+msgstr "regexxer ikonoa"
+
+#: ../ui/aboutdialog.glade.h:4
+msgid "translated by"
+msgstr "Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>"
+
+#: ../ui/aboutdialog.glade.h:5
+msgid "translator-credits"
+msgstr "Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>"
+
+#: ../ui/aboutdialog.glade.h:6
+msgid "written by"
+msgstr "idazleak "
+
+#: ../ui/mainwindow.glade.h:2
+msgid "A regular expression in Perl syntax"
+msgstr "Adierazpen erregularra Perl sintaxian"
+
+#: ../ui/mainwindow.glade.h:4
+msgid "Backward"
+msgstr "Atzera"
+
+#: ../ui/mainwindow.glade.h:6
+msgid "File backward"
+msgstr "Aurreko fitxategia"
+
+#: ../ui/mainwindow.glade.h:7
+msgid "File forward"
+msgstr "Hurrengo fitxategia"
+
+#: ../ui/mainwindow.glade.h:8
+msgid "Find all files that match the filename pattern"
+msgstr "Bilatu fitxategi guztiak, fitxategi-izenaren ereduarekin bat datozenak"
+
+#: ../ui/mainwindow.glade.h:9
+msgid "Find all matches of the regular expression"
+msgstr "Bilatu adierazpen erregularrarekin bat datozen guztiak"
+
+#: ../ui/mainwindow.glade.h:10
+msgid "Find all possible matches in a line"
+msgstr "Bilatu lerroan bat etor daitezkeen guztiak"
+
+#: ../ui/mainwindow.glade.h:11
+msgid "Find fi_les"
+msgstr "Bilatu _fitxategiak"
+
+#: ../ui/mainwindow.glade.h:12
+msgid "Fol_der:"
+msgstr "_Karpeta:"
+
+#: ../ui/mainwindow.glade.h:13
+msgid "Forward"
+msgstr "Aurrera"
+
+#: ../ui/mainwindow.glade.h:14
+msgid "Go to next match"
+msgstr "Joan bat datorren hurrengora"
+
+#: ../ui/mainwindow.glade.h:15
+msgid "Go to previous match"
+msgstr "Joan bat datorren aurrekora"
+
+#: ../ui/mainwindow.glade.h:16
+msgid "Go to the next matching file"
+msgstr "Joan bat datorren hurrengo fitxategira"
+
+#: ../ui/mainwindow.glade.h:17
+msgid "Go to the previous matching file"
+msgstr "Joan bat datorren aurreko fitxategira"
+
+#: ../ui/mainwindow.glade.h:18
+msgid "Pattern:"
+msgstr "Eredua:"
+
+#: ../ui/mainwindow.glade.h:19
+msgid "Preview"
+msgstr "Aurrebista"
+
+#: ../ui/mainwindow.glade.h:20
+msgid "Preview of the substitution"
+msgstr "Ordezpenaren aurrebista"
+
+#: ../ui/mainwindow.glade.h:21
+msgid "Recurse into subdirectories"
+msgstr "Errekurtsiboki azpidirektorioetan"
+
+#: ../ui/mainwindow.glade.h:22
+msgid "Replace _current"
+msgstr "Ordeztu _unekoa"
+
+#: ../ui/mainwindow.glade.h:23
+msgid "Replace all matches in all files"
+msgstr "Ordeztu bat datozen guztiak fitxategi guztietan"
+
+#: ../ui/mainwindow.glade.h:24
+msgid "Replace all matches in the current file"
+msgstr "Ordeztu bat datozen guztiak uneko fitxategian"
+
+#: ../ui/mainwindow.glade.h:25
+msgid "Replace current match"
+msgstr "Ordeztu bat datorren unekoa"
+
+#: ../ui/mainwindow.glade.h:26
+msgid "Replace in _all files"
+msgstr "Ordeztu fitxategi _guztietan"
+
+#: ../ui/mainwindow.glade.h:27
+msgid "Replace in _this file"
+msgstr "Ordeztu fitxategi _honetan"
+
+#: ../ui/mainwindow.glade.h:28
+msgid "Replace:"
+msgstr "Ordeztu:"
+
+#: ../ui/mainwindow.glade.h:29
+msgid "Search:"
+msgstr "Bilatu:"
+
+#: ../ui/mainwindow.glade.h:30
+msgid "The directory to be searched"
+msgstr "Direktorioa bilaketa egiteko"
+
+#: ../ui/mainwindow.glade.h:31
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
+"\\L, \\U and \\E are supported as well."
+msgstr ""
+"Kate berria ordezteko. Perl hizkuntzan bezala, bat datorrenaren zatiari "
+"buruz aritzeko $1, $2, e.a. bezalakoak erabil ditzakezu. Baita $+, $&, $`eta "
+"$' ere. \\|, \\u, \\L, \\U eta \\E eragileak ere onartuta daude."
+
+#: ../ui/mainwindow.glade.h:32
+msgid "_All files"
+msgstr "Fitxategi _denak"
+
+#: ../ui/mainwindow.glade.h:33
+msgid "_Edit"
+msgstr "_Editatu"
+
+#: ../ui/mainwindow.glade.h:34
+msgid "_File"
+msgstr "_Fitxategia"
+
+#: ../ui/mainwindow.glade.h:35
+msgid "_Help"
+msgstr "_Laguntza"
+
+#: ../ui/mainwindow.glade.h:36
+msgid "_Match"
+msgstr "_Bat dator"
+
+#: ../ui/mainwindow.glade.h:37
+msgid "_Next file"
+msgstr "_Hurrengo fitxategia"
+
+#: ../ui/mainwindow.glade.h:38
+msgid "_Previous file"
+msgstr "_Aurreko fitxategia"
+
+#: ../ui/mainwindow.glade.h:39
+msgid "_Replace"
+msgstr "_Ordeztu"
+
+#: ../ui/mainwindow.glade.h:40
+msgid "_This file"
+msgstr "_Fitxategi hau"
+
+#: ../ui/mainwindow.glade.h:41
+msgid "hidden"
+msgstr "ezkutukoa"
+
+#: ../ui/mainwindow.glade.h:42
+msgid "recursive"
+msgstr "errekurtsiboa"
+
+#: ../ui/prefdialog.glade.h:1
+msgid "1."
+msgstr "1."
+
+#: ../ui/prefdialog.glade.h:2
+msgid "2."
+msgstr "2."
+
+#: ../ui/prefdialog.glade.h:3
+msgid "3."
+msgstr "3."
+
+#: ../ui/prefdialog.glade.h:4
+msgid "C_urrent match color:"
+msgstr "_Unean bat datorrenaren kolorea:"
+
+#: ../ui/prefdialog.glade.h:5
+msgid "Fallback _encoding:"
+msgstr "Kodeketa _lehenetsia:"
+
+#: ../ui/prefdialog.glade.h:6
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
+"Ikonoak soilik\n"
+"Testua soilik\n"
+"Ikonoak eta testua\n"
+"Biak horizontalean"
+
+#: ../ui/prefdialog.glade.h:10
+msgid "Preferences"
+msgstr "Hobespenak"
+
+#: ../ui/prefdialog.glade.h:11
+msgid "The encoding specified by the current locale"
+msgstr "Uneko lokalean zehaztutako kodeketa"
+
+#: ../ui/prefdialog.glade.h:12
+msgid "Tool_bar style:"
+msgstr "_Tresna-barraren estiloa:"
+
+#: ../ui/prefdialog.glade.h:13
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ../ui/prefdialog.glade.h:14
+msgid "_File access"
+msgstr "_Fitxategiaren sarbidea"
+
+#: ../ui/prefdialog.glade.h:15
+msgid "_Look'n'feel"
+msgstr "_Itxura eta izaera"
+
+#: ../ui/prefdialog.glade.h:16
+msgid "_Match color:"
+msgstr "_Bat datorrenaren kolorea:"
+
+#: ../ui/prefdialog.glade.h:17
+msgid "_Text view font:"
+msgstr "_Testu ikuspegiaren letra-tipoa:"
+
+#: ../ui/prefdialog.glade.h:18
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr ""
+"regexxer-ek honako kodeketekin saiatu da fitxategia irakurtzen utzi aurretik:"
