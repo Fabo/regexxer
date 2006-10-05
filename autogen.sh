@@ -102,7 +102,7 @@ test -z "${BASH_VERSION+set}" || set_option=set
 $set_option -x
 
 glib-gettextize --copy		|| exit 1
-intltoolize --automake --force	|| exit 1
+intltoolize --automake --copy --force	|| exit 1
 (echo; echo "XGETTEXT_KEYWORDS = $XGETTEXT_KEYWORDS") >> po/Makefile.in.in || exit 1
 "$aclocal" $ACLOCAL_FLAGS	|| exit 1
 "$autoheader"			|| exit 1
