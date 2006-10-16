@@ -2,6 +2,7 @@
 
 	* zh_TW.po: Updated Chinese (Taiwan) translation.
 	* zh_HK.po: New Chinese (Hong Kong) translation.
+	* LINGUAS: Added "zh_HK".
 
 2006-09-24  Pawan Chitrakar  <pchitrakar@gmail.com>
 
