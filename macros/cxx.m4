@@ -84,6 +84,38 @@ AC_MSG_RESULT([$tested_flags])
 ])
 
 
+## REGEXXER_LINK_EXPORT_DYNAMIC(variable)
+##
+## Check whether the C++ linker accepts the --export-dynamic flag.
+## On success, assign the flag to the output variable.
+##
+AC_DEFUN([REGEXXER_LINK_EXPORT_DYNAMIC],
+[
+m4_if([$1],, [AC_FATAL([1 argument required])])
+
+AC_CACHE_CHECK(
+  [whether the linker accepts -Wl,--export-dynamic],
+  [regexxer_cv_link_export_dynamic],
+[
+  regexxer_save_ldflags=$LDFLAGS
+  LDFLAGS="$LDFLAGS -Wl,--export-dynamic"
+  AC_LINK_IFELSE([AC_LANG_PROGRAM([], [])],
+                 [regexxer_cv_link_export_dynamic=yes],
+                 [regexxer_cv_link_export_dynamic=no])
+  LDFLAGS=$regexxer_save_ldflags
+])
+
+AS_IF([test "x$regexxer_cv_link_export_dynamic" = xyes],
+[
+  $1='-Wl,--export-dynamic'
+],[
+  $1=
+])
+
+AC_SUBST([$1])
+])
+
+
 ## REGEXXER_LINK_VERSION_SCRIPT(variable, filename)
 ##
 ## Check whether the C++ linker accepts the --version-script flag.
@@ -116,4 +148,3 @@ AS_IF([test "x$regexxer_cv_link_version_script" = xyes],
 
 AC_SUBST([$1])
 ])
-

@@ -1,3 +1,13 @@
+2006-11-13  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* macros/cxx.m4 (REGEXXER_LINK_EXPORT_DYNAMIC): New macro to
+	check for support of the --export-dynamic linker flag.
+	* configure.ac: Use the new REGEXXER_LINK_EXPORT_DYNAMIC macro
+	to fill in the substituted variable REGEXXER_EXPORT_DYNAMIC.
+	* src/Makefile.am (regexxer_LDFLAGS): Substitute the value of
+	$(REGEXXER_EXPORT_DYNAMIC) since libglade no longer passes the
+	linker flag -Wl,--export-dynamic by default.
+
 2006-10-05  Sven Herzberg  <herzi@gnome-de.org>
 
 	* autogen.sh: use --copy on intltoolize, so modifying
