@@ -26,6 +26,10 @@
 
 	* fr.po: Updated French translation.
 
+2006-03-01  Daniel Nylander  <po@danielnylander.se>
+
+	* sv.po: Updated Swedish translation.
+
 2006-01-22  Clytie Siddall <clytie@riverland.net.au>
 
 	* vi.po: Added "vi" to LINGUAS.
