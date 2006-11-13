@@ -1,5 +1,9 @@
 2006-11-13  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* AUTHORS: Change my mail address.
+
+2006-11-13  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* macros/cxx.m4 (REGEXXER_LINK_EXPORT_DYNAMIC): New macro to
 	check for support of the --export-dynamic linker flag.
 	* configure.ac: Use the new REGEXXER_LINK_EXPORT_DYNAMIC macro
