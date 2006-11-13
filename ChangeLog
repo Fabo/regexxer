@@ -1,5 +1,11 @@
 2006-11-13  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/stringutils.cc (parse_control_char, Util::convert_to_ascii):
+	Avoid bitwise operations with possibly signed char values.  Make
+	use of explicit casts and unsigned integer literals instead.
+
+2006-11-13  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* AUTHORS: Change my mail address.
 
 2006-11-13  Daniel Elstner  <daniel.kitta@gmail.com>

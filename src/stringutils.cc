@@ -182,12 +182,12 @@ void parse_control_char(std::string::const_iterator& p, std::string::const_itera
 {
   const std::string::const_iterator pnext = p + 1;
 
-  if (pnext != pend && (*pnext & '\x80') == 0)
+  if (pnext != pend && (static_cast<unsigned char>(*pnext) & 0x80U) == 0)
   {
     p = pnext;
 
     // Flip bit 6 of the upcased character.
-    const char c = Glib::Ascii::toupper(*pnext) ^ '\x40';
+    const char c = static_cast<unsigned char>(Glib::Ascii::toupper(*pnext)) ^ 0x40U;
 
     // TextBuffer can't handle NUL; interpret it as empty string instead.
     if (c != '\0')
@@ -622,7 +622,7 @@ Glib::ustring Util::convert_to_ascii(const std::string& str)
 
   for (std::string::const_iterator p = str.begin(); p != str.end(); ++p)
   {
-    if ((*p & '\x80') == 0)
+    if ((static_cast<unsigned char>(*p) & 0x80U) == 0)
       output << *p;
     else
       output << '\\' << static_cast<unsigned int>(static_cast<unsigned char>(*p));
