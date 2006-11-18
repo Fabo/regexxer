@@ -1,0 +1,555 @@
+# Arabic translations for PACKAGE package.
+# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-11-17 21:14+0000\n"
+"PO-Revision-Date: 2006-11-17 22:46+0100\n"
+"Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n == 0 ? 0 : n == 1 ? 1 : n == 2 ? 2 : n >= 3 && n <= 10 ? 3 : n >= 11 && n <= 99 ? 4 : 5;\n"
+"X-Poedit-Language: Arabic\n"
+
+#: ../regexxer.desktop.in.h:1
+msgid "Search and replace using regular expressions"
+msgstr ""
+
+#: ../regexxer.desktop.in.h:2
+#, fuzzy
+msgid "regexxer Search Tool"
+msgstr "أداة تقرير خلال"
+
+#: ../regexxer.schemas.in.h:1
+#, fuzzy
+msgid "Current-match color"
+msgstr "لون التظليل للنتائج الحالية"
+
+#: ../regexxer.schemas.in.h:2
+#, fuzzy
+msgid "Fallback encoding"
+msgstr "التشفير الإفتراضي"
+
+#: ../regexxer.schemas.in.h:3
+#, fuzzy
+msgid "Match color"
+msgstr "إضبط الألوان"
+
+#: ../regexxer.schemas.in.h:4
+msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" for a complete list of possible values."
+msgstr ""
+
+#: ../regexxer.schemas.in.h:5
+#, fuzzy
+msgid "Text view font"
+msgstr "خطّ النّصّ"
+
+#: ../regexxer.schemas.in.h:6
+msgid "The background color used to highlight matches of the search expression."
+msgstr ""
+
+#: ../regexxer.schemas.in.h:7
+msgid "The background color used to highlight the currently selected match of the search expression."
+msgstr ""
+
+#: ../regexxer.schemas.in.h:8
+msgid "The font used in the file editor."
+msgstr ""
+
+#: ../regexxer.schemas.in.h:9
+msgid "The style of the application's toolbar. Possible values are \"icons\", \"text\", \"both\", and \"both-horiz\"."
+msgstr ""
+
+#: ../regexxer.schemas.in.h:10
+#, fuzzy
+msgid "Toolbar style"
+msgstr "شكل أزرار عمود الأدوات"
+
+#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+#: ../src/filebuffer.cc:203
+#, fuzzy
+msgid "Can't read file:"
+msgstr "لا يمكن حفظ الملف: %s\n"
+
+#: ../src/filetree.cc:81
+#, fuzzy
+msgid "File"
+msgstr "الملف"
+
+#: ../src/filetree.cc:101
+msgid "#"
+msgstr ""
+
+#: ../src/filetree.cc:532
+#, fuzzy
+msgid "Failed to save file \"%1\": %2"
+msgstr "حفظ صورة شاشة في الم_لف:"
+
+#: ../src/filetree.cc:949
+#, fuzzy
+msgid "\"%1\" seems to be a binary file."
+msgstr "لا يمكن نقل الملف \"%s\" إلى سلة المهملات."
+
+#: ../src/main.cc:84
+#, fuzzy
+msgid "_About"
+msgstr "_حول"
+
+#: ../src/main.cc:85
+#, fuzzy
+msgid "Save _all"
+msgstr "_حفظ الكل"
+
+#: ../src/main.cc:100
+#, fuzzy
+msgid "Find files matching PATTERN"
+msgstr "اسم النموذج للملفات"
+
+#: ../src/main.cc:100
+#, fuzzy
+msgid "PATTERN"
+msgstr "ال_نمط:"
+
+#: ../src/main.cc:101
+#, fuzzy
+msgid "Do not recurse into subdirectories"
+msgstr "لا تشعب إلى الخلفية"
+
+#: ../src/main.cc:102
+#: ../ui/mainwindow.glade.h:3
+#, fuzzy
+msgid "Also find hidden files"
+msgstr "إظهار الملفّات و الدلائل المخفية"
+
+#: ../src/main.cc:103
+#, fuzzy
+msgid "Find text matching REGEX"
+msgstr "لا يمكن العثور على النص التالي!"
+
+#: ../src/main.cc:103
+#, fuzzy
+msgid "REGEX"
+msgstr "مطابقة التّعبير النّظامي"
+
+#: ../src/main.cc:104
+msgid "Find only the first match in a line"
+msgstr ""
+
+#: ../src/main.cc:105
+#: ../ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr ""
+
+#: ../src/main.cc:106
+#, fuzzy
+msgid "Replace matches with STRING"
+msgstr "استبدال مدير النوافذ ب متستي"
+
+#: ../src/main.cc:106
+#, fuzzy
+msgid "STRING"
+msgstr "سلسلة"
+
+#: ../src/main.cc:107
+#, fuzzy
+msgid "Print match location to standard output"
+msgstr "كتابة قيمة مفتاح في لإخراج القياسي."
+
+#: ../src/main.cc:108
+msgid "Do not automatically start search"
+msgstr ""
+
+#: ../src/main.cc:118
+#, fuzzy
+msgid "[OPTION]... [FOLDER]"
+msgstr "افتح مجلد %s"
+
+#: ../src/main.cc:141
+msgid "Try \"regexxer --help\" for more information."
+msgstr ""
+
+#: ../src/mainwindow.cc:252
+#: ../ui/mainwindow.glade.h:1
+msgid "A filename pattern as used by the shell. Character classes [ab] and csh style brace expressions {a,b} are supported."
+msgstr ""
+
+#: ../src/mainwindow.cc:403
+msgid ""
+"Some files haven't been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+
+#: ../src/mainwindow.cc:431
+msgid "The folder name \"%1\" contains characters not representable in the encoding of the local file system."
+msgstr ""
+
+#: ../src/mainwindow.cc:450
+#, fuzzy
+msgid "Select a folder"
+msgstr "انتقاء مجلّد"
+
+#: ../src/mainwindow.cc:470
+msgid ""
+"Some files haven't been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+
+#: ../src/mainwindow.cc:496
+#, fuzzy
+msgid "The file search pattern is invalid."
+msgstr "اختر خيار البحث \"Contains the text\""
+
+#: ../src/mainwindow.cc:502
+msgid "The following errors occurred during search:"
+msgstr ""
+
+#: ../src/mainwindow.cc:527
+msgid ""
+"Error in regular expression at \"%1\" (index %2):\n"
+"%3"
+msgstr ""
+
+#: ../src/mainwindow.cc:529
+#, fuzzy
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr "خطأ عند تجميع التعبير النظامي \"%s\"."
+
+#: ../src/mainwindow.cc:751
+msgid "The following errors occurred during save:"
+msgstr ""
+
+#: ../src/pcreshell.cc:59
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr ""
+
+#: ../src/pcreshell.cc:151
+msgid "Reached the recursion and backtracking limit of the regular expression engine."
+msgstr ""
+
+#: ../src/prefdialog.cc:248
+#, fuzzy
+msgid "\"%1\" is not a valid encoding."
+msgstr "ليس %s موقعا سليما."
+
+#: ../src/statusline.cc:264
+#, fuzzy
+msgid "Stop"
+msgstr "توقّف"
+
+#: ../src/statusline.cc:271
+#, fuzzy
+msgid "File:"
+msgstr "الملف"
+
+#: ../src/statusline.cc:274
+#, fuzzy
+msgid "Match:"
+msgstr "<b>مطابقة</b>"
+
+#: ../src/statusline.cc:285
+#, fuzzy
+msgid "Cancels the running search"
+msgstr "خطأ أثناء تنفيذ أمر البحث."
+
+#. namespace Regexxer
+#: ../ui/aboutdialog.glade.h:1
+#, fuzzy
+msgid "About regexxer"
+msgstr "_حول الملحق"
+
+#: ../ui/aboutdialog.glade.h:2
+#, fuzzy
+msgid "The application icon of regexxer"
+msgstr "لم يعثر على الأيقونة"
+
+#: ../ui/aboutdialog.glade.h:3
+#, fuzzy
+msgid "regexxer icon"
+msgstr "حجم الأيقونة"
+
+#: ../ui/aboutdialog.glade.h:4
+#, fuzzy
+msgid "translated by"
+msgstr "المترجمون:"
+
+#: ../ui/aboutdialog.glade.h:5
+#, fuzzy
+msgid "translator-credits"
+msgstr "Yousef Raffah يوسف رفه (yousef@raffah.com)"
+
+#: ../ui/aboutdialog.glade.h:6
+#, fuzzy
+msgid "written by"
+msgstr "المطورون"
+
+#: ../ui/mainwindow.glade.h:2
+msgid "A regular expression in Perl syntax"
+msgstr ""
+
+#: ../ui/mainwindow.glade.h:4
+#, fuzzy
+msgid "Backward"
+msgstr "لل_خلف"
+
+#: ../ui/mainwindow.glade.h:6
+#, fuzzy
+msgid "File backward"
+msgstr "بحث إلى ال_خلف"
+
+#: ../ui/mainwindow.glade.h:7
+#, fuzzy
+msgid "File forward"
+msgstr "حوّل المكالمات"
+
+#: ../ui/mainwindow.glade.h:8
+msgid "Find all files that match the filename pattern"
+msgstr ""
+
+#: ../ui/mainwindow.glade.h:9
+#, fuzzy
+msgid "Find all matches of the regular expression"
+msgstr "اختر خيار البحث \"Contains the text\""
+
+#: ../ui/mainwindow.glade.h:10
+msgid "Find all possible matches in a line"
+msgstr ""
+
+#: ../ui/mainwindow.glade.h:11
+#, fuzzy
+msgid "Find fi_les"
+msgstr "ايكي ليه بان"
+
+#: ../ui/mainwindow.glade.h:12
+#, fuzzy
+msgid "Fol_der:"
+msgstr "_دلائل"
+
+#: ../ui/mainwindow.glade.h:13
+#, fuzzy
+msgid "Forward"
+msgstr "تمرير"
+
+#: ../ui/mainwindow.glade.h:14
+#, fuzzy
+msgid "Go to next match"
+msgstr "إذهب إلى الصفحة التالية"
+
+#: ../ui/mainwindow.glade.h:15
+#, fuzzy
+msgid "Go to previous match"
+msgstr "إذهب إلى الصفحة السابقة"
+
+#: ../ui/mainwindow.glade.h:16
+#, fuzzy
+msgid "Go to the next matching file"
+msgstr "الذهابل إلى %s في الملف %s"
+
+#: ../ui/mainwindow.glade.h:17
+#, fuzzy
+msgid "Go to the previous matching file"
+msgstr "الذهابل إلى %s في الملف %s"
+
+#: ../ui/mainwindow.glade.h:18
+#, fuzzy
+msgid "Pattern:"
+msgstr "ال_نمط:"
+
+#: ../ui/mainwindow.glade.h:19
+#, fuzzy
+msgid "Preview"
+msgstr "لمحة"
+
+#: ../ui/mainwindow.glade.h:20
+#, fuzzy
+msgid "Preview of the substitution"
+msgstr "استعراض الفيديو"
+
+#: ../ui/mainwindow.glade.h:21
+#, fuzzy
+msgid "Recurse into subdirectories"
+msgstr "ال_صق إلى مجلد"
+
+#: ../ui/mainwindow.glade.h:22
+#, fuzzy
+msgid "Replace _current"
+msgstr "تعويض المستند الحالي"
+
+#: ../ui/mainwindow.glade.h:23
+#, fuzzy
+msgid "Replace all matches in all files"
+msgstr "عدّد كل الملفّات في المجلّد"
+
+#: ../ui/mainwindow.glade.h:24
+msgid "Replace all matches in the current file"
+msgstr ""
+
+#: ../ui/mainwindow.glade.h:25
+#, fuzzy
+msgid "Replace current match"
+msgstr "تعويض المستند الحالي"
+
+#: ../ui/mainwindow.glade.h:26
+#, fuzzy
+msgid "Replace in _all files"
+msgstr "عدّد كل الملفّات في المجلّد"
+
+#: ../ui/mainwindow.glade.h:27
+#, fuzzy
+msgid "Replace in _this file"
+msgstr "بيانات زائدة في الملف"
+
+#: ../ui/mainwindow.glade.h:28
+#, fuzzy
+msgid "Replace:"
+msgstr "استبدال"
+
+#: ../ui/mainwindow.glade.h:29
+#, fuzzy
+msgid "Search:"
+msgstr "<b>ابحث:</b>"
+
+#: ../ui/mainwindow.glade.h:30
+#, fuzzy
+msgid "The directory to be searched"
+msgstr "الدليل الذي سيتم البحث فيه عن أيقونات."
+
+#: ../ui/mainwindow.glade.h:31
+msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
+msgstr ""
+
+#: ../ui/mainwindow.glade.h:32
+#, fuzzy
+msgid "_All files"
+msgstr "_كل الملفات"
+
+#: ../ui/mainwindow.glade.h:33
+#, fuzzy
+msgid "_Edit"
+msgstr "_تحرير"
+
+#: ../ui/mainwindow.glade.h:34
+#, fuzzy
+msgid "_File"
+msgstr "_ملف"
+
+#: ../ui/mainwindow.glade.h:35
+#, fuzzy
+msgid "_Help"
+msgstr "م_ساعدة"
+
+#: ../ui/mainwindow.glade.h:36
+#, fuzzy
+msgid "_Match"
+msgstr "<b>مطابقة</b>"
+
+#: ../ui/mainwindow.glade.h:37
+#, fuzzy
+msgid "_Next file"
+msgstr "إنتقاء ملف"
+
+#: ../ui/mainwindow.glade.h:38
+#, fuzzy
+msgid "_Previous file"
+msgstr "إنتقاء ملف"
+
+#: ../ui/mainwindow.glade.h:39
+#, fuzzy
+msgid "_Replace"
+msgstr "است_بدال"
+
+#: ../ui/mainwindow.glade.h:40
+#, fuzzy
+msgid "_This file"
+msgstr "تنزيل الملف؟"
+
+#: ../ui/mainwindow.glade.h:41
+#, fuzzy
+msgid "hidden"
+msgstr "إبدأ مخفياً"
+
+#: ../ui/mainwindow.glade.h:42
+msgid "recursive"
+msgstr ""
+
+#: ../ui/prefdialog.glade.h:1
+msgid "1."
+msgstr ""
+
+#: ../ui/prefdialog.glade.h:2
+msgid "2."
+msgstr ""
+
+#: ../ui/prefdialog.glade.h:3
+msgid "3."
+msgstr ""
+
+#: ../ui/prefdialog.glade.h:4
+#, fuzzy
+msgid "C_urrent match color:"
+msgstr "لون التظليل للنتائج الحالية"
+
+#: ../ui/prefdialog.glade.h:5
+#, fuzzy
+msgid "Fallback _encoding:"
+msgstr "التشفير الإفتراضي"
+
+#: ../ui/prefdialog.glade.h:6
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
+
+#: ../ui/prefdialog.glade.h:10
+#, fuzzy
+msgid "Preferences"
+msgstr "تفضيلات"
+
+#: ../ui/prefdialog.glade.h:11
+#, fuzzy
+msgid "The encoding specified by the current locale"
+msgstr "استخدام التشفير المحدد من طرف المستند"
+
+#: ../ui/prefdialog.glade.h:12
+#, fuzzy
+msgid "Tool_bar style:"
+msgstr "بدون عمود الأدوات"
+
+#: ../ui/prefdialog.glade.h:13
+#, fuzzy
+msgid "UTF-8"
+msgstr "يو تي أف-8:"
+
+#: ../ui/prefdialog.glade.h:14
+#, fuzzy
+msgid "_File access"
+msgstr "النفاذ للملف:"
+
+#: ../ui/prefdialog.glade.h:15
+#, fuzzy
+msgid "_Look'n'feel"
+msgstr "مظهر ريترو"
+
+#: ../ui/prefdialog.glade.h:16
+#, fuzzy
+msgid "_Match color:"
+msgstr "إضبط الألوان"
+
+#: ../ui/prefdialog.glade.h:17
+#, fuzzy
+msgid "_Text view font:"
+msgstr "خطّ النّصّ"
+
+#: ../ui/prefdialog.glade.h:18
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgstr ""
+
