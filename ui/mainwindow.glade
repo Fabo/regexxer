@@ -332,7 +332,7 @@
 		      <child>
 			<widget class="GtkImageMenuItem" id="menuitem_about">
 			  <property name="visible">True</property>
-			  <property name="label">regexxer-about</property>
+			  <property name="label">gtk-about</property>
 			  <property name="use_stock">True</property>
 			</widget>
 		      </child>

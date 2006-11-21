@@ -1,5 +1,16 @@
 2006-11-21  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* ui/mainwindow.glade (menuitem_about): Replace the stock item
+	reference "regexxer-about" with "gtk-about", now that the latter
+	has been added to GTK+.
+	* src/main.cc (stock_icon_about): Remove.
+	(regexxer_stock_items): Remove "regexxer-about" stock item.
+	* pixmaps/Makefile.am (stockimages): Remove stock_menu_about.png
+	from list.
+	* pixmaps/stock_menu_about.png: Remove file.
+
+2006-11-21  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/filetree.cc (FileTree::on_style_changed): Use the proper
 	stock images "file" and "directory" instead of abusing "new" and
 	"open", respectively.  These new items have been available since
