@@ -1,3 +1,10 @@
+2006-11-21  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* src/filetree.cc (FileTree::on_style_changed): Use the proper
+	stock images "file" and "directory" instead of abusing "new" and
+	"open", respectively.  These new items have been available since
+	GTK+ 2.6.
+
 2006-11-13  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* src/stringutils.cc (parse_control_char, Util::convert_to_ascii):
