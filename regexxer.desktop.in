@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
+Version=1.0
+Type=Application
 _Name=regexxer Search Tool
 _Comment=Search and replace using regular expressions
 Exec=regexxer
-Icon=regexxer.png
-Terminal=false
+Icon=regexxer
 StartupNotify=true
-Type=Application
-Categories=GNOME;Application;Development;
+Categories=GTK;GNOME;Development;

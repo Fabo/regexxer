@@ -1,3 +1,12 @@
+2006-12-09  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* regexxer.desktop.in: Remove a couple of keys and change some
+	values to match the latest freedesktop.org desktop-entry-spec.
+
+	* pixmaps/Makefile.am: Install the regexxer application icon
+	to $(datadir)/icons/hicolor/48x48/apps as the freedesktop.org
+	icon-theme-spec says.
+
 2006-11-21  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* ui/mainwindow.glade (menuitem_about): Replace the stock item
