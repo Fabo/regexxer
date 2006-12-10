@@ -6,7 +6,7 @@
 	this method has not been wrapped yet.
 	(set_default_window_icon): Remove now unused function.
 	* src/aboutdialog.cc (AboutDialog::create): For the same reason as
-	above, use Gtk::Image::set_icon_from_name() instead of an explicit
+	above, use Gtk::Image::set_from_icon_name() instead of an explicit
 	filename to load the application icon.
 	* src/globalstrings.h (application_icon_filename): Remove now
 	unused string.
