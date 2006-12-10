@@ -1,3 +1,16 @@
+2006-12-10  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* src/main.cc (main): Use gtk_window_set_default_icon_name() to
+	have the default window icon looked up in the icon theme, rather
+	than explicitely specifying an image filename.  For some reason
+	this method has not been wrapped yet.
+	(set_default_window_icon): Remove now unused function.
+	* src/aboutdialog.cc (AboutDialog::create): For the same reason as
+	above, use Gtk::Image::set_icon_from_name() instead of an explicit
+	filename to load the application icon.
+	* src/globalstrings.h (application_icon_filename): Remove now
+	unused string.
+
 2006-12-09  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* regexxer.desktop.in: Remove a couple of keys and change some

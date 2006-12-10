@@ -25,6 +25,7 @@
 
 #include <popt.h>
 #include <glib.h>
+#include <gtk/gtkwindow.h> /* for gtk_window_set_default_icon_name() */
 #include <glibmm.h>
 #include <gconfmm.h>
 #include <gtkmm/iconfactory.h>
@@ -186,19 +187,6 @@ void register_stock_items()
   factory->add_default();
 }
 
-void set_default_window_icon()
-{
-  try
-  {
-    Gtk::Window::set_default_icon_from_file(Regexxer::application_icon_filename);
-  }
-  catch (const Glib::Error& error)
-  {
-    const Glib::ustring what = error.what();
-    g_warning("%s", what.c_str());
-  }
-}
-
 void trap_gconf_exceptions()
 {
   try
@@ -255,7 +243,7 @@ int main(int argc, char** argv)
     Util::enable_utf8_gettext(PACKAGE_TARNAME);
 
     register_stock_items();
-    set_default_window_icon();
+    gtk_window_set_default_icon_name("regexxer");
 
     Regexxer::MainWindow window;
 

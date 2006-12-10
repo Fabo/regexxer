@@ -60,7 +60,7 @@ std::auto_ptr<Gtk::Dialog> AboutDialog::create(Gtk::Window& parent)
   dialog->signal_response().connect(sigc::hide(sigc::mem_fun(*dialog, &Gtk::Widget::hide)));
 
   Gtk::Image* image = 0;
-  xml->get_widget("image", image)->set(application_icon_filename);
+  xml->get_widget("image", image)->set_from_icon_name("regexxer", Gtk::ICON_SIZE_DIALOG);
 
   Gtk::Label* label = 0;
   xml->get_widget("label_title", label)->set_markup(package_title);
