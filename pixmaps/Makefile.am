@@ -17,7 +17,8 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-icon48dir = $(datadir)/icons/hicolor/48x48/apps
+iconbasedir = $(datadir)/icons/hicolor
+icon48dir   = $(iconbasedir)/48x48/apps
 dist_icon48_DATA = regexxer.png
 
 stockimages = stock_save_all_16.png stock_save_all_24.png
@@ -28,6 +29,9 @@ CLEANFILES    = stockimages.h
 
 # use --extern here and include stockimages.h within an anonymous namespace
 gdk_pixbuf_csource_command = $(GDK_PIXBUF_CSOURCE) --extern --raw
+update_icon_cache_command  = $(GTK_UPDATE_ICON_CACHE) --ignore-theme-index --force
+
+install-data-hook: update-icon-cache
 
 stockimages.h: $(stockimages)
 	@build_list='--build-list'; \
@@ -38,3 +42,7 @@ stockimages.h: $(stockimages)
 	done; \
 	echo " $(gdk_pixbuf_csource_command) $$build_list >$@"; \
 	$(gdk_pixbuf_csource_command) $$build_list >$@
+
+update-icon-cache:
+	@$(POST_INSTALL)
+	test -n "$(DESTDIR)" || $(update_icon_cache_command) "$(iconbasedir)"

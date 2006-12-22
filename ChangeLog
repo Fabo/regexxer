@@ -1,3 +1,11 @@
+2006-12-22  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* configure.ac: Use REGEXXER_PKG_PATH_PROG() to locate the
+	gtk-update-icon-cache command.
+	* pixmaps/Makefile.am (update-icon-cache): Add new target, which
+	is invoked as prerequisite of install-data-hook in order to update
+	the GTK+ icon theme cache after installation.
+
 2006-12-10  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* src/main.cc (main): Use gtk_window_set_default_icon_name() to

@@ -17,7 +17,6 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
 AC_INIT([regexxer], [0.8], [daniel.elstner@gmx.net], [regexxer])
 AC_PREREQ([2.53])
 
@@ -43,6 +42,7 @@ AC_SUBST([REGEXXER_CFLAGS])
 AC_SUBST([REGEXXER_LIBS])
 
 REGEXXER_PKG_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-2.0], [gdk-pixbuf-csource])
+REGEXXER_PKG_PATH_PROG([GTK_UPDATE_ICON_CACHE], [gtk+-2.0], [gtk-update-icon-cache])
 REGEXXER_PKG_PATH_PROG([GCONFTOOL], [gconf-2.0], [gconftool-2])
 
 AM_GCONF_SOURCE_2()
@@ -68,4 +68,3 @@ AC_CONFIG_FILES([
 ])
 
 AC_OUTPUT()
-
