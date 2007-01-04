@@ -1,3 +1,43 @@
+2007-01-04  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* Makefile.am: Switch to a non-recursing build system.  The entire
+	source tree except for the po/ subdirectory is now built from the
+	toplevel Makefile.  For the rationale of this change, see Peter
+	Miller's excellent paper "Recursive Make Considered Harmful":
+	http://members.pcug.org.au/~millerp/rmch/recu-make-cons-harm.html
+
+	The new system makes use of Automake's subdir-objects feature to
+	put compilation results into the src/ subdirectory.  The Automake
+	variables and rules from the subdirectories have been merged into
+	the toplevel Makefile.am and adapted as necessary.
+
+	(DISTCHECK_CONFIGURE_FLAGS): Lower --enable-warnings argument from
+	"hardcore" to "maximum", in order to get distcheck to work despite
+	the non-virtual base class warning triggered by gconfmm.
+
+	* {pixmaps,src,ui}/Makefile.am: Remove from repository.
+
+	* configure.ac (AC_INIT): Bump version number to 0.9.  Also change
+	my mail address.
+	(AC_PREREQ): Raise version requirement to autoconf 2.55.
+	(AM_INIT_AUTOMAKE): Require Automake 1.8 and add -Wall option.
+	(PKG_CHECK_MODULES): Replace output variable prefix REGEXXER with
+	REGEXXER_MODULES for clarity.  Remove the AC_SUBST() invocations
+	as the macro seems to do that on its own now.
+	(AC_CONFIG_FILES): Remove {pixmaps,src,ui}/Makefile from the list.
+
+	* NEWS: Add entry on regexxer 0.9.  Not complete yet.
+
+	* autogen.sh: Rip out the overzealous version checking fancyness.
+	This stuff was just a wee bit over the top.  Overall, reduce the
+	the script to a sensible minimum.  Honor $NOCONFIGURE instead of
+	$AUTOGEN_SUBDIR_MODE to match autogen.sh from gnome-common.
+
+	* mkinstalldirs: Remove, as glib-gettextize now properly adds
+	this file to the source tree if it is missing.
+	* config.rpath: Remove, as it does not seem to be actually used
+	anywhere.
+
 2006-12-22  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* configure.ac: Use REGEXXER_PKG_PATH_PROG() to locate the

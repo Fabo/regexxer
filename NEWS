@@ -1,3 +1,7 @@
+regexxer 0.9 (2007-01-04)
+
+	* maintenance release
+
 regexxer 0.8 (2004-07-09)
 
 	* port to new API of sigc++ 2, gtkmm 2.4 and gconfmm 2.6

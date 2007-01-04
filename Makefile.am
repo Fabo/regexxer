@@ -1,71 +1,162 @@
-## $Id$
+## Copyright (c) 2004-2007  Daniel Elstner  <daniel.kitta@gmail.com>
 ##
-## Copyright (c) 2004  Daniel Elstner  <daniel.elstner@gmx.net>
+## This file is part of regexxer.
 ##
-## This program is free software; you can redistribute it and/or modify
-## it under the terms of the GNU General Public License VERSION 2 as
-## published by the Free Software Foundation.  You are not allowed to
-## use any other version of the license; unless you got the explicit
-## permission from the author to do so.
+## regexxer is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
 ##
-## This program is distributed in the hope that it will be useful,
+## regexxer is distributed in the hope that it will be useful,
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
 ## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ## GNU General Public License for more details.
 ##
 ## You should have received a copy of the GNU General Public License
-## along with this program; if not, write to the Free Software
-## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+## along with regexxer; if not, write to the Free Software Foundation, Inc.,
+## 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+## This project does not use recursive make, but a single toplevel Makefile
+## to build the entire tree (excluding the po subdirectory as gettext comes
+## with its own build system).  Read Peter Miller's excellent paper to learn
+## why recursive make invocations are both slow and error-prone:
+## http://members.pcug.org.au/~millerp/rmch/recu-make-cons-harm.html
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install --enable-warnings=hardcore
+AUTOMAKE_OPTIONS = subdir-objects
+DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install --enable-warnings=maximum
 
-SUBDIRS = pixmaps ui src po
+SUBDIRS = po
 
-desktop_in_files    = regexxer.desktop.in
-desktopdir          = $(datadir)/applications
-desktop_DATA        = regexxer.desktop
+bin_PROGRAMS = src/regexxer
 
-@INTLTOOL_DESKTOP_RULE@
+src_regexxer_SOURCES =		\
+	src/aboutdialog.cc	\
+	src/aboutdialog.h	\
+	src/controller.cc	\
+	src/controller.h	\
+	src/filebuffer.cc	\
+	src/filebuffer.h	\
+	src/filebufferundo.cc	\
+	src/filebufferundo.h	\
+	src/fileio.cc		\
+	src/fileio.h		\
+	src/fileshared.cc	\
+	src/fileshared.h	\
+	src/filetree.cc		\
+	src/filetree.h		\
+	src/filetreeprivate.cc	\
+	src/filetreeprivate.h	\
+	src/globalstrings.h	\
+	src/main.cc		\
+	src/mainwindow.cc	\
+	src/mainwindow.h	\
+	src/miscutils.cc	\
+	src/miscutils.h		\
+	src/pcreshell.cc	\
+	src/pcreshell.h		\
+	src/prefdialog.cc	\
+	src/prefdialog.h	\
+	src/sharedptr.cc	\
+	src/sharedptr.h		\
+	src/signalutils.cc	\
+	src/signalutils.h	\
+	src/statusline.cc	\
+	src/statusline.h	\
+	src/stringutils.cc	\
+	src/stringutils.h	\
+	src/translation.cc	\
+	src/translation.h	\
+	src/undostack.cc	\
+	src/undostack.h
+
+nodist_src_regexxer_SOURCES =	\
+	pixmaps/stockimages.h
+
+global_defs = \
+-DREGEXXER_DATADIR=\""$(datadir)"\" \
+-DREGEXXER_PKGDATADIR=\""$(pkgdatadir)"\" \
+-DREGEXXER_GCONF_DIRECTORY=\""$(REGEXXER_GCONF_DIRECTORY)"\" \
+-DGLIBMM_DISABLE_DEPRECATED -DGTKMM_DISABLE_DEPRECATED
+
+AM_CPPFLAGS = $(global_defs) -I$(top_builddir) $(REGEXXER_MODULES_CFLAGS) $(PCRE_CFLAGS)
+
+src_regexxer_DEPENDENCIES = src/exported-symbols
+src_regexxer_LDFLAGS      = $(REGEXXER_EXPORT_DYNAMIC) $(REGEXXER_VERSION_SCRIPT)
+src_regexxer_LDADD        = $(LIBINTL) $(REGEXXER_MODULES_LIBS) $(PCRE_LIBS) $(POPT_LIBS)
+
+dist_pkgdata_DATA   = ui/aboutdialog.glade ui/mainwindow.glade ui/prefdialog.glade
+
+iconthemedir        = $(datadir)/icons/hicolor
+appicondir          = $(iconthemedir)/48x48/apps
+dist_appicon_DATA   = pixmaps/regexxer.png
 
 schemas_in_files    = regexxer.schemas.in
 schemasdir          = $(GCONF_SCHEMA_FILE_DIR)
 schemas_DATA        = regexxer.schemas
 
-@INTLTOOL_SCHEMAS_RULE@
+desktop_in_files    = regexxer.desktop.in
+desktopdir          = $(datadir)/applications
+desktop_DATA        = regexxer.desktop
 
-dist_macros         = macros/cxx.m4 macros/misc.m4 macros/pcre.m4
 dist_intltool       = intltool-extract.in intltool-merge.in intltool-update.in
+stockimages         = pixmaps/stock_save_all_16.png pixmaps/stock_save_all_24.png
 
 dist_noinst_SCRIPTS = autogen.sh
-dist_noinst_DATA    = po/LINGUAS $(dist_macros) $(dist_intltool) $(desktop_in_files) $(schemas_in_files)
+dist_noinst_DATA    = src/exported-symbols $(stockimages) $(dist_intltool) \
+		      $(desktop_in_files) $(schemas_in_files)
 
-CLEANFILES          = $(desktop_DATA) $(schemas_DATA)
-DISTCLEANFILES      = intltool-extract intltool-merge intltool-update
+BUILT_SOURCES       = ui/.dirstamp $(nodist_src_regexxer_SOURCES)
+CLEANFILES          = $(nodist_src_regexxer_SOURCES) $(desktop_DATA) $(schemas_DATA)
+DISTCLEANFILES      = intltool-extract intltool-merge intltool-update ui/.dirstamp
 
-gconftool_command   = GCONF_CONFIG_SOURCE='$(GCONF_SCHEMA_CONFIG_SOURCE)' $(GCONFTOOL)
+pixbuf_csource      = $(GDK_PIXBUF_CSOURCE) --raw
+update_icon_cache   = $(GTK_UPDATE_ICON_CACHE) --ignore-theme-index --force
+gconftool           = GCONF_CONFIG_SOURCE='$(GCONF_SCHEMA_CONFIG_SOURCE)' $(GCONFTOOL)
+
+@INTLTOOL_SCHEMAS_RULE@
+@INTLTOOL_DESKTOP_RULE@
 
 if GCONF_SCHEMAS_INSTALL
-install-data-hook: install-schemas
-uninstall-hook: uninstall-schemas
+install-data-hook: install-schemas install-update-icon-cache
+uninstall-hook: uninstall-schemas uninstall-update-icon-cache
 else
-install-data-hook:
-uninstall-hook:
+install-data-hook: install-update-icon-cache
+uninstall-hook: uninstall-update-icon-cache
 endif
+
+# Hook to create the ui/ build directory when doing a VPATH build.  This is
+# required for "make check" to work in the po/ subdirectory.  Unfortunately
+# automake cannot handle this automatically since it does not know what the
+# gettext Makefile is doing.
+ui/.dirstamp:
+	@$(mkdir_p) ui
+	@: >ui/.dirstamp
+
+pixmaps/stockimages.h: $(stockimages)
+	@$(mkdir_p) pixmaps
+	@build_list='--build-list'; \
+	list='$(stockimages)'; for file in $$list; do \
+	  name=`expr "X/$$file" : '.*/\([^.]*\)' | sed 'y/-/_/'`; \
+	  dir=; test -f "$$file" || dir='$(srcdir)/'; \
+	  build_list="$$build_list $$name $$dir$$file"; \
+	done; \
+	echo " $(pixbuf_csource) $$build_list >$@"; \
+	$(pixbuf_csource) $$build_list >$@
 
 install-schemas: $(schemas_DATA)
 	@$(POST_INSTALL)
-	$(gconftool_command) --makefile-install-rule $(schemas_DATA)
-	@echo; \
-	echo "*** NOTE ***"; \
-	echo "If you executed src/regexxer before running 'make install' as privileged user,"; \
-	echo "it might be necessary to restart the GConf daemon now in order for the default"; \
-	echo "configuration values to take effect.  Do to so, run (as ordinary user):"; \
-	echo; \
-	echo "  gconftool-2 --shutdown; gconftool-2 --spawn"; \
-	echo
+	test -n "$(DESTDIR)" || $(gconftool) --makefile-install-rule $(schemas_DATA)
 
 uninstall-schemas: $(schemas_DATA)
-	@$(NORMAL_UNINSTALL)
-	$(gconftool_command) --makefile-uninstall-rule $(schemas_DATA)
+	@$(POST_UNINSTALL)
+	test -n "$(DESTDIR)" || $(gconftool) --makefile-uninstall-rule $(schemas_DATA)
 
+install-update-icon-cache:
+	@$(POST_INSTALL)
+	test -n "$(DESTDIR)" || $(update_icon_cache) "$(iconthemedir)"
+
+uninstall-update-icon-cache:
+	@$(POST_UNINSTALL)
+	test -n "$(DESTDIR)" || $(update_icon_cache) "$(iconthemedir)"
+
+.PHONY: install-schemas uninstall-schemas install-update-icon-cache uninstall-update-icon-cache

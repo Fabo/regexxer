@@ -1,122 +1,88 @@
 #! /bin/sh
-# vim:sta:sw=2:sts=2:
 
-# $Id$
+# Copyright (c) 2004-2007  Daniel Elstner  <daniel.kitta@gmail.com>
 #
-# Copyright (c) 2002  Daniel Elstner  <daniel.elstner@gmx.net>
+# This file is part of regexxer.
 #
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License VERSION 2 as
-# published by the Free Software Foundation.  You are not allowed to
-# use any other version of the license; unless you got the explicit
-# permission from the author to do so.
+# regexxer is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
+# regexxer is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# along with regexxer; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-
-# Be Bourne compatible. (stolen from autoconf)
-if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
-  emulate sh
-  NULLCMD=:
-  # Zsh 3.x and 4.x performs word splitting on ${1+"$@"}, which
-  # is contrary to our usage.  Disable this feature.
-  alias -g '${1+"$@"}'='"$@"'
-elif test -n "${BASH_VERSION+set}" && (set -o posix) >/dev/null 2>&1; then
-  set -o posix
-fi
-
-PROJECT=regexxer
-MIN_AUTOMAKE_VERSION=1.7
-XGETTEXT_KEYWORDS='--keyword=_ --keyword=N_ --keyword=translate --qt'
-
-srcdir=`dirname "$0"`
+test -n "$srcdir" || srcdir=`dirname "$0"`
 test -n "$srcdir" || srcdir=.
 
-origdir=`pwd`
-cd "$srcdir"
-
-ACLOCAL_FLAGS="-I macros $ACLOCAL_FLAGS"
-AUTOMAKE_FLAGS="--add-missing --gnu $AUTOMAKE_FLAGS"
-
-if test -z "$AUTOGEN_SUBDIR_MODE" && test "x$*" = x
+if test "x$NOCONFIGURE$*" = x
 then
-  echo "I am going to run ./configure with no arguments - if you wish "
-  echo "to pass any to it, please specify them on the $0 command line."
+  echo "I am going to run $srcdir/configure with no arguments -- if you"
+  echo "wish to pass any to it, please specify them on the $0 command line."
 fi
 
-autoconf=autoconf
-autoheader=autoheader
-aclocal=
-automake=
-auto_version=0
+# Let the user override the default choice of tools.
+autoconf=$AUTOCONF
+autoheader=$AUTOHEADER
+aclocal=$ACLOCAL
+automake=$AUTOMAKE
 
-# sed magic to transform a version string into a mathematical expression.
-# For instance, "1.7.2" becomes "1 \* 1000000 + 7 \* 1000 + 02".  This string
-# can be fed to 'eval expr' in order to compare version numbers.
-#
-d='[0123456789]'
-get_version='s/^.*(GNU automake) \('$d$d'*\)\.\('$d$d'*\)\.*\('$d'*\).*$'
-get_version=$get_version'/\1 \\* 1000000 + \2 \\* 1000 + 0\3/p'
-
-for suffix in -1.6 -1.7 -1.8 -1.9 ""
-do
-  aclocal_version=`aclocal$suffix --version </dev/null 2>&1 | sed -n "$get_version"`
-  automake_version=`automake$suffix --version </dev/null 2>&1 | sed -n "$get_version"`
-
-  if test -n "$aclocal_version" && \
-     test "x$aclocal_version" = "x$automake_version" && \
-     eval "expr $automake_version \\>= $auto_version" >/dev/null
-  then
-    auto_version=$automake_version
-    aclocal=aclocal$suffix
-    automake=automake$suffix
-  fi
-done
-
-min_auto_version=`echo "(GNU automake) $MIN_AUTOMAKE_VERSION" | sed -n "$get_version"`
-
-if eval "expr $auto_version \\< $min_auto_version" >/dev/null
+if test -z "$aclocal" || test -z "$automake"
 then
-  echo "Sorry, at least automake $MIN_AUTOMAKE_VERSION is required to configure $PROJECT."
-  exit 1
+  # Prefer explicitely versioned executables.
+  for version in 1.10 1.9 1.8
+  do
+    if "aclocal-$version"  --version </dev/null >/dev/null 2>&1 && \
+       "automake-$version" --version </dev/null >/dev/null 2>&1
+    then
+      aclocal=aclocal-$version
+      automake=automake-$version
+      break
+    fi
+  done
 fi
 
-rm -f intltool-extract.in intltool-merge.in intltool-update.in po/Makefile.in.in
-rm -f config.guess config.sub depcomp install-sh missing
-rm -f config.cache acconfig.h
-rm -rf autom4te.cache
+test -n "$autoconf"   || autoconf=autoconf
+test -n "$autoheader" || autoheader=autoheader
+test -n "$aclocal"    || aclocal=aclocal
+test -n "$automake"   || automake=automake
 
-#WARNINGS=all
-#export WARNINGS
+( # Enter a subshell to temporarily change the working directory.
+  cd "$srcdir" || exit 1
 
-set_option=:
-test -z "${BASH_VERSION+set}" || set_option=set
+  # Explicitely delete some old cruft, which seems to be
+  # more reliable than --force options and the like.
+  rm -f intltool-extract.in intltool-merge.in intltool-update.in po/Makefile.in.in
+  rm -f acconfig.h config.cache config.guess config.rpath config.sub
+  rm -f depcomp install-sh missing mkinstalldirs
+  rm -rf autom4te.cache
 
-$set_option -x
+  XGETTEXT_KEYWORDS='--keyword=_ --keyword=N_ --keyword=translate --qt'
 
-glib-gettextize --copy		|| exit 1
-intltoolize --automake --copy --force	|| exit 1
-(echo; echo "XGETTEXT_KEYWORDS = $XGETTEXT_KEYWORDS") >> po/Makefile.in.in || exit 1
-"$aclocal" $ACLOCAL_FLAGS	|| exit 1
-"$autoheader"			|| exit 1
-"$automake" $AUTOMAKE_FLAGS	|| exit 1
-"$autoconf"			|| exit 1
-cd "$origdir"			|| exit 1
+  #WARNINGS=all; export WARNINGS
+  (set -x) </dev/null >/dev/null 2>&1 && set -x
 
-if test -z "$AUTOGEN_SUBDIR_MODE"
+  glib-gettextize --copy				|| exit 1
+  intltoolize --automake --copy	--force			|| exit 1
+  (echo; echo "XGETTEXT_KEYWORDS = $XGETTEXT_KEYWORDS") >>po/Makefile.in.in || exit 1
+  $aclocal -I macros $ACLOCAL_FLAGS			|| exit 1
+  $autoheader						|| exit 1
+  $automake --add-missing --copy $AUTOMAKE_FLAGS	|| exit 1
+  $autoconf						|| exit 1
+) || exit 1
+
+if test -z "$NOCONFIGURE"
 then
-  "$srcdir/configure" ${1+"$@"} || exit 1
-  $set_option +x
+  echo "+ $srcdir/configure $*"
+  "$srcdir/configure" "$@" || exit 1
   echo
-  echo "Now type 'make' to compile $PROJECT."
+  echo 'Now type "make" to compile regexxer.'
 fi
 
 exit 0
-
