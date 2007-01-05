@@ -58,23 +58,22 @@ test -n "$automake"   || automake=automake
 
   # Explicitely delete some old cruft, which seems to be
   # more reliable than --force options and the like.
+  rm -f m4/codeset.m4 m4/gettext.m4 m4/glibc21.m4 m4/iconv.m4 m4/intltool.m4 m4/isc-posix.m4
+  rm -f m4/lcmessage.m4 m4/lib-ld.m4 m4/lib-link.m4 m4/lib-prefix.m4 m4/progtest.m4
   rm -f intltool-extract.in intltool-merge.in intltool-update.in po/Makefile.in.in
-  rm -f acconfig.h config.cache config.guess config.rpath config.sub
+  rm -f ABOUT-NLS acconfig.h config.cache config.guess config.rpath config.sub
   rm -f depcomp install-sh missing mkinstalldirs
   rm -rf autom4te.cache
-
-  XGETTEXT_KEYWORDS='--keyword=_ --keyword=N_ --keyword=translate --qt'
 
   #WARNINGS=all; export WARNINGS
   (set -x) </dev/null >/dev/null 2>&1 && set -x
 
   glib-gettextize --copy				|| exit 1
-  intltoolize --automake --copy	--force			|| exit 1
-  (echo; echo "XGETTEXT_KEYWORDS = $XGETTEXT_KEYWORDS") >>po/Makefile.in.in || exit 1
+  intltoolize --automake --copy --force			|| exit 1
   $aclocal -I m4 $ACLOCAL_FLAGS				|| exit 1
+  $autoconf						|| exit 1
   $autoheader						|| exit 1
   $automake --add-missing --copy $AUTOMAKE_FLAGS	|| exit 1
-  $autoconf						|| exit 1
 ) || exit 1
 
 if test -z "$NOCONFIGURE"

@@ -1,5 +1,28 @@
 2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* configure.ac (AC_PREREQ): Require Autoconf 2.58.
+	(AC_CONFIG_MACRO_DIR): Specify m4 macro directory.
+	(IT_PROG_INTLTOOL): Replace obsolete AC_PROG_INTLTOOL().  Require
+	at least intltool 0.35 for full po/LINGUAS and po/Makevars support.
+	(ALL_LINGUAS): No longer set this environment variable, but rely
+	on po/LINGUAS support.  Get rid of the CONFIG_STATUS_DEPENDENCIES
+	substitution hack.
+	(GETTEXT_PACKAGE): Move the variable assignment to AC_SUBST().
+
+	* po/Makevars: Reintroduce this file, as it is finally properly
+	supported by intltool.  Set XGETTEXT_OPTIONS to the list of
+	keywords xgettext should recognize.
+
+	* autogen.sh: Get rid of the hack that appends XGETTEXT_KEYWORDS
+	to po/Makefile.in.in.  Also change the invocation order of the
+	various setup tools according to the recommendation found in the
+	gettext manual.  Delete some more cruft from the m4/ directory.
+
+	* ABOUT-NLS: Get rid of this both large and largely useless file.
+	Probably a left-over from the time before glib-gettextize.
+
+2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* m4/export.m4: New file.  Defines generalized replacements in the
 	DK_ namespace for the cxx.m4 macros REGEXXER_LINK_EXPORT_DYNAMIC()
 	and REGEXXER_LINK_VERSION_SCRIPT().

@@ -17,9 +17,10 @@
 ## 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 AC_INIT([regexxer], [0.9], [daniel.kitta@gmail.com], [regexxer])
-AC_PREREQ([2.55])
+AC_PREREQ([2.58])
 
 AC_CONFIG_SRCDIR([src/pcreshell.cc])
+AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.8 -Wall gnu no-define nostdinc check-news])
@@ -28,11 +29,8 @@ AC_SUBST([ACLOCAL_AMFLAGS], ['-I m4 ${ACLOCAL_FLAGS}'])
 AC_PROG_CC()
 AC_PROG_CXX()
 
-AC_PROG_INTLTOOL([0.23])
-ALL_LINGUAS=`cat "$srcdir/po/LINGUAS"`
-GETTEXT_PACKAGE=regexxer
-AC_SUBST([CONFIG_STATUS_DEPENDENCIES], ['$(top_srcdir)/po/LINGUAS'])
-AC_SUBST([GETTEXT_PACKAGE])
+IT_PROG_INTLTOOL([0.35])
+AC_SUBST([GETTEXT_PACKAGE], [regexxer])
 AM_GLIB_GNU_GETTEXT()
 
 PKG_CHECK_MODULES([REGEXXER_MODULES],
