@@ -38,18 +38,25 @@ AM_GLIB_GNU_GETTEXT()
 PKG_CHECK_MODULES([REGEXXER_MODULES],
                   [gtkmm-2.4 >= 2.4.0 libglademm-2.4 >= 2.4.0 gconfmm-2.6 >= 2.6.1 libpcre >= 5.0])
 
-REGEXXER_PKG_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-2.0], [gdk-pixbuf-csource])
-REGEXXER_PKG_PATH_PROG([GTK_UPDATE_ICON_CACHE], [gtk+-2.0], [gtk-update-icon-cache])
-REGEXXER_PKG_PATH_PROG([GCONFTOOL], [gconf-2.0], [gconftool-2])
+DK_PKG_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-2.0], [gdk-pixbuf-csource])
+DK_PKG_PATH_PROG([GTK_UPDATE_ICON_CACHE], [gtk+-2.0], [gtk-update-icon-cache])
+DK_PKG_PATH_PROG([GCONFTOOL], [gconf-2.0], [gconftool-2])
 
 AM_GCONF_SOURCE_2()
 AC_SUBST([REGEXXER_GCONF_DIRECTORY], ['/apps/regexxer'])
 
 AC_LANG([C++])
-REGEXXER_LIB_POPT()
-REGEXXER_LINK_EXPORT_DYNAMIC([REGEXXER_EXPORT_DYNAMIC])
-REGEXXER_LINK_VERSION_SCRIPT([REGEXXER_VERSION_SCRIPT], [src/exported-symbols])
-REGEXXER_ARG_ENABLE_WARNINGS()
+
+DK_LIB_POPT()
+DK_LINK_EXPORT_DYNAMIC([REGEXXER_EXPORT_DYNAMIC])
+DK_LINK_VERSION_SCRIPT([REGEXXER_VERSION_SCRIPT], [src/exported-symbols])
+
+# Disabling -Wnon-virtual-dtor is nasty, but unfortunately required due to
+# a bug in gconfmm that triggers this warning.  Not disabling this warning
+# would make --enable-warnings=fatal unusable.
+DK_ARG_ENABLE_WARNINGS([REGEXXER_WARNING_FLAGS],
+                       [-Wall -w1 -Wno-non-virtual-dtor],
+                       [-pedantic -Wall -Wextra -w1 -Wno-non-virtual-dtor])
 
 AC_CONFIG_FILES([Makefile po/Makefile.in])
 AC_OUTPUT()

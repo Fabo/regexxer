@@ -1,5 +1,34 @@
 2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* m4/export.m4: New file.  Defines generalized replacements in the
+	DK_ namespace for the cxx.m4 macros REGEXXER_LINK_EXPORT_DYNAMIC()
+	and REGEXXER_LINK_VERSION_SCRIPT().
+	* m4/feature.m4: New file.  Defines a couple of generic helper
+	macros for feature testing.
+	* m4/pkgproc.m4: New file.  Defines the macro DK_PKG_PATH_PROG()
+	which replaces REGEXXER_PKG_PATH_PROG() from misc.m4.
+	* m4/popt.m4: New file.  Defines DK_LIB_POPT(), a generalized
+	replacement for REGEXXER_LIB_POPT() from misc.m4.
+	* m4/warn.m4: New file.  Defines the macro DK_ARG_ENABLE_WARNINGS()
+	which is a generalized and also somewhat improved replacement for
+	REGEXXER_ARG_ENABLE_WARNINGS() from cxx.m4.  Note that the argument
+	values of --enable-warnings= have changed; see ./configure --help.
+	* m4/{cxx,misc}.m4: Remove files.
+
+	* configure.ac: Use the new macros in the DK_ namespace.
+	(DK_ARG_ENABLE_WARNINGS): Pass "-Wno-non-virtual-dtor" to the
+	compiler if accepted.  Nasty, but due to the gconfmm bug the only
+	way to recover the functionality of --enable-warnings=fatal.
+	Assign the warning flags to the variable REGEXXER_WARNING_FLAGS.
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Again raise the value
+	passed to --enable-warnings= from "maximum" to "fatal", now that
+	we work around the gconfmm bug.
+	(AM_CPPFLAGS): Add $(REGEXXER_WARNING_FLAGS).
+	(src_regexxer_LDADD): Reorder the library substitutions so that
+	the ones more likely to depend on others in the list come first.
+
+2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* pixmaps/*.png: Move images to ui/ directory.  This makes for
 	a more streamlined directory structure, and besides "pixmaps" was
 	a horrible name anyway.
