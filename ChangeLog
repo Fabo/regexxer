@@ -1,5 +1,16 @@
 2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* pixmaps/*.png: Move images to ui/ directory.  This makes for
+	a more streamlined directory structure, and besides "pixmaps" was
+	a horrible name anyway.
+	* pixmaps: Remove directory.
+	* Makefile.am: Accomodate for the change from "pixmaps" to "ui".
+	As a side effect, the .dirstamp hack for ui/ is also no longer
+	necessary, as the ui/stockimages.h rule already covers this.
+	* src/main.cc: Change stockimages.h #include accordingly.
+
+2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* macros: Rename directory to m4.  I love Subversion.
 	* autogen.sh: Change "-I macros" to "-I m4" in aclocal invocation.
 	* configure.ac (ACLOCAL_AMFLAGS): Likewise for this substitution.

@@ -70,7 +70,7 @@ src_regexxer_SOURCES =		\
 	src/undostack.h
 
 nodist_src_regexxer_SOURCES =	\
-	pixmaps/stockimages.h
+	ui/stockimages.h
 
 global_defs = \
 -DREGEXXER_DATADIR=\""$(datadir)"\" \
@@ -88,7 +88,7 @@ dist_pkgdata_DATA   = ui/aboutdialog.glade ui/mainwindow.glade ui/prefdialog.gla
 
 iconthemedir        = $(datadir)/icons/hicolor
 appicondir          = $(iconthemedir)/48x48/apps
-dist_appicon_DATA   = pixmaps/regexxer.png
+dist_appicon_DATA   = ui/regexxer.png
 
 schemas_in_files    = regexxer.schemas.in
 schemasdir          = $(GCONF_SCHEMA_FILE_DIR)
@@ -99,15 +99,15 @@ desktopdir          = $(datadir)/applications
 desktop_DATA        = regexxer.desktop
 
 dist_intltool       = intltool-extract.in intltool-merge.in intltool-update.in
-stockimages         = pixmaps/stock_save_all_16.png pixmaps/stock_save_all_24.png
+stockimages         = ui/stock_save_all_16.png ui/stock_save_all_24.png
 
 dist_noinst_SCRIPTS = autogen.sh
 dist_noinst_DATA    = src/exported-symbols $(stockimages) $(dist_intltool) \
 		      $(desktop_in_files) $(schemas_in_files)
 
-BUILT_SOURCES       = ui/.dirstamp $(nodist_src_regexxer_SOURCES)
+BUILT_SOURCES       = $(nodist_src_regexxer_SOURCES)
 CLEANFILES          = $(nodist_src_regexxer_SOURCES) $(desktop_DATA) $(schemas_DATA)
-DISTCLEANFILES      = intltool-extract intltool-merge intltool-update ui/.dirstamp
+DISTCLEANFILES      = intltool-extract intltool-merge intltool-update
 
 pixbuf_csource      = $(GDK_PIXBUF_CSOURCE) --raw
 update_icon_cache   = $(GTK_UPDATE_ICON_CACHE) --ignore-theme-index --force
@@ -124,16 +124,8 @@ install-data-hook: install-update-icon-cache
 uninstall-hook: uninstall-update-icon-cache
 endif
 
-# Hook to create the ui/ build directory when doing a VPATH build.  This is
-# required for "make check" to work in the po/ subdirectory.  Unfortunately
-# automake cannot handle this automatically since it does not know what the
-# gettext Makefile is doing.
-ui/.dirstamp:
+ui/stockimages.h: $(stockimages)
 	@$(mkdir_p) ui
-	@: >ui/.dirstamp
-
-pixmaps/stockimages.h: $(stockimages)
-	@$(mkdir_p) pixmaps
 	@build_list='--build-list'; \
 	list='$(stockimages)'; for file in $$list; do \
 	  name=`expr "X/$$file" : '.*/\([^.]*\)' | sed 'y/-/_/'`; \
