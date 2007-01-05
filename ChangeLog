@@ -1,5 +1,11 @@
 2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* macros: Rename directory to m4.  I love Subversion.
+	* autogen.sh: Change "-I macros" to "-I m4" in aclocal invocation.
+	* configure.ac (ACLOCAL_AMFLAGS): Likewise for this substitution.
+
+2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* Makefile.am (AM_CPPFLAGS): Remove leftover $(PCRE_CFLAGS).
 	(src_regexxer_LDADD): Likewise for $(PCRE_LIBS).
 

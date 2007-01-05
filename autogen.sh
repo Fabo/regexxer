@@ -71,7 +71,7 @@ test -n "$automake"   || automake=automake
   glib-gettextize --copy				|| exit 1
   intltoolize --automake --copy	--force			|| exit 1
   (echo; echo "XGETTEXT_KEYWORDS = $XGETTEXT_KEYWORDS") >>po/Makefile.in.in || exit 1
-  $aclocal -I macros $ACLOCAL_FLAGS			|| exit 1
+  $aclocal -I m4 $ACLOCAL_FLAGS				|| exit 1
   $autoheader						|| exit 1
   $automake --add-missing --copy $AUTOMAKE_FLAGS	|| exit 1
   $autoconf						|| exit 1
