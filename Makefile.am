@@ -90,13 +90,13 @@ iconthemedir        = $(datadir)/icons/hicolor
 appicondir          = $(iconthemedir)/48x48/apps
 dist_appicon_DATA   = ui/regexxer.png
 
-schemas_in_files    = regexxer.schemas.in
+schemas_in_files    = ui/regexxer.schemas.in
 schemasdir          = $(GCONF_SCHEMA_FILE_DIR)
-schemas_DATA        = regexxer.schemas
+schemas_DATA        = ui/regexxer.schemas
 
-desktop_in_files    = regexxer.desktop.in
+desktop_in_files    = ui/regexxer.desktop.in
 desktopdir          = $(datadir)/applications
-desktop_DATA        = regexxer.desktop
+desktop_DATA        = ui/regexxer.desktop
 
 dist_intltool       = intltool-extract.in intltool-merge.in intltool-update.in
 stockimages         = ui/stock_save_all_16.png ui/stock_save_all_24.png
@@ -124,8 +124,12 @@ install-data-hook: install-update-icon-cache
 uninstall-hook: uninstall-update-icon-cache
 endif
 
+# Note that this rule creates the ui/ build directory as a side effect.
+# This works just fine because the target is in BUILT_SOURCES and thus
+# built before everything else.  Otherwise a special ui/.dirstamp rule
+# would be necessary.
 ui/stockimages.h: $(stockimages)
-	@$(mkdir_p) ui
+	@mkdir ui >/dev/null 2>&1 || test -d ui
 	@build_list='--build-list'; \
 	list='$(stockimages)'; for file in $$list; do \
 	  name=`expr "X/$$file" : '.*/\([^.]*\)' | sed 'y/-/_/'`; \

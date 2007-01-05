@@ -1,5 +1,16 @@
 2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* regexxer.{desktop,schemas}.in: Move to ui/ directory to reduce
+	clutter in the toplevel directory.
+	* Makefile.am ({desktop,schemas}_in_files): Update accordingly.
+	({desktop,schemas}_DATA): Likewise.
+	(ui/stockimages.h): Do not rely on $(mkdir_p) because it is already
+	obsolete but AC_PROG_MKDIR_P() is too recent to require.  Just use
+	plain mkdir and test for the existence of the directory on failure.
+	Also, add a comment explaining the implicit directory creation.
+
+2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* configure.ac (AC_PREREQ): Require Autoconf 2.58.
 	(AC_CONFIG_MACRO_DIR): Specify m4 macro directory.
 	(IT_PROG_INTLTOOL): Replace obsolete AC_PROG_INTLTOOL().  Require
