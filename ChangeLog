@@ -1,3 +1,16 @@
+2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* configure.ac (PCRE_CHECK_VERSION): Remove invocation of hand-
+	crafted macro and just add "libpcre >= 5.0" to PKG_CHECK_MODULES()
+	instead.  PCRE supports pkg-config since version 5.0, released
+	September 2004.  I think it is safe to make that a requirement.
+	(PCRE_CHECK_UTF8): Ditch the UTF-8 check, which was problematic
+	anyway since it involved executing a runtime test.  Just rely on
+	regexxer to report an error at runtime if libpcre is found not to
+	support UTF-8.  This is acceptable since updating to a libpcre
+	with UTF-8 support does not require rebuilding regexxer.
+	* macros/pcre.m4: Get rid of it.
+
 2007-01-04  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* Makefile.am: Switch to a non-recursing build system.  The entire

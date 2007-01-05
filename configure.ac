@@ -36,7 +36,7 @@ AC_SUBST([GETTEXT_PACKAGE])
 AM_GLIB_GNU_GETTEXT()
 
 PKG_CHECK_MODULES([REGEXXER_MODULES],
-                  [gtkmm-2.4 >= 2.4.0 libglademm-2.4 >= 2.4.0 gconfmm-2.6 >= 2.6.1])
+                  [gtkmm-2.4 >= 2.4.0 libglademm-2.4 >= 2.4.0 gconfmm-2.6 >= 2.6.1 libpcre >= 5.0])
 
 REGEXXER_PKG_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-2.0], [gdk-pixbuf-csource])
 REGEXXER_PKG_PATH_PROG([GTK_UPDATE_ICON_CACHE], [gtk+-2.0], [gtk-update-icon-cache])
@@ -46,15 +46,9 @@ AM_GCONF_SOURCE_2()
 AC_SUBST([REGEXXER_GCONF_DIRECTORY], ['/apps/regexxer'])
 
 AC_LANG([C++])
-
-PCRE_CHECK_VERSION([4.0])
-PCRE_CHECK_UTF8()
-
 REGEXXER_LIB_POPT()
-
 REGEXXER_LINK_EXPORT_DYNAMIC([REGEXXER_EXPORT_DYNAMIC])
 REGEXXER_LINK_VERSION_SCRIPT([REGEXXER_VERSION_SCRIPT], [src/exported-symbols])
-
 REGEXXER_ARG_ENABLE_WARNINGS()
 
 AC_CONFIG_FILES([Makefile po/Makefile.in])
