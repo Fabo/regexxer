@@ -1,5 +1,10 @@
 2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* Makefile.am (AM_CPPFLAGS): Remove leftover $(PCRE_CFLAGS).
+	(src_regexxer_LDADD): Likewise for $(PCRE_LIBS).
+
+2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* configure.ac (PCRE_CHECK_VERSION): Remove invocation of hand-
 	crafted macro and just add "libpcre >= 5.0" to PKG_CHECK_MODULES()
 	instead.  PCRE supports pkg-config since version 5.0, released

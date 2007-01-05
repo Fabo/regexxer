@@ -78,11 +78,11 @@ global_defs = \
 -DREGEXXER_GCONF_DIRECTORY=\""$(REGEXXER_GCONF_DIRECTORY)"\" \
 -DGLIBMM_DISABLE_DEPRECATED -DGTKMM_DISABLE_DEPRECATED
 
-AM_CPPFLAGS = $(global_defs) -I$(top_builddir) $(REGEXXER_MODULES_CFLAGS) $(PCRE_CFLAGS)
+AM_CPPFLAGS = $(global_defs) -I$(top_builddir) $(REGEXXER_MODULES_CFLAGS)
 
 src_regexxer_DEPENDENCIES = src/exported-symbols
 src_regexxer_LDFLAGS      = $(REGEXXER_EXPORT_DYNAMIC) $(REGEXXER_VERSION_SCRIPT)
-src_regexxer_LDADD        = $(LIBINTL) $(REGEXXER_MODULES_LIBS) $(PCRE_LIBS) $(POPT_LIBS)
+src_regexxer_LDADD        = $(LIBINTL) $(REGEXXER_MODULES_LIBS) $(POPT_LIBS)
 
 dist_pkgdata_DATA   = ui/aboutdialog.glade ui/mainwindow.glade ui/prefdialog.glade
 
