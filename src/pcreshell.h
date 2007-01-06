@@ -38,7 +38,6 @@ enum CompileOptions
   MULTILINE       = 0x0002,
   DOTALL          = 0x0004,
   EXTENDED        = 0x0008,
-  ANCHORED        = 0x0010,
   DOLLAR_ENDONLY  = 0x0020,
   EXTRA           = 0x0040,
   UNGREEDY        = 0x0200
@@ -72,6 +71,7 @@ inline CompileOptions& operator^=(CompileOptions& lhs, CompileOptions rhs)
  */
 enum MatchOptions
 {
+  ANCHORED  = 0x0010,
   NOT_BOL   = 0x0080,
   NOT_EOL   = 0x0100,
   NOT_EMPTY = 0x0400

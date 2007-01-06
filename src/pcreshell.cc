@@ -26,7 +26,6 @@
 #include <glibmm.h>
 #include <algorithm>
 
-
 namespace
 {
 
@@ -65,7 +64,6 @@ void check_for_single_byte_escape(const Glib::ustring& regex)
 
 } // anonymous namespace
 
-
 namespace Pcre
 {
 
@@ -97,7 +95,6 @@ Error& Error::operator=(const Error& other)
   return *this;
 }
 
-
 /**** Pcre::Pattern ********************************************************/
 
 Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
@@ -122,9 +119,9 @@ Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
   }
 
   int capture_count = 0;
-  const int rc = pcre_fullinfo(static_cast<pcre*>(pcre_), 0, PCRE_INFO_CAPTURECOUNT, &capture_count);
-
-  g_assert(rc == 0);
+  const int result G_GNUC_UNUSED = pcre_fullinfo(static_cast<pcre*>(pcre_), 0,
+                                                 PCRE_INFO_CAPTURECOUNT, &capture_count);
+  g_assert(result == 0);
   g_assert(capture_count >= 0);
 
   ovecsize_ = 3 * (capture_count + 1);
@@ -139,18 +136,18 @@ Pattern::~Pattern()
 
 int Pattern::match(const Glib::ustring& subject, int offset, MatchOptions options)
 {
-  const int rc = pcre_exec(static_cast<pcre*>(pcre_), 0, subject.data(), subject.bytes(),
-                           offset, options, ovector_, ovecsize_);
+  const int captures = pcre_exec(static_cast<pcre*>(pcre_), 0, subject.raw().data(),
+                                 subject.raw().size(), offset, options, ovector_, ovecsize_);
 
-  if (rc >= 0 || rc == PCRE_ERROR_NOMATCH)
-    return rc;
+  if (captures >= 0 || captures == PCRE_ERROR_NOMATCH)
+    return captures;
 
   // Of all possible error conditions pcre_exec() might return, hitting
   // the match limit is the only one that could be triggered by user input.
-  if (rc == PCRE_ERROR_MATCHLIMIT)
+  if (captures == PCRE_ERROR_MATCHLIMIT)
     throw Error(_("Reached the recursion and backtracking limit of the regular expression engine."));
 
-  g_return_val_if_reached(rc);
+  g_return_val_if_reached(captures);
 }
 
 std::pair<int,int> Pattern::get_substring_bounds(int index) const

@@ -1,5 +1,21 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/pcreshell.h ({Compile,Match}Options): Eeek, as it turns out
+	the flag ANCHORED (and probably others too) are valid flags at both
+	compile time and match time.  Move ANCHORED from CompileOptions to
+	MatchOptions as I need it there for the following /g matching fix.
+	These enumerations should of course be properly namespaced instead;
+	this is just a quick hack for now.
+	* src/pcreshell.cc: Rename a couple of variables to improve code
+	clarity.
+
+	* src/filebuffer.cc (FileBuffer::find_matches): Set the ANCHORED
+	flag in addition to the NOT_EMPTY flag if the previous match was
+	empty in /g mode.  This matches the algorithm outlined in recent
+	versions of the PCRE documentation to mimic the behavior of Perl.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/main.cc (RegexxerOptions): New class that implements the
 	command-line option interface using the option parsing facilities
 	of glibmm instead of libpopt.

@@ -33,12 +33,10 @@
 
 #include <config.h>
 
-
 namespace
 {
 
 enum { PULSE_INTERVAL = 128 };
-
 
 class RegexxerTags : public Gtk::TextTagTable
 {
@@ -109,7 +107,6 @@ Glib::RefPtr<RegexxerTags> RegexxerTags::instance()
 
 } // anonymous namespace
 
-
 namespace Regexxer
 {
 
@@ -142,7 +139,6 @@ FileBuffer::ScopedLock::~ScopedLock()
   buffer_.locked_ = false;
 }
 
-
 /**** Regexxer::FileBuffer::ScopedUserAction *******************************/
 
 class FileBuffer::ScopedUserAction
@@ -159,7 +155,6 @@ public:
 
   ~ScopedUserAction() { buffer_.end_user_action(); }
 };
-
 
 /**** Regexxer::FileBuffer *************************************************/
 
@@ -297,9 +292,9 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple,
         return match_count_;
       }
 
-      const int capture_count = pattern.match(
-          subject, offset, (last_was_empty) ? Pcre::NOT_EMPTY : Pcre::MatchOptions(0));
-
+      const int capture_count =
+        pattern.match(subject, offset, (last_was_empty) ? Pcre::ANCHORED | Pcre::NOT_EMPTY
+                                                        : Pcre::MatchOptions(0));
       if (capture_count <= 0)
       {
         if (last_was_empty && unsigned(offset) < subject.bytes())
