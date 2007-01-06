@@ -1,5 +1,20 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/*.{cc,h}: Update copyright notice:  The postal address of
+	the Free Software Foundation changed, and my email address too.
+	Also, remove the statement I had inserted which explicitely
+	disallowed using a later version of the license.  I think I do
+	not have to ask for permission from contributors, since the
+	copyright notice only mentions me as the copyright holder, so
+	technically everyone automatically transferred her copyright
+	to me.  Anyway, the change is utterly minor and the notice now
+	matches what everyone else is using.
+	Also use the opportunity to get rid of the version control
+	substitutions and the trailing empty line in every file.
+	* ui/aboutdialog.glade: Update my email address.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* Makefile.am (src_regexxer_LDADD): Replace $(LIBINTL) substitution
 	with $(INTLLIBS).  Apparently AM_GLIB_GNU_GETTEXT(), unlike plain
 	AM_GNU_GETTEXT(), assigns INTLLIBS instead of LIBINTL for whatever
