@@ -1,5 +1,10 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* COPYING: Update to latest version shipped with Automake.
+	* INSTALL: Likewise.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/mainwindow.{cc,h} (MainWindow::on_about): Replace custom
 	about dialog with stock GTK+ one.
 	(on_about_dialog_response): Rename from on_about_dialog_hide().
