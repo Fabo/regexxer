@@ -1,5 +1,10 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/globalstrings.h (glade_aboutdialog_filename): Remove
+	leftover string constant.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* COPYING: Update to latest version shipped with Automake.
 	* INSTALL: Likewise.
 
