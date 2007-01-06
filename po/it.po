@@ -1,7 +1,7 @@
 # Italian translations for regexxer package.
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the regexxer package.
-# Daniel Elstner <daniel.elstner@gmx.net>, 2004.
+# Alberto Paro <alberto@paro.homeunix.org>, 2004.
 #
 msgid ""
 msgstr ""
