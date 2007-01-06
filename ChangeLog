@@ -1,5 +1,9 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* NEWS: Update.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/exported-symbols: Add comment about the purpose of this file.
 
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>

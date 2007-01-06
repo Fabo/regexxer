@@ -3,8 +3,8 @@ regexxer 0.9 (2007-01-xx)
 	* command line option support
 	* icon theme support
 	* now builds a working executable on systems with newer libglade
+	* replaced about dialog with stock GTK+ one
 	* completely revamped build system
-	* smaller executable size
 	* lots of new translations: ar bg ca es eu fi fr hu ne pa pl rw
 	  sl sr sr@Latn uk vi zh_CN zh_HK zh_TW
 	* other minor cleanups and fixes
