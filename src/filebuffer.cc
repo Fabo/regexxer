@@ -629,11 +629,11 @@ void FileBuffer::on_erase(const FileBuffer::iterator& rbegin, const FileBuffer::
       signal_preview_line_changed.queue();
   }
 
-  const Glib::RefPtr<RegexxerTags> tagtable = RegexxerTags::instance();
+  const Glib::RefPtr<const Gtk::TextTag> tag_match = RegexxerTags::instance()->match;
 
-  if (!rbegin.starts_line() && rbegin.has_tag(tagtable->match))
+  if (!rbegin.starts_line() && rbegin.has_tag(tag_match))
   {
-    g_return_if_fail(!rbegin.ends_tag(tagtable->match)); // just to be sure...
+    g_return_if_fail(!rbegin.ends_tag(tag_match)); // just to be sure...
 
     int backward_chars = 0;
     int match_length = -1;
@@ -653,7 +653,7 @@ void FileBuffer::on_erase(const FileBuffer::iterator& rbegin, const FileBuffer::
           match_length = std::max(match_length, match_data->length);
       }
     }
-    while (match_length < 0 && !pos.starts_line() && !pos.toggles_tag(tagtable->match));
+    while (match_length < 0 && !pos.starts_line() && !pos.toggles_tag(tag_match));
 
     if (match_length > backward_chars)
       remove_match_at_iter(pos);

@@ -1,5 +1,12 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/filebuffer.cc (FileBuffer::on_erase): Copy tagtable->match
+	into a local variable and use it.  This fixes a compilation error
+	with the Intel C++ compiler caused by the creation of a temporary
+	inside the statement expression of g_return_if_fail().
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/globalstrings.h (glade_aboutdialog_filename): Remove
 	leftover string constant.
 
