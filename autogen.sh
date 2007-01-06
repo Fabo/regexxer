@@ -21,19 +21,14 @@
 test -n "$srcdir" || srcdir=`dirname "$0"`
 test -n "$srcdir" || srcdir=.
 
-if test "x$NOCONFIGURE$*" = x
+if test "$#$NOCONFIGURE" = 0
 then
   echo "I am going to run $srcdir/configure with no arguments -- if you"
   echo "wish to pass any to it, please specify them on the $0 command line."
 fi
 
 # Let the user override the default choice of tools.
-autoconf=$AUTOCONF
-autoheader=$AUTOHEADER
-aclocal=$ACLOCAL
-automake=$AUTOMAKE
-
-if test -z "$aclocal" || test -z "$automake"
+if test -z "$ACLOCAL" || test -z "$AUTOMAKE"
 then
   # Prefer explicitely versioned executables.
   for version in 1.10 1.9 1.8
@@ -41,17 +36,12 @@ then
     if "aclocal-$version"  --version </dev/null >/dev/null 2>&1 && \
        "automake-$version" --version </dev/null >/dev/null 2>&1
     then
-      aclocal=aclocal-$version
-      automake=automake-$version
+      ACLOCAL=aclocal-$version
+      AUTOMAKE=automake-$version
       break
     fi
   done
 fi
-
-test -n "$autoconf"   || autoconf=autoconf
-test -n "$autoheader" || autoheader=autoheader
-test -n "$aclocal"    || aclocal=aclocal
-test -n "$automake"   || automake=automake
 
 ( # Enter a subshell to temporarily change the working directory.
   cd "$srcdir" || exit 1
@@ -66,14 +56,14 @@ test -n "$automake"   || automake=automake
   rm -rf autom4te.cache
 
   #WARNINGS=all; export WARNINGS
-  (set -x) </dev/null >/dev/null 2>&1 && set -x
+  :; set -ex
 
-  glib-gettextize --copy				|| exit 1
-  intltoolize --automake --copy --force			|| exit 1
-  $aclocal -I m4 $ACLOCAL_FLAGS				|| exit 1
-  $autoconf						|| exit 1
-  $autoheader						|| exit 1
-  $automake --add-missing --copy $AUTOMAKE_FLAGS	|| exit 1
+  glib-gettextize --copy
+  intltoolize --automake --copy --force
+  ${ACLOCAL:-aclocal} -I m4 $ACLOCAL_FLAGS
+  ${AUTOCONF:-autoconf}
+  ${AUTOHEADER:-autoheader}
+  ${AUTOMAKE:-automake} --add-missing --copy $AUTOMAKE_FLAGS
 ) || exit 1
 
 if test -z "$NOCONFIGURE"
