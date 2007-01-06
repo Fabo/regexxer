@@ -56,7 +56,8 @@ fi
   rm -rf autom4te.cache
 
   #WARNINGS=all; export WARNINGS
-  :; set -ex
+  # Trace commands and exit if a command fails.
+  set -ex
 
   glib-gettextize --copy
   intltoolize --automake --copy --force

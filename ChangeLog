@@ -1,11 +1,15 @@
-2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* autogen.sh: Comment "set -ex" and remove pointless ":;".
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* autogen.sh: Further simplify the script by making use of set -e
 	and colons in substitutions, like ${foo:-bar}.  Although some truly
 	ancient shells do not provide these features, this does not matter
 	much for scripts intended for maintainer use.
 
-2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* autogen.sh: Reduce number of rm -f invocations by means of line
 	continuation.
