@@ -132,16 +132,16 @@ namespace Regexxer
 
 InitState::InitState()
 :
-  folder        (Glib::get_current_dir()),
-  pattern       ("*"),
+  folder        (),
+  pattern       (),
   regex         (),
   substitution  (),
-  recursive     (true),
+  no_recursive  (false),
   hidden        (false),
-  global        (true),
+  no_global     (false),
   ignorecase    (false),
   feedback      (false),
-  autorun       (false)
+  no_autorun    (false)
 {}
 
 InitState::~InitState()
@@ -201,22 +201,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::initialize(std::auto_ptr<InitState> init)
 {
-  entry_folder_->set_text(
-      Util::filename_to_utf8_fallback(Util::shorten_pathname(init->folder)));
+  const std::string folder =
+      (init->folder.empty()) ? Glib::get_current_dir() : init->folder.front();
 
-  entry_pattern_     ->set_text(init->pattern);
+  entry_folder_      ->set_text(Util::filename_to_utf8_fallback(Util::shorten_pathname(folder)));
+  entry_pattern_     ->set_text((init->pattern.empty()) ? Glib::ustring("*") : init->pattern);
   entry_regex_       ->set_text(init->regex);
   entry_substitution_->set_text(init->substitution);
 
-  button_recursive_->set_active(init->recursive);
+  button_recursive_->set_active(!init->no_recursive);
   button_hidden_   ->set_active(init->hidden);
-  button_multiple_ ->set_active(init->global);
+  button_multiple_ ->set_active(!init->no_global);
   button_caseless_ ->set_active(init->ignorecase);
 
   if (init->feedback)
     filetree_->signal_feedback.connect(&print_location);
 
-  if (init->autorun)
+  if (!init->no_autorun && !init->folder.empty())
     Glib::signal_idle().connect(sigc::mem_fun(*this, &MainWindow::autorun_idle));
 }
 

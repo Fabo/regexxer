@@ -28,7 +28,6 @@
 #include <glib.h>
 #include <glibmm.h>
 
-
 namespace
 {
 
@@ -38,6 +37,13 @@ Glib::ustring compose_impl(const Glib::ustring& format,
   using Glib::ustring;
 
   ustring result;
+  ustring::size_type result_size = format.raw().size();
+
+  // Guesstimate the final string size.
+  for (int i = 0; i < argc; ++i)
+    result_size += argv[i]->raw().size();
+
+  result.reserve(result_size);
 
   ustring::const_iterator       p    = format.begin();
   const ustring::const_iterator pend = format.end();
@@ -62,7 +68,7 @@ Glib::ustring compose_impl(const Glib::ustring& format,
 
         const ustring buf (1, uc);
 
-        g_warning("Util::compose(): invalid substitution `%%%s' in format string `%s'",
+        g_warning("Util::compose(): invalid substitution \"%%%s\" in format string \"%s\"",
                   buf.c_str(), format.c_str());
 
         result += '%'; // print invalid substitutions literally
@@ -82,22 +88,15 @@ Glib::ustring compose_impl(const Glib::ustring& format,
 void Util::initialize_gettext(const char* domain, const char* localedir)
 {
   bindtextdomain(domain, localedir);
+# if HAVE_BIND_TEXTDOMAIN_CODESET
+  bind_textdomain_codeset(domain, "UTF-8");
+# endif
   textdomain(domain);
 }
 #else
 void Util::initialize_gettext(const char*, const char*)
 {}
 #endif /* !ENABLE_NLS */
-
-#if ENABLE_NLS && HAVE_BIND_TEXTDOMAIN_CODESET
-void Util::enable_utf8_gettext(const char* domain)
-{
-  bind_textdomain_codeset(domain, "UTF-8");
-}
-#else
-void Util::enable_utf8_gettext(const char*)
-{}
-#endif /* !(ENABLE_NLS && HAVE_BIND_TEXTDOMAIN_CODESET) */
 
 const char* Util::translate(const char* msgid)
 {

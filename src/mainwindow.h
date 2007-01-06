@@ -30,6 +30,7 @@
 #include <glibmm/ustring.h>
 #include <list>
 #include <memory>
+#include <vector>
 
 namespace Gtk
 {
@@ -55,16 +56,16 @@ struct FileInfo;
 
 struct InitState
 {
-  std::string   folder;
-  Glib::ustring pattern;
-  Glib::ustring regex;
-  Glib::ustring substitution;
-  bool          recursive;
-  bool          hidden;
-  bool          global;
-  bool          ignorecase;
-  bool          feedback;
-  bool          autorun;
+  std::vector<std::string>  folder;
+  Glib::ustring             pattern;
+  Glib::ustring             regex;
+  Glib::ustring             substitution;
+  bool                      no_recursive;
+  bool                      hidden;
+  bool                      no_global;
+  bool                      ignorecase;
+  bool                      feedback;
+  bool                      no_autorun;
 
   InitState();
   ~InitState();

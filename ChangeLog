@@ -1,5 +1,34 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/main.cc (RegexxerOptions): New class that implements the
+	command-line option interface using the option parsing facilities
+	of glibmm instead of libpopt.
+	(parse_command_line): Remove old function that used libpopt to
+	parse command line options.
+	(main): Use the new option parsing code.  Also, merge the gettext
+	initialization into a single call again.  The special trickery that
+	used to bind the codeset separately after option processing is no
+	longer necessary with the new parser.
+
+	* src/mainwindow.{cc,h} (Regexxer::InitState): Reorganize the data
+	structure so that default-constructed objects equal the default
+	values of the command-line options.  This is a work-around for
+	glibmm bug #393571.
+	(MainWindow::initialize): Adapt to Regexxer::InitState changes.
+
+	* src/translation.{cc,h} (Util::enable_utf8_gettext): Merge back
+	into Util::initialize_gettext(), as the separation is no longer
+	necessary.
+	(compose_impl): Optimize a bit by reserving the memory for the
+	result string in advance.  Also, replace a couple of `...' quotes
+	with "..." in a warning message.
+
+	* Makefile.am (src_regexxer_LDADD): Remove $(POPTLIBS).
+	* configure.ac (DK_LIB_POPT): Remove check for libpopt.
+	* m4/dk-popt.m4: Remove now obsolete file.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* configure.ac (AC_CONFIG_SRCDIR): Name a file that will be
 	truly unique to regexxer.
 

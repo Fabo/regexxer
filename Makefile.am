@@ -79,7 +79,7 @@ AM_CPPFLAGS = $(global_defs) -I$(top_builddir) $(REGEXXER_MODULES_CFLAGS) $(REGE
 
 src_regexxer_DEPENDENCIES = src/exported-symbols
 src_regexxer_LDFLAGS      = $(REGEXXER_EXPORT_DYNAMIC) $(REGEXXER_VERSION_SCRIPT)
-src_regexxer_LDADD        = $(REGEXXER_MODULES_LIBS) $(POPT_LIBS) $(INTLLIBS)
+src_regexxer_LDADD        = $(REGEXXER_MODULES_LIBS) $(INTLLIBS)
 
 dist_pkgdata_DATA   = ui/mainwindow.glade ui/prefdialog.glade
 
