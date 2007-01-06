@@ -1,3 +1,6 @@
+/*
+ * List of dynamically exported symbols for libglade.
+ */
 {
   global: regexxer_create_*;
   local: *;
