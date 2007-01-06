@@ -1,5 +1,9 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* POTFILES.in: Remove ui/aboutdialog.glade.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* it.po: Replace my old email address with the one of the
 	original contributor of this translation.
 

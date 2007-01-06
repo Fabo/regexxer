@@ -1,5 +1,20 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/mainwindow.{cc,h} (MainWindow::on_about): Replace custom
+	about dialog with stock GTK+ one.
+	(on_about_dialog_response): Rename from on_about_dialog_hide().
+	Add unused function parameter for the response ID.
+	* src/aboutdialog.{cc,h}: Remove now superfluous files.
+	* ui/aboutdialog.glade: Likewise.
+
+	* Makefile.am (src_regexxer_SOURCES): Remove src/aboutdialog.{cc,h}
+	from the list of source files.
+	(dist_pkgdata_DATA): Remove ui/aboutdialog.glade from list.
+	* configure.ac (REGEXXER_MODULES): Require gtkmm 2.6, in which the
+	stock about dialog first appeared.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* NEWS: Update.
 	* README: Minor reformatting.
 

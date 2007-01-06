@@ -30,8 +30,6 @@ SUBDIRS = po
 bin_PROGRAMS = src/regexxer
 
 src_regexxer_SOURCES =		\
-	src/aboutdialog.cc	\
-	src/aboutdialog.h	\
 	src/controller.cc	\
 	src/controller.h	\
 	src/filebuffer.cc	\
@@ -83,7 +81,7 @@ src_regexxer_DEPENDENCIES = src/exported-symbols
 src_regexxer_LDFLAGS      = $(REGEXXER_EXPORT_DYNAMIC) $(REGEXXER_VERSION_SCRIPT)
 src_regexxer_LDADD        = $(REGEXXER_MODULES_LIBS) $(POPT_LIBS) $(INTLLIBS)
 
-dist_pkgdata_DATA   = ui/aboutdialog.glade ui/mainwindow.glade ui/prefdialog.glade
+dist_pkgdata_DATA   = ui/mainwindow.glade ui/prefdialog.glade
 
 iconthemedir        = $(datadir)/icons/hicolor
 appicondir          = $(iconthemedir)/48x48/apps

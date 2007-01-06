@@ -167,7 +167,7 @@ private:
   void on_busy_action_cancel();
 
   void on_about();
-  void on_about_dialog_hide();
+  void on_about_dialog_response(int);
 
   void on_preferences();
   void on_pref_dialog_hide();

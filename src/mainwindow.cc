@@ -19,7 +19,6 @@
  */
 
 #include "mainwindow.h"
-#include "aboutdialog.h"
 #include "filetree.h"
 #include "globalstrings.h"
 #include "pcreshell.h"
@@ -50,6 +49,15 @@ typedef Glib::RefPtr<Regexxer::FileBuffer> FileBufferPtr;
 
 const char *const selection_clipboard = "CLIPBOARD";
 
+/*
+ * List of authors to be displayed in the about dialog.
+ */
+const char *const program_authors[] =
+{
+  "Daniel Elstner <daniel.kitta@gmail.com>",
+  "Murray Cumming <murrayc@murrayc.com>",
+  0
+};
 
 class FileErrorDialog : public Gtk::MessageDialog
 {
@@ -885,16 +893,25 @@ void MainWindow::on_about()
   }
   else
   {
-    std::auto_ptr<Gtk::Dialog> dialog = AboutDialog::create(*window_);
+    std::auto_ptr<Gtk::AboutDialog> dialog (new Gtk::AboutDialog());
 
-    dialog->signal_hide().connect(sigc::mem_fun(*this, &MainWindow::on_about_dialog_hide));
+    dialog->set_version(PACKAGE_VERSION);
+    dialog->set_authors(program_authors);
+    dialog->set_website("http://regexxer.sourceforge.net/");
+    dialog->set_copyright("Copyright \302\251 2002-2007 Daniel Elstner");
+    dialog->set_comments(_("Search and replace using regular expressions"));
+    dialog->set_translator_credits(_("translator-credits"));
+    dialog->set_logo_icon_name(PACKAGE_TARNAME);
+
+    dialog->set_transient_for(*window_);
     dialog->show();
+    dialog->signal_response().connect(sigc::mem_fun(*this, &MainWindow::on_about_dialog_response));
 
     about_dialog_ = dialog;
   }
 }
 
-void MainWindow::on_about_dialog_hide()
+void MainWindow::on_about_dialog_response(int)
 {
   // Play safe and transfer ownership, and let the dtor do the delete.
   const std::auto_ptr<Gtk::Dialog> temp (about_dialog_);
