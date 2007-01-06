@@ -82,7 +82,7 @@ AM_CPPFLAGS = $(global_defs) -I$(top_builddir) $(REGEXXER_MODULES_CFLAGS) $(REGE
 
 src_regexxer_DEPENDENCIES = src/exported-symbols
 src_regexxer_LDFLAGS      = $(REGEXXER_EXPORT_DYNAMIC) $(REGEXXER_VERSION_SCRIPT)
-src_regexxer_LDADD        = $(REGEXXER_MODULES_LIBS) $(POPT_LIBS) $(LIBINTL)
+src_regexxer_LDADD        = $(REGEXXER_MODULES_LIBS) $(POPT_LIBS) $(INTLLIBS)
 
 dist_pkgdata_DATA   = ui/aboutdialog.glade ui/mainwindow.glade ui/prefdialog.glade
 
@@ -101,9 +101,9 @@ desktop_DATA        = ui/regexxer.desktop
 dist_intltool       = intltool-extract.in intltool-merge.in intltool-update.in
 stockimages         = ui/stock_save_all_16.png ui/stock_save_all_24.png
 
-dist_noinst_SCRIPTS = autogen.sh
 dist_noinst_DATA    = src/exported-symbols $(stockimages) $(dist_intltool) \
 		      $(desktop_in_files) $(schemas_in_files)
+dist_noinst_SCRIPTS = autogen.sh
 
 BUILT_SOURCES       = $(nodist_src_regexxer_SOURCES)
 CLEANFILES          = $(nodist_src_regexxer_SOURCES) $(desktop_DATA) $(schemas_DATA)

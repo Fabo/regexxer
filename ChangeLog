@@ -1,5 +1,14 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* Makefile.am (src_regexxer_LDADD): Replace $(LIBINTL) substitution
+	with $(INTLLIBS).  Apparently AM_GLIB_GNU_GETTEXT(), unlike plain
+	AM_GNU_GETTEXT(), assigns INTLLIBS instead of LIBINTL for whatever
+	reason.  This difference is nowhere documented.  Funny noone has
+	noticed this yet, since as far as I can tell it is empty only with
+	GNU libc.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* autogen.sh: Reduce the list of cruft to delete; it was a bit over
 	the top and too long to maintain anyway.  Also, remove colons from
 	substitutions again, as the script no longer assigns the empty
