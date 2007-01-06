@@ -1,5 +1,11 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* m4/dk-{export,feature,pkgprog,popt,warn}.m4: Prefix M4 macro
+	filenames with "dk-", to avoid clashes with other applications
+	installing their M4 files here.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* NEWS: Update.
 
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
