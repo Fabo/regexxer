@@ -1,5 +1,10 @@
 2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* autogen.sh: Reduce number of rm -f invocations by means of line
+	continuation.
+
+2007-01-05  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* regexxer.{desktop,schemas}.in: Move to ui/ directory to reduce
 	clutter in the toplevel directory.
 	* Makefile.am ({desktop,schemas}_in_files): Update accordingly.
