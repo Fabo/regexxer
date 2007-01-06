@@ -48,23 +48,21 @@ fi
 
   # Explicitely delete some old cruft, which seems to be
   # more reliable than --force options and the like.
-  rm -f	ABOUT-NLS acconfig.h config.cache config.guess config.rpath config.sub depcomp \
-	install-sh intltool-extract.in intltool-merge.in intltool-update.in missing \
-	mkinstalldirs m4/codeset.m4 m4/gettext.m4 m4/glibc21.m4 m4/iconv.m4 m4/intltool.m4 \
-	m4/isc-posix.m4 m4/lcmessage.m4 m4/lib-ld.m4 m4/lib-link.m4 m4/lib-prefix.m4 \
-	m4/progtest.m4 po/Makefile.in.in
+  rm -f	ABOUT-NLS acconfig.h config.cache config.guess config.rpath config.sub \
+	depcomp install-sh intltool-extract.in intltool-merge.in intltool-update.in \
+	missing mkinstalldirs po/Makefile.in.in
   rm -rf autom4te.cache
 
   #WARNINGS=all; export WARNINGS
   # Trace commands and exit if a command fails.
   set -ex
 
-  glib-gettextize --copy
+  glib-gettextize --copy --force
   intltoolize --automake --copy --force
-  ${ACLOCAL:-aclocal} -I m4 $ACLOCAL_FLAGS
-  ${AUTOCONF:-autoconf}
-  ${AUTOHEADER:-autoheader}
-  ${AUTOMAKE:-automake} --add-missing --copy $AUTOMAKE_FLAGS
+  ${ACLOCAL-aclocal} -I m4 $ACLOCAL_FLAGS
+  ${AUTOCONF-autoconf}
+  ${AUTOHEADER-autoheader}
+  ${AUTOMAKE-automake} --add-missing --copy $AUTOMAKE_FLAGS
 ) || exit 1
 
 if test -z "$NOCONFIGURE"

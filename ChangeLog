@@ -1,5 +1,12 @@
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* autogen.sh: Reduce the list of cruft to delete; it was a bit over
+	the top and too long to maintain anyway.  Also, remove colons from
+	substitutions again, as the script no longer assigns the empty
+	string anywhere to the variables in question.
+
+2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* autogen.sh: Comment "set -ex" and remove pointless ":;".
 
 2007-01-06  Daniel Elstner  <daniel.kitta@gmail.com>
