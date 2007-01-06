@@ -19,7 +19,7 @@
 AC_INIT([regexxer], [0.9], [daniel.kitta@gmail.com], [regexxer])
 AC_PREREQ([2.58])
 
-AC_CONFIG_SRCDIR([src/pcreshell.cc])
+AC_CONFIG_SRCDIR([ui/regexxer.desktop.in])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
 
