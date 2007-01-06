@@ -50,7 +50,6 @@ src_regexxer_SOURCES =		\
 	src/main.cc		\
 	src/mainwindow.cc	\
 	src/mainwindow.h	\
-	src/miscutils.cc	\
 	src/miscutils.h		\
 	src/pcreshell.cc	\
 	src/pcreshell.h		\
