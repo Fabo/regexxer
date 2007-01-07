@@ -35,8 +35,6 @@
 #include <gtkmm/stockitem.h>
 #include <gtkmm/window.h>
 
-#include <cstdio>
-#include <cstdlib>
 #include <exception>
 #include <list>
 
