@@ -171,7 +171,7 @@ public:
 MainWindow::MainWindow()
 :
   toolbar_                (0),
-  entry_folder_           (0),
+  button_folder_          (0),
   entry_pattern_          (0),
   button_recursive_       (0),
   button_hidden_          (0),
@@ -201,10 +201,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::initialize(std::auto_ptr<InitState> init)
 {
-  const std::string folder =
-      (init->folder.empty()) ? Glib::get_current_dir() : init->folder.front();
+  std::string folder;
 
-  entry_folder_      ->set_text(Util::filename_to_utf8_fallback(Util::shorten_pathname(folder)));
+  if (!init->folder.empty())
+    folder = init->folder.front();
+
+  if (!Glib::path_is_absolute(folder))
+    folder = Glib::build_filename(Glib::get_current_dir(), folder);
+
+  const bool folder_exists = button_folder_->set_current_folder(folder);
+
   entry_pattern_     ->set_text((init->pattern.empty()) ? Glib::ustring("*") : init->pattern);
   entry_regex_       ->set_text(init->regex);
   entry_substitution_->set_text(init->substitution);
@@ -217,8 +223,15 @@ void MainWindow::initialize(std::auto_ptr<InitState> init)
   if (init->feedback)
     filetree_->signal_feedback.connect(&print_location);
 
-  if (!init->no_autorun && !init->folder.empty())
+  // Strangely, folder_exists seems to be always true, probably because the
+  // file chooser works asynchronously but the GLib main loop isn't running
+  // yet.  As a work-around, explicitely check whether the directory exists
+  // on the file system as well.
+  if (folder_exists && !init->no_autorun && !init->folder.empty()
+      && Glib::file_test(folder, Glib::FILE_TEST_IS_DIR))
+  {
     Glib::signal_idle().connect(sigc::mem_fun(*this, &MainWindow::autorun_idle));
+  }
 }
 
 /**** Regexxer::MainWindow -- private **************************************/
@@ -233,7 +246,7 @@ void MainWindow::load_xml()
   window_.reset(xml->get_widget("mainwindow", mainwindow));
 
   xml->get_widget("toolbar",             toolbar_);
-  xml->get_widget("entry_folder",        entry_folder_);
+  xml->get_widget("button_folder",       button_folder_);
   xml->get_widget("button_recursive",    button_recursive_);
   xml->get_widget("button_hidden",       button_hidden_);
   xml->get_widget("entry_regex",         entry_regex_);
@@ -244,27 +257,7 @@ void MainWindow::load_xml()
   xml->get_widget("textview",            textview_);
   xml->get_widget("entry_preview",       entry_preview_);
   xml->get_widget("statusline",          statusline_);
-
-  Gtk::ComboBoxEntry* combo_pattern = 0;
-  xml->get_widget("combo_pattern", combo_pattern);
-  entry_pattern_ = dynamic_cast<Gtk::Entry*>(combo_pattern->get_child());
-
-  // Current libglade does not yet provide access to the internal child of
-  // GtkComboBoxEntry.  However, I want a tooltip to be assigned to the entry
-  // and not to the combo box as a whole (by means of GtkEventBox).  I hope
-  // libglade will be fixed soon -- until then, this hack assigns the tooltip
-  // manually using the group created by libglade.
-
-  if (GtkTooltipsData *const tipdata = gtk_tooltips_data_get(entry_folder_->Gtk::Widget::gobj()))
-  {
-    gtk_tooltips_set_tip(tipdata->tooltips, entry_pattern_->Gtk::Widget::gobj(),
-                         _("A filename pattern as used by the shell. Character classes "
-                           "[ab] and csh style brace expressions {a,b} are supported."), 0);
-  }
-
-  Gtk::Button* button_folder = 0;
-  xml->get_widget("button_folder", button_folder);
-  button_folder->signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::on_select_folder));
+  xml->get_widget("combo_pattern_entry", entry_pattern_);
 
   controller_.load_xml(xml);
 }
@@ -278,7 +271,6 @@ void MainWindow::connect_signals()
   window_->signal_style_changed().connect(mem_fun(*this, &MainWindow::on_style_changed));
   window_->signal_delete_event ().connect(mem_fun(*this, &MainWindow::on_delete_event));
 
-  entry_folder_ ->signal_activate().connect(controller_.find_files.slot());
   entry_pattern_->signal_activate().connect(controller_.find_files.slot());
   entry_pattern_->signal_changed ().connect(mem_fun(*this, &MainWindow::on_entry_pattern_changed));
 
@@ -418,60 +410,6 @@ bool MainWindow::confirm_quit_request()
   return (dialog.run() == Gtk::RESPONSE_OK);
 }
 
-/*
- * Expand the pathname entered into the folder entry, and convert it to
- * the local filename encoding.  If the conversion fails, show an error
- * message to the user and return an empty string.
- */
-std::string MainWindow::get_folder_fullname() const
-{
-  const Glib::ustring folder = entry_folder_->get_text();
-
-  if (folder.empty())
-    return Glib::get_current_dir();
-
-  try
-  {
-    return Util::expand_pathname(Glib::filename_from_utf8(folder));
-  }
-  catch (const Glib::ConvertError&)
-  {
-    const Glib::ustring message = Util::compose(
-        _("The folder name \"%1\" contains characters not representable "
-          "in the encoding of the local file system."), folder);
-
-    Gtk::MessageDialog dialog (*window_, message, false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
-    dialog.run();
-
-    return std::string();
-  }
-}
-
-void MainWindow::on_select_folder()
-{
-  using namespace Gtk;
-
-  const std::string folder = get_folder_fullname();
-
-  if (folder.empty())
-    return;
-
-  FileChooserDialog chooser (*window_, _("Select a folder"), FILE_CHOOSER_ACTION_SELECT_FOLDER);
-
-  chooser.add_button(Stock::CANCEL, RESPONSE_CANCEL);
-  chooser.add_button(Stock::OK,     RESPONSE_OK);
-  chooser.set_default_response(RESPONSE_OK);
-  chooser.set_modal(true);
-  chooser.set_local_only(true);
-  chooser.set_current_folder(folder);
-
-  if (chooser.run() == RESPONSE_OK)
-  {
-    const std::string shortname = Util::shorten_pathname(chooser.get_filename());
-    entry_folder_->set_text(Util::filename_to_utf8_fallback(shortname));
-  }
-}
-
 void MainWindow::on_find_files()
 {
   if (filetree_->get_modified_count() > 0)
@@ -483,10 +421,12 @@ void MainWindow::on_find_files()
       return;
   }
 
-  const std::string folder = get_folder_fullname();
+  std::string folder = button_folder_->get_filename();
 
   if (folder.empty())
-    return;
+    folder = Glib::get_current_dir();
+
+  g_return_if_fail(Glib::path_is_absolute(folder));
 
   undo_stack_clear();
 

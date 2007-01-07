@@ -38,6 +38,7 @@ class Button;
 class CheckButton;
 class Dialog;
 class Entry;
+class FileChooser;
 class TextView;
 class Toolbar;
 class Window;
@@ -86,29 +87,29 @@ private:
   std::auto_ptr<Gtk::Window>  window_;
   Controller                  controller_;
 
-  Gtk::Toolbar*     toolbar_;
+  Gtk::Toolbar*               toolbar_;
 
-  Gtk::Entry*       entry_folder_;
-  Gtk::Entry*       entry_pattern_;
-  Gtk::CheckButton* button_recursive_;
-  Gtk::CheckButton* button_hidden_;
+  Gtk::FileChooser*           button_folder_;
+  Gtk::Entry*                 entry_pattern_;
+  Gtk::CheckButton*           button_recursive_;
+  Gtk::CheckButton*           button_hidden_;
 
-  Gtk::Entry*       entry_regex_;
-  Gtk::Entry*       entry_substitution_;
-  Gtk::CheckButton* button_multiple_;
-  Gtk::CheckButton* button_caseless_;
+  Gtk::Entry*                 entry_regex_;
+  Gtk::Entry*                 entry_substitution_;
+  Gtk::CheckButton*           button_multiple_;
+  Gtk::CheckButton*           button_caseless_;
 
-  FileTree*         filetree_;
-  Gtk::TextView*    textview_;
-  Gtk::Entry*       entry_preview_;
+  FileTree*                   filetree_;
+  Gtk::TextView*              textview_;
+  Gtk::Entry*                 entry_preview_;
 
-  StatusLine*       statusline_;
+  StatusLine*                 statusline_;
 
-  bool              busy_action_running_;
-  bool              busy_action_cancel_;
-  unsigned int      busy_action_iteration_;
+  bool                        busy_action_running_;
+  bool                        busy_action_cancel_;
+  unsigned int                busy_action_iteration_;
 
-  UndoStackPtr      undo_stack_;
+  UndoStackPtr                undo_stack_;
 
   std::list<sigc::connection> buffer_connections_;
 
@@ -131,8 +132,6 @@ private:
   void on_quit();
   bool confirm_quit_request();
 
-  std::string get_folder_fullname() const;
-  void on_select_folder();
   void on_find_files();
   void on_exec_search();
   bool after_exec_search();

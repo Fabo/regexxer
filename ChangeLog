@@ -1,5 +1,27 @@
 2007-01-07  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* ui/mainwindow.glade: Again remove the tearoff menus and the
+	menubar and toolbar handle boxes.  This was just superfluous UI
+	clutter not actually used by anyone.
+	(button_folder): Get rid of the custom button that used to fire
+	up the file chooser dialog, plus the accompanying text entry for
+	display and editing of the folder name.  Replace this old cruft
+	with a fresh and crisp GtkFileChooserButton plus a label.  Yay!
+	(combo_pattern_entry): Reactivate commented-out markup that sets
+	a tooltip on the internal GtkEntry child of combo_pattern.  As
+	this finally supported by libglade it is no longer necessary to
+	hack around the limitation in code.
+
+	* src/mainwindow.{cc,h} (MainWindow): Adapt the implementation
+	to work with the changed UI layout.  Change the folder selection
+	handling as necessary.
+	(MainWindow::load_xml): Remove the tooltip hack for the pattern
+	entry, since libglade now allows for this in the glade file.
+	(MainWindow::get_folder_fullname): Remove now unused method.
+	(MainWindow::on_select_folder): Likewise.
+
+2007-01-07  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/main.cc: #include <memory> for std::auto_ptr<> rather than
 	relying on indirect inclusion by some other header file.
 
