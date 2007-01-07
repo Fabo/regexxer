@@ -37,6 +37,7 @@
 
 #include <exception>
 #include <list>
+#include <memory>
 
 #include <config.h>
 

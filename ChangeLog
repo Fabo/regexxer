@@ -1,5 +1,10 @@
 2007-01-07  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/main.cc: #include <memory> for std::auto_ptr<> rather than
+	relying on indirect inclusion by some other header file.
+
+2007-01-07  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/main.cc: Remove <cstdlib> and <cstdio> includes left over
 	from the old libpopt code.
 
