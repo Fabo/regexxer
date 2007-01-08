@@ -1,3 +1,11 @@
+2007-01-08  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* configure.ac (AC_INIT): Replace my email address for bug reports
+	with the URI <http://regexxer.sourceforge.net/bugs>.  This address
+	is redirected to <http://sourceforge.net/tracker/?group_id=64876>,
+	so that the bug tracker now has a canonical URI that hides the
+	numeric group ID.
+
 2007-01-07  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* ui/mainwindow.glade: Again remove the tearoff menus and the
