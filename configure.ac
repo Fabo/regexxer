@@ -24,7 +24,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.8 -Wall gnu no-define nostdinc check-news])
-AC_SUBST([ACLOCAL_AMFLAGS], ['-I m4 ${ACLOCAL_FLAGS}'])
+AC_SUBST([ACLOCAL_AMFLAGS], ["-I m4 $ACLOCAL_FLAGS"])
 
 AC_PROG_CC()
 AC_PROG_CXX()

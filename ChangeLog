@@ -1,5 +1,12 @@
 2007-01-08  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* configure.ac (ACLOCAL_AMFLAGS): Substitute $ACLOCAL_FLAGS from
+	the environment at configure time instead of when make runs.
+	Formerly, the flags could change without reconfiguring, which is
+	probably a bad idea and contrary to Makefile conventions.
+
+2007-01-08  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* configure.ac (AC_INIT): Replace my email address for bug reports
 	with the URI <http://regexxer.sourceforge.net/bugs>.  This address
 	is redirected to <http://sourceforge.net/tracker/?group_id=64876>,
