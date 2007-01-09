@@ -1,3 +1,10 @@
+2007-01-09  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* src/mainwindow.cc: Remove leftover includes <gtk/gtktooltips.h>
+	and <gtkmm/comboboxentry.h>, which had only been required for the
+	tooltip hack removed earlier.  Also, collapse multiple empty lines
+	into one.
+
 2007-01-08  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* configure.ac (ACLOCAL_AMFLAGS): Substitute $ACLOCAL_FLAGS from

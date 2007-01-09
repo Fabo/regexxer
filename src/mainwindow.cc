@@ -28,9 +28,7 @@
 #include "translation.h"
 
 #include <glib.h>
-#include <gtk/gtktooltips.h>  /* XXX: see load_xml() */
 #include <gtkmm.h>
-#include <gtkmm/comboboxentry.h>
 #include <gconfmm/client.h>
 #include <libglademm/xml.h>
 #include <algorithm>
@@ -38,7 +36,6 @@
 #include <iostream>
 
 #include <config.h>
-
 
 namespace
 {
@@ -107,7 +104,6 @@ FileErrorDialog::FileErrorDialog(Gtk::Window& parent, const Glib::ustring& messa
 FileErrorDialog::~FileErrorDialog()
 {}
 
-
 void print_location(int linenumber, const Glib::ustring& subject, Regexxer::FileInfoPtr fileinfo)
 {
   std::cout << fileinfo->fullname << ':' << linenumber + 1 << ':';
@@ -123,7 +119,6 @@ void print_location(int linenumber, const Glib::ustring& subject, Regexxer::File
 }
 
 } // anonymous namespace
-
 
 namespace Regexxer
 {
@@ -147,7 +142,6 @@ InitState::InitState()
 InitState::~InitState()
 {}
 
-
 /**** Regexxer::MainWindow::BusyAction *************************************/
 
 class MainWindow::BusyAction
@@ -164,7 +158,6 @@ public:
 
   ~BusyAction() { object_.busy_action_leave(); }
 };
-
 
 /**** Regexxer::MainWindow *************************************************/
 
