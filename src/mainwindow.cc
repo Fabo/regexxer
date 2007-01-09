@@ -56,6 +56,21 @@ const char *const program_authors[] =
   0
 };
 
+const char *const program_license =
+  "regexxer is free software; you can redistribute it and/or modify "
+  "it under the terms of the GNU General Public License as published by "
+  "the Free Software Foundation; either version 2 of the License, or "
+  "(at your option) any later version.\n"
+  "\n"
+  "regexxer is distributed in the hope that it will be useful, "
+  "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+  "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the "
+  "GNU General Public License for more details.\n"
+  "\n"
+  "You should have received a copy of the GNU General Public License "
+  "along with regexxer; if not, write to the Free Software Foundation, "
+  "Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA";
+
 class FileErrorDialog : public Gtk::MessageDialog
 {
 public:
@@ -830,12 +845,15 @@ void MainWindow::on_about()
     std::auto_ptr<Gtk::AboutDialog> dialog (new Gtk::AboutDialog());
 
     dialog->set_version(PACKAGE_VERSION);
-    dialog->set_authors(program_authors);
-    dialog->set_website("http://regexxer.sourceforge.net/");
-    dialog->set_copyright("Copyright \302\251 2002-2007 Daniel Elstner");
-    dialog->set_comments(_("Search and replace using regular expressions"));
-    dialog->set_translator_credits(_("translator-credits"));
     dialog->set_logo_icon_name(PACKAGE_TARNAME);
+    dialog->set_comments(_("Search and replace using regular expressions"));
+    dialog->set_copyright("Copyright \302\251 2002-2007 Daniel Elstner");
+    dialog->set_website("http://regexxer.sourceforge.net/");
+
+    dialog->set_authors(program_authors);
+    dialog->set_translator_credits(_("translator-credits"));
+    dialog->set_license(program_license);
+    dialog->set_wrap_license(true);
 
     dialog->set_transient_for(*window_);
     dialog->show();

@@ -1,5 +1,12 @@
 2007-01-09  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/mainwindow.cc (program_license): New string literal with the
+	same license information as at the top of the file.
+	(MainWindow::on_about): Show the license information in the about
+	dialog.
+
+2007-01-09  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/mainwindow.cc: Remove leftover includes <gtk/gtktooltips.h>
 	and <gtkmm/comboboxentry.h>, which had only been required for the
 	tooltip hack removed earlier.  Also, collapse multiple empty lines
