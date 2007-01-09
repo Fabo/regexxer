@@ -33,8 +33,7 @@ then
   # Prefer explicitely versioned executables.
   for version in 1.10 1.9 1.8
   do
-    if "aclocal-$version"  --version </dev/null >/dev/null 2>&1 && \
-       "automake-$version" --version </dev/null >/dev/null 2>&1
+    if { "aclocal-$version" --version && "automake-$version" --version; } </dev/null >/dev/null 2>&1
     then
       ACLOCAL=aclocal-$version
       AUTOMAKE=automake-$version

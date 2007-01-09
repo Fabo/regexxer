@@ -1,5 +1,12 @@
 2007-01-09  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* autogen.sh: Simplify redirection of aclocal and automake output
+	when testing for versioned executables.
+	* po/Makevars (MSGID_BUGS_ADDRESS): Change URI to
+	<http://regexxer.sourceforge.net/bugs>.
+
+2007-01-09  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/mainwindow.cc (program_license): New string literal with the
 	same license information as at the top of the file.
 	(MainWindow::on_about): Show the license information in the about

@@ -23,4 +23,4 @@ top_builddir = ..
 
 XGETTEXT_OPTIONS = --keyword=_ --keyword=N_ --keyword=translate --qt
 
-MSGID_BUGS_ADDRESS = http://regexxer.sourceforge.net/
+MSGID_BUGS_ADDRESS = http://regexxer.sourceforge.net/bugs
