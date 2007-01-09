@@ -2,8 +2,6 @@
 
 	* autogen.sh: Simplify redirection of aclocal and automake output
 	when testing for versioned executables.
-	* po/Makevars (MSGID_BUGS_ADDRESS): Change URI to
-	<http://regexxer.sourceforge.net/bugs>.
 
 2007-01-09  Daniel Elstner  <daniel.kitta@gmail.com>
 
