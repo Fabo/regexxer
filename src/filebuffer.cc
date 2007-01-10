@@ -68,7 +68,7 @@ RegexxerTags::RegexxerTags()
 {
   error_message->property_wrap_mode()          = Gtk::WRAP_WORD;
   error_message->property_justification()      = Gtk::JUSTIFY_CENTER;
-  error_message->property_pixels_above_lines() = 10;
+  error_message->property_pixels_above_lines() = 16;
 
   error_title->property_scale() = Pango::SCALE_X_LARGE;
 
@@ -193,8 +193,8 @@ FileBuffer::create_with_error_message(const Glib::RefPtr<Gdk::Pixbuf>& pixbuf,
 
   iterator pend = buffer->insert_pixbuf(buffer->end(), pixbuf);
 
-  Glib::ustring title = "\302\240";
-  // TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
+  Glib::ustring title = "\302\240"; // U+00A0 NO-BREAK SPACE
+
   title += _("Can't read file:");
   title += '\n';
 

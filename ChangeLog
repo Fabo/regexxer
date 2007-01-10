@@ -1,3 +1,13 @@
+2007-01-10  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* src/filebuffer.cc (FileBuffer::create_with_error_message): Get
+	rid of the inappropriate plea to translators to replace space with
+	no-break space in the message title.  Apart from the fact that it
+	was a bad idea in the first place to make translators put up with
+	this internal issue, the no-break spaces have no point being there
+	at all.  A single untranslated no-break space between the error
+	icon and the title text is all that is warranted.
+
 2007-01-09  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* autogen.sh: Simplify redirection of aclocal and automake output
