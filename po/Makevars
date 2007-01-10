@@ -21,6 +21,7 @@ DOMAIN = $(PACKAGE)
 subdir = po
 top_builddir = ..
 
-XGETTEXT_OPTIONS = --keyword=_ --keyword=N_ --keyword=translate --qt
+# Only extract explicitely tagged comments into PO files.
+XGETTEXT_OPTIONS = --add-comments=TRANSLATORS --keyword=_ --keyword=N_ --keyword=translate --qt
 
 MSGID_BUGS_ADDRESS = http://regexxer.sourceforge.net/bugs
