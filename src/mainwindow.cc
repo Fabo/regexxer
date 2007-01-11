@@ -213,13 +213,12 @@ void MainWindow::initialize(const InitState& init)
 
   if (!init.folder.empty())
     folder = init.folder.front();
-
   if (!Glib::path_is_absolute(folder))
     folder = Glib::build_filename(Glib::get_current_dir(), folder);
 
   const bool folder_exists = button_folder_->set_current_folder(folder);
 
-  entry_pattern_->set_text((init.pattern.empty()) ? Glib::ustring("*") : init.pattern);
+  entry_pattern_->set_text((init.pattern.empty()) ? Glib::ustring(1, '*') : init.pattern);
   entry_regex_  ->set_text(init.regex);
   entry_substitution_->set_text(init.substitution);
 

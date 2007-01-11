@@ -1,5 +1,9 @@
 2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/mainwindow.cc (MainWindow::initialize): Really minor tweaks.
+
+2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/main.cc (RegexxerOptions): Make init_state_ a value member
 	of the class instead creating it dynamically.  This simplification
 	is now possible since the RegexxerOptions object will be allocated
