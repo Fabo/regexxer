@@ -1,5 +1,14 @@
 2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* de.po ("C_urrent match color:"): Move accelerator from "g" to "T"
+	in order to make it visible.
+	("Text view font"): Slightly reword translation.
+
+2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* *.po: Globally replace ASCII quotes (") and apostrophes (') with
+	the typographically correct variants in Unicode.
+
 	* en.po: Remove English "translation" as proper Unicode quotes and
 	apostrophes are now used directly in the untranslated messages.
 	* LINGUAS: Remove "en" from list.

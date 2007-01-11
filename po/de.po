@@ -49,7 +49,7 @@ msgstr ""
 
 #: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
-msgstr "Schriftart für Text"
+msgstr "Schriftart in Dateiansicht"
 
 #: ../ui/regexxer.schemas.in.h:6
 msgid ""
@@ -426,7 +426,7 @@ msgstr "3."
 
 #: ../ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
-msgstr "Farbe des _gewählten Treffers:"
+msgstr "Farbe des gewählten _Treffers:"
 
 #: ../ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
@@ -474,7 +474,7 @@ msgstr "_Farbe eines Treffers:"
 
 #: ../ui/prefdialog.glade.h:17
 msgid "_Text view font:"
-msgstr "_Schriftart für Text:"
+msgstr "_Schriftart in Dateiansicht:"
 
 #: ../ui/prefdialog.glade.h:18
 msgid ""
