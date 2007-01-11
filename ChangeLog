@@ -1,5 +1,10 @@
 2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* ui/prefdialog.glade (label_toolbar_style): Assign mnemonic widget
+	combo_toolbar_style as GTK+ messes up the automatic assignment.
+
+2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/filebuffer.cc (FileBuffer::create_with_error_message): Use
 	UTF-8 encoded typographically correct apostrophe in the title
 	string.
