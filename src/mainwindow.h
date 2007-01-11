@@ -78,7 +78,7 @@ public:
   MainWindow();
   virtual ~MainWindow();
 
-  void initialize(std::auto_ptr<InitState> init);
+  void initialize(const InitState& init);
   Gtk::Window* get_window() { return window_.get(); }
 
 private:

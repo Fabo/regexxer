@@ -207,36 +207,36 @@ MainWindow::MainWindow()
 MainWindow::~MainWindow()
 {}
 
-void MainWindow::initialize(std::auto_ptr<InitState> init)
+void MainWindow::initialize(const InitState& init)
 {
   std::string folder;
 
-  if (!init->folder.empty())
-    folder = init->folder.front();
+  if (!init.folder.empty())
+    folder = init.folder.front();
 
   if (!Glib::path_is_absolute(folder))
     folder = Glib::build_filename(Glib::get_current_dir(), folder);
 
   const bool folder_exists = button_folder_->set_current_folder(folder);
 
-  entry_pattern_     ->set_text((init->pattern.empty()) ? Glib::ustring("*") : init->pattern);
-  entry_regex_       ->set_text(init->regex);
-  entry_substitution_->set_text(init->substitution);
+  entry_pattern_->set_text((init.pattern.empty()) ? Glib::ustring("*") : init.pattern);
+  entry_regex_  ->set_text(init.regex);
+  entry_substitution_->set_text(init.substitution);
 
-  button_recursive_->set_active(!init->no_recursive);
-  button_hidden_   ->set_active(init->hidden);
-  button_multiple_ ->set_active(!init->no_global);
-  button_caseless_ ->set_active(init->ignorecase);
+  button_recursive_->set_active(!init.no_recursive);
+  button_hidden_   ->set_active(init.hidden);
+  button_multiple_ ->set_active(!init.no_global);
+  button_caseless_ ->set_active(init.ignorecase);
 
-  if (init->feedback)
+  if (init.feedback)
     filetree_->signal_feedback.connect(&print_location);
 
   // Strangely, folder_exists seems to be always true, probably because the
   // file chooser works asynchronously but the GLib main loop isn't running
   // yet.  As a work-around, explicitely check whether the directory exists
   // on the file system as well.
-  if (folder_exists && !init->no_autorun
-      && !init->folder.empty() && !init->pattern.empty()
+  if (folder_exists && !init.no_autorun
+      && !init.folder.empty() && !init.pattern.empty()
       && Glib::file_test(folder, Glib::FILE_TEST_IS_DIR))
   {
     Glib::signal_idle().connect(sigc::mem_fun(*this, &MainWindow::autorun_idle));

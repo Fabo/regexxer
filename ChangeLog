@@ -1,5 +1,18 @@
 2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/main.cc (RegexxerOptions): Make init_state_ a value member
+	of the class instead creating it dynamically.  This simplification
+	is now possible since the RegexxerOptions object will be allocated
+	dynamically anyway.
+	(RegexxerOptions::init_state): Rename from take_init_state(), and
+	make it return a const reference.
+	(main): Use new init_state() method when initializing the window.
+
+	* src/mainwindow.{cc,h} (MainWindow::initialize): Change init
+	parameter type to a const reference.
+
+2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* Makefile.am (global_defs): Define REGEXXER_LOCALEDIR to the
 	"$(locale)" directory path.  Remove define for REGEXXER_DATADIR
 	since it was used only as part of the locale directory.

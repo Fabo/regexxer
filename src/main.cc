@@ -64,25 +64,6 @@ struct StockItemData
   const char*           label;
 };
 
-class RegexxerOptions
-{
-private:
-  std::auto_ptr<Regexxer::InitState>  init_state_;
-  Glib::OptionGroup                   group_;
-  Glib::OptionContext                 context_;
-
-  static Glib::OptionEntry entry(const char* long_name, char short_name,
-                                 const char* description, const char* arg_description = 0);
-  RegexxerOptions();
-
-public:
-  static std::auto_ptr<RegexxerOptions> create();
-  ~RegexxerOptions();
-
-  Glib::OptionContext& context() { return context_; }
-  std::auto_ptr<Regexxer::InitState> take_init_state() { return init_state_; }
-};
-
 const StockIconData stock_icon_save_all[] =
 {
   { stock_save_all_16, sizeof(stock_save_all_16), Gtk::ICON_SIZE_MENU          },
@@ -92,6 +73,25 @@ const StockIconData stock_icon_save_all[] =
 const StockItemData regexxer_stock_items[] =
 {
   { "regexxer-save-all", stock_icon_save_all, G_N_ELEMENTS(stock_icon_save_all), N_("Save _all") }
+};
+
+class RegexxerOptions
+{
+private:
+  Regexxer::InitState   init_state_;
+  Glib::OptionGroup     group_;
+  Glib::OptionContext   context_;
+
+  static Glib::OptionEntry entry(const char* long_name, char short_name,
+                                 const char* description, const char* arg_description = 0);
+  RegexxerOptions();
+
+public:
+  static std::auto_ptr<RegexxerOptions> create();
+  ~RegexxerOptions();
+
+  Glib::OptionContext& context()    { return context_; }
+  Regexxer::InitState& init_state() { return init_state_; }
 };
 
 // static
@@ -113,7 +113,7 @@ Glib::OptionEntry RegexxerOptions::entry(const char* long_name, char short_name,
 
 RegexxerOptions::RegexxerOptions()
 :
-  init_state_ (new Regexxer::InitState()),
+  init_state_ (),
   group_      (PACKAGE_TARNAME, Glib::ustring()),
   context_    ()
 {}
@@ -126,8 +126,8 @@ std::auto_ptr<RegexxerOptions> RegexxerOptions::create()
 {
   std::auto_ptr<RegexxerOptions> options (new RegexxerOptions());
 
-  Glib::OptionGroup&   group = options->group_;
-  Regexxer::InitState& init  = *options->init_state_;
+  Glib::OptionGroup&  group = options->group_;
+  Regexxer::InitState& init = options->init_state_;
 
   group.add_entry(entry("pattern", 'p', N_("Find files matching PATTERN"), N_("PATTERN")),
                   init.pattern);
@@ -214,7 +214,7 @@ void initialize_configuration()
   client->set_error_handling(CLIENT_HANDLE_ALL);
   client->add_dir(REGEXXER_GCONF_DIRECTORY, CLIENT_PRELOAD_ONELEVEL);
 
-  const std::list<Entry> entries (client->all_entries(REGEXXER_GCONF_DIRECTORY));
+  const std::list<Entry> entries = client->all_entries(REGEXXER_GCONF_DIRECTORY);
 
   // Issue an artificial value_changed() signal for each entry in /apps/regexxer.
   // Reusing the signal handlers this way neatly avoids the need for separate
@@ -245,7 +245,7 @@ int main(int argc, char** argv)
     Regexxer::MainWindow window;
 
     initialize_configuration();
-    window.initialize(options->take_init_state());
+    window.initialize(options->init_state());
     options.reset();
 
     Gtk::Main::run(*window.get_window());
