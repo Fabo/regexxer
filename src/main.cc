@@ -239,8 +239,8 @@ int main(int argc, char** argv)
 
     std::auto_ptr<RegexxerOptions> options = RegexxerOptions::create();
     Gtk::Main main_instance (argc, argv, options->context());
-    Glib::set_application_name(PACKAGE_NAME);
 
+    Glib::set_application_name(PACKAGE_NAME);
     register_stock_items();
     gtk_window_set_default_icon_name(PACKAGE_TARNAME);
 
@@ -251,12 +251,13 @@ int main(int argc, char** argv)
     options.reset();
 
     Gtk::Main::run(*window.get_window());
+
+    return 0;
   }
   catch (const Glib::OptionError& error)
   {
     const Glib::ustring what = error.what();
-    g_printerr(PACKAGE_TARNAME ": %s\n", what.c_str());
-    return 1;
+    g_printerr("%s: %s\n", g_get_prgname(), what.c_str());
   }
   catch (const Glib::Error& error)
   {
@@ -272,5 +273,5 @@ int main(int argc, char** argv)
     g_error("unhandled exception: (type unknown)");
   }
 
-  return 0;
+  return 1;
 }

@@ -49,6 +49,8 @@ int default_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel:
 
 int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs)
 {
+  typedef std::string::difference_type diff_type;
+
   const FileTreeColumns& columns = FileTreeColumns::instance();
 
   const std::string lhs_key = (*lhs)[columns.collatekey];
@@ -57,7 +59,7 @@ int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeMod
   if (lhs_key.size() > 1 && rhs_key.size() > 1)
     return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
   else
-    return (lhs_key.size() - rhs_key.size());
+    return diff_type(lhs_key.size()) - diff_type(rhs_key.size());
 }
 
 bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse)

@@ -58,10 +58,9 @@ Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& inp
 
 void save_iochannel(const Glib::RefPtr<Glib::IOChannel>& output, const Glib::RefPtr<FileBuffer>& buffer)
 {
-  FileBuffer::iterator start = buffer->begin();
-  FileBuffer::iterator stop  = start;
+  FileBuffer::iterator stop = buffer->begin();
 
-  for (; start; start = stop)
+  for (FileBuffer::iterator start = stop; start; start = stop)
   {
     stop.forward_chars(BUFSIZE); // inaccurate, but doesn't matter
     const Glib::ustring chunk = buffer->get_slice(start, stop);
@@ -69,6 +68,8 @@ void save_iochannel(const Glib::RefPtr<Glib::IOChannel>& output, const Glib::Ref
     gsize bytes_written = 0;
     const Glib::IOStatus status = output->write(chunk.data(), chunk.bytes(), bytes_written);
 
+    // These conditions really must hold true at this point
+    // since any error should have caused an exception.
     g_assert(status == Glib::IO_STATUS_NORMAL);
     g_assert(bytes_written == chunk.bytes());
   }
@@ -163,11 +164,13 @@ void save_file(const FileInfoPtr& fileinfo)
       Glib::IOChannel::create_from_file(fileinfo->fullname, "w");
 
   channel->set_buffer_size(BUFSIZE);
-
   channel->set_encoding(fileinfo->encoding);
+
   save_iochannel(channel, fileinfo->buffer);
 
-  channel->close(); // might throw
+  // Explicitely close() the buffer at this point so that
+  // we get an exception if closing the file fails.
+  channel->close();
 
   fileinfo->buffer->set_modified(false);
 }
