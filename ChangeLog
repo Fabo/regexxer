@@ -1,3 +1,19 @@
+2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* src/fileio.cc (save_iochannel): Add comment about assertions and
+	reorganize the code a bit.
+	(Regexxer::save_file): Elaborate on why IOChannel::close() is
+	used explicitely.
+
+	* src/filetreeprivate.cc (FileTreePrivate::collatekey_sort_func):
+	Fix oversight:  Subtracting two unsigned values and converting the
+	result to a signed type relies on implementation-defined behavior.
+	Explicitely cast the operands to a signed type before substraction.
+
+	* src/main.cc (main): Use g_get_prgname() instead of the string
+	literal PACKAGE_TARNAME in the error message for Glib::OptionError
+	exceptions.
+
 2007-01-10  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* src/filebuffer.cc (FileBuffer::create_with_error_message): Get
