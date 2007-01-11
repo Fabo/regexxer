@@ -70,7 +70,7 @@ nodist_src_regexxer_SOURCES =	\
 	ui/stockimages.h
 
 global_defs = \
--DREGEXXER_DATADIR=\""$(datadir)"\" \
+-DREGEXXER_LOCALEDIR=\""$(localedir)"\" \
 -DREGEXXER_PKGDATADIR=\""$(pkgdatadir)"\" \
 -DREGEXXER_GCONF_DIRECTORY=\""$(REGEXXER_GCONF_DIRECTORY)"\" \
 -DGLIBMM_DISABLE_DEPRECATED -DGTKMM_DISABLE_DEPRECATED

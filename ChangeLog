@@ -1,5 +1,13 @@
 2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* Makefile.am (global_defs): Define REGEXXER_LOCALEDIR to the
+	"$(locale)" directory path.  Remove define for REGEXXER_DATADIR
+	since it was used only as part of the locale directory.
+	* src/main.cc (main): Use REGEXXER_LOCALEDIR.
+	(locale_directory): Remove string literal.
+
+2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* ui/prefdialog.glade (label_toolbar_style): Assign mnemonic widget
 	combo_toolbar_style as GTK+ messes up the automatic assignment.
 

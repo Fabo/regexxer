@@ -94,8 +94,6 @@ const StockItemData regexxer_stock_items[] =
   { "regexxer-save-all", stock_icon_save_all, G_N_ELEMENTS(stock_icon_save_all), N_("Save _all") }
 };
 
-const char *const locale_directory = REGEXXER_DATADIR G_DIR_SEPARATOR_S "locale";
-
 // static
 Glib::OptionEntry RegexxerOptions::entry(const char* long_name, char short_name,
                                          const char* description, const char* arg_description)
@@ -234,7 +232,7 @@ int main(int argc, char** argv)
 {
   try
   {
-    Util::initialize_gettext(PACKAGE_TARNAME, locale_directory);
+    Util::initialize_gettext(PACKAGE_TARNAME, REGEXXER_LOCALEDIR);
     Gnome::Conf::init();
 
     std::auto_ptr<RegexxerOptions> options = RegexxerOptions::create();
