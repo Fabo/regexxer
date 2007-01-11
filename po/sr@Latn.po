@@ -41,7 +41,7 @@ msgstr "Boja za poklapanje"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr "Ime kodiranja znakova koje se koristi ako datoteka nije UTF-8 ili skup znakova koji se koristi u tekućem lokalitetu. Probajte „iconv --list“ za potpun spisak dopuštenih vrednosti."
 
@@ -66,8 +66,8 @@ msgstr "Font koji se koristi u uređivaču datoteka."
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr "Stil trake alatki u programu. Dopuštene vrednosti su „icons“, „text“, „both“, i „both-horiz“."
 
 #: regexxer.schemas.in.h:10
@@ -76,7 +76,7 @@ msgstr "Stil alatki"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Ne mogu da učitam datoteku:"
 
 #: src/filetree.cc:81
@@ -88,11 +88,11 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
 msgstr "Neuspešno čuvanje datoteke „%1“: %2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
+msgid "“%1” seems to be a binary file."
 msgstr "Čini se da je „%1“ binarna datoteka."
 
 #: src/main.cc:84
@@ -156,7 +156,7 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[OPCIJA]... [DIREKTORIJUM]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
+msgid "Try “regexxer --help” for more information."
 msgstr "Probajte „regexxer --help“ za detalje."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
@@ -167,7 +167,7 @@ msgstr "Obrazac imena datoteka se koristi u ljusci. Klase znakova [ab] i izrazi 
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Neke datoteke još uvek nisu sačuvane.\n"
@@ -175,7 +175,7 @@ msgstr ""
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr "Ime direktorijuma „%1“ sadrži znakove koji se ne mogu predstaviti u kodiranju lokalnog sistema datoteka."
 
@@ -185,7 +185,7 @@ msgstr "Izaberite direktorijum"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Neke datoteke još uvek nisu sačuvane.\n"
@@ -201,7 +201,7 @@ msgstr "Dogodile su se naredne greške pri pretrazi:"
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
 "Greška u regularnom izrazu „%1“ (indeks %2):\n"
@@ -230,7 +230,7 @@ msgid ""
 msgstr "Dostignuto je ograničenje broja rekurzija i samopozivanja biblioteke za regularne izraze."
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
+msgid "“%1” is not a valid encoding."
 msgstr "„%1“ ne predstavlja ispravno kodiranje."
 
 #: src/statusline.cc:264
@@ -489,7 +489,7 @@ msgid "_File access"
 msgstr "_Pristup datoteci"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Izgled i ponašanje"
 
 #: ui/prefdialog.glade.h:16

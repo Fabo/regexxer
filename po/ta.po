@@ -40,7 +40,7 @@ msgstr "வண்ணப்¦À¡Õத்தம்"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr "தற்§ப¡¨தய உள்ளூரால் சொல்லப்பட்ட UTF-8 அல்லது குறிக்கணத்தில் உள்ள அ-வை வாசிக்கமுடியவில்¨ல எனில் உபயோகப்படுத்த வேண்டிய வரியுரு குறியாக்கத்தின் பெயர். முழுப்பட்டியலில் உள்ள சாத்தியமான மதிப்புகளுக்கு\"iconv--list\"ஐ முயற்சி செய்."
 
@@ -66,8 +66,8 @@ msgstr "§¸¡ôÒப்பதிப்பானில் உபயோகப்�
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
 "பயன்பாட்டு கருவிப்பட்¨டயின் பாணி. சாத்தியமான மதிப்புகள் \"குரும்படம்\",\"உரை"
 "\",\"இரண்டும்\", மற்றும் \"இரண்டும்-இடம்வல\"."
@@ -78,7 +78,7 @@ msgstr "கருவிப்பட்¨டயின் பாணி "
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "§¸¡ô¨ப படிக்க முடியாது"
 
 #: src/filetree.cc:81
@@ -90,12 +90,12 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "§¸¡ôÒக¨ள §º¸Ã¢க்க இயலவில்¨ல \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "§¸¡ôÒக¨ள §º¸Ã¢க்க இயலவில்¨ல “%1”: %2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\"þÕ¿¢¨Äì §¸¡ôபை பொல தெரிகிறது."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1”þÕ¿¢¨Äì §¸¡ôபை பொல தெரிகிறது."
 
 #: src/main.cc:84
 msgid "_About"
@@ -158,8 +158,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[§¾÷×]...[ஆவனம்]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "அதிக விவரத்¨த அறிய \"regexxer --help\" முயற்சி செய்."
+msgid "Try “regexxer --help” for more information."
+msgstr "அதிக விவரத்¨த அறிய “regexxer --help” முயற்சி செய்."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -171,7 +171,7 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "சில கோப்புகள் இன்னும் சேமிக்கபடவில்¨ல.\n"
@@ -179,9 +179,9 @@ msgstr ""
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding"
+"The folder name “%1” contains characters not representable in the encoding"
 "of the local file system."
-msgstr "\"%1\" என்ற ஆவணப்¦பயரில் உள்ள எழுத்துருக்களை உள்§காப்பு அமைப்பின் குறியாக்கத்தில் குறிப்பிட முடியாது."
+msgstr "“%1” என்ற ஆவணப்¦பயரில் உள்ள எழுத்துருக்களை உள்§காப்பு அமைப்பின் குறியாக்கத்தில் குறிப்பிட முடியாது."
 
 #: src/mainwindow.cc:450
 msgid "Select a folder"
@@ -189,7 +189,7 @@ msgstr "ஆவனத்¨த தெர்ந்§தடு"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "சில கோப்புகள் இன்னும் சேமிக்கபடவில்¨ல.\n"
@@ -205,10 +205,10 @@ msgstr "இப்பிழைகள் தேடும் போது நேர
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"ÅÆì¸Á¡É தொடரில் பிழை at \"%1\" (index %2):\n"
+"ÅÆì¸Á¡É தொடரில் பிழை at “%1” (index %2):\n"
 "%3"
 
 #: src/mainwindow.cc:529
@@ -234,8 +234,8 @@ msgid ""
 msgstr "வழக்கமான கூற்றுப் பொறியின் பின் நகர்வு வரம்பு மற்றும் மறுகழற்சியை அடைந்துவிட்டது."
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" இந்த குறியாக்கம் செல்லாது."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” இந்த குறியாக்கம் செல்லாது."
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -490,7 +490,7 @@ msgid "_File access"
 msgstr "_கோப்பு அணுகல்"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_பார்த்து உணர்"
 
 #: ui/prefdialog.glade.h:16

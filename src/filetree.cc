@@ -25,6 +25,7 @@
 #include "stringutils.h"
 #include "translation.h"
 
+#include <glibmm.h>
 #include <gconfmm/client.h>
 #include <gtkmm/stock.h>
 
@@ -410,11 +411,11 @@ void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
       }
       else if (file_test(fullname, FILE_TEST_IS_REGULAR))
       {
-        const ustring basename_utf8 = Util::filename_to_utf8_fallback(basename);
+        const ustring displayname = Glib::filename_display_name(basename);
 
-        if (find_data.pattern.match(basename_utf8) > 0)
+        if (find_data.pattern.match(displayname) > 0)
         {
-          find_add_file(basename_utf8, fullname, find_data);
+          find_add_file(displayname, fullname, find_data);
           ++file_count;
         }
       }
@@ -473,7 +474,7 @@ void FileTree::find_fill_dirstack(FindData& find_data)
     if (pdir->second) // node already created
       continue;
 
-    const Glib::ustring dirname = Util::filename_to_utf8_fallback(pdir->first);
+    const Glib::ustring dirname = Glib::filename_display_name(pdir->first);
 
     // Build the collate key with a leading '0' so that directories always
     // come first.  This is simpler and faster than explicitely checking for
@@ -529,8 +530,8 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
     }
     catch (const Glib::Error& error)
     {
-      error_list->push_back(Util::compose(_("Failed to save file \"%1\": %2"),
-                                          Util::filename_to_utf8_fallback(fileinfo->fullname),
+      error_list->push_back(Util::compose(_("Failed to save file \342\200\234%1\342\200\235: %2"),
+                                          Glib::filename_display_name(fileinfo->fullname),
                                           error.what()));
     }
 
@@ -946,7 +947,7 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
 
     fileinfo->buffer = FileBuffer::create_with_error_message(
         render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG),
-        Util::compose(_("\"%1\" seems to be a binary file."), filename));
+        Util::compose(_("\342\200\234%1\342\200\235 seems to be a binary file."), filename));
   }
 
   if (old_load_failed != fileinfo->load_failed)

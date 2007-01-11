@@ -43,13 +43,10 @@ Glib::ustring substitute_references(const Glib::ustring& substitution,
                                     const Glib::ustring& subject,
                                     const CaptureVector& captures);
 
-Glib::ustring filename_to_utf8_fallback(const std::string& filename);
-Glib::ustring convert_to_ascii(const std::string& str);
-Glib::ustring int_to_string(int number);
-
 std::string shorten_pathname(const std::string& path);
 std::string expand_pathname(const std::string& path);
 
+Glib::ustring int_to_string(int number);
 Glib::ustring color_to_string(const Gdk::Color& color);
 
 int enum_from_nick_impl(GType type, const Glib::ustring& nick);

@@ -19,6 +19,8 @@
  */
 
 #include "pcreshell.h"
+#include "miscutils.h"
+#include "stringutils.h"
 #include "translation.h"
 
 #include <pcre.h>
@@ -59,6 +61,28 @@ void check_for_single_byte_escape(const Glib::ustring& regex)
                         byte_to_char_offset(regex.begin(), index + 1));
     }
     index += 2;
+  }
+}
+
+void throw_regex_error(const Glib::ustring&, int, const char*) G_GNUC_NORETURN;
+void throw_regex_error(const Glib::ustring& regex, int byte_offset, const char* message)
+{
+  using Glib::ustring;
+
+  const ustring what = (message) ? Glib::locale_to_utf8(message) : Glib::ustring();
+
+  if (byte_offset >= 0 && unsigned(byte_offset) < regex.raw().size())
+  {
+    const int offset = byte_to_char_offset(regex.begin(), byte_offset);
+    const gunichar error_char = *ustring::const_iterator(regex.raw().begin() + byte_offset);
+
+    throw Pcre::Error(Util::compose(
+        _("Error in regular expression at \342\200\234%1\342\200\235 (index %2):\n%3"),
+        ustring(1, error_char), Util::int_to_string(offset + 1), what), offset);
+  }
+  else
+  {
+    throw Pcre::Error(Util::compose(_("Error in regular expression:\n%1"), what));
   }
 }
 
@@ -111,12 +135,7 @@ Pattern::Pattern(const Glib::ustring& regex, CompileOptions options)
   pcre_ = pcre_compile(regex.c_str(), options | PCRE_UTF8, &error_message, &error_offset, 0);
 
   if (!pcre_)
-  {
-    g_assert(error_message != 0);
-
-    throw Error(Glib::locale_to_utf8(error_message),
-                (error_offset < 0) ? -1 : byte_to_char_offset(regex.begin(), error_offset));
-  }
+    throw_regex_error(regex, error_offset, error_message);
 
   int capture_count = 0;
   const int result G_GNUC_UNUSED = pcre_fullinfo(static_cast<pcre*>(pcre_), 0,

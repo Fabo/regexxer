@@ -40,7 +40,7 @@ msgstr "Couleur de correspondance"
 #: ../regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "Nom du codage de caractères à utiliser si un fichier n'est pas lisible en "
@@ -72,8 +72,8 @@ msgstr "La police utilisée dans l'éditeur de fichier."
 
 #: ../regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
 "Le style de la barre d'outils de l'application. Les valeurs possibles sont "
 "« icônes seulement », « test seulement », « texte sous les icônes » et "
@@ -85,7 +85,7 @@ msgstr "Style de la barre d'outils"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Impossible de lire le fichier :"
 
 #: ../src/filetree.cc:81
@@ -97,11 +97,11 @@ msgid "#"
 msgstr "#"
 
 #: ../src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
 msgstr "Impossible d'enregistrer « %1 » : %2"
 
 #: ../src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
+msgid "“%1” seems to be a binary file."
 msgstr "« %1 » semble être un fichier binaire."
 
 #: ../src/main.cc:84
@@ -165,7 +165,7 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[OPTION]... [REPERTOIRE]"
 
 #: ../src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
+msgid "Try “regexxer --help” for more information."
 msgstr "Essayez « regexxer --help » pour plus d'information."
 
 #: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
@@ -179,7 +179,7 @@ msgstr ""
 
 #: ../src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Certains fichiers n'ont pas été enregistrés.\n"
@@ -187,7 +187,7 @@ msgstr ""
 
 #: ../src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
 "Le nom du répertoire « %1 » contient des caractères non représentables dans "
@@ -199,7 +199,7 @@ msgstr "Sélectionnez un répertoire"
 
 #: ../src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Certains fichiers n'ont pas été enregistrés.\n"
@@ -215,7 +215,7 @@ msgstr "Les erreurs suivantes sont apparues durant la recherche :"
 
 #: ../src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
 "Erreur dans l'expression régulière à « %1 » (index %2) :\n"
@@ -246,7 +246,7 @@ msgstr ""
 "Limite de récursion et de retour du moteur d'expression régulière atteinte."
 
 #: ../src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
+msgid "“%1” is not a valid encoding."
 msgstr "« %1 » n'est pas un codage valide."
 
 #: ../src/statusline.cc:264
@@ -506,7 +506,7 @@ msgid "_File access"
 msgstr "Accès aux _fichiers"
 
 #: ../ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Apparence"
 
 #: ../ui/prefdialog.glade.h:16

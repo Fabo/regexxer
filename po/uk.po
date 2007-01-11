@@ -38,12 +38,12 @@ msgstr "Колір відповідності"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "Назва кодування символів, що використовується якщо файл неможливо прочитати у "
 "UTF-8 або кодуванні поточної локалі. Перелік можливих значень можна переглянути виконавши "
-"\"iconv --list\"."
+"“iconv --list”."
 
 #: regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -68,11 +68,11 @@ msgstr "Шрифт, що використовується у редакторі 
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
-"Стиль панелі інструментів програми. Можливі значення: \"icons\" (значки), \"text\" (текст)"
-", \"both\" (значки та текст), та \"both-horiz\" (значки та текст горизонтально)."
+"Стиль панелі інструментів програми. Можливі значення: “icons” (значки), “text” (текст)"
+", “both” (значки та текст), та “both-horiz” (значки та текст горизонтально)."
 
 #: regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -80,7 +80,7 @@ msgstr "Стиль панелі інструментів"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Не вдається прочитати файл:"
 
 #: src/filetree.cc:81
@@ -92,12 +92,12 @@ msgid "#"
 msgstr "№"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "Не вдається зберегти файл \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "Не вдається зберегти файл “%1”: %2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" схожий на двійковий файл."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” схожий на двійковий файл."
 
 #: src/main.cc:84
 msgid "_About"
@@ -160,8 +160,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[ПАРАМЕТР]... [ТЕКА]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "Додаткову інформацію дивіться у \"regexxer --help\"."
+msgid "Try “regexxer --help” for more information."
+msgstr "Додаткову інформацію дивіться у “regexxer --help”."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -173,7 +173,7 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Деякі файли ще не були збережені.\n"
@@ -181,10 +181,10 @@ msgstr ""
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
-"Назва теки \"%1\" містить символи, які неможливо представити у кодуванні локальної "
+"Назва теки “%1” містить символи, які неможливо представити у кодуванні локальної "
 "системи."
 
 #: src/mainwindow.cc:450
@@ -193,7 +193,7 @@ msgstr "Виберіть теку"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Деякі файли ще не були збережені.\n"
@@ -209,10 +209,10 @@ msgstr "При пошуку виникли наступні помилки:"
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Помилка у регулярному виразі у \"%1\" (індекс %2):\n"
+"Помилка у регулярному виразі у “%1” (індекс %2):\n"
 "%3"
 
 #: src/mainwindow.cc:529
@@ -239,8 +239,8 @@ msgstr ""
 "Досягнуто межу кількості рекурсій та повернень у регулярному виразі."
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" не є правильним кодуванням."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” не є правильним кодуванням."
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -498,7 +498,7 @@ msgid "_File access"
 msgstr "Доступ до _файлів"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Вигляд"
 
 #: ui/prefdialog.glade.h:16

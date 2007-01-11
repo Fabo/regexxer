@@ -385,14 +385,14 @@ Glib::ustring Util::shell_pattern_to_regex(const Glib::ustring& pattern)
   // partial UTF-8 characters during processing.  Although this would work with
   // the current Glib::ustring implementation, it's definitely not a good idea.
   std::string result;
-  result.reserve(std::max<std::string::size_type>(32, 2 * pattern.bytes()));
+  result.reserve(std::max<std::string::size_type>(32, 2 * pattern.raw().size()));
 
   result.append("\\A", 2);
 
   int brace_level = 0;
 
-  const std::string::const_iterator pend = pattern.end().base();
-  std::string::const_iterator       p    = pattern.begin().base();
+  const std::string::const_iterator pend = pattern.raw().end();
+  std::string::const_iterator       p    = pattern.raw().begin();
   std::string::const_iterator       pcc  = pend; // start of character class
 
   for (; p != pend; ++p)
@@ -478,12 +478,12 @@ Glib::ustring Util::substitute_references(const Glib::ustring& substitution,
                                           const CaptureVector& captures)
 {
   std::string result;
-  result.reserve(2 * std::max(substitution.bytes(), subject.bytes()));
+  result.reserve(2 * std::max(substitution.raw().size(), subject.raw().size()));
 
   std::vector<ModPos> modifiers;
 
-  const std::string::const_iterator pend = substitution.end().base();
-  std::string::const_iterator       p    = substitution.begin().base();
+  const std::string::const_iterator pend = substitution.raw().end();
+  std::string::const_iterator       p    = substitution.raw().begin();
 
   for (; p != pend; ++p)
   {
@@ -540,7 +540,7 @@ Glib::ustring Util::substitute_references(const Glib::ustring& substitution,
     {
       std::pair<int,int> bounds;
 
-      if (Glib::Ascii::isdigit(*++p) || (*p == '{' && std::find(p, pend, '}') != pend))
+      if (Glib::Ascii::isdigit(*++p) || (*p == '{' && std::find(p + 1, pend, '}') != pend))
       {
         const int index = parse_capture_index(p, pend);
 
@@ -567,7 +567,7 @@ Glib::ustring Util::substitute_references(const Glib::ustring& substitution,
 
         case '\'':
           bounds.first  = captures.front().second;
-          bounds.second = subject.bytes();
+          bounds.second = subject.raw().size();
           break;
 
         default:
@@ -589,46 +589,6 @@ Glib::ustring Util::substitute_references(const Glib::ustring& substitution,
     result = apply_modifiers(result, modifiers);
 
   return result;
-}
-
-Glib::ustring Util::filename_to_utf8_fallback(const std::string& filename)
-{
-  try
-  {
-    return Glib::filename_to_utf8(filename);
-  }
-  catch (const Glib::ConvertError& error)
-  {
-    if (error.code() != Glib::ConvertError::ILLEGAL_SEQUENCE)
-      throw;
-  }
-
-  const Glib::ustring filename_utf8 = Util::convert_to_ascii(filename);
-
-  g_warning("The filename `%s' is not valid UTF-8.  To work around that, please "
-            "set G_FILENAME_ENCODING to the local encoding used for filenames.  "
-            "Alternatively, convert all your legacy filenames to UTF-8 encoding.",
-            filename_utf8.c_str());
-
-  return filename_utf8;
-}
-
-Glib::ustring Util::convert_to_ascii(const std::string& str)
-{
-  std::ostringstream output;
-
-  output.imbue(std::locale::classic());
-  output.setf(std::ios::oct, std::ios::basefield);
-
-  for (std::string::const_iterator p = str.begin(); p != str.end(); ++p)
-  {
-    if ((static_cast<unsigned char>(*p) & 0x80U) == 0)
-      output << *p;
-    else
-      output << '\\' << static_cast<unsigned int>(static_cast<unsigned char>(*p));
-  }
-
-  return output.str();
 }
 
 Glib::ustring Util::int_to_string(int number)
@@ -655,7 +615,7 @@ std::string Util::shorten_pathname(const std::string& path)
   const std::string::size_type len = homedir.length();
 
   if (path.length() >= len
-      && (path.length() == len || path[len] == G_DIR_SEPARATOR)
+      && (path.length() == len || G_IS_DIR_SEPARATOR(path[len]))
       && path.compare(0, len, homedir) == 0)
   {
     std::string result (1, '~');
@@ -669,7 +629,7 @@ std::string Util::shorten_pathname(const std::string& path)
 std::string Util::expand_pathname(const std::string& path)
 {
   if (path.length() > 0 && path[0] == '~'
-      && (path.length() == 1 || path[1] == G_DIR_SEPARATOR))
+      && (path.length() == 1 || G_IS_DIR_SEPARATOR(path[1])))
   {
     std::string result = Glib::get_home_dir();
     result.append(path, 1, std::string::npos);

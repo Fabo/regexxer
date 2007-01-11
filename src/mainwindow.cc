@@ -235,7 +235,8 @@ void MainWindow::initialize(std::auto_ptr<InitState> init)
   // file chooser works asynchronously but the GLib main loop isn't running
   // yet.  As a work-around, explicitely check whether the directory exists
   // on the file system as well.
-  if (folder_exists && !init->no_autorun && !init->folder.empty()
+  if (folder_exists && !init->no_autorun
+      && !init->folder.empty() && !init->pattern.empty()
       && Glib::file_test(folder, Glib::FILE_TEST_IS_DIR))
   {
     Glib::signal_idle().connect(sigc::mem_fun(*this, &MainWindow::autorun_idle));
@@ -409,7 +410,8 @@ bool MainWindow::confirm_quit_request()
   if (filetree_->get_modified_count() == 0)
     return true;
 
-  Gtk::MessageDialog dialog (*window_, _("Some files haven't been saved yet.\nQuit anyway?"),
+  Gtk::MessageDialog dialog (*window_,
+                             _("Some files haven\342\200\231t been saved yet.\nQuit anyway?"),
                              false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_NONE, true);
 
   dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
@@ -422,7 +424,8 @@ void MainWindow::on_find_files()
 {
   if (filetree_->get_modified_count() > 0)
   {
-    Gtk::MessageDialog dialog (*window_, _("Some files haven't been saved yet.\nContinue anyway?"),
+    Gtk::MessageDialog dialog (*window_,
+                               _("Some files haven\342\200\231t been saved yet.\nContinue anyway?"),
                                false, Gtk::MESSAGE_WARNING, Gtk::BUTTONS_OK_CANCEL, true);
 
     if (dialog.run() != Gtk::RESPONSE_OK)
@@ -475,18 +478,16 @@ void MainWindow::on_exec_search()
   try
   {
     Pcre::Pattern pattern (regex, (caseless) ? Pcre::CASELESS : Pcre::CompileOptions(0));
+
     filetree_->find_matches(pattern, multiple);
   }
   catch (const Pcre::Error& error)
   {
-    const int offset = error.offset();
-    const Glib::ustring message = (offset >= 0 && unsigned(offset) < regex.length())
-      ? Util::compose(_("Error in regular expression at \"%1\" (index %2):\n%3"),
-                      regex.substr(offset, 1), Util::int_to_string(offset + 1), error.what())
-      : Util::compose(_("Error in regular expression:\n%1"), error.what());
-
-    Gtk::MessageDialog dialog (*window_, message, false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    Gtk::MessageDialog dialog (*window_, error.what(), false,
+                               Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
+
+    const int offset = error.offset();
 
     if (offset >= 0 && offset < entry_regex_->get_text_length())
     {
@@ -778,10 +779,10 @@ void MainWindow::update_preview()
 
 void MainWindow::set_title_filename(const std::string& filename)
 {
-  Glib::ustring title = Util::filename_to_utf8_fallback(Glib::path_get_basename(filename));
+  Glib::ustring title = Glib::filename_display_name(Glib::path_get_basename(filename));
 
   title += " (";
-  title += Util::filename_to_utf8_fallback(Util::shorten_pathname(Glib::path_get_dirname(filename)));
+  title += Glib::filename_display_name(Util::shorten_pathname(Glib::path_get_dirname(filename)));
   title += ") \342\200\223 " PACKAGE_NAME; // U+2013 EN DASH
 
   window_->set_title(title);

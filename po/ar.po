@@ -42,7 +42,7 @@ msgid "Match color"
 msgstr "إضبط الألوان"
 
 #: ../regexxer.schemas.in.h:4
-msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" for a complete list of possible values."
+msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try “iconv --list” for a complete list of possible values."
 msgstr ""
 
 #: ../regexxer.schemas.in.h:5
@@ -63,7 +63,7 @@ msgid "The font used in the file editor."
 msgstr ""
 
 #: ../regexxer.schemas.in.h:9
-msgid "The style of the application's toolbar. Possible values are \"icons\", \"text\", \"both\", and \"both-horiz\"."
+msgid "The style of the application’s toolbar. Possible values are “icons”, “text”, “both”, and “both-horiz”."
 msgstr ""
 
 #: ../regexxer.schemas.in.h:10
@@ -74,7 +74,7 @@ msgstr "شكل أزرار عمود الأدوات"
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:203
 #, fuzzy
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "لا يمكن حفظ الملف: %s\n"
 
 #: ../src/filetree.cc:81
@@ -88,12 +88,12 @@ msgstr ""
 
 #: ../src/filetree.cc:532
 #, fuzzy
-msgid "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
 msgstr "حفظ صورة شاشة في الم_لف:"
 
 #: ../src/filetree.cc:949
 #, fuzzy
-msgid "\"%1\" seems to be a binary file."
+msgid "“%1” seems to be a binary file."
 msgstr "لا يمكن نقل الملف \"%s\" إلى سلة المهملات."
 
 #: ../src/main.cc:84
@@ -171,7 +171,7 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "افتح مجلد %s"
 
 #: ../src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
+msgid "Try “regexxer --help” for more information."
 msgstr ""
 
 #: ../src/mainwindow.cc:252
@@ -181,12 +181,12 @@ msgstr ""
 
 #: ../src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 
 #: ../src/mainwindow.cc:431
-msgid "The folder name \"%1\" contains characters not representable in the encoding of the local file system."
+msgid "The folder name “%1” contains characters not representable in the encoding of the local file system."
 msgstr ""
 
 #: ../src/mainwindow.cc:450
@@ -196,7 +196,7 @@ msgstr "انتقاء مجلّد"
 
 #: ../src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 
@@ -211,7 +211,7 @@ msgstr ""
 
 #: ../src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
 
@@ -236,7 +236,7 @@ msgstr ""
 
 #: ../src/prefdialog.cc:248
 #, fuzzy
-msgid "\"%1\" is not a valid encoding."
+msgid "“%1” is not a valid encoding."
 msgstr "ليس %s موقعا سليما."
 
 #: ../src/statusline.cc:264
@@ -536,7 +536,7 @@ msgstr "النفاذ للملف:"
 
 #: ../ui/prefdialog.glade.h:15
 #, fuzzy
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "مظهر ريترو"
 
 #: ../ui/prefdialog.glade.h:16

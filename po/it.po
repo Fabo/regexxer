@@ -39,7 +39,7 @@ msgstr "Colore dell’occorrenza"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "UTF-8 o nel set di codici specificato nella localizzazione corrente. Prova "
@@ -70,8 +70,8 @@ msgstr "Il carattere usato nel file editor"
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
 "Lo stile della toolbar dell’applicazione. I possibili valori sono “icone”, "
 "“testo”, “entrambi”, e “entrambi-oriz”."
@@ -82,7 +82,7 @@ msgstr "Stile Toolbar"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Impossibile leggere file:"
 
 #: src/filetree.cc:81
@@ -95,12 +95,12 @@ msgstr "#"
 
 #: src/filetree.cc:532
 #, qt-format
-msgid "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
 msgstr "Fallito salvataggio file “%1”: %2"
 
 #: src/filetree.cc:941
 #, qt-format
-msgid "\"%1\" seems to be a binary file."
+msgid "“%1” seems to be a binary file."
 msgstr "“%1” sembra essere un file binario."
 
 #: src/main.cc:81
@@ -121,7 +121,7 @@ msgstr ""
 
 #: src/mainwindow.cc:341
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Dei files non sono ancora stati salvati.\n"
@@ -130,7 +130,7 @@ msgstr ""
 #: src/mainwindow.cc:369
 #, qt-format
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
 "La cartella “%1” contiene caratteri non rappresentabili nella codifica del "
@@ -142,7 +142,7 @@ msgstr "Seleziona una cartella"
 
 #: src/mainwindow.cc:408
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Alcuni files non sono ancora stati salvati.\n"
@@ -159,7 +159,7 @@ msgstr "I seguenti errori sono accorsi durante la ricerca:"
 #: src/mainwindow.cc:465
 #, qt-format
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
 "Errore nell’espressione regolare a “%1” (index %2):\n"
@@ -194,7 +194,7 @@ msgstr ""
 
 #: src/prefdialog.cc:248
 #, qt-format
-msgid "\"%1\" is not a valid encoding."
+msgid "“%1” is not a valid encoding."
 msgstr "“%1” non è una codifica valida."
 
 #: src/statusline.cc:271
@@ -461,7 +461,7 @@ msgid "_File access"
 msgstr "Accesso _File"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "Aspetto"
 
 #: ui/prefdialog.glade.h:16

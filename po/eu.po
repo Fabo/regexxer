@@ -40,9 +40,9 @@ msgstr "Bat datorrenaren kolorea"
 #: ../regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
-msgstr "Erabiliko den karaktere-kodeketaren izena, uneko lokalean UTF-8 edo beste zehaztutako kodeketa multzoarekin fitxategia ezin bada irakurri. Saiatu \"iconv --list\" erabilgarri dauden balioen zerrenda ikusteko."
+msgstr "Erabiliko den karaktere-kodeketaren izena, uneko lokalean UTF-8 edo beste zehaztutako kodeketa multzoarekin fitxategia ezin bada irakurri. Saiatu “iconv --list” erabilgarri dauden balioen zerrenda ikusteko."
 
 #: ../regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -64,11 +64,11 @@ msgstr "Letra-tipoa fitxategi-editorean erabiltzeko."
 
 #: ../regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
-"Aplikazioaren tresna-barraren estiloa. Balio erabilgarriak: \"icons\" (ikonoak), \"text"
-"\" (testua), \"both\" (biak), eta \"both-horiz\" (biak-horiz)."
+"Aplikazioaren tresna-barraren estiloa. Balio erabilgarriak: “icons” (ikonoak), “text"
+"” (testua), “both” (biak), eta “both-horiz” (biak-horiz)."
 
 #: ../regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -76,7 +76,7 @@ msgstr "Tresna-barraren estiloa"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Ezin da irakurri fitxategia:"
 
 #: ../src/filetree.cc:81
@@ -88,12 +88,12 @@ msgid "#"
 msgstr "#"
 
 #: ../src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "Huts egin du \"%1\" fitxategia gordetzean: %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "Huts egin du “%1” fitxategia gordetzean: %2"
 
 #: ../src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "Badirudi \"%1\" fitxategi bitarra dela."
+msgid "“%1” seems to be a binary file."
+msgstr "Badirudi “%1” fitxategi bitarra dela."
 
 #: ../src/main.cc:84
 msgid "_About"
@@ -156,8 +156,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[AUKERA]... [KARPETA]"
 
 #: ../src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "Exekutatu \"regexxer --help\" informazio gehiagorako."
+msgid "Try “regexxer --help” for more information."
+msgstr "Exekutatu “regexxer --help” informazio gehiagorako."
 
 #: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
 msgid ""
@@ -167,7 +167,7 @@ msgstr "Fitxategi-izena komando lerroan erabiltzen den bezala. Karaktere-klaseak
 
 #: ../src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Fitxategi batzuk oraindik ez dira gorde.\n"
@@ -175,11 +175,11 @@ msgstr ""
 
 #: ../src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
 "Fitxategi-sistema lokaleko kodeketarekin bistaratu ezin daitekeen "
-"karaktereak ditu \"%1\" izeneko karpetak."
+"karaktereak ditu “%1” izeneko karpetak."
 
 #: ../src/mainwindow.cc:450
 msgid "Select a folder"
@@ -187,7 +187,7 @@ msgstr "Hautatu karpeta"
 
 #: ../src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Fitxategi batzuk oraindik ez dira gorde.\n"
@@ -203,10 +203,10 @@ msgstr "Erroreak bilaketa lantzean:"
 
 #: ../src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Errorea adierazpen erregularrean \"%1\" (%2 indizea):\n"
+"Errorea adierazpen erregularrean “%1” (%2 indizea):\n"
 "%3"
 
 #: ../src/mainwindow.cc:529
@@ -234,8 +234,8 @@ msgstr ""
 "muga gainditu da."
 
 #: ../src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" ez da baliozko kodeketa."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” ez da baliozko kodeketa."
 
 #: ../src/statusline.cc:264
 msgid "Stop"
@@ -492,7 +492,7 @@ msgid "_File access"
 msgstr "_Fitxategiaren sarbidea"
 
 #: ../ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Itxura eta izaera"
 
 #: ../ui/prefdialog.glade.h:16

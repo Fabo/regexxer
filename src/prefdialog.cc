@@ -245,8 +245,9 @@ void PrefDialog::on_entry_fallback_activate()
   }
   else
   {
-    const Glib::ustring message = Util::compose(_("\"%1\" is not a valid encoding."),
-                                                fallback_encoding);
+    const Glib::ustring message =
+        Util::compose(_("\342\200\234%1\342\200\235 is not a valid encoding."), fallback_encoding);
+
     Gtk::MessageDialog error_dialog (*dialog_, message, false,
                                      Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     error_dialog.run();

@@ -39,8 +39,8 @@ msgid "Match color"
 msgstr "Barva zadetka"
 
 #: ../regexxer.schemas.in.h:4
-msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" for a complete list of possible values."
-msgstr "Ime znakovnega nabora, ki naj bo uporabljen, če datoteke ni možno prebrati v UTF-8 ali naboru določenem v sistemu. Vtipkajte \"iconv --list\" za celoten spisek možnih vrednosti."
+msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try “iconv --list” for a complete list of possible values."
+msgstr "Ime znakovnega nabora, ki naj bo uporabljen, če datoteke ni možno prebrati v UTF-8 ali naboru določenem v sistemu. Vtipkajte “iconv --list” za celoten spisek možnih vrednosti."
 
 #: ../regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -59,7 +59,7 @@ msgid "The font used in the file editor."
 msgstr "Pisava uporabljena v urejevalcu datotek."
 
 #: ../regexxer.schemas.in.h:9
-msgid "The style of the application's toolbar. Possible values are \"icons\", \"text\", \"both\", and \"both-horiz\"."
+msgid "The style of the application’s toolbar. Possible values are “icons”, “text”, “both”, and “both-horiz”."
 msgstr "Stil orodne vrstice. Možne vrednosti so \"ikone\", \"besedilo\", \"oboje\", in \"oboje-vodoravno\"."
 
 #: ../regexxer.schemas.in.h:10
@@ -68,7 +68,7 @@ msgstr "Stil orodne vrstice"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Ne morem prebrati datoteke:"
 
 #: ../src/filetree.cc:81
@@ -80,12 +80,12 @@ msgid "#"
 msgstr "#"
 
 #: ../src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "Napaka pri shranjevanju datoteke \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "Napaka pri shranjevanju datoteke “%1”: %2"
 
 #: ../src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" izgleda kot binarna datoteka."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” izgleda kot binarna datoteka."
 
 #: ../src/main.cc:84
 msgid "_About"
@@ -150,8 +150,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[MOŽNOST]... [MAPA]"
 
 #: ../src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "Vtipkajte \"regexxer --help\" za več informacij."
+msgid "Try “regexxer --help” for more information."
+msgstr "Vtipkajte “regexxer --help” za več informacij."
 
 #: ../src/mainwindow.cc:252
 #: ../ui/mainwindow.glade.h:1
@@ -160,15 +160,15 @@ msgstr "Vzorec imena datoteke, kot je uporabljen v konzoli. Znakovni razredi [ab
 
 #: ../src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Nekatere datoteke še niso shranjene.\n"
 "Vseeno zaključim?"
 
 #: ../src/mainwindow.cc:431
-msgid "The folder name \"%1\" contains characters not representable in the encoding of the local file system."
-msgstr "Ime mape \"%1\" vsebuje znake, ki se jih ne da izpisati z uporabo trenutnega nabora znakov datotečnega sistema."
+msgid "The folder name “%1” contains characters not representable in the encoding of the local file system."
+msgstr "Ime mape “%1” vsebuje znake, ki se jih ne da izpisati z uporabo trenutnega nabora znakov datotečnega sistema."
 
 #: ../src/mainwindow.cc:450
 msgid "Select a folder"
@@ -176,7 +176,7 @@ msgstr "Izberite mapo"
 
 #: ../src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Nekatere datoteke še niso shranjene.\n"
@@ -192,10 +192,10 @@ msgstr "Napake, ki so nastale med iskanjem:"
 
 #: ../src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Napaka v logičnem izrazu pri \"%1\" (indeks %2):\n"
+"Napaka v logičnem izrazu pri “%1” (indeks %2):\n"
 "%3"
 
 #: ../src/mainwindow.cc:529
@@ -219,8 +219,8 @@ msgid "Reached the recursion and backtracking limit of the regular expression en
 msgstr "Dosežena je globina iskanja v podmapah in omejitev povratnega sledenja orodja logičnih izrazov."
 
 #: ../src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" ni veljavni nabor znakov."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” ni veljavni nabor znakov."
 
 #: ../src/statusline.cc:264
 msgid "Stop"
@@ -472,7 +472,7 @@ msgid "_File access"
 msgstr "_Dostop datotek"
 
 #: ../ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Izgled in občutek"
 
 #: ../ui/prefdialog.glade.h:16

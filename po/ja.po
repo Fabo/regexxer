@@ -39,11 +39,11 @@ msgstr "条件にマッチした色"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "UTF-8 または現在利用しているロケールが指定するコードセットを使ってファイルを"
-"読み込めない場合に使用する文字エンコーディングの名前です。\"iconv --list\" を"
+"読み込めない場合に使用する文字エンコーディングの名前です。“iconv --list” を"
 "実行すると、指定できる値の一覧が表示されます。"
 
 #: regexxer.schemas.in.h:5
@@ -69,11 +69,11 @@ msgstr "ファイル・エディタで使用するフォントです。"
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
-"アプリケーションのツールバーのスタイルです。指定可能な値: \"icons\"、\"text"
-"\"、\"both\"、\"both-horiz\""
+"アプリケーションのツールバーのスタイルです。指定可能な値: “icons”、“text"
+"”、“both”、“both-horiz”"
 
 #: regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -81,7 +81,7 @@ msgstr "ツールバーのスタイル"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "ファイルを読み込めません:"
 
 #: src/filetree.cc:81
@@ -93,12 +93,12 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "ファイル \"%1\" の保存に失敗: %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "ファイル “%1” の保存に失敗: %2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" はバイナリ・ファイルのようです。"
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” はバイナリ・ファイルのようです。"
 
 #: src/main.cc:84
 msgid "_About"
@@ -161,8 +161,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[オプション]...[フォルダ]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "より情報が欲しければ \"regexxer --help\" を試して下さい"
+msgid "Try “regexxer --help” for more information."
+msgstr "より情報が欲しければ “regexxer --help” を試して下さい"
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -174,7 +174,7 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "いくつかのファイルが未だ保存されていません。\n"
@@ -182,10 +182,10 @@ msgstr ""
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
-"フォルダ名 \"%1\" には、ローカルで使用しているファイル・システムのエンコー"
+"フォルダ名 “%1” には、ローカルで使用しているファイル・システムのエンコー"
 "ディングを使って表現できない文字が含まれています。"
 
 #: src/mainwindow.cc:450
@@ -194,7 +194,7 @@ msgstr "フォルダの選択"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "いくつかのファイルがまだ保存されていません。\n"
@@ -210,10 +210,10 @@ msgstr "検索の実行中に次のエラーが発生しました:"
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"正規表現の条件式 \"%1\" (インデックス %2) でエラー:\n"
+"正規表現の条件式 “%1” (インデックス %2) でエラー:\n"
 "%3"
 
 #: src/mainwindow.cc:529
@@ -241,8 +241,8 @@ msgid ""
 msgstr "正規表現エンジンで再帰とバックトラッキングの上限に到達しました。"
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "エンコーディング \"%1\" が間違っています。"
+msgid "“%1” is not a valid encoding."
+msgstr "エンコーディング “%1” が間違っています。"
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -503,7 +503,7 @@ msgid "_File access"
 msgstr "ファイルのアクセス"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "ルック＆フィール"
 
 #: ui/prefdialog.glade.h:16

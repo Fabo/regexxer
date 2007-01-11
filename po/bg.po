@@ -40,7 +40,7 @@ msgstr "Цвят на съвпаденията"
 #: ../ui/regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "Име на кодовата таблица, която да се използва, ако файлът не може да се "
@@ -69,8 +69,8 @@ msgstr "Шрифтът, използван в текстовия редакто�
 
 #: ../ui/regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
 "Видът на лентата с инструменти на програмата. Възможните стойности са "
 "„icons“, „text“, „both“ и „both-horiz“."
@@ -81,7 +81,7 @@ msgstr "Вид на лентата с инструменти"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:198
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Неуспех при прочитането на файла:"
 
 #: ../src/filetree.cc:81
@@ -94,12 +94,12 @@ msgstr "бр."
 
 #: ../src/filetree.cc:532
 #, qt-format
-msgid "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
 msgstr "Грешка при запазване на файла „%1“: %2"
 
 #: ../src/filetree.cc:949
 #, qt-format
-msgid "\"%1\" seems to be a binary file."
+msgid "“%1” seems to be a binary file."
 msgstr "„%1“ изглежда е двоичен файл."
 
 #: ../src/main.cc:94
@@ -160,7 +160,7 @@ msgstr "[ПАПКА]"
 
 #: ../src/mainwindow.cc:404
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Някои файлове още не са запазени.\n"
@@ -168,7 +168,7 @@ msgstr ""
 
 #: ../src/mainwindow.cc:417
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Някои файлове още не са запазени.\n"
@@ -185,7 +185,7 @@ msgstr "Грешки при търсенето:"
 #: ../src/mainwindow.cc:476
 #, qt-format
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
 "Грешка в регулярния израз около „%1“ (индекс %2):\n"
@@ -229,7 +229,7 @@ msgstr ""
 
 #: ../src/prefdialog.cc:248
 #, qt-format
-msgid "\"%1\" is not a valid encoding."
+msgid "“%1” is not a valid encoding."
 msgstr "„%1“ не е правилна кодова таблица."
 
 #: ../src/statusline.cc:264
@@ -469,7 +469,7 @@ msgid "_File access"
 msgstr "_Файлов достъп"
 
 #: ../ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Изглед"
 
 #: ../ui/prefdialog.glade.h:16

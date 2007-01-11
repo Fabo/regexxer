@@ -195,7 +195,7 @@ FileBuffer::create_with_error_message(const Glib::RefPtr<Gdk::Pixbuf>& pixbuf,
 
   Glib::ustring title = "\302\240"; // U+00A0 NO-BREAK SPACE
 
-  title += _("Can't read file:");
+  title += _("Can\342\200\231t read file:");
   title += '\n';
 
   pend = buffer->insert_with_tag(pend, title, tagtable->error_title);

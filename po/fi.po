@@ -39,12 +39,12 @@ msgstr "Osuman väri"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "Käytettävän merkistökoodauksen nimi, jos tiedosto ei ole luettavissa joko "
 "UTF-8 muodossa tai merkistökoodauksessa, joka on määritelty nykyisissä "
-"lokalisointiasetuksissa. Komennolla \"iconv --list\" saat listan kaikista "
+"lokalisointiasetuksissa. Komennolla “iconv --list” saat listan kaikista "
 "mahdollisista arvoista."
 
 #: regexxer.schemas.in.h:5
@@ -68,8 +68,8 @@ msgstr "Tiedostomuokkaimessa käytettävä kirjasin."
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
 "Ohjelman työkalupalkin tyyli. Mahdolliset arvot ovat \"kuvakkeet\", \"teksti"
 "\", \"molemmat\" tai \"molemmat-rinnakkain\"."
@@ -80,7 +80,7 @@ msgstr "Työkalupalkin tyyli"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Tiedostoa ei voida lukea"
 
 #: src/filetree.cc:81
@@ -93,13 +93,13 @@ msgstr "#"
 
 #: src/filetree.cc:532
 #, qt-format
-msgid "Failed to save file \"%1\": %2"
-msgstr "Tiedostoa \"%1\" ei voitu tallentaa: %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "Tiedostoa “%1” ei voitu tallentaa: %2"
 
 #: src/filetree.cc:949
 #, qt-format
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" näyttää olevan binäääritiedosto."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” näyttää olevan binäääritiedosto."
 
 #: src/main.cc:84
 msgid "_About"
@@ -162,8 +162,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[OPTIO] ... [KANSIO]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "Kokeile \"regexxer --help\" saadaksesi lisätietoja."
+msgid "Try “regexxer --help” for more information."
+msgstr "Kokeile “regexxer --help” saadaksesi lisätietoja."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -175,7 +175,7 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Joitain tiedostoja ei ole vielä tallennettu.\n"
@@ -184,10 +184,10 @@ msgstr ""
 #: src/mainwindow.cc:431
 #, qt-format
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
-"Kansion nimi \"%1\" sisältää merkkejä, joita ei voida esittää paikkalisen "
+"Kansion nimi “%1” sisältää merkkejä, joita ei voida esittää paikkalisen "
 "tiedostojärjestelmän merkistökoodauksessa."
 
 #: src/mainwindow.cc:450
@@ -196,7 +196,7 @@ msgstr "Valitse kansio"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Joitain tiedostoja ei ole vielä tallennettu.\n"
@@ -213,10 +213,10 @@ msgstr "Seuraavat virheet tapahtuivat haettaessa:"
 #: src/mainwindow.cc:527
 #, qt-format
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Virhe säännöllisessä lausekkeessa kohdassa \"%1\" (indeksi %2):\n"
+"Virhe säännöllisessä lausekkeessa kohdassa “%1” (indeksi %2):\n"
 "%3"
 
 #: src/mainwindow.cc:529
@@ -246,8 +246,8 @@ msgstr ""
 
 #: src/prefdialog.cc:248
 #, qt-format
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" ei ole kelvollinen merkistökooda"
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” ei ole kelvollinen merkistökooda"
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -508,7 +508,7 @@ msgid "_File access"
 msgstr "_Tiedoston luku"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Käyttöliittymä"
 
 #: ui/prefdialog.glade.h:16

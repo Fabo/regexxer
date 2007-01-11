@@ -39,12 +39,12 @@ msgstr "Barva výskytu"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "Název kódování znaků, které používat, když soubor není čitelný ani v UTF-8 "
 "ani kódování určeném aktuálním locale. Pro úplný seznam možných hodnot "
-"zkuste \"iconv --list\"."
+"zkuste “iconv --list”."
 
 #: regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -69,11 +69,11 @@ msgstr "Písmo používané v editoru souborů."
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
-"Styl lišty nástrojů aplikace. Možné hodnoty jsou \"icons\", \"text\", \"both"
-"\" a \"both-horiz\"."
+"Styl lišty nástrojů aplikace. Možné hodnoty jsou “icons”, “text”, “both"
+"” a “both-horiz”."
 
 #: regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -81,7 +81,7 @@ msgstr "Styl lišty nástrojů"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Nemohu číst soubor:"
 
 #: src/filetree.cc:81
@@ -93,12 +93,12 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "Nemohu uložit soubor \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "Nemohu uložit soubor “%1”: %2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" je zřejmě binární soubor."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” je zřejmě binární soubor."
 
 #: src/main.cc:84
 msgid "_About"
@@ -161,8 +161,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[PŘEPÍNAČ]... [ADRESÁŘ]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "Pro více informací zkuste \"regexxer --help\"."
+msgid "Try “regexxer --help” for more information."
+msgstr "Pro více informací zkuste “regexxer --help”."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -174,7 +174,7 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Některé soubory dosud nebyly uloženy.\n"
@@ -182,10 +182,10 @@ msgstr ""
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
-"Název adrsáře \"%1\" obsahuje znaky, které nelze reprezentovat v kódování "
+"Název adrsáře “%1” obsahuje znaky, které nelze reprezentovat v kódování "
 "místního systému souborů."
 
 #: src/mainwindow.cc:450
@@ -194,7 +194,7 @@ msgstr "Zvolte adresář"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Některé soubory dosud nebyly uloženy.\n"
@@ -210,10 +210,10 @@ msgstr "Při hledání došlo k následujícím chybám:"
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Chyba v regulárním výrazu na \"%1\" (index %2):\n"
+"Chyba v regulárním výrazu na “%1” (index %2):\n"
 "%3"
 
 #: src/mainwindow.cc:529
@@ -240,8 +240,8 @@ msgid ""
 msgstr "Narazil jsem na limit rekurze a návratů v engine pro regulární výrazy."
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" není platné kódování."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” není platné kódování."
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -499,7 +499,7 @@ msgid "_File access"
 msgstr "_Přístup k souborům"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Vzhled a chování"
 
 #: ui/prefdialog.glade.h:16

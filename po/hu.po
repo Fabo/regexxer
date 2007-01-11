@@ -38,12 +38,12 @@ msgstr "Találat színe"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "A használandó karakterkódolás neve, ha a fájl nem olvasható sem UTF-8, sem a "
 "jelenlegi területi beállítások által meghatározott kódolással. A lehetséges "
-"értékek listáját az \"iconv --list\" paranccsal kérheti le."
+"értékek listáját az “iconv --list” paranccsal kérheti le."
 
 #: regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -69,11 +69,11 @@ msgstr "A fájlszerkesztőben használt betűkészlet."
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
-"Az alkalmazás eszköztárának stílusa. Lehetséges értékek: \"icons\" (ikonok), "
-"\"text\" (szöveg), \"both\" (mindkettő), és \"both-horiz\" (mindkettő "
+"Az alkalmazás eszköztárának stílusa. Lehetséges értékek: “icons” (ikonok), "
+"“text” (szöveg), “both” (mindkettő), és “both-horiz” (mindkettő "
 "vízszintesen)."
 
 #: regexxer.schemas.in.h:10
@@ -82,7 +82,7 @@ msgstr "Eszköztár stílusa"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Nem lehet olvasni a fájlt:"
 
 #: src/filetree.cc:81
@@ -94,12 +94,12 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "A(z) \"%1\" fájl mentése sikertelen: %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "A(z) “%1” fájl mentése sikertelen: %2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" bináris fájlnak tűnik."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” bináris fájlnak tűnik."
 
 #: src/main.cc:84
 msgid "_About"
@@ -162,8 +162,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[OPCIÓ]... [MAPPA]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "További információért adja ki a \"regexxer --help\" parancsot."
+msgid "Try “regexxer --help” for more information."
+msgstr "További információért adja ki a “regexxer --help” parancsot."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -175,7 +175,7 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Néhány fájl még nincs elmentve.\n"
@@ -183,10 +183,10 @@ msgstr ""
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
-"A(z) \"%1\" mappanév olyan karaktereket tartalmaz, amelyek nem jeleníthetőek "
+"A(z) “%1” mappanév olyan karaktereket tartalmaz, amelyek nem jeleníthetőek "
 "meg a helyi fájlrendszer kódolásával."
 
 #: src/mainwindow.cc:450
@@ -195,7 +195,7 @@ msgstr "Válasszon egy mappát"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Néhány fájl még nincs elmentve.\n"
@@ -211,10 +211,10 @@ msgstr "A következő hibák léptek fel keresés közben:"
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Hiba a szabályos kifejezésben itt: \"%1\" (index %2):\n"
+"Hiba a szabályos kifejezésben itt: “%1” (index %2):\n"
 "%3"
 
 #: src/mainwindow.cc:529
@@ -242,8 +242,8 @@ msgstr ""
 "Elérte a szabályos kifejezés motor rekurziós és visszalépési határértékét."
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\"  érvénytelen kódolás."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1”  érvénytelen kódolás."
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -501,7 +501,7 @@ msgid "_File access"
 msgstr "_Fájlelérés"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Kinézet"
 
 #: ui/prefdialog.glade.h:16

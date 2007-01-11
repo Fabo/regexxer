@@ -46,9 +46,9 @@ msgstr "मिल्दो रङ"
 #: ../regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
-msgstr "यदि फाइल हालको लोक्यालद्वारा वर्णन गरिएको UTF-8 वा सङ्केत सेटमा पढ्न योग्य छैन भने प्रयोग गर्न क्यारेक्टर सङ्केतनको नाम। संभावित मानहरूको पूर्ण सूचीका लागि \"iconv --list\" प्रयास गर्नुहोस्।"
+msgstr "यदि फाइल हालको लोक्यालद्वारा वर्णन गरिएको UTF-8 वा सङ्केत सेटमा पढ्न योग्य छैन भने प्रयोग गर्न क्यारेक्टर सङ्केतनको नाम। संभावित मानहरूको पूर्ण सूचीका लागि “iconv --list” प्रयास गर्नुहोस्।"
 
 #: ../regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -70,9 +70,9 @@ msgstr "फन्ट फाइल सम्पादकमा प्रयोग
 
 #: ../regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
-msgstr "अनुप्रयोगको उपकरणपट्टीको शैली। संभावित मानहरू \"icons\", \"text\", \"both\", र \"both-horiz\" हुन्।"
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
+msgstr "अनुप्रयोगको उपकरणपट्टीको शैली। संभावित मानहरू “icons”, “text”, “both”, र “both-horiz” हुन्।"
 
 #: ../regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -80,7 +80,7 @@ msgstr "उपकरणपट्टी शैली"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "फाइल पढ्न सकिएन:"
 
 #: ../src/filetree.cc:81
@@ -92,12 +92,12 @@ msgid "#"
 msgstr "#"
 
 #: ../src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "फाइल \"%1\" बचत गर्न असफल: %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "फाइल “%1” बचत गर्न असफल: %2"
 
 #: ../src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" बाइनरी फाइल जस्तो देखिन्छ"
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” बाइनरी फाइल जस्तो देखिन्छ"
 
 #: ../src/main.cc:84
 msgid "_About"
@@ -160,8 +160,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[विकल्प]... [फोल्डर]"
 
 #: ../src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "अरू सूचनाका लागि \"regexxer --help\" प्रयास गर्नुहोस्"
+msgid "Try “regexxer --help” for more information."
+msgstr "अरू सूचनाका लागि “regexxer --help” प्रयास गर्नुहोस्"
 
 #: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
 msgid ""
@@ -171,7 +171,7 @@ msgstr "शेलद्वारा प्रयोग गरिएको जस
 
 #: ../src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "केही फाइलहरू अझै पनि बचत गरिएको छैन।\n"
@@ -179,9 +179,9 @@ msgstr ""
 
 #: ../src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
-msgstr "फोल्डर नाम \"%1\" समावेश भएका क्यारेक्टरहरू स्थानीय फाइल प्रणालीको सङ्केतनमा प्रतिनिधित्व गर्न लायकको छैन।"
+msgstr "फोल्डर नाम “%1” समावेश भएका क्यारेक्टरहरू स्थानीय फाइल प्रणालीको सङ्केतनमा प्रतिनिधित्व गर्न लायकको छैन।"
 
 #: ../src/mainwindow.cc:450
 msgid "Select a folder"
@@ -189,7 +189,7 @@ msgstr "एउटा फोल्डर चयन गर्नुहोस्"
 
 #: ../src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "केही फाइलहरू अझै बचत भईसकेको छैन।\n"
@@ -205,10 +205,10 @@ msgstr "खोजि अवधिमा निम्न त्रुटिहर
 
 #: ../src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"\"%1\" (अनुक्रमणिका %2) मा नियमित अभिव्यक्ति भित्र त्रुटि:\n"
+"“%1” (अनुक्रमणिका %2) मा नियमित अभिव्यक्ति भित्र त्रुटि:\n"
 "%3"
 
 #: ../src/mainwindow.cc:529
@@ -234,8 +234,8 @@ msgid ""
 msgstr "नियमित अभिव्यक्ति इन्जिनको पुनरावृतिक र ब्याकट्र्याकिंग सीमा सम्म पुग्यो।"
 
 #: ../src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" वैध सङ्केतन होइन।"
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” वैध सङ्केतन होइन।"
 
 #: ../src/statusline.cc:264
 msgid "Stop"
@@ -492,7 +492,7 @@ msgid "_File access"
 msgstr "फाइल पँहुच"
 
 #: ../ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "हेर्नुहोस् र अनुभव गर्नुहोस्"
 
 #: ../ui/prefdialog.glade.h:16

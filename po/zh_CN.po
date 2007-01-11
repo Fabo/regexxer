@@ -38,7 +38,7 @@ msgstr "匹配颜色"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 
@@ -63,8 +63,8 @@ msgstr ""
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
 
 #: regexxer.schemas.in.h:10
@@ -73,7 +73,7 @@ msgstr "工具栏样式"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "无法读取文件："
 
 #: src/filetree.cc:81
@@ -85,11 +85,11 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
 msgstr "保存文件“%1”失败：%2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
+msgid "“%1” seems to be a binary file."
 msgstr "“%1”似乎是二进制文件。"
 
 #: src/main.cc:84
@@ -153,7 +153,7 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[选项]... [文件夹]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
+msgid "Try “regexxer --help” for more information."
 msgstr "输入“regexxer --help”可获得更新信息。"
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
@@ -164,13 +164,13 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr "某些文件尚未保存。仍然退出吗？"
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr "文件夹名称“%1”包含本地文件系统编码无法表示的字符。"
 
@@ -180,7 +180,7 @@ msgstr "选择一个文件夹"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr "某些文件尚未保存。\n仍然继续吗？"
 
@@ -194,7 +194,7 @@ msgstr "搜索时发生了下列错误："
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgid ""
 msgstr ""
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
+msgid "“%1” is not a valid encoding."
 msgstr "“%1”不是有效的编码。"
 
 #: src/statusline.cc:264
@@ -471,7 +471,7 @@ msgid "_File access"
 msgstr "文件访问(_F)"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "观感(_L)"
 
 #: ui/prefdialog.glade.h:16

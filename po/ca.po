@@ -37,12 +37,12 @@ msgstr "Color de la coincidència"
 #: ../regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "El nom de la codificació dels caràcters a utilitzar si el fitxer no és "
 "llegible ambUTF-8 o amb la codificació especificada en l'actual "
-"localització. Proveu amb\"iconv --list\" per a un llistat complet dels "
+"localització. Proveu amb“iconv --list” per a un llistat complet dels "
 "possibles valors."
 
 #: ../regexxer.schemas.in.h:5
@@ -70,11 +70,11 @@ msgstr "Tipus de lletra utilitzat en l'editor de fitxers."
 
 #: ../regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
-"L'estil de la barra d'eines. Els possibles valors són \"icons\", \"text\", "
-"\"both\",i \"both-horiz\"."
+"L'estil de la barra d'eines. Els possibles valors són “icons”, “text”, "
+"“both”,i “both-horiz”."
 
 #: ../regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -82,7 +82,7 @@ msgstr "Estil de la barra d'eines"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "No s'ha pogut llegir el fitxer:"
 
 #: ../src/filetree.cc:81
@@ -94,12 +94,12 @@ msgid "#"
 msgstr "#"
 
 #: ../src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "S'ha produït un error en desar el fitxer \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "S'ha produït un error en desar el fitxer “%1”: %2"
 
 #: ../src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" sembla que es un fitxer binari."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” sembla que es un fitxer binari."
 
 #: ../src/main.cc:84
 msgid "_About"
@@ -162,8 +162,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[OPCIÓ]... [CARPETA]"
 
 #: ../src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "Proveu \"regexxer --help\" per a més informació."
+msgid "Try “regexxer --help” for more information."
+msgstr "Proveu “regexxer --help” per a més informació."
 
 #: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
 msgid ""
@@ -176,7 +176,7 @@ msgstr ""
 
 #: ../src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Alguns fitxers no s'han desat encara.\n"
@@ -184,10 +184,10 @@ msgstr ""
 
 #: ../src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
-"El nom de la carpeta \"%1\" conté caràcters no representables en la "
+"El nom de la carpeta “%1” conté caràcters no representables en la "
 "codificaciódel sistema de fitxers local."
 
 #: ../src/mainwindow.cc:450
@@ -196,7 +196,7 @@ msgstr "Selecciona una carpeta"
 
 #: ../src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Alguns fitxers encara no s'han desat.\n"
@@ -212,10 +212,10 @@ msgstr "S'han produït els següents errors durant la cerca:"
 
 #: ../src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Hi ha un error en l'expressió regular a \"%1\" (índex %2):\n"
+"Hi ha un error en l'expressió regular a “%1” (índex %2):\n"
 "%3"
 
 #: ../src/mainwindow.cc:529
@@ -245,8 +245,8 @@ msgstr ""
 "regular."
 
 #: ../src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" no es una codificació vàlida."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” no es una codificació vàlida."
 
 #: ../src/statusline.cc:264
 msgid "Stop"
@@ -505,7 +505,7 @@ msgid "_File access"
 msgstr "Accés al _fitxer"
 
 #: ../ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Aspecte"
 
 #: ../ui/prefdialog.glade.h:16

@@ -52,7 +52,7 @@ msgstr "Ibara"
 #, fuzzy
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "Bya i Inyuguti Imisobekere: Kuri Gukoresha NIBA a IDOSIYE ni OYA in 8 "
@@ -86,8 +86,8 @@ msgstr "Intego- nyuguti in i IDOSIYE Muhinduzi"
 #: regexxer.schemas.in.h:9
 #, fuzzy
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
 "IMISUSIRE Bya i Umwanyabikoresho Uduciro Udushushondanga Umwandiko Byombi Na "
 "Byombi"
@@ -100,7 +100,7 @@ msgstr "IMISUSIRE"
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
 #, fuzzy
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Gusoma IDOSIYE"
 
 # sc/source\ui\src\scfuncs.src:RID_SC_FUNCTION_DESCRIPTIONS2.SC_OPCODE_DDE.4.text
@@ -115,13 +115,13 @@ msgstr "#"
 
 #: src/filetree.cc:532
 #, fuzzy
-msgid "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
 msgstr "Kuri Kubika IDOSIYE"
 
 #: src/filetree.cc:949
 #, fuzzy
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\"Kuri a Nyabibiri IDOSIYE"
+msgid "“%1” seems to be a binary file."
+msgstr "“%1”Kuri a Nyabibiri IDOSIYE"
 
 #: src/main.cc:84
 #, fuzzy
@@ -200,7 +200,7 @@ msgstr ""
 
 #: src/main.cc:141
 #, fuzzy
-msgid "Try \"regexxer --help\" for more information."
+msgid "Try “regexxer --help” for more information."
 msgstr "Ifashayobora kugirango Birenzeho Ibisobanuro"
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
@@ -214,14 +214,14 @@ msgstr ""
 #: src/mainwindow.cc:403
 #, fuzzy
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr "Idosiye"
 
 #: src/mainwindow.cc:431
 #, fuzzy
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
 "Ububiko Izina: Kirimo Inyuguti OYA in i Imisobekere: Bya i IDOSIYE Sisitemu"
@@ -234,7 +234,7 @@ msgstr "a Ububiko"
 #: src/mainwindow.cc:470
 #, fuzzy
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr "Wapfagukomeza."
 
@@ -251,7 +251,7 @@ msgstr "Amakosa Gushaka"
 #: src/mainwindow.cc:527
 #, fuzzy
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr "in Ibisanzwe imvugo ku Umubarendanga"
 
@@ -281,8 +281,8 @@ msgstr "i Na Bya i Ibisanzwe imvugo"
 
 #: src/prefdialog.cc:248
 #, fuzzy
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\"ni OYA a Byemewe Imisobekere:"
+msgid "“%1” is not a valid encoding."
+msgstr "“%1”ni OYA a Byemewe Imisobekere:"
 
 # basctl/source\basicide\basidesh.src:RID_BASICIDE_OBJECTBAR.SID_BASICSTOP.text
 #: src/statusline.cc:264
@@ -617,7 +617,7 @@ msgid "_File access"
 msgstr "Idosiye"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr ""
 
 #: ui/prefdialog.glade.h:16

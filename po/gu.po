@@ -40,7 +40,7 @@ msgstr "રંગ સરખાવો"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 
@@ -64,8 +64,8 @@ msgstr "ફાઈલ સંપાદકમાં વપરાતા ફોન્
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
 "કાર્યક્રમની સાધનપટ્ટીની શૈલી. \"ચિહ્નો\", \"લખાણ\", \"બંને\", અને \"બંને-આડા\""
 "એ શક્ય કિંમતો છે."
@@ -76,7 +76,7 @@ msgstr "સાધનપટ્ટીની શૈલી"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "ફાઈલ વાંચી શકતા નથી:"
 
 #: src/filetree.cc:81
@@ -88,12 +88,12 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "ફાઈલ \"%1\" સંગ્રહવામાં નિષ્ફળ: %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "ફાઈલ “%1” સંગ્રહવામાં નિષ્ફળ: %2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" એ બાઈનરી ફાઈલ હોય એવું લાગે છે."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” એ બાઈનરી ફાઈલ હોય એવું લાગે છે."
 
 #: src/main.cc:84
 msgid "_About"
@@ -156,8 +156,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[વિકલ્પ]... [ફોલ્ડર]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "વધુ જાણકારી માટે \"regexxer --help\" ને વાપરી જુઓ."
+msgid "Try “regexxer --help” for more information."
+msgstr "વધુ જાણકારી માટે “regexxer --help” ને વાપરી જુઓ."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -167,7 +167,7 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "અમુક ફાઈલો હજુ સુધી સંગ્રહાયેલી નથી.\n"
@@ -175,7 +175,7 @@ msgstr ""
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
 
@@ -185,7 +185,7 @@ msgstr "ફોલ્ડર પસંદ કરો"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "અમુક ફાઈલો હજુ સુધી સંગ્રહાયેલી નથી.\n"
@@ -202,10 +202,10 @@ msgstr "શોધ દરમ્યાન નીચેની ભૂલો ઉદ�
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"\"%1\" માં નિયમિત સમીકરણમાં ભૂલ (અનુક્રમ %2):\n"
+"“%1” માં નિયમિત સમીકરણમાં ભૂલ (અનુક્રમ %2):\n"
 "%3"
 
 #: src/mainwindow.cc:529
@@ -231,8 +231,8 @@ msgid ""
 msgstr ""
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" એ માન્ય એનકોડીંગ નથી."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” એ માન્ય એનકોડીંગ નથી."
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -487,7 +487,7 @@ msgid "_File access"
 msgstr "ફાઈલ વાપરો (_F)"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "જુઓ અને અનુભવો (_L)"
 
 #: ui/prefdialog.glade.h:16

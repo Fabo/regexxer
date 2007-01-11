@@ -38,12 +38,12 @@ msgstr "Cor de coincidências"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "Nome da codificação de caracteres a utilizar se um ficheiro não for legível "
-"em UTF-8 nem na codificação especificada pelo local actual. Tente \"iconv --"
-"list\" para obter uma lista completa dos valores possíveis."
+"em UTF-8 nem na codificação especificada pelo local actual. Tente “iconv --"
+"list” para obter uma lista completa dos valores possíveis."
 
 #: regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -70,11 +70,11 @@ msgstr "A fonte utilizada no editor de ficheiros."
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
-"O estilo da barra de ferramentas da aplicação. Valores possíveis são \"icons"
-"\", \"text\", \"both\", e \"both-horiz\"."
+"O estilo da barra de ferramentas da aplicação. Valores possíveis são “icons"
+"”, “text”, “both”, e “both-horiz”."
 
 #: regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -82,7 +82,7 @@ msgstr "Estilo da barra de ferramentas"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Incapaz de ler o ficheiro:"
 
 #: src/filetree.cc:81
@@ -94,12 +94,12 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "Falha ao gravar o ficheiro \"%1\". %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "Falha ao gravar o ficheiro “%1”. %2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" parece ser um ficheiro binário."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” parece ser um ficheiro binário."
 
 #: src/main.cc:84
 msgid "_About"
@@ -162,8 +162,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[OPÇºÃO]... [PASTA]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "Tente \"regexxer --help\" para mais informações."
+msgid "Try “regexxer --help” for more information."
+msgstr "Tente “regexxer --help” para mais informações."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -175,7 +175,7 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Alguns ficheiros ainda não foram gravados.\n"
@@ -183,10 +183,10 @@ msgstr ""
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
-"A pasta de nome \"%1\" contém caracteres sem representação na codificação do "
+"A pasta de nome “%1” contém caracteres sem representação na codificação do "
 "sistema de ficheiros local."
 
 #: src/mainwindow.cc:450
@@ -195,7 +195,7 @@ msgstr "Seleccione uma pasta"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Alguns ficheiros ainda não foram gravados.\n"
@@ -211,10 +211,10 @@ msgstr "Ocorreram os seguintes erros durante a procura:"
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Erro na expressão regular em \"%1\" (índice %2):\n"
+"Erro na expressão regular em “%1” (índice %2):\n"
 "%3"
 
 #: src/mainwindow.cc:529
@@ -244,8 +244,8 @@ msgstr ""
 "regulares."
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" não é uma codificação válida."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” não é uma codificação válida."
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -504,7 +504,7 @@ msgid "_File access"
 msgstr "Acesso de _ficheiros"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "_Aparência"
 
 #: ui/prefdialog.glade.h:16

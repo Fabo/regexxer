@@ -40,7 +40,7 @@ msgstr ""
 #, fuzzy
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr "Emri nga a është nuk në nga lokale lista për a lista nga."
 
@@ -68,8 +68,8 @@ msgstr "Gërmat e përdorura në editor."
 #: regexxer.schemas.in.h:9
 #, fuzzy
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr "nga programi tekst dhe."
 
 #: regexxer.schemas.in.h:10
@@ -79,7 +79,7 @@ msgstr "Stili i panelit të instrumenteve"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr ""
 
 #: src/filetree.cc:81
@@ -93,12 +93,12 @@ msgstr ""
 
 #: src/filetree.cc:532
 #, fuzzy
-msgid "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
 msgstr "Dështoi ruaj 2"
 
 #: src/filetree.cc:949
 #, fuzzy
-msgid "\"%1\" seems to be a binary file."
+msgid "“%1” seems to be a binary file."
 msgstr "a."
 
 #: src/main.cc:84
@@ -176,7 +176,7 @@ msgstr "KARTELA"
 
 #: src/main.cc:141
 #, fuzzy
-msgid "Try \"regexxer --help\" for more information."
+msgid "Try “regexxer --help” for more information."
 msgstr "ndihmë për tjetër."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
@@ -188,14 +188,14 @@ msgstr "A nga Simboli dhe a."
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 
 #: src/mainwindow.cc:431
 #, fuzzy
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr "kartelë emri përmban nuk në nga lokal sistemi."
 
@@ -206,7 +206,7 @@ msgstr "Zgjidh a kartelë"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 
@@ -223,7 +223,7 @@ msgstr "kërko:"
 #: src/mainwindow.cc:527
 #, fuzzy
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr "Gabim në i rregullt shprehje treguesi j 3"
 
@@ -253,7 +253,7 @@ msgstr "dhe nga i rregullt shprehje."
 
 #: src/prefdialog.cc:248
 #, fuzzy
-msgid "\"%1\" is not a valid encoding."
+msgid "“%1” is not a valid encoding."
 msgstr "është nuk a."
 
 #: src/statusline.cc:264
@@ -554,7 +554,7 @@ msgstr "File hyrje"
 
 #: ui/prefdialog.glade.h:15
 #, fuzzy
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "Paraqitja j"
 
 #: ui/prefdialog.glade.h:16

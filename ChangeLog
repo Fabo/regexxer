@@ -1,5 +1,51 @@
 2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/filebuffer.cc (FileBuffer::create_with_error_message): Use
+	UTF-8 encoded typographically correct apostrophe in the title
+	string.
+	* src/filetree.cc (FileTree::find_recursively): Replace call to
+	Util::filename_to_utf8_fallback() by Glib::filename_display_name().
+	(FileTree::find_fill_dirstack): Likewise.
+	(FileTree::save_file_at_iter): Use UTF-8 encoded typographically
+	correct quote characters in the error message string.
+	(FileTree::load_file_with_fallback): Likewise.
+
+	* src/pcreshell.cc (throw_regex_error): New function to throw a
+	Pcre::Error exception with a properly formatted error message.
+	(Pcre::Pattern::Pattern): Use throw_regex_error().
+
+	* src/prefdialog.cc (PrefDialog::on_entry_fallback_activate):
+	Use proper Unicode quotes in error message string.
+
+	* src/mainwindow.cc (MainWindow::initialize): Run the search
+	automatically only if also a filename pattern has been specified
+	on the command line.
+	(MainWindow::confirm_quit_request): Use proper Unicode apostrophe
+	in the error message.
+	(MainWindow::on_find_files): Likewise.  Also remove the code to
+	format an error message for regex exceptions, as Pcre::Error now
+	already carries a user-friendly message.
+	(MainWindow::set_title_filename): Replace calls to
+	Util::filename_to_utf8_fallback() by Glib::filename_display_name().
+
+	* src/stringutils.{cc,h} (Util::shell_pattern_to_regex): Minor
+	optimization twiddling.
+	(Util::substitute_references): Likewise.
+	(Util::filename_to_utf8_fallback): Remove function, as we can
+	now simply use Glib::filename_display_name() instead.
+	(Util::convert_to_ascii): Remove; no longer used anywhere.
+	(Util::shorten_pathname): Use G_IS_DIR_SEPARATOR() instead of
+	comparing against G_DIR_SEPARATOR directly.  Necessary because
+	on win32 both '/' and '\' are accepted as directory separators.
+
+	* ui/regexxer.schemas.in: Reformat and use proper Unicode quotes
+	and apostrophes.
+	* ui/prefdialog.glade: Likewise.  Also remove some property
+	specifications which assigned default values anyway.
+	* ui/mainwindow.glade: As above, strip pointless property settings.
+
+2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/fileio.cc (save_iochannel): Add comment about assertions and
 	reorganize the code a bit.
 	(Regexxer::save_file): Elaborate on why IOChannel::close() is

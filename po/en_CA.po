@@ -39,11 +39,11 @@ msgstr "Match colour"
 #: regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 
 #: regexxer.schemas.in.h:5
@@ -70,11 +70,11 @@ msgstr "The font used in the file editor."
 
 #: regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 
 #: regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -82,8 +82,8 @@ msgstr "Toolbar style"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: src/filebuffer.cc:203
-msgid "Can't read file:"
-msgstr "Can't read file:"
+msgid "Can’t read file:"
+msgstr "Can’t read file:"
 
 #: src/filetree.cc:81
 msgid "File"
@@ -94,12 +94,12 @@ msgid "#"
 msgstr "#"
 
 #: src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "Failed to save file “%1”: %2"
 
 #: src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" seems to be a binary file."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” seems to be a binary file."
 
 #: src/main.cc:84
 msgid "_About"
@@ -162,8 +162,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[OPTION]... [FOLDER]"
 
 #: src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "Try \"regexxer --help\" for more information."
+msgid "Try “regexxer --help” for more information."
+msgstr "Try “regexxer --help” for more information."
 
 #: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
 msgid ""
@@ -175,18 +175,18 @@ msgstr ""
 
 #: src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 
 #: src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 
 #: src/mainwindow.cc:450
@@ -195,10 +195,10 @@ msgstr "Select a folder"
 
 #: src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 
 #: src/mainwindow.cc:496
@@ -211,10 +211,10 @@ msgstr "The following errors occurred during search:"
 
 #: src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 
 #: src/mainwindow.cc:529
@@ -242,8 +242,8 @@ msgstr ""
 "engine."
 
 #: src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" is not a valid encoding."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” is not a valid encoding."
 
 #: src/statusline.cc:264
 msgid "Stop"
@@ -501,8 +501,8 @@ msgid "_File access"
 msgstr "_File access"
 
 #: ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
-msgstr "_Look'n'feel"
+msgid "_Look’n’feel"
+msgstr "_Look’n’feel"
 
 #: ui/prefdialog.glade.h:16
 msgid "_Match color:"

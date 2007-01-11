@@ -9,10 +9,8 @@
       <type>string</type>
       <default>Monospace 10</default>
       <locale name="C">
-	 <short>Text view font</short>
-	 <long>
-	   The font used in the file editor.
-	 </long>
+	<short>Text view font</short>
+	<long>The font used in the file editor.</long>
       </locale>
     </schema>
 
@@ -23,10 +21,9 @@
       <type>string</type>
       <default>#9DB8D2</default>
       <locale name="C">
-	 <short>Match color</short>
-	 <long>
-	   The background color used to highlight matches of the search expression.
-	 </long>
+	<short>Match color</short>
+	<long>The background color used to highlight matches of the search
+	  expression.</long>
       </locale>
     </schema>
 
@@ -37,11 +34,9 @@
       <type>string</type>
       <default>#EED680</default>
       <locale name="C">
-	 <short>Current-match color</short>
-	 <long>
-	   The background color used to highlight the currently selected
-	   match of the search expression.
-	 </long>
+	<short>Current-match color</short>
+	<long>The background color used to highlight the currently selected
+	  match of the search expression.</long>
       </locale>
     </schema>
 
@@ -52,12 +47,9 @@
       <type>string</type>
       <default>both-horiz</default>
       <locale name="C">
-	 <short>Toolbar style</short>
-	 <long>
-	   The style of the application&apos;s toolbar.
-	   Possible values are &quot;icons&quot;, &quot;text&quot;,
-	   &quot;both&quot;, and &quot;both-horiz&quot;.
-	 </long>
+	<short>Toolbar style</short>
+	<long>The style of the application’s toolbar. Possible values are
+	  “icons”, “text”, “both”, and “both-horiz”.</long>
       </locale>
     </schema>
 
@@ -68,12 +60,10 @@
       <type>string</type>
       <default>ISO-8859-15</default>
       <locale name="C">
-	 <short>Fallback encoding</short>
-	 <long>
-	   Name of the character encoding to use if a file is not readable
-	   in either UTF-8 or the codeset specified by the current locale.
-	   Try &quot;iconv --list&quot; for a complete list of possible values.
-	 </long>
+	<short>Fallback encoding</short>
+	<long>Name of the character encoding to use if a file is not readable
+	  in either UTF-8 or the codeset specified by the current locale.
+	  Try “iconv --list” for a complete list of possible values.</long>
       </locale>
     </schema>
 

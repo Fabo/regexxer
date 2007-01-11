@@ -40,12 +40,12 @@ msgstr "Overeenkomst kleur"
 #: ../regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
 "for a complete list of possible values."
 msgstr ""
 "Naam van de te gebruiken tekenset indien een bestand niet leesbaar is in "
 "ofwel UTF-8 of de tekenset gespecificeerd door de huidige locale. Probeer "
-"\"iconv --list\" voor een volledige lijst met mogelijke waarden."
+"“iconv --list” voor een volledige lijst met mogelijke waarden."
 
 #: ../regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -71,11 +71,11 @@ msgstr "Het gebruikte lettertype in de bestandseditor."
 
 #: ../regexxer.schemas.in.h:9
 msgid ""
-"The style of the application's toolbar. Possible values are \"icons\", \"text"
-"\", \"both\", and \"both-horiz\"."
+"The style of the application’s toolbar. Possible values are “icons”, “text"
+"”, “both”, and “both-horiz”."
 msgstr ""
-"De werkbalkstijl van de toepassing. Mogelijke waarden zijn \"icons\", \"text"
-"\", \"both\", en \"both-horiz\"."
+"De werkbalkstijl van de toepassing. Mogelijke waarden zijn “icons”, “text"
+"”, “both”, en “both-horiz”."
 
 #: ../regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -83,7 +83,7 @@ msgstr "Werkbalkstijl"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "Kan bestand niet lezen:"
 
 #: ../src/filetree.cc:81
@@ -95,12 +95,12 @@ msgid "#"
 msgstr "#"
 
 #: ../src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
-msgstr "Opslaan van bestand \"%1\" is mislukt: %2"
+msgid "Failed to save file “%1”: %2"
+msgstr "Opslaan van bestand “%1” is mislukt: %2"
 
 #: ../src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
-msgstr "\"%1\" is blijkbaar een binair bestand."
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” is blijkbaar een binair bestand."
 
 #: ../src/main.cc:84
 msgid "_About"
@@ -163,8 +163,8 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[OPTIE]... [MAP]"
 
 #: ../src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
-msgstr "Probeer \"regexxer --help\" voor meer informatie."
+msgid "Try “regexxer --help” for more information."
+msgstr "Probeer “regexxer --help” voor meer informatie."
 
 #: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
 msgid ""
@@ -177,7 +177,7 @@ msgstr ""
 # bepaalde bestanden
 #: ../src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Sommige bestanden zijn nog niet opgeslagen.\n"
@@ -185,10 +185,10 @@ msgstr ""
 
 #: ../src/mainwindow.cc:431
 msgid ""
-"The folder name \"%1\" contains characters not representable in the encoding "
+"The folder name “%1” contains characters not representable in the encoding "
 "of the local file system."
 msgstr ""
-"De mapnaam \"%1\" bevat tekens die niet kunnen worden weergegeven in de "
+"De mapnaam “%1” bevat tekens die niet kunnen worden weergegeven in de "
 "tekenset van het lokale bestandsyssteem."
 
 # een map selecteren
@@ -198,7 +198,7 @@ msgstr "Selecteer een map"
 
 #: ../src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Sommige bestanden zijn nog niet opgeslagen.\n"
@@ -215,10 +215,10 @@ msgstr "De volgende fouten traden op gedurende de zoekopdracht:"
 
 #: ../src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Fout in reguliere expressie bij \"%1\" (index %2):\n"
+"Fout in reguliere expressie bij “%1” (index %2):\n"
 "%3"
 
 #: ../src/mainwindow.cc:529
@@ -248,8 +248,8 @@ msgstr ""
 "bereikt."
 
 #: ../src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
-msgstr "\"%1\" is geen geldige tekenset."
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” is geen geldige tekenset."
 
 #: ../src/statusline.cc:264
 msgid "Stop"
@@ -508,8 +508,8 @@ msgstr "_Bestandstoegang"
 
 # wat is een goede vertaling?
 #: ../ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
-msgstr "_Look'n'feel"
+msgid "_Look’n’feel"
+msgstr "_Look’n’feel"
 
 #: ../ui/prefdialog.glade.h:16
 msgid "_Match color:"

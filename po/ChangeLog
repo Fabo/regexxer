@@ -1,3 +1,10 @@
+2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* en.po: Remove English "translation" as proper Unicode quotes and
+	apostrophes are now used directly in the untranslated messages.
+	* LINGUAS: Remove "en" from list.
+	* POTFILES.in: Prepend [encoding: UTF-8] to list of files.
+
 2007-01-10  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* Makevars (XGETTEXT_OPTIONS): Add --add-comments=TRANSLATORS in

@@ -35,7 +35,7 @@ msgid "Match color"
 msgstr "符合色彩"
 
 #: ../regexxer.schemas.in.h:4
-msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" for a complete list of possible values."
+msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try “iconv --list” for a complete list of possible values."
 msgstr "在檔案無法以 UTF-8 或目前的地區所指定的編碼讀取時使用的字元編碼名稱。使用 “iconv --list” 可以查看所有可使用編碼的清單。"
 
 #: ../regexxer.schemas.in.h:5
@@ -55,7 +55,7 @@ msgid "The font used in the file editor."
 msgstr "在檔案編輯器中使用的字型。"
 
 #: ../regexxer.schemas.in.h:9
-msgid "The style of the application's toolbar. Possible values are \"icons\", \"text\", \"both\", and \"both-horiz\"."
+msgid "The style of the application’s toolbar. Possible values are “icons”, “text”, “both”, and “both-horiz”."
 msgstr "應用程式的工具列風格。可用的數值有 “圖示”、“文字”、“兩者” 與 “兩者(水平)”。"
 
 #: ../regexxer.schemas.in.h:10
@@ -64,7 +64,7 @@ msgstr "工具列風格"
 
 #. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:203
-msgid "Can't read file:"
+msgid "Can’t read file:"
 msgstr "無法讀取檔案："
 
 #: ../src/filetree.cc:81
@@ -76,11 +76,11 @@ msgid "#"
 msgstr "#"
 
 #: ../src/filetree.cc:532
-msgid "Failed to save file \"%1\": %2"
+msgid "Failed to save file “%1”: %2"
 msgstr "儲存檔案 “%1” 時失敗：%2"
 
 #: ../src/filetree.cc:949
-msgid "\"%1\" seems to be a binary file."
+msgid "“%1” seems to be a binary file."
 msgstr "“%1” 似乎是二元檔。"
 
 #: ../src/main.cc:84
@@ -146,7 +146,7 @@ msgid "[OPTION]... [FOLDER]"
 msgstr "[選項]... [資料夾]"
 
 #: ../src/main.cc:141
-msgid "Try \"regexxer --help\" for more information."
+msgid "Try “regexxer --help” for more information."
 msgstr "使用 “regexxer --help” 以獲得更多資訊。"
 
 #: ../src/mainwindow.cc:252
@@ -156,14 +156,14 @@ msgstr "以 shell 方式表示的檔案名稱樣式。支援字元類別 [ab] �
 
 #: ../src/mainwindow.cc:403
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "某些檔案尚未儲存。\n"
 "無論如何都要離開？"
 
 #: ../src/mainwindow.cc:431
-msgid "The folder name \"%1\" contains characters not representable in the encoding of the local file system."
+msgid "The folder name “%1” contains characters not representable in the encoding of the local file system."
 msgstr "資料夾名稱“%1”包含本地檔案系統編碼中沒有出現的字元。"
 
 #: ../src/mainwindow.cc:450
@@ -172,7 +172,7 @@ msgstr "選擇資料夾"
 
 #: ../src/mainwindow.cc:470
 msgid ""
-"Some files haven't been saved yet.\n"
+"Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "某些檔案尚未儲存。\n"
@@ -188,7 +188,7 @@ msgstr "在搜尋時發生下列錯誤："
 
 #: ../src/mainwindow.cc:527
 msgid ""
-"Error in regular expression at \"%1\" (index %2):\n"
+"Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
 "正規表示式發生錯誤於“%1” (索引 %2)：\n"
@@ -215,7 +215,7 @@ msgid "Reached the recursion and backtracking limit of the regular expression en
 msgstr "已到達正規表示式引擎循環與返回的極限。"
 
 #: ../src/prefdialog.cc:248
-msgid "\"%1\" is not a valid encoding."
+msgid "“%1” is not a valid encoding."
 msgstr "“%1” 不是有效的編碼。"
 
 #: ../src/statusline.cc:264
@@ -473,7 +473,7 @@ msgid "_File access"
 msgstr "檔案存取(_F)"
 
 #: ../ui/prefdialog.glade.h:15
-msgid "_Look'n'feel"
+msgid "_Look’n’feel"
 msgstr "外觀與感覺(_L)"
 
 #: ../ui/prefdialog.glade.h:16
