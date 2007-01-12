@@ -55,8 +55,7 @@ public:
   void* get() const { return class_; }
 };
 
-
-inline
+static inline
 bool is_significant_encoding_char(char c)
 {
   switch (c)
@@ -68,18 +67,19 @@ bool is_significant_encoding_char(char c)
   return true;
 }
 
-inline
+static inline
 unsigned int scale_to_8bit(unsigned int value)
 {
   return (value & 0xFF00) >> 8;
 }
 
-inline
+static inline
 bool ascii_isodigit(char c)
 {
   return (c >= '0' && c <= '7');
 }
 
+static
 std::string apply_modifiers(const std::string& subject, const std::vector<ModPos>& modifiers)
 {
   std::string result;
@@ -177,6 +177,7 @@ std::string apply_modifiers(const std::string& subject, const std::vector<ModPos
   return result;
 }
 
+static
 void parse_control_char(std::string::const_iterator& p, std::string::const_iterator pend,
                         std::string& dest)
 {
@@ -197,6 +198,7 @@ void parse_control_char(std::string::const_iterator& p, std::string::const_itera
     dest += 'c';
 }
 
+static
 void parse_hex_unichar(std::string::const_iterator& p, std::string::const_iterator pend,
                        std::string& dest)
 {
@@ -245,6 +247,7 @@ void parse_hex_unichar(std::string::const_iterator& p, std::string::const_iterat
   dest += 'x';
 }
 
+static
 void parse_oct_unichar(std::string::const_iterator& p, std::string::const_iterator pend,
                        std::string& dest)
 {
@@ -275,6 +278,7 @@ void parse_oct_unichar(std::string::const_iterator& p, std::string::const_iterat
  * On entry, p _must_ point to either a digit or a starting bracket '{'.  Also,
  * if p points to '{' the closing bracket '}' is assumed to follow before pend.
  */
+static
 int parse_capture_index(std::string::const_iterator& p, std::string::const_iterator pend)
 {
   std::string::const_iterator pnum = p;
@@ -312,7 +316,6 @@ int parse_capture_index(std::string::const_iterator& p, std::string::const_itera
 
 } // anonymous namespace
 
-
 bool Util::validate_encoding(const std::string& encoding)
 {
   // GLib just ignores some characters that aren't used in encoding names,
@@ -334,7 +337,7 @@ bool Util::validate_encoding(const std::string& encoding)
   if (!Util::encodings_equal(encoding, "UTF-8"))
     try
     {
-      Glib::convert("", "UTF-8", encoding);
+      Glib::convert(std::string(), "UTF-8", encoding);
     }
     catch (const Glib::ConvertError& error)
     {

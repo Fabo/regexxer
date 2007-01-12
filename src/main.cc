@@ -64,12 +64,14 @@ struct StockItemData
   const char*           label;
 };
 
+static
 const StockIconData stock_icon_save_all[] =
 {
   { stock_save_all_16, sizeof(stock_save_all_16), Gtk::ICON_SIZE_MENU          },
   { stock_save_all_24, sizeof(stock_save_all_24), Gtk::ICON_SIZE_SMALL_TOOLBAR }
 };
 
+static
 const StockItemData regexxer_stock_items[] =
 {
   { "regexxer-save-all", stock_icon_save_all, G_N_ELEMENTS(stock_icon_save_all), N_("Save _all") }
@@ -156,6 +158,7 @@ std::auto_ptr<RegexxerOptions> RegexxerOptions::create()
   return options;
 }
 
+static
 void register_stock_items()
 {
   const Glib::RefPtr<Gtk::IconFactory> factory = Gtk::IconFactory::create();
@@ -189,6 +192,7 @@ void register_stock_items()
   factory->add_default();
 }
 
+static
 void trap_gconf_exceptions()
 {
   try
@@ -203,6 +207,7 @@ void trap_gconf_exceptions()
   }
 }
 
+static
 void initialize_configuration()
 {
   using namespace Gnome::Conf;

@@ -44,19 +44,19 @@ enum { BUSY_GUI_UPDATE_INTERVAL = 16 };
 
 typedef Glib::RefPtr<Regexxer::FileBuffer> FileBufferPtr;
 
-const char *const selection_clipboard = "CLIPBOARD";
+static const char *const selection_clipboard = "CLIPBOARD";
 
 /*
  * List of authors to be displayed in the about dialog.
  */
-const char *const program_authors[] =
+static const char *const program_authors[] =
 {
   "Daniel Elstner <daniel.kitta@gmail.com>",
   "Murray Cumming <murrayc@murrayc.com>",
   0
 };
 
-const char *const program_license =
+static const char *const program_license =
   "regexxer is free software; you can redistribute it and/or modify "
   "it under the terms of the GNU General Public License as published by "
   "the Free Software Foundation; either version 2 of the License, or "
@@ -119,6 +119,7 @@ FileErrorDialog::FileErrorDialog(Gtk::Window& parent, const Glib::ustring& messa
 FileErrorDialog::~FileErrorDialog()
 {}
 
+static
 void print_location(int linenumber, const Glib::ustring& subject, Regexxer::FileInfoPtr fileinfo)
 {
   std::cout << fileinfo->fullname << ':' << linenumber + 1 << ':';

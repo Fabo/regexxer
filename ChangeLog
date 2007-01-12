@@ -1,3 +1,18 @@
+2007-01-12  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* src/fileio.cc: Prefix function and data definitions within
+	anonymous namespaces with the "static" keyword.  Although this
+	usage of "static" is deprecated in C++, GCC still exports symbols
+	defined in anonymous namespaces.  For more information, see:
+	http://gcc.gnu.org/bugzilla/show_bug.cgi?id=18267
+	* src/fileshared.cc: ditto,
+	* src/main.cc: ditto,
+	* src/mainwindow.cc: ditto,
+	* src/pcreshell.cc: ditto,
+	* src/prefdialog.cc: ditto,
+	* src/stringutils.cc: ditto,
+	* src/translation.cc: ditto.
+
 2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* src/mainwindow.cc (MainWindow::initialize): Really minor tweaks.

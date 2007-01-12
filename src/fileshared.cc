@@ -28,6 +28,7 @@
 namespace
 {
 
+static
 const Glib::Quark& file_buffer_match_quark()
 {
   // Regexxer::FileBuffer uses anonymous Gtk::TextMark objects to remember
@@ -38,6 +39,7 @@ const Glib::Quark& file_buffer_match_quark()
   return quark;
 }
 
+static
 int calculate_match_length(const Glib::ustring& subject, const std::pair<int,int>& bounds)
 {
   const std::string::const_iterator begin = subject.begin().base();

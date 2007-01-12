@@ -31,6 +31,7 @@
 namespace
 {
 
+static
 int byte_to_char_offset(Glib::ustring::const_iterator start, int byte_offset)
 {
   return std::distance(start, Glib::ustring::const_iterator(start.base() + byte_offset));
@@ -41,6 +42,7 @@ int byte_to_char_offset(Glib::ustring::const_iterator start, int byte_offset)
  * Having Pcre::Pattern::match() return matches on partial UTF-8 characters
  * would make regexxer crash faster than you can say "illegal sequence!"
  */
+static
 void check_for_single_byte_escape(const Glib::ustring& regex)
 {
   using std::string;
@@ -64,7 +66,9 @@ void check_for_single_byte_escape(const Glib::ustring& regex)
   }
 }
 
+static
 void throw_regex_error(const Glib::ustring&, int, const char*) G_GNUC_NORETURN;
+static
 void throw_regex_error(const Glib::ustring& regex, int byte_offset, const char* message)
 {
   using Glib::ustring;

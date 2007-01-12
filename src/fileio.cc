@@ -35,6 +35,7 @@ using Regexxer::FileBuffer;
 
 enum { BUFSIZE = 4096 };
 
+static
 Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& input)
 {
   const Glib::RefPtr<FileBuffer> text_buffer = FileBuffer::create();
@@ -56,6 +57,7 @@ Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& inp
   return text_buffer;
 }
 
+static
 void save_iochannel(const Glib::RefPtr<Glib::IOChannel>& output, const Glib::RefPtr<FileBuffer>& buffer)
 {
   FileBuffer::iterator stop = buffer->begin();
@@ -75,6 +77,7 @@ void save_iochannel(const Glib::RefPtr<Glib::IOChannel>& output, const Glib::Ref
   }
 }
 
+static
 Glib::RefPtr<FileBuffer> load_try_encoding(const std::string& filename, const std::string& encoding)
 {
   const Glib::RefPtr<Glib::IOChannel> channel = Glib::IOChannel::create_from_file(filename, "r");

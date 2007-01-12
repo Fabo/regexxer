@@ -35,6 +35,7 @@
 namespace
 {
 
+static
 const Gtk::ToolbarStyle toolbar_style_values[] =
 {
   Gtk::TOOLBAR_ICONS,
@@ -43,6 +44,7 @@ const Gtk::ToolbarStyle toolbar_style_values[] =
   Gtk::TOOLBAR_BOTH_HORIZ
 };
 
+static
 int get_toolbar_style_index(const Glib::ustring& value)
 {
   const Gtk::ToolbarStyle toolbar_style = Util::enum_from_nick<Gtk::ToolbarStyle>(value);

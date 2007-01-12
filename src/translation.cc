@@ -31,6 +31,7 @@
 namespace
 {
 
+static
 Glib::ustring compose_impl(const Glib::ustring& format,
                            int argc, const Glib::ustring *const * argv)
 {
