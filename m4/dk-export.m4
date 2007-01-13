@@ -16,31 +16,7 @@
 ## with danielk's Autostuff; if not, write to the Free Software Foundation,
 ## Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#serial 20070105
-
-## DK_LINK_EXPORT_DYNAMIC(variable)
-##
-## Check whether the linker accepts the --export-dynamic flag.
-## On success, set the output <variable> to "-Wl,--export-dynamic".
-##
-AC_DEFUN([DK_LINK_EXPORT_DYNAMIC],
-[dnl
-m4_if([$1],, [AC_FATAL([argument expected])])[]dnl
-dnl
-AC_CACHE_CHECK([whether the linker accepts --export-dynamic],
-               [dk_cv_link_export_dynamic],
-[
-  DK_SH_VAR_PUSH([LDFLAGS], ["$LDFLAGS -Wl,--export-dynamic"])
-  AC_LINK_IFELSE([AC_LANG_PROGRAM([], [])],
-                 [dk_cv_link_export_dynamic=yes],
-                 [dk_cv_link_export_dynamic=no])
-  DK_SH_VAR_POP([LDFLAGS])
-])
-AS_IF([test "x$dk_cv_link_export_dynamic" = xyes],
-      [$1='-Wl,--export-dynamic'],
-      [$1=])
-AC_SUBST([$1])[]dnl
-])
+#serial 20070113
 
 ## DK_LINK_VERSION_SCRIPT(variable, filename)
 ##

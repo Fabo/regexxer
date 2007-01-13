@@ -23,7 +23,6 @@
 
 #include <glib/gutils.h>  /* for G_DIR_SEPARATOR_S */
 
-
 namespace Regexxer
 {
 
@@ -33,14 +32,17 @@ namespace Regexxer
  * The final executable contains exactly one copy of each string literal,
  * so there's no need to define them in a separate object file.
  */
-const char *const conf_key_textview_font        = REGEXXER_GCONF_DIRECTORY "/textview_font";
-const char *const conf_key_match_color          = REGEXXER_GCONF_DIRECTORY "/match_color";
-const char *const conf_key_current_match_color  = REGEXXER_GCONF_DIRECTORY "/current_match_color";
-const char *const conf_key_toolbar_style        = REGEXXER_GCONF_DIRECTORY "/toolbar_style";
-const char *const conf_key_fallback_encoding    = REGEXXER_GCONF_DIRECTORY "/fallback_encoding";
+const char *const conf_dir_application         = "/apps/regexxer";
+const char *const conf_key_textview_font       = "/apps/regexxer/textview_font";
+const char *const conf_key_match_color         = "/apps/regexxer/match_color";
+const char *const conf_key_current_match_color = "/apps/regexxer/current_match_color";
+const char *const conf_key_toolbar_style       = "/apps/regexxer/toolbar_style";
+const char *const conf_key_fallback_encoding   = "/apps/regexxer/fallback_encoding";
 
-const char *const glade_mainwindow_filename     = REGEXXER_PKGDATADIR G_DIR_SEPARATOR_S "mainwindow.glade";
-const char *const glade_prefdialog_filename     = REGEXXER_PKGDATADIR G_DIR_SEPARATOR_S "prefdialog.glade";
+const char *const glade_mainwindow_filename    = REGEXXER_PKGDATADIR G_DIR_SEPARATOR_S
+                                                 "mainwindow.glade";
+const char *const glade_prefdialog_filename    = REGEXXER_PKGDATADIR G_DIR_SEPARATOR_S
+                                                 "prefdialog.glade";
 
 } // namespace Regexxer
 

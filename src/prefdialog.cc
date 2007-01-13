@@ -31,7 +31,6 @@
 
 #include <config.h>
 
-
 namespace
 {
 
@@ -59,7 +58,6 @@ int get_toolbar_style_index(const Glib::ustring& value)
 }
 
 } // anonymous namespace
-
 
 namespace Regexxer
 {
@@ -184,7 +182,7 @@ void PrefDialog::initialize_configuration()
   using namespace Gnome::Conf;
 
   const Glib::RefPtr<Client> client = Client::get_default_client();
-  const std::list<Entry> entries (client->all_entries(REGEXXER_GCONF_DIRECTORY));
+  const std::list<Entry> entries (client->all_entries(conf_dir_application));
 
   for (std::list<Entry>::const_iterator p = entries.begin(); p != entries.end(); ++p)
   {

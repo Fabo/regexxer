@@ -217,9 +217,9 @@ void initialize_configuration()
   const Glib::RefPtr<Client> client = Client::get_default_client();
 
   client->set_error_handling(CLIENT_HANDLE_ALL);
-  client->add_dir(REGEXXER_GCONF_DIRECTORY, CLIENT_PRELOAD_ONELEVEL);
+  client->add_dir(Regexxer::conf_dir_application, CLIENT_PRELOAD_ONELEVEL);
 
-  const std::list<Entry> entries = client->all_entries(REGEXXER_GCONF_DIRECTORY);
+  const std::list<Entry> entries = client->all_entries(Regexxer::conf_dir_application);
 
   // Issue an artificial value_changed() signal for each entry in /apps/regexxer.
   // Reusing the signal handlers this way neatly avoids the need for separate

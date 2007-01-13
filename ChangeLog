@@ -1,5 +1,27 @@
 2007-01-13  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/globalstrings.h (conf_dir_application): New string constant
+	defining the directory of regexxer in the GConf database.  This
+	string literal replaces the REGEXXER_GCONF_DIRECTORY macro which
+	used to be defined in the Makefile.  This global macro definition
+	was inherently pointless as it was not configurable anyway.
+	* src/main.cc (initialize_configuration): Use conf_dir_application
+	instead of REGEXXER_GCONF_DIRECTORY.
+	* src/prefdialog.cc (PrefDialog::initialize_configuration): ditto.
+
+	* configure.ac (REGEXXER_GCONF_DIRECTORY): Remove substitution.
+	(PKG_CHECK_MODULES): Add gmodule-export-2.0 to the module list to
+	get the -Wl,--export-dynamic flag automatically.
+	(DK_LINK_EXPORT_DYNAMIC): Remove macro invocation as it no longer
+	necessary.  Also, add comments elaborating about the whole linker
+	stuff.
+	* Makefile.am (global_defs): Remove -DREGEXXER_GCONF_DIRECTORY.
+	(src_regexxer_LDFLAGS): Get rid of $(REGEXXER_EXPORT_DYNAMIC).
+
+	* m4/dk-export.m4 (DK_LINK_EXPORT_DYNAMIC): Remove macro.
+
+2007-01-13  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/filetree.cc (FileTree::find_recursively): Replace uses of
 	Glib::filename_display_name() by Glib::filename_display_basename()
 	to enable translation of well-known locations in future.  Store
