@@ -1,5 +1,9 @@
 2007-01-13  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* MAINTAINERS: Add file for the benefit of sysadmin tools.
+
+2007-01-13  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/globalstrings.h (conf_dir_application): New string constant
 	defining the directory of regexxer in the GConf database.  This
 	string literal replaces the REGEXXER_GCONF_DIRECTORY macro which
