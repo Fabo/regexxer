@@ -46,7 +46,6 @@ class Window;
 
 namespace Gnome { namespace Conf { class Value; } }
 
-
 namespace Regexxer
 {
 

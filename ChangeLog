@@ -1,3 +1,20 @@
+2007-01-13  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* src/filetree.cc (FileTree::find_recursively): Replace uses of
+	Glib::filename_display_name() by Glib::filename_display_basename()
+	to enable translation of well-known locations in future.  Store
+	the full path in the directory stack.
+	(FileTree::find_fill_dirstack): Convert the full path from the
+	stack to a displayable name with Glib::filename_display_basename().
+	(FileTree::save_file_at_iter): Determine the basename for
+	use in the error message with Glib::filename_display_basename().
+
+	* src/mainwindow.cc (MainWindow::set_title_filename): Call
+	Glib::filename_display_basename() to get the filename to be
+	displayed in the window title.
+
+	* src/filetreeprivate.{cc,h}: Some early spring cleaning.
+
 2007-01-12  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* src/fileio.cc: Prefix function and data definitions within

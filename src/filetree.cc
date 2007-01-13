@@ -33,7 +33,6 @@
 
 using namespace Regexxer::FileTreePrivate;
 
-
 namespace
 {
 
@@ -53,7 +52,6 @@ GtkWidget* regexxer_create_file_tree(char*, char*, char*, int, int)
 }
 
 } // anonymous namespace
-
 
 namespace Regexxer
 {
@@ -389,12 +387,12 @@ void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
       if (signal_pulse()) // emit
         break;
 
-      const std::string basename = *pos;
+      const std::string filename = *pos;
 
-      if (!find_data.hidden && *basename.begin() == '.')
+      if (!find_data.hidden && *filename.begin() == '.')
         continue;
 
-      const std::string fullname = build_filename(dirname, basename);
+      const std::string fullname = build_filename(dirname, filename);
 
       if (file_test(fullname, FILE_TEST_IS_SYMLINK))
         continue; // ignore symbolic links
@@ -405,17 +403,16 @@ void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
         // immediately.  The corresponding node will be created on demand if
         // there's actually a matching file in the directory or one of its
         // subdirectories.
-        //
-        ScopedPushDir pushdir (find_data.dirstack, basename);
+        ScopedPushDir pushdir (find_data.dirstack, fullname);
         find_recursively(fullname, find_data); // recurse
       }
       else if (file_test(fullname, FILE_TEST_IS_REGULAR))
       {
-        const ustring displayname = Glib::filename_display_name(basename);
+        const ustring basename = Glib::filename_display_basename(fullname);
 
-        if (find_data.pattern.match(displayname) > 0)
+        if (find_data.pattern.match(basename) > 0)
         {
-          find_add_file(displayname, fullname, find_data);
+          find_add_file(basename, fullname, find_data);
           ++file_count;
         }
       }
@@ -474,7 +471,7 @@ void FileTree::find_fill_dirstack(FindData& find_data)
     if (pdir->second) // node already created
       continue;
 
-    const Glib::ustring dirname = Glib::filename_display_name(pdir->first);
+    const Glib::ustring dirname = Glib::filename_display_basename(pdir->first);
 
     // Build the collate key with a leading '0' so that directories always
     // come first.  This is simpler and faster than explicitely checking for
@@ -531,7 +528,7 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
     catch (const Glib::Error& error)
     {
       error_list->push_back(Util::compose(_("Failed to save file \342\200\234%1\342\200\235: %2"),
-                                          Glib::filename_display_name(fileinfo->fullname),
+                                          Glib::filename_display_basename(fileinfo->fullname),
                                           error.what()));
     }
 

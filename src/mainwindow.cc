@@ -353,7 +353,6 @@ void MainWindow::on_hide()
   // necessary since they'd be deleted in the destructor anyway.  But if we
   // have to do a lot of cleanup the dialogs would stay open for that time,
   // which doesn't look neat.
-
   {
     // Play safe and transfer ownership, and let the dtor do the delete.
     const std::auto_ptr<Gtk::Dialog> temp (about_dialog_);
@@ -743,8 +742,8 @@ void MainWindow::update_preview()
   {
     Glib::ustring preview;
     const int pos = buffer->get_line_preview(entry_substitution_->get_text(), preview);
-    entry_preview_->set_text(preview);
 
+    entry_preview_->set_text(preview);
     controller_.replace.set_enabled(pos >= 0);
 
     // Beware, strange code ahead!
@@ -779,7 +778,7 @@ void MainWindow::update_preview()
 
 void MainWindow::set_title_filename(const std::string& filename)
 {
-  Glib::ustring title = Glib::filename_display_name(Glib::path_get_basename(filename));
+  Glib::ustring title = Glib::filename_display_basename(filename);
 
   title += " (";
   title += Glib::filename_display_name(Util::shorten_pathname(Glib::path_get_dirname(filename)));
@@ -880,7 +879,8 @@ void MainWindow::on_preferences()
   {
     std::auto_ptr<PrefDialog> dialog (new PrefDialog(*window_));
 
-    dialog->get_dialog()->signal_hide().connect(sigc::mem_fun(*this, &MainWindow::on_pref_dialog_hide));
+    dialog->get_dialog()->signal_hide()
+        .connect(sigc::mem_fun(*this, &MainWindow::on_pref_dialog_hide));
     dialog->get_dialog()->show();
 
     pref_dialog_ = dialog;

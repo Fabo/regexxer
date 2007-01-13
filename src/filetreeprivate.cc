@@ -37,29 +37,29 @@ const FileTreeColumns& FileTreeColumns::instance()
   return column_record;
 }
 
-int default_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs)
+int default_sort_func(const Gtk::TreeModel::iterator& a, const Gtk::TreeModel::iterator& b)
 {
   const FileTreeColumns& columns = FileTreeColumns::instance();
 
-  const std::string lhs_key = (*lhs)[columns.collatekey];
-  const std::string rhs_key = (*rhs)[columns.collatekey];
+  const std::string a_key = (*a)[columns.collatekey];
+  const std::string b_key = (*b)[columns.collatekey];
 
-  return lhs_key.compare(rhs_key);
+  return a_key.compare(b_key);
 }
 
-int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs)
+int collatekey_sort_func(const Gtk::TreeModel::iterator& a, const Gtk::TreeModel::iterator& b)
 {
   typedef std::string::difference_type diff_type;
 
   const FileTreeColumns& columns = FileTreeColumns::instance();
 
-  const std::string lhs_key = (*lhs)[columns.collatekey];
-  const std::string rhs_key = (*rhs)[columns.collatekey];
+  const std::string a_key = (*a)[columns.collatekey];
+  const std::string b_key = (*b)[columns.collatekey];
 
-  if (lhs_key.size() > 1 && rhs_key.size() > 1)
-    return lhs_key.compare(1, std::string::npos, rhs_key, 1, std::string::npos);
+  if (a_key.size() > 1 && b_key.size() > 1)
+    return a_key.compare(1, std::string::npos, b_key, 1, std::string::npos);
   else
-    return diff_type(lhs_key.size()) - diff_type(rhs_key.size());
+    return diff_type(a_key.size()) - diff_type(b_key.size());
 }
 
 bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse)
@@ -145,17 +145,16 @@ bool prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* colla
 
 } // namespace FileTreePrivate
 
-
 /**** Regexxer::FileTree::TreeRowRef ***************************************/
 
-FileTree::TreeRowRef::TreeRowRef(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk::TreePath& path)
+FileTree::TreeRowRef::TreeRowRef(const Glib::RefPtr<Gtk::TreeModel>& model,
+                                 const Gtk::TreeModel::Path& path)
 :
   Gtk::TreeRowReference(model, path)
 {}
 
 FileTree::TreeRowRef::~TreeRowRef()
 {}
-
 
 /**** Regexxer::FileTree::MessageList **************************************/
 
@@ -164,7 +163,6 @@ FileTree::MessageList::MessageList()
 
 FileTree::MessageList::~MessageList()
 {}
-
 
 /**** Regexxer::FileTree::Error ********************************************/
 
@@ -192,7 +190,6 @@ const std::list<Glib::ustring>& FileTree::Error::get_error_list() const
   return *error_list_;
 }
 
-
 /**** Regexxer::FileTree::FindData *****************************************/
 
 FileTree::FindData::FindData(Pcre::Pattern& pattern_, bool recursive_, bool hidden_)
@@ -206,7 +203,6 @@ FileTree::FindData::FindData(Pcre::Pattern& pattern_, bool recursive_, bool hidd
 FileTree::FindData::~FindData()
 {}
 
-
 /**** Regexxer::FileTree::FindMatchesData **********************************/
 
 FileTree::FindMatchesData::FindMatchesData(Pcre::Pattern& pattern_, bool multiple_)
@@ -215,7 +211,6 @@ FileTree::FindMatchesData::FindMatchesData(Pcre::Pattern& pattern_, bool multipl
   multiple             (multiple_),
   path_match_first_set (false)
 {}
-
 
 /**** Regexxer::FileTree::ReplaceMatchesData *******************************/
 
@@ -237,7 +232,6 @@ void FileTree::ReplaceMatchesData::undo_stack_push(UndoActionPtr undo_action)
 
   undo_stack->push(UndoActionPtr(new BufferActionShell(filetree, row_reference, undo_action)));
 }
-
 
 /**** Regexxer::FileTree::ScopedBlockSorting *******************************/
 
@@ -264,7 +258,6 @@ FileTree::ScopedBlockSorting::~ScopedBlockSorting()
   filetree_.treestore_->set_sort_column(sort_column_, sort_order_);
   filetree_.set_headers_clickable(true);
 }
-
 
 /**** Regexxer::FileTree::BufferActionShell ********************************/
 

@@ -27,7 +27,6 @@
 #include <gtkmm/treestore.h>
 #include <utility>
 
-
 namespace Regexxer
 {
 
@@ -43,7 +42,6 @@ namespace FileTreePrivate
 using Util::shared_dynamic_cast;
 using Util::shared_polymorphic_cast;
 
-
 struct FileTreeColumns : public Gtk::TreeModel::ColumnRecord
 {
   Gtk::TreeModelColumn<Glib::ustring>   filename;
@@ -57,7 +55,6 @@ private:
   FileTreeColumns() { add(filename); add(collatekey); add(matchcount); add(fileinfo); }
 };
 
-
 inline
 FileInfoPtr get_fileinfo_from_iter(const Gtk::TreeModel::iterator& iter)
 {
@@ -70,7 +67,6 @@ int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeMod
 
 bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
 bool prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
-
 
 typedef std::pair<std::string,Gtk::TreeModel::iterator> DirNodePair;
 typedef std::list<DirNodePair>                          DirStack;
@@ -92,7 +88,6 @@ public:
 
 } // namespace FileTreePrivate
 
-
 /* This is just a Gtk::TreeRowReference wrapper that can be used with Util::SharedPtr<>.
  */
 class FileTree::TreeRowRef : public Util::SharedObject, public Gtk::TreeRowReference
@@ -106,7 +101,6 @@ private:
   FileTree::TreeRowRef& operator=(const FileTree::TreeRowRef&);
 };
 
-
 /* This is just a std::list<> wrapper that can be used with Util::SharedPtr<>.
  */
 class FileTree::MessageList : public Util::SharedObject, public std::list<Glib::ustring>
@@ -119,7 +113,6 @@ private:
   MessageList(const FileTree::MessageList&);
   FileTree::MessageList& operator=(const FileTree::MessageList&);
 };
-
 
 struct FileTree::FindData
 {
@@ -137,7 +130,6 @@ private:
   FileTree::FindData& operator=(const FileTree::FindData&);
 };
 
-
 struct FileTree::FindMatchesData
 {
   FindMatchesData(Pcre::Pattern& pattern_, bool multiple_);
@@ -150,7 +142,6 @@ private:
   FindMatchesData(const FileTree::FindMatchesData&);
   FileTree::FindMatchesData& operator=(const FileTree::FindMatchesData&);
 };
-
 
 struct FileTree::ReplaceMatchesData
 {
@@ -170,7 +161,6 @@ private:
   FileTree::ReplaceMatchesData& operator=(const FileTree::ReplaceMatchesData&);
 };
 
-
 class FileTree::ScopedBlockSorting
 {
 public:
@@ -185,7 +175,6 @@ private:
   ScopedBlockSorting(const FileTree::ScopedBlockSorting&);
   FileTree::ScopedBlockSorting& operator=(const FileTree::ScopedBlockSorting&);
 };
-
 
 class FileTree::BufferActionShell : public UndoAction
 {
