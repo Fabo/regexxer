@@ -1,5 +1,18 @@
 2007-01-14  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/translation.{cc,h} (Util::compose_argv): New function with
+	the functionality of compose_impl() but using a format string of
+	type const char*.  This implementation operates on bytes instead of
+	Unicode code points, and copies the chunks between placeholders in
+	one go instead of each character separately.
+	(Util::compose): Call compose_argv() instead of compose_impl()
+	and change the type of the format argument to const char* because
+	the format string really should be a string literal.  Also, inline
+	all of these overloads since they just forward their arguments to
+	compose_argv() anyway, so that inlining actually reduces code size.
+
+2007-01-14  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/fileshared.h: Replace occurrences of "lhs" and "rhs" with
 	"a" and "b", respectively.
 	(BoundState): Remove BOUND_MASK value from enumeration as it is

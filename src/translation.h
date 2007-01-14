@@ -35,14 +35,41 @@ namespace Util
 {
 
 void initialize_gettext(const char* domain, const char* localedir);
-const char* translate(const char* msgid) G_GNUC_PURE G_GNUC_FORMAT(1);
+const char* translate(const char* msgid) G_GNUC_FORMAT(1);
 
-Glib::ustring compose(const Glib::ustring& format, const Glib::ustring& arg1);
-Glib::ustring compose(const Glib::ustring& format, const Glib::ustring& arg1,
-                                                   const Glib::ustring& arg2);
-Glib::ustring compose(const Glib::ustring& format, const Glib::ustring& arg1,
-                                                   const Glib::ustring& arg2,
-                                                   const Glib::ustring& arg3);
+Glib::ustring compose_argv(const char* format, int argc, const Glib::ustring *const * argv);
+
+/*
+ * The compose functions substitute placeholders in a format string with
+ * the referenced arguments.  The template string should be in qt-format,
+ * that is "%1", "%2", ..., "%9" are used as placeholders and "%%" denotes
+ * a literal "%".  Substitutions may be reordered.
+ *
+ * Note that the format argument is of type const char* because the format
+ * should generally not be computed.  It should be either a literal string
+ * or the result of a call to Util::translate().
+ */
+inline
+Glib::ustring compose(const char* format, const Glib::ustring& s1)
+{
+  const Glib::ustring *const argv[] = { &s1 };
+  return compose_argv(format, G_N_ELEMENTS(argv), argv);
+}
+
+inline
+Glib::ustring compose(const char* format, const Glib::ustring& s1, const Glib::ustring& s2)
+{
+  const Glib::ustring *const argv[] = { &s1, &s2 };
+  return compose_argv(format, G_N_ELEMENTS(argv), argv);
+}
+
+inline
+Glib::ustring compose(const char* format, const Glib::ustring& s1, const Glib::ustring& s2,
+                                          const Glib::ustring& s3)
+{
+  const Glib::ustring *const argv[] = { &s1, &s2, &s3 };
+  return compose_argv(format, G_N_ELEMENTS(argv), argv);
+}
 
 } // namespace Util
 

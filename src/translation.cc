@@ -27,63 +27,7 @@
 
 #include <glib.h>
 #include <glibmm.h>
-
-namespace
-{
-
-static
-Glib::ustring compose_impl(const Glib::ustring& format,
-                           int argc, const Glib::ustring *const * argv)
-{
-  using Glib::ustring;
-
-  ustring result;
-  ustring::size_type result_size = format.raw().size();
-
-  // Guesstimate the final string size.
-  for (int i = 0; i < argc; ++i)
-    result_size += argv[i]->raw().size();
-
-  result.reserve(result_size);
-
-  ustring::const_iterator       p    = format.begin();
-  const ustring::const_iterator pend = format.end();
-
-  while (p != pend)
-  {
-    gunichar uc = *p++;
-
-    if (uc == '%' && p != pend)
-    {
-      uc = *p++;
-
-      if (uc != '%')
-      {
-        const int index = Glib::Unicode::digit_value(uc) - 1;
-
-        if (index >= 0 && index < argc)
-        {
-          result += *argv[index];
-          continue;
-        }
-
-        const ustring buf (1, uc);
-
-        g_warning("Util::compose(): invalid substitution \"%%%s\" in format string \"%s\"",
-                  buf.c_str(), format.c_str());
-
-        result += '%'; // print invalid substitutions literally
-      }
-    }
-
-    result += uc;
-  }
-
-  return result;
-}
-
-} // anonymous namespace
-
+#include <cstring>
 
 #if ENABLE_NLS
 void Util::initialize_gettext(const char* domain, const char* localedir)
@@ -108,23 +52,52 @@ const char* Util::translate(const char* msgid)
 #endif
 }
 
-Glib::ustring Util::compose(const Glib::ustring& format, const Glib::ustring& arg1)
+Glib::ustring Util::compose_argv(const char* format, int argc, const Glib::ustring *const * argv)
 {
-  const Glib::ustring *const argv[] = { &arg1 };
-  return compose_impl(format, G_N_ELEMENTS(argv), argv);
-}
+  const std::string::size_type format_size = std::strlen(format);
+  std::string::size_type       result_size = format_size;
 
-Glib::ustring Util::compose(const Glib::ustring& format, const Glib::ustring& arg1,
-                                                         const Glib::ustring& arg2)
-{
-  const Glib::ustring *const argv[] = { &arg1, &arg2 };
-  return compose_impl(format, G_N_ELEMENTS(argv), argv);
-}
+  // Guesstimate the final string size.
+  for (int i = 0; i < argc; ++i)
+    result_size += argv[i]->raw().size();
 
-Glib::ustring Util::compose(const Glib::ustring& format, const Glib::ustring& arg1,
-                                                         const Glib::ustring& arg2,
-                                                         const Glib::ustring& arg3)
-{
-  const Glib::ustring *const argv[] = { &arg1, &arg2, &arg3 };
-  return compose_impl(format, G_N_ELEMENTS(argv), argv);
+  std::string result;
+  result.reserve(result_size);
+
+  const char* start = format;
+
+  while (const char* stop = std::strchr(start, '%'))
+  {
+    if (stop[1] == '%')
+    {
+      result.append(start, stop - start + 1);
+      start = stop + 2;
+    }
+    else
+    {
+      const int index = Glib::Ascii::digit_value(stop[1]) - 1;
+
+      if (index >= 0 && index < argc)
+      {
+        result.append(start, stop - start);
+        result += argv[index]->raw();
+        start = stop + 2;
+      }
+      else
+      {
+        const char *const next = (stop[1] != '\0') ? g_utf8_next_char(stop + 1) : (stop + 1);
+
+        // Copy invalid substitutions literally to the output.
+        result.append(start, next - start);
+
+        g_warning("invalid substitution \"%s\" in format string \"%s\"",
+                  result.c_str() + result.size() - (next - stop), format);
+        start = next;
+      }
+    }
+  }
+
+  result.append(start, format + format_size - start);
+
+  return result;
 }
