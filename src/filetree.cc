@@ -63,6 +63,7 @@ FileTree::FileTree()
   sum_matches_    (0)
 {
   using namespace Gtk;
+  using sigc::mem_fun;
 
   set_model(treestore_);
   const FileTreeColumns& model_columns = FileTreeColumns::instance();
@@ -71,8 +72,8 @@ FileTree::FileTree()
   treestore_->set_sort_func(model_columns.collatekey, &collatekey_sort_func);
   treestore_->set_sort_column(TreeStore::DEFAULT_SORT_COLUMN_ID, SORT_ASCENDING);
 
-  treestore_->signal_rows_reordered().connect(
-      sigc::mem_fun(*this, &FileTree::on_treestore_rows_reordered));
+  treestore_->signal_rows_reordered()
+      .connect(mem_fun(*this, &FileTree::on_treestore_rows_reordered));
 
   {
     Column *const column = new Column(_("File"));
@@ -85,15 +86,14 @@ FileTree::FileTree()
     column->pack_start(*manage(cell_filename));
 
     column->add_attribute(cell_filename->property_text(), model_columns.filename);
-    column->set_cell_data_func(*cell_icon,     sigc::mem_fun(*this, &FileTree::icon_cell_data_func));
-    column->set_cell_data_func(*cell_filename, sigc::mem_fun(*this, &FileTree::text_cell_data_func));
+    column->set_cell_data_func(*cell_icon,     mem_fun(*this, &FileTree::icon_cell_data_func));
+    column->set_cell_data_func(*cell_filename, mem_fun(*this, &FileTree::text_cell_data_func));
 
     column->set_resizable(true);
     column->set_expand(true);
 
     column->set_sort_column(model_columns.collatekey);
   }
-
   {
     Column *const column = new Column(_("#"));
     append_column(*manage(column));
@@ -102,7 +102,7 @@ FileTree::FileTree()
     column->pack_start(*manage(cell_matchcount));
 
     column->add_attribute(cell_matchcount->property_text(), model_columns.matchcount);
-    column->set_cell_data_func(*cell_matchcount, sigc::mem_fun(*this, &FileTree::text_cell_data_func));
+    column->set_cell_data_func(*cell_matchcount, mem_fun(*this, &FileTree::text_cell_data_func));
 
     column->set_alignment(1.0);
     cell_matchcount->property_xalign() = 1.0;
@@ -115,10 +115,10 @@ FileTree::FileTree()
   const Glib::RefPtr<TreeSelection> selection = get_selection();
 
   selection->set_select_function(&FileTree::select_func);
-  selection->signal_changed().connect(sigc::mem_fun(*this, &FileTree::on_selection_changed));
+  selection->signal_changed().connect(mem_fun(*this, &FileTree::on_selection_changed));
 
   Gnome::Conf::Client::get_default_client()
-      ->signal_value_changed().connect(sigc::mem_fun(*this, &FileTree::on_conf_value_changed));
+      ->signal_value_changed().connect(mem_fun(*this, &FileTree::on_conf_value_changed));
 }
 
 FileTree::~FileTree()
@@ -150,7 +150,7 @@ void FileTree::find_files(const std::string& dirname, Pcre::Pattern& pattern,
   // slightly.  This in turn confuses TreeView::set_cursor() -- the first
   // call after the tree was completely filled just doesn't scroll.
   if (toplevel_.file_count > 0)
-    scroll_to_row(Gtk::TreePath(1U, 0));
+    scroll_to_row(Gtk::TreeModel::Path(1u, 0));
 
   signal_bound_state_changed(); // emit
 
@@ -229,7 +229,7 @@ BoundState FileTree::get_bound_state()
   {
     if (const Gtk::TreeModel::iterator iter = get_selection()->get_selected())
     {
-      Gtk::TreePath path (iter);
+      Gtk::TreeModel::Path path (iter);
 
       if (path > path_match_first_)
         bound &= ~BOUND_FIRST;
@@ -365,10 +365,11 @@ void FileTree::text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel
 }
 
 // static
-bool FileTree::select_func(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk::TreePath& path, bool)
+bool FileTree::select_func(const Glib::RefPtr<Gtk::TreeModel>& model,
+                           const Gtk::TreeModel::Path& path, bool)
 {
   // Don't allow selection of directory nodes.
-  return get_fileinfo_from_iter(model->get_iter(path));
+  return (get_fileinfo_from_iter(model->get_iter(path)) != 0);
 }
 
 void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
@@ -566,10 +567,10 @@ bool FileTree::find_matches_at_path_iter(const Gtk::TreeModel::Path& path,
     // are actually any handlers connected to the signal.  find_matches() can
     // then check whether the slot is empty to avoid providing arguments that
     // are never going to be used.
-    const int new_match_count = buffer->find_matches(
-        find_data.pattern, find_data.multiple,
-        (signal_feedback.empty()) ? sigc::slot<void,int,const Glib::ustring&>()
-                                  : sigc::bind(signal_feedback.make_slot(), fileinfo));
+    const int new_match_count =
+        buffer->find_matches(find_data.pattern, find_data.multiple, (signal_feedback.empty())
+                             ? sigc::slot<void, int, const Glib::ustring&>()
+                             : sigc::bind(signal_feedback.make_slot(), fileinfo));
 
     if (new_match_count > 0)
     {
@@ -623,9 +624,8 @@ bool FileTree::replace_matches_at_path_iter(const Gtk::TreeModel::Path& path,
         // a single user action object for all replacements in all buffers.
         // Note that the caller must block conn_undo_stack_push_ to avoid
         // double notification.
-        Util::ScopedConnection conn1 (buffer->signal_undo_stack_push.
-                                      connect(replace_data.slot_undo_stack_push));
-
+        Util::ScopedConnection conn1 (buffer->signal_undo_stack_push
+                                        .connect(replace_data.slot_undo_stack_push));
         Util::ScopedConnection conn2 (buffer->signal_pulse.connect(signal_pulse.make_slot()));
 
         buffer->replace_all_matches(replace_data.substitution);
@@ -643,7 +643,7 @@ bool FileTree::replace_matches_at_path_iter(const Gtk::TreeModel::Path& path,
   return false;
 }
 
-void FileTree::expand_and_select(const Gtk::TreePath& path)
+void FileTree::expand_and_select(const Gtk::TreeModel::Path& path)
 {
   expand_to_path(path);
   set_cursor(path);
@@ -729,7 +729,7 @@ void FileTree::on_selection_changed()
           connect(sigc::mem_fun(*this, &FileTree::on_buffer_undo_stack_push));
     }
 
-    last_selected_rowref_.reset(new TreeRowRef(treestore_, Gtk::TreePath(iter)));
+    last_selected_rowref_.reset(new TreeRowRef(treestore_, Gtk::TreeModel::Path(iter)));
   }
 
   if (last_selected_ && last_selected_ != fileinfo &&
@@ -792,7 +792,7 @@ void FileTree::on_buffer_match_count_changed()
     // The range should've been set up already since old_sum_matches > 0.
     g_return_if_fail(path_match_first_ <= path_match_last_);
 
-    Gtk::TreePath path (iter);
+    Gtk::TreeModel::Path path (iter);
 
     if (old_match_count == 0)
     {
@@ -900,7 +900,7 @@ void FileTree::propagate_modified_change(const Gtk::TreeModel::iterator& pos, bo
   const int difference = (modified) ? 1 : -1;
   const FileTreeColumns& columns = FileTreeColumns::instance();
 
-  Gtk::TreePath path (pos);
+  Gtk::TreeModel::Path path (pos);
   treestore_->row_changed(path, pos);
 
   for (Gtk::TreeModel::iterator iter = pos->parent(); iter && path.up(); iter = iter->parent())
@@ -949,7 +949,7 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
   {
     // Trigger signal_row_changed() because the value of fileinfo->load_failed
     // changed, which means we have to change icon and color of the row.
-    treestore_->row_changed(Gtk::TreePath(iter), iter);
+    treestore_->row_changed(Gtk::TreeModel::Path(iter), iter);
   }
 }
 

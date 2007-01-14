@@ -62,8 +62,8 @@ FileInfoPtr get_fileinfo_from_iter(const Gtk::TreeModel::iterator& iter)
   return shared_dynamic_cast<FileInfo>(base);
 }
 
-int default_sort_func   (const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs);
-int collatekey_sort_func(const Gtk::TreeModel::iterator& lhs, const Gtk::TreeModel::iterator& rhs);
+int default_sort_func   (const Gtk::TreeModel::iterator& a, const Gtk::TreeModel::iterator& b);
+int collatekey_sort_func(const Gtk::TreeModel::iterator& a, const Gtk::TreeModel::iterator& b);
 
 bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
 bool prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
@@ -81,7 +81,8 @@ private:
 
 public:
   ScopedPushDir(DirStack& dirstack, const std::string& dirname)
-    : dirstack_ (dirstack) { dirstack_.push_back(DirNodePair(dirname, Gtk::TreeIter())); }
+    : dirstack_ (dirstack)
+    { dirstack_.push_back(DirNodePair(dirname, Gtk::TreeModel::iterator())); }
 
   ~ScopedPushDir() { dirstack_.pop_back(); }
 };
@@ -93,7 +94,7 @@ public:
 class FileTree::TreeRowRef : public Util::SharedObject, public Gtk::TreeRowReference
 {
 public:
-  TreeRowRef(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk::TreePath& path);
+  TreeRowRef(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk::TreeModel::Path& path);
   ~TreeRowRef();
 
 private:

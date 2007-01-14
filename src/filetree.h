@@ -28,14 +28,13 @@
 
 #include <gdkmm/color.h>
 #include <gdkmm/pixbuf.h>
-#include <gtkmm/treepath.h>
+#include <gtkmm/treemodel.h>
 #include <gtkmm/treeview.h>
 #include <list>
 
 namespace Gtk   { class TreeStore; }
-namespace Pcre  { class Pattern;   }
+namespace Pcre  { class Pattern; }
 namespace Gnome { namespace Conf { class Value; } }
-
 
 namespace Regexxer
 {
@@ -76,7 +75,7 @@ public:
   sigc::signal<void,UndoActionPtr>    signal_undo_stack_push;
 
   // Provide line number, subject and file info for match location output.
-  sigc::signal<void,int,const Glib::ustring&,FileInfoPtr> signal_feedback;
+  sigc::signal<void, int, const Glib::ustring&, FileInfoPtr> signal_feedback;
 
 protected:
   virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
@@ -112,19 +111,20 @@ private:
   Util::AutoConnection          conn_modified_changed_;
   Util::AutoConnection          conn_undo_stack_push_;
 
-  Gtk::TreePath                 path_match_first_;
-  Gtk::TreePath                 path_match_last_;
+  Gtk::TreeModel::Path          path_match_first_;
+  Gtk::TreeModel::Path          path_match_last_;
 
   std::string                   fallback_encoding_;
 
   void icon_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
   void text_cell_data_func(Gtk::CellRenderer* cell, const Gtk::TreeModel::iterator& iter);
 
-  static bool select_func(const Glib::RefPtr<Gtk::TreeModel>& model, const Gtk::TreePath& path,
-                          bool currently_selected);
+  static bool select_func(const Glib::RefPtr<Gtk::TreeModel>& model,
+                          const Gtk::TreeModel::Path& path, bool currently_selected);
 
   void find_recursively(const std::string& dirname, FindData& find_data);
-  void find_add_file(const Glib::ustring& basename, const std::string& fullname, FindData& find_data);
+  void find_add_file(const Glib::ustring& basename, const std::string& fullname,
+                     FindData& find_data);
   void find_fill_dirstack(FindData& find_data);
   void find_increment_file_count(FindData& find_data, int file_count);
 
@@ -139,7 +139,7 @@ private:
                                     const Gtk::TreeModel::iterator& iter,
                                     ReplaceMatchesData& replace_data);
 
-  void expand_and_select(const Gtk::TreePath& path);
+  void expand_and_select(const Gtk::TreeModel::Path& path);
 
   void on_treestore_rows_reordered(const Gtk::TreeModel::Path& path,
                                    const Gtk::TreeModel::iterator& iter, int* order);
@@ -157,7 +157,6 @@ private:
 
   void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
 };
-
 
 class FileTree::Error
 {

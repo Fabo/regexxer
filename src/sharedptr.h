@@ -23,7 +23,6 @@
 
 #include <algorithm>
 
-
 namespace Util
 {
 
@@ -35,12 +34,13 @@ template <class> class SharedPtr;
 class SharedObject
 {
 protected:
-  SharedObject(); // initial reference count is 0
-  ~SharedObject();
+  inline SharedObject(); // initial reference count is 0
+  inline ~SharedObject();
 
 private:
   mutable long refcount_;
 
+  // noncopyable
   SharedObject(const SharedObject&);
   SharedObject& operator=(const SharedObject&);
 
@@ -111,11 +111,22 @@ private:
   T* ptr_;
 };
 
-// Explicitely forbid the usage of a generic SharedPtr<SharedObject>
-// because class SharedObject doesn't have a virtual destructor.
+/*
+ * Explicitely forbid the usage of a generic SharedPtr<SharedObject>
+ * because class SharedObject doesn't have a virtual destructor.
+ */
 template <> class SharedPtr<SharedObject> {};
 template <> class SharedPtr<const SharedObject> {};
 
+inline
+SharedObject::SharedObject()
+:
+  refcount_ (0)
+{}
+
+inline
+SharedObject::~SharedObject()
+{}
 
 template <class T> inline
 SharedPtr<T>::SharedPtr()
@@ -139,10 +150,11 @@ SharedPtr<T>::SharedPtr(T* ptr)
     ++ptr_->refcount_;
 }
 
-// Note that reset() and get() are defined here and not in declaration order
-// on purpose -- defining them before they're first used allows for maximum
-// inlining.
-
+/*
+ * Note that reset() and get() are defined here and not in declaration order
+ * on purpose -- defining them before their first use is required with some
+ * compilers for for maximum inlining.
+ */
 template <class T> inline
 void SharedPtr<T>::swap(SharedPtr<T>& other)
 {
@@ -217,11 +229,10 @@ SharedPtr<T>::operator const void*() const
   return ptr_;
 }
 
-
 template <class T> inline
-void swap(SharedPtr<T>& lhs, SharedPtr<T>& rhs)
+void swap(SharedPtr<T>& a, SharedPtr<T>& b)
 {
-  lhs.swap(rhs);
+  a.swap(b);
 }
 
 template <class T, class U> inline

@@ -1,5 +1,17 @@
 2007-01-14  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/filetree.{cc,h}: Clean up the code a bit.  In particular,
+	change occurrences of Gtk::TreePath to Gtk::TreeModel::Path.
+	* src/filetreeprivate.{cc,h}: Likewise.
+
+	* src/sharedptr.h (Util::SharedPtr::SharedPtr): Inline.
+	(Util::SharedPtr::~SharedPtr): Remove assertion and inline.
+	* src/sharedptr.cc: Remove now empty file.
+
+	* Makefile.am (src_regexxer_SOURCES): Remove src/sharedptr.cc.
+
+2007-01-14  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/filetree.cc (regexxer_create_file_tree): Move function to
 	the global namespace.  Putting it inside an anonymous namespace
 	just obfuscated the code, as this function is exported for the

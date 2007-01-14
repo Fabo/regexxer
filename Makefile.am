@@ -53,7 +53,6 @@ src_regexxer_SOURCES =		\
 	src/pcreshell.h		\
 	src/prefdialog.cc	\
 	src/prefdialog.h	\
-	src/sharedptr.cc	\
 	src/sharedptr.h		\
 	src/signalutils.cc	\
 	src/signalutils.h	\
