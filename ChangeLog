@@ -1,5 +1,12 @@
 2007-01-14  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/fileshared.h: Replace occurrences of "lhs" and "rhs" with
+	"a" and "b", respectively.
+	(BoundState): Remove BOUND_MASK value from enumeration as it is
+	nowhere being used.
+
+2007-01-14  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/filetree.{cc,h}: Clean up the code a bit.  In particular,
 	change occurrences of Gtk::TreePath to Gtk::TreeModel::Path.
 	* src/filetreeprivate.{cc,h}: Likewise.

@@ -28,7 +28,6 @@
 #include <utility>
 #include <vector>
 
-
 namespace Pcre { class Pattern; }
 
 namespace Regexxer
@@ -38,40 +37,39 @@ enum BoundState
 {
   BOUND_NONE  = 0,
   BOUND_FIRST = 1 << 0,
-  BOUND_LAST  = 1 << 1,
-  BOUND_MASK  = BOUND_FIRST | BOUND_LAST
+  BOUND_LAST  = 1 << 1
 };
 
-inline BoundState operator|(BoundState lhs, BoundState rhs)
-  { return static_cast<BoundState>(static_cast<unsigned>(lhs) | static_cast<unsigned>(rhs)); }
+inline BoundState operator|(BoundState a, BoundState b)
+  { return static_cast<BoundState>(static_cast<unsigned>(a) | static_cast<unsigned>(b)); }
 
-inline BoundState operator&(BoundState lhs, BoundState rhs)
-  { return static_cast<BoundState>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs)); }
+inline BoundState operator&(BoundState a, BoundState b)
+  { return static_cast<BoundState>(static_cast<unsigned>(a) & static_cast<unsigned>(b)); }
 
-inline BoundState operator^(BoundState lhs, BoundState rhs)
-  { return static_cast<BoundState>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs)); }
+inline BoundState operator^(BoundState a, BoundState b)
+  { return static_cast<BoundState>(static_cast<unsigned>(a) ^ static_cast<unsigned>(b)); }
 
 inline BoundState operator~(BoundState flags)
   { return static_cast<BoundState>(~static_cast<unsigned>(flags)); }
 
-inline BoundState& operator|=(BoundState& lhs, BoundState rhs)
-  { return (lhs = static_cast<BoundState>(static_cast<unsigned>(lhs) | static_cast<unsigned>(rhs))); }
+inline BoundState& operator|=(BoundState& a, BoundState b)
+  { return (a = static_cast<BoundState>(static_cast<unsigned>(a) | static_cast<unsigned>(b))); }
 
-inline BoundState& operator&=(BoundState& lhs, BoundState rhs)
-  { return (lhs = static_cast<BoundState>(static_cast<unsigned>(lhs) & static_cast<unsigned>(rhs))); }
+inline BoundState& operator&=(BoundState& a, BoundState b)
+  { return (a = static_cast<BoundState>(static_cast<unsigned>(a) & static_cast<unsigned>(b))); }
 
-inline BoundState& operator^=(BoundState& lhs, BoundState rhs)
-  { return (lhs = static_cast<BoundState>(static_cast<unsigned>(lhs) ^ static_cast<unsigned>(rhs))); }
+inline BoundState& operator^=(BoundState& a, BoundState b)
+  { return (a = static_cast<BoundState>(static_cast<unsigned>(a) ^ static_cast<unsigned>(b))); }
 
-
-// This struct holds all the information that's necessary to locate a
-// match's position in the buffer and to substitute captured substrings
-// into a replacement string.  The latter is achived by storing the whole
-// subject string (i.e. the line in the buffer) together with a table of
-// indices into it.  This arrangement should consume less memory than the
-// alternative of storing a vector of captured substrings since we want
-// to support $&, $`, $' too.
-//
+/*
+ * This struct holds all the information that's necessary to locate a
+ * match's position in the buffer and to substitute captured substrings
+ * into a replacement string.  The latter is achieved by storing the whole
+ * subject string (i.e. the line in the buffer) together with a table of
+ * indices into it.  This arrangement should consume less memory than the
+ * alternative of storing a vector of captured substrings since we want
+ * to support $&, $`, $' too.
+ */
 struct MatchData : public Util::SharedObject
 {
   int                               index;
@@ -96,12 +94,13 @@ private:
 
 typedef Util::SharedPtr<MatchData> MatchDataPtr;
 
-/* Sort predicate for use with std::set<>.
+/*
+ * Sort predicate for use with std::set<>.
  */
 struct MatchDataLess : public std::binary_function<MatchDataPtr, MatchDataPtr, bool>
 {
-  bool operator()(const MatchDataPtr& lhs, const MatchDataPtr& rhs) const
-    { return (lhs->index < rhs->index); }
+  bool operator()(const MatchDataPtr& a, const MatchDataPtr& b) const
+    { return (a->index < b->index); }
 };
 
 } // namespace Regexxer
