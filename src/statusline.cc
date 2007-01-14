@@ -27,10 +27,9 @@
 #include <sstream>
 #include <stdexcept>
 
-
-namespace
-{
-
+/*
+ * Custom widget creation function for libglade.
+ */
 extern "C"
 GtkWidget* regexxer_create_status_line(char*, char*, char*, int, int)
 {
@@ -45,9 +44,6 @@ GtkWidget* regexxer_create_status_line(char*, char*, char*, int, int)
     g_return_val_if_reached(0);
   }
 }
-
-} // anonymous namespace
-
 
 namespace Regexxer
 {
@@ -78,7 +74,6 @@ private:
   void recalculate_label_width();
   void on_label_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
 };
-
 
 CounterBox::CounterBox(const Glib::ustring& label)
 :
@@ -235,7 +230,6 @@ void CounterBox::on_label_style_changed(const Glib::RefPtr<Gtk::Style>&)
 
   recalculate_label_width();
 }
-
 
 /**** Regexxer::StatusLine *************************************************/
 

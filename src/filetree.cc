@@ -31,11 +31,9 @@
 
 #include <config.h>
 
-using namespace Regexxer::FileTreePrivate;
-
-namespace
-{
-
+/*
+ * Custom widget creation function for libglade.
+ */
 extern "C"
 GtkWidget* regexxer_create_file_tree(char*, char*, char*, int, int)
 {
@@ -51,10 +49,10 @@ GtkWidget* regexxer_create_file_tree(char*, char*, char*, int, int)
   }
 }
 
-} // anonymous namespace
-
 namespace Regexxer
 {
+
+using namespace Regexxer::FileTreePrivate;
 
 /**** Regexxer::FileTree ***************************************************/
 
