@@ -1,3 +1,8 @@
+2007-01-14  Alexander Shopov  <ash@contact.bg>
+
+	* bg.po: Updated Bulgarian translation by
+	Yavor Doganov <yavor@doganov.org>
+
 2007-01-11  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* de.po ("C_urrent match color:"): Move accelerator from "g" to "T"

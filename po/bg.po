@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer trunk\n"
-"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/\n"
-"POT-Creation-Date: 2007-01-08 22:30+0200\n"
-"PO-Revision-Date: 2007-01-08 16:59+0200\n"
+"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
+"POT-Creation-Date: 2007-01-14 21:22+0200\n"
+"PO-Revision-Date: 2007-01-12 19:12+0200\n"
 "Last-Translator: Yavor Doganov <yavor@doganov.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:843
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
 msgstr "Търсене и замяна с регулярни изрази"
 
@@ -40,8 +40,8 @@ msgstr "Цвят на съвпаденията"
 #: ../ui/regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
-"for a complete list of possible values."
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
+"a complete list of possible values."
 msgstr ""
 "Име на кодовата таблица, която да се използва, ако файлът не може да се "
 "прочете нито с Уникод, нито с кодовата таблица на текущия локал. Използвайте "
@@ -69,8 +69,8 @@ msgstr "Шрифтът, използван в текстовия редакто�
 
 #: ../ui/regexxer.schemas.in.h:9
 msgid ""
-"The style of the application’s toolbar. Possible values are “icons”, “text"
-"”, “both”, and “both-horiz”."
+"The style of the application’s toolbar. Possible values are “icons”, “text”, "
+"“both”, and “both-horiz”."
 msgstr ""
 "Видът на лентата с инструменти на програмата. Възможните стойности са "
 "„icons“, „text“, „both“ и „both-horiz“."
@@ -79,30 +79,29 @@ msgstr ""
 msgid "Toolbar style"
 msgstr "Вид на лентата с инструменти"
 
-#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "Неуспех при прочитането на файла:"
 
-#: ../src/filetree.cc:81
+#: ../src/filetree.cc:79
 msgid "File"
 msgstr "Файл"
 
-#: ../src/filetree.cc:101
+#: ../src/filetree.cc:98
 msgid "#"
 msgstr "бр."
 
-#: ../src/filetree.cc:532
+#: ../src/filetree.cc:529
 #, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Грешка при запазване на файла „%1“: %2"
 
-#: ../src/filetree.cc:949
+#: ../src/filetree.cc:945
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "„%1“ изглежда е двоичен файл."
 
-#: ../src/main.cc:94
+#: ../src/main.cc:77
 msgid "Save _all"
 msgstr "Запазване на _всички"
 
@@ -158,7 +157,7 @@ msgstr "Без автоматично започване на търсенето
 msgid "[FOLDER]"
 msgstr "[ПАПКА]"
 
-#: ../src/mainwindow.cc:404
+#: ../src/mainwindow.cc:413
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -166,7 +165,7 @@ msgstr ""
 "Някои файлове още не са запазени.\n"
 "Да бъде ли все пак спряна програмата?"
 
-#: ../src/mainwindow.cc:417
+#: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -174,37 +173,19 @@ msgstr ""
 "Някои файлове още не са запазени.\n"
 "Да се продължи ли въпреки това?"
 
-#: ../src/mainwindow.cc:445
+#: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
 msgstr "Шаблонът за търсене на файл не е правилен."
 
-#: ../src/mainwindow.cc:451
+#: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
 msgstr "Грешки при търсенето:"
 
-#: ../src/mainwindow.cc:476
-#, qt-format
-msgid ""
-"Error in regular expression at “%1” (index %2):\n"
-"%3"
-msgstr ""
-"Грешка в регулярния израз около „%1“ (индекс %2):\n"
-"%3"
-
-#: ../src/mainwindow.cc:478
-#, qt-format
-msgid ""
-"Error in regular expression:\n"
-"%1"
-msgstr ""
-"Грешка в регулярния израз:\n"
-"%1"
-
-#: ../src/mainwindow.cc:700
+#: ../src/mainwindow.cc:708
 msgid "The following errors occurred during save:"
 msgstr "Грешки при запазването:"
 
-#: ../src/mainwindow.cc:844
+#: ../src/mainwindow.cc:854
 msgid "translator-credits"
 msgstr ""
 "Ясен Праматаров <yasen@lindeas.com>\n"
@@ -213,13 +194,31 @@ msgstr ""
 "Научете повече за нас на http://gnome.cult.bg\n"
 "Докладвайте за грешки на http://gnome.cult.bg/bugs"
 
-#: ../src/pcreshell.cc:58
+#: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
 msgstr ""
 "Използването на последователността \\C за откриване на отделен байт не се "
 "поддържа."
 
-#: ../src/pcreshell.cc:148
+#: ../src/pcreshell.cc:84
+#, qt-format
+msgid ""
+"Error in regular expression at “%1” (index %2):\n"
+"%3"
+msgstr ""
+"Грешка в регулярния израз около „%1“ (индекс %2):\n"
+"%3"
+
+#: ../src/pcreshell.cc:89
+#, qt-format
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"Грешка в регулярния израз:\n"
+"%1"
+
+#: ../src/pcreshell.cc:171
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
@@ -227,28 +226,27 @@ msgstr ""
 "Достигнато е вътрешното ограничение за рекурсивно търсене на системата за "
 "регулярни изрази."
 
-#: ../src/prefdialog.cc:248
+#: ../src/prefdialog.cc:249
 #, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "„%1“ не е правилна кодова таблица."
 
-#: ../src/statusline.cc:264
+#: ../src/statusline.cc:258
 msgid "Stop"
 msgstr "Прекъсване"
 
-#: ../src/statusline.cc:271
+#: ../src/statusline.cc:265
 msgid "File:"
 msgstr "Файлове:"
 
-#: ../src/statusline.cc:274
+#: ../src/statusline.cc:268
 msgid "Match:"
 msgstr "Съвпадения:"
 
-#: ../src/statusline.cc:285
+#: ../src/statusline.cc:279
 msgid "Cancels the running search"
 msgstr "Отмяна на действащото търсене"
 
-#. namespace Regexxer
 #: ../ui/mainwindow.glade.h:1
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
@@ -369,7 +367,7 @@ msgid ""
 "\\L, \\U and \\E are supported as well."
 msgstr ""
 "Новият низ за замяна. Както и в Пърл, можете да обработвате части от "
-"съвпадението с използване на $1, $2, и т.н. или дори $+, $&, $` and·$'. "
+"съвпадението с използване на $1, $2, и т.н. или дори $+, $&, $` и $'. "
 "Операторите \\l, \\u, \\L, \\U и \\E също се поддържат."
 
 #: ../ui/mainwindow.glade.h:31
