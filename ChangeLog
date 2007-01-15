@@ -1,5 +1,9 @@
 2007-01-14  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* MAINTAINERS: Add my real name.
+
+2007-01-14  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/translation.{cc,h} (Util::compose_argv): New function with
 	the functionality of compose_impl() but using a format string of
 	type const char*.  This implementation operates on bytes instead of
