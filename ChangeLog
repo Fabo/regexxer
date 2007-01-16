@@ -1,5 +1,18 @@
 2007-01-16  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* m4/dk-warn.m4 (DK_ARG_ENABLE_WARNINGS): Accept a fourth argument
+	which can be used to generate -DMODULE_DISABLE_DEPRECATED defines
+	by specifying a list of module prefixes.  These flags are produced
+	only in --enable-warnings=fatal mode, in order to avoid breaking
+	the default build if new deprecations appear in some module.
+
+	* configure.ac (REGEXXER_WARNING_FLAGS): List the module prefixes
+	GLIBMM and GTKMM in the fourth argument to DK_ARG_ENABLE_WARNINGS.
+	* Makefile.am (global_defs): Remove -D*_DISABLE_DEPRECATED flags,
+	since they are now included in $(REGEXXER_WARNING_FLAGS).
+
+2007-01-16  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* Makefile.am (ui/stockimages.h): Accept backslash '\' as directory
 	separator in filenames, in addition to the forward slash '/'.  You
 	can never know.

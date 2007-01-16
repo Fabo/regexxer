@@ -16,12 +16,19 @@
 ## with danielk's Autostuff; if not, write to the Free Software Foundation,
 ## Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-#serial 20070105
+#serial 20070116
 
-## DK_ARG_ENABLE_WARNINGS(variable, minimum flags, maximum flags)
+## DK_ARG_ENABLE_WARNINGS(variable, min-flags, max-flags, [deprecation-prefixes])
 ##
-## Provide the --enable-warnings configure argument, set to 'min'
-## by default.
+## Provide the --enable-warnings configure argument, set to "min" by default.
+## <min-flags> and <max-flags> should be space-separated lists of compiler
+## warning flags to use with --enable-warnings=min or --enable-warnings=max,
+## respectively.  Warning level "fatal" is the same as "max" but in addition
+## enables -Werror mode.
+##
+## If not empty, <deprecation-prefixes> should be a list of module prefixes
+## which is expanded to -D<module>_DISABLE_DEPRECATED flags if fatal warnings
+## are enabled, too.
 ##
 AC_DEFUN([DK_ARG_ENABLE_WARNINGS],
 [dnl
@@ -34,7 +41,6 @@ AC_ARG_ENABLE([warnings], [AS_HELP_STRING(
   [dk_enable_warnings=min])[]dnl
 
 dk_lang=
-
 case $ac_compile in
   *'$CXXFLAGS '*)
     dk_lang='C++'
@@ -53,12 +59,23 @@ AS_IF([test "x$dk_lang" != x],
   AC_MSG_CHECKING([which $dk_lang compiler warning flags to use])
 
   case $dk_enable_warnings in
-    no)     dk_warning_flags= ;;
-    max)    dk_warning_flags="$3" ;;
-    fatal)  dk_warning_flags="$3 -Werror" ;;
-    *)      dk_warning_flags="$2" ;;
+    no)     dk_warning_flags=;;
+    max)    dk_warning_flags="$3";;
+    fatal)  dk_warning_flags="$3 -Werror";;
+    *)      dk_warning_flags="$2";;
   esac
 
+  dk_deprecation_flags=
+m4_if([$4],,, [
+  AS_IF([test "x$dk_enable_warnings" = xfatal],
+  [
+    dk_deprecation_prefixes="$4"
+    for dk_prefix in $dk_deprecation_prefixes
+    do
+      dk_deprecation_flags="${dk_deprecation_flags}-D${dk_prefix}_DISABLE_DEPRECATED "
+    done
+  ])
+])[]dnl
   dk_tested_flags=
 
   AS_IF([test "x$dk_warning_flags" != x],
@@ -88,9 +105,10 @@ AS_IF([test "x$dk_lang" != x],
 
     rm -f "$dk_conftest"
   ])
-  AC_SUBST([$1], [$dk_tested_flags])
+  dk_all_flags=$dk_deprecation_flags$dk_tested_flags
+  AC_SUBST([$1], [$dk_all_flags])
 
-  test "x$dk_tested_flags" != x || dk_tested_flags=none
-  AC_MSG_RESULT([$dk_tested_flags])
+  test "x$dk_all_flags" != x || dk_all_flags=none
+  AC_MSG_RESULT([$dk_all_flags])
 ])
 ])

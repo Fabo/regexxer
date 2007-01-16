@@ -56,7 +56,8 @@ DK_LINK_VERSION_SCRIPT([REGEXXER_VERSION_SCRIPT], [src/exported-symbols])
 # would make --enable-warnings=fatal unusable.
 DK_ARG_ENABLE_WARNINGS([REGEXXER_WARNING_FLAGS],
                        [-Wall -w1 -Wno-non-virtual-dtor],
-                       [-pedantic -Wall -Wextra -w1 -Wno-non-virtual-dtor])
+                       [-pedantic -Wall -Wextra -w1 -Wno-non-virtual-dtor],
+                       [GLIBMM GTKMM])
 
 AC_CONFIG_FILES([Makefile po/Makefile.in])
 AC_OUTPUT()

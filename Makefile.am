@@ -68,11 +68,7 @@ src_regexxer_SOURCES =		\
 nodist_src_regexxer_SOURCES =	\
 	ui/stockimages.h
 
-global_defs = \
--DREGEXXER_LOCALEDIR=\""$(localedir)"\" \
--DREGEXXER_PKGDATADIR=\""$(pkgdatadir)"\" \
--DGLIBMM_DISABLE_DEPRECATED -DGTKMM_DISABLE_DEPRECATED
-
+global_defs = -DREGEXXER_LOCALEDIR=\""$(localedir)"\" -DREGEXXER_PKGDATADIR=\""$(pkgdatadir)"\"
 AM_CPPFLAGS = $(global_defs) -I$(top_builddir) $(REGEXXER_MODULES_CFLAGS) $(REGEXXER_WARNING_FLAGS)
 
 src_regexxer_DEPENDENCIES = src/exported-symbols
