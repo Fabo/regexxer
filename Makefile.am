@@ -127,7 +127,7 @@ ui/stockimages.h: $(stockimages)
 	@mkdir ui >/dev/null 2>&1 || test -d ui
 	@build_list='--build-list'; \
 	list='$(stockimages)'; for file in $$list; do \
-	  name=`expr "X/$$file" : '.*/\([^.]*\)' | sed 'y/-/_/'`; \
+	  name=`expr "X/$$file" : '.*[\\/]\([^.]*\)' | sed 'y/-/_/'`; \
 	  dir=; test -f "$$file" || dir='$(srcdir)/'; \
 	  build_list="$$build_list $$name $$dir$$file"; \
 	done; \

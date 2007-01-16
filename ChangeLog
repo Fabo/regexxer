@@ -1,4 +1,10 @@
-2007-01-14  Daniel Elstner  <daniel.kitta@gmail.com>
+2007-01-16  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* Makefile.am (ui/stockimages.h): Accept backslash '\' as directory
+	separator in filenames, in addition to the forward slash '/'.  You
+	can never know.
+
+2007-01-15  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* MAINTAINERS: Add my real name.
 
