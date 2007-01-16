@@ -21,6 +21,7 @@
 #include "statusline.h"
 #include "translation.h"
 
+#include <gmodule.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtkmm.h>
 #include <locale>
@@ -30,7 +31,7 @@
 /*
  * Custom widget creation function for libglade.
  */
-extern "C"
+extern "C" G_MODULE_EXPORT
 GtkWidget* regexxer_create_status_line(char*, char*, char*, int, int)
 {
   try

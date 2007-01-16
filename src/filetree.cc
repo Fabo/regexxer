@@ -25,6 +25,7 @@
 #include "stringutils.h"
 #include "translation.h"
 
+#include <gmodule.h>
 #include <glibmm.h>
 #include <gconfmm/client.h>
 #include <gtkmm/stock.h>
@@ -34,7 +35,7 @@
 /*
  * Custom widget creation function for libglade.
  */
-extern "C"
+extern "C" G_MODULE_EXPORT
 GtkWidget* regexxer_create_file_tree(char*, char*, char*, int, int)
 {
   try

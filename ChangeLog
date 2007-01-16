@@ -1,5 +1,12 @@
 2007-01-16  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/filetree.cc (regexxer_create_file_tree): Prefix function
+	signature with G_MODULE_EXPORT, as this will probably be required
+	on Windows to enable dynamic loading.
+	* src/statusline.cc (regexxer_create_status_line): Ditto.
+
+2007-01-16  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* m4/dk-warn.m4 (DK_ARG_ENABLE_WARNINGS): Accept a fourth argument
 	which can be used to generate -DMODULE_DISABLE_DEPRECATED defines
 	by specifying a list of module prefixes.  These flags are produced
