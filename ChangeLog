@@ -1,5 +1,14 @@
 2007-01-16  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/statusline.cc (CounterBox::CounterBox): Change the shadow
+	type to Gtk::SHADOW_ETCHED_IN.  Still looks somewhat ugly though;
+	I need to think of something better.  Also enable the single line
+	mode property of the numeric labels, in order to avoid resizing if
+	the digits in the font have different height.
+	(StatusLine::StatusLine): Increase HBox spacing to 3 pixels.
+
+2007-01-16  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/filetree.cc (regexxer_create_file_tree): Prefix function
 	signature with G_MODULE_EXPORT, as this will probably be required
 	on Windows to enable dynamic loading.

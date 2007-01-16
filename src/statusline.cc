@@ -86,7 +86,7 @@ CounterBox::CounterBox(const Glib::ustring& label)
 {
   using namespace Gtk;
 
-  set_shadow_type(SHADOW_IN);
+  set_shadow_type(SHADOW_ETCHED_IN);
 
   Box *const paddingbox = new HBox(false, 0);
   add(*manage(paddingbox));
@@ -103,6 +103,9 @@ CounterBox::CounterBox(const Glib::ustring& label)
 
   label_count_ = new Label("", 0.0, 0.5);
   box->pack_start(*manage(label_count_), PACK_SHRINK);
+
+  label_index_->set_single_line_mode(true);
+  label_count_->set_single_line_mode(true);
 
   label_index_->signal_style_changed().connect(
       sigc::mem_fun(*this, &CounterBox::on_label_style_changed));
@@ -236,7 +239,7 @@ void CounterBox::on_label_style_changed(const Glib::RefPtr<Gtk::Style>&)
 
 StatusLine::StatusLine()
 :
-  Gtk::HBox(false, 1),
+  Gtk::HBox(false, 3),
   stop_button_    (0),
   progressbar_    (0),
   file_counter_   (0),
