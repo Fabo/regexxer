@@ -29,7 +29,6 @@
 
 namespace Gdk { class Color; }
 
-
 namespace Util
 {
 
@@ -43,8 +42,7 @@ Glib::ustring substitute_references(const Glib::ustring& substitution,
                                     const Glib::ustring& subject,
                                     const CaptureVector& captures);
 
-std::string shorten_pathname(const std::string& path);
-std::string expand_pathname(const std::string& path);
+Glib::ustring filename_short_display_name(const std::string& filename);
 
 Glib::ustring int_to_string(int number);
 Glib::ustring color_to_string(const Gdk::Color& color);

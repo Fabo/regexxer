@@ -1,5 +1,15 @@
 2007-01-17  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/stringutils.{cc,h} (Util::filename_short_display_name):
+	Rename from Util::shorten_pathname().  Return the display name
+	of the shortened filename encoded in UTF-8.
+	(Util::expand_pathname): Remove as this function is no longer
+	being used anywhere.
+	* src/mainwindow.cc (MainWindow::set_title_filename): Use
+	Util::filename_short_display_name().
+
+2007-01-17  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* Makefile.am (rxlocaledir): New variable that defines the locale
 	directory the same way intltool does.
 	(global_defs): Use $(rxlocaledir) instead of $(localedir).  In

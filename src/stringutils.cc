@@ -24,6 +24,7 @@
 #include <glib-object.h>
 #include <glibmm.h>
 #include <gdkmm/color.h>
+
 #include <algorithm>
 #include <iomanip>
 #include <locale>
@@ -31,7 +32,6 @@
 #include <stdexcept>
 #include <utility>
 #include <vector>
-
 
 namespace
 {
@@ -612,34 +612,22 @@ Glib::ustring Util::int_to_string(int number)
   return Glib::locale_to_utf8(output.str());
 }
 
-std::string Util::shorten_pathname(const std::string& path)
+Glib::ustring Util::filename_short_display_name(const std::string& filename)
 {
   const std::string homedir = Glib::get_home_dir();
   const std::string::size_type len = homedir.length();
 
-  if (path.length() >= len
-      && (path.length() == len || G_IS_DIR_SEPARATOR(path[len]))
-      && path.compare(0, len, homedir) == 0)
+  if (filename.length() >= len
+      && (filename.length() == len || G_IS_DIR_SEPARATOR(filename[len]))
+      && filename.compare(0, len, homedir) == 0)
   {
-    std::string result (1, '~');
-    result.append(path, len, std::string::npos);
-    return result;
+    std::string short_name (1, '~');
+    short_name.append(filename, len, std::string::npos);
+
+    return Glib::filename_display_name(short_name);
   }
 
-  return path;
-}
-
-std::string Util::expand_pathname(const std::string& path)
-{
-  if (path.length() > 0 && path[0] == '~'
-      && (path.length() == 1 || G_IS_DIR_SEPARATOR(path[1])))
-  {
-    std::string result = Glib::get_home_dir();
-    result.append(path, 1, std::string::npos);
-    return result;
-  }
-
-  return path;
+  return Glib::filename_display_name(filename);
 }
 
 Glib::ustring Util::color_to_string(const Gdk::Color& color)
