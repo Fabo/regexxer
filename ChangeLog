@@ -1,3 +1,11 @@
+2007-01-17  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* Makefile.am (rxlocaledir): New variable that defines the locale
+	directory the same way intltool does.
+	(global_defs): Use $(rxlocaledir) instead of $(localedir).  In
+	addition to being different from intltool's definition, standard
+	$(localedir) also requires at least Autoconf 2.59c.
+
 2007-01-16  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* src/statusline.cc (CounterBox::CounterBox): Change the shadow
