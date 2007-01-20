@@ -1,3 +1,8 @@
+2007-01-20  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* INSTALL: Remove generic installation instructions from the
+	repository, as this file is supplied by automake.
+
 2007-01-17  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* src/stringutils.{cc,h} (Util::filename_short_display_name):
