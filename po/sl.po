@@ -1,164 +1,153 @@
 # Slovenian translation of regexxer.
-# Copyright (C) 2006 Free Software Foundation, Inc.
+# Copyright (C) 2006-2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the regexxer package.
 #
-# Matej Urbančič <matej.urban@gmail.com>, 2006.
+# Matej Urbančič <matej.urban@gmail.com>, 2006, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer HEAD branch\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-21 13:06+0200\n"
-"PO-Revision-Date: 2006-10-31 16:39+0100\n"
-"Last-Translator: Matic Žgur <mr.zgur@gmail.com>\n"
-"Language-Team: Slovenian <sl@li.org>\n"
+"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
+"POT-Creation-Date: 2007-01-11 03:10+0000\n"
+"PO-Revision-Date: 2007-01-23 07:32+0100\n"
+"Last-Translator: Matej Urbančič <matej.urban@gmail.com>\n"
+"Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 "X-Poedit-Country: SLOVENIA\n"
 
-#: ../regexxer.desktop.in.h:1
+#: ../ui/regexxer.desktop.in.h:1
+#: ../src/mainwindow.cc:850
 msgid "Search and replace using regular expressions"
 msgstr "Išči in zamenjaj s pomočjo logičnih izrazov"
 
-#: ../regexxer.desktop.in.h:2
+#: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
 msgstr "regexxer orodje za iskanje"
 
-#: ../regexxer.schemas.in.h:1
+#: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
 msgstr "Trenutna barva zadetka"
 
-#: ../regexxer.schemas.in.h:2
+#: ../ui/regexxer.schemas.in.h:2
 msgid "Fallback encoding"
 msgstr "Povratni nabor"
 
-#: ../regexxer.schemas.in.h:3
+#: ../ui/regexxer.schemas.in.h:3
 msgid "Match color"
 msgstr "Barva zadetka"
 
-#: ../regexxer.schemas.in.h:4
+#: ../ui/regexxer.schemas.in.h:4
 msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try “iconv --list” for a complete list of possible values."
 msgstr "Ime znakovnega nabora, ki naj bo uporabljen, če datoteke ni možno prebrati v UTF-8 ali naboru določenem v sistemu. Vtipkajte “iconv --list” za celoten spisek možnih vrednosti."
 
-#: ../regexxer.schemas.in.h:5
+#: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Pisava besedila"
 
-#: ../regexxer.schemas.in.h:6
+#: ../ui/regexxer.schemas.in.h:6
 msgid "The background color used to highlight matches of the search expression."
 msgstr "Barva ozadja za označevanje zadetkov iskalnih izrazov."
 
-#: ../regexxer.schemas.in.h:7
+#: ../ui/regexxer.schemas.in.h:7
 msgid "The background color used to highlight the currently selected match of the search expression."
 msgstr "Barva ozadja za označitev trenutno izbranega zadetka iskalnega izraza."
 
-#: ../regexxer.schemas.in.h:8
+#: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
 msgstr "Pisava uporabljena v urejevalcu datotek."
 
-#: ../regexxer.schemas.in.h:9
+#: ../ui/regexxer.schemas.in.h:9
 msgid "The style of the application’s toolbar. Possible values are “icons”, “text”, “both”, and “both-horiz”."
 msgstr "Stil orodne vrstice. Možne vrednosti so \"ikone\", \"besedilo\", \"oboje\", in \"oboje-vodoravno\"."
 
-#: ../regexxer.schemas.in.h:10
+#: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
 msgstr "Stil orodne vrstice"
 
-#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
-#: ../src/filebuffer.cc:203
+#: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
-msgstr "Ne morem prebrati datoteke:"
+msgstr "Ni mogoče prebrati datoteke:"
 
-#: ../src/filetree.cc:81
+#: ../src/filetree.cc:82
 msgid "File"
 msgstr "Datoteka"
 
-#: ../src/filetree.cc:101
+#: ../src/filetree.cc:102
 msgid "#"
 msgstr "#"
 
-#: ../src/filetree.cc:532
+#: ../src/filetree.cc:533
+#, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Napaka pri shranjevanju datoteke “%1”: %2"
 
-#: ../src/filetree.cc:949
+#: ../src/filetree.cc:950
+#, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "“%1” izgleda kot binarna datoteka."
 
-#: ../src/main.cc:84
-msgid "_About"
-msgstr "_O programu"
-
-#: ../src/main.cc:85
+#: ../src/main.cc:94
 msgid "Save _all"
 msgstr "Shrani _vse"
 
-#: ../src/main.cc:100
+#: ../src/main.cc:134
 msgid "Find files matching PATTERN"
 msgstr "Poišči datoteke primerljive z VZORCEM"
 
-#: ../src/main.cc:100
+#: ../src/main.cc:134
 msgid "PATTERN"
 msgstr "VZOREC"
 
-#: ../src/main.cc:101
+#: ../src/main.cc:136
 msgid "Do not recurse into subdirectories"
 msgstr "Ne pregleduj podmap"
 
-#: ../src/main.cc:102
+#: ../src/main.cc:138
 #: ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "Preišči tudi skrite datoteke"
 
-#: ../src/main.cc:103
+#: ../src/main.cc:140
 msgid "Find text matching REGEX"
 msgstr "Poišči besedilo primerljivo z IZRAZOM"
 
-#: ../src/main.cc:103
+#: ../src/main.cc:140
 msgid "REGEX"
 msgstr "IZRAZ"
 
-#: ../src/main.cc:104
+#: ../src/main.cc:142
 msgid "Find only the first match in a line"
 msgstr "Poišči samo prvi zadetek v vrstici"
 
-#: ../src/main.cc:105
+#: ../src/main.cc:144
 #: ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr "Pri primerjavi ne upoštevaj velikosti črk"
 
-#: ../src/main.cc:106
+#: ../src/main.cc:146
 msgid "Replace matches with STRING"
 msgstr "Zamenjaj zadetke z NIZOM"
 
-#: ../src/main.cc:106
+#: ../src/main.cc:146
 msgid "STRING"
 msgstr "NIZ"
 
-#: ../src/main.cc:107
+#: ../src/main.cc:148
 msgid "Print match location to standard output"
 msgstr "Izpiši položaj zadetka na standardni izhod."
 
-#: ../src/main.cc:108
+#: ../src/main.cc:150
 msgid "Do not automatically start search"
 msgstr "Ne začni samodejnega iskanja"
 
-#: ../src/main.cc:118
-msgid "[OPTION]... [FOLDER]"
-msgstr "[MOŽNOST]... [MAPA]"
+#: ../src/main.cc:152
+msgid "[FOLDER]"
+msgstr "[MAPA]"
 
-#: ../src/main.cc:141
-msgid "Try “regexxer --help” for more information."
-msgstr "Vtipkajte “regexxer --help” za več informacij."
-
-#: ../src/mainwindow.cc:252
-#: ../ui/mainwindow.glade.h:1
-msgid "A filename pattern as used by the shell. Character classes [ab] and csh style brace expressions {a,b} are supported."
-msgstr "Vzorec imena datoteke, kot je uporabljen v konzoli. Znakovni razredi [ab] in csh stil oklepajnih izrazov {a,b} so podprti."
-
-#: ../src/mainwindow.cc:403
+#: ../src/mainwindow.cc:414
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -166,15 +155,7 @@ msgstr ""
 "Nekatere datoteke še niso shranjene.\n"
 "Vseeno zaključim?"
 
-#: ../src/mainwindow.cc:431
-msgid "The folder name “%1” contains characters not representable in the encoding of the local file system."
-msgstr "Ime mape “%1” vsebuje znake, ki se jih ne da izpisati z uporabo trenutnega nabora znakov datotečnega sistema."
-
-#: ../src/mainwindow.cc:450
-msgid "Select a folder"
-msgstr "Izberite mapo"
-
-#: ../src/mainwindow.cc:470
+#: ../src/mainwindow.cc:428
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -182,15 +163,28 @@ msgstr ""
 "Nekatere datoteke še niso shranjene.\n"
 "Vseeno nadaljujem?"
 
-#: ../src/mainwindow.cc:496
+#: ../src/mainwindow.cc:456
 msgid "The file search pattern is invalid."
 msgstr "Vzorec za iskanje datotek je napačen."
 
-#: ../src/mainwindow.cc:502
+#: ../src/mainwindow.cc:462
 msgid "The following errors occurred during search:"
 msgstr "Napake, ki so nastale med iskanjem:"
 
-#: ../src/mainwindow.cc:527
+#: ../src/mainwindow.cc:709
+msgid "The following errors occurred during save:"
+msgstr "Napake, ki so nastale med shranjevanjem:"
+
+#: ../src/mainwindow.cc:855
+msgid "translator-credits"
+msgstr "Matej Urbančič <matej.urban@gmail.com>"
+
+#: ../src/pcreshell.cc:60
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr "Uporaba \\C izhodne sekvence za primerjanje enojnega bajta  ni podprta."
+
+#: ../src/pcreshell.cc:80
+#, qt-format
 msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
@@ -198,7 +192,8 @@ msgstr ""
 "Napaka v logičnem izrazu pri “%1” (indeks %2):\n"
 "%3"
 
-#: ../src/mainwindow.cc:529
+#: ../src/pcreshell.cc:85
+#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -206,19 +201,12 @@ msgstr ""
 "Napaka v logičnem izrazu:\n"
 "%1"
 
-#: ../src/mainwindow.cc:751
-msgid "The following errors occurred during save:"
-msgstr "Napake, ki so nastale med shranjevanjem:"
-
-#: ../src/pcreshell.cc:59
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr "Uporaba \\C izhodne sekvence za primerjanje enojnega bajta  ni podprta."
-
-#: ../src/pcreshell.cc:151
+#: ../src/pcreshell.cc:167
 msgid "Reached the recursion and backtracking limit of the regular expression engine."
 msgstr "Dosežena je globina iskanja v podmapah in omejitev povratnega sledenja orodja logičnih izrazov."
 
-#: ../src/prefdialog.cc:248
+#: ../src/prefdialog.cc:249
+#, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "“%1” ni veljavni nabor znakov."
 
@@ -238,30 +226,9 @@ msgstr "Zadetek:"
 msgid "Cancels the running search"
 msgstr "Prekine trenutno iskanje"
 
-#. namespace Regexxer
-#: ../ui/aboutdialog.glade.h:1
-msgid "About regexxer"
-msgstr "O programu regexxer"
-
-#: ../ui/aboutdialog.glade.h:2
-msgid "The application icon of regexxer"
-msgstr "Ikona programa regexxer"
-
-#: ../ui/aboutdialog.glade.h:3
-msgid "regexxer icon"
-msgstr "regexxer ikona"
-
-#: ../ui/aboutdialog.glade.h:4
-msgid "translated by"
-msgstr "prevedel"
-
-#: ../ui/aboutdialog.glade.h:5
-msgid "translator-credits"
-msgstr "Matej Urbančič <matej.urban@gmail.com>"
-
-#: ../ui/aboutdialog.glade.h:6
-msgid "written by"
-msgstr "napisal"
+#: ../ui/mainwindow.glade.h:1
+msgid "A filename pattern as used by the shell. Character classes [ab] and csh style brace expressions {a,b} are supported."
+msgstr "Vzorec imena datoteke, kot je uporabljen v konzoli. Znakovni razredi [ab] in csh stil oklepajnih izrazov {a,b} so podprti."
 
 #: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
@@ -368,54 +335,50 @@ msgid "Search:"
 msgstr "Poišči:"
 
 #: ../ui/mainwindow.glade.h:30
-msgid "The directory to be searched"
-msgstr "Mapa, ki naj bo preiskana"
-
-#: ../ui/mainwindow.glade.h:31
 msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
 msgstr "Nov niz za zamenjavo. Kot v Perlu lahko določite dele zadetkov z uporabo $1, $2, itd. ali celo $+, $&, $` in $'. Operatorji \\l, \\u, \\L, \\U in \\E so prav tako podprti."
 
-#: ../ui/mainwindow.glade.h:32
+#: ../ui/mainwindow.glade.h:31
 msgid "_All files"
 msgstr "_Vsa datoteke"
 
-#: ../ui/mainwindow.glade.h:33
+#: ../ui/mainwindow.glade.h:32
 msgid "_Edit"
 msgstr "_Uredi"
 
-#: ../ui/mainwindow.glade.h:34
+#: ../ui/mainwindow.glade.h:33
 msgid "_File"
 msgstr "_Datoteka"
 
-#: ../ui/mainwindow.glade.h:35
+#: ../ui/mainwindow.glade.h:34
 msgid "_Help"
 msgstr "_Pomoč"
 
-#: ../ui/mainwindow.glade.h:36
+#: ../ui/mainwindow.glade.h:35
 msgid "_Match"
 msgstr "_Zadetki"
 
-#: ../ui/mainwindow.glade.h:37
+#: ../ui/mainwindow.glade.h:36
 msgid "_Next file"
 msgstr "_Naslednja datoteka"
 
-#: ../ui/mainwindow.glade.h:38
+#: ../ui/mainwindow.glade.h:37
 msgid "_Previous file"
 msgstr "_Predhodna datoteka"
 
-#: ../ui/mainwindow.glade.h:39
+#: ../ui/mainwindow.glade.h:38
 msgid "_Replace"
 msgstr "_Zamenjaj"
 
-#: ../ui/mainwindow.glade.h:40
+#: ../ui/mainwindow.glade.h:39
 msgid "_This file"
 msgstr "_Ta datoteka"
 
-#: ../ui/mainwindow.glade.h:41
+#: ../ui/mainwindow.glade.h:40
 msgid "hidden"
 msgstr "skrito"
 
-#: ../ui/mainwindow.glade.h:42
+#: ../ui/mainwindow.glade.h:41
 msgid "recursive"
 msgstr "po strukturi map"
 
@@ -486,4 +449,31 @@ msgstr "_Pisava besedila:"
 #: ../ui/prefdialog.glade.h:18
 msgid "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr "regexxer poskuša prebrati datoteko v privzetem kodiranju, preden prekine delovanje:"
+
+#~ msgid "_About"
+#~ msgstr "_O programu"
+#~ msgid "[OPTION]... [FOLDER]"
+#~ msgstr "[MOŽNOST]... [MAPA]"
+#~ msgid "Try “regexxer --help” for more information."
+#~ msgstr "Vtipkajte “regexxer --help” za več informacij."
+#~ msgid ""
+#~ "The folder name “%1” contains characters not representable in the "
+#~ "encoding of the local file system."
+#~ msgstr ""
+#~ "Ime mape “%1” vsebuje znake, ki se jih ne da izpisati z uporabo "
+#~ "trenutnega nabora znakov datotečnega sistema."
+#~ msgid "Select a folder"
+#~ msgstr "Izberite mapo"
+#~ msgid "About regexxer"
+#~ msgstr "O programu regexxer"
+#~ msgid "The application icon of regexxer"
+#~ msgstr "Ikona programa regexxer"
+#~ msgid "regexxer icon"
+#~ msgstr "regexxer ikona"
+#~ msgid "translated by"
+#~ msgstr "prevedel"
+#~ msgid "written by"
+#~ msgstr "napisal"
+#~ msgid "The directory to be searched"
+#~ msgstr "Mapa, ki naj bo preiskana"
 
