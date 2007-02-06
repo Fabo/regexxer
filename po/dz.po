@@ -1,0 +1,453 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer.head.pot\n"
+"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
+"POT-Creation-Date: 2007-01-30 03:15+0000\n"
+"PO-Revision-Date: 2007-02-01 11:04+0530\n"
+"Last-Translator: sonam pelden <sonaa_peldn@yahoo.com>\n"
+"Language-Team: Dzongkha <pgeyleg@dit.gov.bt>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: Dzongkha\n"
+"X-Poedit-Country: Bhutan\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: ../ui/regexxer.desktop.in.h:1
+#: ../src/mainwindow.cc:849
+msgid "Search and replace using regular expressions"
+msgstr "དུས་རྒྱུན་གསལ་བརྗོད་ཚུ་ལག་ལེན་འཐབ་སྟེ་  འཚོལ་ཞིབ་འབད་ནི་དང་ཚབ་བཙུགས་              "
+
+#: ../ui/regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "regexxer འཚོལ་ཞིབ་འབད་བའི་ལག་ཆས་"
+
+#: ../ui/regexxer.schemas.in.h:1
+msgid "Current-match color"
+msgstr "ད་ལྟོའི་-མཐུན་སྒྲིག་གི་ཚོས་གཞི་"
+
+#: ../ui/regexxer.schemas.in.h:2
+msgid "Fallback encoding"
+msgstr "ཨིན་ཀོ་ཌིང་འདི་གློ་བུར་རྒྱབ་ཐག་"
+
+#: ../ui/regexxer.schemas.in.h:3
+msgid "Match color"
+msgstr "མཐུན་པའི་ཚོས་གཞི་"
+
+#: ../ui/regexxer.schemas.in.h:4
+msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try “iconv --list” for a complete list of possible values."
+msgstr "ཡིག་སྣོད་འདི་  UTF-8 ཡང་ན་  ད་ལྟོའི་ལོ་ཀེལ་གྱིས་གསལ་བཀོད་འབད་ཡོད་པའི་ ཨང་རྟགས་གཞི་སྒྲིག་གི་ནང་ལྷག་མ་བཏུབ་པ་ཅིན་  ལག་ལེན་འཐབ་ནི་ཨིན་པའི་ཨིན་ཀོ་ཌིང་ཡིག་འབྲུའི་མིང་།  སྲིད་པའི་གནས་གོང་ཚུ་གི་  མཇུག་བསྡུ་ཐོ་ཡིག་ཅིག་གི་དོན་ལུ་  “iconv --list” འབད་བརྩོལ་བསྐྱེད།"
+
+#: ../ui/regexxer.schemas.in.h:5
+msgid "Text view font"
+msgstr "ཚིག་ཡིག་མཐོང་སྣང་གི་ཡིག་གཟུགས་"
+
+#: ../ui/regexxer.schemas.in.h:6
+msgid "The background color used to highlight matches of the search expression."
+msgstr "འཚོལ་ཞིབ་གསལ་བརྗོད་ཀྱི་མཐུན་སྒྲིག་ཚུ་གཙོ་དམིགས་བཀོད་ནི་ལུ་  ལག་ལེན་འཐབ་དོ་ཡོད་པའི་རྒྱབ་གཞི་ཚོས་གཞི།"
+
+#: ../ui/regexxer.schemas.in.h:7
+msgid "The background color used to highlight the currently selected match of the search expression."
+msgstr "འཚོལ་ཞིབ་གསལ་བརྗོད་ཀྱི་ད་ལྟོ་སེལ་འཐུ་འབད་དེ་ཡོད་པའི་མཐུན་སྒྲིག་འདི་  གཙོ་དམིགས་བཀོད་ནི་ལུ་ལག་ལེན་འཐབ་པའི་ རྒྱབ་གཞི་ཚོས་གཞི།"
+
+#: ../ui/regexxer.schemas.in.h:8
+msgid "The font used in the file editor."
+msgstr "ཡིག་སྣོད་ཞུན་དགཔ་ནང་ལག་ལེན་འཐབ་པའི་ཡིག་གཟུགས།"
+
+#: ../ui/regexxer.schemas.in.h:9
+msgid "The style of the application’s toolbar. Possible values are “icons”, “text”, “both”, and “both-horiz”."
+msgstr "གློག་རིམ་ལག་ཆས་ཀྱི་བཟོ་རྣམ།  སྲིད་པའི་གནས་གོང་ཚུ་  “icons”, “text”, “both”, དང་ “both-horiz” ཚུ་ཨིན།"
+
+#: ../ui/regexxer.schemas.in.h:10
+msgid "Toolbar style"
+msgstr "ལག་ཆས་ཕྲ་རིང་གི་བཟོ་རྣམ་"
+
+#: ../src/filebuffer.cc:198
+msgid "Can’t read file:"
+msgstr "ཡིག་སྣོད་ལྷག་མ་ཚུགས:"
+
+#: ../src/filetree.cc:80
+msgid "File"
+msgstr "ཡིག་སྣོད་"
+
+#: ../src/filetree.cc:99
+msgid "#"
+msgstr "#"
+
+#: ../src/filetree.cc:530
+#, qt-format
+msgid "Failed to save file “%1”: %2"
+msgstr "ཡིག་སྣོད་ “%1”  སྲུང་བཞག་འབད་མ་ཚུགས: %2"
+
+#: ../src/filetree.cc:946
+#, qt-format
+msgid "“%1” seems to be a binary file."
+msgstr "“%1” འདི་ ཟུང་ལྡན་ཡིག་སྣོད་ཅིག་སྦེ་མཐོང་མས།"
+
+#: ../src/main.cc:77
+msgid "Save _all"
+msgstr "ཆ་མཉམ་སྲུང་། (_a)"
+
+#: ../src/main.cc:134
+msgid "Find files matching PATTERN"
+msgstr "PATTERN མཐུན་པའི་ཡིག་སྣོད་ཚུ་འཚོལ་"
+
+#: ../src/main.cc:134
+msgid "PATTERN"
+msgstr "PATTERN"
+
+#: ../src/main.cc:136
+msgid "Do not recurse into subdirectories"
+msgstr "ཡན་ལག་སྣོད་ཐོའི་ནང་ལུ་སླར་ལོག་མ་འབད་"
+
+#: ../src/main.cc:138
+#: ../ui/mainwindow.glade.h:3
+msgid "Also find hidden files"
+msgstr "གཞན་ཡང་སྦ་སྟེ་ཡོད་པའི་ཡིག་སྣོད་ཚུ་འཚོལ་"
+
+#: ../src/main.cc:140
+msgid "Find text matching REGEX"
+msgstr "REGEX མཐུན་པའི་ཚིག་ཡིག་འཚོལ་"
+
+#: ../src/main.cc:140
+msgid "REGEX"
+msgstr "REGEX"
+
+#: ../src/main.cc:142
+msgid "Find only the first match in a line"
+msgstr "གྲལ་ཐིག་ཅིག་གི་ནང་ལུ་  མགོའི་མཐུན་པ་རྐྱངམ་ཅིག་འཚོལ་"
+
+#: ../src/main.cc:144
+#: ../ui/mainwindow.glade.h:5
+msgid "Do case insensitive matching"
+msgstr "གནད་དོན་ཉེན་ཁ་མེད་པའི་མཐུན་སྒྲིག་བཟོ་"
+
+#: ../src/main.cc:146
+msgid "Replace matches with STRING"
+msgstr "STRING དང་ཅིག་ཁར་  མཐུན་སྒྲིག་ཚུ་ཚབ་བཙུགས་"
+
+#: ../src/main.cc:146
+msgid "STRING"
+msgstr "STRING"
+
+#: ../src/main.cc:148
+msgid "Print match location to standard output"
+msgstr "ཚད་ལྡན་ཨའུཊི་པུཊི་ལུ་  མཐུན་པའི་གནས་ཁོངས་དཔར་བསྐྲུན་འབད་"
+
+#: ../src/main.cc:150
+msgid "Do not automatically start search"
+msgstr "འཚོལ་ཞིབ་འབད་ནི་འདི་  རང་བཞིན་གྱིས་སྦེ་འགོ་མ་བཙུགས་"
+
+#: ../src/main.cc:152
+msgid "[FOLDER]"
+msgstr "[FOLDER]"
+
+#: ../src/mainwindow.cc:413
+msgid ""
+"Some files haven’t been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+"ཡིག་སྣོད་ལ་ལོ་ཅིག་ད་ལྟོ་ཡང་སྲུང་མ་ཚུགས། \n"
+"ག་ལས་སྐོར་རུང་སྤང་བཞག་ག?"
+
+#: ../src/mainwindow.cc:427
+msgid ""
+"Some files haven’t been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+"ཡིག་སྣོད་ལ་ལོ་ཅིག་ད་ལྟོ་ཡང་སྲུང་མ་ཚུགས། \n"
+"ག་ལས་སྐོར་རུང་འཕྲོ་མཐུད་ག?"
+
+#: ../src/mainwindow.cc:455
+msgid "The file search pattern is invalid."
+msgstr "ཡིག་སྣོད་འཚོལ་བའི་དཔེ་གཞི་འདི་ནུས་ཅན་མེད།"
+
+#: ../src/mainwindow.cc:461
+msgid "The following errors occurred during search:"
+msgstr "འོག་གི་འཛོལ་བ་ཚུ་འཚོལ་ཞིབ་འབད་བའི་བསྒང་བྱུང་ཡོདཔ:"
+
+#: ../src/mainwindow.cc:708
+msgid "The following errors occurred during save:"
+msgstr "སྲུང་བཞག་འབདཝ་ད་འོག་གི་འཛོལ་བ་ཚུ་བྱུང་ཡོདཔ:"
+
+#: ../src/mainwindow.cc:854
+msgid "translator-credits"
+msgstr "སྐད་བསྒྱུར་པའི་-ངོ་བསྟོད་ཚུ་"
+
+#: ../src/pcreshell.cc:62
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr "བཱའིཊི་རྐྱང་པ་ཅིག་མཐུན་སྒྲིག་འབད་ནི་ལུ་   \\C escape འབྱུང་རིམ་ལག་ལེན་འཐབ་མི་འདི་ རྒྱབ་སྐྱོར་མ་འབད་བས།"
+
+#: ../src/pcreshell.cc:84
+#, qt-format
+msgid ""
+"Error in regular expression at “%1” (index %2):\n"
+"%3"
+msgstr ""
+"“%1” (index %2) ལུ་དུས་རྒྱུན་གསལ་བརྗོད་ནང་འཛོལ་བ:\n"
+"%3"
+
+#: ../src/pcreshell.cc:89
+#, qt-format
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"དུས་རྒྱུན་གསལ་བརྗོད་ནང་འཛོལ་བ:\n"
+"%1"
+
+#: ../src/pcreshell.cc:171
+msgid "Reached the recursion and backtracking limit of the regular expression engine."
+msgstr "དུས་རྒྱུན་གསལ་བརྗོད་མ་འཕྲུལ་གྱི་སླར་ལོག་དང་ རྒྱབ་འཚོལ་ཚད་ལུ་ལྷོད་ཡོདཔ།"
+
+#: ../src/prefdialog.cc:249
+#, qt-format
+msgid "“%1” is not a valid encoding."
+msgstr "“%1” འདི་ནུས་ཅན་ཡོད་པའི་ཨིན་ཀོ་ཌིང་མེན།"
+
+#: ../src/statusline.cc:262
+msgid "Stop"
+msgstr "བཀག"
+
+#: ../src/statusline.cc:269
+msgid "File:"
+msgstr "ཡིག་སྣོད:"
+
+#: ../src/statusline.cc:272
+msgid "Match:"
+msgstr "མཐུན་སྒྲིག:"
+
+#: ../src/statusline.cc:283
+msgid "Cancels the running search"
+msgstr "ལཱ་འབད་མི་འཚོལ་ཞིབ་འདི་ཆ་མེད་གཏངམ་ཨིན་"
+
+#: ../ui/mainwindow.glade.h:1
+msgid "A filename pattern as used by the shell. Character classes [ab] and csh style brace expressions {a,b} are supported."
+msgstr "ཤལ་གྱིས་ལག་ལེན་འཐབ་ཡོདཔ་བཟུམ་མའི་ ཡིག་སྣོད་ཀྱི་དཔེ་གཞི།  ཡིག་འབྲུའི་དབྱེ་རིགས་ [ab] དང་  སི་ཨེསི་ཨེཆ་བཟོ་རྣམ་གུག་ཤད་གསལ་བརྗོད་ {a,b} ཚུ་རྒྱབ་སྐྱོར་འབད་དེ་ཡོདཔ་ཨིན།"
+
+#: ../ui/mainwindow.glade.h:2
+msgid "A regular expression in Perl syntax"
+msgstr "པརཱལ་ཚིག་སྦྱོར་ནང་  དུས་རྒྱུན་གསལ་བརྗོད་ཅིག་"
+
+#: ../ui/mainwindow.glade.h:4
+msgid "Backward"
+msgstr "རྒྱབ་བསྐྱོད་"
+
+#: ../ui/mainwindow.glade.h:6
+msgid "File backward"
+msgstr "ཡིག་སྣོད་རྒྱབ་བསྐྱོད་"
+
+#: ../ui/mainwindow.glade.h:7
+msgid "File forward"
+msgstr "ཡིག་སྣོད་གདོང་བསྐྱོད་"
+
+#: ../ui/mainwindow.glade.h:8
+msgid "Find all files that match the filename pattern"
+msgstr "ཡིག་སྣོད་མིང་གི་དཔེ་གཞི་མཐུན་མི་  ཡིག་སྣོད་ཚུ་ཆ་མཉམ་འཚོལ་"
+
+#: ../ui/mainwindow.glade.h:9
+msgid "Find all matches of the regular expression"
+msgstr "དུས་རྒྱུན་གསལ་བརྗོད་ཀྱི་ མཐུན་སྒྲིག་ཚུ་འཚོལ་"
+
+#: ../ui/mainwindow.glade.h:10
+msgid "Find all possible matches in a line"
+msgstr "གྲལ་ཐིག་ཅིག་ནང་  སྲིད་པའི་མཐུན་སྒྲིག་ཚུ་འཚོལ་"
+
+#: ../ui/mainwindow.glade.h:11
+msgid "Find fi_les"
+msgstr "ཡིག་སྣོད་ཚུ་འཚོལ། (_l)"
+
+#: ../ui/mainwindow.glade.h:12
+msgid "Fol_der:"
+msgstr "སྣོད་འཛིན: (_d)"
+
+#: ../ui/mainwindow.glade.h:13
+msgid "Forward"
+msgstr "གདོང་བསྐྱོད་"
+
+#: ../ui/mainwindow.glade.h:14
+msgid "Go to next match"
+msgstr "ཤུལ་མའི་མཐུན་སྒྲིག་ནང་སོང་"
+
+#: ../ui/mainwindow.glade.h:15
+msgid "Go to previous match"
+msgstr "ཧེ་མའི་མཐུན་སྒྲིག་ནང་སོང་"
+
+#: ../ui/mainwindow.glade.h:16
+msgid "Go to the next matching file"
+msgstr "ཤུལ་མའི་མཐུན་སྒྲིག་གི་ཡིག་སྣོད་ལུ་སོང་"
+
+#: ../ui/mainwindow.glade.h:17
+msgid "Go to the previous matching file"
+msgstr "ཧེ་མའི་མཐུན་སྒྲིག་གི་ཡིག་སྣོད་ལུ་སོང་"
+
+#: ../ui/mainwindow.glade.h:18
+msgid "Pattern:"
+msgstr "དཔེ་གཞི:"
+
+#: ../ui/mainwindow.glade.h:19
+msgid "Preview"
+msgstr "སྔོན་ལྟ་"
+
+#: ../ui/mainwindow.glade.h:20
+msgid "Preview of the substitution"
+msgstr "ཚབ་མའི་སྔོན་ལྟ་"
+
+#: ../ui/mainwindow.glade.h:21
+msgid "Recurse into subdirectories"
+msgstr "ཡན་ལག་སྣོད་ཐོའི་ནང་ལུ་ སླར་ལོག་འབད་"
+
+#: ../ui/mainwindow.glade.h:22
+msgid "Replace _current"
+msgstr "ད་ལྟོ་ཚབ་བཙུགས། (_c)"
+
+#: ../ui/mainwindow.glade.h:23
+msgid "Replace all matches in all files"
+msgstr "ཡིག་སྣོད་ཆ་མཉམ་ནང་ལུ་  མཐུན་སྒྲིག་ཆ་མཉམ་ཚབ་བཙུགས་"
+
+#: ../ui/mainwindow.glade.h:24
+msgid "Replace all matches in the current file"
+msgstr "ད་ལྟོའི་ཡིག་སྣོད་ནང་མཐུན་སྒྲིག་ཆ་མཉམ་ཚབ་བཙུགས་"
+
+#: ../ui/mainwindow.glade.h:25
+msgid "Replace current match"
+msgstr "ད་ལྟོའི་མཐུན་སྒྲིག་ཚབ་བཙུགས་"
+
+#: ../ui/mainwindow.glade.h:26
+msgid "Replace in _all files"
+msgstr "ཡིག་སྣོད་ཆ་མཉམ་ཚུ་ནང་ཚབ་བཙུགས། (_a)"
+
+#: ../ui/mainwindow.glade.h:27
+msgid "Replace in _this file"
+msgstr "ཡིག་སྣོད་འདི་ནང་ ཚབ་བཙུགས། ( _t)"
+
+#: ../ui/mainwindow.glade.h:28
+msgid "Replace:"
+msgstr "ཚབ་བཙུགས:"
+
+#: ../ui/mainwindow.glade.h:29
+msgid "Search:"
+msgstr "འཚོལ་ཞིབ་འབད:"
+
+#: ../ui/mainwindow.glade.h:30
+msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
+msgstr "ཚབ་མ་འབད་ནི་ཨིན་པའི་ཡིག་རྒྱུན་གསརཔ།  པརཱལ་ནང་འབད་བ་ཅིན་  ཁྱོད་ཀྱིས་  $1, $2, ལ་སོགས་པ་ལག་ལེན་འཐབ་སྟེ་  མཐུན་སྒྲིག་གི་ཆ་ཤས་ལུ་གཞི་བསྟུན་འབད་ཚུགས་  ཡང་ན་  $+, $&, $` and $' བཀོལ་བསྐྱོདཔ་ \\l, \\u, \\L, \\U and \\E ཚུ་ རྒྱབ་སྐྱོར་འབད་དེ་ཡོད།"
+
+#: ../ui/mainwindow.glade.h:31
+msgid "_All files"
+msgstr "ཡིག་སྣོད་ཆ་ཚང་། (_A)"
+
+#: ../ui/mainwindow.glade.h:32
+msgid "_Edit"
+msgstr "ཞུན་དག་འབད། (_E)"
+
+#: ../ui/mainwindow.glade.h:33
+msgid "_File"
+msgstr "ཡིག་སྣོད། (_F)"
+
+#: ../ui/mainwindow.glade.h:34
+msgid "_Help"
+msgstr "གྲོགས་རམ། (_H)"
+
+#: ../ui/mainwindow.glade.h:35
+msgid "_Match"
+msgstr "མཐུན་སྒྲིག། (_M)"
+
+#: ../ui/mainwindow.glade.h:36
+msgid "_Next file"
+msgstr "ཤུལ་མའི་ཡིག་སྣོད། (_N)"
+
+#: ../ui/mainwindow.glade.h:37
+msgid "_Previous file"
+msgstr "ཧེ་མའི་ཡིག་སྣོད། (_P)"
+
+#: ../ui/mainwindow.glade.h:38
+msgid "_Replace"
+msgstr "ཚབ་བཙུགས། (_R)"
+
+#: ../ui/mainwindow.glade.h:39
+msgid "_This file"
+msgstr "ཡིག་སྣོད་འདི། (_T)"
+
+#: ../ui/mainwindow.glade.h:40
+msgid "hidden"
+msgstr "སྦ་བཞག་ཡོདཔ་"
+
+#: ../ui/mainwindow.glade.h:41
+msgid "recursive"
+msgstr "སླར་ལོག་འབད་བཏུབ་"
+
+#: ../ui/prefdialog.glade.h:1
+msgid "1."
+msgstr "1."
+
+#: ../ui/prefdialog.glade.h:2
+msgid "2."
+msgstr "2."
+
+#: ../ui/prefdialog.glade.h:3
+msgid "3."
+msgstr "3."
+
+#: ../ui/prefdialog.glade.h:4
+msgid "C_urrent match color:"
+msgstr "ད་ལྟོའི་མཐུན་པའི་ཚོས་གཞི: (_u)"
+
+#: ../ui/prefdialog.glade.h:5
+msgid "Fallback _encoding:"
+msgstr "ཨིན་ཀོ་ཌིང་གློ་བུར་རྒྱབ་ཐག: (_e)"
+
+#: ../ui/prefdialog.glade.h:6
+msgid ""
+"Icons only\n"
+"Text only\n"
+"Icons and text\n"
+"Both horizontal"
+msgstr ""
+"ངོས་དཔར་ཚུ་རྐྱངམ་ཅིག\n"
+"ཚིག་ཡིག་རྐྱངམ་ཅིག\n"
+"ངོས་དཔར་ཚུ་དང་ཚིག་ཡིག་\n"
+"གཉིས་ཆ་རང་ཐད་སྙོམས་"
+
+#: ../ui/prefdialog.glade.h:10
+msgid "Preferences"
+msgstr "དགའ་གདམ་ཚུ་"
+
+#: ../ui/prefdialog.glade.h:11
+msgid "The encoding specified by the current locale"
+msgstr "ད་ལྟོའི་ལོ་ཀེལ་གྱིས་གསལ་བཀོད་འབད་དེ་ཡོད་པའི་ཨིན་ཀོ་ཌིང་"
+
+#: ../ui/prefdialog.glade.h:12
+msgid "Tool_bar style:"
+msgstr "ལག་ཆས་ཕྲ་རིང་གི་བཟོ་རྣམ: (_b)"
+
+#: ../ui/prefdialog.glade.h:13
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ../ui/prefdialog.glade.h:14
+msgid "_File access"
+msgstr "ཡིག་སྣོད་འཛུལ་སྤྱོད་འབད་ནི། (_F)"
+
+#: ../ui/prefdialog.glade.h:15
+msgid "_Look’n’feel"
+msgstr "བལྟ་ཞིནམ་ལས་ ’n’ ཚོར་སྣང་། (_L)"
+
+#: ../ui/prefdialog.glade.h:16
+msgid "_Match color:"
+msgstr "ཚོས་གཞི་མཐུན་སྒྲིག་བཟོ: (_M)"
+
+#: ../ui/prefdialog.glade.h:17
+msgid "_Text view font:"
+msgstr "ཚིག་ཡིག་མཐོང་སྣང་གི་ཡིག་གཟུགས: (_T)"
+
+#: ../ui/prefdialog.glade.h:18
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "regexxer དེ་གིས་  མ་བཞག་པའི་ཧེ་མ་རང་  འོག་གི་ཨིན་ཀོ་ཌིང་ཚུ་ནང་ཡོད་པའི་  ཡིག་སྣོད་ཅིག་ལྷགཔ་ཨིན:"
+
