@@ -1,3 +1,12 @@
+2007-02-06  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	* configure.ac (ACLOCAL_FLAGS): Declare variable as precious
+	using AC_ARG_VAR(), which also makes it a substituted variable.
+	This should prevent inconsistent behavior if the variable changes
+	in the environment after configure has run.
+	(ACLOCAL_AMFLAGS): Remove substitution.
+	* Makefile.am (ACLOCAL_AMFLAGS): Define variable.
+
 2007-01-20  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	* INSTALL: Remove generic installation instructions from the
