@@ -19,6 +19,7 @@
  */
 
 #include "statusline.h"
+#include "stringutils.h"
 #include "translation.h"
 
 #include <gmodule.h>
@@ -68,7 +69,7 @@ private:
   int                 digits_range_;
   int                 widest_digit_;
   int                 second_widest_digit_;
-  std::ostringstream  stringstream_;
+  std::wostringstream stringstream_;
 
   Glib::ustring number_to_string(int number);
 
@@ -158,9 +159,9 @@ void CounterBox::set_count(int count)
 
 Glib::ustring CounterBox::number_to_string(int number)
 {
-  stringstream_.str(std::string());
+  stringstream_.str(std::wstring());
   stringstream_ << number;
-  return Glib::locale_to_utf8(stringstream_.str());
+  return Util::wstring_to_utf8(stringstream_.str());
 }
 
 /*

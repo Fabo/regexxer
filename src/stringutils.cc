@@ -36,7 +36,7 @@
 namespace
 {
 
-typedef std::pair<int,char> ModPos;
+typedef std::pair<int, char> ModPos;
 
 class ScopedTypeClass
 {
@@ -316,6 +316,56 @@ int parse_capture_index(std::string::const_iterator& p, std::string::const_itera
 
 } // anonymous namespace
 
+/*
+ * Convert the content of an std::wstring to UTF-8.  Using wide strings is
+ * necessary when dealing with localized stream formatting, for the reasons
+ * outlined here:  http://bugzilla.gnome.org/show_bug.cgi?id=399216
+ *
+ * Direct use of wide strings in regexxer is a temporary measure.  Thus,
+ * this function should be removed once Glib::compose() and Glib::format()
+ * are available in glibmm.
+ */
+Glib::ustring Util::wstring_to_utf8(const std::wstring& str)
+{
+  class ScopedCharArray
+  {
+  private:
+    char* ptr_;
+
+    ScopedCharArray(const ScopedCharArray&);
+    ScopedCharArray& operator=(const ScopedCharArray&);
+
+  public:
+    explicit ScopedCharArray(char* ptr) : ptr_ (ptr) {}
+    ~ScopedCharArray() { g_free(ptr_); }
+
+    char* get() const { return ptr_; }
+  };
+
+  GError* error = 0;
+
+#ifdef __STDC_ISO_10646__
+  // Avoid going through iconv if wchar_t always contains UCS-4.
+  glong n_bytes = 0;
+  const ScopedCharArray buf (g_ucs4_to_utf8(reinterpret_cast<const gunichar*>(str.data()),
+                                            str.size(), 0, &n_bytes, &error));
+#else
+  gsize n_bytes = 0;
+  const ScopedCharArray buf (g_convert(reinterpret_cast<const char*>(str.data()),
+                                       str.size() * sizeof(std::wstring::value_type),
+                                       "UTF-8", "WCHAR_T", 0, &n_bytes, &error));
+#endif /* !__STDC_ISO_10646__ */
+
+  if (G_UNLIKELY(error))
+  {
+    g_warning("%s", error->message);
+    g_error_free(error);
+    return Glib::ustring();
+  }
+
+  return Glib::ustring(buf.get(), buf.get() + n_bytes);
+}
+
 bool Util::validate_encoding(const std::string& encoding)
 {
   // GLib just ignores some characters that aren't used in encoding names,
@@ -541,7 +591,7 @@ Glib::ustring Util::substitute_references(const Glib::ustring& substitution,
     }
     else if (*p == '$' && p + 1 != pend)
     {
-      std::pair<int,int> bounds;
+      std::pair<int, int> bounds;
 
       if (Glib::Ascii::isdigit(*++p) || (*p == '{' && std::find(p + 1, pend, '}') != pend))
       {
@@ -596,7 +646,7 @@ Glib::ustring Util::substitute_references(const Glib::ustring& substitution,
 
 Glib::ustring Util::int_to_string(int number)
 {
-  std::ostringstream output;
+  std::wostringstream output;
 
   try // don't abort if the user-specified locale doesn't exist
   {
@@ -609,7 +659,7 @@ Glib::ustring Util::int_to_string(int number)
 
   output << number;
 
-  return Glib::locale_to_utf8(output.str());
+  return Util::wstring_to_utf8(output.str());
 }
 
 Glib::ustring Util::filename_short_display_name(const std::string& filename)

@@ -32,7 +32,9 @@ namespace Gdk { class Color; }
 namespace Util
 {
 
-typedef std::vector< std::pair<int,int> > CaptureVector;
+typedef std::vector< std::pair<int, int> > CaptureVector;
+
+Glib::ustring wstring_to_utf8(const std::wstring& str);
 
 bool validate_encoding(const std::string& encoding);
 bool encodings_equal(const std::string& lhs, const std::string& rhs);
