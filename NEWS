@@ -1,13 +1,14 @@
-regexxer 0.9 (2007-01-xx)
+regexxer 0.9 (2007-02-18)
 
-	* command line option support
-	* icon theme support
-	* now builds a working executable on systems with newer libglade
-	* replaced about dialog with stock GTK+ one
-	* completely revamped build system
-	* lots of new translations: ar bg ca es eu fi fr hu ne pa pl rw
-	  sl sr sr@Latn uk vi zh_CN zh_HK zh_TW
-	* other minor cleanups and fixes
+	* Command line option support
+	* Icon theme support
+	* Now builds a working executable on systems with newer libglade
+	* New GTK+ file chooser button
+	* Replaced about dialog with stock GTK+ one
+	* Completely revamped build system
+	* Lots of new translations: bg ca dz es eu fi fr hu ne pa pl sl
+	sr sr@Latn uk vi zh_CN zh_HK zh_TW
+	* Other minor cleanups and fixes
 
 regexxer 0.8 (2004-07-09)
 
