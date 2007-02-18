@@ -6,483 +6,489 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 04:01+0100\n"
+"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
+"POT-Creation-Date: 2007-02-18 22:12+0100\n"
 "PO-Revision-Date: 2004-11-29 19:03+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: regexxer.desktop.in.h:1
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
 msgstr "使用正则表达式搜索并替换"
 
-#: regexxer.desktop.in.h:2
+#: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
 msgstr "regexxer 搜索工具"
 
-#: regexxer.schemas.in.h:1
+#: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
 msgstr "当前匹配的颜色"
 
-#: regexxer.schemas.in.h:2
+#: ../ui/regexxer.schemas.in.h:2
 msgid "Fallback encoding"
 msgstr "默认编码"
 
-#: regexxer.schemas.in.h:3
+#: ../ui/regexxer.schemas.in.h:3
 msgid "Match color"
 msgstr "匹配颜色"
 
-#: regexxer.schemas.in.h:4
+#: ../ui/regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
-"for a complete list of possible values."
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
+"a complete list of possible values."
 msgstr ""
 
-#: regexxer.schemas.in.h:5
+#: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "文本视图颜色"
 
-#: regexxer.schemas.in.h:6
+#: ../ui/regexxer.schemas.in.h:6
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr ""
 
-#: regexxer.schemas.in.h:7
+#: ../ui/regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
 msgstr ""
 
-#: regexxer.schemas.in.h:8
+#: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
 msgstr ""
 
-#: regexxer.schemas.in.h:9
+#: ../ui/regexxer.schemas.in.h:9
 msgid ""
-"The style of the application’s toolbar. Possible values are “icons”, “text"
-"”, “both”, and “both-horiz”."
+"The style of the application’s toolbar. Possible values are “icons”, “text”, "
+"“both”, and “both-horiz”."
 msgstr ""
 
-#: regexxer.schemas.in.h:10
+#: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
 msgstr "工具栏样式"
 
-#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
-#: src/filebuffer.cc:203
+#: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "无法读取文件："
 
-#: src/filetree.cc:81
+#: ../src/filetree.cc:80
 msgid "File"
 msgstr "文件"
 
-#: src/filetree.cc:101
+#: ../src/filetree.cc:99
 msgid "#"
 msgstr "#"
 
-#: src/filetree.cc:532
+#: ../src/filetree.cc:530
+#, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "保存文件“%1”失败：%2"
 
-#: src/filetree.cc:949
+#: ../src/filetree.cc:946
+#, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "“%1”似乎是二进制文件。"
 
-#: src/main.cc:84
-msgid "_About"
-msgstr "关于(_A)"
-
-#: src/main.cc:85
+#: ../src/main.cc:77
 msgid "Save _all"
 msgstr "全部保存(_A)"
 
-#: src/main.cc:100
+#: ../src/main.cc:134
 msgid "Find files matching PATTERN"
 msgstr "查找与[模式]匹配的文件"
 
-#: src/main.cc:100
+#: ../src/main.cc:134
 msgid "PATTERN"
 msgstr "模式"
 
-#: src/main.cc:101
+#: ../src/main.cc:136
 msgid "Do not recurse into subdirectories"
 msgstr "不进入子目录"
 
-#: src/main.cc:102 ui/mainwindow.glade.h:3
+#: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "也查找隐藏文件"
 
-#: src/main.cc:103
+#: ../src/main.cc:140
 msgid "Find text matching REGEX"
 msgstr "查找与[正则表达式]匹配的文本"
 
-#: src/main.cc:103
+#: ../src/main.cc:140
 msgid "REGEX"
 msgstr "正则表达式"
 
-#: src/main.cc:104
+#: ../src/main.cc:142
 msgid "Find only the first match in a line"
 msgstr ""
 
-#: src/main.cc:105 ui/mainwindow.glade.h:5
+#: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr ""
 
-#: src/main.cc:106
+#: ../src/main.cc:146
 msgid "Replace matches with STRING"
 msgstr ""
 
-#: src/main.cc:106
+#: ../src/main.cc:146
 msgid "STRING"
 msgstr ""
 
-#: src/main.cc:107
+#: ../src/main.cc:148
 msgid "Print match location to standard output"
 msgstr ""
 
-#: src/main.cc:108
+#: ../src/main.cc:150
 msgid "Do not automatically start search"
 msgstr ""
 
-#: src/main.cc:118
-msgid "[OPTION]... [FOLDER]"
-msgstr "[选项]... [文件夹]"
-
-#: src/main.cc:141
-msgid "Try “regexxer --help” for more information."
-msgstr "输入“regexxer --help”可获得更新信息。"
-
-#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
+#: ../src/main.cc:152
+msgid "[FOLDER]"
 msgstr ""
 
-#: src/mainwindow.cc:403
+#: ../src/mainwindow.cc:413
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr "某些文件尚未保存。仍然退出吗？"
 
-#: src/mainwindow.cc:431
-msgid ""
-"The folder name “%1” contains characters not representable in the encoding "
-"of the local file system."
-msgstr "文件夹名称“%1”包含本地文件系统编码无法表示的字符。"
-
-#: src/mainwindow.cc:450
-msgid "Select a folder"
-msgstr "选择一个文件夹"
-
-#: src/mainwindow.cc:470
+#: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
-msgstr "某些文件尚未保存。\n仍然继续吗？"
+msgstr ""
+"某些文件尚未保存。\n"
+"仍然继续吗？"
 
-#: src/mainwindow.cc:496
+#: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
 msgstr ""
 
-#: src/mainwindow.cc:502
+#: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
 msgstr "搜索时发生了下列错误："
 
-#: src/mainwindow.cc:527
+#: ../src/mainwindow.cc:708
+msgid "The following errors occurred during save:"
+msgstr ""
+
+#: ../src/mainwindow.cc:854
+msgid "translator-credits"
+msgstr ""
+"开源软件国际化之 GNOME 简体中文组\n"
+"\thttp://i18n.linux.net.cn"
+
+#: ../src/pcreshell.cc:62
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr ""
+
+#: ../src/pcreshell.cc:84
+#, qt-format
 msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
 
-#: src/mainwindow.cc:529
+#: ../src/pcreshell.cc:89
+#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
-msgstr "正则表达式有错：\n%1"
-
-#: src/mainwindow.cc:751
-msgid "The following errors occurred during save:"
 msgstr ""
+"正则表达式有错：\n"
+"%1"
 
-#: src/pcreshell.cc:59
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
-
-#: src/pcreshell.cc:151
+#: ../src/pcreshell.cc:171
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
 msgstr ""
 
-#: src/prefdialog.cc:248
+#: ../src/prefdialog.cc:249
+#, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "“%1”不是有效的编码。"
 
-#: src/statusline.cc:264
+#: ../src/statusline.cc:263
 msgid "Stop"
 msgstr "停止"
 
-#: src/statusline.cc:271
+#: ../src/statusline.cc:270
 msgid "File:"
 msgstr "文件："
 
-#: src/statusline.cc:274
+#: ../src/statusline.cc:273
 msgid "Match:"
 msgstr "匹配："
 
-#: src/statusline.cc:285
+#: ../src/statusline.cc:284
 msgid "Cancels the running search"
 msgstr "取消运行中的搜索"
 
-#. namespace Regexxer
-#: ui/aboutdialog.glade.h:1
-msgid "About regexxer"
-msgstr "关于 regexxer"
+#: ../ui/mainwindow.glade.h:1
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
 
-#: ui/aboutdialog.glade.h:2
-msgid "The application icon of regexxer"
-msgstr "regexxer 的应用程序图标"
-
-#: ui/aboutdialog.glade.h:3
-msgid "regexxer icon"
-msgstr "regexxer 图标"
-
-#: ui/aboutdialog.glade.h:4
-msgid "translated by"
-msgstr "翻译者"
-
-#: ui/aboutdialog.glade.h:5
-msgid "translator-credits"
-msgstr "开源软件国际化之 GNOME 简体中文组\n\thttp://i18n.linux.net.cn"
-
-#: ui/aboutdialog.glade.h:6
-msgid "written by"
-msgstr "编写者"
-
-#: ui/mainwindow.glade.h:2
+#: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
 msgstr "Perl 语法的正则表达式"
 
-#: ui/mainwindow.glade.h:4
+#: ../ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr ""
 
-#: ui/mainwindow.glade.h:6
+#: ../ui/mainwindow.glade.h:6
 msgid "File backward"
 msgstr ""
 
-#: ui/mainwindow.glade.h:7
+#: ../ui/mainwindow.glade.h:7
 msgid "File forward"
 msgstr ""
 
-#: ui/mainwindow.glade.h:8
+#: ../ui/mainwindow.glade.h:8
 msgid "Find all files that match the filename pattern"
 msgstr ""
 
-#: ui/mainwindow.glade.h:9
+#: ../ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
 msgstr ""
 
-#: ui/mainwindow.glade.h:10
+#: ../ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
 msgstr ""
 
-#: ui/mainwindow.glade.h:11
+#: ../ui/mainwindow.glade.h:11
 msgid "Find fi_les"
 msgstr "查找文件(_L)"
 
-#: ui/mainwindow.glade.h:12
+#: ../ui/mainwindow.glade.h:12
 msgid "Fol_der:"
 msgstr "文件夹(_D)："
 
-#: ui/mainwindow.glade.h:13
+#: ../ui/mainwindow.glade.h:13
 msgid "Forward"
 msgstr ""
 
-#: ui/mainwindow.glade.h:14
+#: ../ui/mainwindow.glade.h:14
 msgid "Go to next match"
 msgstr "转到下次匹配"
 
-#: ui/mainwindow.glade.h:15
+#: ../ui/mainwindow.glade.h:15
 msgid "Go to previous match"
 msgstr "转到上次匹配"
 
-#: ui/mainwindow.glade.h:16
+#: ../ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
 msgstr "转到匹配的下个文件"
 
-#: ui/mainwindow.glade.h:17
+#: ../ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
 msgstr "转到匹配的上个文件"
 
-#: ui/mainwindow.glade.h:18
+#: ../ui/mainwindow.glade.h:18
 msgid "Pattern:"
 msgstr "模式："
 
-#: ui/mainwindow.glade.h:19
+#: ../ui/mainwindow.glade.h:19
 msgid "Preview"
 msgstr "预览"
 
-#: ui/mainwindow.glade.h:20
+#: ../ui/mainwindow.glade.h:20
 msgid "Preview of the substitution"
 msgstr ""
 
-#: ui/mainwindow.glade.h:21
+#: ../ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
 msgstr "递归进入子目录"
 
-#: ui/mainwindow.glade.h:22
+#: ../ui/mainwindow.glade.h:22
 msgid "Replace _current"
 msgstr "替换当前(_C)"
 
-#: ui/mainwindow.glade.h:23
+#: ../ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
 msgstr "替换全部文件中的全部匹配"
 
-#: ui/mainwindow.glade.h:24
+#: ../ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
 msgstr ""
 
-#: ui/mainwindow.glade.h:25
+#: ../ui/mainwindow.glade.h:25
 msgid "Replace current match"
 msgstr "替换当前匹配"
 
-#: ui/mainwindow.glade.h:26
+#: ../ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
 msgstr "在全部文件中替换(_A)"
 
-#: ui/mainwindow.glade.h:27
+#: ../ui/mainwindow.glade.h:27
 msgid "Replace in _this file"
 msgstr "在此文件中替换(_T)"
 
-#: ui/mainwindow.glade.h:28
+#: ../ui/mainwindow.glade.h:28
 msgid "Replace:"
 msgstr "替换："
 
-#: ui/mainwindow.glade.h:29
+#: ../ui/mainwindow.glade.h:29
 msgid "Search:"
 msgstr "搜索："
 
-#: ui/mainwindow.glade.h:30
-msgid "The directory to be searched"
-msgstr "要搜索的目录"
-
-#: ui/mainwindow.glade.h:31
+#: ../ui/mainwindow.glade.h:30
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
 "\\L, \\U and \\E are supported as well."
 msgstr ""
 
-#: ui/mainwindow.glade.h:32
+#: ../ui/mainwindow.glade.h:31
 msgid "_All files"
 msgstr "全部文件(_A)"
 
-#: ui/mainwindow.glade.h:33
+#: ../ui/mainwindow.glade.h:32
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ui/mainwindow.glade.h:34
+#: ../ui/mainwindow.glade.h:33
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ui/mainwindow.glade.h:35
+#: ../ui/mainwindow.glade.h:34
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ui/mainwindow.glade.h:36
+#: ../ui/mainwindow.glade.h:35
 msgid "_Match"
 msgstr "匹配(_M)"
 
-#: ui/mainwindow.glade.h:37
+#: ../ui/mainwindow.glade.h:36
 msgid "_Next file"
 msgstr "下个文件(_N)"
 
-#: ui/mainwindow.glade.h:38
+#: ../ui/mainwindow.glade.h:37
 msgid "_Previous file"
 msgstr "上个文件(_P)"
 
-#: ui/mainwindow.glade.h:39
+#: ../ui/mainwindow.glade.h:38
 msgid "_Replace"
 msgstr "替换(_R)"
 
-#: ui/mainwindow.glade.h:40
+#: ../ui/mainwindow.glade.h:39
 msgid "_This file"
 msgstr "此文件(_T)"
 
-#: ui/mainwindow.glade.h:41
+#: ../ui/mainwindow.glade.h:40
 msgid "hidden"
 msgstr "隐藏"
 
-#: ui/mainwindow.glade.h:42
+#: ../ui/mainwindow.glade.h:41
 msgid "recursive"
 msgstr "递归"
 
-#: ui/prefdialog.glade.h:1
+#: ../ui/prefdialog.glade.h:1
 msgid "1."
 msgstr "1."
 
-#: ui/prefdialog.glade.h:2
+#: ../ui/prefdialog.glade.h:2
 msgid "2."
 msgstr "2."
 
-#: ui/prefdialog.glade.h:3
+#: ../ui/prefdialog.glade.h:3
 msgid "3."
 msgstr "3."
 
-#: ui/prefdialog.glade.h:4
+#: ../ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
 msgstr "当前匹配颜色(_U)："
 
-#: ui/prefdialog.glade.h:5
+#: ../ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
 msgstr "默认编码(_E)："
 
-#: ui/prefdialog.glade.h:6
+#: ../ui/prefdialog.glade.h:6
 msgid ""
 "Icons only\n"
 "Text only\n"
 "Icons and text\n"
 "Both horizontal"
-msgstr "只有图标\n只有文字\n图标和文字\n两者水平排列"
+msgstr ""
+"只有图标\n"
+"只有文字\n"
+"图标和文字\n"
+"两者水平排列"
 
-#: ui/prefdialog.glade.h:10
+#: ../ui/prefdialog.glade.h:10
 msgid "Preferences"
 msgstr "首选项"
 
-#: ui/prefdialog.glade.h:11
+#: ../ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
 msgstr "当前语系指定的编码"
 
-#: ui/prefdialog.glade.h:12
+#: ../ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
 msgstr "工具栏样式(_B)："
 
-#: ui/prefdialog.glade.h:13
+#: ../ui/prefdialog.glade.h:13
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: ui/prefdialog.glade.h:14
+#: ../ui/prefdialog.glade.h:14
 msgid "_File access"
 msgstr "文件访问(_F)"
 
-#: ui/prefdialog.glade.h:15
+#: ../ui/prefdialog.glade.h:15
 msgid "_Look’n’feel"
 msgstr "观感(_L)"
 
-#: ui/prefdialog.glade.h:16
+#: ../ui/prefdialog.glade.h:16
 msgid "_Match color:"
 msgstr "匹配颜色(_M)："
 
-#: ui/prefdialog.glade.h:17
+#: ../ui/prefdialog.glade.h:17
 msgid "_Text view font:"
 msgstr "文本视图字体(_T)："
 
-#: ui/prefdialog.glade.h:18
+#: ../ui/prefdialog.glade.h:18
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
+
+#~ msgid "_About"
+#~ msgstr "关于(_A)"
+
+#~ msgid "[OPTION]... [FOLDER]"
+#~ msgstr "[选项]... [文件夹]"
+
+#~ msgid "Try “regexxer --help” for more information."
+#~ msgstr "输入“regexxer --help”可获得更新信息。"
+
+#~ msgid ""
+#~ "The folder name “%1” contains characters not representable in the "
+#~ "encoding of the local file system."
+#~ msgstr "文件夹名称“%1”包含本地文件系统编码无法表示的字符。"
+
+#~ msgid "Select a folder"
+#~ msgstr "选择一个文件夹"
+
+#~ msgid "About regexxer"
+#~ msgstr "关于 regexxer"
+
+#~ msgid "The application icon of regexxer"
+#~ msgstr "regexxer 的应用程序图标"
+
+#~ msgid "regexxer icon"
+#~ msgstr "regexxer 图标"
+
+#~ msgid "translated by"
+#~ msgstr "翻译者"
+
+#~ msgid "written by"
+#~ msgstr "编写者"
+
+#~ msgid "The directory to be searched"
+#~ msgstr "要搜索的目录"

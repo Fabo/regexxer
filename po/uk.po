@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-24 17:31+0300\n"
+"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
+"POT-Creation-Date: 2007-02-18 22:12+0100\n"
 "PO-Revision-Date: 2004-09-25 HO:MI+ZONE\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -15,163 +15,151 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: regexxer.desktop.in.h:1
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
 msgstr "Пошук та заміна з використанням регулярних виразів"
 
-#: regexxer.desktop.in.h:2
+#: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
 msgstr "Утиліта пошуку regexxer"
 
-#: regexxer.schemas.in.h:1
+#: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
 msgstr "Колір поточної відповідності"
 
-#: regexxer.schemas.in.h:2
+#: ../ui/regexxer.schemas.in.h:2
 msgid "Fallback encoding"
 msgstr "Запасне кодування"
 
-#: regexxer.schemas.in.h:3
+#: ../ui/regexxer.schemas.in.h:3
 msgid "Match color"
 msgstr "Колір відповідності"
 
-#: regexxer.schemas.in.h:4
+#: ../ui/regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
-"for a complete list of possible values."
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
+"a complete list of possible values."
 msgstr ""
-"Назва кодування символів, що використовується якщо файл неможливо прочитати у "
-"UTF-8 або кодуванні поточної локалі. Перелік можливих значень можна переглянути виконавши "
-"“iconv --list”."
+"Назва кодування символів, що використовується якщо файл неможливо прочитати "
+"у UTF-8 або кодуванні поточної локалі. Перелік можливих значень можна "
+"переглянути виконавши “iconv --list”."
 
-#: regexxer.schemas.in.h:5
+#: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Шрифт текстової області"
 
-#: regexxer.schemas.in.h:6
+#: ../ui/regexxer.schemas.in.h:6
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr ""
-"Колір тла, що використовується для підсвічення відповідностей пошуковому виразу."
+"Колір тла, що використовується для підсвічення відповідностей пошуковому "
+"виразу."
 
-#: regexxer.schemas.in.h:7
+#: ../ui/regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
 msgstr ""
-"Колір тла, що використовується для підсвічення поточної вибраної відповідності пошуковому виразу."
+"Колір тла, що використовується для підсвічення поточної вибраної "
+"відповідності пошуковому виразу."
 
-#: regexxer.schemas.in.h:8
+#: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
 msgstr "Шрифт, що використовується у редакторі файлів."
 
-#: regexxer.schemas.in.h:9
+#: ../ui/regexxer.schemas.in.h:9
 msgid ""
-"The style of the application’s toolbar. Possible values are “icons”, “text"
-"”, “both”, and “both-horiz”."
+"The style of the application’s toolbar. Possible values are “icons”, “text”, "
+"“both”, and “both-horiz”."
 msgstr ""
-"Стиль панелі інструментів програми. Можливі значення: “icons” (значки), “text” (текст)"
-", “both” (значки та текст), та “both-horiz” (значки та текст горизонтально)."
+"Стиль панелі інструментів програми. Можливі значення: “icons” (значки), "
+"“text” (текст), “both” (значки та текст), та “both-horiz” (значки та текст "
+"горизонтально)."
 
-#: regexxer.schemas.in.h:10
+#: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
 msgstr "Стиль панелі інструментів"
 
-#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
-#: src/filebuffer.cc:203
+#: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "Не вдається прочитати файл:"
 
-#: src/filetree.cc:81
+#: ../src/filetree.cc:80
 msgid "File"
 msgstr "Файл"
 
-#: src/filetree.cc:101
+#: ../src/filetree.cc:99
 msgid "#"
 msgstr "№"
 
-#: src/filetree.cc:532
+#: ../src/filetree.cc:530
+#, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Не вдається зберегти файл “%1”: %2"
 
-#: src/filetree.cc:949
+#: ../src/filetree.cc:946
+#, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "“%1” схожий на двійковий файл."
 
-#: src/main.cc:84
-msgid "_About"
-msgstr "_Про програму"
-
-#: src/main.cc:85
+#: ../src/main.cc:77
 msgid "Save _all"
 msgstr "Зберегти вс_е"
 
-#: src/main.cc:100
+#: ../src/main.cc:134
 msgid "Find files matching PATTERN"
 msgstr "Знайти файли, що відповідають ШАБЛОНУ"
 
-#: src/main.cc:100
+#: ../src/main.cc:134
 msgid "PATTERN"
 msgstr "ШАБЛОН"
 
-#: src/main.cc:101
+#: ../src/main.cc:136
 msgid "Do not recurse into subdirectories"
 msgstr "Не враховувати підкаталоги"
 
-#: src/main.cc:102 ui/mainwindow.glade.h:3
+#: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "Також шукати у прихованих файлах"
 
-#: src/main.cc:103
+#: ../src/main.cc:140
 msgid "Find text matching REGEX"
 msgstr "Знайти текст, що відповідає РЕГВИРАЗУ"
 
-#: src/main.cc:103
+#: ../src/main.cc:140
 msgid "REGEX"
 msgstr "РЕГВИРАЗ"
 
-#: src/main.cc:104
+#: ../src/main.cc:142
 msgid "Find only the first match in a line"
 msgstr "Шукати лише першу відповідність у рядку"
 
-#: src/main.cc:105 ui/mainwindow.glade.h:5
+#: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr "Не враховувати регістр при порівнянні"
 
-#: src/main.cc:106
+#: ../src/main.cc:146
 msgid "Replace matches with STRING"
 msgstr "Замінювати знайдені відповідності на РЯДОК"
 
-#: src/main.cc:106
+#: ../src/main.cc:146
 msgid "STRING"
 msgstr "РЯДОК"
 
-#: src/main.cc:107
+#: ../src/main.cc:148
 msgid "Print match location to standard output"
 msgstr "Виводити позиції відповідностей у стандартний вивід"
 
-#: src/main.cc:108
+#: ../src/main.cc:150
 msgid "Do not automatically start search"
 msgstr "Не починати пошук автоматично"
 
-#: src/main.cc:118
-msgid "[OPTION]... [FOLDER]"
-msgstr "[ПАРАМЕТР]... [ТЕКА]"
-
-#: src/main.cc:141
-msgid "Try “regexxer --help” for more information."
-msgstr "Додаткову інформацію дивіться у “regexxer --help”."
-
-#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
+#: ../src/main.cc:152
+msgid "[FOLDER]"
 msgstr ""
-"Шаблон назви файлу у форматі оболонки. Підтримуються класи символів [ab] та "
-"вирази з дужками {a,b} у стилі csh."
 
-#: src/mainwindow.cc:403
+#: ../src/mainwindow.cc:413
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -179,19 +167,7 @@ msgstr ""
 "Деякі файли ще не були збережені.\n"
 "Все одно вийти?"
 
-#: src/mainwindow.cc:431
-msgid ""
-"The folder name “%1” contains characters not representable in the encoding "
-"of the local file system."
-msgstr ""
-"Назва теки “%1” містить символи, які неможливо представити у кодуванні локальної "
-"системи."
-
-#: src/mainwindow.cc:450
-msgid "Select a folder"
-msgstr "Виберіть теку"
-
-#: src/mainwindow.cc:470
+#: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -199,15 +175,30 @@ msgstr ""
 "Деякі файли ще не були збережені.\n"
 "Все одно продовжувати?"
 
-#: src/mainwindow.cc:496
+#: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
 msgstr "Неправильний шаблон пошуку файлів."
 
-#: src/mainwindow.cc:502
+#: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
 msgstr "При пошуку виникли наступні помилки:"
 
-#: src/mainwindow.cc:527
+#: ../src/mainwindow.cc:708
+msgid "The following errors occurred during save:"
+msgstr "При збереженні виникли наступні помилки:"
+
+#: ../src/mainwindow.cc:854
+msgid "translator-credits"
+msgstr "Максим Дзюманенко <mvd@mylinux.com.ua>"
+
+#: ../src/pcreshell.cc:62
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr ""
+"Використання escape-послідовності \\C для відповідності одному байтові не "
+"підтримується."
+
+#: ../src/pcreshell.cc:84
+#, qt-format
 msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
@@ -215,7 +206,8 @@ msgstr ""
 "Помилка у регулярному виразі у “%1” (індекс %2):\n"
 "%3"
 
-#: src/mainwindow.cc:529
+#: ../src/pcreshell.cc:89
+#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -223,175 +215,146 @@ msgstr ""
 "Помилка у регулярному виразі \n"
 "%1"
 
-#: src/mainwindow.cc:751
-msgid "The following errors occurred during save:"
-msgstr "При збереженні виникли наступні помилки:"
-
-#: src/pcreshell.cc:59
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr "Використання escape-послідовності \\C для відповідності одному байтові не підтримується."
-
-#: src/pcreshell.cc:151
+#: ../src/pcreshell.cc:171
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
-msgstr ""
-"Досягнуто межу кількості рекурсій та повернень у регулярному виразі."
+msgstr "Досягнуто межу кількості рекурсій та повернень у регулярному виразі."
 
-#: src/prefdialog.cc:248
+#: ../src/prefdialog.cc:249
+#, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "“%1” не є правильним кодуванням."
 
-#: src/statusline.cc:264
+#: ../src/statusline.cc:263
 msgid "Stop"
 msgstr "Зупинити"
 
-#: src/statusline.cc:271
+#: ../src/statusline.cc:270
 msgid "File:"
 msgstr "Файл:"
 
-#: src/statusline.cc:274
+#: ../src/statusline.cc:273
 msgid "Match:"
 msgstr "Відповідність:"
 
-#: src/statusline.cc:285
+#: ../src/statusline.cc:284
 msgid "Cancels the running search"
 msgstr "Скасовує процес пошуку"
 
-#. namespace Regexxer
-#: ui/aboutdialog.glade.h:1
-msgid "About regexxer"
-msgstr "Про програму regexxer"
+#: ../ui/mainwindow.glade.h:1
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Шаблон назви файлу у форматі оболонки. Підтримуються класи символів [ab] та "
+"вирази з дужками {a,b} у стилі csh."
 
-#: ui/aboutdialog.glade.h:2
-msgid "The application icon of regexxer"
-msgstr "Значок програми regexxer"
-
-#: ui/aboutdialog.glade.h:3
-msgid "regexxer icon"
-msgstr "значок regexxer"
-
-#: ui/aboutdialog.glade.h:4
-msgid "translated by"
-msgstr "переклад"
-
-#: ui/aboutdialog.glade.h:5
-msgid "translator-credits"
-msgstr "Максим Дзюманенко <mvd@mylinux.com.ua>"
-
-#: ui/aboutdialog.glade.h:6
-msgid "written by"
-msgstr "автор"
-
-#: ui/mainwindow.glade.h:2
+#: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
 msgstr "Регулярний вираз із синтаксисом у стилі Perl"
 
-#: ui/mainwindow.glade.h:4
+#: ../ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "Назад"
 
-#: ui/mainwindow.glade.h:6
+#: ../ui/mainwindow.glade.h:6
 msgid "File backward"
 msgstr "Файл назад"
 
-#: ui/mainwindow.glade.h:7
+#: ../ui/mainwindow.glade.h:7
 msgid "File forward"
 msgstr "Файл вперед"
 
-#: ui/mainwindow.glade.h:8
+#: ../ui/mainwindow.glade.h:8
 msgid "Find all files that match the filename pattern"
 msgstr "Знайти усі файли, які відповідають шаблону файлу"
 
-#: ui/mainwindow.glade.h:9
+#: ../ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
 msgstr "Знайти усі відповідності регулярному виразу"
 
-#: ui/mainwindow.glade.h:10
+#: ../ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
 msgstr "Знайти усі можливі відповідності у рядку"
 
-#: ui/mainwindow.glade.h:11
+#: ../ui/mainwindow.glade.h:11
 msgid "Find fi_les"
 msgstr "Знайти ф_айли"
 
-#: ui/mainwindow.glade.h:12
+#: ../ui/mainwindow.glade.h:12
 msgid "Fol_der:"
 msgstr "_Тека:"
 
-#: ui/mainwindow.glade.h:13
+#: ../ui/mainwindow.glade.h:13
 msgid "Forward"
 msgstr "Вперед"
 
-#: ui/mainwindow.glade.h:14
+#: ../ui/mainwindow.glade.h:14
 msgid "Go to next match"
 msgstr "Перейти до наступної відповідності"
 
-#: ui/mainwindow.glade.h:15
+#: ../ui/mainwindow.glade.h:15
 msgid "Go to previous match"
 msgstr "Перейти до попередньої відповідності"
 
-#: ui/mainwindow.glade.h:16
+#: ../ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
 msgstr "Перейти до наступного відповідного файлу"
 
-#: ui/mainwindow.glade.h:17
+#: ../ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
 msgstr "Перейти до попереднього відповідного файлу"
 
-#: ui/mainwindow.glade.h:18
+#: ../ui/mainwindow.glade.h:18
 msgid "Pattern:"
 msgstr "Шаблон:"
 
-#: ui/mainwindow.glade.h:19
+#: ../ui/mainwindow.glade.h:19
 msgid "Preview"
 msgstr "Попередній перегляд"
 
-#: ui/mainwindow.glade.h:20
+#: ../ui/mainwindow.glade.h:20
 msgid "Preview of the substitution"
 msgstr "Попередній перегляд заміни"
 
-#: ui/mainwindow.glade.h:21
+#: ../ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
 msgstr "Перевіряти підкаталоги"
 
-#: ui/mainwindow.glade.h:22
+#: ../ui/mainwindow.glade.h:22
 msgid "Replace _current"
 msgstr "Замінити _поточну"
 
-#: ui/mainwindow.glade.h:23
+#: ../ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
 msgstr "Замінити усі відповідності в усіх файлах"
 
-#: ui/mainwindow.glade.h:24
+#: ../ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
 msgstr "Замінити усі відповідності у поточному файлі"
 
-#: ui/mainwindow.glade.h:25
+#: ../ui/mainwindow.glade.h:25
 msgid "Replace current match"
 msgstr "Замінити поточну відповідність"
 
-#: ui/mainwindow.glade.h:26
+#: ../ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
 msgstr "Замінити в _усіх файлах"
 
-#: ui/mainwindow.glade.h:27
+#: ../ui/mainwindow.glade.h:27
 msgid "Replace in _this file"
 msgstr "Замінити у _цьому файлі"
 
-#: ui/mainwindow.glade.h:28
+#: ../ui/mainwindow.glade.h:28
 msgid "Replace:"
 msgstr "Замінити:"
 
-#: ui/mainwindow.glade.h:29
+#: ../ui/mainwindow.glade.h:29
 msgid "Search:"
 msgstr "Шукати:"
 
-#: ui/mainwindow.glade.h:30
-msgid "The directory to be searched"
-msgstr "Каталог пошуку"
-
-#: ui/mainwindow.glade.h:31
+#: ../ui/mainwindow.glade.h:30
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
@@ -401,71 +364,71 @@ msgstr ""
 "відповідності використовуючи $1, $2, тощо. Або навіть $+, $&, $` та $'. "
 "Також підтримуються оператори \\l, \\u, \\L, \\U та \\E."
 
-#: ui/mainwindow.glade.h:32
+#: ../ui/mainwindow.glade.h:31
 msgid "_All files"
 msgstr "_Усі файли"
 
-#: ui/mainwindow.glade.h:33
+#: ../ui/mainwindow.glade.h:32
 msgid "_Edit"
 msgstr "_Правка"
 
-#: ui/mainwindow.glade.h:34
+#: ../ui/mainwindow.glade.h:33
 msgid "_File"
 msgstr "_Файл"
 
-#: ui/mainwindow.glade.h:35
+#: ../ui/mainwindow.glade.h:34
 msgid "_Help"
 msgstr "_Довідка"
 
-#: ui/mainwindow.glade.h:36
+#: ../ui/mainwindow.glade.h:35
 msgid "_Match"
 msgstr "_Відповідність"
 
-#: ui/mainwindow.glade.h:37
+#: ../ui/mainwindow.glade.h:36
 msgid "_Next file"
 msgstr "_Наступний файл"
 
-#: ui/mainwindow.glade.h:38
+#: ../ui/mainwindow.glade.h:37
 msgid "_Previous file"
 msgstr "_Попередній файл"
 
-#: ui/mainwindow.glade.h:39
+#: ../ui/mainwindow.glade.h:38
 msgid "_Replace"
 msgstr "За_мінити"
 
-#: ui/mainwindow.glade.h:40
+#: ../ui/mainwindow.glade.h:39
 msgid "_This file"
 msgstr "_Цей файл"
 
-#: ui/mainwindow.glade.h:41
+#: ../ui/mainwindow.glade.h:40
 msgid "hidden"
 msgstr "приховані"
 
-#: ui/mainwindow.glade.h:42
+#: ../ui/mainwindow.glade.h:41
 msgid "recursive"
 msgstr "рекурсивно"
 
-#: ui/prefdialog.glade.h:1
+#: ../ui/prefdialog.glade.h:1
 msgid "1."
 msgstr "1."
 
-#: ui/prefdialog.glade.h:2
+#: ../ui/prefdialog.glade.h:2
 msgid "2."
 msgstr "2."
 
-#: ui/prefdialog.glade.h:3
+#: ../ui/prefdialog.glade.h:3
 msgid "3."
 msgstr "3."
 
-#: ui/prefdialog.glade.h:4
+#: ../ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
 msgstr "Колір _поточної відповідності:"
 
-#: ui/prefdialog.glade.h:5
+#: ../ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
 msgstr "Запасне _кодування:"
 
-#: ui/prefdialog.glade.h:6
+#: ../ui/prefdialog.glade.h:6
 msgid ""
 "Icons only\n"
 "Text only\n"
@@ -477,40 +440,78 @@ msgstr ""
 "Значки та текст\n"
 "Значки та текст гориз."
 
-#: ui/prefdialog.glade.h:10
+#: ../ui/prefdialog.glade.h:10
 msgid "Preferences"
 msgstr "Параметри"
 
-#: ui/prefdialog.glade.h:11
+#: ../ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
 msgstr "Кодування вказане у поточній локалі"
 
-#: ui/prefdialog.glade.h:12
+#: ../ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
 msgstr "Стиль панелі _інструментів:"
 
-#: ui/prefdialog.glade.h:13
+#: ../ui/prefdialog.glade.h:13
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: ui/prefdialog.glade.h:14
+#: ../ui/prefdialog.glade.h:14
 msgid "_File access"
 msgstr "Доступ до _файлів"
 
-#: ui/prefdialog.glade.h:15
+#: ../ui/prefdialog.glade.h:15
 msgid "_Look’n’feel"
 msgstr "_Вигляд"
 
-#: ui/prefdialog.glade.h:16
+#: ../ui/prefdialog.glade.h:16
 msgid "_Match color:"
 msgstr "Колір _відповідностей:"
 
-#: ui/prefdialog.glade.h:17
+#: ../ui/prefdialog.glade.h:17
 msgid "_Text view font:"
 msgstr "Шрифт _текстової області:"
 
-#: ui/prefdialog.glade.h:18
+#: ../ui/prefdialog.glade.h:18
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
-"regexxer намагається прочитати файл у наступних кодуваннях, перш ніж закінчить:"
+"regexxer намагається прочитати файл у наступних кодуваннях, перш ніж "
+"закінчить:"
+
+#~ msgid "_About"
+#~ msgstr "_Про програму"
+
+#~ msgid "[OPTION]... [FOLDER]"
+#~ msgstr "[ПАРАМЕТР]... [ТЕКА]"
+
+#~ msgid "Try “regexxer --help” for more information."
+#~ msgstr "Додаткову інформацію дивіться у “regexxer --help”."
+
+#~ msgid ""
+#~ "The folder name “%1” contains characters not representable in the "
+#~ "encoding of the local file system."
+#~ msgstr ""
+#~ "Назва теки “%1” містить символи, які неможливо представити у кодуванні "
+#~ "локальної системи."
+
+#~ msgid "Select a folder"
+#~ msgstr "Виберіть теку"
+
+#~ msgid "About regexxer"
+#~ msgstr "Про програму regexxer"
+
+#~ msgid "The application icon of regexxer"
+#~ msgstr "Значок програми regexxer"
+
+#~ msgid "regexxer icon"
+#~ msgstr "значок regexxer"
+
+#~ msgid "translated by"
+#~ msgstr "переклад"
+
+#~ msgid "written by"
+#~ msgstr "автор"
+
+#~ msgid "The directory to be searched"
+#~ msgstr "Каталог пошуку"

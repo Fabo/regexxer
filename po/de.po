@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-01-11 04:02+0100\n"
+"POT-Creation-Date: 2007-02-18 22:12+0100\n"
 "PO-Revision-Date: 2004-05-05 11:34+0200\n"
 "Last-Translator: Daniel Elstner <daniel.kitta@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:850
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
 msgstr "Suchen und Ersetzen mit regulären Ausdrücken"
 
@@ -86,25 +86,25 @@ msgstr "Stil der Werkzeugleiste"
 msgid "Can’t read file:"
 msgstr "Datei nicht lesbar:"
 
-#: ../src/filetree.cc:82
+#: ../src/filetree.cc:80
 msgid "File"
 msgstr "Datei"
 
-#: ../src/filetree.cc:102
+#: ../src/filetree.cc:99
 msgid "#"
 msgstr "#"
 
-#: ../src/filetree.cc:533
+#: ../src/filetree.cc:530
 #, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Fehler beim Speichern der Datei „%1“: %2"
 
-#: ../src/filetree.cc:950
+#: ../src/filetree.cc:946
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "„%1“ scheint eine Binärdatei zu sein."
 
-#: ../src/main.cc:94
+#: ../src/main.cc:77
 msgid "Save _all"
 msgstr "_Alle speichern"
 
@@ -160,7 +160,7 @@ msgstr "Keine automatische Suche starten"
 msgid "[FOLDER]"
 msgstr "[ORDNER]"
 
-#: ../src/mainwindow.cc:414
+#: ../src/mainwindow.cc:413
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -168,7 +168,7 @@ msgstr ""
 "Einige Dateien wurden noch nicht gespeichert.\n"
 "Trotzdem beenden?"
 
-#: ../src/mainwindow.cc:428
+#: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -176,29 +176,29 @@ msgstr ""
 "Einige Dateien wurden noch nicht gespeichert.\n"
 "Trotzdem fortsetzen?"
 
-#: ../src/mainwindow.cc:456
+#: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
 msgstr "Das Dateinamen-Suchmuster ist ungültig."
 
-#: ../src/mainwindow.cc:462
+#: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
 msgstr "Die folgenden Fehler sind beim Suchen aufgetreten:"
 
-#: ../src/mainwindow.cc:709
+#: ../src/mainwindow.cc:708
 msgid "The following errors occurred during save:"
 msgstr "Die folgenden Fehler sind beim Speichern aufgetreten:"
 
-#: ../src/mainwindow.cc:855
+#: ../src/mainwindow.cc:854
 msgid "translator-credits"
 msgstr "Daniel Elstner <daniel.kitta@gmail.com>"
 
-#: ../src/pcreshell.cc:60
+#: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
 msgstr ""
 "Das Benutzen der \\C Escape-Sequenz um ein einzelnes Byte zu finden wird "
 "nicht unterstützt."
 
-#: ../src/pcreshell.cc:80
+#: ../src/pcreshell.cc:84
 #, qt-format
 msgid ""
 "Error in regular expression at “%1” (index %2):\n"
@@ -207,7 +207,7 @@ msgstr ""
 "Fehler in regulärem Ausdruck bei „%1“ (Index %2):\n"
 "%3"
 
-#: ../src/pcreshell.cc:85
+#: ../src/pcreshell.cc:89
 #, qt-format
 msgid ""
 "Error in regular expression:\n"
@@ -216,7 +216,7 @@ msgstr ""
 "Fehler in regulärem Ausdruck:\n"
 "%1"
 
-#: ../src/pcreshell.cc:167
+#: ../src/pcreshell.cc:171
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
@@ -229,19 +229,19 @@ msgstr ""
 msgid "“%1” is not a valid encoding."
 msgstr "„%1“ ist kein gültiger Zeichensatz."
 
-#: ../src/statusline.cc:264
+#: ../src/statusline.cc:263
 msgid "Stop"
 msgstr "Stopp"
 
-#: ../src/statusline.cc:271
+#: ../src/statusline.cc:270
 msgid "File:"
 msgstr "Datei:"
 
-#: ../src/statusline.cc:274
+#: ../src/statusline.cc:273
 msgid "Match:"
 msgstr "Treffer:"
 
-#: ../src/statusline.cc:285
+#: ../src/statusline.cc:284
 msgid "Cancels the running search"
 msgstr "Bricht die laufende Suche ab"
 

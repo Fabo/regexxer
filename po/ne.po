@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer.HEAD.ne\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-15 12:32+0200\n"
+"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
+"POT-Creation-Date: 2007-02-18 22:12+0100\n"
 "PO-Revision-Date: 2006-06-18 16:25+0545\n"
 "Last-Translator: Mahesh subedi <submanesh@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -23,153 +23,146 @@ msgstr ""
 "X-Generator: KBabel 1.10.2\n"
 "Plural-Forms: nplurals=2;plural=(n!=1)\n"
 
-#: ../regexxer.desktop.in.h:1
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
 msgstr "नियमित अभिव्यक्तिहरू प्रयोग गरेर खोजी गर्नुहोस् र बदल्नुहोस्"
 
-#: ../regexxer.desktop.in.h:2
+#: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
 msgstr "रेजेक्सर खोजी उपकरण"
 
-#: ../regexxer.schemas.in.h:1
+#: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
 msgstr "हालको-मिल्दो रङ"
 
-#: ../regexxer.schemas.in.h:2
+#: ../ui/regexxer.schemas.in.h:2
 msgid "Fallback encoding"
 msgstr "सङ्केतन पछाउनुहोस्"
 
-#: ../regexxer.schemas.in.h:3
+#: ../ui/regexxer.schemas.in.h:3
 msgid "Match color"
 msgstr "मिल्दो रङ"
 
-#: ../regexxer.schemas.in.h:4
+#: ../ui/regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
-"for a complete list of possible values."
-msgstr "यदि फाइल हालको लोक्यालद्वारा वर्णन गरिएको UTF-8 वा सङ्केत सेटमा पढ्न योग्य छैन भने प्रयोग गर्न क्यारेक्टर सङ्केतनको नाम। संभावित मानहरूको पूर्ण सूचीका लागि “iconv --list” प्रयास गर्नुहोस्।"
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
+"a complete list of possible values."
+msgstr ""
+"यदि फाइल हालको लोक्यालद्वारा वर्णन गरिएको UTF-8 वा सङ्केत सेटमा पढ्न योग्य छैन भने "
+"प्रयोग गर्न क्यारेक्टर सङ्केतनको नाम। संभावित मानहरूको पूर्ण सूचीका लागि “iconv --list” "
+"प्रयास गर्नुहोस्।"
 
-#: ../regexxer.schemas.in.h:5
+#: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "पाठ दृश्य फन्ट"
 
-#: ../regexxer.schemas.in.h:6
-msgid "The background color used to highlight matches of the search expression."
+#: ../ui/regexxer.schemas.in.h:6
+msgid ""
+"The background color used to highlight matches of the search expression."
 msgstr "पृष्ठभूमि रङ खोजी अभिव्यक्तिको जोडाहरू हाइलाइट गर्न प्रयोग गर्दछ।"
 
-#: ../regexxer.schemas.in.h:7
+#: ../ui/regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
 msgstr "पृष्ठभूमि रङ खोजी अभिव्यक्तिको हालै चयन गरिएको जोडा हाइलाइट गर्न प्रयोग गर्दछ।"
 
-#: ../regexxer.schemas.in.h:8
+#: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
 msgstr "फन्ट फाइल सम्पादकमा प्रयोग गरिन्छ।"
 
-#: ../regexxer.schemas.in.h:9
+#: ../ui/regexxer.schemas.in.h:9
 msgid ""
-"The style of the application’s toolbar. Possible values are “icons”, “text"
-"”, “both”, and “both-horiz”."
-msgstr "अनुप्रयोगको उपकरणपट्टीको शैली। संभावित मानहरू “icons”, “text”, “both”, र “both-horiz” हुन्।"
+"The style of the application’s toolbar. Possible values are “icons”, “text”, "
+"“both”, and “both-horiz”."
+msgstr ""
+"अनुप्रयोगको उपकरणपट्टीको शैली। संभावित मानहरू “icons”, “text”, “both”, र “both-"
+"horiz” हुन्।"
 
-#: ../regexxer.schemas.in.h:10
+#: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
 msgstr "उपकरणपट्टी शैली"
 
-#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
-#: ../src/filebuffer.cc:203
+#: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "फाइल पढ्न सकिएन:"
 
-#: ../src/filetree.cc:81
+#: ../src/filetree.cc:80
 msgid "File"
 msgstr "फाइल"
 
-#: ../src/filetree.cc:101
+#: ../src/filetree.cc:99
 msgid "#"
 msgstr "#"
 
-#: ../src/filetree.cc:532
+#: ../src/filetree.cc:530
+#, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "फाइल “%1” बचत गर्न असफल: %2"
 
-#: ../src/filetree.cc:949
+#: ../src/filetree.cc:946
+#, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "“%1” बाइनरी फाइल जस्तो देखिन्छ"
 
-#: ../src/main.cc:84
-msgid "_About"
-msgstr "बारेमा"
-
-#: ../src/main.cc:85
+#: ../src/main.cc:77
 msgid "Save _all"
 msgstr "सबै बचत गर्नुहोस्"
 
-#: ../src/main.cc:100
+#: ../src/main.cc:134
 msgid "Find files matching PATTERN"
 msgstr "पाठहरूसँग  मिल्दो बाँन्की फेला पार्नुहोस्"
 
-#: ../src/main.cc:100
+#: ../src/main.cc:134
 msgid "PATTERN"
 msgstr "बाँन्की"
 
-#: ../src/main.cc:101
+#: ../src/main.cc:136
 msgid "Do not recurse into subdirectories"
 msgstr "उपडाइरेक्टरीहरू भित्र पुनरावृत नगर्नुहोस्"
 
-#: ../src/main.cc:102 ../ui/mainwindow.glade.h:3
+#: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "लुकेका फाइलहरू पनि फेला पार्नुहोस्"
 
-#: ../src/main.cc:103
+#: ../src/main.cc:140
 msgid "Find text matching REGEX"
 msgstr "पाठसँग मिल्दो रेजेक्स फेला पार्नुहोस्"
 
-#: ../src/main.cc:103
+#: ../src/main.cc:140
 msgid "REGEX"
 msgstr "रेजेक्स"
 
-#: ../src/main.cc:104
+#: ../src/main.cc:142
 msgid "Find only the first match in a line"
 msgstr "हरफमा पहिलो मिल्दो मात्र फेला पार्नुहोस्"
 
-#: ../src/main.cc:105 ../ui/mainwindow.glade.h:5
+#: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr "केस असंवेदनशील जोडा मिलाउनुहोस्"
 
-#: ../src/main.cc:106
+#: ../src/main.cc:146
 msgid "Replace matches with STRING"
 msgstr "स्ट्रिङसँग जोडाहरू बदल्नुहोस्"
 
-#: ../src/main.cc:106
+#: ../src/main.cc:146
 msgid "STRING"
 msgstr "स्ट्रिङ"
 
-#: ../src/main.cc:107
+#: ../src/main.cc:148
 msgid "Print match location to standard output"
 msgstr "मानक प्रतिफलमा मिल्दो स्थान मुद्रण गर्नुहोस्"
 
-#: ../src/main.cc:108
+#: ../src/main.cc:150
 msgid "Do not automatically start search"
 msgstr "स्वचालित तरिकाले खोजी सुरु नगर्नुहोस्"
 
-#: ../src/main.cc:118
-msgid "[OPTION]... [FOLDER]"
-msgstr "[विकल्प]... [फोल्डर]"
+#: ../src/main.cc:152
+msgid "[FOLDER]"
+msgstr ""
 
-#: ../src/main.cc:141
-msgid "Try “regexxer --help” for more information."
-msgstr "अरू सूचनाका लागि “regexxer --help” प्रयास गर्नुहोस्"
-
-#: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
-msgstr "शेलद्वारा प्रयोग गरिएको जस्तो फाइलनाम बाँन्की। क्यारेक्टर तहहरू [ab] र csh शैली जुँगे कोष्ठक अभिव्यक्तिहरू {a,b} समर्थित छन्।"
-
-#: ../src/mainwindow.cc:403
+#: ../src/mainwindow.cc:413
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -177,17 +170,7 @@ msgstr ""
 "केही फाइलहरू अझै पनि बचत गरिएको छैन।\n"
 "जे भए पनि बन्द गर्नुहुन्छ ?"
 
-#: ../src/mainwindow.cc:431
-msgid ""
-"The folder name “%1” contains characters not representable in the encoding "
-"of the local file system."
-msgstr "फोल्डर नाम “%1” समावेश भएका क्यारेक्टरहरू स्थानीय फाइल प्रणालीको सङ्केतनमा प्रतिनिधित्व गर्न लायकको छैन।"
-
-#: ../src/mainwindow.cc:450
-msgid "Select a folder"
-msgstr "एउटा फोल्डर चयन गर्नुहोस्"
-
-#: ../src/mainwindow.cc:470
+#: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -195,15 +178,28 @@ msgstr ""
 "केही फाइलहरू अझै बचत भईसकेको छैन।\n"
 "जे भए पनि जारि राख्नुहुन्छ ?"
 
-#: ../src/mainwindow.cc:496
+#: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
 msgstr "फाइल खोजी बाँन्की अवैध छ।"
 
-#: ../src/mainwindow.cc:502
+#: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
 msgstr "खोजि अवधिमा निम्न त्रुटिहरू रह्यो:"
 
-#: ../src/mainwindow.cc:527
+#: ../src/mainwindow.cc:708
+msgid "The following errors occurred during save:"
+msgstr "बचत अवधिमा निम्न त्रुटिहरू रह्यो:"
+
+#: ../src/mainwindow.cc:854
+msgid "translator-credits"
+msgstr "ज्योत्सना श्रेष्ठ <jyotshna@mpp.org.np> Mahesh Subedi<submahesh@gmail.com>"
+
+#: ../src/pcreshell.cc:62
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr "एकल बाइटसँग जोडा मिलाउनका लागि \\C निकास अनुक्रमको प्रयोग समर्थित छैन।"
+
+#: ../src/pcreshell.cc:84
+#, qt-format
 msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
@@ -211,7 +207,8 @@ msgstr ""
 "“%1” (अनुक्रमणिका %2) मा नियमित अभिव्यक्ति भित्र त्रुटि:\n"
 "%3"
 
-#: ../src/mainwindow.cc:529
+#: ../src/pcreshell.cc:89
+#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -219,66 +216,40 @@ msgstr ""
 "नियमित अभिव्यक्ति भित्र त्रुटि:\n"
 "%1"
 
-#: ../src/mainwindow.cc:751
-msgid "The following errors occurred during save:"
-msgstr "बचत अवधिमा निम्न त्रुटिहरू रह्यो:"
-
-#: ../src/pcreshell.cc:59
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr "एकल बाइटसँग जोडा मिलाउनका लागि \\C निकास अनुक्रमको प्रयोग समर्थित छैन।"
-
-#: ../src/pcreshell.cc:151
+#: ../src/pcreshell.cc:171
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
 msgstr "नियमित अभिव्यक्ति इन्जिनको पुनरावृतिक र ब्याकट्र्याकिंग सीमा सम्म पुग्यो।"
 
-#: ../src/prefdialog.cc:248
+#: ../src/prefdialog.cc:249
+#, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "“%1” वैध सङ्केतन होइन।"
 
-#: ../src/statusline.cc:264
+#: ../src/statusline.cc:263
 msgid "Stop"
 msgstr "रोक्नुहोस्"
 
-#: ../src/statusline.cc:271
+#: ../src/statusline.cc:270
 msgid "File:"
 msgstr "फाइल:"
 
-#: ../src/statusline.cc:274
+#: ../src/statusline.cc:273
 msgid "Match:"
 msgstr "मिल्दो:"
 
-#: ../src/statusline.cc:285
+#: ../src/statusline.cc:284
 msgid "Cancels the running search"
 msgstr "चलिरहेको खोजी रद्द गर्दछ"
 
-#. namespace Regexxer
-#: ../ui/aboutdialog.glade.h:1
-msgid "About regexxer"
-msgstr "रेजेक्सरका बारेमा"
-
-#: ../ui/aboutdialog.glade.h:2
-msgid "The application icon of regexxer"
-msgstr "रेजेक्सरको अनुप्रयोग प्रतीमा"
-
-#: ../ui/aboutdialog.glade.h:3
-msgid "regexxer icon"
-msgstr "रेजेक्सर प्रतीमा"
-
-#: ../ui/aboutdialog.glade.h:4
-msgid "translated by"
-msgstr "अनुवाद"
-
-#: ../ui/aboutdialog.glade.h:5
-msgid "translator-credits"
+#: ../ui/mainwindow.glade.h:1
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
 msgstr ""
-"ज्योत्सना श्रेष्ठ <jyotshna@mpp.org.np> "
-"Mahesh Subedi<submahesh@gmail.com>"
-
-#: ../ui/aboutdialog.glade.h:6
-msgid "written by"
-msgstr "द्वारा लिखित"
+"शेलद्वारा प्रयोग गरिएको जस्तो फाइलनाम बाँन्की। क्यारेक्टर तहहरू [ab] र csh शैली जुँगे "
+"कोष्ठक अभिव्यक्तिहरू {a,b} समर्थित छन्।"
 
 #: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
@@ -385,57 +356,56 @@ msgid "Search:"
 msgstr "खोजी गर्नुहोस्:"
 
 #: ../ui/mainwindow.glade.h:30
-msgid "The directory to be searched"
-msgstr "खोजी गरिनुपर्ने डाइरेक्टरी"
-
-#: ../ui/mainwindow.glade.h:31
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
 "\\L, \\U and \\E are supported as well."
-msgstr "प्रतिस्थापन गर्न नयाँ स्ट्रिङ। पर्लमा जस्तै, $१, $२, आदि. वा $+, $&, $` र $' प्रयोग गरेर जोडाको भागहरूमा तपाईँले सुपुर्द गर्न सक्नुहुन्छ। सञ्चालकहरू \\l, \\u, \\L, \\U र \\E हरू पनि समर्थित छन्।"
+msgstr ""
+"प्रतिस्थापन गर्न नयाँ स्ट्रिङ। पर्लमा जस्तै, $१, $२, आदि. वा $+, $&, $` र $' प्रयोग "
+"गरेर जोडाको भागहरूमा तपाईँले सुपुर्द गर्न सक्नुहुन्छ। सञ्चालकहरू \\l, \\u, \\L, \\U र \\E "
+"हरू पनि समर्थित छन्।"
 
-#: ../ui/mainwindow.glade.h:32
+#: ../ui/mainwindow.glade.h:31
 msgid "_All files"
 msgstr "सबै फाइलहरू"
 
-#: ../ui/mainwindow.glade.h:33
+#: ../ui/mainwindow.glade.h:32
 msgid "_Edit"
 msgstr "सम्पादन"
 
-#: ../ui/mainwindow.glade.h:34
+#: ../ui/mainwindow.glade.h:33
 msgid "_File"
 msgstr "फाइल"
 
-#: ../ui/mainwindow.glade.h:35
+#: ../ui/mainwindow.glade.h:34
 msgid "_Help"
 msgstr "मद्दत"
 
-#: ../ui/mainwindow.glade.h:36
+#: ../ui/mainwindow.glade.h:35
 msgid "_Match"
 msgstr "मिल्दो"
 
-#: ../ui/mainwindow.glade.h:37
+#: ../ui/mainwindow.glade.h:36
 msgid "_Next file"
 msgstr "अर्को फाइल"
 
-#: ../ui/mainwindow.glade.h:38
+#: ../ui/mainwindow.glade.h:37
 msgid "_Previous file"
 msgstr "अघिल्लो फाइल"
 
-#: ../ui/mainwindow.glade.h:39
+#: ../ui/mainwindow.glade.h:38
 msgid "_Replace"
 msgstr "बदल्नुहोस्"
 
-#: ../ui/mainwindow.glade.h:40
+#: ../ui/mainwindow.glade.h:39
 msgid "_This file"
 msgstr "यो फाइल"
 
-#: ../ui/mainwindow.glade.h:41
+#: ../ui/mainwindow.glade.h:40
 msgid "hidden"
 msgstr "लुकेको"
 
-#: ../ui/mainwindow.glade.h:42
+#: ../ui/mainwindow.glade.h:41
 msgid "recursive"
 msgstr "पुनरावृतिक"
 
@@ -504,6 +474,43 @@ msgid "_Text view font:"
 msgstr "पाठ दृश्य फन्ट:"
 
 #: ../ui/prefdialog.glade.h:18
-msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
 msgstr "छोड्नु भन्दा पहिले निम्न सङ्केतनहरूमा रेजेक्सरले फाइल पढ्ने प्रयास गर्दछ:"
 
+#~ msgid "_About"
+#~ msgstr "बारेमा"
+
+#~ msgid "[OPTION]... [FOLDER]"
+#~ msgstr "[विकल्प]... [फोल्डर]"
+
+#~ msgid "Try “regexxer --help” for more information."
+#~ msgstr "अरू सूचनाका लागि “regexxer --help” प्रयास गर्नुहोस्"
+
+#~ msgid ""
+#~ "The folder name “%1” contains characters not representable in the "
+#~ "encoding of the local file system."
+#~ msgstr ""
+#~ "फोल्डर नाम “%1” समावेश भएका क्यारेक्टरहरू स्थानीय फाइल प्रणालीको सङ्केतनमा "
+#~ "प्रतिनिधित्व गर्न लायकको छैन।"
+
+#~ msgid "Select a folder"
+#~ msgstr "एउटा फोल्डर चयन गर्नुहोस्"
+
+#~ msgid "About regexxer"
+#~ msgstr "रेजेक्सरका बारेमा"
+
+#~ msgid "The application icon of regexxer"
+#~ msgstr "रेजेक्सरको अनुप्रयोग प्रतीमा"
+
+#~ msgid "regexxer icon"
+#~ msgstr "रेजेक्सर प्रतीमा"
+
+#~ msgid "translated by"
+#~ msgstr "अनुवाद"
+
+#~ msgid "written by"
+#~ msgstr "द्वारा लिखित"
+
+#~ msgid "The directory to be searched"
+#~ msgstr "खोजी गरिनुपर्ने डाइरेक्टरी"

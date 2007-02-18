@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Head\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-01 04:19+0000\n"
+"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
+"POT-Creation-Date: 2007-02-18 22:12+0100\n"
 "PO-Revision-Date: 2004-08-29 10:32+0200\n"
 "Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -17,47 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../regexxer.desktop.in.h:1
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
 msgstr "Zoeken en vervangen door reguliere expressies"
 
-#: ../regexxer.desktop.in.h:2
+#: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
 msgstr "regexxer zoekmachine"
 
-#: ../regexxer.schemas.in.h:1
+#: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
 msgstr "Huidige overeenkomst kleur"
 
-#: ../regexxer.schemas.in.h:2
+#: ../ui/regexxer.schemas.in.h:2
 msgid "Fallback encoding"
 msgstr "Terugvallen tekenset"
 
-#: ../regexxer.schemas.in.h:3
+#: ../ui/regexxer.schemas.in.h:3
 msgid "Match color"
 msgstr "Overeenkomst kleur"
 
-#: ../regexxer.schemas.in.h:4
+#: ../ui/regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
-"for a complete list of possible values."
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
+"a complete list of possible values."
 msgstr ""
 "Naam van de te gebruiken tekenset indien een bestand niet leesbaar is in "
 "ofwel UTF-8 of de tekenset gespecificeerd door de huidige locale. Probeer "
 "“iconv --list” voor een volledige lijst met mogelijke waarden."
 
-#: ../regexxer.schemas.in.h:5
+#: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Tekstweergave lettertype"
 
-#: ../regexxer.schemas.in.h:6
+#: ../ui/regexxer.schemas.in.h:6
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr ""
 "De achtergrondkleur voor het oplichten van de overeenkomsten van de zoekterm."
 
-#: ../regexxer.schemas.in.h:7
+#: ../ui/regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
@@ -65,117 +65,102 @@ msgstr ""
 "De achtergrondkleur voor het oplichten van de huidige overeenkomst van de "
 "zoekterm."
 
-#: ../regexxer.schemas.in.h:8
+#: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
 msgstr "Het gebruikte lettertype in de bestandseditor."
 
-#: ../regexxer.schemas.in.h:9
+#: ../ui/regexxer.schemas.in.h:9
 msgid ""
-"The style of the application’s toolbar. Possible values are “icons”, “text"
-"”, “both”, and “both-horiz”."
+"The style of the application’s toolbar. Possible values are “icons”, “text”, "
+"“both”, and “both-horiz”."
 msgstr ""
-"De werkbalkstijl van de toepassing. Mogelijke waarden zijn “icons”, “text"
-"”, “both”, en “both-horiz”."
+"De werkbalkstijl van de toepassing. Mogelijke waarden zijn “icons”, “text”, "
+"“both”, en “both-horiz”."
 
-#: ../regexxer.schemas.in.h:10
+#: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
 msgstr "Werkbalkstijl"
 
-#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
-#: ../src/filebuffer.cc:203
+#: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "Kan bestand niet lezen:"
 
-#: ../src/filetree.cc:81
+#: ../src/filetree.cc:80
 msgid "File"
 msgstr "Bestand"
 
-#: ../src/filetree.cc:101
+#: ../src/filetree.cc:99
 msgid "#"
 msgstr "#"
 
-#: ../src/filetree.cc:532
+#: ../src/filetree.cc:530
+#, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Opslaan van bestand “%1” is mislukt: %2"
 
-#: ../src/filetree.cc:949
+#: ../src/filetree.cc:946
+#, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "“%1” is blijkbaar een binair bestand."
 
-#: ../src/main.cc:84
-msgid "_About"
-msgstr "I_nfo"
-
-#: ../src/main.cc:85
+#: ../src/main.cc:77
 msgid "Save _all"
 msgstr "_Alles opslaan"
 
-#: ../src/main.cc:100
+#: ../src/main.cc:134
 msgid "Find files matching PATTERN"
 msgstr "Bestanden zoeken volgensPATROON"
 
-#: ../src/main.cc:100
+#: ../src/main.cc:134
 msgid "PATTERN"
 msgstr "PATROON"
 
-#: ../src/main.cc:101
+#: ../src/main.cc:136
 msgid "Do not recurse into subdirectories"
 msgstr "Submappen niet doorzoeken"
 
-#: ../src/main.cc:102 ../ui/mainwindow.glade.h:3
+#: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "Ook verborgen bestanden zoeken"
 
-#: ../src/main.cc:103
+#: ../src/main.cc:140
 msgid "Find text matching REGEX"
 msgstr "Tekst zoeken volgens REGEX"
 
-#: ../src/main.cc:103
+#: ../src/main.cc:140
 msgid "REGEX"
 msgstr "REGEX"
 
-#: ../src/main.cc:104
+#: ../src/main.cc:142
 msgid "Find only the first match in a line"
 msgstr "Alleen de eerste  overeenkomst in een regel zoeken"
 
-#: ../src/main.cc:105 ../ui/mainwindow.glade.h:5
+#: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr "Hoofdletterongevoelig zoeken"
 
-#: ../src/main.cc:106
+#: ../src/main.cc:146
 msgid "Replace matches with STRING"
 msgstr "Bij overeenkomst vervangen door TEKENREEKS"
 
-#: ../src/main.cc:106
+#: ../src/main.cc:146
 msgid "STRING"
 msgstr "TEKENREEKS"
 
-#: ../src/main.cc:107
+#: ../src/main.cc:148
 msgid "Print match location to standard output"
 msgstr "Locatie van overeenkomst tonen op de standaard-uitvoer"
 
-#: ../src/main.cc:108
+#: ../src/main.cc:150
 msgid "Do not automatically start search"
 msgstr "Niet automatisch beginnen met zoeken"
 
-#: ../src/main.cc:118
-msgid "[OPTION]... [FOLDER]"
-msgstr "[OPTIE]... [MAP]"
-
-#: ../src/main.cc:141
-msgid "Try “regexxer --help” for more information."
-msgstr "Probeer “regexxer --help” voor meer informatie."
-
-#: ../src/mainwindow.cc:252 ../ui/mainwindow.glade.h:1
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
+#: ../src/main.cc:152
+msgid "[FOLDER]"
 msgstr ""
-"Eem bestandsnaam-patroon dat gebruikt wordt door de shell (opdrachtregel). "
-"Tekenklassen [ab] en csh-stijl haakjes {a,b} worden ondersteund."
 
 # bepaalde bestanden
-#: ../src/mainwindow.cc:403
+#: ../src/mainwindow.cc:413
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -183,20 +168,7 @@ msgstr ""
 "Sommige bestanden zijn nog niet opgeslagen.\n"
 "Toch afsluiten?"
 
-#: ../src/mainwindow.cc:431
-msgid ""
-"The folder name “%1” contains characters not representable in the encoding "
-"of the local file system."
-msgstr ""
-"De mapnaam “%1” bevat tekens die niet kunnen worden weergegeven in de "
-"tekenset van het lokale bestandsyssteem."
-
-# een map selecteren
-#: ../src/mainwindow.cc:450
-msgid "Select a folder"
-msgstr "Selecteer een map"
-
-#: ../src/mainwindow.cc:470
+#: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -204,16 +176,31 @@ msgstr ""
 "Sommige bestanden zijn nog niet opgeslagen.\n"
 "Toch doorgaan?"
 
-#: ../src/mainwindow.cc:496
+#: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
 msgstr "Het bestandszoekpatroon is ongeldig."
 
 # gedurende het zoeken
-#: ../src/mainwindow.cc:502
+#: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
 msgstr "De volgende fouten traden op gedurende de zoekopdracht:"
 
-#: ../src/mainwindow.cc:527
+#: ../src/mainwindow.cc:708
+msgid "The following errors occurred during save:"
+msgstr "De volgende fouten traden op tijden opslaan:"
+
+#: ../src/mainwindow.cc:854
+msgid "translator-credits"
+msgstr "Tino Meinen <a.t.meinen@chello.nl>"
+
+#: ../src/pcreshell.cc:62
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr ""
+"Het gebruik van het ontsnappingsteken \\C voor de overeenkomst met een "
+"enkele byte wordt niet ondersteund."
+
+#: ../src/pcreshell.cc:84
+#, qt-format
 msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
@@ -221,7 +208,8 @@ msgstr ""
 "Fout in reguliere expressie bij “%1” (index %2):\n"
 "%3"
 
-#: ../src/mainwindow.cc:529
+#: ../src/pcreshell.cc:89
+#, qt-format
 msgid ""
 "Error in regular expression:\n"
 "%1"
@@ -229,17 +217,7 @@ msgstr ""
 "Fout in reguliere extressie:\n"
 "%1"
 
-#: ../src/mainwindow.cc:751
-msgid "The following errors occurred during save:"
-msgstr "De volgende fouten traden op tijden opslaan:"
-
-#: ../src/pcreshell.cc:59
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
-"Het gebruik van het ontsnappingsteken \\C voor de overeenkomst met een "
-"enkele byte wordt niet ondersteund."
-
-#: ../src/pcreshell.cc:151
+#: ../src/pcreshell.cc:171
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
@@ -247,50 +225,34 @@ msgstr ""
 "De recursie- en 'backtracing'-limiet van de reguliere expressie motor is "
 "bereikt."
 
-#: ../src/prefdialog.cc:248
+#: ../src/prefdialog.cc:249
+#, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "“%1” is geen geldige tekenset."
 
-#: ../src/statusline.cc:264
+#: ../src/statusline.cc:263
 msgid "Stop"
 msgstr "Stoppen"
 
-#: ../src/statusline.cc:271
+#: ../src/statusline.cc:270
 msgid "File:"
 msgstr "Bestand:"
 
-#: ../src/statusline.cc:274
+#: ../src/statusline.cc:273
 msgid "Match:"
 msgstr "Overeenkomst:"
 
-#: ../src/statusline.cc:285
+#: ../src/statusline.cc:284
 msgid "Cancels the running search"
 msgstr "Annuleert de huidige zoekopdracht"
 
-#. namespace Regexxer
-#: ../ui/aboutdialog.glade.h:1
-msgid "About regexxer"
-msgstr "Over regexxer"
-
-#: ../ui/aboutdialog.glade.h:2
-msgid "The application icon of regexxer"
-msgstr "Het pictogram van regexxer"
-
-#: ../ui/aboutdialog.glade.h:3
-msgid "regexxer icon"
-msgstr "regexxer pictogram"
-
-#: ../ui/aboutdialog.glade.h:4
-msgid "translated by"
-msgstr "vertaald door"
-
-#: ../ui/aboutdialog.glade.h:5
-msgid "translator-credits"
-msgstr "Tino Meinen <a.t.meinen@chello.nl>"
-
-#: ../ui/aboutdialog.glade.h:6
-msgid "written by"
-msgstr "geschreven door"
+#: ../ui/mainwindow.glade.h:1
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Eem bestandsnaam-patroon dat gebruikt wordt door de shell (opdrachtregel). "
+"Tekenklassen [ab] en csh-stijl haakjes {a,b} worden ondersteund."
 
 #: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
@@ -397,10 +359,6 @@ msgid "Search:"
 msgstr "Zoeken:"
 
 #: ../ui/mainwindow.glade.h:30
-msgid "The directory to be searched"
-msgstr "De te doorzoeken map"
-
-#: ../ui/mainwindow.glade.h:31
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
@@ -410,47 +368,47 @@ msgstr ""
 "delen van de overeenkomst door $1, $2, enz. of zelfs $+, $` en $'. De "
 "operators \\l, \\u, \\L, \\U en \\E worden ook ondersteund."
 
-#: ../ui/mainwindow.glade.h:32
+#: ../ui/mainwindow.glade.h:31
 msgid "_All files"
 msgstr "_Alle bestanden"
 
-#: ../ui/mainwindow.glade.h:33
+#: ../ui/mainwindow.glade.h:32
 msgid "_Edit"
 msgstr "Be_werken"
 
-#: ../ui/mainwindow.glade.h:34
+#: ../ui/mainwindow.glade.h:33
 msgid "_File"
 msgstr "_Bestand"
 
-#: ../ui/mainwindow.glade.h:35
+#: ../ui/mainwindow.glade.h:34
 msgid "_Help"
 msgstr "_Hulp"
 
-#: ../ui/mainwindow.glade.h:36
+#: ../ui/mainwindow.glade.h:35
 msgid "_Match"
 msgstr "_Overeenkomst"
 
-#: ../ui/mainwindow.glade.h:37
+#: ../ui/mainwindow.glade.h:36
 msgid "_Next file"
 msgstr "V_orig bestand"
 
-#: ../ui/mainwindow.glade.h:38
+#: ../ui/mainwindow.glade.h:37
 msgid "_Previous file"
 msgstr "_Volgend bestand"
 
-#: ../ui/mainwindow.glade.h:39
+#: ../ui/mainwindow.glade.h:38
 msgid "_Replace"
 msgstr "_Vervangen"
 
-#: ../ui/mainwindow.glade.h:40
+#: ../ui/mainwindow.glade.h:39
 msgid "_This file"
 msgstr "_Dit bestand"
 
-#: ../ui/mainwindow.glade.h:41
+#: ../ui/mainwindow.glade.h:40
 msgid "hidden"
 msgstr "verborgen"
 
-#: ../ui/mainwindow.glade.h:42
+#: ../ui/mainwindow.glade.h:41
 msgid "recursive"
 msgstr "recursief"
 
@@ -525,6 +483,44 @@ msgid ""
 msgstr ""
 "regexxer probeert een bestand te lezen in de volgende tekensets voordat hij "
 "opgeeft:"
+
+#~ msgid "_About"
+#~ msgstr "I_nfo"
+
+#~ msgid "[OPTION]... [FOLDER]"
+#~ msgstr "[OPTIE]... [MAP]"
+
+#~ msgid "Try “regexxer --help” for more information."
+#~ msgstr "Probeer “regexxer --help” voor meer informatie."
+
+#~ msgid ""
+#~ "The folder name “%1” contains characters not representable in the "
+#~ "encoding of the local file system."
+#~ msgstr ""
+#~ "De mapnaam “%1” bevat tekens die niet kunnen worden weergegeven in de "
+#~ "tekenset van het lokale bestandsyssteem."
+
+# een map selecteren
+#~ msgid "Select a folder"
+#~ msgstr "Selecteer een map"
+
+#~ msgid "About regexxer"
+#~ msgstr "Over regexxer"
+
+#~ msgid "The application icon of regexxer"
+#~ msgstr "Het pictogram van regexxer"
+
+#~ msgid "regexxer icon"
+#~ msgstr "regexxer pictogram"
+
+#~ msgid "translated by"
+#~ msgstr "vertaald door"
+
+#~ msgid "written by"
+#~ msgstr "geschreven door"
+
+#~ msgid "The directory to be searched"
+#~ msgstr "De te doorzoeken map"
 
 #~ msgid "Ignore case distinctions"
 #~ msgstr "Hoofdletterongevoelig"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer trunk\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-01-14 21:22+0200\n"
+"POT-Creation-Date: 2007-02-18 22:12+0100\n"
 "PO-Revision-Date: 2007-01-12 19:12+0200\n"
 "Last-Translator: Yavor Doganov <yavor@doganov.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
@@ -83,20 +83,20 @@ msgstr "Вид на лентата с инструменти"
 msgid "Can’t read file:"
 msgstr "Неуспех при прочитането на файла:"
 
-#: ../src/filetree.cc:79
+#: ../src/filetree.cc:80
 msgid "File"
 msgstr "Файл"
 
-#: ../src/filetree.cc:98
+#: ../src/filetree.cc:99
 msgid "#"
 msgstr "бр."
 
-#: ../src/filetree.cc:529
+#: ../src/filetree.cc:530
 #, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Грешка при запазване на файла „%1“: %2"
 
-#: ../src/filetree.cc:945
+#: ../src/filetree.cc:946
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "„%1“ изглежда е двоичен файл."
@@ -231,19 +231,19 @@ msgstr ""
 msgid "“%1” is not a valid encoding."
 msgstr "„%1“ не е правилна кодова таблица."
 
-#: ../src/statusline.cc:258
+#: ../src/statusline.cc:263
 msgid "Stop"
 msgstr "Прекъсване"
 
-#: ../src/statusline.cc:265
+#: ../src/statusline.cc:270
 msgid "File:"
 msgstr "Файлове:"
 
-#: ../src/statusline.cc:268
+#: ../src/statusline.cc:273
 msgid "Match:"
 msgstr "Съвпадения:"
 
-#: ../src/statusline.cc:279
+#: ../src/statusline.cc:284
 msgid "Cancels the running search"
 msgstr "Отмяна на действащото търсене"
 

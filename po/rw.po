@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-01 21:04-0700\n"
+"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
+"POT-Creation-Date: 2007-02-18 22:12+0100\n"
 "PO-Revision-Date: 2005-03-31 20:55-0700\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -24,53 +24,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "ULL NAME <EMAIL@ADDRESS>\n"
 
-#: regexxer.desktop.in.h:1
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 #, fuzzy
 msgid "Search and replace using regular expressions"
 msgstr "Na Gusimbura ikoresha Ibisanzwe"
 
-#: regexxer.desktop.in.h:2
+#: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
 msgstr ""
 
-#: regexxer.schemas.in.h:1
+#: ../ui/regexxer.schemas.in.h:1
 #, fuzzy
 msgid "Current-match color"
 msgstr "BIHUYE Ibara"
 
-#: regexxer.schemas.in.h:2
+#: ../ui/regexxer.schemas.in.h:2
 #, fuzzy
 msgid "Fallback encoding"
 msgstr "Imisobekere:"
 
-#: regexxer.schemas.in.h:3
+#: ../ui/regexxer.schemas.in.h:3
 #, fuzzy
 msgid "Match color"
 msgstr "Ibara"
 
-#: regexxer.schemas.in.h:4
+#: ../ui/regexxer.schemas.in.h:4
 #, fuzzy
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
-"for a complete list of possible values."
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
+"a complete list of possible values."
 msgstr ""
 "Bya i Inyuguti Imisobekere: Kuri Gukoresha NIBA a IDOSIYE ni OYA in 8 "
 "Cyangwa i ku i KIGEZWEHO Umwanya Urutonde kugirango a Byuzuye Urutonde Bya "
 "Uduciro"
 
-#: regexxer.schemas.in.h:5
+#: ../ui/regexxer.schemas.in.h:5
 #, fuzzy
 msgid "Text view font"
 msgstr "Kureba Intego- nyuguti"
 
-#: regexxer.schemas.in.h:6
+#: ../ui/regexxer.schemas.in.h:6
 #, fuzzy
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr "Mbuganyuma Ibara Kuri garagaza cyane Bya i Gushaka imvugo"
 
-#: regexxer.schemas.in.h:7
+#: ../ui/regexxer.schemas.in.h:7
 #, fuzzy
 msgid ""
 "The background color used to highlight the currently selected match of the "
@@ -78,132 +78,207 @@ msgid ""
 msgstr ""
 "Mbuganyuma Ibara Kuri garagaza cyane i Byahiswemo BIHUYE Bya i Gushaka imvugo"
 
-#: regexxer.schemas.in.h:8
+#: ../ui/regexxer.schemas.in.h:8
 #, fuzzy
 msgid "The font used in the file editor."
 msgstr "Intego- nyuguti in i IDOSIYE Muhinduzi"
 
-#: regexxer.schemas.in.h:9
+#: ../ui/regexxer.schemas.in.h:9
 #, fuzzy
 msgid ""
-"The style of the application’s toolbar. Possible values are “icons”, “text"
-"”, “both”, and “both-horiz”."
+"The style of the application’s toolbar. Possible values are “icons”, “text”, "
+"“both”, and “both-horiz”."
 msgstr ""
 "IMISUSIRE Bya i Umwanyabikoresho Uduciro Udushushondanga Umwandiko Byombi Na "
 "Byombi"
 
-#: regexxer.schemas.in.h:10
+#: ../ui/regexxer.schemas.in.h:10
 #, fuzzy
 msgid "Toolbar style"
 msgstr "IMISUSIRE"
 
-#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
-#: src/filebuffer.cc:203
+#: ../src/filebuffer.cc:198
 #, fuzzy
 msgid "Can’t read file:"
 msgstr "Gusoma IDOSIYE"
 
 # sc/source\ui\src\scfuncs.src:RID_SC_FUNCTION_DESCRIPTIONS2.SC_OPCODE_DDE.4.text
-#: src/filetree.cc:81
+#: ../src/filetree.cc:80
 msgid "File"
 msgstr "Idosiye"
 
 # sw/source\ui\index\cnttab.src:TP_TOX_ENTRY.WIN_TOKEN.STR_TOKEN_PAGE_NUMS.text
-#: src/filetree.cc:101
+#: ../src/filetree.cc:99
 msgid "#"
 msgstr "#"
 
-#: src/filetree.cc:532
-#, fuzzy
+#: ../src/filetree.cc:530
+#, fuzzy, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Kuri Kubika IDOSIYE"
 
-#: src/filetree.cc:949
-#, fuzzy
+#: ../src/filetree.cc:946
+#, fuzzy, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "“%1”Kuri a Nyabibiri IDOSIYE"
 
-#: src/main.cc:84
-#, fuzzy
-msgid "_About"
-msgstr "Bigyanye"
-
 # sfx2/sdi\sfxslots.src:SID_SAVEDOCS.text
-#: src/main.cc:85
+#: ../src/main.cc:77
 #, fuzzy
 msgid "Save _all"
 msgstr "Gushyingura Byose"
 
-#: src/main.cc:100
+#: ../src/main.cc:134
 #, fuzzy
 msgid "Find files matching PATTERN"
 msgstr "Idosiye"
 
 # sc/source\ui\src\autofmt.src:RID_SCDLG_AUTOFORMAT.BTN_PATTERN.text
-#: src/main.cc:100
+#: ../src/main.cc:134
 #, fuzzy
 msgid "PATTERN"
 msgstr "Ishusho"
 
-#: src/main.cc:101
+#: ../src/main.cc:136
 #, fuzzy
 msgid "Do not recurse into subdirectories"
 msgstr "OYA Ububiko bwungirije"
 
-#: src/main.cc:102 ui/mainwindow.glade.h:3
+#: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 #, fuzzy
 msgid "Also find hidden files"
 msgstr "Gushaka gihishwe Idosiye"
 
-#: src/main.cc:103
+#: ../src/main.cc:140
 #, fuzzy
 msgid "Find text matching REGEX"
 msgstr "Umwandiko"
 
-#: src/main.cc:103
+#: ../src/main.cc:140
 msgid "REGEX"
 msgstr ""
 
-#: src/main.cc:104
+#: ../src/main.cc:142
 #, fuzzy
 msgid "Find only the first match in a line"
 msgstr "i Itangira BIHUYE in a Umurongo"
 
-#: src/main.cc:105 ui/mainwindow.glade.h:5
+#: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr ""
 
-#: src/main.cc:106
+#: ../src/main.cc:146
 #, fuzzy
 msgid "Replace matches with STRING"
 msgstr "Na:"
 
 # svx/source\options\optcolor.src:RID_SVXPAGE_COLORCONFIG.CT_COLORCONFIG.WN_SCROLL.FT_BASICSTRING.text
-#: src/main.cc:106
+#: ../src/main.cc:146
 #, fuzzy
 msgid "STRING"
 msgstr "Ikurikiranyanyuguti"
 
-#: src/main.cc:107
+#: ../src/main.cc:148
 #, fuzzy
 msgid "Print match location to standard output"
 msgstr "BIHUYE Ahantu Kuri Bisanzwe Ibisohoka"
 
-#: src/main.cc:108
+#: ../src/main.cc:150
 #, fuzzy
 msgid "Do not automatically start search"
 msgstr "OYA ku buryo bwikora Gutangira Gushaka"
 
-#: src/main.cc:118
-msgid "[OPTION]... [FOLDER]"
+#: ../src/main.cc:152
+msgid "[FOLDER]"
 msgstr ""
 
-#: src/main.cc:141
+#: ../src/mainwindow.cc:413
 #, fuzzy
-msgid "Try “regexxer --help” for more information."
-msgstr "Ifashayobora kugirango Birenzeho Ibisobanuro"
+msgid ""
+"Some files haven’t been saved yet.\n"
+"Quit anyway?"
+msgstr "Idosiye"
 
-#: src/mainwindow.cc:252 ui/mainwindow.glade.h:1
+#: ../src/mainwindow.cc:427
+#, fuzzy
+msgid ""
+"Some files haven’t been saved yet.\n"
+"Continue anyway?"
+msgstr "Wapfagukomeza."
+
+#: ../src/mainwindow.cc:455
+#, fuzzy
+msgid "The file search pattern is invalid."
+msgstr "IDOSIYE Gushaka Ishusho ni Sibyo"
+
+#: ../src/mainwindow.cc:461
+#, fuzzy
+msgid "The following errors occurred during search:"
+msgstr "Amakosa Gushaka"
+
+#: ../src/mainwindow.cc:708
+#, fuzzy
+msgid "The following errors occurred during save:"
+msgstr "Amakosa Kubika"
+
+#: ../src/mainwindow.cc:854
+#, fuzzy
+msgid "translator-credits"
+msgstr "Umusemuzi"
+
+#: ../src/pcreshell.cc:62
+#, fuzzy
+msgid "Using the \\C escape sequence to match a single byte is not supported."
+msgstr "i Kuri BIHUYE a UMWE Bayite ni OYA"
+
+#: ../src/pcreshell.cc:84
+#, fuzzy, qt-format
+msgid ""
+"Error in regular expression at “%1” (index %2):\n"
+"%3"
+msgstr "in Ibisanzwe imvugo ku Umubarendanga"
+
+#: ../src/pcreshell.cc:89
+#, fuzzy, qt-format
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr "in Ibisanzwe imvugo"
+
+#: ../src/pcreshell.cc:171
+#, fuzzy
+msgid ""
+"Reached the recursion and backtracking limit of the regular expression "
+"engine."
+msgstr "i Na Bya i Ibisanzwe imvugo"
+
+#: ../src/prefdialog.cc:249
+#, fuzzy, qt-format
+msgid "“%1” is not a valid encoding."
+msgstr "“%1”ni OYA a Byemewe Imisobekere:"
+
+# basctl/source\basicide\basidesh.src:RID_BASICIDE_OBJECTBAR.SID_BASICSTOP.text
+#: ../src/statusline.cc:263
+msgid "Stop"
+msgstr "Guhagarara"
+
+# sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_LINKERRORFILE.text
+#: ../src/statusline.cc:270
+msgid "File:"
+msgstr "Idosiye:"
+
+# sc/source\core\src\compiler.src:RID_SC_FUNCTION_NAMES.SC_OPCODE_MATCH.text
+#: ../src/statusline.cc:273
+#, fuzzy
+msgid "Match:"
+msgstr "BIHUYE"
+
+#: ../src/statusline.cc:284
+#, fuzzy
+msgid "Cancels the running search"
+msgstr "i Gushaka"
+
+#: ../ui/mainwindow.glade.h:1
 #, fuzzy
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
@@ -211,252 +286,128 @@ msgid ""
 msgstr ""
 "A Izina ry'idosiye: Ishusho Nka ku i Igikonoshwa Inzego Na IMISUSIRE a B"
 
-#: src/mainwindow.cc:403
-#, fuzzy
-msgid ""
-"Some files haven’t been saved yet.\n"
-"Quit anyway?"
-msgstr "Idosiye"
-
-#: src/mainwindow.cc:431
-#, fuzzy
-msgid ""
-"The folder name “%1” contains characters not representable in the encoding "
-"of the local file system."
-msgstr ""
-"Ububiko Izina: Kirimo Inyuguti OYA in i Imisobekere: Bya i IDOSIYE Sisitemu"
-
-#: src/mainwindow.cc:450
-#, fuzzy
-msgid "Select a folder"
-msgstr "a Ububiko"
-
-#: src/mainwindow.cc:470
-#, fuzzy
-msgid ""
-"Some files haven’t been saved yet.\n"
-"Continue anyway?"
-msgstr "Wapfagukomeza."
-
-#: src/mainwindow.cc:496
-#, fuzzy
-msgid "The file search pattern is invalid."
-msgstr "IDOSIYE Gushaka Ishusho ni Sibyo"
-
-#: src/mainwindow.cc:502
-#, fuzzy
-msgid "The following errors occurred during search:"
-msgstr "Amakosa Gushaka"
-
-#: src/mainwindow.cc:527
-#, fuzzy
-msgid ""
-"Error in regular expression at “%1” (index %2):\n"
-"%3"
-msgstr "in Ibisanzwe imvugo ku Umubarendanga"
-
-#: src/mainwindow.cc:529
-#, fuzzy
-msgid ""
-"Error in regular expression:\n"
-"%1"
-msgstr "in Ibisanzwe imvugo"
-
-#: src/mainwindow.cc:751
-#, fuzzy
-msgid "The following errors occurred during save:"
-msgstr "Amakosa Kubika"
-
-#: src/pcreshell.cc:59
-#, fuzzy
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr "i Kuri BIHUYE a UMWE Bayite ni OYA"
-
-#: src/pcreshell.cc:151
-#, fuzzy
-msgid ""
-"Reached the recursion and backtracking limit of the regular expression "
-"engine."
-msgstr "i Na Bya i Ibisanzwe imvugo"
-
-#: src/prefdialog.cc:248
-#, fuzzy
-msgid "“%1” is not a valid encoding."
-msgstr "“%1”ni OYA a Byemewe Imisobekere:"
-
-# basctl/source\basicide\basidesh.src:RID_BASICIDE_OBJECTBAR.SID_BASICSTOP.text
-#: src/statusline.cc:264
-msgid "Stop"
-msgstr "Guhagarara"
-
-# sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_LINKERRORFILE.text
-#: src/statusline.cc:271
-msgid "File:"
-msgstr "Idosiye:"
-
-# sc/source\core\src\compiler.src:RID_SC_FUNCTION_NAMES.SC_OPCODE_MATCH.text
-#: src/statusline.cc:274
-#, fuzzy
-msgid "Match:"
-msgstr "BIHUYE"
-
-#: src/statusline.cc:285
-#, fuzzy
-msgid "Cancels the running search"
-msgstr "i Gushaka"
-
-#. namespace Regexxer
-#: ui/aboutdialog.glade.h:1
-msgid "About regexxer"
-msgstr ""
-
-#: ui/aboutdialog.glade.h:2
-#, fuzzy
-msgid "The application icon of regexxer"
-msgstr "Porogaramu Agashushondanga Bya"
-
-#: ui/aboutdialog.glade.h:3
-#, fuzzy
-msgid "regexxer icon"
-msgstr "Agashushondanga"
-
-#: ui/aboutdialog.glade.h:4
-#, fuzzy
-msgid "translated by"
-msgstr "ku"
-
-#: ui/aboutdialog.glade.h:5
-#, fuzzy
-msgid "translator-credits"
-msgstr "Umusemuzi"
-
-#: ui/aboutdialog.glade.h:6
-#, fuzzy
-msgid "written by"
-msgstr "ku"
-
-#: ui/mainwindow.glade.h:2
+#: ../ui/mainwindow.glade.h:2
 #, fuzzy
 msgid "A regular expression in Perl syntax"
 msgstr "A Ibisanzwe imvugo in"
 
 # 505
-#: ui/mainwindow.glade.h:4
+#: ../ui/mainwindow.glade.h:4
 msgid "Backward"
 msgstr "subira inyuma"
 
-#: ui/mainwindow.glade.h:6
+#: ../ui/mainwindow.glade.h:6
 #, fuzzy
 msgid "File backward"
 msgstr "Idosiye subira inyuma"
 
-#: ui/mainwindow.glade.h:7
+#: ../ui/mainwindow.glade.h:7
 #, fuzzy
 msgid "File forward"
 msgstr "Idosiye Imbere"
 
-#: ui/mainwindow.glade.h:8
+#: ../ui/mainwindow.glade.h:8
 #, fuzzy
 msgid "Find all files that match the filename pattern"
 msgstr "Byose Idosiye BIHUYE i Izina ry'idosiye: Ishusho"
 
-#: ui/mainwindow.glade.h:9
+#: ../ui/mainwindow.glade.h:9
 #, fuzzy
 msgid "Find all matches of the regular expression"
 msgstr "Byose Bya i Ibisanzwe imvugo"
 
-#: ui/mainwindow.glade.h:10
+#: ../ui/mainwindow.glade.h:10
 #, fuzzy
 msgid "Find all possible matches in a line"
 msgstr "Byose in a Umurongo"
 
 # 2308
-#: ui/mainwindow.glade.h:11
+#: ../ui/mainwindow.glade.h:11
 #, fuzzy
 msgid "Find fi_les"
 msgstr "shaka amadosiye"
 
-#: ui/mainwindow.glade.h:12
+#: ../ui/mainwindow.glade.h:12
 #, fuzzy
 msgid "Fol_der:"
 msgstr "Ububiko..."
 
 # sch/sdi\schslots.src:SID_ROW_MOREFRONT.text
-#: ui/mainwindow.glade.h:13
+#: ../ui/mainwindow.glade.h:13
 msgid "Forward"
 msgstr "Imbere"
 
-#: ui/mainwindow.glade.h:14
+#: ../ui/mainwindow.glade.h:14
 #, fuzzy
 msgid "Go to next match"
 msgstr "Kuri Komeza>> BIHUYE"
 
-#: ui/mainwindow.glade.h:15
+#: ../ui/mainwindow.glade.h:15
 #, fuzzy
 msgid "Go to previous match"
 msgstr "Kuri Ibanjirije BIHUYE"
 
-#: ui/mainwindow.glade.h:16
+#: ../ui/mainwindow.glade.h:16
 #, fuzzy
 msgid "Go to the next matching file"
 msgstr "Kuri i Komeza>> IDOSIYE"
 
-#: ui/mainwindow.glade.h:17
+#: ../ui/mainwindow.glade.h:17
 #, fuzzy
 msgid "Go to the previous matching file"
 msgstr "Kuri i Ibanjirije IDOSIYE"
 
 # sc/source\ui\src\autofmt.src:RID_SCDLG_AUTOFORMAT.BTN_PATTERN.text
-#: ui/mainwindow.glade.h:18
+#: ../ui/mainwindow.glade.h:18
 #, fuzzy
 msgid "Pattern:"
 msgstr "Ishusho"
 
-#: ui/mainwindow.glade.h:19
+#: ../ui/mainwindow.glade.h:19
 msgid "Preview"
 msgstr "Igaragazambere"
 
-#: ui/mainwindow.glade.h:20
+#: ../ui/mainwindow.glade.h:20
 #, fuzzy
 msgid "Preview of the substitution"
 msgstr "Bya i"
 
-#: ui/mainwindow.glade.h:21
+#: ../ui/mainwindow.glade.h:21
 #, fuzzy
 msgid "Recurse into subdirectories"
 msgstr "Ububiko bwungirije"
 
-#: ui/mainwindow.glade.h:22
+#: ../ui/mainwindow.glade.h:22
 #, fuzzy
 msgid "Replace _current"
 msgstr "KIGEZWEHO"
 
-#: ui/mainwindow.glade.h:23
+#: ../ui/mainwindow.glade.h:23
 #, fuzzy
 msgid "Replace all matches in all files"
 msgstr "Byose in Byose Idosiye"
 
-#: ui/mainwindow.glade.h:24
+#: ../ui/mainwindow.glade.h:24
 #, fuzzy
 msgid "Replace all matches in the current file"
 msgstr "Byose in i KIGEZWEHO IDOSIYE"
 
-#: ui/mainwindow.glade.h:25
+#: ../ui/mainwindow.glade.h:25
 #, fuzzy
 msgid "Replace current match"
 msgstr "KIGEZWEHO BIHUYE"
 
-#: ui/mainwindow.glade.h:26
+#: ../ui/mainwindow.glade.h:26
 #, fuzzy
 msgid "Replace in _all files"
 msgstr "in Byose Idosiye"
 
-#: ui/mainwindow.glade.h:27
+#: ../ui/mainwindow.glade.h:27
 #, fuzzy
 msgid "Replace in _this file"
 msgstr "in iyi IDOSIYE"
 
-#: ui/mainwindow.glade.h:28
+#: ../ui/mainwindow.glade.h:28
 #, fuzzy
 msgid "Replace:"
 msgstr "Gusimbura:"
@@ -465,17 +416,12 @@ msgstr "Gusimbura:"
 # so3/src\svuidlg.src:MD_INSERT_OLEOBJECT.BTN_FILEPATH.text
 # #-#-#-#-#  so3.pot (PACKAGE VERSION)  #-#-#-#-#
 # so3/src\svuidlg.src:MD_INSERT_OBJECT_APPLET.BTN_CLASS.text
-#: ui/mainwindow.glade.h:29
+#: ../ui/mainwindow.glade.h:29
 #, fuzzy
 msgid "Search:"
 msgstr "Gushakisha..."
 
-#: ui/mainwindow.glade.h:30
-#, fuzzy
-msgid "The directory to be searched"
-msgstr "bushyinguro Kuri"
-
-#: ui/mainwindow.glade.h:31
+#: ../ui/mainwindow.glade.h:30
 #, fuzzy
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
@@ -486,7 +432,7 @@ msgstr ""
 "Cyangwa ATARIIGIHARWE Na Mukoresha Na Nka"
 
 # 146
-#: ui/mainwindow.glade.h:32
+#: ../ui/mainwindow.glade.h:31
 #, fuzzy
 msgid "_All files"
 msgstr "amadosiye yose"
@@ -501,63 +447,63 @@ msgstr "amadosiye yose"
 # basctl/source\basicide\moduldlg.src:RID_TP_MODULS.RID_PB_EDIT.text
 # #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
 # basctl/source\basicide\moduldlg.src:RID_TP_LIBS.RID_PB_EDIT.text
-#: ui/mainwindow.glade.h:33
+#: ../ui/mainwindow.glade.h:32
 #, fuzzy
 msgid "_Edit"
 msgstr "Guhindura"
 
 # sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_HFCMD_FILE.text
-#: ui/mainwindow.glade.h:34
+#: ../ui/mainwindow.glade.h:33
 #, fuzzy
 msgid "_File"
 msgstr "IDOSIYE"
 
-#: ui/mainwindow.glade.h:35
+#: ../ui/mainwindow.glade.h:34
 #, fuzzy
 msgid "_Help"
 msgstr "Ifashayobora"
 
 # sc/source\core\src\compiler.src:RID_SC_FUNCTION_NAMES.SC_OPCODE_MATCH.text
-#: ui/mainwindow.glade.h:36
+#: ../ui/mainwindow.glade.h:35
 #, fuzzy
 msgid "_Match"
 msgstr "BIHUYE"
 
-#: ui/mainwindow.glade.h:37
+#: ../ui/mainwindow.glade.h:36
 #, fuzzy
 msgid "_Next file"
 msgstr "IDOSIYE"
 
-#: ui/mainwindow.glade.h:38
+#: ../ui/mainwindow.glade.h:37
 #, fuzzy
 msgid "_Previous file"
 msgstr "IDOSIYE"
 
 # offmgr/source\offapp\dialog\autocdlg.src:RID_OFA_AUTOCORR_DLG.1.RID_OFAPAGE_AUTOCORR_REPLACE.text
-#: ui/mainwindow.glade.h:39
+#: ../ui/mainwindow.glade.h:38
 #, fuzzy
 msgid "_Replace"
 msgstr "Gusimbura"
 
-#: ui/mainwindow.glade.h:40
+#: ../ui/mainwindow.glade.h:39
 #, fuzzy
 msgid "_This file"
 msgstr "IDOSIYE"
 
 # sc/source\ui\navipi\navipi.src:RID_SCDLG_NAVIGATOR.STR_HIDDEN.text
-#: ui/mainwindow.glade.h:41
+#: ../ui/mainwindow.glade.h:40
 msgid "hidden"
 msgstr "gihishwe"
 
-#: ui/mainwindow.glade.h:42
+#: ../ui/mainwindow.glade.h:41
 msgid "recursive"
 msgstr ""
 
-#: ui/prefdialog.glade.h:1
+#: ../ui/prefdialog.glade.h:1
 msgid "1."
 msgstr "1."
 
-#: ui/prefdialog.glade.h:2
+#: ../ui/prefdialog.glade.h:2
 msgid "2."
 msgstr "2."
 
@@ -567,21 +513,21 @@ msgstr "2."
 # officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Fax.Elements.Element3.Text.text
 # #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
 # officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Memo.Elements.Element3.Text.text
-#: ui/prefdialog.glade.h:3
+#: ../ui/prefdialog.glade.h:3
 msgid "3."
 msgstr "3."
 
-#: ui/prefdialog.glade.h:4
+#: ../ui/prefdialog.glade.h:4
 #, fuzzy
 msgid "C_urrent match color:"
 msgstr "BIHUYE Ibara"
 
-#: ui/prefdialog.glade.h:5
+#: ../ui/prefdialog.glade.h:5
 #, fuzzy
 msgid "Fallback _encoding:"
 msgstr "Imisobekere:"
 
-#: ui/prefdialog.glade.h:6
+#: ../ui/prefdialog.glade.h:6
 #, fuzzy
 msgid ""
 "Icons only\n"
@@ -592,46 +538,86 @@ msgstr "Na Gitambitse"
 
 # extracted from content/PrefsWindow.xul
 # LOCALIZATION NOTE : FILE UI for the outer parts of the Prefs dialog
-#: ui/prefdialog.glade.h:10
+#: ../ui/prefdialog.glade.h:10
 msgid "Preferences"
 msgstr "Ibyahisemo"
 
-#: ui/prefdialog.glade.h:11
+#: ../ui/prefdialog.glade.h:11
 #, fuzzy
 msgid "The encoding specified by the current locale"
 msgstr "Imisobekere: ku i KIGEZWEHO Umwanya"
 
-#: ui/prefdialog.glade.h:12
+#: ../ui/prefdialog.glade.h:12
 #, fuzzy
 msgid "Tool_bar style:"
 msgstr "IMISUSIRE"
 
-#: ui/prefdialog.glade.h:13
+#: ../ui/prefdialog.glade.h:13
 #, fuzzy
 msgid "UTF-8"
 msgstr "8"
 
-#: ui/prefdialog.glade.h:14
+#: ../ui/prefdialog.glade.h:14
 #, fuzzy
 msgid "_File access"
 msgstr "Idosiye"
 
-#: ui/prefdialog.glade.h:15
+#: ../ui/prefdialog.glade.h:15
 msgid "_Look’n’feel"
 msgstr ""
 
-#: ui/prefdialog.glade.h:16
+#: ../ui/prefdialog.glade.h:16
 #, fuzzy
 msgid "_Match color:"
 msgstr "Ibara"
 
-#: ui/prefdialog.glade.h:17
+#: ../ui/prefdialog.glade.h:17
 #, fuzzy
 msgid "_Text view font:"
 msgstr "Kureba Intego- nyuguti"
 
-#: ui/prefdialog.glade.h:18
+#: ../ui/prefdialog.glade.h:18
 #, fuzzy
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr "Kuri Gusoma a IDOSIYE in i Mbere Hejuru"
+
+#, fuzzy
+#~ msgid "_About"
+#~ msgstr "Bigyanye"
+
+#, fuzzy
+#~ msgid "Try “regexxer --help” for more information."
+#~ msgstr "Ifashayobora kugirango Birenzeho Ibisobanuro"
+
+#, fuzzy
+#~ msgid ""
+#~ "The folder name “%1” contains characters not representable in the "
+#~ "encoding of the local file system."
+#~ msgstr ""
+#~ "Ububiko Izina: Kirimo Inyuguti OYA in i Imisobekere: Bya i IDOSIYE "
+#~ "Sisitemu"
+
+#, fuzzy
+#~ msgid "Select a folder"
+#~ msgstr "a Ububiko"
+
+#, fuzzy
+#~ msgid "The application icon of regexxer"
+#~ msgstr "Porogaramu Agashushondanga Bya"
+
+#, fuzzy
+#~ msgid "regexxer icon"
+#~ msgstr "Agashushondanga"
+
+#, fuzzy
+#~ msgid "translated by"
+#~ msgstr "ku"
+
+#, fuzzy
+#~ msgid "written by"
+#~ msgstr "ku"
+
+#, fuzzy
+#~ msgid "The directory to be searched"
+#~ msgstr "bushyinguro Kuri"

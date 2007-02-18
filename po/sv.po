@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-01-09 23:29+0100\n"
+"POT-Creation-Date: 2007-02-18 22:12+0100\n"
 "PO-Revision-Date: 2007-01-09 23:30+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -18,8 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../ui/regexxer.desktop.in.h:1
-#: ../src/mainwindow.cc:849
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
 msgstr "Sök och ersätt med hjälp av reguljära uttryck"
 
@@ -40,57 +39,72 @@ msgid "Match color"
 msgstr "Matchningsfärg"
 
 #: ../ui/regexxer.schemas.in.h:4
-msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try “iconv --list” for a complete list of possible values."
-msgstr "Namn på teckenkodning att använda om en fil inte är läsbar i varken UTF-8 eller teckenuppsättningen som angivits av aktuell lokal. Försök med “iconv --list” för en komplett lista av möjliga värden."
+msgid ""
+"Name of the character encoding to use if a file is not readable in either "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
+"a complete list of possible values."
+msgstr ""
+"Namn på teckenkodning att använda om en fil inte är läsbar i varken UTF-8 "
+"eller teckenuppsättningen som angivits av aktuell lokal. Försök med “iconv --"
+"list” för en komplett lista av möjliga värden."
 
 #: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Typsnitt för textvy"
 
 #: ../ui/regexxer.schemas.in.h:6
-msgid "The background color used to highlight matches of the search expression."
-msgstr "Bakgrundsfärgen som används för att framhäva träffar från sökuttrycket."
+msgid ""
+"The background color used to highlight matches of the search expression."
+msgstr ""
+"Bakgrundsfärgen som används för att framhäva träffar från sökuttrycket."
 
 #: ../ui/regexxer.schemas.in.h:7
-msgid "The background color used to highlight the currently selected match of the search expression."
-msgstr "Bakgrundsfärgen som används för att framhäva aktuellt markerad träff från sökuttrycket."
+msgid ""
+"The background color used to highlight the currently selected match of the "
+"search expression."
+msgstr ""
+"Bakgrundsfärgen som används för att framhäva aktuellt markerad träff från "
+"sökuttrycket."
 
 #: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
 msgstr "Typsnittet som används i filredigeraren."
 
 #: ../ui/regexxer.schemas.in.h:9
-msgid "The style of the application’s toolbar. Possible values are “icons”, “text”, “both”, and “both-horiz”."
-msgstr "Stilen för programmets verktygsrad. Möjliga värden är “icons”, “text”, “both”, och “both-horiz”."
+msgid ""
+"The style of the application’s toolbar. Possible values are “icons”, “text”, "
+"“both”, and “both-horiz”."
+msgstr ""
+"Stilen för programmets verktygsrad. Möjliga värden är “icons”, “text”, "
+"“both”, och “both-horiz”."
 
 #: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
 msgstr "Stil på verktygsrad"
 
-#. TRANSLATORS: Please replace space by U+00A0 NO-BREAK SPACE.
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "Kan inte läsa fil:"
 
-#: ../src/filetree.cc:81
+#: ../src/filetree.cc:80
 msgid "File"
 msgstr "Fil"
 
-#: ../src/filetree.cc:101
+#: ../src/filetree.cc:99
 msgid "#"
 msgstr "#"
 
-#: ../src/filetree.cc:532
+#: ../src/filetree.cc:530
 #, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Misslyckades med att spara filen “%1”: %2"
 
-#: ../src/filetree.cc:949
+#: ../src/filetree.cc:946
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "“%1” verkar vara en binärfil."
 
-#: ../src/main.cc:94
+#: ../src/main.cc:77
 msgid "Save _all"
 msgstr "Spara _alla"
 
@@ -106,8 +120,7 @@ msgstr "MÖNSTER"
 msgid "Do not recurse into subdirectories"
 msgstr "Gå inte rekursivt in i underkataloger"
 
-#: ../src/main.cc:138
-#: ../ui/mainwindow.glade.h:3
+#: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "Hitta även dolda filer"
 
@@ -123,8 +136,7 @@ msgstr "REGUTR"
 msgid "Find only the first match in a line"
 msgstr "Hitta endast första träffen på en rad"
 
-#: ../src/main.cc:144
-#: ../ui/mainwindow.glade.h:5
+#: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr "Utför skiftlägesokänslig matchning"
 
@@ -148,7 +160,7 @@ msgstr "Starta inte sökningen automatiskt"
 msgid "[FOLDER]"
 msgstr "[MAPP]"
 
-#: ../src/mainwindow.cc:412
+#: ../src/mainwindow.cc:413
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -156,7 +168,7 @@ msgstr ""
 "Vissa filer har inte sparats ännu.\n"
 "Avsluta ändå?"
 
-#: ../src/mainwindow.cc:425
+#: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -164,32 +176,13 @@ msgstr ""
 "Vissa filer har inte sparats ännu.\n"
 "Fortsätta ändå?"
 
-#: ../src/mainwindow.cc:453
+#: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
 msgstr "Filsökmönstret är ogiltigt."
 
-#: ../src/mainwindow.cc:459
+#: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
 msgstr "Följande fel inträffade under sökningen:"
-
-#: ../src/mainwindow.cc:484
-#, qt-format
-msgid ""
-"Error in regular expression at “%1” (index %2):\n"
-"%3"
-msgstr ""
-"Fel i reguljärt utrryck vid “%1” (index %2):\n"
-"%3"
-
-# SUN NEW TRANSLATION
-#: ../src/mainwindow.cc:486
-#, qt-format
-msgid ""
-"Error in regular expression:\n"
-"%1"
-msgstr ""
-"Fel i reguljärt uttryck:\n"
-"%1"
 
 # Sparandet?
 #: ../src/mainwindow.cc:708
@@ -205,39 +198,64 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "tp-sv@listor.tp-sv.se"
 
-#: ../src/pcreshell.cc:58
+#: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
 msgstr "Använd specialsekvens \\C för att matcha en enstaka byte stöds inte."
 
-#: ../src/pcreshell.cc:148
-msgid "Reached the recursion and backtracking limit of the regular expression engine."
-msgstr "Nådde gräns för rekursion och bakspårning för reguljära uttrycksmotorn."
+#: ../src/pcreshell.cc:84
+#, qt-format
+msgid ""
+"Error in regular expression at “%1” (index %2):\n"
+"%3"
+msgstr ""
+"Fel i reguljärt utrryck vid “%1” (index %2):\n"
+"%3"
 
-#: ../src/prefdialog.cc:248
+# SUN NEW TRANSLATION
+#: ../src/pcreshell.cc:89
+#, qt-format
+msgid ""
+"Error in regular expression:\n"
+"%1"
+msgstr ""
+"Fel i reguljärt uttryck:\n"
+"%1"
+
+#: ../src/pcreshell.cc:171
+msgid ""
+"Reached the recursion and backtracking limit of the regular expression "
+"engine."
+msgstr ""
+"Nådde gräns för rekursion och bakspårning för reguljära uttrycksmotorn."
+
+#: ../src/prefdialog.cc:249
 #, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "“%1” är inte en giltig teckenkodning."
 
-#: ../src/statusline.cc:264
+#: ../src/statusline.cc:263
 msgid "Stop"
 msgstr "Stopp"
 
-#: ../src/statusline.cc:271
+#: ../src/statusline.cc:270
 msgid "File:"
 msgstr "Fil:"
 
-#: ../src/statusline.cc:274
+#: ../src/statusline.cc:273
 msgid "Match:"
 msgstr "Träff:"
 
-#: ../src/statusline.cc:285
+#: ../src/statusline.cc:284
 msgid "Cancels the running search"
 msgstr "Avbryter den körande sökningen"
 
-#. namespace Regexxer
 #: ../ui/mainwindow.glade.h:1
-msgid "A filename pattern as used by the shell. Character classes [ab] and csh style brace expressions {a,b} are supported."
-msgstr "Ett filnamnsmönster som används av skalet. Teckenklasser [ab] och csh-liknande klammerparentesuttryck {a,b} stöds."
+msgid ""
+"A filename pattern as used by the shell. Character classes [ab] and csh "
+"style brace expressions {a,b} are supported."
+msgstr ""
+"Ett filnamnsmönster som används av skalet. Teckenklasser [ab] och csh-"
+"liknande klammerparentesuttryck {a,b} stöds."
 
 #: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
@@ -344,8 +362,14 @@ msgid "Search:"
 msgstr "Sök:"
 
 #: ../ui/mainwindow.glade.h:30
-msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
-msgstr "Den nya strängen att ersätta. Precis som i Perl, kan du referera till delar av träffen med $1, $2, etc. eller även $+, $&, $` och $'. Operanderna \\l, \\u, \\L, \\U och \\E stöds också."
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
+"\\L, \\U and \\E are supported as well."
+msgstr ""
+"Den nya strängen att ersätta. Precis som i Perl, kan du referera till delar "
+"av träffen med $1, $2, etc. eller även $+, $&, $` och $'. Operanderna \\l, "
+"\\u, \\L, \\U och \\E stöds också."
 
 #: ../ui/mainwindow.glade.h:31
 msgid "_All files"
@@ -456,41 +480,57 @@ msgid "_Text view font:"
 msgstr "_Typsnitt för textvyn:"
 
 #: ../ui/prefdialog.glade.h:18
-msgid "regexxer attempts to read a file in the following encodings before giving up:"
-msgstr "regexxer försöker att läsa en fil i följande teckenkodningar före den ger upp:"
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr ""
+"regexxer försöker att läsa en fil i följande teckenkodningar före den ger "
+"upp:"
 
 #~ msgid "_About"
 #~ msgstr "_Om"
+
 #~ msgid "[OPTION]... [FOLDER]"
 #~ msgstr "[FLAGGA]... [MAPP]"
+
 #~ msgid "Try “regexxer --help” for more information."
 #~ msgstr "Försök med “regexxer --help” för mer information."
+
 #~ msgid ""
 #~ "The folder name “%1” contains characters not representable in the "
 #~ "encoding of the local file system."
 #~ msgstr ""
 #~ "Mappnamnet “%1” innehåller tecken som inte finns representerade i "
 #~ "teckenkodningen för det lokala filsystemet."
+
 #~ msgid "Select a folder"
 #~ msgstr "Välj en mapp"
+
 #~ msgid "About regexxer"
 #~ msgstr "Om regexxer"
+
 #~ msgid "The application icon of regexxer"
 #~ msgstr "Programikonen för regexxer"
+
 #~ msgid "regexxer icon"
 #~ msgstr "regexxer-ikon"
+
 #~ msgid "translated by"
 #~ msgstr "Översatt av"
+
 #~ msgid "written by"
 #~ msgstr "skrivet av"
+
 #~ msgid "The directory to be searched"
 #~ msgstr "Katalogen som ska sökas i"
+
 #~ msgid "Override text direction"
 #~ msgstr "Åsidosätt textriktning"
+
 #~ msgid "*"
 #~ msgstr "*"
+
 #~ msgid "_Ignore the text direction of the locale"
 #~ msgstr "_Ignorera lokalens textriktning"
+
 #~ msgid "Debian package by"
 #~ msgstr "Debian-paket av"
-
