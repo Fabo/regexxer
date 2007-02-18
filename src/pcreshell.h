@@ -131,7 +131,7 @@ public:
   int match(const Glib::ustring& subject, int offset = 0, MatchOptions options = MatchOptions(0));
 
   // returns byte offsets
-  std::pair<int,int> get_substring_bounds(int index) const;
+  std::pair<int, int> get_substring_bounds(int index) const;
   Glib::ustring get_substring(const Glib::ustring& subject, int index) const;
 
 private:

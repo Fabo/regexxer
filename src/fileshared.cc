@@ -40,7 +40,7 @@ const Glib::Quark& file_buffer_match_quark()
 }
 
 static
-int calculate_match_length(const Glib::ustring& subject, const std::pair<int,int>& bounds)
+int calculate_match_length(const Glib::ustring& subject, const std::pair<int, int>& bounds)
 {
   const std::string::const_iterator begin = subject.begin().base();
 

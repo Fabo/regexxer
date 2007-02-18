@@ -173,7 +173,7 @@ int Pattern::match(const Glib::ustring& subject, int offset, MatchOptions option
   g_return_val_if_reached(captures);
 }
 
-std::pair<int,int> Pattern::get_substring_bounds(int index) const
+std::pair<int, int> Pattern::get_substring_bounds(int index) const
 {
   g_return_val_if_fail(index >= 0 && 3 * index < ovecsize_, std::make_pair(-1, -1));
 
@@ -182,7 +182,7 @@ std::pair<int,int> Pattern::get_substring_bounds(int index) const
 
 Glib::ustring Pattern::get_substring(const Glib::ustring& subject, int index) const
 {
-  const std::pair<int,int> bounds = get_substring_bounds(index);
+  const std::pair<int, int> bounds = get_substring_bounds(index);
 
   if (bounds.first >= 0 && bounds.first < bounds.second)
   {

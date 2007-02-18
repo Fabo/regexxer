@@ -66,13 +66,13 @@ public:
 
   int get_modified_count() const;
 
-  sigc::signal<void,FileInfoPtr,int>  signal_switch_buffer;
-  sigc::signal<void>                  signal_bound_state_changed;
-  sigc::signal<void>                  signal_file_count_changed;
-  sigc::signal<void>                  signal_match_count_changed;
-  sigc::signal<void>                  signal_modified_count_changed;
-  sigc::signal<bool>                  signal_pulse;
-  sigc::signal<void,UndoActionPtr>    signal_undo_stack_push;
+  sigc::signal<void, FileInfoPtr, int>  signal_switch_buffer;
+  sigc::signal<void>                    signal_bound_state_changed;
+  sigc::signal<void>                    signal_file_count_changed;
+  sigc::signal<void>                    signal_match_count_changed;
+  sigc::signal<void>                    signal_modified_count_changed;
+  sigc::signal<bool>                    signal_pulse;
+  sigc::signal<void, UndoActionPtr>     signal_undo_stack_push;
 
   // Provide line number, subject and file info for match location output.
   sigc::signal<void, int, const Glib::ustring&, FileInfoPtr> signal_feedback;

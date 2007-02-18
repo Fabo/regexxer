@@ -68,8 +68,8 @@ int collatekey_sort_func(const Gtk::TreeModel::iterator& a, const Gtk::TreeModel
 bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
 bool prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* collapse = 0);
 
-typedef std::pair<std::string,Gtk::TreeModel::iterator> DirNodePair;
-typedef std::list<DirNodePair>                          DirStack;
+typedef std::pair<std::string, Gtk::TreeModel::iterator> DirNodePair;
+typedef std::list<DirNodePair>                           DirStack;
 
 class ScopedPushDir
 {
@@ -153,7 +153,7 @@ struct FileTree::ReplaceMatchesData
   const Glib::ustring                   substitution;
   FileTree::TreeRowRefPtr               row_reference;
   UndoStackPtr                          undo_stack;
-  const sigc::slot<void,UndoActionPtr>  slot_undo_stack_push;
+  const sigc::slot<void, UndoActionPtr> slot_undo_stack_push;
 
   void undo_stack_push(UndoActionPtr undo_action);
 

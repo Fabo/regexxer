@@ -51,7 +51,7 @@ public:
   bool in_user_action() const;
 
   int find_matches(Pcre::Pattern& pattern, bool multiple,
-                   const sigc::slot<void,int,const Glib::ustring&>& feedback);
+                   const sigc::slot<void, int, const Glib::ustring&>& feedback);
 
   int get_match_count() const;
   int get_match_index() const;
@@ -78,7 +78,7 @@ public:
   sigc::signal<void>                signal_bound_state_changed;
   Util::QueuedSignal                signal_preview_line_changed;
   sigc::signal<bool>                signal_pulse;
-  sigc::signal<void,UndoActionPtr>  signal_undo_stack_push;
+  sigc::signal<void, UndoActionPtr> signal_undo_stack_push;
 
 protected:
   FileBuffer();
@@ -96,7 +96,7 @@ private:
   class ScopedLock;
   class ScopedUserAction;
 
-  typedef std::set<MatchDataPtr,MatchDataLess>      MatchSet;
+  typedef std::set<MatchDataPtr, MatchDataLess>     MatchSet;
   typedef std::stack<FileBufferActionRemoveMatch*>  WeakUndoStack;
 
   MatchSet            match_set_;

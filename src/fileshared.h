@@ -72,11 +72,11 @@ inline BoundState& operator^=(BoundState& a, BoundState b)
  */
 struct MatchData : public Util::SharedObject
 {
-  int                               index;
-  int                               length;
-  Glib::ustring                     subject;
-  std::vector< std::pair<int,int> > captures;
-  Glib::RefPtr<Gtk::TextMark>       mark;
+  int                                index;
+  int                                length;
+  Glib::ustring                      subject;
+  std::vector< std::pair<int, int> > captures;
+  Glib::RefPtr<Gtk::TextMark>        mark;
 
   MatchData(int match_index, const Glib::ustring& line,
             const Pcre::Pattern& pattern, int capture_count);

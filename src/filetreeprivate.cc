@@ -23,7 +23,6 @@
 #include <glib.h>
 #include <gtkmm/treestore.h>
 
-
 namespace Regexxer
 {
 
@@ -68,8 +67,9 @@ bool next_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* colla
 
   const FileTreeColumns& columns = FileTreeColumns::instance();
   Gtk::TreeModel::iterator parent = iter->parent();
+  ++iter;
 
-  for (++iter;;)
+  for (;;)
   {
     if (iter)
     {
@@ -121,7 +121,7 @@ bool prev_match_file(Gtk::TreeModel::iterator& iter, Gtk::TreeModel::Path* colla
         if (const Gtk::TreeModel::Children& children = iter->children()) // directory?
         {
           parent = iter;
-          path.push_back(children.size());
+          path.push_back(children.size()); // one beyond the last child
           continue;
         }
 
@@ -194,10 +194,10 @@ const std::list<Glib::ustring>& FileTree::Error::get_error_list() const
 
 FileTree::FindData::FindData(Pcre::Pattern& pattern_, bool recursive_, bool hidden_)
 :
-  pattern     (pattern_),
-  recursive   (recursive_),
-  hidden      (hidden_),
-  error_list  (new FileTree::MessageList())
+  pattern    (pattern_),
+  recursive  (recursive_),
+  hidden     (hidden_),
+  error_list (new FileTree::MessageList())
 {}
 
 FileTree::FindData::~FindData()
@@ -277,10 +277,10 @@ bool FileTree::BufferActionShell::do_undo(const sigc::slot<bool>& pulse)
 {
   g_return_val_if_fail(row_reference_->is_valid(), false);
 
-  const Gtk::TreePath path (row_reference_->get_path());
+  const Gtk::TreeModel::Path path = row_reference_->get_path();
 
-  if (!filetree_.last_selected_rowref_ ||
-      filetree_.last_selected_rowref_->get_path() != path)
+  if (!filetree_.last_selected_rowref_
+      || filetree_.last_selected_rowref_->get_path() != path)
   {
     filetree_.expand_and_select(path);
   }

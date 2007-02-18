@@ -1,5 +1,17 @@
 2007-02-18  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	* src/controller.h: Minor code reformatting: Change instances
+	of <foo,bar> in template argument lists to <foo, bar>.
+	* src/filebuffer.{cc,h}: ditto,
+	* src/fileshared.{cc,h}: ditto,
+	* src/filetree.h: ditto,
+	* src/filetreeprivate.{cc,h}: ditto,
+	* src/pcreshell.{cc,h}: ditto.
+	* src/mainwindow.cc (program_license): Add terminating newline
+	to last paragraph.
+
+2007-02-18  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	* src/stringutils.{cc,h} (Util::wstring_to_utf8): New function to
 	convert an std::wstring to UTF-8.  This is a temporary measure
 	to deal with the same locale issues as discussed in the comments

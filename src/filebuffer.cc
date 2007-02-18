@@ -255,7 +255,7 @@ bool FileBuffer::in_user_action() const
  * multiple matches per line will be found (like modifier /g in Perl).
  */
 int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple,
-                             const sigc::slot<void,int,const Glib::ustring&>& feedback)
+                             const sigc::slot<void, int, const Glib::ustring&>& feedback)
 {
   ScopedLock lock (*this);
 
@@ -312,7 +312,7 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple,
       ++match_count_;
       ++original_match_count_;
 
-      const std::pair<int,int> bounds = pattern.get_substring_bounds(0);
+      const std::pair<int, int> bounds = pattern.get_substring_bounds(0);
 
       iterator start = line;
       iterator stop  = line;
@@ -517,7 +517,7 @@ void FileBuffer::decrement_stamp()
 
 void FileBuffer::undo_remove_match(const MatchDataPtr& match, int offset)
 {
-  const std::pair<MatchSet::iterator,bool> pos = match_set_.insert(match);
+  const std::pair<MatchSet::iterator, bool> pos = match_set_.insert(match);
   g_return_if_fail(pos.second);
 
   const iterator start = get_iter_at_offset(offset);

@@ -58,10 +58,10 @@ public:
   bool is_enabled() const;
 
 private:
-  sigc::signal<void>      signal_activate_;
-  sigc::signal<void,bool> signal_set_sensitive_;
-  bool                    enabled_;
-  bool                    group_enabled_;
+  sigc::signal<void>       signal_activate_;
+  sigc::signal<void, bool> signal_set_sensitive_;
+  bool                     enabled_;
+  bool                     group_enabled_;
 
   ControlItem(const ControlItem&);
   ControlItem& operator=(const ControlItem&);
@@ -78,8 +78,8 @@ public:
   void set_enabled(bool enable);
 
 private:
-  sigc::signal<void,bool> signal_set_enabled_;
-  bool                    enabled_;
+  sigc::signal<void, bool> signal_set_enabled_;
+  bool                     enabled_;
 
   ControlGroup(const ControlGroup&);
   ControlGroup& operator=(const ControlGroup&);
