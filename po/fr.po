@@ -1,17 +1,19 @@
 # French translation of regexxer.
-# Copyright (C) 2004-2006 Free Software Foundation, Inc.
+# Copyright (C) 2004-2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the regexxer package.
 #
-# Benoît Dejean <TazForEver@dlfp.org>, 2004.
+# Benoît Dejean <tazforever@dlfp.org>, 2004.
 # David Soulayrol <david.soulayrol.2000@anciens.enib.fr>, 2005.
-# 
+# Jonathan Ernst <jonathan@ernstfamily.ch>, 2007.
+# Stéphane Raimbault <stephane.raimbault@gmail.com>, 2007.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer 0.8\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2006-07-24 14:39+0200\n"
-"Last-Translator: David Soulayrol <david.soulayrol.2000@anciens.enib.fr>\n"
+"POT-Creation-Date: 2007-03-22 22:21+0100\n"
+"PO-Revision-Date: 2007-03-22 22:26+0100\n"
+"Last-Translator: Jonathan Ernst <jonathan@ernstfamily.ch>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +21,7 @@ msgstr ""
 
 #: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
-msgstr "Rechercher et remplacer en utilisant des expressions régulières"
+msgstr "Recherche et remplace en utilisant des expressions régulières"
 
 #: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
@@ -42,10 +44,7 @@ msgid ""
 "Name of the character encoding to use if a file is not readable in either "
 "UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
 "a complete list of possible values."
-msgstr ""
-"Nom du codage de caractères à utiliser si un fichier n'est pas lisible en "
-"UTF-8 ou selon le jeu de code spécifié par la locale courante. Essayez "
-"« iconv --list » pour une liste complète des valeurs possibles."
+msgstr "Nom du codage de caractères à utiliser si un fichier n'est pas lisible en UTF-8 ou selon le jeu de code spécifié par la locale courante. Essayez « iconv --list » pour une liste complète des valeurs possibles."
 
 #: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -159,7 +158,7 @@ msgstr "Ne démarre pas la recherche automatiquement"
 
 #: ../src/main.cc:152
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[DOSSIER]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
@@ -191,7 +190,11 @@ msgstr "Les erreurs suivantes sont apparues lors de l'enregistrement :"
 
 #: ../src/mainwindow.cc:854
 msgid "translator-credits"
-msgstr "David Soulayrol <david.soulayrol.2000@anciens.enib.fr>"
+msgstr ""
+"Benoît Dejean <tazforever@dlfp.org>\n"
+"David Soulayrol <david.soulayrol.2000@anciens.enib.fr>\n"
+"Jonathan Ernst <jonathan@ernstfamily.ch>\n"
+"Stéphane Raimbault <stephane.raimbault@gmail.com>"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
@@ -382,7 +385,7 @@ msgstr "_Fichier"
 
 #: ../ui/mainwindow.glade.h:34
 msgid "_Help"
-msgstr "_Aide"
+msgstr "Aid_e"
 
 #: ../ui/mainwindow.glade.h:35
 msgid "_Match"
@@ -481,40 +484,3 @@ msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "regexxer tente de lire un fichier avec le codage suivant avant d'abandonner :"
-
-#~ msgid "_About"
-#~ msgstr "À _propos"
-
-#~ msgid "[OPTION]... [FOLDER]"
-#~ msgstr "[OPTION]... [REPERTOIRE]"
-
-#~ msgid "Try “regexxer --help” for more information."
-#~ msgstr "Essayez « regexxer --help » pour plus d'information."
-
-#~ msgid ""
-#~ "The folder name “%1” contains characters not representable in the "
-#~ "encoding of the local file system."
-#~ msgstr ""
-#~ "Le nom du répertoire « %1 » contient des caractères non représentables "
-#~ "dans le codage du système de fichier local."
-
-#~ msgid "Select a folder"
-#~ msgstr "Sélectionnez un répertoire"
-
-#~ msgid "About regexxer"
-#~ msgstr "À propos de regexxer"
-
-#~ msgid "The application icon of regexxer"
-#~ msgstr "L'icône d'application de regexxer"
-
-#~ msgid "regexxer icon"
-#~ msgstr "icône regexxer"
-
-#~ msgid "translated by"
-#~ msgstr "traduit par"
-
-#~ msgid "written by"
-#~ msgstr "écrit par"
-
-#~ msgid "The directory to be searched"
-#~ msgstr "Le répertoire devant être inspecté"
