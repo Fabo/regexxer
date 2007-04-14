@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
+"POT-Creation-Date: 2007-02-22 18:59+0000\n"
 "PO-Revision-Date: 2006-11-17 22:46+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -205,11 +205,11 @@ msgid "Using the \\C escape sequence to match a single byte is not supported."
 msgstr ""
 
 #: ../src/pcreshell.cc:84
-#, qt-format
+#, fuzzy, qt-format
 msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
-msgstr ""
+msgstr "خطأ عند تجميع التعبير النظامي \"%s\"."
 
 #: ../src/pcreshell.cc:89
 #, fuzzy, qt-format
@@ -518,10 +518,6 @@ msgid ""
 msgstr ""
 
 #, fuzzy
-#~ msgid "_About"
-#~ msgstr "_حول"
-
-#, fuzzy
 #~ msgid "[OPTION]... [FOLDER]"
 #~ msgstr "افتح مجلد %s"
 
@@ -552,3 +548,7 @@ msgstr ""
 #, fuzzy
 #~ msgid "The directory to be searched"
 #~ msgstr "الدليل الذي سيتم البحث فيه عن أيقونات."
+
+#, fuzzy
+#~ msgid "_About"
+#~ msgstr "_حول"
