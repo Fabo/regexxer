@@ -1,46 +1,44 @@
-# Arabic translations for PACKAGE package.
-# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Automatically generated, 2006.
-#
+# Arabic translations for THIS package.
+# Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as THIS package.
+# Automatically generated, 2007.
+# Djihed Afifi <djihed@gmail.com>, 2007
 msgid ""
 msgstr ""
-"Project-Id-Version: regexxer\n"
+"Project-Id-Version: Arabic\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-22 18:59+0000\n"
-"PO-Revision-Date: 2006-11-17 22:46+0100\n"
+"POT-Creation-Date: 2007-04-21 10:45+0100\n"
+"PO-Revision-Date: 2007-04-14 18:49+0100\n"
 "Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
-"Language-Team: Arabic <doc@arabeyes.org>\n"
+"Language-Team: Arabeyes <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n == 0 ? 0 : n == 1 ? 1 : n == 2 ? 2 : n >= "
-"3 && n <= 10 ? 3 : n >= 11 && n <= 99 ? 4 : 5;\n"
-"X-Poedit-Language: Arabic\n"
 
 #: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
+#, fuzzy
 msgid "Search and replace using regular expressions"
-msgstr ""
+msgstr "الإسم يطابق التعبير المنتظم"
 
 #: ../ui/regexxer.desktop.in.h:2
 #, fuzzy
 msgid "regexxer Search Tool"
-msgstr "أداة تقرير خلال"
+msgstr "أداة بحث المُقتفي"
 
 #: ../ui/regexxer.schemas.in.h:1
 #, fuzzy
 msgid "Current-match color"
-msgstr "لون التظليل للنتائج الحالية"
+msgstr "اللون الحالي"
 
 #: ../ui/regexxer.schemas.in.h:2
 #, fuzzy
 msgid "Fallback encoding"
-msgstr "التشفير الإفتراضي"
+msgstr "الترميز الإفتراضي"
 
 #: ../ui/regexxer.schemas.in.h:3
 #, fuzzy
 msgid "Match color"
-msgstr "إضبط الألوان"
+msgstr "طابق لك_امل الكلمة"
 
 #: ../ui/regexxer.schemas.in.h:4
 msgid ""
@@ -52,7 +50,7 @@ msgstr ""
 #: ../ui/regexxer.schemas.in.h:5
 #, fuzzy
 msgid "Text view font"
-msgstr "خطّ النّصّ"
+msgstr "عرض النص:"
 
 #: ../ui/regexxer.schemas.in.h:6
 msgid ""
@@ -60,14 +58,16 @@ msgid ""
 msgstr ""
 
 #: ../ui/regexxer.schemas.in.h:7
+#, fuzzy
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
-msgstr ""
+msgstr "فيما إذا كان على gedit إبراز جميع حالات وجود النص المبحوث."
 
 #: ../ui/regexxer.schemas.in.h:8
+#, fuzzy
 msgid "The font used in the file editor."
-msgstr ""
+msgstr "الخط المستخدم في العنوان"
 
 #: ../ui/regexxer.schemas.in.h:9
 msgid ""
@@ -78,82 +78,81 @@ msgstr ""
 #: ../ui/regexxer.schemas.in.h:10
 #, fuzzy
 msgid "Toolbar style"
-msgstr "شكل أزرار عمود الأدوات"
+msgstr "أسلوب شري_ط الأدوات"
 
 #: ../src/filebuffer.cc:198
 #, fuzzy
 msgid "Can’t read file:"
-msgstr "لا يمكن حفظ الملف: %s\n"
+msgstr "تعذّرت قراءة الملف"
 
 #: ../src/filetree.cc:80
-#, fuzzy
 msgid "File"
-msgstr "الملف"
+msgstr "ملف"
 
 #: ../src/filetree.cc:99
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../src/filetree.cc:530
 #, fuzzy, qt-format
 msgid "Failed to save file “%1”: %2"
-msgstr "حفظ صورة شاشة في الم_لف:"
+msgstr "تعذر إنشاء الملف “%s”: %s"
 
 #: ../src/filetree.cc:946
-#, fuzzy, qt-format
+#, qt-format
 msgid "“%1” seems to be a binary file."
-msgstr "لا يمكن نقل الملف \"%s\" إلى سلة المهملات."
+msgstr ""
 
 #: ../src/main.cc:77
 #, fuzzy
 msgid "Save _all"
-msgstr "_حفظ الكل"
+msgstr "ا_حفظ الكل"
 
 #: ../src/main.cc:134
 #, fuzzy
 msgid "Find files matching PATTERN"
-msgstr "اسم النموذج للملفات"
+msgstr "اعثر على الأزواج المتماثلة"
 
 #: ../src/main.cc:134
-#, fuzzy
 msgid "PATTERN"
-msgstr "ال_نمط:"
+msgstr "PATTERN"
 
 #: ../src/main.cc:136
 #, fuzzy
 msgid "Do not recurse into subdirectories"
-msgstr "لا تشعب إلى الخلفية"
+msgstr "لا _تنشئ أدلة"
 
 #: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 #, fuzzy
 msgid "Also find hidden files"
-msgstr "إظهار الملفّات و الدلائل المخفية"
+msgstr "اظهر الملفات المخفية"
 
 #: ../src/main.cc:140
 #, fuzzy
 msgid "Find text matching REGEX"
-msgstr "لا يمكن العثور على النص التالي!"
+msgstr "اعثر على الأزواج المتماثلة"
 
 #: ../src/main.cc:140
 #, fuzzy
 msgid "REGEX"
-msgstr "مطابقة التّعبير النّظامي"
+msgstr "شجرة"
 
 #: ../src/main.cc:142
+#, fuzzy
 msgid "Find only the first match in a line"
-msgstr ""
+msgstr "اعثر على الأزواج المتماثلة"
 
 #: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
+#, fuzzy
 msgid "Do case insensitive matching"
-msgstr ""
+msgstr "مُطابقة غير حساسة للحالة"
 
 #: ../src/main.cc:146
 #, fuzzy
 msgid "Replace matches with STRING"
-msgstr "استبدال مدير النوافذ ب متستي"
+msgstr "استبدّل _بـ: "
 
 #: ../src/main.cc:146
-#, fuzzy
 msgid "STRING"
 msgstr "سلسلة"
 
@@ -163,12 +162,14 @@ msgid "Print match location to standard output"
 msgstr "كتابة قيمة مفتاح في لإخراج القياسي."
 
 #: ../src/main.cc:150
+#, fuzzy
 msgid "Do not automatically start search"
-msgstr ""
+msgstr "ابدأ البحث آليّا"
 
 #: ../src/main.cc:152
+#, fuzzy
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[FILE]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
@@ -185,20 +186,22 @@ msgstr ""
 #: ../src/mainwindow.cc:455
 #, fuzzy
 msgid "The file search pattern is invalid."
-msgstr "اختر خيار البحث \"Contains the text\""
+msgstr "تنسيق الملف غير صحيح."
 
 #: ../src/mainwindow.cc:461
+#, fuzzy
 msgid "The following errors occurred during search:"
-msgstr ""
+msgstr "حدث الخطأ التالي: %s\n"
 
 #: ../src/mainwindow.cc:708
+#, fuzzy
 msgid "The following errors occurred during save:"
-msgstr ""
+msgstr "حدث الخطأ التالي: %s\n"
 
 #: ../src/mainwindow.cc:854
 #, fuzzy
 msgid "translator-credits"
-msgstr "Yousef Raffah يوسف رفه (yousef@raffah.com)"
+msgstr "المترجمون:"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
@@ -227,27 +230,27 @@ msgstr ""
 #: ../src/prefdialog.cc:249
 #, fuzzy, qt-format
 msgid "“%1” is not a valid encoding."
-msgstr "ليس %s موقعا سليما."
+msgstr "“%s” لا يستجيب."
 
 #: ../src/statusline.cc:263
 #, fuzzy
 msgid "Stop"
-msgstr "توقّف"
+msgstr "تو_قّف"
 
 #: ../src/statusline.cc:270
 #, fuzzy
 msgid "File:"
-msgstr "الملف"
+msgstr "_ملف:"
 
 #: ../src/statusline.cc:273
 #, fuzzy
 msgid "Match:"
-msgstr "<b>مطابقة</b>"
+msgstr "م_طابقة"
 
 #: ../src/statusline.cc:284
 #, fuzzy
 msgid "Cancels the running search"
-msgstr "خطأ أثناء تنفيذ أمر البحث."
+msgstr "احفظ البحث المحرر"
 
 #: ../ui/mainwindow.glade.h:1
 msgid ""
@@ -256,130 +259,130 @@ msgid ""
 msgstr ""
 
 #: ../ui/mainwindow.glade.h:2
+#, fuzzy
 msgid "A regular expression in Perl syntax"
-msgstr ""
+msgstr "بحث عن تعابير نمطيّة"
 
 #: ../ui/mainwindow.glade.h:4
-#, fuzzy
 msgid "Backward"
-msgstr "لل_خلف"
+msgstr "إلى الخلف"
 
 #: ../ui/mainwindow.glade.h:6
 #, fuzzy
 msgid "File backward"
-msgstr "بحث إلى ال_خلف"
+msgstr "تخطّى إلى الخلف"
 
 #: ../ui/mainwindow.glade.h:7
 #, fuzzy
 msgid "File forward"
-msgstr "حوّل المكالمات"
+msgstr "أرسل بريد"
 
 #: ../ui/mainwindow.glade.h:8
+#, fuzzy
 msgid "Find all files that match the filename pattern"
-msgstr ""
+msgstr "اعثر على العناصر التي تفي بالمعايير التالية"
 
 #: ../ui/mainwindow.glade.h:9
 #, fuzzy
 msgid "Find all matches of the regular expression"
-msgstr "اختر خيار البحث \"Contains the text\""
+msgstr "الإسم يطابق التعبير المنتظم"
 
 #: ../ui/mainwindow.glade.h:10
+#, fuzzy
 msgid "Find all possible matches in a line"
-msgstr ""
+msgstr "جِدْ قواعد البحث المحتملة"
 
 #: ../ui/mainwindow.glade.h:11
 #, fuzzy
 msgid "Find fi_les"
-msgstr "ايكي ليه بان"
+msgstr "ملفات الفيديو"
 
 #: ../ui/mainwindow.glade.h:12
 #, fuzzy
 msgid "Fol_der:"
-msgstr "_دلائل"
+msgstr "_مجلّدات"
 
 #: ../ui/mainwindow.glade.h:13
-#, fuzzy
 msgid "Forward"
-msgstr "تمرير"
+msgstr "مرر"
 
 #: ../ui/mainwindow.glade.h:14
 #, fuzzy
 msgid "Go to next match"
-msgstr "إذهب إلى الصفحة التالية"
+msgstr "اذهب إلى الصفحة التالية"
 
 #: ../ui/mainwindow.glade.h:15
 #, fuzzy
 msgid "Go to previous match"
-msgstr "إذهب إلى الصفحة السابقة"
+msgstr "اذهب إلى الصفحة السابقة"
 
 #: ../ui/mainwindow.glade.h:16
 #, fuzzy
 msgid "Go to the next matching file"
-msgstr "الذهابل إلى %s في الملف %s"
+msgstr "اذهب إلى الصفحة التالية"
 
 #: ../ui/mainwindow.glade.h:17
 #, fuzzy
 msgid "Go to the previous matching file"
-msgstr "الذهابل إلى %s في الملف %s"
+msgstr "اذهب إلى الصفحة السابقة"
 
 #: ../ui/mainwindow.glade.h:18
-#, fuzzy
 msgid "Pattern:"
-msgstr "ال_نمط:"
+msgstr "نمط:"
 
 #: ../ui/mainwindow.glade.h:19
 #, fuzzy
 msgid "Preview"
-msgstr "لمحة"
+msgstr "معاينات"
 
 #: ../ui/mainwindow.glade.h:20
 #, fuzzy
 msgid "Preview of the substitution"
-msgstr "استعراض الفيديو"
+msgstr "موفّر الجسم"
 
 #: ../ui/mainwindow.glade.h:21
 #, fuzzy
 msgid "Recurse into subdirectories"
-msgstr "ال_صق إلى مجلد"
+msgstr "الأرشيف ليس ذو دليل ثانوي"
 
 #: ../ui/mainwindow.glade.h:22
 #, fuzzy
 msgid "Replace _current"
-msgstr "تعويض المستند الحالي"
+msgstr "استبدل المستند الحالي"
 
 #: ../ui/mainwindow.glade.h:23
 #, fuzzy
 msgid "Replace all matches in all files"
-msgstr "عدّد كل الملفّات في المجلّد"
+msgstr "احذف كل الوُسوم من ملف"
 
 #: ../ui/mainwindow.glade.h:24
+#, fuzzy
 msgid "Replace all matches in the current file"
-msgstr ""
+msgstr "استبدل التحديد الحالي"
 
 #: ../ui/mainwindow.glade.h:25
 #, fuzzy
 msgid "Replace current match"
-msgstr "تعويض المستند الحالي"
+msgstr "استبدل المستند الحالي"
 
 #: ../ui/mainwindow.glade.h:26
 #, fuzzy
 msgid "Replace in _all files"
-msgstr "عدّد كل الملفّات في المجلّد"
+msgstr "اختر كل الملفات"
 
 #: ../ui/mainwindow.glade.h:27
 #, fuzzy
 msgid "Replace in _this file"
-msgstr "بيانات زائدة في الملف"
+msgstr "فتح الملف؟"
 
 #: ../ui/mainwindow.glade.h:28
 #, fuzzy
 msgid "Replace:"
-msgstr "استبدال"
+msgstr "ا_ستبدال"
 
 #: ../ui/mainwindow.glade.h:29
-#, fuzzy
 msgid "Search:"
-msgstr "<b>ابحث:</b>"
+msgstr "ابحث:"
 
 #: ../ui/mainwindow.glade.h:30
 msgid ""
@@ -389,80 +392,82 @@ msgid ""
 msgstr ""
 
 #: ../ui/mainwindow.glade.h:31
-#, fuzzy
 msgid "_All files"
 msgstr "_كل الملفات"
 
 #: ../ui/mainwindow.glade.h:32
 #, fuzzy
 msgid "_Edit"
-msgstr "_تحرير"
+msgstr "_تحرير/"
 
 #: ../ui/mainwindow.glade.h:33
 #, fuzzy
 msgid "_File"
-msgstr "_ملف"
+msgstr "/ملف"
 
 #: ../ui/mainwindow.glade.h:34
 #, fuzzy
 msgid "_Help"
-msgstr "م_ساعدة"
+msgstr "مساعدة"
 
 #: ../ui/mainwindow.glade.h:35
-#, fuzzy
 msgid "_Match"
-msgstr "<b>مطابقة</b>"
+msgstr "م_طابقة"
 
 #: ../ui/mainwindow.glade.h:36
 #, fuzzy
 msgid "_Next file"
-msgstr "إنتقاء ملف"
+msgstr "ملف نصي"
 
 #: ../ui/mainwindow.glade.h:37
 #, fuzzy
 msgid "_Previous file"
-msgstr "إنتقاء ملف"
+msgstr "الصفحة ال_سابقة"
 
 #: ../ui/mainwindow.glade.h:38
 #, fuzzy
 msgid "_Replace"
-msgstr "است_بدال"
+msgstr "المبدل"
 
 #: ../ui/mainwindow.glade.h:39
 #, fuzzy
 msgid "_This file"
-msgstr "تنزيل الملف؟"
+msgstr "ملف قرص"
 
 #: ../ui/mainwindow.glade.h:40
 #, fuzzy
 msgid "hidden"
-msgstr "إبدأ مخفياً"
+msgstr "اظهار المخفي"
 
 #: ../ui/mainwindow.glade.h:41
+#, fuzzy
 msgid "recursive"
-msgstr ""
+msgstr "تكرار"
 
 #: ../ui/prefdialog.glade.h:1
+#, fuzzy
 msgid "1."
-msgstr ""
+msgstr "1"
 
 #: ../ui/prefdialog.glade.h:2
+#, fuzzy
 msgid "2."
-msgstr ""
+msgstr "2"
 
 #: ../ui/prefdialog.glade.h:3
+#, fuzzy
 msgid "3."
-msgstr ""
+msgstr "3"
 
 #: ../ui/prefdialog.glade.h:4
 #, fuzzy
 msgid "C_urrent match color:"
-msgstr "لون التظليل للنتائج الحالية"
+msgstr "اللون الحالي"
 
 #: ../ui/prefdialog.glade.h:5
 #, fuzzy
 msgid "Fallback _encoding:"
-msgstr "التشفير الإفتراضي"
+msgstr "الترميز الإفتراضي"
 
 #: ../ui/prefdialog.glade.h:6
 msgid ""
@@ -475,22 +480,21 @@ msgstr ""
 #: ../ui/prefdialog.glade.h:10
 #, fuzzy
 msgid "Preferences"
-msgstr "تفضيلات"
+msgstr "ت_فضيلات"
 
 #: ../ui/prefdialog.glade.h:11
 #, fuzzy
 msgid "The encoding specified by the current locale"
-msgstr "استخدام التشفير المحدد من طرف المستند"
+msgstr "استخدم الترميز المحدد من طرف المستند"
 
 #: ../ui/prefdialog.glade.h:12
 #, fuzzy
 msgid "Tool_bar style:"
-msgstr "بدون عمود الأدوات"
+msgstr "أسلوب شري_ط الأدوات"
 
 #: ../ui/prefdialog.glade.h:13
-#, fuzzy
 msgid "UTF-8"
-msgstr "يو تي أف-8:"
+msgstr "UTF-8"
 
 #: ../ui/prefdialog.glade.h:14
 #, fuzzy
@@ -498,57 +502,21 @@ msgid "_File access"
 msgstr "النفاذ للملف:"
 
 #: ../ui/prefdialog.glade.h:15
-#, fuzzy
 msgid "_Look’n’feel"
-msgstr "مظهر ريترو"
+msgstr ""
 
 #: ../ui/prefdialog.glade.h:16
 #, fuzzy
 msgid "_Match color:"
-msgstr "إضبط الألوان"
+msgstr "لون ال_نص:"
 
 #: ../ui/prefdialog.glade.h:17
 #, fuzzy
 msgid "_Text view font:"
-msgstr "خطّ النّصّ"
+msgstr "عرض النص:"
 
 #: ../ui/prefdialog.glade.h:18
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 
-#, fuzzy
-#~ msgid "[OPTION]... [FOLDER]"
-#~ msgstr "افتح مجلد %s"
-
-#, fuzzy
-#~ msgid "Select a folder"
-#~ msgstr "انتقاء مجلّد"
-
-#, fuzzy
-#~ msgid "About regexxer"
-#~ msgstr "_حول الملحق"
-
-#, fuzzy
-#~ msgid "The application icon of regexxer"
-#~ msgstr "لم يعثر على الأيقونة"
-
-#, fuzzy
-#~ msgid "regexxer icon"
-#~ msgstr "حجم الأيقونة"
-
-#, fuzzy
-#~ msgid "translated by"
-#~ msgstr "المترجمون:"
-
-#, fuzzy
-#~ msgid "written by"
-#~ msgstr "المطورون"
-
-#, fuzzy
-#~ msgid "The directory to be searched"
-#~ msgstr "الدليل الذي سيتم البحث فيه عن أيقونات."
-
-#, fuzzy
-#~ msgid "_About"
-#~ msgstr "_حول"
