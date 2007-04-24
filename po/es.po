@@ -1,16 +1,16 @@
-# translation of es.po to Spanish
-# traducción de es.po al Spanish
+# traducción de regexxer al español
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 #
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2004, 2006.
+# Jorge González <jorgegonz@svn.gnome.org>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: es\n"
+"Project-Id-Version: regexxer.HEAD.es\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2006-08-26 18:10+0200\n"
-"Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
+"POT-Creation-Date: 2007-02-18 21:23+0000\n"
+"PO-Revision-Date: 2007-04-24 23:30+0200\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,8 +54,7 @@ msgid "Text view font"
 msgstr "Tipografía para la vista de texto"
 
 #: ../ui/regexxer.schemas.in.h:6
-msgid ""
-"The background color used to highlight matches of the search expression."
+msgid "The background color used to highlight matches of the search expression."
 msgstr ""
 "El color de fondo usado para resaltar las coincidencias de la expresión de "
 "búsqueda."
@@ -160,7 +159,7 @@ msgstr "No empezar a buscar automáticamente"
 
 #: ../src/main.cc:152
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[CARPETA]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
@@ -190,7 +189,9 @@ msgstr "Los siguientes errores ocurrieron al guardar:"
 
 #: ../src/mainwindow.cc:854
 msgid "translator-credits"
-msgstr "Francisco Javier F. Serrador <serrador@cvs.gnome.org>"
+msgstr ""
+"Jorge González <jorgegonz@svn.gnome.org>, 2007\n"
+"Francisco Javier F. Serrador <serrador@cvs.gnome.org>"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
@@ -479,45 +480,8 @@ msgid "_Text view font:"
 msgstr "Tipografía de la vista de _texto:"
 
 #: ../ui/prefdialog.glade.h:18
-msgid ""
-"regexxer attempts to read a file in the following encodings before giving up:"
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "regexxer intenta leer un archivo en las siguientes codificaciones antes de "
 "dejarlo:"
 
-#~ msgid "_About"
-#~ msgstr "A_cerca de"
-
-#~ msgid "[OPTION]... [FOLDER]"
-#~ msgstr "[OPCIÓN]... [CARPETA]"
-
-#~ msgid "Try “regexxer --help” for more information."
-#~ msgstr "Pruebe con «regexxer --help» para más información."
-
-#~ msgid ""
-#~ "The folder name “%1” contains characters not representable in the "
-#~ "encoding of the local file system."
-#~ msgstr ""
-#~ "El nombre de carpeta «%1» contiene caracteres no representables en la "
-#~ "codificación del sistema de archivos local."
-
-#~ msgid "Select a folder"
-#~ msgstr "Seleccione una carpeta"
-
-#~ msgid "About regexxer"
-#~ msgstr "Acerca de regexxer"
-
-#~ msgid "The application icon of regexxer"
-#~ msgstr "El icono de aplicación de regexxer"
-
-#~ msgid "regexxer icon"
-#~ msgstr "icono regexxer"
-
-#~ msgid "translated by"
-#~ msgstr "traducido por"
-
-#~ msgid "written by"
-#~ msgstr "escrito por"
-
-#~ msgid "The directory to be searched"
-#~ msgstr "El directorio que ser buscado"
