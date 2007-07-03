@@ -67,11 +67,8 @@ msgstr "Phông chữ dùng trong bộ sửa tập tin."
 msgid ""
 "The style of the application’s toolbar. Possible values are “icons”, “text”, "
 "“both”, and “both-horiz”."
-msgstr "Kiểu thanh công cụ của ứng dụng. Giá trị có thể là:\n"
-" • icons		biểu tượng\n"
-" • text		văn bản\n"
-" • both		cả hai\n"
-" • both-horiz	cả hai nằm ngang."
+msgstr "Kiểu thanh công cụ của ứng dụng. Những giá trị có thể là “icons” (biểu "
+"tượng), “text” (chữ), “both” (cả hai), and “both-horiz” (cả hai, ngang)."
 
 #: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -92,12 +89,12 @@ msgstr "#"
 #: ../src/filetree.cc:530
 #, qt-format
 msgid "Failed to save file “%1”: %2"
-msgstr "Lỗi lưu tập tin « %1 »: %2"
+msgstr "Lỗi lưu tập tin “%1”: %2"
 
 #: ../src/filetree.cc:946
 #, qt-format
 msgid "“%1” seems to be a binary file."
-msgstr "« %1 » có vẻ là một tập tin nhị phân."
+msgstr "“%1” có vẻ là một tập tin nhị phân."
 
 #: ../src/main.cc:77
 msgid "Save _all"
@@ -118,7 +115,7 @@ msgstr "Không đệ qui vào thư mục con"
 #: ../src/main.cc:138
 #: ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
-msgstr "Cũng tìm các tập tin ẩn"
+msgstr "Tìm luôn các tập tin ẩn"
 
 #: ../src/main.cc:140
 msgid "Find text matching REGEX"
@@ -162,14 +159,14 @@ msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr "Chưa lưu một số tập tin.\n"
-"Vẫn còn thoát không?"
+"Vẫn thoát chứ?"
 
 #: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr "Chưa lưu một số tập tin.\n"
-"Vẫn còn tiếp tục không?"
+"Vẫn tiếp tục chứ?"
 
 #: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
@@ -189,14 +186,14 @@ msgstr "Nhóm Việt hóa Gnome <gnomevi-list@lists.sourceforge.net>"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr "Không hô trợ khả năng sử dụng dãy thoát « \\C » để khớp với một byte riêng lẻ."
+msgstr "Không hỗ trợ khả năng sử dụng dãy thoát « \\C » để khớp với một byte riêng lẻ."
 
 #: ../src/pcreshell.cc:84
 #, qt-format
 msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
-msgstr "Gặp lỗi trong biểu thức chính quy tại « %1 » (chỉ mục %2):\n"
+msgstr "Gặp lỗi trong biểu thức chính quy tại “%1” (chỉ mục %2):\n"
 "%3"
 
 #: ../src/pcreshell.cc:89
@@ -216,7 +213,7 @@ msgstr "Đã tới giới hạn đệ qui và rút lui của dụng cụ biểu 
 #: ../src/prefdialog.cc:249
 #, qt-format
 msgid "“%1” is not a valid encoding."
-msgstr "« %1 » không phải là bảng mã hợp lệ."
+msgstr "“%1” không phải là bảng mã hợp lệ."
 
 #: ../src/statusline.cc:263
 msgid "Stop"
@@ -238,12 +235,12 @@ msgstr "Thôi tiến trình tìm kiếm đang chạy"
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
-msgstr "Một mẫu tên tập tin như do trình bao sử dụng. Hỗ trợ các hạng ký tự [ab] và "
+msgstr "Mẫu tên tập tin như do trình bao sử dụng. Hỗ trợ các hạng ký tự [ab] và "
 "biểu thức dấu nháy kép kiểu csh {a,b}."
 
 #: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
-msgstr "Một biểu thức chính quy theo cú pháp Perl"
+msgstr "Biểu thức chính quy theo cú pháp Perl"
 
 #: ../ui/mainwindow.glade.h:4
 msgid "Backward"
