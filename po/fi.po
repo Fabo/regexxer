@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
+"POT-Creation-Date: 2007-08-16 11:37+0300\n"
 "PO-Revision-Date: 2004-09-05 13:34+0300\n"
 "Last-Translator: hile@iki.fi <hile@iki.fi\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -154,7 +154,7 @@ msgstr "Älä käynnistä hakua automaattisesti"
 
 #: ../src/main.cc:152
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[KANSIO]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
