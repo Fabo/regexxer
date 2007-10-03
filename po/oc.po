@@ -177,9 +177,7 @@ msgstr ""
 
 #: ../src/mainwindow.cc:854
 msgid "translator-credits"
-msgstr ""
-"La còla occitana de revirada d'Ubuntu, 2006 - ubuntu-l10n-"
-"oci@lists.ubuntu.com"
+msgstr "Yannig Marchegay (Kokoyaya) <yannig@marchegay.org)"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
