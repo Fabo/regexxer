@@ -1,27 +1,28 @@
-# Slovenian translation of regexxer.
-# Copyright (C) 2006-2007 Free Software Foundation, Inc.
-# This file is distributed under the same license as the regexxer package.
+# Copyright (C) 2002-2007 Free Software Foundation, Inc.
+# This file is distributed under the same license as the package.
 #
-# Matej Urbančič <matej.urban@gmail.com>, 2006, 2007.
+# Matej Urbančič <matej.urban@gmail.com>, 2006 - 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: regexxer HEAD branch\n"
+"Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2007-01-23 07:32+0100\n"
-"Last-Translator: Matej Urbančič <matej.urban@gmail.com>\n"
+"POT-Creation-Date: 2007-02-18 21:23+0000\n"
+"PO-Revision-Date: 2007-11-15 15:49+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
+"X-Poedit-Language: Slovenian\n"
 "X-Poedit-Country: SLOVENIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
+#: ../ui/regexxer.desktop.in.h:1
+#: ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
-msgstr "Išči in zamenjaj s pomočjo logičnih izrazov"
+msgstr "Iskanje in zamenjava s pomočjo logičnih izrazov"
 
 #: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
@@ -40,41 +41,28 @@ msgid "Match color"
 msgstr "Barva zadetka"
 
 #: ../ui/regexxer.schemas.in.h:4
-msgid ""
-"Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
-"a complete list of possible values."
-msgstr ""
-"Ime znakovnega nabora, ki naj bo uporabljen, če datoteke ni možno prebrati v "
-"UTF-8 ali naboru določenem v sistemu. Vtipkajte “iconv --list” za celoten "
-"spisek možnih vrednosti."
+msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try “iconv --list” for a complete list of possible values."
+msgstr "Ime znakovnega nabora, ki naj bo uporabljen, če datoteke ni mogoče prebrati v UTF-8 ali naboru določenem v sistemu. Vtipkajte “iconv --list” za celoten spisek mogočih vrednosti."
 
 #: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Pisava besedila"
 
 #: ../ui/regexxer.schemas.in.h:6
-msgid ""
-"The background color used to highlight matches of the search expression."
+msgid "The background color used to highlight matches of the search expression."
 msgstr "Barva ozadja za označevanje zadetkov iskalnih izrazov."
 
 #: ../ui/regexxer.schemas.in.h:7
-msgid ""
-"The background color used to highlight the currently selected match of the "
-"search expression."
-msgstr "Barva ozadja za označitev trenutno izbranega zadetka iskalnega izraza."
+msgid "The background color used to highlight the currently selected match of the search expression."
+msgstr "Barva ozadja za označevanje trenutno izbranega zadetka iskalnega izraza."
 
 #: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
 msgstr "Pisava uporabljena v urejevalcu datotek."
 
 #: ../ui/regexxer.schemas.in.h:9
-msgid ""
-"The style of the application’s toolbar. Possible values are “icons”, “text”, "
-"“both”, and “both-horiz”."
-msgstr ""
-"Stil orodne vrstice. Možne vrednosti so \"ikone\", \"besedilo\", \"oboje\", "
-"in \"oboje-vodoravno\"."
+msgid "The style of the application’s toolbar. Possible values are “icons”, “text”, “both”, and “both-horiz”."
+msgstr "Stil orodne vrstice. Mogoče vrednosti so \"ikone\", \"besedilo\", \"oboje\", in \"oboje-vodoravno\"."
 
 #: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -100,7 +88,7 @@ msgstr "Napaka pri shranjevanju datoteke “%1”: %2"
 #: ../src/filetree.cc:946
 #, qt-format
 msgid "“%1” seems to be a binary file."
-msgstr "“%1” izgleda kot binarna datoteka."
+msgstr "“%1” je videti kot binarna datoteka."
 
 #: ../src/main.cc:77
 msgid "Save _all"
@@ -116,9 +104,10 @@ msgstr "VZOREC"
 
 #: ../src/main.cc:136
 msgid "Do not recurse into subdirectories"
-msgstr "Ne pregleduj podmap"
+msgstr "Ne pregleduj podrejenih map"
 
-#: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
+#: ../src/main.cc:138
+#: ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
 msgstr "Preišči tudi skrite datoteke"
 
@@ -134,7 +123,8 @@ msgstr "IZRAZ"
 msgid "Find only the first match in a line"
 msgstr "Poišči samo prvi zadetek v vrstici"
 
-#: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
+#: ../src/main.cc:144
+#: ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
 msgstr "Pri primerjavi ne upoštevaj velikosti črk"
 
@@ -188,12 +178,11 @@ msgstr "Napake, ki so nastale med shranjevanjem:"
 
 #: ../src/mainwindow.cc:854
 msgid "translator-credits"
-msgstr "Matej Urbančič <matej.urban@gmail.com>"
+msgstr "Matej Urbančič <mateju@svn@gnome.org>"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
-"Uporaba \\C izhodne sekvence za primerjanje enojnega bajta  ni podprta."
+msgstr "Uporaba \\C izhodne sekvence za primerjanje enojnega bajta  ni podprta."
 
 #: ../src/pcreshell.cc:84
 #, qt-format
@@ -214,12 +203,8 @@ msgstr ""
 "%1"
 
 #: ../src/pcreshell.cc:171
-msgid ""
-"Reached the recursion and backtracking limit of the regular expression "
-"engine."
-msgstr ""
-"Dosežena je globina iskanja v podmapah in omejitev povratnega sledenja "
-"orodja logičnih izrazov."
+msgid "Reached the recursion and backtracking limit of the regular expression engine."
+msgstr "Dosežena je globina iskanja v podrejenih mapah in omejitev povratnega sledenja orodja logičnih izrazov."
 
 #: ../src/prefdialog.cc:249
 #, qt-format
@@ -243,16 +228,12 @@ msgid "Cancels the running search"
 msgstr "Prekine trenutno iskanje"
 
 #: ../ui/mainwindow.glade.h:1
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
-msgstr ""
-"Vzorec imena datoteke, kot je uporabljen v konzoli. Znakovni razredi [ab] in "
-"csh stil oklepajnih izrazov {a,b} so podprti."
+msgid "A filename pattern as used by the shell. Character classes [ab] and csh style brace expressions {a,b} are supported."
+msgstr "Vzorec imena datoteke, kot je uporabljen v konzoli. Znakovni razredi [ab] in csh stil izrazov v oklepajih  {a,b} so podprti."
 
 #: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
-msgstr "Logični izrazi v Perl sintaksi"
+msgstr "Logični izrazi v Perl skladnji"
 
 #: ../ui/mainwindow.glade.h:4
 msgid "Backward"
@@ -276,7 +257,7 @@ msgstr "Poišči vse zadetke logičnih izrazov"
 
 #: ../ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
-msgstr "Poišči vse možne zadetke v vrstici"
+msgstr "Poišči vse mogoče zadetke v vrstici"
 
 #: ../ui/mainwindow.glade.h:11
 msgid "Find fi_les"
@@ -355,14 +336,8 @@ msgid "Search:"
 msgstr "Poišči:"
 
 #: ../ui/mainwindow.glade.h:30
-msgid ""
-"The new string to substitute. As in Perl, you can refer to parts of the "
-"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
-"\\L, \\U and \\E are supported as well."
-msgstr ""
-"Nov niz za zamenjavo. Kot v Perlu lahko določite dele zadetkov z uporabo $1, "
-"$2, itd. ali celo $+, $&, $` in $'. Operatorji \\l, \\u, \\L, \\U in \\E so "
-"prav tako podprti."
+msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
+msgstr "Nov niz za zamenjavo. Kot v jeziku Perl lahko določite dele zadetkov z uporabo $1, $2, ... ali celo $+, $&, $` in $'. Operatorji \\l, \\u, \\L, \\U in \\E so prav tako podprti."
 
 #: ../ui/mainwindow.glade.h:31
 msgid "_All files"
@@ -406,7 +381,7 @@ msgstr "skrito"
 
 #: ../ui/mainwindow.glade.h:41
 msgid "recursive"
-msgstr "po strukturi map"
+msgstr "po drevesu map"
 
 #: ../ui/prefdialog.glade.h:1
 msgid "1."
@@ -435,8 +410,8 @@ msgid ""
 "Icons and text\n"
 "Both horizontal"
 msgstr ""
-"Samo ikone\n"
-"Samo besedilo\n"
+"Le ikone\n"
+"Le besedilo\n"
 "Ikone in besedilo\n"
 "Oboje vodoravno"
 
@@ -462,56 +437,44 @@ msgstr "_Dostop datotek"
 
 #: ../ui/prefdialog.glade.h:15
 msgid "_Look’n’feel"
-msgstr "_Izgled in občutek"
+msgstr "_Videz in občutek"
 
 #: ../ui/prefdialog.glade.h:16
 msgid "_Match color:"
-msgstr "_Barva zadetka"
+msgstr "_Barva zadetka:"
 
 #: ../ui/prefdialog.glade.h:17
 msgid "_Text view font:"
 msgstr "_Pisava besedila:"
 
 #: ../ui/prefdialog.glade.h:18
-msgid ""
-"regexxer attempts to read a file in the following encodings before giving up:"
-msgstr ""
-"regexxer poskuša prebrati datoteko v privzetem kodiranju, preden prekine "
-"delovanje:"
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "program regexxer naj poskuša prebrati datoteko v privzetem kodiranju, preden prekine delovanje:"
 
 #~ msgid "_About"
 #~ msgstr "_O programu"
-
 #~ msgid "[OPTION]... [FOLDER]"
 #~ msgstr "[MOŽNOST]... [MAPA]"
-
 #~ msgid "Try “regexxer --help” for more information."
 #~ msgstr "Vtipkajte “regexxer --help” za več informacij."
-
 #~ msgid ""
 #~ "The folder name “%1” contains characters not representable in the "
 #~ "encoding of the local file system."
 #~ msgstr ""
 #~ "Ime mape “%1” vsebuje znake, ki se jih ne da izpisati z uporabo "
 #~ "trenutnega nabora znakov datotečnega sistema."
-
 #~ msgid "Select a folder"
 #~ msgstr "Izberite mapo"
-
 #~ msgid "About regexxer"
 #~ msgstr "O programu regexxer"
-
 #~ msgid "The application icon of regexxer"
 #~ msgstr "Ikona programa regexxer"
-
 #~ msgid "regexxer icon"
 #~ msgstr "regexxer ikona"
-
 #~ msgid "translated by"
 #~ msgstr "prevedel"
-
 #~ msgid "written by"
 #~ msgstr "napisal"
-
 #~ msgid "The directory to be searched"
 #~ msgstr "Mapa, ki naj bo preiskana"
+
