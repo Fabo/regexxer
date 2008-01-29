@@ -1,14 +1,14 @@
-# translation of eu.po to Basque
+# translation of regexxer.HEAD.po to Basque
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2006, 2007.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: eu\n"
+"Project-Id-Version: regexxer.HEAD\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-04-02 18:24+0200\n"
-"PO-Revision-Date: 2007-04-02 18:24+0200\n"
+"POT-Creation-Date: 2008-01-29 16:59+0100\n"
+"PO-Revision-Date: 2008-01-25 19:24+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -52,8 +52,10 @@ msgid "Text view font"
 msgstr "Testu ikuspegiaren letra-tipoa"
 
 #: ../ui/regexxer.schemas.in.h:6
-msgid "The background color used to highlight matches of the search expression."
-msgstr "Atzeko planoko kolorea bat datozenak nabarmentzeko adierazpenaren bilaketan."
+msgid ""
+"The background color used to highlight matches of the search expression."
+msgstr ""
+"Atzeko planoko kolorea bat datozenak nabarmentzeko adierazpenaren bilaketan."
 
 #: ../ui/regexxer.schemas.in.h:7
 msgid ""
@@ -82,7 +84,7 @@ msgstr "Tresna-barraren estiloa"
 
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
-msgstr "Ezin da irakurri fitxategia:"
+msgstr "Ezin da fitxategia irakurri:"
 
 #: ../src/filetree.cc:80
 msgid "File"
@@ -192,7 +194,8 @@ msgstr "Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr "\\C ihes-sekuentzia erabiltzea byte bakarra bilatzeko ez dago onartuta."
+msgstr ""
+"\\C ihes-sekuentzia erabiltzea byte bakarra bilatzeko ez dago onartuta."
 
 #: ../src/pcreshell.cc:84
 #, qt-format
@@ -472,6 +475,7 @@ msgid "_Text view font:"
 msgstr "_Testu ikuspegiaren letra-tipoa:"
 
 #: ../ui/prefdialog.glade.h:18
-msgid "regexxer attempts to read a file in the following encodings before giving up:"
-msgstr "regexxer-ek honako kodeketekin saiatu da fitxategia irakurtzen utzi aurretik:"
-
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr ""
+"regexxer-ek honako kodeketekin saiatu da fitxategia irakurtzen utzi aurretik:"
