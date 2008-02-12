@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer.HEAD.ne\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
+"POT-Creation-Date: 2007-02-18 21:23+0000\n"
 "PO-Revision-Date: 2006-06-18 16:25+0545\n"
 "Last-Translator: Mahesh subedi <submanesh@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -49,7 +49,7 @@ msgid ""
 "UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
 "a complete list of possible values."
 msgstr ""
-"यदि फाइल हालको लोक्यालद्वारा वर्णन गरिएको UTF-8 वा सङ्केत सेटमा पढ्न योग्य छैन भने "
+"यदि फाइल हालको लोकेलद्वारा वर्णन गरिएको UTF-8 वा सङ्केत सेटमा पढ्न योग्य छैन भने "
 "प्रयोग गर्न क्यारेक्टर सङ्केतनको नाम। संभावित मानहरूको पूर्ण सूचीका लागि “iconv --list” "
 "प्रयास गर्नुहोस्।"
 
@@ -70,14 +70,14 @@ msgstr "पृष्ठभूमि रङ खोजी अभिव्यक्
 
 #: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
-msgstr "फन्ट फाइल सम्पादकमा प्रयोग गरिन्छ।"
+msgstr "फाइल सम्पादकमा प्रयोग गरिएको फन्ट ।"
 
 #: ../ui/regexxer.schemas.in.h:9
 msgid ""
 "The style of the application’s toolbar. Possible values are “icons”, “text”, "
 "“both”, and “both-horiz”."
 msgstr ""
-"अनुप्रयोगको उपकरणपट्टीको शैली। संभावित मानहरू “icons”, “text”, “both”, र “both-"
+"अनुप्रयोगको उपकरणपट्टीको शैली । सम्भावित मानहरू “icons”, “text”, “both”, र “both-"
 "horiz” हुन्।"
 
 #: ../ui/regexxer.schemas.in.h:10
@@ -136,7 +136,7 @@ msgstr "रेजेक्स"
 
 #: ../src/main.cc:142
 msgid "Find only the first match in a line"
-msgstr "हरफमा पहिलो मिल्दो मात्र फेला पार्नुहोस्"
+msgstr "पङ्क्तिमा पहिलो मिल्दो मात्र फेला पार्नुहोस्"
 
 #: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
@@ -160,7 +160,7 @@ msgstr "स्वचालित तरिकाले खोजी सुरु
 
 #: ../src/main.cc:152
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[FOLDER]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
@@ -184,11 +184,11 @@ msgstr "फाइल खोजी बाँन्की अवैध छ।"
 
 #: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
-msgstr "खोजि अवधिमा निम्न त्रुटिहरू रह्यो:"
+msgstr "खोजी अवधिमा निम्न त्रुटिहरू देखापर्यो:"
 
 #: ../src/mainwindow.cc:708
 msgid "The following errors occurred during save:"
-msgstr "बचत अवधिमा निम्न त्रुटिहरू रह्यो:"
+msgstr "बचत अवधिमा निम्न त्रुटिहरू देखापर्यो:"
 
 #: ../src/mainwindow.cc:854
 msgid "translator-credits"
@@ -261,11 +261,11 @@ msgstr "पछिल्तिर"
 
 #: ../ui/mainwindow.glade.h:6
 msgid "File backward"
-msgstr "पछिल्तिर फाइल गर्नुहोस्"
+msgstr "पछिल्तिर फाइल"
 
 #: ../ui/mainwindow.glade.h:7
 msgid "File forward"
-msgstr "अघिल्तिर फाइल गर्नुहोस्"
+msgstr "अघिल्तिर फाइल"
 
 #: ../ui/mainwindow.glade.h:8
 msgid "Find all files that match the filename pattern"
@@ -277,7 +277,7 @@ msgstr "नियमित अभिव्यक्तिका सबै जो
 
 #: ../ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
-msgstr "हरफ भित्र सबै संभावित जोडाहरू फेला पार्नुहोस्"
+msgstr "हरफ भित्र सबै सम्भावित जोडाहरू फेला पार्नुहोस्"
 
 #: ../ui/mainwindow.glade.h:11
 msgid "Find fi_les"
@@ -289,11 +289,11 @@ msgstr "फोल्डर"
 
 #: ../ui/mainwindow.glade.h:13
 msgid "Forward"
-msgstr "अघिल्तिर"
+msgstr "पठाउनुहोस्"
 
 #: ../ui/mainwindow.glade.h:14
 msgid "Go to next match"
-msgstr "अर्को जोडामा जानुहोस्"
+msgstr "पछिल्लो जोडामा जानुहोस्"
 
 #: ../ui/mainwindow.glade.h:15
 msgid "Go to previous match"
@@ -301,7 +301,7 @@ msgstr "अघिल्लो जोडामा जानुहोस्"
 
 #: ../ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
-msgstr "अर्को मिल्दो फाइलमा जानुहोस्"
+msgstr "पछिल्लो मिल्दो फाइलमा जानुहोस्"
 
 #: ../ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
@@ -387,7 +387,7 @@ msgstr "मिल्दो"
 
 #: ../ui/mainwindow.glade.h:36
 msgid "_Next file"
-msgstr "अर्को फाइल"
+msgstr "पछिल्लो फाइल"
 
 #: ../ui/mainwindow.glade.h:37
 msgid "_Previous file"
@@ -443,11 +443,11 @@ msgstr ""
 
 #: ../ui/prefdialog.glade.h:10
 msgid "Preferences"
-msgstr "प्राथमिकताहरू"
+msgstr "प्राथमिकता"
 
 #: ../ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
-msgstr "हालको लोक्यालद्वारा वर्णन गरिएको सङ्केतन"
+msgstr "हालको लोकेलद्वारा वर्णन गरिएको सङ्केतन"
 
 #: ../ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
