@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2005-01-28 12:47+0100\n"
+"POT-Creation-Date: 2008-02-18 18:56+0100\n"
+"PO-Revision-Date: 2008-02-18 18:56+0100\n"
 "Last-Translator: Jordi Ivars <ear@oronetes.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -156,7 +156,7 @@ msgstr "No comencis la cerca automáticament"
 
 #: ../src/main.cc:152
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[DIRECTORI]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
