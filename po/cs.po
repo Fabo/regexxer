@@ -1,17 +1,18 @@
 # Czech translation of regexxer.
-# Copyright (C) 2004 regexxer'S COPYRIGHT HOLDER
-# Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>
+# Copyright (C) 2004 Free Software Foundation, Inc.
+# Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>.
 # This file is distributed under the same license as the regexxer package.
 # Miloslav Trmac <mitr@volny.cz>, 2004.
+# Lucas Lommer <llommer@svn.gnome.org>, 2008 (I did one string only...).
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: regexxer VERSION\n"
+"Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2004-07-15 18:55+0200\n"
-"Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
-"Language-Team: Czech <cs@li.org>\n"
+"POT-Creation-Date: 2008-03-04 22:45+0100\n"
+"PO-Revision-Date: 2008-02-29 18:51+0100\n"
+"Last-Translator: Lucas Lommer <llommer@svn.gnome.org>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -155,7 +156,7 @@ msgstr "Nezačínat hledání automaticky"
 
 #: ../src/main.cc:152
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[SLOŽKA]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
@@ -473,61 +474,3 @@ msgstr "_Písmo textového pohledu:"
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr "Než se regexxer vzdá, zkouší soubor načíst v následujících kódováních:"
-
-#~ msgid "_About"
-#~ msgstr "O _aplikaci"
-
-#~ msgid "[OPTION]... [FOLDER]"
-#~ msgstr "[PŘEPÍNAČ]... [ADRESÁŘ]"
-
-#~ msgid "Try “regexxer --help” for more information."
-#~ msgstr "Pro více informací zkuste “regexxer --help”."
-
-#~ msgid ""
-#~ "The folder name “%1” contains characters not representable in the "
-#~ "encoding of the local file system."
-#~ msgstr ""
-#~ "Název adrsáře “%1” obsahuje znaky, které nelze reprezentovat v kódování "
-#~ "místního systému souborů."
-
-#~ msgid "Select a folder"
-#~ msgstr "Zvolte adresář"
-
-#~ msgid "About regexxer"
-#~ msgstr "O regexxeru"
-
-#~ msgid "The application icon of regexxer"
-#~ msgstr "Ikona aplikace regexxer"
-
-#~ msgid "regexxer icon"
-#~ msgstr "ikona regexxeru"
-
-#~ msgid "translated by"
-#~ msgstr "přeložili"
-
-#~ msgid "written by"
-#~ msgstr "napsali"
-
-#~ msgid "The directory to be searched"
-#~ msgstr "Adresář, ve kterém hledat"
-
-#~ msgid "Ignore case distinctions"
-#~ msgstr "Nerozlišovat velikost písmen"
-
-#~ msgid ""
-#~ "If enabled, the text direction of the file editor, preview area, and all "
-#~ "file-related entry boxes is always set to left-to-right no matter what "
-#~ "the locale's default direction is."
-#~ msgstr ""
-#~ "Je-li povoleno, je směr textu v editoru souborů, oblasti náhledu a všech "
-#~ "polích souvisejících se souborem vždy nastaven na zleva doprava bez "
-#~ "ohledu na implicitní směr locale."
-
-#~ msgid "Override text direction"
-#~ msgstr "Ignorovat směr textu"
-
-#~ msgid "_Ignore the text direction of the locale"
-#~ msgstr "_Ignorovat směr textu locale"
-
-#~ msgid "Color Selection"
-#~ msgstr "Výběr barev"
