@@ -1,16 +1,16 @@
 # Brazilian Portuguese translation of regexxer.
-# Copyright (C) 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the regexxer package.
 # João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, 2004.
-# Raphael Higino <raphaelh@uai.com.br>, 2004.
+# Raphael Higino <In memoriam>, 2004.
+# Andrius da Costa Ribas <andriusmao@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2004-07-15 22:58-0300\n"
-"Last-Translator: Raphael Higino <raphaelh@uai.com.br>\n"
+"POT-Creation-Date: 2007-02-18 21:23+0000\n"
+"PO-Revision-Date: 2008-06-29 13:15-0300\n"
+"Last-Translator: Andrius da Costa Ribas <andriusmao@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 #: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
-msgstr "Procure e substitua usando expressões regulares"
+msgstr "Pesquise e substitua usando expressões regulares"
 
 #: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
-msgstr "regexxer - Ferramenta de Busca"
+msgstr "Ferramenta de Pesquisa Regexxer"
 
 #: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
@@ -44,8 +44,8 @@ msgid ""
 "a complete list of possible values."
 msgstr ""
 "Nome da codificação de caractere para usar se um arquivo não for legível em "
-"UTF-8 nem na codificação especificada pelo local atual. Tente “iconv --list” "
-"para uma lista completa de possíveis valores."
+"UTF-8 nem na codificação especificada pelo local atual. Tente \"iconv --list"
+"\" para uma lista completa de possíveis valores."
 
 #: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -55,7 +55,7 @@ msgstr "Fonte de visualização do texto"
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr ""
-"A cor de fundo usada para destacar os resultados da expressão de busca."
+"A cor de fundo usada para destacar os resultados da expressão de pesquisa."
 
 #: ../ui/regexxer.schemas.in.h:7
 msgid ""
@@ -63,7 +63,7 @@ msgid ""
 "search expression."
 msgstr ""
 "A cor de fundo usada para destacar o resultado atualmente selecionado da "
-"expressão de busca."
+"expressão de pesquisa."
 
 #: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
@@ -74,8 +74,9 @@ msgid ""
 "The style of the application’s toolbar. Possible values are “icons”, “text”, "
 "“both”, and “both-horiz”."
 msgstr ""
-"O estilo da barra de ferramentas da aplicação. Valores possíveis são "
-"“icons”, “text”, “both” e “both-horiz”."
+"O estilo da barra de ferramentas da aplicação. Valores possíveis são \"icons"
+"\" (ícones), \"text\" (texto), \"both\" (ambos) e \"both-horiz\" (ambos, "
+"horizontal)."
 
 #: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
@@ -96,12 +97,12 @@ msgstr "#"
 #: ../src/filetree.cc:530
 #, qt-format
 msgid "Failed to save file “%1”: %2"
-msgstr "Falha ao salvar o arquivo “%1”: %2"
+msgstr "Falha ao salvar o arquivo \"%1\": %2"
 
 #: ../src/filetree.cc:946
 #, qt-format
 msgid "“%1” seems to be a binary file."
-msgstr "“%1” parece ser um arquivo binário."
+msgstr "\"%1\" parece ser um arquivo binário."
 
 #: ../src/main.cc:77
 msgid "Save _all"
@@ -117,7 +118,7 @@ msgstr "PADRÃO"
 
 #: ../src/main.cc:136
 msgid "Do not recurse into subdirectories"
-msgstr "Não descer nos sub-diretórios"
+msgstr "Não descer nos subdiretórios"
 
 #: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
@@ -125,11 +126,11 @@ msgstr "Procurar arquivos ocultos também"
 
 #: ../src/main.cc:140
 msgid "Find text matching REGEX"
-msgstr "Encontrar texto que coincida com EXREG"
+msgstr "Encontrar texto que coincida com ER"
 
 #: ../src/main.cc:140
 msgid "REGEX"
-msgstr "EXREG"
+msgstr "ER"
 
 #: ../src/main.cc:142
 msgid "Find only the first match in a line"
@@ -137,7 +138,7 @@ msgstr "Procurar apenas o primeiro resultado em uma linha"
 
 #: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
-msgstr "Diferenciar maiúsc./minúsc. na busca"
+msgstr "Diferenciar maiúsc./minúsc."
 
 #: ../src/main.cc:146
 msgid "Replace matches with STRING"
@@ -153,11 +154,11 @@ msgstr "Imprimir a localização do resultado na saída padrão"
 
 #: ../src/main.cc:150
 msgid "Do not automatically start search"
-msgstr "Não iniciar buscas automaticamente"
+msgstr "Não iniciar pesquisa automaticamente"
 
 #: ../src/main.cc:152
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[PASTA]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
@@ -177,11 +178,11 @@ msgstr ""
 
 #: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
-msgstr "O padrão de busca de arquivos é invalido."
+msgstr "O padrão de pesquisa de arquivos é invalido."
 
 #: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
-msgstr "Os seguintes erros ocorreram durante a busca:"
+msgstr "Os seguintes erros ocorreram durante a pesquisa:"
 
 #: ../src/mainwindow.cc:708
 msgid "The following errors occurred during save:"
@@ -191,12 +192,13 @@ msgstr "Os seguintes erros ocorreram durante a gravação:"
 msgid "translator-credits"
 msgstr ""
 "João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>\n"
-"Raphael Higino <raphaelh@uai.com.br>"
+"Raphael Higino <In memoriam>\n"
+"Andrius da Costa Ribas <andriusmao@gmail.com>"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
 msgstr ""
-"O uso da sequência de escape \\C para coincidir um único byte não é "
+"O uso da seqüência de escape \\C para coincidir um único byte não é "
 "suportado."
 
 #: ../src/pcreshell.cc:84
@@ -205,7 +207,7 @@ msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Erro na expressão regular em “%1” (índice %2):\n"
+"Erro na expressão regular em \"%1\" (índice %2):\n"
 "%3"
 
 #: ../src/pcreshell.cc:89
@@ -228,7 +230,7 @@ msgstr ""
 #: ../src/prefdialog.cc:249
 #, qt-format
 msgid "“%1” is not a valid encoding."
-msgstr "“%1” não é uma codificação valida."
+msgstr "\"%1\" não é uma codificação valida."
 
 #: ../src/statusline.cc:263
 msgid "Stop"
@@ -244,7 +246,7 @@ msgstr "Parâmetro:"
 
 #: ../src/statusline.cc:284
 msgid "Cancels the running search"
-msgstr "Cancela a busca atual"
+msgstr "Cancela a pesquisa atual"
 
 #: ../ui/mainwindow.glade.h:1
 msgid ""
@@ -325,7 +327,7 @@ msgstr "Prévia da substituição"
 
 #: ../ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
-msgstr "Descer nos sub-diretórios"
+msgstr "Descer nos subdiretórios"
 
 #: ../ui/mainwindow.glade.h:22
 msgid "Replace _current"
@@ -357,7 +359,7 @@ msgstr "Substituir:"
 
 #: ../ui/mainwindow.glade.h:29
 msgid "Search:"
-msgstr "Procurar:"
+msgstr "Pesquisar:"
 
 #: ../ui/mainwindow.glade.h:30
 msgid ""
@@ -366,8 +368,8 @@ msgid ""
 "\\L, \\U and \\E are supported as well."
 msgstr ""
 "A nova expressão para substituir. Assim como em Perl, você pode referir-se a "
-"partes do resultado usando $1, $2, etc. ou mesmo $+, $& $` e $'. Também são "
-"suportados os operadores \\l, \\u, \\L, \\U e \\E."
+"partes do resultado usando $1, $2, etc. ou mesmo $+, $& $\" e $\". Também "
+"são suportados os operadores \\l, \\u, \\L, \\U e \\E."
 
 #: ../ui/mainwindow.glade.h:31
 msgid "_All files"
@@ -491,7 +493,7 @@ msgstr ""
 #~ msgstr "[OPÇÕES]... [PASTA]"
 
 #~ msgid "Try “regexxer --help” for more information."
-#~ msgstr "Tente “regexxer --help” para mais informações."
+#~ msgstr "Tente \"regexxer --help\" para mais informações."
 
 #~ msgid ""
 #~ "The folder name “%1” contains characters not representable in the "
@@ -519,7 +521,7 @@ msgstr ""
 #~ msgstr "escrito por"
 
 #~ msgid "The directory to be searched"
-#~ msgstr "O diretório no qual procurar"
+#~ msgstr "O diretório no qual pesquisar"
 
 #~ msgid ""
 #~ "If enabled, the text direction of the file editor, preview area, and all "
