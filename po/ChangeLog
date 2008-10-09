@@ -1,3 +1,8 @@
+2008-10-09  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* LINGUAS: Added 'nb'.
+	* nb.po: Added Norwegian bokmål translation.
+
 2008-09-14  Duarte Loreto <happyguy_pt@hotmail.com>
 
 	* pt.po: Updated Portuguese translation.
