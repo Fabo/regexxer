@@ -1,3 +1,8 @@
+2008-12-01  Simos Xenitellis  <simos@gnome.org>
+
+	* LINGUAS: Added 'el' (Greek).
+	* el.po: Added Greek translation by Evgenia Petoumenou.
+
 2008-10-09  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* LINGUAS: Added 'nb'.
