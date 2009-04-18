@@ -1,0 +1,17 @@
+.deps
+.dirstamp
+stamp-??
+Makefile
+Makefile.in
+/INSTALL
+/aclocal.m4
+/autom4te.cache
+/config.*
+/configure
+/*.lineno
+/depcomp
+/install-sh
+/intltool-*.in
+/missing
+/mkinstalldirs
+/m4/intltool.m4
