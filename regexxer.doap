@@ -13,7 +13,7 @@
   <maintainer>
     <foaf:Person>
       <foaf:name>Daniel Elstner</foaf:name>
-      <foaf:mbox rdf:resource="daniel.kitta@gmail.com" />
+      <foaf:mbox rdf:resource="mailto:daniel.kitta@gmail.com" />
       <gnome:userid>daniel</gnome:userid>
     </foaf:Person>
   </maintainer>
