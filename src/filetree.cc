@@ -536,7 +536,7 @@ bool FileTree::save_file_at_iter(const Gtk::TreeModel::iterator& iter,
       propagate_modified_change(iter, false);
 
     if (fileinfo != last_selected_ && fileinfo->buffer->is_freeable())
-      fileinfo->buffer.clear(); // reduce memory footprint
+      Glib::RefPtr<FileBuffer>().swap(fileinfo->buffer); // reduce memory footprint
   }
 
   return false;
@@ -588,7 +588,7 @@ bool FileTree::find_matches_at_path_iter(const Gtk::TreeModel::Path& path,
       propagate_match_count_change(iter, new_match_count - old_match_count);
 
     if (fileinfo != last_selected_ && buffer->is_freeable())
-      fileinfo->buffer.clear(); // reduce memory footprint
+      Glib::RefPtr<FileBuffer>().swap(fileinfo->buffer); // reduce memory footprint
   }
 
   return false;
@@ -736,7 +736,7 @@ void FileTree::on_selection_changed()
   if (last_selected_ && last_selected_ != fileinfo &&
       last_selected_->buffer && last_selected_->buffer->is_freeable())
   {
-    last_selected_->buffer.clear(); // reduce memory footprint
+    Glib::RefPtr<FileBuffer>().swap(last_selected_->buffer); // reduce memory footprint
   }
 
   last_selected_ = fileinfo;

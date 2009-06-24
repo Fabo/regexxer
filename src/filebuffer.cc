@@ -679,7 +679,7 @@ void FileBuffer::on_mark_deleted(const Glib::RefPtr<FileBuffer::Mark>& mark)
   {
     const MatchSet::iterator pos = current_match_++;
 
-    (*pos)->mark.clear();
+    Glib::RefPtr<FileBuffer::Mark>().swap((*pos)->mark);
     match_set_.erase(pos);
     match_removed_ = true;
 
@@ -693,7 +693,7 @@ void FileBuffer::on_mark_deleted(const Glib::RefPtr<FileBuffer::Mark>& mark)
 
     if (pos != match_set_.end())
     {
-      (*pos)->mark.clear();
+      Glib::RefPtr<FileBuffer::Mark>().swap((*pos)->mark);
       match_set_.erase(pos);
 
       --match_count_;
