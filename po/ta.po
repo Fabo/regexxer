@@ -1,21 +1,24 @@
-# translation of regexxer.HEAD.po to 
+# translation of ta.po to Tamil
+# translation of regexxer.HEAD.po to
 # This file is distributed under the same license as the PACKAGE package.
 # S.Vivekananthan,C.Annamalai,M.S.Ramya,R.Sivaranjani,M.Yamuna <vivekananthan@gmail.com>
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# root <root@localhost.localdomain>, 2004
 #
+# root <root@localhost.localdomain>, 2004.
+# I. Felix <ifelix@redhat.com>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: regexxer.HEAD\n"
+"Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
 "POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2004-02-11 20:26+0530\n"
-"Last-Translator: root <root@localhost.localdomain>\n"
-"Language-Team:  <en@li.org>\n"
+"PO-Revision-Date: 2009-06-24 17:07+0530\n"
+"Last-Translator: I. Felix <ifelix@redhat.com>\n"
+"Language-Team: Tamil <fedora-trans-ta@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n\n"
 
 #: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
@@ -27,47 +30,43 @@ msgstr " regexxer தேடுகின்ற  கருவி"
 
 #: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
-msgstr " தற்§ப¡¨தய - வண்ணப்¦À¡Õத்தம்"
+msgstr ""
 
 #: ../ui/regexxer.schemas.in.h:2
 msgid "Fallback encoding"
-msgstr "பின்சா÷தலின் குறியீட்டல்'"
+msgstr ""
 
 #: ../ui/regexxer.schemas.in.h:3
 msgid "Match color"
-msgstr "வண்ணப்¦À¡Õத்தம்"
+msgstr ""
 
 #: ../ui/regexxer.schemas.in.h:4
-#, fuzzy
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
 "UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
 "a complete list of possible values."
 msgstr ""
-"தற்§ப¡¨தய உள்ளூரால் சொல்லப்பட்ட UTF-8 அல்லது குறிக்கணத்தில் உள்ள அ-வை வாசிக்கமுடியவில்¨ல "
-"எனில் உபயோகப்படுத்த வேண்டிய வரியுரு குறியாக்கத்தின் பெயர். முழுப்பட்டியலில் உள்ள "
-"சாத்தியமான மதிப்புகளுக்கு\"iconv--list\"ஐ முயற்சி செய்."
+"Name of the character encoding to use if a file is not readable in either "
+"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
+"a complete list of possible values."
 
 #: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
-msgstr "±ØòÐÕவின் ¯¨Ãக்காட்சி"
+msgstr "உரை பார்வை எழுத்துரு"
 
 #: ../ui/regexxer.schemas.in.h:6
-msgid ""
-"The background color used to highlight matches of the search expression."
-msgstr "§¾Îகின்ற கூற்றின் பொருத்தத்¨த தனிப்படுத்துவதற்காக பின்னனிவண்ணத்¨த உபயோகப்படுத்தலாம்`"
+msgid "The background color used to highlight matches of the search expression."
+msgstr ""
 
 #: ../ui/regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
 msgstr ""
-"§¾Îகின்ற கூற்றிற்கான  தனிப்படுத்துவதற்காக தற்§ப¡து §¾÷ó¦¾Îக்கப்பட்ட பின்னனிவண்ணத்¨த "
-"உபயோகப்படுத்தலாம்"
 
 #: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
-msgstr "§¸¡ôÒப்பதிப்பானில் உபயோகப்படுத்துகின்ற ±ØòÐÕ."
+msgstr ""
 
 #: ../ui/regexxer.schemas.in.h:9
 msgid ""
@@ -79,15 +78,15 @@ msgstr ""
 
 #: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
-msgstr "கருவிப்பட்¨டயின் பாணி "
+msgstr ""
 
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
-msgstr "§¸¡ô¨ப படிக்க முடியாது"
+msgstr ""
 
 #: ../src/filetree.cc:80
 msgid "File"
-msgstr "§¸¡ôÒ"
+msgstr ""
 
 #: ../src/filetree.cc:99
 msgid "#"
@@ -96,36 +95,36 @@ msgstr "#"
 #: ../src/filetree.cc:530
 #, qt-format
 msgid "Failed to save file “%1”: %2"
-msgstr "§¸¡ôÒக¨ள §º¸Ã¢க்க இயலவில்¨ல “%1”: %2"
+msgstr ""
 
 #: ../src/filetree.cc:946
 #, qt-format
 msgid "“%1” seems to be a binary file."
-msgstr "“%1”þÕ¿¢¨Äì §¸¡ôபை பொல தெரிகிறது."
+msgstr ""
 
 #: ../src/main.cc:77
 msgid "Save _all"
-msgstr "«¨ÉòÐõ §º¸Ã¢"
+msgstr ""
 
 #: ../src/main.cc:134
 msgid "Find files matching PATTERN"
-msgstr "பொருத்தமான Óý ÅÊÅக் கோப்¨ப ¸ñÎÀ¢Ê "
+msgstr ""
 
 #: ../src/main.cc:134
 msgid "PATTERN"
-msgstr "Óý ÅÊÅõ "
+msgstr ""
 
 #: ../src/main.cc:136
 msgid "Do not recurse into subdirectories"
-msgstr "¯À «¨¼×¸ளில் மறுசுழல் செய்யாதே"
+msgstr ""
 
 #: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
-msgstr "Á¨Èó¾ §¸¡ôÒக¨ளயும் ¸ñÎÀ¢Ê"
+msgstr ""
 
 #: ../src/main.cc:140
 msgid "Find text matching REGEX"
-msgstr "¯¨Ãய¡ன REGEX ¨ய ¸ñÎÀ¢Ê "
+msgstr ""
 
 #: ../src/main.cc:140
 msgid "REGEX"
@@ -133,23 +132,23 @@ msgstr "REGEX"
 
 #: ../src/main.cc:142
 msgid "Find only the first match in a line"
-msgstr "வரியில் இருக்கும் முதல் பொருத்தத்¨த மட்டும் கண்டுபிடி"
+msgstr ""
 
 #: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
-msgstr "±ØòÐÕ ¯½ர்வின்றி பொருத்துக"
+msgstr ""
 
 #: ../src/main.cc:146
 msgid "Replace matches with STRING"
-msgstr "¦¾¡¼÷îº¢ ¯¼ý பொருத்தமானவற்¨ற மாற்று"
+msgstr ""
 
 #: ../src/main.cc:146
 msgid "STRING"
-msgstr "¦¾¡¼÷îº¢"
+msgstr ""
 
 #: ../src/main.cc:148
 msgid "Print match location to standard output"
-msgstr "இயல்பான வெளியிட்டில் பொருத்தமான இடத்¨த அச்சிடி"
+msgstr ""
 
 #: ../src/main.cc:150
 msgid "Do not automatically start search"
@@ -157,27 +156,23 @@ msgstr "தேடுவதை தானாக துவக்காதே"
 
 #: ../src/main.cc:152
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[FOLDER]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
-"சில கோப்புகள் இன்னும் சேமிக்கபடவில்¨ல.\n"
-"என்னவாக இருந்தாலும் வெளியேறு?"
 
 #: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
-"சில கோப்புகள் இன்னும் சேமிக்கபடவில்¨ல.\n"
-"என்னவாக இருந்தாலும் தொடர்க?"
 
 #: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
-msgstr "கோப்பு தேடும் முன்வடிவம் ¦ºøÄ¡Ð"
+msgstr ""
 
 #: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
@@ -189,11 +184,11 @@ msgstr "இப்பிழைகள் சேமிக்கும் போத�
 
 #: ../src/mainwindow.cc:854
 msgid "translator-credits"
-msgstr "மொழிபெயர்ப்பு நிரல்-புகழ்கள்"
+msgstr ""
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr "ஒரு பைட்¨டப் பொருத்த \\C என்ற escape sequenceஐ உபயோகிக்க துணையில்¨ல."
+msgstr ""
 
 #: ../src/pcreshell.cc:84
 #, qt-format
@@ -201,8 +196,6 @@ msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"ÅÆì¸Á¡É தொடரில் பிழை at “%1” (index %2):\n"
-"%3"
 
 #: ../src/pcreshell.cc:89
 #, qt-format
@@ -210,14 +203,12 @@ msgid ""
 "Error in regular expression:\n"
 "%1"
 msgstr ""
-"ÅÆì¸Á¡É தொடரில் பிழை:\n"
-"%1"
 
 #: ../src/pcreshell.cc:171
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
-msgstr "வழக்கமான கூற்றுப் பொறியின் பின் நகர்வு வரம்பு மற்றும் மறுகழற்சியை அடைந்துவிட்டது."
+msgstr ""
 
 #: ../src/prefdialog.cc:249
 #, qt-format
@@ -226,7 +217,7 @@ msgstr "“%1” இந்த குறியாக்கம் செல்ல�
 
 #: ../src/statusline.cc:263
 msgid "Stop"
-msgstr "நிருத்து"
+msgstr "நிறுத்து"
 
 #: ../src/statusline.cc:270
 msgid "File:"
@@ -241,25 +232,24 @@ msgid "Cancels the running search"
 msgstr "இயங்குநிலையில் இருக்கும் தேடலை ரத்து செய்"
 
 #: ../ui/mainwindow.glade.h:1
-#, fuzzy
 msgid ""
 "A filename pattern as used by the shell. Character classes [ab] and csh "
 "style brace expressions {a,b} are supported."
 msgstr ""
-"shell உபயோகப்படுத்திய கோப்புப்¦பயரின் முன்வடிவம். எழுத்து வகுப்புகள் [ab] மற்றும் "
-"cshபாணி «¨¼ôÒìÌÈ¢ தொடர் {a,b} ஆதரவு."
+"ஒரு கோப்பு பெயர் தோற்றம் ஷெல்லால் பயன்படுத்தப்பட்டது. எழுத்து வகுப்புகள் [ab] மற்றும் csh "
+"தோற்ற அடைப்புகுறிகள் சமன்பாடு {a,b} துணைபுரிகிறது."
 
 #: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
-msgstr "ÅÆì¸Á¡É தொடரின் Perl þÄì¸½ம்"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:4
 msgid "Backward"
-msgstr "À¢ýÀì¸Á¡¸"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:6
 msgid "File backward"
-msgstr "கோப்பு பின் நொக்கு"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:7
 msgid "File forward"
@@ -271,19 +261,19 @@ msgstr "கோப்புப் பெயரின் முன் வடிவ
 
 #: ../ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
-msgstr "ÅÆì¸Á¡É தொடருடன் பொருந்தும் அனைத் தையும் கண்டுபிடி"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
-msgstr "§¸¡ட்டில் சாத்தியமான அனைத்துப் பொருத்தங்களையும் கண்டுபிடி"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:11
 msgid "Find fi_les"
-msgstr "கோ_ப்புகளை கண்டுபிடி"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:12
 msgid "Fol_der:"
-msgstr "ஆ_வனம்"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:13
 msgid "Forward"
@@ -295,15 +285,15 @@ msgstr "அடுத்த பொருத்தத்திற்குச் �
 
 #: ../ui/mainwindow.glade.h:15
 msgid "Go to previous match"
-msgstr "முந்¨தய பொருத்தத்திற்குச் செல்"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
-msgstr "அடுத்து பொருந்தியிருக்கும் கோப்புக்குச் செல்"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
-msgstr "முந்¨தய பொருந்தியிருக்கும் கோப்புக்குச் செல்"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:18
 msgid "Pattern:"
@@ -311,11 +301,11 @@ msgstr "வடிவம்"
 
 #: ../ui/mainwindow.glade.h:19
 msgid "Preview"
-msgstr "முன்பார்¨வ "
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:20
 msgid "Preview of the substitution"
-msgstr "பதிலியின் முன்பார்¨வ"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
@@ -323,7 +313,7 @@ msgstr "மீண்டும் உபஅடைவுகளுக்குள�
 
 #: ../ui/mainwindow.glade.h:22
 msgid "Replace _current"
-msgstr "_தற்§À¡தையை மாற்று"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
@@ -331,15 +321,15 @@ msgstr "அணைத்து கோப்புகளிலும் உள்�
 
 #: ../ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
-msgstr "தற்§À¡தைய கோப்பில் உள்ள அணைத்துப் பொருத்தங்களையும் மாற்று"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:25
 msgid "Replace current match"
-msgstr "தற்§À¡தைய பொருத்தங்களை மாற்று"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
-msgstr "_அணைத்து கோப்புகளிலும் மாற்று"
+msgstr ""
 
 #: ../ui/mainwindow.glade.h:27
 msgid "Replace in _this file"
@@ -359,9 +349,6 @@ msgid ""
 "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
 "\\L, \\U and \\E are supported as well."
 msgstr ""
-"ஈடுசெய்வதற்கான புதிய சரம்.Perlல் உள்ளது போல், $1, $2, அல்லது $+, $&, $` மற்றும் $' "
-"ஆகியவற்¨ற உபயோகித்து பொருத்தத்தில் உள்ள பாகங்க¨ள நீங்கள் ஆலோசிக்கலாம். \\l, \\u, \\L, "
-"\\U மற்றும் \\E ஆகிய இயக்கிகளுக்கும் துணையிருக்கும்."
 
 #: ../ui/mainwindow.glade.h:31
 msgid "_All files"
@@ -389,7 +376,7 @@ msgstr "_அடுத்த கோப்பு"
 
 #: ../ui/mainwindow.glade.h:37
 msgid "_Previous file"
-msgstr "_முந்¨தய கோப்பு"
+msgstr "முந்தைய கோப்பு"
 
 #: ../ui/mainwindow.glade.h:38
 msgid "_Replace"
@@ -421,7 +408,7 @@ msgstr "3."
 
 #: ../ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
-msgstr "த_ற்§À¡தைய பொருந்தும் வண்ணம்"
+msgstr "நடப்பு பொருந்தும் வண்ணம்"
 
 #: ../ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
@@ -445,11 +432,11 @@ msgstr "விருப்பங்கள்"
 
 #: ../ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
-msgstr "தற்§À¡தைய உள்ளூரால் சொல்லப்பட்ட குறியாக்கம்"
+msgstr ""
 
 #: ../ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
-msgstr "கருவி_பட்¨டயின் பாணி:"
+msgstr ""
 
 #: ../ui/prefdialog.glade.h:13
 msgid "UTF-8"
@@ -472,44 +459,6 @@ msgid "_Text view font:"
 msgstr "_உரை காட்சி எழுத்துரு:"
 
 #: ../ui/prefdialog.glade.h:18
-msgid ""
-"regexxer attempts to read a file in the following encodings before giving up:"
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
-"விடுவதற்கு முன் regexxer கீழ்கண்ட குறியாக்கங்களில் உள்ள கோப்¨ப படிக்க முயற்சி செய்கிறது:"
 
-#~ msgid "_About"
-#~ msgstr "ÀüÈ¢"
-
-#~ msgid "[OPTION]... [FOLDER]"
-#~ msgstr "[§¾÷×]...[ஆவனம்]"
-
-#~ msgid "Try “regexxer --help” for more information."
-#~ msgstr "அதிக விவரத்¨த அறிய “regexxer --help” முயற்சி செய்."
-
-#~ msgid ""
-#~ "The folder name “%1” contains characters not representable in the "
-#~ "encodingof the local file system."
-#~ msgstr ""
-#~ "“%1” என்ற ஆவணப்¦பயரில் உள்ள எழுத்துருக்களை உள்§காப்பு அமைப்பின் குறியாக்கத்தில் "
-#~ "குறிப்பிட முடியாது."
-
-#~ msgid "Select a folder"
-#~ msgstr "ஆவனத்¨த தெர்ந்§தடு"
-
-#~ msgid "About regexxer"
-#~ msgstr "regexxerயை பற்றி"
-
-#~ msgid "The application icon of regexxer"
-#~ msgstr "regexxerயின் பயன்பாட்டுச் சின்னம்"
-
-#~ msgid "regexxer icon"
-#~ msgstr "regexxerயின் சின்னம்"
-
-#~ msgid "translated by"
-#~ msgstr "பெயர்ப்பவர்"
-
-#~ msgid "written by"
-#~ msgstr "ஏழுதியவர்"
-
-#~ msgid "The directory to be searched"
-#~ msgstr "தேடப்படவேண்டிய அடைவு"
