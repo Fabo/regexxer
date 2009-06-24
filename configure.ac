@@ -26,12 +26,13 @@ AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.8 -Wall gnu no-define nostdinc check-news])
 AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 
-AC_PROG_CC()
-AC_PROG_CXX()
+AC_PROG_CC
+AC_PROG_CXX
 
 IT_PROG_INTLTOOL([0.35])
 AC_SUBST([GETTEXT_PACKAGE], [regexxer])
-AM_GLIB_GNU_GETTEXT()
+AM_GNU_GETTEXT_VERSION([0.11])
+AM_GLIB_GNU_GETTEXT
 
 # gmodule-export-2.0 adds -Wl,--export-dynamic to the linker flags
 # so that libglade can get at the custom widget creation functions.
@@ -43,7 +44,7 @@ DK_PKG_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-2.0], [gdk-pixbuf-csource])
 DK_PKG_PATH_PROG([GTK_UPDATE_ICON_CACHE], [gtk+-2.0], [gtk-update-icon-cache])
 DK_PKG_PATH_PROG([GCONFTOOL], [gconf-2.0], [gconftool-2])
 
-AM_GCONF_SOURCE_2()
+AM_GCONF_SOURCE_2
 
 AC_LANG([C++])
 
@@ -60,4 +61,4 @@ DK_ARG_ENABLE_WARNINGS([REGEXXER_WARNING_FLAGS],
                        [GLIBMM GTKMM])
 
 AC_CONFIG_FILES([Makefile po/Makefile.in])
-AC_OUTPUT()
+AC_OUTPUT

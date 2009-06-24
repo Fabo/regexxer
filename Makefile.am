@@ -23,7 +23,7 @@
 ## http://members.pcug.org.au/~millerp/rmch/recu-make-cons-harm.html
 
 AUTOMAKE_OPTIONS = subdir-objects
-ACLOCAL_AMFLAGS  = -I m4 $(ACLOCAL_FLAGS)
+ACLOCAL_AMFLAGS  = -I m4 ${ACLOCAL_FLAGS}
 DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install --enable-warnings=fatal
 
 SUBDIRS = po
