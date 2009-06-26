@@ -6,49 +6,48 @@
 #
 # root <root@localhost.localdomain>, 2004.
 # I. Felix <ifelix@redhat.com>, 2009.
+# Dr.T.Vasudevan <agnihot3@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2009-06-24 17:07+0530\n"
-"Last-Translator: I. Felix <ifelix@redhat.com>\n"
-"Language-Team: Tamil <fedora-trans-ta@redhat.com>\n"
+"POT-Creation-Date: 2009-06-25 07:10+0530\n"
+"PO-Revision-Date: 2009-06-25 17:46+0530\n"
+"Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
+"Language-Team: Tamil <Ubuntu-l10n-tam@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\\n\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n"
+"\n"
 
 #: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
-msgstr "வழக்கமான கூற்¨ற  உபயோகித்து  தேடு மற்றும் மாற்று "
+msgstr "வழக்கமான கூற்று  உபயோகித்து  தேடு மற்றும் மாற்று "
 
 #: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
-msgstr " regexxer தேடுகின்ற  கருவி"
+msgstr "ரெக்எக்ஸர் (regexxer) தேடுகின்ற  கருவி"
 
 #: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
-msgstr ""
+msgstr "நடப்பு பொருந்தும் வண்ணம்"
 
 #: ../ui/regexxer.schemas.in.h:2
 msgid "Fallback encoding"
-msgstr ""
+msgstr "பின் சார்தல் குறியாக்கம்"
 
 #: ../ui/regexxer.schemas.in.h:3
 msgid "Match color"
-msgstr ""
+msgstr "வண்ணம் பொருத்து "
 
 #: ../ui/regexxer.schemas.in.h:4
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
 "UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
 "a complete list of possible values."
-msgstr ""
-"Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
-"a complete list of possible values."
+msgstr "நடப்பு இடம் குறிக்கும் குறியாக்கம் அல்லது யூடிஎஃப் (UTF)-8 ஆல் படிக்க இயலாவிட்டால் பயன்படுத்த எழுத்துரு குறியாக்கம்.  “iconv --list” கட்டளையை பயன்படுத்தி இயலும் அத்தனை மதிப்புகளையும் காண்க."
 
 #: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
@@ -56,37 +55,37 @@ msgstr "உரை பார்வை எழுத்துரு"
 
 #: ../ui/regexxer.schemas.in.h:6
 msgid "The background color used to highlight matches of the search expression."
-msgstr ""
+msgstr "தேடும் கூறு பொருந்தினால் சிறப்புச்சுட்ட பின்புல நிறம்"
 
 #: ../ui/regexxer.schemas.in.h:7
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
-msgstr ""
+msgstr "நடப்பில் தேர்ந்தெடுத்த தேடல் கூற்று பொருத்தத்துக்கு சிறப்புச்சுட்ட பயனாகும் பின் புல நிறம்"
 
 #: ../ui/regexxer.schemas.in.h:8
 msgid "The font used in the file editor."
-msgstr ""
+msgstr "கோப்பு திருத்தரில் பயன்படுத்த எழுத்துரு"
 
 #: ../ui/regexxer.schemas.in.h:9
 msgid ""
 "The style of the application’s toolbar. Possible values are “icons”, “text”, "
 "“both”, and “both-horiz”."
 msgstr ""
-"பயன்பாட்டு கருவிப்பட்¨டயின் பாணி. சாத்தியமான மதிப்புகள் \"குரும்படம்\",\"உரை\",\"இரண்டும்"
-"\", மற்றும் \"இரண்டும்-இடம்வல\"."
+"பயன்பாட்டு கருவிப்பட்டையின் பாணி. சாத்தியமான மதிப்புகள் \"குறும்படம்\",\"உரை\",\"இரண்டும்"
+"\", மற்றும் \"இரண்டும்-கிடையாக\"."
 
 #: ../ui/regexxer.schemas.in.h:10
 msgid "Toolbar style"
-msgstr ""
+msgstr "கருவிப்பட்டை பாங்கு"
 
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
-msgstr ""
+msgstr "கோப்பை படிக்க முடியவில்லை:"
 
 #: ../src/filetree.cc:80
 msgid "File"
-msgstr ""
+msgstr "கோப்பு"
 
 #: ../src/filetree.cc:99
 msgid "#"
@@ -95,36 +94,36 @@ msgstr "#"
 #: ../src/filetree.cc:530
 #, qt-format
 msgid "Failed to save file “%1”: %2"
-msgstr ""
+msgstr "கோப்பு “%1” ஐ சேமிக்கவில்லை: %2"
 
 #: ../src/filetree.cc:946
 #, qt-format
 msgid "“%1” seems to be a binary file."
-msgstr ""
+msgstr "“%1” இரும கோப்பு போல உள்ளது"
 
 #: ../src/main.cc:77
 msgid "Save _all"
-msgstr ""
+msgstr "(_a) அனைத்தும் சேமி"
 
 #: ../src/main.cc:134
 msgid "Find files matching PATTERN"
-msgstr ""
+msgstr "PATTERN தோரணி க்கு பொருந்தும் கோப்புகளை கண்டு பிடி"
 
 #: ../src/main.cc:134
 msgid "PATTERN"
-msgstr ""
+msgstr "PATTERN"
 
 #: ../src/main.cc:136
 msgid "Do not recurse into subdirectories"
-msgstr ""
+msgstr "துணை அடைவுகளுக்குள் செல்லாதே"
 
 #: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
 msgid "Also find hidden files"
-msgstr ""
+msgstr "மறைத்த கோப்புகளையும் கண்டு பிடி"
 
 #: ../src/main.cc:140
 msgid "Find text matching REGEX"
-msgstr ""
+msgstr "வழக்கக்கூற்றுக்கு பொருந்தும் உரையை தேடு"
 
 #: ../src/main.cc:140
 msgid "REGEX"
@@ -132,23 +131,23 @@ msgstr "REGEX"
 
 #: ../src/main.cc:142
 msgid "Find only the first match in a line"
-msgstr ""
+msgstr "ஒரு வரியில் முதல் பொருத்தத்தை மட்டும் தேடு"
 
 #: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
 msgid "Do case insensitive matching"
-msgstr ""
+msgstr "நிலை தவிர்த்த பொருத்தம் தேடு"
 
 #: ../src/main.cc:146
 msgid "Replace matches with STRING"
-msgstr ""
+msgstr "சரத்தால் (STRING) பொருத்தங்களை மாற்று"
 
 #: ../src/main.cc:146
 msgid "STRING"
-msgstr ""
+msgstr "STRING"
 
 #: ../src/main.cc:148
 msgid "Print match location to standard output"
-msgstr ""
+msgstr "பொருத்தமான இடங்களை செந்தர வெளியீட்டுக்கு அச்சிடு"
 
 #: ../src/main.cc:150
 msgid "Do not automatically start search"
@@ -163,32 +162,36 @@ msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
+"சில கோப்புகள் இன்னும் சேமிக்கப்படவில்லை. \n"
+"எப்படியும் வெளியேறவா?"
 
 #: ../src/mainwindow.cc:427
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
+"சில கோப்புகள் இன்னும் சேமிக்கப்படவில்லை. \n"
+"எப்படியும் தொடரவா?"
 
 #: ../src/mainwindow.cc:455
 msgid "The file search pattern is invalid."
-msgstr ""
+msgstr "கோப்பு தேடல் தோரணி செல்லுபடியாகாதது."
 
 #: ../src/mainwindow.cc:461
 msgid "The following errors occurred during search:"
-msgstr "இப்பிழைகள் தேடும் போது நேர்ந்தன:"
+msgstr "பின் வரும் பிழைகள் தேடும் போது நேர்ந்தன:"
 
 #: ../src/mainwindow.cc:708
 msgid "The following errors occurred during save:"
-msgstr "இப்பிழைகள் சேமிக்கும் போது நேர்ந்தன:"
+msgstr "பின் வரும் பிழைகள் சேமிக்கும் போது நேர்ந்தன:"
 
 #: ../src/mainwindow.cc:854
 msgid "translator-credits"
-msgstr ""
+msgstr "மொழிபெயர்ப்பாளர்-நன்றி அறிதல்"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
+msgstr "\\C விடுப்புத்தொடரை ஐ பயன்படுத்தி ஒரு தனி பைட்டை தேடுதல் ஆதரிக்கப்படவில்லை."
 
 #: ../src/pcreshell.cc:84
 #, qt-format
@@ -196,6 +199,8 @@ msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
+"வழக்கக்கூற்றில் “%1” (index %2) இல் பிழை:\n"
+"%3"
 
 #: ../src/pcreshell.cc:89
 #, qt-format
@@ -203,12 +208,14 @@ msgid ""
 "Error in regular expression:\n"
 "%1"
 msgstr ""
+"வழக்கக்கூற்றில் பிழை:\n"
+"%1"
 
 #: ../src/pcreshell.cc:171
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
-msgstr ""
+msgstr "வழக்கக்கூற்று இயந்திரத்தின் சுருள் பின் செல்லல் செயல்களின் எல்லை எட்டப்பட்டது."
 
 #: ../src/prefdialog.cc:249
 #, qt-format
@@ -225,7 +232,7 @@ msgstr "கோப்பு:"
 
 #: ../src/statusline.cc:273
 msgid "Match:"
-msgstr "பொருத்த:"
+msgstr "பொருத்தம்:"
 
 #: ../src/statusline.cc:284
 msgid "Cancels the running search"
@@ -241,19 +248,19 @@ msgstr ""
 
 #: ../ui/mainwindow.glade.h:2
 msgid "A regular expression in Perl syntax"
-msgstr ""
+msgstr "பெர்ல் சொல் வழக்கில் வழக்கக்கூற்று"
 
 #: ../ui/mainwindow.glade.h:4
 msgid "Backward"
-msgstr ""
+msgstr "பின்பக்கம்"
 
 #: ../ui/mainwindow.glade.h:6
 msgid "File backward"
-msgstr ""
+msgstr "கோப்பு பின்பக்கம்"
 
 #: ../ui/mainwindow.glade.h:7
 msgid "File forward"
-msgstr "கோப்பு முன்"
+msgstr "கோப்பு முன் பக்கம்"
 
 #: ../ui/mainwindow.glade.h:8
 msgid "Find all files that match the filename pattern"
@@ -261,19 +268,19 @@ msgstr "கோப்புப் பெயரின் முன் வடிவ
 
 #: ../ui/mainwindow.glade.h:9
 msgid "Find all matches of the regular expression"
-msgstr ""
+msgstr "வழக்கக்கூற்றுக்கு அனைத்து பொருத்தங்களையும்  கண்டுபிடி"
 
 #: ../ui/mainwindow.glade.h:10
 msgid "Find all possible matches in a line"
-msgstr ""
+msgstr "ஒரு வரியில் அனைத்து பொருத்தங்களையும்  கண்டுபிடி"
 
 #: ../ui/mainwindow.glade.h:11
 msgid "Find fi_les"
-msgstr ""
+msgstr "(_l) கோப்புகளை கண்டுபிடி"
 
 #: ../ui/mainwindow.glade.h:12
 msgid "Fol_der:"
-msgstr ""
+msgstr "(_d) அடைவு:"
 
 #: ../ui/mainwindow.glade.h:13
 msgid "Forward"
@@ -285,55 +292,55 @@ msgstr "அடுத்த பொருத்தத்திற்குச் �
 
 #: ../ui/mainwindow.glade.h:15
 msgid "Go to previous match"
-msgstr ""
+msgstr "முந்தைய பொருத்தத்திற்குச் செல்"
 
 #: ../ui/mainwindow.glade.h:16
 msgid "Go to the next matching file"
-msgstr ""
+msgstr "அடுத்து பொருந்தும் கோப்புக்கு செல்"
 
 #: ../ui/mainwindow.glade.h:17
 msgid "Go to the previous matching file"
-msgstr ""
+msgstr "முந்தைய பொருந்தும் கோப்புக்கு செல்"
 
 #: ../ui/mainwindow.glade.h:18
 msgid "Pattern:"
-msgstr "வடிவம்"
+msgstr "தோரணி:"
 
 #: ../ui/mainwindow.glade.h:19
 msgid "Preview"
-msgstr ""
+msgstr "முன்தோற்றம்"
 
 #: ../ui/mainwindow.glade.h:20
 msgid "Preview of the substitution"
-msgstr ""
+msgstr "மாற்றத்தின் முன்தோற்றம்"
 
 #: ../ui/mainwindow.glade.h:21
 msgid "Recurse into subdirectories"
-msgstr "மீண்டும் உபஅடைவுகளுக்குள்"
+msgstr "துணை அடைவுகளுக்குள் மீள்சுருள் "
 
 #: ../ui/mainwindow.glade.h:22
 msgid "Replace _current"
-msgstr ""
+msgstr "(_c) நடப்பை மாற்று"
 
 #: ../ui/mainwindow.glade.h:23
 msgid "Replace all matches in all files"
-msgstr "அணைத்து கோப்புகளிலும் உள்ள அணைத்துப் பொருத்தங்களையும் மாற்று"
+msgstr "அனைத்து கோப்புகளிலும் உள்ள அனைத்துப் பொருத்தங்களையும் மாற்று"
 
 #: ../ui/mainwindow.glade.h:24
 msgid "Replace all matches in the current file"
-msgstr ""
+msgstr "நடப்பு கோப்பில் உள்ள அனைத்துப் பொருத்தங்களையும் மாற்று"
 
 #: ../ui/mainwindow.glade.h:25
 msgid "Replace current match"
-msgstr ""
+msgstr "நடப்பு பொருத்தத்தை மாற்று"
 
 #: ../ui/mainwindow.glade.h:26
 msgid "Replace in _all files"
-msgstr ""
+msgstr "(_a) அனைத்து கோப்புகளிலும்  மாற்று"
 
 #: ../ui/mainwindow.glade.h:27
 msgid "Replace in _this file"
-msgstr "இந்த கோப்பில் உள்ளதை மாற்று"
+msgstr "(_t) இந்த கோப்பில் உள்ளதை மாற்று"
 
 #: ../ui/mainwindow.glade.h:28
 msgid "Replace:"
@@ -352,39 +359,39 @@ msgstr ""
 
 #: ../ui/mainwindow.glade.h:31
 msgid "_All files"
-msgstr "_அனைத்து கோப்புகள்"
+msgstr "(_A) அனைத்து கோப்புகள்"
 
 #: ../ui/mainwindow.glade.h:32
 msgid "_Edit"
-msgstr "_சீரமைப்பு"
+msgstr "(_E) திருத்து"
 
 #: ../ui/mainwindow.glade.h:33
 msgid "_File"
-msgstr "_கோப்பு"
+msgstr "(_F) கோப்பு"
 
 #: ../ui/mainwindow.glade.h:34
 msgid "_Help"
-msgstr "_உதவி"
+msgstr "(_H) உதவி"
 
 #: ../ui/mainwindow.glade.h:35
 msgid "_Match"
-msgstr "_பொருத்தம்"
+msgstr "(_M) பொருத்தம்"
 
 #: ../ui/mainwindow.glade.h:36
 msgid "_Next file"
-msgstr "_அடுத்த கோப்பு"
+msgstr "(_N) அடுத்த கோப்பு"
 
 #: ../ui/mainwindow.glade.h:37
 msgid "_Previous file"
-msgstr "முந்தைய கோப்பு"
+msgstr "(_P) முந்தைய கோப்பு"
 
 #: ../ui/mainwindow.glade.h:38
 msgid "_Replace"
-msgstr "_மாற்று"
+msgstr "(_R) மாற்று"
 
 #: ../ui/mainwindow.glade.h:39
 msgid "_This file"
-msgstr "_இந்த கோப்பு"
+msgstr "(_T) இந்த கோப்பு"
 
 #: ../ui/mainwindow.glade.h:40
 msgid "hidden"
@@ -392,7 +399,7 @@ msgstr "மறைந்த"
 
 #: ../ui/mainwindow.glade.h:41
 msgid "recursive"
-msgstr "மீண்டும்"
+msgstr "மீள் சுருள்"
 
 #: ../ui/prefdialog.glade.h:1
 msgid "1."
@@ -408,11 +415,11 @@ msgstr "3."
 
 #: ../ui/prefdialog.glade.h:4
 msgid "C_urrent match color:"
-msgstr "நடப்பு பொருந்தும் வண்ணம்"
+msgstr "(_u) நடப்பு பொருந்தும் வண்ணம்:"
 
 #: ../ui/prefdialog.glade.h:5
 msgid "Fallback _encoding:"
-msgstr "பின் சார்தல் _குறியாக்கம்"
+msgstr "(_e) பின் சார்தல் குறியாக்கம்"
 
 #: ../ui/prefdialog.glade.h:6
 msgid ""
@@ -424,7 +431,7 @@ msgstr ""
 "சின்னங்கள் மட்டும்\n"
 "உரை மட்டும்\n"
 "சின்னங்கள் மற்றும் உரை\n"
-"இரண்டும் இடம்வலமாக"
+"இரண்டும் கிடையாக"
 
 #: ../ui/prefdialog.glade.h:10
 msgid "Preferences"
@@ -432,11 +439,11 @@ msgstr "விருப்பங்கள்"
 
 #: ../ui/prefdialog.glade.h:11
 msgid "The encoding specified by the current locale"
-msgstr ""
+msgstr "நடப்பு இடம் குறிக்கும் குறியாக்கம்"
 
 #: ../ui/prefdialog.glade.h:12
 msgid "Tool_bar style:"
-msgstr ""
+msgstr "(_b) கருவிப்பட்டை பாங்கு:"
 
 #: ../ui/prefdialog.glade.h:13
 msgid "UTF-8"
@@ -444,21 +451,21 @@ msgstr "UTF-8"
 
 #: ../ui/prefdialog.glade.h:14
 msgid "_File access"
-msgstr "_கோப்பு அணுகல்"
+msgstr "(_F) கோப்பு அணுகல்"
 
 #: ../ui/prefdialog.glade.h:15
 msgid "_Look’n’feel"
-msgstr "_பார்த்து உணர்"
+msgstr "(_L) பார்த்து உணர்"
 
 #: ../ui/prefdialog.glade.h:16
 msgid "_Match color:"
-msgstr "_வண்ணப் பொருத்தம்"
+msgstr "(_M) வண்ணப் பொருத்தம்:"
 
 #: ../ui/prefdialog.glade.h:17
 msgid "_Text view font:"
-msgstr "_உரை காட்சி எழுத்துரு:"
+msgstr "(_T) உரை காட்சி எழுத்துரு:"
 
 #: ../ui/prefdialog.glade.h:18
 msgid "regexxer attempts to read a file in the following encodings before giving up:"
-msgstr ""
+msgstr "வழக்கக்கூற்று ஒரு கோப்பை கை விடு முன் பின் வரும் குறியாக்கங்களில் படிக்க முயல்கிறது:"
 
