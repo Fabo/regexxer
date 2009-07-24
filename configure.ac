@@ -38,8 +38,7 @@ AM_GLIB_GNU_GETTEXT
 # gmodule-export-2.0 adds -Wl,--export-dynamic to the linker flags
 # so that libglade can get at the custom widget creation functions.
 PKG_CHECK_MODULES([REGEXXER_MODULES],
-                  [gmodule-export-2.0 >= 2.6.1 gtkmm-2.4 >= 2.6.0 libglademm-2.4 >= 2.4.0
-                   gconfmm-2.6 >= 2.6.1 libpcre >= 5.0])
+                  [gtkmm-2.4 >= 2.12.0 gconfmm-2.6 >= 2.6.1 libpcre >= 5.0])
 
 DK_PKG_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-2.0], [gdk-pixbuf-csource])
 DK_PKG_PATH_PROG([GTK_UPDATE_ICON_CACHE], [gtk+-2.0], [gtk-update-icon-cache])
@@ -48,10 +47,6 @@ DK_PKG_PATH_PROG([GCONFTOOL], [gconf-2.0], [gconftool-2])
 AM_GCONF_SOURCE_2
 
 AC_LANG([C++])
-
-# If the linker supports it, use a version script to limit the effect
-# of --export-dynamic to the functions which need to be exported.
-DK_LINK_VERSION_SCRIPT([REGEXXER_VERSION_SCRIPT], [src/exported-symbols])
 
 # Disabling -Wnon-virtual-dtor is nasty, but unfortunately required due to
 # a bug in gconfmm that triggers this warning.  Not disabling this warning

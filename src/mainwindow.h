@@ -42,6 +42,10 @@ class FileChooser;
 class TextView;
 class Toolbar;
 class Window;
+class ComboBoxEntryText;
+class VBox;
+class ScrolledWindow;
+class Table;
 }
 
 namespace Gnome { namespace Conf { class Value; } }
@@ -85,11 +89,14 @@ private:
 
   std::auto_ptr<Gtk::Window>  window_;
   Controller                  controller_;
+  
+  Gtk::VBox*                  vbox_main_;
 
   Gtk::Toolbar*               toolbar_;
 
+  Gtk::Table*                 table_file_;
   Gtk::FileChooser*           button_folder_;
-  Gtk::Entry*                 entry_pattern_;
+  Gtk::ComboBoxEntryText*     combo_entry_pattern_;
   Gtk::CheckButton*           button_recursive_;
   Gtk::CheckButton*           button_hidden_;
 
@@ -99,6 +106,7 @@ private:
   Gtk::CheckButton*           button_caseless_;
 
   FileTree*                   filetree_;
+  Gtk::ScrolledWindow*        scrollwin_filetree_;
   Gtk::TextView*              textview_;
   Gtk::Entry*                 entry_preview_;
 

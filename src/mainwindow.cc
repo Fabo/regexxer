@@ -30,7 +30,6 @@
 #include <glib.h>
 #include <gtkmm.h>
 #include <gconfmm/client.h>
-#include <libglademm/xml.h>
 #include <algorithm>
 #include <functional>
 #include <iostream>
@@ -180,18 +179,20 @@ public:
 MainWindow::MainWindow()
 :
   toolbar_                (0),
+  table_file_             (0),
   button_folder_          (0),
-  entry_pattern_          (0),
+  combo_entry_pattern_    (Gtk::manage(new Gtk::ComboBoxEntryText())),
   button_recursive_       (0),
   button_hidden_          (0),
   entry_regex_            (0),
   entry_substitution_     (0),
   button_multiple_        (0),
   button_caseless_        (0),
-  filetree_               (0),
+  filetree_               (Gtk::manage(new FileTree())),
+  scrollwin_filetree_     (0),
   textview_               (0),
   entry_preview_          (0),
-  statusline_             (0),
+  statusline_             (Gtk::manage(new StatusLine())),
   busy_action_running_    (false),
   busy_action_cancel_     (false),
   busy_action_iteration_  (0),
@@ -202,6 +203,14 @@ MainWindow::MainWindow()
   textview_->set_buffer(FileBuffer::create());
   window_->set_title(PACKAGE_NAME);
 
+  vbox_main_->pack_start(*statusline_, Gtk::PACK_SHRINK);
+  scrollwin_filetree_->add(*filetree_);
+  table_file_->attach(*combo_entry_pattern_, 1, 2, 1, 2);
+  
+  statusline_->show_all();
+  filetree_->show_all();
+  combo_entry_pattern_->show_all();
+  
   connect_signals();
 }
 
@@ -219,9 +228,20 @@ void MainWindow::initialize(const InitState& init)
 
   const bool folder_exists = button_folder_->set_current_folder(folder);
 
-  entry_pattern_->set_text((init.pattern.empty()) ? Glib::ustring(1, '*') : init.pattern);
+  combo_entry_pattern_->get_entry()->set_text((init.pattern.empty()) ? Glib::ustring(1, '*') : init.pattern);
   entry_regex_  ->set_text(init.regex);
   entry_substitution_->set_text(init.substitution);
+
+  combo_entry_pattern_->append_text("*.[ch]");
+  combo_entry_pattern_->append_text("*.{c,cc,cpp,cxx,c++,C,h,hh,hpp,hxx,h++}");
+  combo_entry_pattern_->append_text("*.{ccg,hg}");
+  combo_entry_pattern_->append_text("*.idl");
+  combo_entry_pattern_->append_text("*.{java,jsp}");
+  combo_entry_pattern_->append_text("*.{pl,pm,cgi}");
+  combo_entry_pattern_->append_text("*.py");
+  combo_entry_pattern_->append_text("*.php[0-9]?");
+  combo_entry_pattern_->append_text("*.{html,htm,shtml,js,wml}");
+  combo_entry_pattern_->append_text("*.{xml,xsl,css,dtd,xsd}");
 
   button_recursive_->set_active(!init.no_recursive);
   button_hidden_   ->set_active(init.hidden);
@@ -247,12 +267,11 @@ void MainWindow::initialize(const InitState& init)
 
 void MainWindow::load_xml()
 {
-  using Gnome::Glade::Xml;
-
-  const Glib::RefPtr<Xml> xml = Xml::create(glade_mainwindow_filename);
+  const Glib::RefPtr<Gtk::Builder> xml = Gtk::Builder::create_from_file(ui_mainwindow_filename);
 
   Gtk::Window* mainwindow = 0;
-  window_.reset(xml->get_widget("mainwindow", mainwindow));
+  xml->get_widget("mainwindow", mainwindow);
+  window_.reset(mainwindow);
 
   xml->get_widget("toolbar",             toolbar_);
   xml->get_widget("button_folder",       button_folder_);
@@ -262,11 +281,11 @@ void MainWindow::load_xml()
   xml->get_widget("entry_substitution",  entry_substitution_);
   xml->get_widget("button_multiple",     button_multiple_);
   xml->get_widget("button_caseless",     button_caseless_);
-  xml->get_widget("filetree",            filetree_);
   xml->get_widget("textview",            textview_);
   xml->get_widget("entry_preview",       entry_preview_);
-  xml->get_widget("statusline",          statusline_);
-  xml->get_widget("combo_pattern_entry", entry_pattern_);
+  xml->get_widget("vbox_main",           vbox_main_);
+  xml->get_widget("scrollwin_filetree",  scrollwin_filetree_);
+  xml->get_widget("table_file",          table_file_);
 
   controller_.load_xml(xml);
 }
@@ -280,8 +299,8 @@ void MainWindow::connect_signals()
   window_->signal_style_changed().connect(mem_fun(*this, &MainWindow::on_style_changed));
   window_->signal_delete_event ().connect(mem_fun(*this, &MainWindow::on_delete_event));
 
-  entry_pattern_->signal_activate().connect(controller_.find_files.slot());
-  entry_pattern_->signal_changed ().connect(mem_fun(*this, &MainWindow::on_entry_pattern_changed));
+  combo_entry_pattern_->get_entry()->signal_activate().connect(controller_.find_files.slot());
+  combo_entry_pattern_->signal_changed ().connect(mem_fun(*this, &MainWindow::on_entry_pattern_changed));
 
   entry_regex_       ->signal_activate().connect(controller_.find_matches.slot());
   entry_substitution_->signal_activate().connect(controller_.find_matches.slot());
@@ -383,7 +402,7 @@ void MainWindow::on_cut()
   else
   {
     const int noEntries = 3;
-    Gtk::Entry *entries[noEntries] = { entry_pattern_, entry_regex_,
+    Gtk::Entry *entries[noEntries] = { combo_entry_pattern_->get_entry(), entry_regex_,
                                        entry_substitution_ };
     for (int i = 0; i < 3; i++)
     {
@@ -406,7 +425,7 @@ void MainWindow::on_copy()
   else
   {
     const int noEntries = 3;
-    Gtk::Entry *entries[noEntries] = { entry_pattern_, entry_regex_,
+    Gtk::Entry *entries[noEntries] = { combo_entry_pattern_->get_entry(), entry_regex_,
                                        entry_substitution_ };
     for (int i = 0; i < 3; i++)
     {
@@ -430,7 +449,7 @@ void MainWindow::on_paste()
   else
   {
     const int noEntries = 3;
-    Gtk::Entry *entries[noEntries] = { entry_pattern_, entry_regex_,
+    Gtk::Entry *entries[noEntries] = { combo_entry_pattern_->get_entry(), entry_regex_,
                                        entry_substitution_ };
     for (int i = 0; i < 3; i++)
     {
@@ -495,7 +514,7 @@ void MainWindow::on_find_files()
 
   try
   {
-    Pcre::Pattern pattern (Util::shell_pattern_to_regex(entry_pattern_->get_text()), Pcre::DOTALL);
+    Pcre::Pattern pattern (Util::shell_pattern_to_regex(combo_entry_pattern_->get_entry()->get_text()), Pcre::DOTALL);
 
     filetree_->find_files(folder, pattern,
                           button_recursive_->get_active(),
@@ -786,7 +805,7 @@ void MainWindow::undo_stack_clear()
 
 void MainWindow::on_entry_pattern_changed()
 {
-  controller_.find_files.set_enabled(entry_pattern_->get_text_length() > 0);
+  controller_.find_files.set_enabled(combo_entry_pattern_->get_entry()->get_text_length() > 0);
 }
 
 void MainWindow::update_preview()

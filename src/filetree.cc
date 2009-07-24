@@ -25,30 +25,11 @@
 #include "stringutils.h"
 #include "translation.h"
 
-#include <gmodule.h>
 #include <glibmm.h>
 #include <gconfmm/client.h>
 #include <gtkmm/stock.h>
 
 #include <config.h>
-
-/*
- * Custom widget creation function for libglade.
- */
-extern "C" G_MODULE_EXPORT
-GtkWidget* regexxer_create_file_tree(char*, char*, char*, int, int)
-{
-  try
-  {
-    Gtk::Widget *const widget = new Regexxer::FileTree();
-    widget->show();
-    return Gtk::manage(widget)->gobj();
-  }
-  catch (...)
-  {
-    g_return_val_if_reached(0);
-  }
-}
 
 namespace Regexxer
 {

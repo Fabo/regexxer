@@ -30,10 +30,8 @@ namespace Gtk
 class MenuBar;
 class Toolbar;
 class Widget;
+class Builder;
 }
-
-namespace Gnome { namespace Glade { class Xml; } }
-
 
 namespace Regexxer
 {
@@ -50,7 +48,7 @@ public:
   void connect(const sigc::slot<void>& slot_activated);
 
   void add_widget(Gtk::Widget& widget);
-  void add_widgets(const Glib::RefPtr<Gnome::Glade::Xml>& xml,
+  void add_widgets(const Glib::RefPtr<Gtk::Builder>& xml,
                    const char* menuitem_name, const char* button_name);
 
   void set_enabled(bool enable);
@@ -121,7 +119,7 @@ public:
   ControlItem   paste;
   ControlItem   erase;
 
-  void load_xml(const Glib::RefPtr<Gnome::Glade::Xml>& xml);
+  void load_xml(const Glib::RefPtr<Gtk::Builder>& xml);
 
 private:
   Controller(const Controller&);

@@ -75,11 +75,9 @@ rxlocaledir = $(prefix)/$(DATADIRNAME)/locale
 global_defs = -DREGEXXER_LOCALEDIR=\""$(rxlocaledir)"\" -DREGEXXER_PKGDATADIR=\""$(pkgdatadir)"\"
 AM_CPPFLAGS = $(global_defs) -I$(top_builddir) $(REGEXXER_MODULES_CFLAGS) $(REGEXXER_WARNING_FLAGS)
 
-src_regexxer_DEPENDENCIES = src/exported-symbols
-src_regexxer_LDFLAGS      = $(REGEXXER_VERSION_SCRIPT)
 src_regexxer_LDADD        = $(REGEXXER_MODULES_LIBS) $(INTLLIBS)
 
-dist_pkgdata_DATA   = ui/mainwindow.glade ui/prefdialog.glade
+dist_pkgdata_DATA   = ui/mainwindow.ui ui/prefdialog.ui
 
 iconthemedir        = $(datadir)/icons/hicolor
 appicondir          = $(iconthemedir)/48x48/apps
@@ -96,8 +94,7 @@ desktop_DATA        = ui/regexxer.desktop
 dist_intltool       = intltool-extract.in intltool-merge.in intltool-update.in
 stockimages         = ui/stock_save_all_16.png ui/stock_save_all_24.png
 
-dist_noinst_DATA    = src/exported-symbols $(stockimages) $(dist_intltool) \
-		      $(desktop_in_files) $(schemas_in_files)
+dist_noinst_DATA    = $(stockimages) $(dist_intltool) $(desktop_in_files) $(schemas_in_files)
 dist_noinst_SCRIPTS = autogen.sh
 
 BUILT_SOURCES       = $(nodist_src_regexxer_SOURCES)

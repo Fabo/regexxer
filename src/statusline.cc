@@ -22,30 +22,11 @@
 #include "stringutils.h"
 #include "translation.h"
 
-#include <gmodule.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtkmm.h>
 #include <locale>
 #include <sstream>
 #include <stdexcept>
-
-/*
- * Custom widget creation function for libglade.
- */
-extern "C" G_MODULE_EXPORT
-GtkWidget* regexxer_create_status_line(char*, char*, char*, int, int)
-{
-  try
-  {
-    Gtk::Widget *const widget = new Regexxer::StatusLine();
-    widget->show();
-    return Gtk::manage(widget)->gobj();
-  }
-  catch (...)
-  {
-    g_return_val_if_reached(0);
-  }
-}
 
 namespace Regexxer
 {

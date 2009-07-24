@@ -26,7 +26,6 @@
 #include <glib.h>
 #include <gtkmm.h>
 #include <gconfmm/client.h>
-#include <libglademm/xml.h>
 #include <list>
 
 #include <config.h>
@@ -87,12 +86,12 @@ PrefDialog::~PrefDialog()
 void PrefDialog::load_xml()
 {
   using namespace Gtk;
-  using Gnome::Glade::Xml;
-
-  const Glib::RefPtr<Xml> xml = Xml::create(glade_prefdialog_filename);
+  
+  const Glib::RefPtr<Builder> xml = Builder::create_from_file(ui_prefdialog_filename);
 
   Dialog* prefdialog = 0;
-  dialog_.reset(xml->get_widget("prefdialog", prefdialog));
+  xml->get_widget("prefdialog", prefdialog);
+  dialog_.reset(prefdialog);
 
   xml->get_widget("button_textview_font", button_textview_font_);
   xml->get_widget("button_match_color",   button_match_color_);
@@ -102,9 +101,16 @@ void PrefDialog::load_xml()
 
   const Glib::RefPtr<SizeGroup> size_group = SizeGroup::create(SIZE_GROUP_VERTICAL);
 
-  size_group->add_widget(*xml->get_widget("label_utf8"));
-  size_group->add_widget(*xml->get_widget("label_locale"));
-  size_group->add_widget(*xml->get_widget("box_fallback"));
+  Label* label_utf8 = 0, *label_locale = 0;
+  Box* box_fallback = 0;
+  
+  xml->get_widget("label_utf8",   label_utf8);
+  xml->get_widget("label_locale", label_locale);
+  xml->get_widget("box_fallback", box_fallback);
+  
+  size_group->add_widget(*label_utf8);
+  size_group->add_widget(*label_locale);
+  size_group->add_widget(*box_fallback);
 }
 
 void PrefDialog::connect_signals()

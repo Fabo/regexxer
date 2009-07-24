@@ -23,7 +23,7 @@
 #include <gtkmm/button.h>
 #include <gtkmm/menu.h>
 #include <gtkmm/toolbutton.h>
-#include <libglademm/xml.h>
+#include <gtkmm/builder.h>
 
 #include <config.h>
 
@@ -64,7 +64,7 @@ void ControlItem::add_widget(Gtk::Widget& widget)
   widget.set_sensitive(enabled_ && group_enabled_);
 }
 
-void ControlItem::add_widgets(const Glib::RefPtr<Gnome::Glade::Xml>& xml,
+void ControlItem::add_widgets(const Glib::RefPtr<Gtk::Builder>& xml,
                               const char* menuitem_name, const char* button_name)
 {
   const sigc::slot<void> slot_activate = slot();
@@ -72,13 +72,19 @@ void ControlItem::add_widgets(const Glib::RefPtr<Gnome::Glade::Xml>& xml,
   Gtk::MenuItem* menuitem = 0;
   Gtk::Widget*   widget   = 0;
 
-  if (menuitem_name && xml->get_widget(menuitem_name, menuitem))
+  if (menuitem_name)
+    xml->get_widget(menuitem_name, menuitem);
+
+  if (button_name)
+    xml->get_widget(button_name, widget);
+  
+  if (menuitem_name)
   {
     menuitem->signal_activate().connect(slot_activate);
     add_widget(*menuitem);
   }
 
-  if (button_name && xml->get_widget(button_name, widget))
+  if (button_name)
   {
     if (Gtk::ToolButton *const button = dynamic_cast<Gtk::ToolButton*>(widget))
       button->signal_clicked().connect(slot_activate);
@@ -190,7 +196,7 @@ Controller::Controller()
 Controller::~Controller()
 {}
 
-void Controller::load_xml(const Glib::RefPtr<Gnome::Glade::Xml>& xml)
+void Controller::load_xml(const Glib::RefPtr<Gtk::Builder>& xml)
 {
   save_file   .add_widgets(xml, "menuitem_save",         "button_save");
   save_all    .add_widgets(xml, "menuitem_save_all",     "button_save_all");
