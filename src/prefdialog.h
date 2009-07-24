@@ -31,7 +31,6 @@ namespace Gtk
 {
 class CheckButton;
 class ColorButton;
-class ComboBox;
 class Dialog;
 class Entry;
 class FontButton;
@@ -58,7 +57,6 @@ private:
   Gtk::FontButton*            button_textview_font_;
   Gtk::ColorButton*           button_match_color_;
   Gtk::ColorButton*           button_current_color_;
-  Gtk::ComboBox*              combo_toolbar_style_;
   Gtk::Entry*                 entry_fallback_;
   Util::AutoConnection        conn_toolbar_style_;
   bool                        entry_fallback_changed_;
@@ -74,7 +72,6 @@ private:
   void on_textview_font_set();
   void on_match_color_set();
   void on_current_color_set();
-  void on_option_toolbar_style_changed();
   void on_entry_fallback_changed();
   void on_entry_fallback_activate();
 };

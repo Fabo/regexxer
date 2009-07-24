@@ -30,34 +30,6 @@
 
 #include <config.h>
 
-namespace
-{
-
-static
-const Gtk::ToolbarStyle toolbar_style_values[] =
-{
-  Gtk::TOOLBAR_ICONS,
-  Gtk::TOOLBAR_TEXT,
-  Gtk::TOOLBAR_BOTH,
-  Gtk::TOOLBAR_BOTH_HORIZ
-};
-
-static
-int get_toolbar_style_index(const Glib::ustring& value)
-{
-  const Gtk::ToolbarStyle toolbar_style = Util::enum_from_nick<Gtk::ToolbarStyle>(value);
-
-  for (unsigned int i = 0; i < G_N_ELEMENTS(toolbar_style_values); ++i)
-  {
-    if (toolbar_style_values[i] == toolbar_style)
-      return i;
-  }
-
-  g_return_val_if_reached(-1);
-}
-
-} // anonymous namespace
-
 namespace Regexxer
 {
 
@@ -69,7 +41,6 @@ PrefDialog::PrefDialog(Gtk::Window& parent)
   button_textview_font_   (0),
   button_match_color_     (0),
   button_current_color_   (0),
-  combo_toolbar_style_    (0),
   entry_fallback_         (0),
   entry_fallback_changed_ (false)
 {
@@ -96,7 +67,6 @@ void PrefDialog::load_xml()
   xml->get_widget("button_textview_font", button_textview_font_);
   xml->get_widget("button_match_color",   button_match_color_);
   xml->get_widget("button_current_color", button_current_color_);
-  xml->get_widget("combo_toolbar_style",  combo_toolbar_style_);
   xml->get_widget("entry_fallback",       entry_fallback_);
 
   const Glib::RefPtr<SizeGroup> size_group = SizeGroup::create(SIZE_GROUP_VERTICAL);
@@ -126,9 +96,6 @@ void PrefDialog::connect_signals()
 
   button_current_color_->signal_color_set().connect(
       sigc::mem_fun(*this, &PrefDialog::on_current_color_set));
-
-  conn_toolbar_style_ = combo_toolbar_style_->signal_changed().connect(
-      sigc::mem_fun(*this, &PrefDialog::on_option_toolbar_style_changed));
 
   entry_fallback_->signal_changed().connect(
       sigc::mem_fun(*this, &PrefDialog::on_entry_fallback_changed));
@@ -170,11 +137,6 @@ void PrefDialog::on_conf_value_changed(const Glib::ustring& key, const Gnome::Co
     {
       button_current_color_->set_color(Gdk::Color(value.get_string()));
     }
-    else if (key.raw() == conf_key_toolbar_style)
-    {
-      Util::ScopedBlock block (conn_toolbar_style_);
-      combo_toolbar_style_->set_active(get_toolbar_style_index(value.get_string()));
-    }
     else if (key.raw() == conf_key_fallback_encoding)
     {
       entry_fallback_->set_text(value.get_string());
@@ -215,19 +177,6 @@ void PrefDialog::on_current_color_set()
 {
   const Glib::ustring value = Util::color_to_string(button_current_color_->get_color());
   Gnome::Conf::Client::get_default_client()->set(conf_key_current_match_color, value);
-}
-
-void PrefDialog::on_option_toolbar_style_changed()
-{
-  const int index = combo_toolbar_style_->get_active_row_number();
-
-  if (index >= 0)
-  {
-    g_return_if_fail(unsigned(index) < G_N_ELEMENTS(toolbar_style_values));
-
-    const Glib::ustring value = Util::enum_to_nick(toolbar_style_values[index]);
-    Gnome::Conf::Client::get_default_client()->set(conf_key_toolbar_style, value);
-  }
 }
 
 void PrefDialog::on_entry_fallback_changed()

@@ -975,10 +975,6 @@ void MainWindow::on_conf_value_changed(const Glib::ustring& key, const Gnome::Co
       textview_     ->modify_font(font);
       entry_preview_->modify_font(font);
     }
-    else if (key.raw() == conf_key_toolbar_style)
-    {
-      toolbar_->set_toolbar_style(Util::enum_from_nick<Gtk::ToolbarStyle>(value.get_string()));
-    }
   }
 }
 
