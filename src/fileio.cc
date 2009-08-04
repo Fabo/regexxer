@@ -25,8 +25,11 @@
 
 #include <glib.h>
 #include <glibmm.h>
+#include <giomm.h>
+#include <gtksourceviewmm.h> 
 #include <cstring>
 
+namespace Gsv=gtksourceview;
 
 namespace
 {
@@ -154,6 +157,13 @@ void load_file(const FileInfoPtr& fileinfo, const std::string& fallback_encoding
   if (!buffer)
     throw ErrorBinaryFile();
 
+  Glib::RefPtr<Gsv::SourceLanguageManager> language_manager = Gsv::SourceLanguageManager::create();
+  
+  bool uncertain = false;
+  std::string content_type = Gio::content_type_guess(fileinfo->fullname, buffer->get_text(), uncertain);
+
+  buffer->set_highlight_syntax(true);
+  buffer->set_language(language_manager->guess_language(fileinfo->fullname, content_type));
   buffer->set_modified(false);
 
   fileinfo->encoding    = encoding;

@@ -39,7 +39,7 @@ AM_GLIB_GNU_GETTEXT
 # so that libglade can get at the custom widget creation functions.
 PKG_CHECK_MODULES([REGEXXER_MODULES],
                   [gtk+-2.0 >= 2.16.0 gtkmm-2.4 >= 2.12.0 gconfmm-2.6 >= 2.6.1
-                  libpcre >= 5.0 gtksourceviewmm-2.0 >= 2.4])
+                  libpcre >= 5.0 gtksourceviewmm-2.0 >= 2.3.1])
 
 DK_PKG_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-2.0], [gdk-pixbuf-csource])
 DK_PKG_PATH_PROG([GTK_UPDATE_ICON_CACHE], [gtk+-2.0], [gtk-update-icon-cache])

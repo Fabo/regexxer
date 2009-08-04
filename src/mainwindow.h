@@ -39,13 +39,17 @@ class CheckButton;
 class Dialog;
 class Entry;
 class FileChooser;
-class TextView;
 class Toolbar;
 class Window;
 class ComboBoxEntryText;
 class VBox;
 class ScrolledWindow;
 class Table;
+}
+
+namespace gtksourceview
+{
+class SourceView;
 }
 
 namespace Gnome { namespace Conf { class Value; } }
@@ -107,7 +111,8 @@ private:
 
   FileTree*                   filetree_;
   Gtk::ScrolledWindow*        scrollwin_filetree_;
-  Gtk::TextView*              textview_;
+  Gtk::ScrolledWindow*        scrollwin_textview_;
+  gtksourceview::SourceView*  textview_;
   Gtk::Entry*                 entry_preview_;
 
   StatusLine*                 statusline_;

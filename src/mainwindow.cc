@@ -29,6 +29,7 @@
 
 #include <glib.h>
 #include <gtkmm.h>
+#include <gtksourceviewmm.h>
 #include <gconfmm/client.h>
 #include <algorithm>
 #include <functional>
@@ -190,7 +191,8 @@ MainWindow::MainWindow()
   button_caseless_        (0),
   filetree_               (Gtk::manage(new FileTree())),
   scrollwin_filetree_     (0),
-  textview_               (0),
+  scrollwin_textview_     (0),
+  textview_               (Gtk::manage(new gtksourceview::SourceView())),
   entry_preview_          (0),
   statusline_             (Gtk::manage(new StatusLine())),
   busy_action_running_    (false),
@@ -207,9 +209,12 @@ MainWindow::MainWindow()
   scrollwin_filetree_->add(*filetree_);
   table_file_->attach(*combo_entry_pattern_, 1, 2, 1, 2);
   
+  scrollwin_textview_->add(*textview_);
+  
   statusline_->show_all();
   filetree_->show_all();
   combo_entry_pattern_->show_all();
+  scrollwin_textview_->show_all();
   
   connect_signals();
 }
@@ -281,7 +286,7 @@ void MainWindow::load_xml()
   xml->get_widget("entry_substitution",  entry_substitution_);
   xml->get_widget("button_multiple",     button_multiple_);
   xml->get_widget("button_caseless",     button_caseless_);
-  xml->get_widget("textview",            textview_);
+  xml->get_widget("scrollwin_textview",  scrollwin_textview_);
   xml->get_widget("entry_preview",       entry_preview_);
   xml->get_widget("vbox_main",           vbox_main_);
   xml->get_widget("scrollwin_filetree",  scrollwin_filetree_);

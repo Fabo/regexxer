@@ -34,6 +34,8 @@
 #include <gtkmm/stock.h>
 #include <gtkmm/stockitem.h>
 #include <gtkmm/window.h>
+#include <gtksourceviewmm/init.h>
+#include <giomm/init.h>
 
 #include <exception>
 #include <list>
@@ -242,6 +244,8 @@ int main(int argc, char** argv)
 
     std::auto_ptr<RegexxerOptions> options = RegexxerOptions::create();
     Gtk::Main main_instance (argc, argv, options->context());
+    gtksourceview::init();
+    Gio::init();
 
     Glib::set_application_name(PACKAGE_NAME);
     register_stock_items();
