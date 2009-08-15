@@ -1,19 +1,21 @@
 # Hungarian translation of regexxer.
-# Copyright (C) 2005 Free Software Foundation, Inc.
+# Copyright (C) 2005, 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the regexxer package.
-# Gabor Kelemen <kelemeng@gnome.hu>, 2005.
 #
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2005, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2005-01-11 14:04+0100\n"
-"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
-"Language-Team: Hungarian <gnome@gnome.hu>\n"
+"POT-Creation-Date: 2009-08-15 11:57+0200\n"
+"PO-Revision-Date: 2009-08-15 11:59+0200\n"
+"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
+"Language-Team: Hungarian <gnome at fsf dot hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
 msgid "Search and replace using regular expressions"
@@ -21,7 +23,7 @@ msgstr "Keresés és csere reguláris kifejezések használatával"
 
 #: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
-msgstr "regexxer keresőeszköz"
+msgstr "Regexxer keresőeszköz"
 
 #: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
@@ -43,17 +45,15 @@ msgid ""
 msgstr ""
 "A használandó karakterkódolás neve, ha a fájl nem olvasható sem UTF-8, sem a "
 "jelenlegi területi beállítások által meghatározott kódolással. A lehetséges "
-"értékek listáját az “iconv --list” paranccsal kérheti le."
+"értékek listáját az „iconv --list” paranccsal kérheti le."
 
 #: ../ui/regexxer.schemas.in.h:5
 msgid "Text view font"
 msgstr "Szövegnézet betűkészlete"
 
 #: ../ui/regexxer.schemas.in.h:6
-msgid ""
-"The background color used to highlight matches of the search expression."
-msgstr ""
-"A keresőkifejezéssel egyező találatok kiemeléséhez használt háttérszín."
+msgid "The background color used to highlight matches of the search expression."
+msgstr "A keresőkifejezéssel egyező találatok kiemeléséhez használt háttérszín."
 
 #: ../ui/regexxer.schemas.in.h:7
 msgid ""
@@ -72,8 +72,8 @@ msgid ""
 "The style of the application’s toolbar. Possible values are “icons”, “text”, "
 "“both”, and “both-horiz”."
 msgstr ""
-"Az alkalmazás eszköztárának stílusa. Lehetséges értékek: “icons” (ikonok), "
-"“text” (szöveg), “both” (mindkettő), és “both-horiz” (mindkettő "
+"Az alkalmazás eszköztárának stílusa. Lehetséges értékek: „icons” (ikonok), "
+"„text” (szöveg), „both” (mindkettő), és „both-horiz” (mindkettő "
 "vízszintesen)."
 
 #: ../ui/regexxer.schemas.in.h:10
@@ -95,12 +95,12 @@ msgstr "#"
 #: ../src/filetree.cc:530
 #, qt-format
 msgid "Failed to save file “%1”: %2"
-msgstr "A(z) “%1” fájl mentése sikertelen: %2"
+msgstr "A(z) „%1” fájl mentése sikertelen: %2"
 
 #: ../src/filetree.cc:946
 #, qt-format
 msgid "“%1” seems to be a binary file."
-msgstr "“%1” bináris fájlnak tűnik."
+msgstr "„%1” bináris fájlnak tűnik."
 
 #: ../src/main.cc:77
 msgid "Save _all"
@@ -156,7 +156,7 @@ msgstr "Ne kezdjen keresni automatikusan"
 
 #: ../src/main.cc:152
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[MAPPA]"
 
 #: ../src/mainwindow.cc:413
 msgid ""
@@ -192,8 +192,7 @@ msgstr "Kelemen Gábor <kelemeng@gnome.hu>"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
-"A \\C escape-szekvencia használata egyetlen bájt keresésére nem támogatott."
+msgstr "A \\C escape-szekvencia használata egyetlen bájt keresésére nem támogatott."
 
 #: ../src/pcreshell.cc:84
 #, qt-format
@@ -201,7 +200,7 @@ msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Hiba a szabályos kifejezésben itt: “%1” (index %2):\n"
+"Hiba a szabályos kifejezésben itt: „%1” (index %2):\n"
 "%3"
 
 #: ../src/pcreshell.cc:89
@@ -217,13 +216,12 @@ msgstr ""
 msgid ""
 "Reached the recursion and backtracking limit of the regular expression "
 "engine."
-msgstr ""
-"Elérte a szabályos kifejezés motor rekurziós és visszalépési határértékét."
+msgstr "Elérte a szabályos kifejezés motor rekurziós és visszalépési határértékét."
 
 #: ../src/prefdialog.cc:249
 #, qt-format
 msgid "“%1” is not a valid encoding."
-msgstr "“%1”  érvénytelen kódolás."
+msgstr "„%1”  érvénytelen kódolás."
 
 #: ../src/statusline.cc:263
 msgid "Stop"
@@ -472,45 +470,8 @@ msgid "_Text view font:"
 msgstr "_Szöveg betűtípusa:"
 
 #: ../ui/prefdialog.glade.h:18
-msgid ""
-"regexxer attempts to read a file in the following encodings before giving up:"
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr ""
 "A regexxer a következő kódolásokkal próbálja meg beolvasni a fájlokat, "
 "mielőtt feladja:"
 
-#~ msgid "_About"
-#~ msgstr "_Névjegy"
-
-#~ msgid "[OPTION]... [FOLDER]"
-#~ msgstr "[OPCIÓ]... [MAPPA]"
-
-#~ msgid "Try “regexxer --help” for more information."
-#~ msgstr "További információért adja ki a “regexxer --help” parancsot."
-
-#~ msgid ""
-#~ "The folder name “%1” contains characters not representable in the "
-#~ "encoding of the local file system."
-#~ msgstr ""
-#~ "A(z) “%1” mappanév olyan karaktereket tartalmaz, amelyek nem "
-#~ "jeleníthetőek meg a helyi fájlrendszer kódolásával."
-
-#~ msgid "Select a folder"
-#~ msgstr "Válasszon egy mappát"
-
-#~ msgid "About regexxer"
-#~ msgstr "A Regexxer névjegye"
-
-#~ msgid "The application icon of regexxer"
-#~ msgstr "A regexxer alkalmazás ikonja"
-
-#~ msgid "regexxer icon"
-#~ msgstr "regexxer ikon"
-
-#~ msgid "translated by"
-#~ msgstr "fordította:"
-
-#~ msgid "written by"
-#~ msgstr "írta:"
-
-#~ msgid "The directory to be searched"
-#~ msgstr "A keresendő könyvtár"
