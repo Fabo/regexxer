@@ -16,14 +16,15 @@
 ## along with regexxer; if not, write to the Free Software Foundation, Inc.,
 ## 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-AC_INIT([regexxer], [0.9], [http://regexxer.sourceforge.net/bugs], [regexxer])
-AC_PREREQ([2.58])
+AC_INIT([regexxer], [0.10], [http://regexxer.sourceforge.net/bugs], [regexxer],
+        [http://regexxer.sourceforge.net/])
+AC_PREREQ([2.59])
 
 AC_CONFIG_SRCDIR([ui/regexxer.desktop.in])
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
 
-AM_INIT_AUTOMAKE([1.8 -Wall gnu no-define nostdinc check-news])
+AM_INIT_AUTOMAKE([1.9 -Wall gnu no-define nostdinc check-news dist-bzip2])
 AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 
 AC_PROG_CC

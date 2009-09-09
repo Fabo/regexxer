@@ -119,6 +119,8 @@ install-data-hook: install-update-icon-cache
 uninstall-hook: uninstall-update-icon-cache
 endif
 
+dist-hook: dist-changelog
+
 # Note that this rule creates the ui/ build directory as a side effect.
 # This works just fine because the target is in BUILT_SOURCES and thus
 # built before everything else.  Otherwise a special ui/.dirstamp rule
@@ -133,6 +135,18 @@ ui/stockimages.h: $(stockimages)
 	done; \
 	echo " $(pixbuf_csource) $$build_list >$@"; \
 	$(pixbuf_csource) $$build_list >$@
+
+dist-changelog:
+	@if test -r "$(top_srcdir)/.git"; then \
+	  if git --git-dir="$(top_srcdir)/.git" --work-tree="$(top_srcdir)" \
+		log --date=short --pretty='format:%cd  %an  <%ae>%n%n%s%n%n%b%n' \
+	  | sed	-e '/^[12]...-[01].-[0123].  [^<>]*  <[^<>]*>$$/,/^$$/ b' \
+		-e '/[^	 ]/,/^[	 ]*$$/! d' \
+		-e 's/^[	 ]*/	/' \
+		-e 's/^[	 ]*$$//' >.ChangeLog.tmp; \
+	  then mv -f .ChangeLog.tmp "$(top_distdir)/ChangeLog"; \
+	  else rm -f .ChangeLog.tmp; exit 1; fi; \
+	fi
 
 install-schemas: $(schemas_DATA)
 	@$(POST_INSTALL)
@@ -150,4 +164,7 @@ uninstall-update-icon-cache:
 	@$(POST_UNINSTALL)
 	test -n "$(DESTDIR)" || $(update_icon_cache) "$(iconthemedir)"
 
-.PHONY: install-schemas uninstall-schemas install-update-icon-cache uninstall-update-icon-cache
+.PHONY: dist-changelog install-schemas uninstall-schemas \
+	install-update-icon-cache uninstall-update-icon-cache
+
+.DELETE_ON_ERROR:
