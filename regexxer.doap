@@ -12,6 +12,11 @@
 
   <maintainer>
     <foaf:Person>
+      <foaf:name>Fabien Parent</foaf:name>
+      <foaf:mbox rdf:resource="mailto:parent.f@gmail.com" />
+      <gnome:userid>fparent</gnome:userid>
+    </foaf:Person>
+    <foaf:Person>
       <foaf:name>Daniel Elstner</foaf:name>
       <foaf:mbox rdf:resource="mailto:daniel.kitta@gmail.com" />
       <gnome:userid>daniel</gnome:userid>
