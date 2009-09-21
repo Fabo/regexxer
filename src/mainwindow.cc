@@ -374,22 +374,73 @@ bool MainWindow::on_delete_event(GdkEventAny*)
 
 void MainWindow::on_cut()
 {
-  if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
-    buffer->cut_clipboard(textview_->get_clipboard(selection_clipboard),
-                          textview_->get_editable());
+  if (textview_->is_focus())
+  {
+    if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
+      buffer->cut_clipboard(textview_->get_clipboard(selection_clipboard),
+                            textview_->get_editable());
+  }
+  else
+  {
+    const int noEntries = 3;
+    Gtk::Entry *entries[noEntries] = { entry_pattern_, entry_regex_,
+                                       entry_substitution_ };
+    for (int i = 0; i < 3; i++)
+    {
+      if (entries[i]->is_focus())
+      {
+        ((Gtk::Editable *)entries[i])->cut_clipboard();
+        return ;
+      }
+    }
+  }
 }
 
 void MainWindow::on_copy()
 {
-  if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
-    buffer->copy_clipboard(textview_->get_clipboard(selection_clipboard));
+  if (textview_->is_focus())
+  {
+    if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
+      buffer->copy_clipboard(textview_->get_clipboard(selection_clipboard));
+  }
+  else
+  {
+    const int noEntries = 3;
+    Gtk::Entry *entries[noEntries] = { entry_pattern_, entry_regex_,
+                                       entry_substitution_ };
+    for (int i = 0; i < 3; i++)
+    {
+      if (entries[i]->is_focus())
+      {
+        ((Gtk::Editable *)entries[i])->copy_clipboard();
+        return ;
+      }
+    }
+  }
 }
 
 void MainWindow::on_paste()
 {
-  if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
-    buffer->paste_clipboard(textview_->get_clipboard(selection_clipboard),
-                            textview_->get_editable());
+  if (textview_->is_focus())
+  {
+    if (const Glib::RefPtr<Gtk::TextBuffer> buffer = textview_->get_buffer())
+      buffer->paste_clipboard(textview_->get_clipboard(selection_clipboard),
+                              textview_->get_editable());
+  }
+  else
+  {
+    const int noEntries = 3;
+    Gtk::Entry *entries[noEntries] = { entry_pattern_, entry_regex_,
+                                       entry_substitution_ };
+    for (int i = 0; i < 3; i++)
+    {
+      if (entries[i]->is_focus())
+      {
+        ((Gtk::Editable *)entries[i])->paste_clipboard();
+        return ;
+      }
+    }
+  }
 }
 
 void MainWindow::on_erase()
@@ -719,10 +770,12 @@ void MainWindow::on_undo_stack_push(UndoActionPtr action)
 
 void MainWindow::on_undo()
 {
-  BusyAction busy (*this);
-
-  undo_stack_->undo_step(sigc::mem_fun(*this, &MainWindow::on_busy_action_pulse));
-  controller_.undo.set_enabled(!undo_stack_->empty());
+  if (textview_->is_focus())
+  {
+    BusyAction busy (*this);
+    undo_stack_->undo_step(sigc::mem_fun(*this, &MainWindow::on_busy_action_pulse));
+    controller_.undo.set_enabled(!undo_stack_->empty());
+  }
 }
 
 void MainWindow::undo_stack_clear()
