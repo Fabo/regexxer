@@ -41,19 +41,6 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/regexxer/toolbar_style</key>
-      <applyto>/apps/regexxer/toolbar_style</applyto>
-      <owner>regexxer</owner>
-      <type>string</type>
-      <default>both-horiz</default>
-      <locale name="C">
-	<short>Toolbar style</short>
-	<long>The style of the application’s toolbar. Possible values are
-	  “icons”, “text”, “both”, and “both-horiz”.</long>
-      </locale>
-    </schema>
-
-    <schema>
       <key>/schemas/apps/regexxer/fallback_encoding</key>
       <applyto>/apps/regexxer/fallback_encoding</applyto>
       <owner>regexxer</owner>
