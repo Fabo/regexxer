@@ -24,6 +24,7 @@
 #include "controller.h"
 #include "filebuffer.h"
 #include "sharedptr.h"
+#include "completionstack.h"
 
 #include <sigc++/sigc++.h>
 #include <glibmm/refptr.h>
@@ -41,10 +42,11 @@ class Entry;
 class FileChooser;
 class Toolbar;
 class Window;
-class ComboBoxEntryText;
+class ComboBoxEntry;
 class VBox;
 class ScrolledWindow;
 class Table;
+class EntryCompletion;
 }
 
 namespace gtksourceview
@@ -100,12 +102,24 @@ private:
 
   Gtk::Table*                 table_file_;
   Gtk::FileChooser*           button_folder_;
-  Gtk::ComboBoxEntryText*     combo_entry_pattern_;
+  
+  Gtk::ComboBoxEntry*         combo_entry_pattern_;
+  CompletionStack             combo_entry_pattern_completion_stack_;
+  Glib::RefPtr<Gtk::EntryCompletion> combo_entry_pattern_completion_;
+  
   Gtk::CheckButton*           button_recursive_;
   Gtk::CheckButton*           button_hidden_;
 
+  Gtk::ComboBoxEntry*         comboboxentry_regex_;
   Gtk::Entry*                 entry_regex_;
+  CompletionStack             entry_regex_completion_stack_;
+  Glib::RefPtr<Gtk::EntryCompletion> entry_regex_completion_;
+  
+  Gtk::ComboBoxEntry*         comboboxentry_substitution_;
   Gtk::Entry*                 entry_substitution_;
+  CompletionStack             entry_substitution_completion_stack_;
+  Glib::RefPtr<Gtk::EntryCompletion> entry_substitution_completion_;
+  
   Gtk::CheckButton*           button_multiple_;
   Gtk::CheckButton*           button_caseless_;
 

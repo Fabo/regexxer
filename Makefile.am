@@ -31,6 +31,8 @@ SUBDIRS = po
 bin_PROGRAMS = src/regexxer
 
 src_regexxer_SOURCES =		\
+	src/completionstack.cc \
+	src/completionstack.h \
 	src/controller.cc	\
 	src/controller.h	\
 	src/filebuffer.cc	\
