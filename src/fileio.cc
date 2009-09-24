@@ -47,6 +47,7 @@ Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& inp
   const Util::ScopedArray<char> inbuf (new char[BUFSIZE]);
   gsize bytes_read = 0;
 
+  text_buffer->begin_not_undoable_action();
   while (input->read(inbuf.get(), BUFSIZE, bytes_read) == Glib::IO_STATUS_NORMAL)
   {
     if (std::memchr(inbuf.get(), '\0', bytes_read)) // binary file?
@@ -54,6 +55,7 @@ Glib::RefPtr<FileBuffer> load_iochannel(const Glib::RefPtr<Glib::IOChannel>& inp
 
     text_end = text_buffer->insert(text_end, inbuf.get(), inbuf.get() + bytes_read);
   }
+  text_buffer->end_not_undoable_action();
 
   g_assert(bytes_read == 0);
 
