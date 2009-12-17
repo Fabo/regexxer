@@ -1,14 +1,14 @@
 # Copyright (C) 2002-2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the package.
 #
-# Matej Urbančič <matej.urban@gmail.com>, 2006 - 2007.
+# Matej Urbančič <mateju@svn.gnome.org>, 2006 - 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
-"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 21:23+0000\n"
-"PO-Revision-Date: 2007-11-15 15:49+0100\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
+"POT-Creation-Date: 2009-11-23 13:41+0000\n"
+"PO-Revision-Date: 2009-12-11 21:29+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../ui/regexxer.desktop.in.h:1
-#: ../src/mainwindow.cc:849
+#: ../src/mainwindow.cc:967
 msgid "Search and replace using regular expressions"
 msgstr "Iskanje in zamenjava s pomočjo logičnih izrazov"
 
 #: ../ui/regexxer.desktop.in.h:2
 msgid "regexxer Search Tool"
-msgstr "regexxer orodje za iskanje"
+msgstr "regexxer orodje iskanja"
 
 #: ../ui/regexxer.schemas.in.h:1
 msgid "Current-match color"
@@ -37,152 +37,158 @@ msgid "Fallback encoding"
 msgstr "Povratni nabor"
 
 #: ../ui/regexxer.schemas.in.h:3
+msgid "List of last pattern used for the file's regex entry."
+msgstr "Seznam zadnje uporabljenih vzorcev za datotečne logične izraze vnosa."
+
+#: ../ui/regexxer.schemas.in.h:4
+msgid "List of last pattern used for the regex entry."
+msgstr "Seznam zadnje uporabljenih vzorcev za logične izraze vnosa."
+
+#: ../ui/regexxer.schemas.in.h:5
+msgid "List of last pattern used for the substitution entry."
+msgstr "Seznam zadnje uporabljenih vzorcev za zamenjavo vnosa."
+
+#: ../ui/regexxer.schemas.in.h:6
 msgid "Match color"
 msgstr "Barva zadetka"
 
-#: ../ui/regexxer.schemas.in.h:4
+#: ../ui/regexxer.schemas.in.h:7
 msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try “iconv --list” for a complete list of possible values."
-msgstr "Ime znakovnega nabora, ki naj bo uporabljen, če datoteke ni mogoče prebrati v UTF-8 ali naboru določenem v sistemu. Vtipkajte “iconv --list” za celoten spisek mogočih vrednosti."
+msgstr "Ime znakovnega nabora, ki naj bo uporabljen, kadar datoteke ni mogoče prebrati v UTF-8 oziroma sistemsko določenem naboru. Vtipkajte “iconv --list” za celoten spisek mogočih vrednosti."
 
-#: ../ui/regexxer.schemas.in.h:5
+#: ../ui/regexxer.schemas.in.h:8
+msgid "Regex Patterns"
+msgstr "Regex vzorci"
+
+#: ../ui/regexxer.schemas.in.h:9
 msgid "Text view font"
 msgstr "Pisava besedila"
 
-#: ../ui/regexxer.schemas.in.h:6
+#: ../ui/regexxer.schemas.in.h:10
 msgid "The background color used to highlight matches of the search expression."
-msgstr "Barva ozadja za označevanje zadetkov iskalnih izrazov."
+msgstr "Barva ozadja za poudarjanje zadetkov iskalnih izrazov."
 
-#: ../ui/regexxer.schemas.in.h:7
+#: ../ui/regexxer.schemas.in.h:11
 msgid "The background color used to highlight the currently selected match of the search expression."
-msgstr "Barva ozadja za označevanje trenutno izbranega zadetka iskalnega izraza."
+msgstr "Barva ozadja za poudarjanje trenutno izbranega zadetka iskalnega izraza."
 
-#: ../ui/regexxer.schemas.in.h:8
+#: ../ui/regexxer.schemas.in.h:12
 msgid "The font used in the file editor."
 msgstr "Pisava uporabljena v urejevalcu datotek."
-
-#: ../ui/regexxer.schemas.in.h:9
-msgid "The style of the application’s toolbar. Possible values are “icons”, “text”, “both”, and “both-horiz”."
-msgstr "Stil orodne vrstice. Mogoče vrednosti so \"ikone\", \"besedilo\", \"oboje\", in \"oboje-vodoravno\"."
-
-#: ../ui/regexxer.schemas.in.h:10
-msgid "Toolbar style"
-msgstr "Stil orodne vrstice"
 
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "Ni mogoče prebrati datoteke:"
 
-#: ../src/filetree.cc:80
+#: ../src/filetree.cc:61
 msgid "File"
 msgstr "Datoteka"
 
-#: ../src/filetree.cc:99
+#: ../src/filetree.cc:80
 msgid "#"
 msgstr "#"
 
-#: ../src/filetree.cc:530
+#: ../src/filetree.cc:511
 #, qt-format
 msgid "Failed to save file “%1”: %2"
-msgstr "Napaka pri shranjevanju datoteke “%1”: %2"
+msgstr "Napaka med shranjevanjem datoteke “%1”: %2"
 
-#: ../src/filetree.cc:946
+#: ../src/filetree.cc:927
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "“%1” je videti kot binarna datoteka."
 
-#: ../src/main.cc:77
+#: ../src/main.cc:79
 msgid "Save _all"
 msgstr "Shrani _vse"
 
-#: ../src/main.cc:134
+#: ../src/main.cc:136
 msgid "Find files matching PATTERN"
 msgstr "Poišči datoteke primerljive z VZORCEM"
 
-#: ../src/main.cc:134
+#: ../src/main.cc:136
 msgid "PATTERN"
 msgstr "VZOREC"
 
-#: ../src/main.cc:136
-msgid "Do not recurse into subdirectories"
-msgstr "Ne pregleduj podrejenih map"
-
 #: ../src/main.cc:138
-#: ../ui/mainwindow.glade.h:3
+msgid "Do not recurse into subdirectories"
+msgstr "Ne upoštevaj ravni map"
+
+#: ../src/main.cc:140
 msgid "Also find hidden files"
 msgstr "Preišči tudi skrite datoteke"
 
-#: ../src/main.cc:140
+#: ../src/main.cc:142
 msgid "Find text matching REGEX"
-msgstr "Poišči besedilo primerljivo z IZRAZOM"
-
-#: ../src/main.cc:140
-msgid "REGEX"
-msgstr "IZRAZ"
+msgstr "Poišči besedilo primerljivo z logičnim izrazom"
 
 #: ../src/main.cc:142
-msgid "Find only the first match in a line"
-msgstr "Poišči samo prvi zadetek v vrstici"
+msgid "REGEX"
+msgstr "Logični izraz"
 
 #: ../src/main.cc:144
-#: ../ui/mainwindow.glade.h:5
+msgid "Find only the first match in a line"
+msgstr "Poišči le prvi zadetek v vrstici"
+
+#: ../src/main.cc:146
 msgid "Do case insensitive matching"
 msgstr "Pri primerjavi ne upoštevaj velikosti črk"
 
-#: ../src/main.cc:146
+#: ../src/main.cc:148
 msgid "Replace matches with STRING"
 msgstr "Zamenjaj zadetke z NIZOM"
 
-#: ../src/main.cc:146
-msgid "STRING"
-msgstr "NIZ"
-
 #: ../src/main.cc:148
+msgid "STRING"
+msgstr "niz"
+
+#: ../src/main.cc:150
 msgid "Print match location to standard output"
 msgstr "Izpiši položaj zadetka na standardni izhod."
 
-#: ../src/main.cc:150
+#: ../src/main.cc:152
 msgid "Do not automatically start search"
 msgstr "Ne začni samodejnega iskanja"
 
-#: ../src/main.cc:152
+#: ../src/main.cc:154
 msgid "[FOLDER]"
 msgstr "[MAPA]"
 
-#: ../src/mainwindow.cc:413
+#: ../src/mainwindow.cc:513
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
 msgstr ""
 "Nekatere datoteke še niso shranjene.\n"
-"Vseeno zaključim?"
+"Ali naj se program vseeno konča?"
 
-#: ../src/mainwindow.cc:427
+#: ../src/mainwindow.cc:527
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr ""
 "Nekatere datoteke še niso shranjene.\n"
-"Vseeno nadaljujem?"
+"Ali naj se dejanje vseeno izvede?"
 
-#: ../src/mainwindow.cc:455
+#: ../src/mainwindow.cc:559
 msgid "The file search pattern is invalid."
 msgstr "Vzorec za iskanje datotek je napačen."
 
-#: ../src/mainwindow.cc:461
+#: ../src/mainwindow.cc:565
 msgid "The following errors occurred during search:"
 msgstr "Napake, ki so nastale med iskanjem:"
 
-#: ../src/mainwindow.cc:708
+#: ../src/mainwindow.cc:824
 msgid "The following errors occurred during save:"
 msgstr "Napake, ki so nastale med shranjevanjem:"
 
-#: ../src/mainwindow.cc:854
+#: ../src/mainwindow.cc:972
 msgid "translator-credits"
-msgstr "Matej Urbančič <mateju@svn@gnome.org>"
+msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 
 #: ../src/pcreshell.cc:62
 msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr "Uporaba \\C izhodne sekvence za primerjanje enojnega bajta  ni podprta."
+msgstr "Uporaba \\C ubežnega zaporedja za primerjanje enojnega bajta ni podprta."
 
 #: ../src/pcreshell.cc:84
 #, qt-format
@@ -190,7 +196,7 @@ msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Napaka v logičnem izrazu pri “%1” (indeks %2):\n"
+"Napaka v logičnem izrazu pri “%1” (kazalo %2):\n"
 "%3"
 
 #: ../src/pcreshell.cc:89
@@ -204,253 +210,165 @@ msgstr ""
 
 #: ../src/pcreshell.cc:171
 msgid "Reached the recursion and backtracking limit of the regular expression engine."
-msgstr "Dosežena je globina iskanja v podrejenih mapah in omejitev povratnega sledenja orodja logičnih izrazov."
+msgstr "Dosežena je globina iskanja ravni map in omejitev povratnega sledenja orodja logičnih izrazov."
 
-#: ../src/prefdialog.cc:249
+#: ../src/prefdialog.cc:204
 #, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "“%1” ni veljavni nabor znakov."
 
-#: ../src/statusline.cc:263
+#: ../src/statusline.cc:244
 msgid "Stop"
-msgstr "Ustavi"
+msgstr "Zaustavi"
 
-#: ../src/statusline.cc:270
+#: ../src/statusline.cc:251
 msgid "File:"
 msgstr "Datoteka:"
 
-#: ../src/statusline.cc:273
+#: ../src/statusline.cc:254
 msgid "Match:"
 msgstr "Zadetek:"
 
-#: ../src/statusline.cc:284
+#: ../src/statusline.cc:265
 msgid "Cancels the running search"
 msgstr "Prekine trenutno iskanje"
 
-#: ../ui/mainwindow.glade.h:1
-msgid "A filename pattern as used by the shell. Character classes [ab] and csh style brace expressions {a,b} are supported."
-msgstr "Vzorec imena datoteke, kot je uporabljen v konzoli. Znakovni razredi [ab] in csh stil izrazov v oklepajih  {a,b} so podprti."
-
-#: ../ui/mainwindow.glade.h:2
-msgid "A regular expression in Perl syntax"
-msgstr "Logični izrazi v Perl skladnji"
-
-#: ../ui/mainwindow.glade.h:4
-msgid "Backward"
-msgstr "Nazaj"
-
-#: ../ui/mainwindow.glade.h:6
-msgid "File backward"
-msgstr "Predhodna datoteka"
-
-#: ../ui/mainwindow.glade.h:7
-msgid "File forward"
-msgstr "Naslednja datoteka"
-
-#: ../ui/mainwindow.glade.h:8
-msgid "Find all files that match the filename pattern"
-msgstr "Poišči vsa imena datotek, ki so primerljiva z vzorcem iskanja"
-
-#: ../ui/mainwindow.glade.h:9
-msgid "Find all matches of the regular expression"
-msgstr "Poišči vse zadetke logičnih izrazov"
-
-#: ../ui/mainwindow.glade.h:10
-msgid "Find all possible matches in a line"
-msgstr "Poišči vse mogoče zadetke v vrstici"
-
-#: ../ui/mainwindow.glade.h:11
-msgid "Find fi_les"
-msgstr "Poišči _datoteke"
-
-#: ../ui/mainwindow.glade.h:12
-msgid "Fol_der:"
-msgstr "_Mapa:"
-
-#: ../ui/mainwindow.glade.h:13
-msgid "Forward"
-msgstr "Naprej"
-
-#: ../ui/mainwindow.glade.h:14
-msgid "Go to next match"
-msgstr "Pojdi na naslednji zadetek"
-
-#: ../ui/mainwindow.glade.h:15
-msgid "Go to previous match"
-msgstr "Pojdi na predhodni zadetek"
-
-#: ../ui/mainwindow.glade.h:16
-msgid "Go to the next matching file"
-msgstr "Pojdi na naslednjo datoteko primerljivo z vzorcem"
-
-#: ../ui/mainwindow.glade.h:17
-msgid "Go to the previous matching file"
-msgstr "Pojdi na predhodno datoteko primerljivo z vzorcem"
-
-#: ../ui/mainwindow.glade.h:18
-msgid "Pattern:"
-msgstr "Vzorec:"
-
-#: ../ui/mainwindow.glade.h:19
-msgid "Preview"
-msgstr "Predogled"
-
-#: ../ui/mainwindow.glade.h:20
-msgid "Preview of the substitution"
-msgstr "Predogled zamenjav"
-
-#: ../ui/mainwindow.glade.h:21
-msgid "Recurse into subdirectories"
-msgstr "Izvedi po strukturi map"
-
-#: ../ui/mainwindow.glade.h:22
-msgid "Replace _current"
-msgstr "Zamenjaj _trenutno"
-
-#: ../ui/mainwindow.glade.h:23
-msgid "Replace all matches in all files"
-msgstr "Zamenjaj vse zadetke v vseh datotekah"
-
-#: ../ui/mainwindow.glade.h:24
-msgid "Replace all matches in the current file"
-msgstr "Zamenjaj vse zadetke v trenutni datoteki"
-
-#: ../ui/mainwindow.glade.h:25
-msgid "Replace current match"
-msgstr "Zamenjaj trenutni zadetek"
-
-#: ../ui/mainwindow.glade.h:26
-msgid "Replace in _all files"
-msgstr "Zamenjaj v _vseh datotekah"
-
-#: ../ui/mainwindow.glade.h:27
-msgid "Replace in _this file"
-msgstr "Zamenjaj v _tej datoteki"
-
-#: ../ui/mainwindow.glade.h:28
-msgid "Replace:"
-msgstr "Zamenjaj:"
-
-#: ../ui/mainwindow.glade.h:29
-msgid "Search:"
-msgstr "Poišči:"
-
-#: ../ui/mainwindow.glade.h:30
-msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
-msgstr "Nov niz za zamenjavo. Kot v jeziku Perl lahko določite dele zadetkov z uporabo $1, $2, ... ali celo $+, $&, $` in $'. Operatorji \\l, \\u, \\L, \\U in \\E so prav tako podprti."
-
-#: ../ui/mainwindow.glade.h:31
-msgid "_All files"
-msgstr "_Vsa datoteke"
-
-#: ../ui/mainwindow.glade.h:32
-msgid "_Edit"
-msgstr "_Uredi"
-
-#: ../ui/mainwindow.glade.h:33
-msgid "_File"
-msgstr "_Datoteka"
-
-#: ../ui/mainwindow.glade.h:34
-msgid "_Help"
-msgstr "_Pomoč"
-
-#: ../ui/mainwindow.glade.h:35
-msgid "_Match"
-msgstr "_Zadetki"
-
-#: ../ui/mainwindow.glade.h:36
-msgid "_Next file"
-msgstr "_Naslednja datoteka"
-
-#: ../ui/mainwindow.glade.h:37
-msgid "_Previous file"
-msgstr "_Predhodna datoteka"
-
-#: ../ui/mainwindow.glade.h:38
-msgid "_Replace"
-msgstr "_Zamenjaj"
-
-#: ../ui/mainwindow.glade.h:39
-msgid "_This file"
-msgstr "_Ta datoteka"
-
-#: ../ui/mainwindow.glade.h:40
-msgid "hidden"
-msgstr "skrito"
-
-#: ../ui/mainwindow.glade.h:41
-msgid "recursive"
-msgstr "po drevesu map"
-
-#: ../ui/prefdialog.glade.h:1
-msgid "1."
-msgstr "1."
-
-#: ../ui/prefdialog.glade.h:2
-msgid "2."
-msgstr "2."
-
-#: ../ui/prefdialog.glade.h:3
-msgid "3."
-msgstr "3."
-
-#: ../ui/prefdialog.glade.h:4
-msgid "C_urrent match color:"
-msgstr "Tren_utna barva zadetka:"
-
-#: ../ui/prefdialog.glade.h:5
-msgid "Fallback _encoding:"
-msgstr "Povratni _nabor:"
-
-#: ../ui/prefdialog.glade.h:6
-msgid ""
-"Icons only\n"
-"Text only\n"
-"Icons and text\n"
-"Both horizontal"
-msgstr ""
-"Le ikone\n"
-"Le besedilo\n"
-"Ikone in besedilo\n"
-"Oboje vodoravno"
-
-#: ../ui/prefdialog.glade.h:10
-msgid "Preferences"
-msgstr "Lastnosti"
-
-#: ../ui/prefdialog.glade.h:11
-msgid "The encoding specified by the current locale"
-msgstr "Kodni nabor določen s trenutnimi nastavitvami"
-
-#: ../ui/prefdialog.glade.h:12
-msgid "Tool_bar style:"
-msgstr "_Stil orodne vrstice:"
-
-#: ../ui/prefdialog.glade.h:13
-msgid "UTF-8"
-msgstr "UTF-8"
-
-#: ../ui/prefdialog.glade.h:14
-msgid "_File access"
-msgstr "_Dostop datotek"
-
-#: ../ui/prefdialog.glade.h:15
-msgid "_Look’n’feel"
-msgstr "_Videz in občutek"
-
-#: ../ui/prefdialog.glade.h:16
-msgid "_Match color:"
-msgstr "_Barva zadetka:"
-
-#: ../ui/prefdialog.glade.h:17
-msgid "_Text view font:"
-msgstr "_Pisava besedila:"
-
-#: ../ui/prefdialog.glade.h:18
-msgid "regexxer attempts to read a file in the following encodings before giving up:"
-msgstr "program regexxer naj poskuša prebrati datoteko v privzetem kodiranju, preden prekine delovanje:"
-
+#~ msgid ""
+#~ "The style of the application’s toolbar. Possible values are “icons”, "
+#~ "“text”, “both”, and “both-horiz”."
+#~ msgstr ""
+#~ "Slog orodne vrstice. Mogoče vrednosti so \"ikone\", \"besedilo\", \"oboje"
+#~ "\", in \"oboje-vodoravno\"."
+#~ msgid "Toolbar style"
+#~ msgstr "Slog orodne vrstice"
+#~ msgid ""
+#~ "A filename pattern as used by the shell. Character classes [ab] and csh "
+#~ "style brace expressions {a,b} are supported."
+#~ msgstr ""
+#~ "Vzorec imena datoteke, kot je uporabljen v konzoli. Znakovni razredi [ab] "
+#~ "in csh slog izrazov v oklepajih  {a,b} so podprti."
+#~ msgid "A regular expression in Perl syntax"
+#~ msgstr "Logični izrazi v Perl skladnji"
+#~ msgid "Backward"
+#~ msgstr "Nazaj"
+#~ msgid "File backward"
+#~ msgstr "Predhodna datoteka"
+#~ msgid "File forward"
+#~ msgstr "Naslednja datoteka"
+#~ msgid "Find all files that match the filename pattern"
+#~ msgstr "Poišči vsa imena datotek, ki so primerljiva z vzorcem iskanja"
+#~ msgid "Find all matches of the regular expression"
+#~ msgstr "Poišči vse zadetke logičnih izrazov"
+#~ msgid "Find all possible matches in a line"
+#~ msgstr "Poišči vse mogoče zadetke v vrstici"
+#~ msgid "Find fi_les"
+#~ msgstr "Poišči _datoteke"
+#~ msgid "Fol_der:"
+#~ msgstr "_Mapa:"
+#~ msgid "Forward"
+#~ msgstr "Naprej"
+#~ msgid "Go to next match"
+#~ msgstr "Pojdi na naslednji zadetek"
+#~ msgid "Go to previous match"
+#~ msgstr "Pojdi na predhodni zadetek"
+#~ msgid "Go to the next matching file"
+#~ msgstr "Pojdi na naslednjo datoteko primerljivo z vzorcem"
+#~ msgid "Go to the previous matching file"
+#~ msgstr "Pojdi na predhodno datoteko primerljivo z vzorcem"
+#~ msgid "Preview"
+#~ msgstr "Predogled"
+#~ msgid "Preview of the substitution"
+#~ msgstr "Predogled zamenjav"
+#~ msgid "Recurse into subdirectories"
+#~ msgstr "Izvedi po ravneh map"
+#~ msgid "Replace _current"
+#~ msgstr "Zamenjaj _trenutno"
+#~ msgid "Replace all matches in all files"
+#~ msgstr "Zamenjaj vse zadetke v vseh datotekah"
+#~ msgid "Replace all matches in the current file"
+#~ msgstr "Zamenjaj vse zadetke v trenutni datoteki"
+#~ msgid "Replace current match"
+#~ msgstr "Zamenjaj trenutni zadetek"
+#~ msgid "Replace in _all files"
+#~ msgstr "Zamenjaj v _vseh datotekah"
+#~ msgid "Replace in _this file"
+#~ msgstr "Zamenjaj v _tej datoteki"
+#~ msgid "Replace:"
+#~ msgstr "Zamenjaj:"
+#~ msgid "Search:"
+#~ msgstr "Poišči:"
+#~ msgid ""
+#~ "The new string to substitute. As in Perl, you can refer to parts of the "
+#~ "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
+#~ "\\u, \\L, \\U and \\E are supported as well."
+#~ msgstr ""
+#~ "Nov niz za zamenjavo. Kot v jeziku Perl lahko določite dele zadetkov z "
+#~ "uporabo $1, $2, ... ali celo $+, $&, $` in $'. Operatorji \\l, \\u, \\L, "
+#~ "\\U in \\E so prav tako podprti."
+#~ msgid "_All files"
+#~ msgstr "_Vse datoteke"
+#~ msgid "_Edit"
+#~ msgstr "_Uredi"
+#~ msgid "_File"
+#~ msgstr "_Datoteka"
+#~ msgid "_Help"
+#~ msgstr "_Pomoč"
+#~ msgid "_Match"
+#~ msgstr "_Zadetki"
+#~ msgid "_Next file"
+#~ msgstr "_Naslednja datoteka"
+#~ msgid "_Previous file"
+#~ msgstr "_Predhodna datoteka"
+#~ msgid "_Replace"
+#~ msgstr "_Zamenjaj"
+#~ msgid "_This file"
+#~ msgstr "_Ta datoteka"
+#~ msgid "hidden"
+#~ msgstr "skrito"
+#~ msgid "recursive"
+#~ msgstr "upoštevaj ravni map"
+#~ msgid "1."
+#~ msgstr "1."
+#~ msgid "2."
+#~ msgstr "2."
+#~ msgid "3."
+#~ msgstr "3."
+#~ msgid "C_urrent match color:"
+#~ msgstr "Tren_utna barva zadetka:"
+#~ msgid "Fallback _encoding:"
+#~ msgstr "Povratni _nabor:"
+#~ msgid ""
+#~ "Icons only\n"
+#~ "Text only\n"
+#~ "Icons and text\n"
+#~ "Both horizontal"
+#~ msgstr ""
+#~ "Le ikone\n"
+#~ "Le besedilo\n"
+#~ "Ikone in besedilo\n"
+#~ "Oboje vodoravno"
+#~ msgid "Preferences"
+#~ msgstr "Možnosti"
+#~ msgid "The encoding specified by the current locale"
+#~ msgstr "Kodni nabor določen s trenutnimi nastavitvami"
+#~ msgid "Tool_bar style:"
+#~ msgstr "_Slog orodne vrstice:"
+#~ msgid "UTF-8"
+#~ msgstr "UTF-8"
+#~ msgid "_File access"
+#~ msgstr "_Dostop datotek"
+#~ msgid "_Look’n’feel"
+#~ msgstr "_Videz in občutek"
+#~ msgid "_Match color:"
+#~ msgstr "_Barva zadetka:"
+#~ msgid "_Text view font:"
+#~ msgstr "_Pisava besedila:"
+#~ msgid ""
+#~ "regexxer attempts to read a file in the following encodings before giving "
+#~ "up:"
+#~ msgstr ""
+#~ "program regexxer naj poskuša prebrati datoteko v privzetem kodiranju, "
+#~ "preden prekine delovanje:"
 #~ msgid "_About"
 #~ msgstr "_O programu"
 #~ msgid "[OPTION]... [FOLDER]"
