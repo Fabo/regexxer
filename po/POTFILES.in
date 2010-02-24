@@ -8,5 +8,5 @@ src/mainwindow.cc
 src/pcreshell.cc
 src/prefdialog.cc
 src/statusline.cc
-ui/mainwindow.ui
-ui/prefdialog.ui
+[type: gettext/glade]ui/mainwindow.ui
+[type: gettext/glade]ui/prefdialog.ui
