@@ -3,21 +3,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 #
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2004, 2006.
-# Jorge González <jorgegonz@svn.gnome.org>, 200, 2009.
+# Jorge González <jorgegonz@svn.gnome.org>, 200, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer.HEAD.es\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=regexxer&component=general\n"
-"POT-Creation-Date: 2009-10-03 00:53+0000\n"
-"PO-Revision-Date: 2009-10-28 00:02+0100\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
+"POT-Creation-Date: 2010-02-24 11:55+0000\n"
+"PO-Revision-Date: 2010-02-24 22:01+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:967
 msgid "Search and replace using regular expressions"
@@ -64,7 +63,6 @@ msgstr ""
 "valores posibles."
 
 #: ../ui/regexxer.schemas.in.h:8
-#| msgid "Pattern:"
 msgid "Regex Patterns"
 msgstr "Patrones regex"
 
@@ -129,7 +127,7 @@ msgstr "PATRÓN"
 msgid "Do not recurse into subdirectories"
 msgstr "No ir recursivamente por los subdirectorios"
 
-#: ../src/main.cc:140
+#: ../src/main.cc:140 ../ui/mainwindow.ui.h:2
 msgid "Also find hidden files"
 msgstr "También buscar en los archivos ocultos"
 
@@ -145,7 +143,7 @@ msgstr "EXPREG"
 msgid "Find only the first match in a line"
 msgstr "Buscar sólo la primera coincidencia en una línea"
 
-#: ../src/main.cc:146
+#: ../src/main.cc:146 ../ui/mainwindow.ui.h:4
 msgid "Do case insensitive matching"
 msgstr "Coincidencias no sensibles a mayúsculas"
 
@@ -254,6 +252,234 @@ msgstr "Coincide:"
 msgid "Cancels the running search"
 msgstr "Cancela la búsqueda actual"
 
+#: ../ui/mainwindow.ui.h:1
+msgid "A regular expression in Perl syntax"
+msgstr "Una expresión regular en sintaxis Perl"
+
+#: ../ui/mainwindow.ui.h:3
+msgid "Backward"
+msgstr "Atrás"
+
+#: ../ui/mainwindow.ui.h:5
+msgid "File backward"
+msgstr "Archivo anterior"
+
+#: ../ui/mainwindow.ui.h:6
+msgid "File forward"
+msgstr "Archivo siguiente"
+
+#: ../ui/mainwindow.ui.h:7
+msgid "Find all files that match the filename pattern"
+msgstr ""
+"Encontrar todos los archivos que coincidan con el patrón en el nombre del "
+"archivo"
+
+#: ../ui/mainwindow.ui.h:8
+msgid "Find all matches of the regular expression"
+msgstr "Buscar todas las coincidencias de la expresión regular"
+
+#: ../ui/mainwindow.ui.h:9
+msgid "Find all possible matches in a line"
+msgstr "Buscar todas las posibles coincidencias en una línea"
+
+#: ../ui/mainwindow.ui.h:10
+msgid "Find fi_les"
+msgstr "Buscar _archivos"
+
+#: ../ui/mainwindow.ui.h:11
+msgid "Fol_der:"
+msgstr "Car_peta:"
+
+#: ../ui/mainwindow.ui.h:12
+msgid "Forward"
+msgstr "Adelante"
+
+#: ../ui/mainwindow.ui.h:13
+msgid "Go to next match"
+msgstr "Ir a la siguiente coincidencia"
+
+#: ../ui/mainwindow.ui.h:14
+msgid "Go to previous match"
+msgstr "Ir a la anterior coincidencia"
+
+#: ../ui/mainwindow.ui.h:15
+msgid "Go to the next matching file"
+msgstr "Ir al archivo coincidente siguiente"
+
+#: ../ui/mainwindow.ui.h:16
+msgid "Go to the previous matching file"
+msgstr "Ir al archivo coincidente anterior"
+
+#: ../ui/mainwindow.ui.h:17
+#| msgid "Regex Patterns"
+msgid "Pattern:"
+msgstr "Patrón:"
+
+#: ../ui/mainwindow.ui.h:18
+msgid "Preview"
+msgstr "Vista previa"
+
+#: ../ui/mainwindow.ui.h:19
+msgid "Preview of the substitution"
+msgstr "Vista previa de la sustitución"
+
+#: ../ui/mainwindow.ui.h:20
+msgid "Recurse into subdirectories"
+msgstr "Recursivamente por los directorios"
+
+#: ../ui/mainwindow.ui.h:21
+msgid "Replace _current"
+msgstr "Reemplazar el _actual"
+
+#: ../ui/mainwindow.ui.h:22
+msgid "Replace all matches in all files"
+msgstr "Reemplazar todas las coincidencias en todos los archivos"
+
+#: ../ui/mainwindow.ui.h:23
+msgid "Replace all matches in the current file"
+msgstr "Reemplazar todas las coincidencias en el archivo actual"
+
+#: ../ui/mainwindow.ui.h:24
+msgid "Replace current match"
+msgstr "Reemplazar la coincidencia actual"
+
+#: ../ui/mainwindow.ui.h:25
+msgid "Replace in _all files"
+msgstr "Reemplazar en _todos los archivos"
+
+#: ../ui/mainwindow.ui.h:26
+msgid "Replace in _this file"
+msgstr "Reemplazar en _este archivo"
+
+#: ../ui/mainwindow.ui.h:27
+msgid "Replace:"
+msgstr "Reemplazar:"
+
+#: ../ui/mainwindow.ui.h:28
+#| msgid "Save _all"
+msgid "Save all"
+msgstr "Guardar todo"
+
+#: ../ui/mainwindow.ui.h:29
+msgid "Search:"
+msgstr "Buscar:"
+
+#: ../ui/mainwindow.ui.h:30
+msgid "_All files"
+msgstr "_Todos los archivos"
+
+#: ../ui/mainwindow.ui.h:31
+msgid "_Edit"
+msgstr "_Editar"
+
+#: ../ui/mainwindow.ui.h:32
+msgid "_File"
+msgstr "_Archivo"
+
+#: ../ui/mainwindow.ui.h:33
+msgid "_Help"
+msgstr "Ay_uda"
+
+#: ../ui/mainwindow.ui.h:34
+msgid "_Match"
+msgstr "_Coincide"
+
+#: ../ui/mainwindow.ui.h:35
+msgid "_Next file"
+msgstr "Siguiente _archivo"
+
+#: ../ui/mainwindow.ui.h:36
+msgid "_Previous file"
+msgstr "Archivo _anterior"
+
+#: ../ui/mainwindow.ui.h:37
+msgid "_Replace"
+msgstr "_Reemplazar"
+
+#: ../ui/mainwindow.ui.h:38
+msgid "_This file"
+msgstr "_Este archivo"
+
+#: ../ui/mainwindow.ui.h:39
+msgid "hidden"
+msgstr "oculto"
+
+#: ../ui/mainwindow.ui.h:40
+msgid "recursive"
+msgstr "recursivo"
+
+#: ../ui/prefdialog.ui.h:1
+msgid "1."
+msgstr "1."
+
+#: ../ui/prefdialog.ui.h:2
+msgid "2."
+msgstr "2."
+
+#: ../ui/prefdialog.ui.h:3
+msgid "3."
+msgstr "3."
+
+#: ../ui/prefdialog.ui.h:4
+msgid "Both horizontal"
+msgstr "Ambos horizontales"
+
+#: ../ui/prefdialog.ui.h:5
+msgid "C_urrent match color:"
+msgstr "Color actual de _coincidencia:"
+
+#: ../ui/prefdialog.ui.h:6
+msgid "Fallback _encoding:"
+msgstr "_Codificación en caso de error:"
+
+#: ../ui/prefdialog.ui.h:7
+msgid "Icons and text"
+msgstr "Iconos y texto"
+
+#: ../ui/prefdialog.ui.h:8
+msgid "Icons only"
+msgstr "Sólo iconos"
+
+#: ../ui/prefdialog.ui.h:9
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: ../ui/prefdialog.ui.h:10
+#| msgid "Text view font"
+msgid "Text only"
+msgstr "Sólo texto"
+
+#: ../ui/prefdialog.ui.h:11
+msgid "The encoding specified by the current locale"
+msgstr "La codificación especificada por la localización actual"
+
+#: ../ui/prefdialog.ui.h:12
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ../ui/prefdialog.ui.h:13
+msgid "_File access"
+msgstr "Acceso al _archivo"
+
+#: ../ui/prefdialog.ui.h:14
+msgid "_Look&#x2019;n&#x2019;feel"
+msgstr "_Aspecto"
+
+#: ../ui/prefdialog.ui.h:15
+msgid "_Match color:"
+msgstr "Color de _coincidencia:"
+
+#: ../ui/prefdialog.ui.h:16
+msgid "_Text view font:"
+msgstr "Tipografía de la vista de _texto:"
+
+#: ../ui/prefdialog.ui.h:17
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr ""
+"regexxer intenta leer un archivo en las siguientes codificaciones antes de "
+"dejarlo:"
+
 #~ msgid ""
 #~ "The style of the application’s toolbar. Possible values are “icons”, "
 #~ "“text”, “both”, and “both-horiz”."
@@ -272,83 +498,6 @@ msgstr "Cancela la búsqueda actual"
 #~ "de caracteres [ab] y las expresiones de llaves estilo csh, {a,b} están "
 #~ "soportadas."
 
-#~ msgid "A regular expression in Perl syntax"
-#~ msgstr "Una expresión regular en sintaxis Perl"
-
-#~ msgid "Backward"
-#~ msgstr "Atrás"
-
-#~ msgid "File backward"
-#~ msgstr "Archivo anterior"
-
-#~ msgid "File forward"
-#~ msgstr "Archivo siguiente"
-
-#~ msgid "Find all files that match the filename pattern"
-#~ msgstr ""
-#~ "Encontrar todos los archivos que coincidan con el patrón en el nombre del "
-#~ "archivo"
-
-#~ msgid "Find all matches of the regular expression"
-#~ msgstr "Buscar todas las coincidencias de la expresión regular"
-
-#~ msgid "Find all possible matches in a line"
-#~ msgstr "Buscar todas las posibles coincidencias en una línea"
-
-#~ msgid "Find fi_les"
-#~ msgstr "Buscar _archivos"
-
-#~ msgid "Fol_der:"
-#~ msgstr "Car_peta:"
-
-#~ msgid "Forward"
-#~ msgstr "Adelante"
-
-#~ msgid "Go to next match"
-#~ msgstr "Ir a la siguiente coincidencia"
-
-#~ msgid "Go to previous match"
-#~ msgstr "Ir a la anterior coincidencia"
-
-#~ msgid "Go to the next matching file"
-#~ msgstr "Ir al archivo coincidente siguiente"
-
-#~ msgid "Go to the previous matching file"
-#~ msgstr "Ir al archivo coincidente anterior"
-
-#~ msgid "Preview"
-#~ msgstr "Vista previa"
-
-#~ msgid "Preview of the substitution"
-#~ msgstr "Vista previa de la sustitución"
-
-#~ msgid "Recurse into subdirectories"
-#~ msgstr "Recursivamente por los directorios"
-
-#~ msgid "Replace _current"
-#~ msgstr "Reemplazar el _actual"
-
-#~ msgid "Replace all matches in all files"
-#~ msgstr "Reemplazar todas las coincidencias en todos los archivos"
-
-#~ msgid "Replace all matches in the current file"
-#~ msgstr "Reemplazar todas las coincidencias en el archivo actual"
-
-#~ msgid "Replace current match"
-#~ msgstr "Reemplazar la coincidencia actual"
-
-#~ msgid "Replace in _all files"
-#~ msgstr "Reemplazar en _todos los archivos"
-
-#~ msgid "Replace in _this file"
-#~ msgstr "Reemplazar en _este archivo"
-
-#~ msgid "Replace:"
-#~ msgstr "Reemplazar:"
-
-#~ msgid "Search:"
-#~ msgstr "Buscar:"
-
 #~ msgid ""
 #~ "The new string to substitute. As in Perl, you can refer to parts of the "
 #~ "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
@@ -357,54 +506,6 @@ msgstr "Cancela la búsqueda actual"
 #~ "La cadena nueva a sustituir. Como en Perl, puede referirse a partes de la "
 #~ "coincidencia usando $1, $2, etc. o incluso $+, $&, $` y $'. Los "
 #~ "operadores \\l, \\u, \\L, \\U y \\E están soportados también."
-
-#~ msgid "_All files"
-#~ msgstr "_Todos los archivos"
-
-#~ msgid "_Edit"
-#~ msgstr "_Editar"
-
-#~ msgid "_File"
-#~ msgstr "_Archivo"
-
-#~ msgid "_Help"
-#~ msgstr "Ay_uda"
-
-#~ msgid "_Match"
-#~ msgstr "_Coincide"
-
-#~ msgid "_Next file"
-#~ msgstr "Siguiente _archivo"
-
-#~ msgid "_Previous file"
-#~ msgstr "Archivo _anterior"
-
-#~ msgid "_Replace"
-#~ msgstr "_Reemplazar"
-
-#~ msgid "_This file"
-#~ msgstr "_Este archivo"
-
-#~ msgid "hidden"
-#~ msgstr "oculto"
-
-#~ msgid "recursive"
-#~ msgstr "recursivo"
-
-#~ msgid "1."
-#~ msgstr "1."
-
-#~ msgid "2."
-#~ msgstr "2."
-
-#~ msgid "3."
-#~ msgstr "3."
-
-#~ msgid "C_urrent match color:"
-#~ msgstr "Color actual de _coincidencia:"
-
-#~ msgid "Fallback _encoding:"
-#~ msgstr "_Codificación en caso de error:"
 
 #~ msgid ""
 #~ "Icons only\n"
@@ -417,33 +518,8 @@ msgstr "Cancela la búsqueda actual"
 #~ "Iconos y texto\n"
 #~ "Ambos horizontal"
 
-#~ msgid "Preferences"
-#~ msgstr "Preferencias"
-
-#~ msgid "The encoding specified by the current locale"
-#~ msgstr "La codificación especificada por la localización actual"
-
 #~ msgid "Tool_bar style:"
 #~ msgstr "Estilo de la barra de _herramientas:"
 
-#~ msgid "UTF-8"
-#~ msgstr "UTF-8"
-
-#~ msgid "_File access"
-#~ msgstr "Acceso al _archivo"
-
 #~ msgid "_Look’n’feel"
 #~ msgstr "_Apariencia"
-
-#~ msgid "_Match color:"
-#~ msgstr "Color de _coincidencia:"
-
-#~ msgid "_Text view font:"
-#~ msgstr "Tipografía de la vista de _texto:"
-
-#~ msgid ""
-#~ "regexxer attempts to read a file in the following encodings before giving "
-#~ "up:"
-#~ msgstr ""
-#~ "regexxer intenta leer un archivo en las siguientes codificaciones antes "
-#~ "de dejarlo:"
