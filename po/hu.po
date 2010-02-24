@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
 "POT-Creation-Date: 2010-02-25 00:14+0100\n"
-"PO-Revision-Date: 2010-02-25 00:16+0100\n"
+"PO-Revision-Date: 2010-02-25 00:19+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at fsf dot hu>\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgid ""
 msgstr ""
 "A használandó karakterkódolás neve, ha a fájl nem olvasható sem UTF-8, sem a "
 "jelenlegi területi beállítások által meghatározott kódolással. A lehetséges "
-"értékek listáját az “iconv --list” paranccsal kérheti le."
+"értékek listáját az „iconv --list” paranccsal kérheti le."
 
 #: ../ui/regexxer.schemas.in.h:8
 msgid "Regex Patterns"
@@ -99,12 +99,12 @@ msgstr "#"
 #: ../src/filetree.cc:511
 #, qt-format
 msgid "Failed to save file “%1”: %2"
-msgstr "A(z) “%1” fájl mentése sikertelen: %2"
+msgstr "A(z) „%1” fájl mentése sikertelen: %2"
 
 #: ../src/filetree.cc:927
 #, qt-format
 msgid "“%1” seems to be a binary file."
-msgstr "“%1” bináris fájlnak tűnik."
+msgstr "„%1” bináris fájlnak tűnik."
 
 #: ../src/main.cc:79
 msgid "Save _all"
@@ -112,7 +112,7 @@ msgstr "Összes _mentése"
 
 #: ../src/main.cc:136
 msgid "Find files matching PATTERN"
-msgstr "A MINTA-ra illeszkedő fájlok keresése"
+msgstr "A MINTÁRA illeszkedő fájlok keresése"
 
 #: ../src/main.cc:136
 msgid "PATTERN"
@@ -148,7 +148,7 @@ msgstr "Találatok helyettesítése a STRING-gel"
 
 #: ../src/main.cc:148
 msgid "STRING"
-msgstr "STRING"
+msgstr "KARAKTERLÁNC"
 
 #: ../src/main.cc:150
 msgid "Print match location to standard output"
@@ -204,7 +204,7 @@ msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Hiba a szabályos kifejezésben itt: “%1” (index %2):\n"
+"Hiba a szabályos kifejezésben itt: „%1” (index %2):\n"
 "%3"
 
 #: ../src/pcreshell.cc:89
@@ -225,7 +225,7 @@ msgstr "Elérte a szabályos kifejezés motor rekurziós és visszalépési hat�
 #: ../src/prefdialog.cc:204
 #, qt-format
 msgid "“%1” is not a valid encoding."
-msgstr "“%1”  érvénytelen kódolás."
+msgstr "„%1” érvénytelen kódolás."
 
 #: ../src/statusline.cc:244
 msgid "Stop"
