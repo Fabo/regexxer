@@ -34,7 +34,7 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_save_all">
-                        <property name="label">Save all</property>
+                        <property name="label" translatable="yes">Save all</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
@@ -148,7 +148,7 @@
                   <object class="GtkMenu" id="menuitem_match_menu">
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_prev_file">
-                        <property name="label">_Previous file</property>
+                        <property name="label" translatable="yes">_Previous file</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
@@ -178,7 +178,7 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_next_file">
-                        <property name="label">_Next file</property>
+                        <property name="label" translatable="yes">_Next file</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
@@ -193,7 +193,7 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_replace">
-                        <property name="label">Replace _current</property>
+                        <property name="label" translatable="yes">Replace _current</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
@@ -203,7 +203,7 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_replace_file">
-                        <property name="label">Replace in _this file</property>
+                        <property name="label" translatable="yes">Replace in _this file</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
@@ -212,7 +212,7 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_replace_all">
-                        <property name="label">Replace in _all files</property>
+                        <property name="label" translatable="yes">Replace in _all files</property>
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
