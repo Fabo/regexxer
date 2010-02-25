@@ -1,16 +1,15 @@
-# German translations for regexxer package
-# German messages for regexxer.
+# German translations for regexxer package.
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the regexxer package.
 # Daniel Elstner <daniel.kitta@gmail.com>, 2004.
-# Mario Blättermann <mariobl@gnome.org>, 2009.
+# Mario Blättermann <mariobl@gnome.org>, 2009, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: regexxer 0.8\n"
-"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2009-10-03 02:45+0200\n"
-"PO-Revision-Date: 2009-10-03 02:51+0100\n"
+"Project-Id-Version: regexxer 0.9\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
+"POT-Creation-Date: 2010-02-24 11:55+0000\n"
+"PO-Revision-Date: 2010-02-25 11:32+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +59,7 @@ msgid ""
 msgstr ""
 "Name des zu benutzenden Zeichensatzes wenn eine Datei weder in UTF-8, noch "
 "dem in der Sprachumgebung eingestellten Zeichensatz gelesen werden kann. "
-"„iconv --list“ zeigt eine komplette Liste möglicher Werte an."
+"»iconv --list« zeigt eine komplette Liste möglicher Werte an."
 
 #: ../ui/regexxer.schemas.in.h:8
 msgid "Regex Patterns"
@@ -86,7 +85,7 @@ msgstr ""
 
 #: ../ui/regexxer.schemas.in.h:12
 msgid "The font used in the file editor."
-msgstr "Die Schriftart die im Datei-Editor benutzt wird."
+msgstr "Die Schriftart, die im Datei-Editor benutzt wird."
 
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
@@ -108,7 +107,7 @@ msgstr "Fehler beim Speichern der Datei »%1«: %2"
 #: ../src/filetree.cc:927
 #, qt-format
 msgid "“%1” seems to be a binary file."
-msgstr "„%1“ scheint eine Binärdatei zu sein."
+msgstr "»%1« scheint eine Binärdatei zu sein."
 
 #: ../src/main.cc:79
 msgid "Save _all"
@@ -126,7 +125,7 @@ msgstr "MUSTER"
 msgid "Do not recurse into subdirectories"
 msgstr "Nicht in Unterordner hinabsteigen"
 
-#: ../src/main.cc:140
+#: ../src/main.cc:140 ../ui/mainwindow.ui.h:2
 msgid "Also find hidden files"
 msgstr "Auch verborgene Dateien suchen"
 
@@ -142,7 +141,7 @@ msgstr "REGEX"
 msgid "Find only the first match in a line"
 msgstr "Nur den ersten Treffer in einer Zeile suchen"
 
-#: ../src/main.cc:146
+#: ../src/main.cc:146 ../ui/mainwindow.ui.h:4
 msgid "Do case insensitive matching"
 msgstr "Groß-/Kleinschreibung beim Suchen ignorieren"
 
@@ -212,7 +211,7 @@ msgid ""
 "Error in regular expression at “%1” (index %2):\n"
 "%3"
 msgstr ""
-"Fehler in regulärem Ausdruck bei „%1“ (Index %2):\n"
+"Fehler in regulärem Ausdruck bei »%1« (Index %2):\n"
 "%3"
 
 #: ../src/pcreshell.cc:89
@@ -234,7 +233,7 @@ msgstr ""
 #: ../src/prefdialog.cc:204
 #, qt-format
 msgid "“%1” is not a valid encoding."
-msgstr "„%1“ ist kein gültiger Zeichensatz."
+msgstr "»%1« ist kein gültiger Zeichensatz."
 
 #: ../src/statusline.cc:244
 msgid "Stop"
@@ -251,6 +250,232 @@ msgstr "Treffer:"
 #: ../src/statusline.cc:265
 msgid "Cancels the running search"
 msgstr "Die laufende Suche abbrechen"
+
+#: ../ui/mainwindow.ui.h:1
+msgid "A regular expression in Perl syntax"
+msgstr "Ein regulärer Ausdruck in Perl-Syntax"
+
+#: ../ui/mainwindow.ui.h:3
+msgid "Backward"
+msgstr "Zurück"
+
+#: ../ui/mainwindow.ui.h:5
+msgid "File backward"
+msgstr "Eine Datei zurück"
+
+#: ../ui/mainwindow.ui.h:6
+msgid "File forward"
+msgstr "Eine Datei vorwärts"
+
+#: ../ui/mainwindow.ui.h:7
+msgid "Find all files that match the filename pattern"
+msgstr "Alle Dateien suchen, auf die das Dateinamen-Suchmuster passt"
+
+#: ../ui/mainwindow.ui.h:8
+msgid "Find all matches of the regular expression"
+msgstr "Alle Treffer für den regulären Ausdruck suchen"
+
+#: ../ui/mainwindow.ui.h:9
+msgid "Find all possible matches in a line"
+msgstr "Alle möglichen Treffer innerhalb einer Zeile suchen"
+
+#: ../ui/mainwindow.ui.h:10
+msgid "Find fi_les"
+msgstr "Dateien _suchen"
+
+#: ../ui/mainwindow.ui.h:11
+msgid "Fol_der:"
+msgstr "_Ordner:"
+
+#: ../ui/mainwindow.ui.h:12
+msgid "Forward"
+msgstr "Vorwärts"
+
+#: ../ui/mainwindow.ui.h:13
+msgid "Go to next match"
+msgstr "Zum nächsten Treffer gehen"
+
+#: ../ui/mainwindow.ui.h:14
+msgid "Go to previous match"
+msgstr "Zum vorherigen Treffer gehen"
+
+#: ../ui/mainwindow.ui.h:15
+msgid "Go to the next matching file"
+msgstr "Zur nächsten Datei mit Treffern gehen"
+
+#: ../ui/mainwindow.ui.h:16
+msgid "Go to the previous matching file"
+msgstr "Zur vorherigen Datei mit Treffern gehen"
+
+#: ../ui/mainwindow.ui.h:17
+#| msgid "Regex Patterns"
+msgid "Pattern:"
+msgstr "Muster:"
+
+#: ../ui/mainwindow.ui.h:18
+msgid "Preview"
+msgstr "Vorschau"
+
+#: ../ui/mainwindow.ui.h:19
+msgid "Preview of the substitution"
+msgstr "Vorschau des ersetzten Texts"
+
+#: ../ui/mainwindow.ui.h:20
+msgid "Recurse into subdirectories"
+msgstr "In Unterordner hinabsteigen"
+
+#: ../ui/mainwindow.ui.h:21
+msgid "Replace _current"
+msgstr "Auswahl _ersetzen"
+
+#: ../ui/mainwindow.ui.h:22
+msgid "Replace all matches in all files"
+msgstr "Alle Treffer in allen Dateien ersetzen"
+
+#: ../ui/mainwindow.ui.h:23
+msgid "Replace all matches in the current file"
+msgstr "Alle Treffer in der gewählten Datei ersetzen"
+
+#: ../ui/mainwindow.ui.h:24
+msgid "Replace current match"
+msgstr "Gewählten Treffer ersetzen"
+
+#: ../ui/mainwindow.ui.h:25
+msgid "Replace in _all files"
+msgstr "In _allen Dateien ersetzen"
+
+#: ../ui/mainwindow.ui.h:26
+msgid "Replace in _this file"
+msgstr "In _dieser Datei ersetzen"
+
+#: ../ui/mainwindow.ui.h:27
+msgid "Replace:"
+msgstr "Ersetzen:"
+
+#: ../ui/mainwindow.ui.h:28
+#| msgid "Save _all"
+msgid "Save all"
+msgstr "Alle speichern"
+
+#: ../ui/mainwindow.ui.h:29
+msgid "Search:"
+msgstr "Suchen:"
+
+#: ../ui/mainwindow.ui.h:30
+msgid "_All files"
+msgstr "_Alle Dateien"
+
+#: ../ui/mainwindow.ui.h:31
+msgid "_Edit"
+msgstr "_Bearbeiten"
+
+#: ../ui/mainwindow.ui.h:32
+msgid "_File"
+msgstr "_Datei"
+
+#: ../ui/mainwindow.ui.h:33
+msgid "_Help"
+msgstr "_Hilfe"
+
+#: ../ui/mainwindow.ui.h:34
+msgid "_Match"
+msgstr "_Treffer"
+
+#: ../ui/mainwindow.ui.h:35
+msgid "_Next file"
+msgstr "_Nächste Datei"
+
+#: ../ui/mainwindow.ui.h:36
+msgid "_Previous file"
+msgstr "_Vorherige Datei"
+
+#: ../ui/mainwindow.ui.h:37
+msgid "_Replace"
+msgstr "_Ersetzen"
+
+#: ../ui/mainwindow.ui.h:38
+msgid "_This file"
+msgstr "D_iese Datei"
+
+#: ../ui/mainwindow.ui.h:39
+msgid "hidden"
+msgstr "verborgen"
+
+#: ../ui/mainwindow.ui.h:40
+msgid "recursive"
+msgstr "rekursiv"
+
+#: ../ui/prefdialog.ui.h:1
+msgid "1."
+msgstr "1."
+
+#: ../ui/prefdialog.ui.h:2
+msgid "2."
+msgstr "2."
+
+#: ../ui/prefdialog.ui.h:3
+msgid "3."
+msgstr "3."
+
+#: ../ui/prefdialog.ui.h:4
+msgid "Both horizontal"
+msgstr "Beide horizontal"
+
+#: ../ui/prefdialog.ui.h:5
+msgid "C_urrent match color:"
+msgstr "Farbe des gewählten _Treffers:"
+
+#: ../ui/prefdialog.ui.h:6
+msgid "Fallback _encoding:"
+msgstr "_Rückfall-Zeichensatz:"
+
+#: ../ui/prefdialog.ui.h:7
+msgid "Icons and text"
+msgstr "Symbole und Text"
+
+#: ../ui/prefdialog.ui.h:8
+msgid "Icons only"
+msgstr "Nur Symbole"
+
+#: ../ui/prefdialog.ui.h:9
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: ../ui/prefdialog.ui.h:10
+#| msgid "Text view font"
+msgid "Text only"
+msgstr "Nur Text"
+
+#: ../ui/prefdialog.ui.h:11
+msgid "The encoding specified by the current locale"
+msgstr "Der in der Sprachumgebung eingestellte Zeichensatz"
+
+#: ../ui/prefdialog.ui.h:12
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ../ui/prefdialog.ui.h:13
+msgid "_File access"
+msgstr "_Dateizugriff"
+
+#: ../ui/prefdialog.ui.h:14
+msgid "_Look&#x2019;n&#x2019;feel"
+msgstr "_Darstellung"
+
+#: ../ui/prefdialog.ui.h:15
+msgid "_Match color:"
+msgstr "_Farbe eines Treffers:"
+
+#: ../ui/prefdialog.ui.h:16
+msgid "_Text view font:"
+msgstr "_Schriftart in Dateiansicht:"
+
+#: ../ui/prefdialog.ui.h:17
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr ""
+"Regexxer versucht eine Datei in den folgenden Zeichensätzen zu lesen, bevor "
+"ein Fehlschlag angezeigt wird:"
 
 #~ msgid ""
 #~ "The style of the application’s toolbar. Possible values are “icons”, "
@@ -270,81 +495,6 @@ msgstr "Die laufende Suche abbrechen"
 #~ "Zeichenklassen [ab] und Klammerausdrücke im csh-Stil {a,b} werden "
 #~ "unterstützt."
 
-#~ msgid "A regular expression in Perl syntax"
-#~ msgstr "Ein regulärer Ausdruck in Perl-Syntax"
-
-#~ msgid "Backward"
-#~ msgstr "Zurück"
-
-#~ msgid "File backward"
-#~ msgstr "Eine Datei zurück"
-
-#~ msgid "File forward"
-#~ msgstr "Eine Datei vorwärts"
-
-#~ msgid "Find all files that match the filename pattern"
-#~ msgstr "Finde alle Dateien auf die das Dateinamen-Suchmuster passt"
-
-#~ msgid "Find all matches of the regular expression"
-#~ msgstr "Finde alle Treffer für den regulären Ausdruck"
-
-#~ msgid "Find all possible matches in a line"
-#~ msgstr "Finde alle möglichen Treffer innerhalb einer Zeile"
-
-#~ msgid "Find fi_les"
-#~ msgstr "_Finde Dateien"
-
-#~ msgid "Fol_der:"
-#~ msgstr "_Ordner:"
-
-#~ msgid "Forward"
-#~ msgstr "Vorwärts"
-
-#~ msgid "Go to next match"
-#~ msgstr "Gehe zum nächsten Treffer"
-
-#~ msgid "Go to previous match"
-#~ msgstr "Gehe zum vorherigen Treffer"
-
-#~ msgid "Go to the next matching file"
-#~ msgstr "Gehe zur nächsten Datei mit Treffern"
-
-#~ msgid "Go to the previous matching file"
-#~ msgstr "Gehe zur vorherigen Datei mit Treffern"
-
-#~ msgid "Preview"
-#~ msgstr "Vorschau"
-
-#~ msgid "Preview of the substitution"
-#~ msgstr "Vorschau des ersetzten Texts"
-
-#~ msgid "Recurse into subdirectories"
-#~ msgstr "Steige in Unterverzeichnisse hinab"
-
-#~ msgid "Replace _current"
-#~ msgstr "_Ersetze Auswahl"
-
-#~ msgid "Replace all matches in all files"
-#~ msgstr "Ersetze alle Treffer in allen Dateien"
-
-#~ msgid "Replace all matches in the current file"
-#~ msgstr "Ersetze alle Treffer in der gewählten Datei"
-
-#~ msgid "Replace current match"
-#~ msgstr "Ersetze gewählten Treffer"
-
-#~ msgid "Replace in _all files"
-#~ msgstr "Ersetze in _allen Dateien"
-
-#~ msgid "Replace in _this file"
-#~ msgstr "Ersetze in _dieser Datei"
-
-#~ msgid "Replace:"
-#~ msgstr "Ersetzen:"
-
-#~ msgid "Search:"
-#~ msgstr "Suchen:"
-
 #~ msgid ""
 #~ "The new string to substitute. As in Perl, you can refer to parts of the "
 #~ "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
@@ -353,54 +503,6 @@ msgstr "Die laufende Suche abbrechen"
 #~ "Die neu einzusetzende Zeichenkette. Wie in Perl können Teile des Treffers "
 #~ "mit $1, $2, etc. oder sogar $+, $&, $` und $' referenziert werden. Die "
 #~ "Operatoren \\l, \\u, \\L, \\U und \\E werden auch unterstützt."
-
-#~ msgid "_All files"
-#~ msgstr "_Alle Dateien"
-
-#~ msgid "_Edit"
-#~ msgstr "_Bearbeiten"
-
-#~ msgid "_File"
-#~ msgstr "_Datei"
-
-#~ msgid "_Help"
-#~ msgstr "_Hilfe"
-
-#~ msgid "_Match"
-#~ msgstr "_Treffer"
-
-#~ msgid "_Next file"
-#~ msgstr "_Nächste Datei"
-
-#~ msgid "_Previous file"
-#~ msgstr "_Vorherige Datei"
-
-#~ msgid "_Replace"
-#~ msgstr "_Ersetzen"
-
-#~ msgid "_This file"
-#~ msgstr "D_iese Datei"
-
-#~ msgid "hidden"
-#~ msgstr "versteckt"
-
-#~ msgid "recursive"
-#~ msgstr "rekursiv"
-
-#~ msgid "1."
-#~ msgstr "1."
-
-#~ msgid "2."
-#~ msgstr "2."
-
-#~ msgid "3."
-#~ msgstr "3."
-
-#~ msgid "C_urrent match color:"
-#~ msgstr "Farbe des gewählten _Treffers:"
-
-#~ msgid "Fallback _encoding:"
-#~ msgstr "_Rückfall-Zeichensatz:"
 
 #~ msgid ""
 #~ "Icons only\n"
@@ -413,33 +515,8 @@ msgstr "Die laufende Suche abbrechen"
 #~ "Icons und Text\n"
 #~ "Beides horizontal"
 
-#~ msgid "Preferences"
-#~ msgstr "Einstellungen"
-
-#~ msgid "The encoding specified by the current locale"
-#~ msgstr "Der in der Sprachumgebung eingestellte Zeichensatz"
-
 #~ msgid "Tool_bar style:"
 #~ msgstr "Stil der _Werkzeugleiste:"
 
-#~ msgid "UTF-8"
-#~ msgstr "UTF-8"
-
-#~ msgid "_File access"
-#~ msgstr "_Dateizugriff"
-
 #~ msgid "_Look’n’feel"
 #~ msgstr "_Oberfläche"
-
-#~ msgid "_Match color:"
-#~ msgstr "_Farbe eines Treffers:"
-
-#~ msgid "_Text view font:"
-#~ msgstr "_Schriftart in Dateiansicht:"
-
-#~ msgid ""
-#~ "regexxer attempts to read a file in the following encodings before giving "
-#~ "up:"
-#~ msgstr ""
-#~ "regexxer versucht eine Datei in den folgenden Zeichensätzen zu lesen bevor "
-#~ "ein Fehlschlag angezeigt wird:"
