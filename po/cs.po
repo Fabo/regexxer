@@ -4,14 +4,14 @@
 # This file is distributed under the same license as the regexxer package.
 # Miloslav Trmac <mitr@volny.cz>, 2004.
 # Lucas Lommer <llommer@svn.gnome.org>, 2008 (I did one string only...).
-# Marek Černocký <marek@manet.cz>, 2009.
+# Marek Černocký <marek@manet.cz>, 2009, 2010.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=regexxer&component=general\n"
-"POT-Creation-Date: 2009-10-28 22:38+0000\n"
-"PO-Revision-Date: 2009-11-07 10:25+0100\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
+"POT-Creation-Date: 2010-02-25 10:37+0000\n"
+"PO-Revision-Date: 2010-02-25 23:48+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -126,7 +126,7 @@ msgstr "VZOR"
 msgid "Do not recurse into subdirectories"
 msgstr "Nezanořovat se do podadresářů"
 
-#: ../src/main.cc:140
+#: ../src/main.cc:140 ../ui/mainwindow.ui.h:2
 msgid "Also find hidden files"
 msgstr "Hledat i skryté soubory"
 
@@ -142,7 +142,7 @@ msgstr "REGEX"
 msgid "Find only the first match in a line"
 msgstr "Hledat pouze první výskyt na řádku"
 
-#: ../src/main.cc:146
+#: ../src/main.cc:146 ../ui/mainwindow.ui.h:4
 msgid "Do case insensitive matching"
 msgstr "Nerozlišovat velikost písmen"
 
@@ -252,193 +252,224 @@ msgstr "Výskyt:"
 msgid "Cancels the running search"
 msgstr "Zruší probíhající hledání"
 
-#~ msgid ""
-#~ "The style of the application’s toolbar. Possible values are “icons”, "
-#~ "“text”, “both”, and “both-horiz”."
-#~ msgstr ""
-#~ "Styl lišty nástrojů aplikace. Možné hodnoty jsou “icons”, “text”, “both” "
-#~ "a “both-horiz”."
+#: ../ui/mainwindow.ui.h:1
+msgid "A regular expression in Perl syntax"
+msgstr "Reguálrní výraz v syntaxi Perlu"
 
-#~ msgid "Toolbar style"
-#~ msgstr "Styl lišty nástrojů"
+#: ../ui/mainwindow.ui.h:3
+msgid "Backward"
+msgstr "Zpět"
 
-#~ msgid ""
-#~ "A filename pattern as used by the shell. Character classes [ab] and csh "
-#~ "style brace expressions {a,b} are supported."
-#~ msgstr ""
-#~ "Vzor názvů souborů jako v shellu. Třídy znaků [ab] a výrazy se složenými "
-#~ "závorkami ve stylu csh {a,b} jsou podporovány."
+#: ../ui/mainwindow.ui.h:5
+msgid "File backward"
+msgstr "Soubor zpět"
 
-#~ msgid "A regular expression in Perl syntax"
-#~ msgstr "Reguálrní výraz v syntaxi Perlu"
+#: ../ui/mainwindow.ui.h:6
+msgid "File forward"
+msgstr "Soubor vpřed"
 
-#~ msgid "Backward"
-#~ msgstr "Zpět"
+#: ../ui/mainwindow.ui.h:7
+msgid "Find all files that match the filename pattern"
+msgstr "Hledat všechny soubory, které odpovídají vzoru názvu souboru"
 
-#~ msgid "File backward"
-#~ msgstr "Soubor zpět"
+#: ../ui/mainwindow.ui.h:8
+msgid "Find all matches of the regular expression"
+msgstr "Hledat všechny výskyty regulárního výrazu"
 
-#~ msgid "File forward"
-#~ msgstr "Soubor vpřed"
+#: ../ui/mainwindow.ui.h:9
+msgid "Find all possible matches in a line"
+msgstr "Hledat všechny možné výskyty na řádku"
 
-#~ msgid "Find all files that match the filename pattern"
-#~ msgstr "Hledat všechny soubory, které odpovídají vzoru názvu souboru"
+#: ../ui/mainwindow.ui.h:10
+msgid "Find fi_les"
+msgstr "Hledat _soubory"
 
-#~ msgid "Find all matches of the regular expression"
-#~ msgstr "Hledat všechny výskyty regulárního výrazu"
+#: ../ui/mainwindow.ui.h:11
+msgid "Fol_der:"
+msgstr "_Adresář:"
 
-#~ msgid "Find all possible matches in a line"
-#~ msgstr "Hledat všechny možné výskyty na řádku"
+#: ../ui/mainwindow.ui.h:12
+msgid "Forward"
+msgstr "Vpřed"
 
-#~ msgid "Find fi_les"
-#~ msgstr "Hledat _soubory"
+#: ../ui/mainwindow.ui.h:13
+msgid "Go to next match"
+msgstr "Jít na následující výskyt"
 
-#~ msgid "Fol_der:"
-#~ msgstr "_Adresář:"
+#: ../ui/mainwindow.ui.h:14
+msgid "Go to previous match"
+msgstr "Jít na předchozí výskyt"
 
-#~ msgid "Forward"
-#~ msgstr "Vpřed"
+#: ../ui/mainwindow.ui.h:15
+msgid "Go to the next matching file"
+msgstr "Jít na následující odpovídající soubor"
 
-#~ msgid "Go to next match"
-#~ msgstr "Jít na následující výskyt"
+#: ../ui/mainwindow.ui.h:16
+msgid "Go to the previous matching file"
+msgstr "Jít na předchozí odpovídající soubor"
 
-#~ msgid "Go to previous match"
-#~ msgstr "Jít na předchozí výskyt"
+#: ../ui/mainwindow.ui.h:17
+msgid "Pattern:"
+msgstr "Vzor:"
 
-#~ msgid "Go to the next matching file"
-#~ msgstr "Jít na následující odpovídající soubor"
+#: ../ui/mainwindow.ui.h:18
+msgid "Preview"
+msgstr "Náhled"
 
-#~ msgid "Go to the previous matching file"
-#~ msgstr "Jít na předchozí odpovídající soubor"
+#: ../ui/mainwindow.ui.h:19
+msgid "Preview of the substitution"
+msgstr "Náhled nahrazení"
 
-#~ msgid "Preview"
-#~ msgstr "Náhled"
+#: ../ui/mainwindow.ui.h:20
+msgid "Recurse into subdirectories"
+msgstr "Vnořovat se do adresářů"
 
-#~ msgid "Preview of the substitution"
-#~ msgstr "Náhled nahrazení"
+#: ../ui/mainwindow.ui.h:21
+msgid "Replace _current"
+msgstr "Nahradit _aktuální"
 
-#~ msgid "Recurse into subdirectories"
-#~ msgstr "Vnořovat se do adresářů"
+#: ../ui/mainwindow.ui.h:22
+msgid "Replace all matches in all files"
+msgstr "Nahradit všechny výskyty ve všech souborech"
 
-#~ msgid "Replace _current"
-#~ msgstr "Nahradit _aktuální"
+#: ../ui/mainwindow.ui.h:23
+msgid "Replace all matches in the current file"
+msgstr "Nahradit všechny výskyty v aktuálním souboru"
 
-#~ msgid "Replace all matches in all files"
-#~ msgstr "Nahradit všechny výskyty ve všech souborech"
+#: ../ui/mainwindow.ui.h:24
+msgid "Replace current match"
+msgstr "Nahradit aktuální výskyt"
 
-#~ msgid "Replace all matches in the current file"
-#~ msgstr "Nahradit všechny výskyty v aktuálním souboru"
+#: ../ui/mainwindow.ui.h:25
+msgid "Replace in _all files"
+msgstr "Nahrazovat ve _všech souborech"
 
-#~ msgid "Replace current match"
-#~ msgstr "Nahradit aktuální výskyt"
+#: ../ui/mainwindow.ui.h:26
+msgid "Replace in _this file"
+msgstr "Nahrazovat v _tomto souboru"
 
-#~ msgid "Replace in _all files"
-#~ msgstr "Nahrazovat ve _všech souborech"
+#: ../ui/mainwindow.ui.h:27
+msgid "Replace:"
+msgstr "Nahradit:"
 
-#~ msgid "Replace in _this file"
-#~ msgstr "Nahrazovat v _tomto souboru"
+#: ../ui/mainwindow.ui.h:28
+msgid "Save all"
+msgstr "Uložit vše"
 
-#~ msgid "Replace:"
-#~ msgstr "Nahradit:"
+#: ../ui/mainwindow.ui.h:29
+msgid "Search:"
+msgstr "Hledat:"
 
-#~ msgid "Search:"
-#~ msgstr "Hledat:"
+#: ../ui/mainwindow.ui.h:30
+msgid "_All files"
+msgstr "_Všechny soubory"
 
-#~ msgid ""
-#~ "The new string to substitute. As in Perl, you can refer to parts of the "
-#~ "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
-#~ "\\u, \\L, \\U and \\E are supported as well."
-#~ msgstr ""
-#~ "Nový řetězec, kterým nahrazovat. Můžete se odkazovat na části nalezeného "
-#~ "výskytu pomocí $1, $2 atd. nebo i $+, $&, $` a $', jako v Perlu. "
-#~ "Operátory \\l, \\u, \\L, \\U a \\E jsou také podporovány."
+#: ../ui/mainwindow.ui.h:31
+msgid "_Edit"
+msgstr "_Upravit"
 
-#~ msgid "_All files"
-#~ msgstr "_Všechny soubory"
+#: ../ui/mainwindow.ui.h:32
+msgid "_File"
+msgstr "_Soubor"
 
-#~ msgid "_Edit"
-#~ msgstr "_Upravit"
+#: ../ui/mainwindow.ui.h:33
+msgid "_Help"
+msgstr "_Nápověda"
 
-#~ msgid "_File"
-#~ msgstr "_Soubor"
+#: ../ui/mainwindow.ui.h:34
+msgid "_Match"
+msgstr "_Výskyt"
 
-#~ msgid "_Help"
-#~ msgstr "_Nápověda"
+#: ../ui/mainwindow.ui.h:35
+msgid "_Next file"
+msgstr "_Následující soubor"
 
-#~ msgid "_Match"
-#~ msgstr "_Výskyt"
+#: ../ui/mainwindow.ui.h:36
+msgid "_Previous file"
+msgstr "_Předchozí soubor"
 
-#~ msgid "_Next file"
-#~ msgstr "_Následující soubor"
+#: ../ui/mainwindow.ui.h:37
+msgid "_Replace"
+msgstr "Na_hradit"
 
-#~ msgid "_Previous file"
-#~ msgstr "_Předchozí soubor"
+#: ../ui/mainwindow.ui.h:38
+msgid "_This file"
+msgstr "_Tento soubor"
 
-#~ msgid "_Replace"
-#~ msgstr "Na_hradit"
+#: ../ui/mainwindow.ui.h:39
+msgid "hidden"
+msgstr "skryté"
 
-#~ msgid "_This file"
-#~ msgstr "_Tento soubor"
+#: ../ui/mainwindow.ui.h:40
+msgid "recursive"
+msgstr "rekurzivně"
 
-#~ msgid "hidden"
-#~ msgstr "skryté"
+#: ../ui/prefdialog.ui.h:1
+msgid "1."
+msgstr "1."
 
-#~ msgid "recursive"
-#~ msgstr "rekurzivně"
+#: ../ui/prefdialog.ui.h:2
+msgid "2."
+msgstr "2."
 
-#~ msgid "1."
-#~ msgstr "1."
+#: ../ui/prefdialog.ui.h:3
+msgid "3."
+msgstr "3."
 
-#~ msgid "2."
-#~ msgstr "2."
+#: ../ui/prefdialog.ui.h:4
+msgid "Both horizontal"
+msgstr "Oboje vodorovně"
 
-#~ msgid "3."
-#~ msgstr "3."
+#: ../ui/prefdialog.ui.h:5
+msgid "C_urrent match color:"
+msgstr "Barva _aktuálního výskytu:"
 
-#~ msgid "C_urrent match color:"
-#~ msgstr "Barva _aktuálního výskytu:"
+#: ../ui/prefdialog.ui.h:6
+msgid "Fallback _encoding:"
+msgstr "Náhradní _kódování:"
 
-#~ msgid "Fallback _encoding:"
-#~ msgstr "Náhradní _kódování:"
+#: ../ui/prefdialog.ui.h:7
+msgid "Icons and text"
+msgstr "Ikony a text"
 
-#~ msgid ""
-#~ "Icons only\n"
-#~ "Text only\n"
-#~ "Icons and text\n"
-#~ "Both horizontal"
-#~ msgstr ""
-#~ "Jen ikony\n"
-#~ "Jen text\n"
-#~ "Ikony a text\n"
-#~ "Obojí vedle sebe"
+#: ../ui/prefdialog.ui.h:8
+msgid "Icons only"
+msgstr "Pouze ikony"
 
-#~ msgid "Preferences"
-#~ msgstr "Nastavení"
+#: ../ui/prefdialog.ui.h:9
+msgid "Preferences"
+msgstr "Nastavení"
 
-#~ msgid "The encoding specified by the current locale"
-#~ msgstr "Kódování určené aktuálním locale"
+#: ../ui/prefdialog.ui.h:10
+msgid "Text only"
+msgstr "Pouze text"
 
-#~ msgid "Tool_bar style:"
-#~ msgstr "_Styl lišty nástrojů:"
+#: ../ui/prefdialog.ui.h:11
+msgid "The encoding specified by the current locale"
+msgstr "Kódování určené aktuálním locale"
 
-#~ msgid "UTF-8"
-#~ msgstr "UTF-8"
+#: ../ui/prefdialog.ui.h:12
+msgid "UTF-8"
+msgstr "UTF-8"
 
-#~ msgid "_File access"
-#~ msgstr "_Přístup k souborům"
+#: ../ui/prefdialog.ui.h:13
+msgid "_File access"
+msgstr "_Přístup k souborům"
 
-#~ msgid "_Look’n’feel"
-#~ msgstr "_Vzhled a chování"
+#: ../ui/prefdialog.ui.h:14
+msgid "_Look&#x2019;n&#x2019;feel"
+msgstr "Vzh_led"
 
-#~ msgid "_Match color:"
-#~ msgstr "_Barva výskytu:"
+#: ../ui/prefdialog.ui.h:15
+msgid "_Match color:"
+msgstr "_Barva výskytu:"
 
-#~ msgid "_Text view font:"
-#~ msgstr "_Písmo textového pohledu:"
+#: ../ui/prefdialog.ui.h:16
+msgid "_Text view font:"
+msgstr "_Písmo textového pohledu:"
 
-#~ msgid ""
-#~ "regexxer attempts to read a file in the following encodings before giving "
-#~ "up:"
-#~ msgstr ""
-#~ "Než se regexxer vzdá, zkouší soubor načíst v následujících kódováních:"
+#: ../ui/prefdialog.ui.h:17
+msgid ""
+"regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "Než se regexxer vzdá, zkouší soubor načíst v následujících kódováních:"
 
