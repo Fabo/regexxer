@@ -16,6 +16,8 @@
       <foaf:mbox rdf:resource="mailto:parent.f@gmail.com" />
       <gnome:userid>fparent</gnome:userid>
     </foaf:Person>
+  </maintainer>
+  <maintainer>
     <foaf:Person>
       <foaf:name>Daniel Elstner</foaf:name>
       <foaf:mbox rdf:resource="mailto:daniel.kitta@gmail.com" />
