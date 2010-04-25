@@ -43,6 +43,7 @@ class FileChooser;
 class Toolbar;
 class Window;
 class ComboBoxEntry;
+class ComboBoxEntryText;
 class VBox;
 class ScrolledWindow;
 class Table;
@@ -103,9 +104,7 @@ private:
   Gtk::Table*                 table_file_;
   Gtk::FileChooser*           button_folder_;
   
-  Gtk::ComboBoxEntry*         combo_entry_pattern_;
-  CompletionStack             combo_entry_pattern_completion_stack_;
-  Glib::RefPtr<Gtk::EntryCompletion> combo_entry_pattern_completion_;
+  Gtk::ComboBoxEntryText*     combo_entry_pattern_;
   
   Gtk::CheckButton*           button_recursive_;
   Gtk::CheckButton*           button_hidden_;

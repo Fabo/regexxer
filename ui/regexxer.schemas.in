@@ -2,24 +2,6 @@
 <gconfschemafile>
   <schemalist>
     <schema>
-      <key>/schemas/apps/regexxer/files_patterns</key>
-      <applyto>/apps/regexxer/files_patterns</applyto>
-      <owner>regexxer</owner>
-      <type>list</type>
-      <list_type>string</list_type>
-      <default_value>
-        <value>
-          <list type="string">
-          </list>
-        </value>
-      </default_value>
-      <locale name="C">
-	<short>Regex Patterns</short>
-	<long>List of last pattern used for the file's regex entry.</long>
-      </locale>
-    </schema>
-  
-    <schema>
       <key>/schemas/apps/regexxer/regex_patterns</key>
       <applyto>/apps/regexxer/regex_patterns</applyto>
       <owner>regexxer</owner>

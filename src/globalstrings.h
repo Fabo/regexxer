@@ -40,7 +40,6 @@ const char *const conf_key_toolbar_style       = "/apps/regexxer/toolbar_style";
 const char *const conf_key_fallback_encoding   = "/apps/regexxer/fallback_encoding";
 const char *const conf_key_substitution_patterns = "/apps/regexxer/substitution_patterns";
 const char *const conf_key_regex_patterns      = "/apps/regexxer/regex_patterns";
-const char *const conf_key_files_patterns      = "/apps/regexxer/files_patterns";
 
 const char *const ui_mainwindow_filename       = REGEXXER_PKGDATADIR G_DIR_SEPARATOR_S
                                                  "mainwindow.ui";

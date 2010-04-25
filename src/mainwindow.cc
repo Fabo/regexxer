@@ -183,8 +183,6 @@ MainWindow::MainWindow()
   table_file_             (0),
   button_folder_          (0),
   combo_entry_pattern_    (Gtk::manage(new Gtk::ComboBoxEntryText())),
-  combo_entry_pattern_completion_stack_(10, Gnome::Conf::Client::get_default_client()->get_string_list(conf_key_files_patterns)),
-  combo_entry_pattern_completion_ (Gtk::EntryCompletion::create()),
   button_recursive_       (0),
   button_hidden_          (0),
   entry_regex_            (0),
@@ -243,9 +241,7 @@ void MainWindow::initialize(const InitState& init)
   const bool folder_exists = button_folder_->set_current_folder(folder);
 
   combo_entry_pattern_->get_entry()->set_text((init.pattern.empty()) ? Glib::ustring(1, '*') : init.pattern);
-  combo_entry_pattern_->set_model(combo_entry_pattern_completion_stack_.get_completion_model());
-  combo_entry_pattern_->set_text_column(combo_entry_pattern_completion_stack_.get_completion_column());
-  combo_entry_pattern_->get_entry()->set_completion(combo_entry_pattern_completion_);
+  entry_regex_  ->set_text(init.regex);
   
   entry_regex_->set_text(init.regex);
   entry_regex_->set_completion(entry_regex_completion_);
@@ -257,16 +253,10 @@ void MainWindow::initialize(const InitState& init)
   comboboxentry_substitution_->set_model(entry_substitution_completion_stack_.get_completion_model());
   comboboxentry_substitution_->set_text_column(entry_substitution_completion_stack_.get_completion_column());
   
-  combo_entry_pattern_completion_->set_model(combo_entry_pattern_completion_stack_.get_completion_model());
-  combo_entry_pattern_completion_->set_text_column(combo_entry_pattern_completion_stack_.get_completion_column());
-  combo_entry_pattern_completion_->set_inline_completion(true);
-  combo_entry_pattern_completion_->set_popup_completion(false);
-  
   entry_regex_completion_->set_model(entry_regex_completion_stack_.get_completion_model());
   entry_regex_completion_->set_text_column(entry_regex_completion_stack_.get_completion_column());
   entry_regex_completion_->set_inline_completion(true);
   entry_regex_completion_->set_popup_completion(false);
-  
 
   entry_substitution_completion_->set_model(entry_substitution_completion_stack_.get_completion_model());
   entry_substitution_completion_->set_text_column(entry_substitution_completion_stack_.get_completion_column());
@@ -277,6 +267,17 @@ void MainWindow::initialize(const InitState& init)
   button_hidden_   ->set_active(init.hidden);
   button_multiple_ ->set_active(!init.no_global);
   button_caseless_ ->set_active(init.ignorecase);
+
+  combo_entry_pattern_->append_text("*.[ch]");
+  combo_entry_pattern_->append_text("*.{c,cc,cpp,cxx,c++,C,h,hh,hpp,hxx,h++}");
+  combo_entry_pattern_->append_text("*.{ccg,hg}");
+  combo_entry_pattern_->append_text("*.idl");
+  combo_entry_pattern_->append_text("*.{java,jsp}");
+  combo_entry_pattern_->append_text("*.{pl,pm,cgi}");
+  combo_entry_pattern_->append_text("*.py");
+  combo_entry_pattern_->append_text("*.php[0-9]?");
+  combo_entry_pattern_->append_text("*.{html,htm,shtml,js,wml}");
+  combo_entry_pattern_->append_text("*.{xml,xsl,css,dtd,xsd}");
 
   if (init.feedback)
     filetree_->signal_feedback.connect(&print_location);
@@ -530,10 +531,6 @@ void MainWindow::on_find_files()
     if (dialog.run() != Gtk::RESPONSE_OK)
       return;
   }
-  
-  const Glib::ustring files_regex = combo_entry_pattern_->get_entry()->get_text();
-  combo_entry_pattern_completion_stack_.push(files_regex);
-  Gnome::Conf::Client::get_default_client()->set_string_list(conf_key_files_patterns, combo_entry_pattern_completion_stack_.get_stack());
 
   std::string folder = button_folder_->get_filename();
 
@@ -548,7 +545,7 @@ void MainWindow::on_find_files()
 
   try
   {
-    Pcre::Pattern pattern (Util::shell_pattern_to_regex(files_regex), Pcre::DOTALL);
+    Pcre::Pattern pattern (Util::shell_pattern_to_regex(combo_entry_pattern_->get_entry()->get_text()), Pcre::DOTALL);
 
     filetree_->find_files(folder, pattern,
                           button_recursive_->get_active(),
