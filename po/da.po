@@ -1,14 +1,14 @@
 # Danish translation for regexxer.
 # Copyright (C) 2010 regexxer's COPYRIGHT HOLDER
 # This file is distributed under the same license as the regexxer package.
-# joehansen <joedalton2@yahoo.dk>, 2010.
+# Joe Hansen <joedalton2@yahoo.dk>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer master\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2010-09-19 23:43+0200\n"
-"PO-Revision-Date: 2010-09-11 19:48+0100\n"
+"POT-Creation-Date: 2010-10-24 17:59+0200\n"
+"PO-Revision-Date: 2010-10-20 19:48+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
@@ -93,12 +93,12 @@ msgid "#"
 msgstr "#"
 
 #: ../src/filetree.cc:511
-#, fuzzy, qt-format
+#, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Kunne ikke gemme fil \"%1\": %2"
 
 #: ../src/filetree.cc:927
-#, fuzzy, qt-format
+#, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "\"%1\" ser ud til at være en binær fil."
 
