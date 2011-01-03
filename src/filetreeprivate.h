@@ -117,10 +117,10 @@ private:
 
 struct FileTree::FindData
 {
-  FindData(Pcre::Pattern& pattern_, bool recursive_, bool hidden_);
+  FindData(const Glib::RefPtr<Glib::Regex>& pattern_, bool recursive_, bool hidden_);
   ~FindData();
 
-  Pcre::Pattern&                          pattern;
+  const Glib::RefPtr<Glib::Regex>&        pattern;
   const bool                              recursive;
   const bool                              hidden;
   FileTreePrivate::DirStack               dirstack;
@@ -133,11 +133,11 @@ private:
 
 struct FileTree::FindMatchesData
 {
-  FindMatchesData(Pcre::Pattern& pattern_, bool multiple_);
+  FindMatchesData(const Glib::RefPtr<Glib::Regex>& pattern_, bool multiple_);
 
-  Pcre::Pattern&  pattern;
-  const bool      multiple;
-  bool            path_match_first_set;
+  const Glib::RefPtr<Glib::Regex>& pattern;
+  const bool                       multiple;
+  bool                             path_match_first_set;
 
 private:
   FindMatchesData(const FileTree::FindMatchesData&);

@@ -21,7 +21,6 @@
 #include "filetree.h"
 #include "filetreeprivate.h"
 #include "globalstrings.h"
-#include "pcreshell.h"
 #include "stringutils.h"
 #include "translation.h"
 
@@ -106,7 +105,7 @@ FileTree::FileTree()
 FileTree::~FileTree()
 {}
 
-void FileTree::find_files(const std::string& dirname, Pcre::Pattern& pattern,
+void FileTree::find_files(const std::string& dirname, const Glib::RefPtr<Glib::Regex>& pattern,
                           bool recursive, bool hidden)
 {
   FindData find_data (pattern, recursive, hidden);
@@ -224,7 +223,7 @@ BoundState FileTree::get_bound_state()
   return bound;
 }
 
-void FileTree::find_matches(Pcre::Pattern& pattern, bool multiple)
+void FileTree::find_matches(const Glib::RefPtr<Glib::Regex>& pattern, bool multiple)
 {
   {
     Util::ScopedBlock  block_conn (conn_match_count_);
@@ -391,7 +390,7 @@ void FileTree::find_recursively(const std::string& dirname, FindData& find_data)
       {
         const ustring basename = Glib::filename_display_basename(fullname);
 
-        if (find_data.pattern.match(basename) > 0)
+        if (find_data.pattern->match(basename))
         {
           find_add_file(basename, fullname, find_data);
           ++file_count;

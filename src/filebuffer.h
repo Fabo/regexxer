@@ -50,7 +50,7 @@ public:
   bool is_freeable() const;
   bool in_user_action() const;
 
-  int find_matches(Pcre::Pattern& pattern, bool multiple,
+  int find_matches(const Glib::RefPtr<Glib::Regex>& pattern, bool multiple,
                    const sigc::slot<void, int, const Glib::ustring&>& feedback);
 
   int get_match_count() const;

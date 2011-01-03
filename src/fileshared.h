@@ -28,8 +28,6 @@
 #include <utility>
 #include <vector>
 
-namespace Pcre { class Pattern; }
-
 namespace Regexxer
 {
 
@@ -79,7 +77,7 @@ struct MatchData : public Util::SharedObject
   Glib::RefPtr<Gtk::TextMark>        mark;
 
   MatchData(int match_index, const Glib::ustring& line,
-            const Pcre::Pattern& pattern, int capture_count);
+            Glib::MatchInfo& match_info);
   ~MatchData();
 
   void install_mark(const Gtk::TextBuffer::iterator& pos);

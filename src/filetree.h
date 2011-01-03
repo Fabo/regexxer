@@ -33,7 +33,7 @@
 #include <list>
 
 namespace Gtk   { class TreeStore; }
-namespace Pcre  { class Pattern; }
+namespace Glib  { class Regex; }
 namespace Gnome { namespace Conf { class Value; } }
 
 namespace Regexxer
@@ -47,7 +47,7 @@ public:
   FileTree();
   virtual ~FileTree();
 
-  void find_files(const std::string& dirname, Pcre::Pattern& pattern,
+  void find_files(const std::string& dirname, const Glib::RefPtr<Glib::Regex>& pattern,
                   bool recursive, bool hidden);
 
   int  get_file_count() const;
@@ -60,7 +60,7 @@ public:
 
   BoundState get_bound_state();
 
-  void find_matches(Pcre::Pattern& pattern, bool multiple);
+  void find_matches(const Glib::RefPtr<Glib::Regex>& pattern, bool multiple);
   long get_match_count() const;
   void replace_all_matches(const Glib::ustring& substitution);
 

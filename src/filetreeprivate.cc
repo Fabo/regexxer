@@ -192,7 +192,8 @@ const std::list<Glib::ustring>& FileTree::Error::get_error_list() const
 
 /**** Regexxer::FileTree::FindData *****************************************/
 
-FileTree::FindData::FindData(Pcre::Pattern& pattern_, bool recursive_, bool hidden_)
+FileTree::FindData::FindData(const Glib::RefPtr<Glib::Regex>& pattern_,
+                             bool recursive_, bool hidden_)
 :
   pattern    (pattern_),
   recursive  (recursive_),
@@ -205,7 +206,8 @@ FileTree::FindData::~FindData()
 
 /**** Regexxer::FileTree::FindMatchesData **********************************/
 
-FileTree::FindMatchesData::FindMatchesData(Pcre::Pattern& pattern_, bool multiple_)
+FileTree::FindMatchesData::FindMatchesData(const Glib::RefPtr<Glib::Regex>& pattern_,
+                                           bool multiple_)
 :
   pattern              (pattern_),
   multiple             (multiple_),

@@ -52,8 +52,6 @@ src_regexxer_SOURCES =		\
 	src/mainwindow.cc	\
 	src/mainwindow.h	\
 	src/miscutils.h		\
-	src/pcreshell.cc	\
-	src/pcreshell.h		\
 	src/prefdialog.cc	\
 	src/prefdialog.h	\
 	src/sharedptr.h		\

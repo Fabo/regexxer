@@ -19,7 +19,6 @@
  */
 
 #include "fileshared.h"
-#include "pcreshell.h"
 
 #include <glib.h>
 #include <algorithm>
@@ -59,15 +58,20 @@ namespace Regexxer
 /**** Regexxer::MatchData **************************************************/
 
 MatchData::MatchData(int match_index, const Glib::ustring& line,
-                     const Pcre::Pattern& pattern, int capture_count)
+                     Glib::MatchInfo& match_info)
 :
   index   (match_index),
   subject (line)
 {
+  int capture_count = match_info.get_match_count();
   captures.reserve(capture_count);
 
   for (int i = 0; i < capture_count; ++i)
-    captures.push_back(pattern.get_substring_bounds(i));
+  {
+    std::pair<int, int> bounds;
+    match_info.fetch_pos(i, bounds.first, bounds.second);
+    captures.push_back(bounds);
+  }
 
   length = calculate_match_length(subject, captures.front());
 }

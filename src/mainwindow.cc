@@ -21,7 +21,6 @@
 #include "mainwindow.h"
 #include "filetree.h"
 #include "globalstrings.h"
-#include "pcreshell.h"
 #include "prefdialog.h"
 #include "statusline.h"
 #include "stringutils.h"
@@ -545,13 +544,15 @@ void MainWindow::on_find_files()
 
   try
   {
-    Pcre::Pattern pattern (Util::shell_pattern_to_regex(combo_entry_pattern_->get_entry()->get_text()), Pcre::DOTALL);
+    Glib::RefPtr<Glib::Regex> pattern = Glib::Regex::create(
+        Util::shell_pattern_to_regex(combo_entry_pattern_->get_entry()->get_text()),
+        Glib::REGEX_DOTALL);
 
     filetree_->find_files(folder, pattern,
                           button_recursive_->get_active(),
                           button_hidden_->get_active());
   }
-  catch (const Pcre::Error&)
+  catch (const Glib::RegexError&)
   {
     Gtk::MessageDialog dialog (*window_, _("The file search pattern is invalid."),
                                false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
@@ -580,23 +581,17 @@ void MainWindow::on_exec_search()
   
   try
   {
-    Pcre::Pattern pattern (regex, (caseless) ? Pcre::CASELESS : Pcre::CompileOptions(0));
+    Glib::RefPtr<Glib::Regex> pattern =
+        Glib::Regex::create(regex, (caseless) ? Glib::REGEX_CASELESS
+                                              : static_cast<Glib::RegexCompileFlags>(0));
 
     filetree_->find_matches(pattern, multiple);
   }
-  catch (const Pcre::Error& error)
+  catch (const Glib::RegexError& error)
   {
     Gtk::MessageDialog dialog (*window_, error.what(), false,
                                Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     dialog.run();
-
-    const int offset = error.offset();
-
-    if (offset >= 0 && offset < entry_regex_->get_text_length())
-    {
-      entry_regex_->grab_focus();
-      entry_regex_->select_region(offset, offset + 1);
-    }
 
     return;
   }

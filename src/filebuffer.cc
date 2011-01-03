@@ -22,7 +22,6 @@
 #include "filebufferundo.h"
 #include "globalstrings.h"
 #include "miscutils.h"
-#include "pcreshell.h"
 #include "stringutils.h"
 #include "translation.h"
 
@@ -254,7 +253,7 @@ bool FileBuffer::in_user_action() const
  * If multiple is false then every line is matched only once, otherwise
  * multiple matches per line will be found (like modifier /g in Perl).
  */
-int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple,
+int FileBuffer::find_matches(const Glib::RefPtr<Glib::Regex>& pattern, bool multiple,
                              const sigc::slot<void, int, const Glib::ustring&>& feedback)
 {
   ScopedLock lock (*this);
@@ -292,10 +291,12 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple,
         return match_count_;
       }
 
-      const int capture_count =
-        pattern.match(subject, offset, (last_was_empty) ? Pcre::ANCHORED | Pcre::NOT_EMPTY
-                                                        : Pcre::MatchOptions(0));
-      if (capture_count <= 0)
+      Glib::MatchInfo match_info;
+      bool is_matched =
+        pattern->match(subject, offset, match_info,
+                       (last_was_empty) ? Glib::REGEX_MATCH_ANCHORED | Glib::REGEX_MATCH_NOTEMPTY
+                                        : static_cast<Glib::RegexMatchFlags>(0));
+      if (!is_matched)
       {
         if (last_was_empty && unsigned(offset) < subject.bytes())
         {
@@ -312,7 +313,8 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple,
       ++match_count_;
       ++original_match_count_;
 
-      const std::pair<int, int> bounds = pattern.get_substring_bounds(0);
+      std::pair<int, int> bounds;
+      match_info.fetch_pos(0, bounds.first, bounds.second);
 
       iterator start = line;
       iterator stop  = line;
@@ -321,7 +323,7 @@ int FileBuffer::find_matches(Pcre::Pattern& pattern, bool multiple,
       stop .set_line_index(bounds.second);
 
       const MatchDataPtr match (new MatchData(
-          original_match_count_, subject, pattern, capture_count));
+          original_match_count_, subject, match_info));
 
       match_set_.insert(match_set_.end(), match);
       match->install_mark(start);

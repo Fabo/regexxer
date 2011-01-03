@@ -38,8 +38,8 @@ AM_GLIB_GNU_GETTEXT
 # gmodule-export-2.0 adds -Wl,--export-dynamic to the linker flags
 # so that libglade can get at the custom widget creation functions.
 PKG_CHECK_MODULES([REGEXXER_MODULES],
-                  [gtk+-2.0 >= 2.16.0 gtkmm-2.4 >= 2.12.0 gconfmm-2.6 >= 2.6.1
-                  libpcre >= 5.0 gtksourceviewmm-2.0 >= 2.9.0])
+                  [gtk+-2.0 >= 2.16.0 gtkmm-2.4 >= 2.12.0 glibmm-2.4 >= 2.27.4.1
+				  gconfmm-2.6 >= 2.6.1 gtksourceviewmm-2.0 >= 2.9.0])
 
 DK_PKG_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-2.0], [gdk-pixbuf-csource])
 DK_PKG_PATH_PROG([GTK_UPDATE_ICON_CACHE], [gtk+-2.0], [gtk-update-icon-cache])
