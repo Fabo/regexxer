@@ -84,7 +84,7 @@ iconthemedir        = $(datadir)/icons/hicolor
 appicondir          = $(iconthemedir)/48x48/apps
 dist_appicon_DATA   = ui/regexxer.png
 
-gsettingsschema_DATA = ui/org.gnome.regexxer.gschema.xml
+gsettingsschema_DATA = ui/org.regexxer.gschema.xml
 
 desktop_in_files    = ui/regexxer.desktop.in
 desktopdir          = $(datadir)/applications

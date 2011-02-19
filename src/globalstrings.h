@@ -32,7 +32,7 @@ namespace Regexxer
  * The final executable contains exactly one copy of each string literal,
  * so there's no need to define them in a separate object file.
  */
-const char *const conf_schema                  = "org.gnome.regexxer";
+const char *const conf_schema                  = "org.regexxer";
 const char *const conf_key_textview_font       = "textview-font";
 const char *const conf_key_match_color         = "match-color";
 const char *const conf_key_current_match_color = "current-match-color";

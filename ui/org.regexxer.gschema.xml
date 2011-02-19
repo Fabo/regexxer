@@ -1,5 +1,5 @@
 <schemalist>
-  <schema id="org.gnome.regexxer" path="/org/gnome/regexxer/">
+  <schema id="org.regexxer" path="/apps/regexxer/">
     <key name="regex-patterns" type="as">
       <default>[]</default>
       <summary>Regex Patterns</summary>
