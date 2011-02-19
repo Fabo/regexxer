@@ -27,7 +27,6 @@
 #include <glib.h>
 #include <gtkmm.h>
 #include <list>
-#include <iostream>
 
 #include <config.h>
 
@@ -109,7 +108,7 @@ void PrefDialog::on_response(int)
 {
   if (entry_fallback_changed_)
     entry_fallback_->activate();
-  std::cout << std::boolalpha << Settings::instance()->is_writable(conf_key_match_color) << std::endl;
+
   dialog_->hide();
 }
 
