@@ -23,9 +23,9 @@
 #include "globalstrings.h"
 #include "stringutils.h"
 #include "translation.h"
+#include "settings.h"
 
 #include <glibmm.h>
-#include <gconfmm/client.h>
 #include <gtkmm/stock.h>
 
 #include <config.h>
@@ -98,8 +98,7 @@ FileTree::FileTree()
   selection->set_select_function(&FileTree::select_func);
   selection->signal_changed().connect(mem_fun(*this, &FileTree::on_selection_changed));
 
-  Gnome::Conf::Client::get_default_client()
-      ->signal_value_changed().connect(mem_fun(*this, &FileTree::on_conf_value_changed));
+  Settings::instance()->signal_changed().connect(mem_fun(*this, &FileTree::on_conf_value_changed));
 }
 
 FileTree::~FileTree()
@@ -934,13 +933,10 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
   }
 }
 
-void FileTree::on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value)
+void FileTree::on_conf_value_changed(const Glib::ustring& key)
 {
-  if (value.get_type() == Gnome::Conf::VALUE_STRING)
-  {
-    if (key.raw() == conf_key_fallback_encoding)
-      fallback_encoding_ = value.get_string();
-  }
+  if (key == conf_key_fallback_encoding)
+    fallback_encoding_ = Settings::instance()->get_string(key);
 }
 
 } // namespace Regexxer

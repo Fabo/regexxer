@@ -32,14 +32,13 @@ namespace Regexxer
  * The final executable contains exactly one copy of each string literal,
  * so there's no need to define them in a separate object file.
  */
-const char *const conf_dir_application         = "/apps/regexxer";
-const char *const conf_key_textview_font       = "/apps/regexxer/textview_font";
-const char *const conf_key_match_color         = "/apps/regexxer/match_color";
-const char *const conf_key_current_match_color = "/apps/regexxer/current_match_color";
-const char *const conf_key_toolbar_style       = "/apps/regexxer/toolbar_style";
-const char *const conf_key_fallback_encoding   = "/apps/regexxer/fallback_encoding";
-const char *const conf_key_substitution_patterns = "/apps/regexxer/substitution_patterns";
-const char *const conf_key_regex_patterns      = "/apps/regexxer/regex_patterns";
+const char *const conf_schema                  = "org.gnome.regexxer";
+const char *const conf_key_textview_font       = "textview-font";
+const char *const conf_key_match_color         = "match-color";
+const char *const conf_key_current_match_color = "current-match-color";
+const char *const conf_key_fallback_encoding   = "fallback-encoding";
+const char *const conf_key_substitution_patterns = "substitution-patterns";
+const char *const conf_key_regex_patterns      = "regex-patterns";
 
 const char *const ui_mainwindow_filename       = REGEXXER_PKGDATADIR G_DIR_SEPARATOR_S
                                                  "mainwindow.ui";

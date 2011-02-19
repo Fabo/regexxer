@@ -22,11 +22,12 @@
 #include "globalstrings.h"
 #include "stringutils.h"
 #include "translation.h"
+#include "settings.h"
 
 #include <glib.h>
 #include <gtkmm.h>
-#include <gconfmm/client.h>
 #include <list>
+#include <iostream>
 
 #include <config.h>
 
@@ -108,82 +109,64 @@ void PrefDialog::on_response(int)
 {
   if (entry_fallback_changed_)
     entry_fallback_->activate();
-
-  Gnome::Conf::Client::get_default_client()->suggest_sync();
-
+  std::cout << std::boolalpha << Settings::instance()->is_writable(conf_key_match_color) << std::endl;
   dialog_->hide();
 }
 
-/*
- * Note that it isn't strictly required to block the change notification
- * as done below for the "toolbar_style" setting.  GConf doesn't emit
- * "value_changed" if the new value is identical to the old one.  If, however,
- * the value was reset to the schema default, the following change notification
- * would again detach the schema.  This won't look neat, and I like neat.
- */
-void PrefDialog::on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value)
+void PrefDialog::on_conf_value_changed(const Glib::ustring& key)
 {
-  if (value.get_type() == Gnome::Conf::VALUE_STRING)
+  Glib::RefPtr<Gio::Settings> settings = Settings::instance();
+
+  if (key.raw() == conf_key_textview_font)
   {
-    if (key.raw() == conf_key_textview_font)
-    {
-      button_textview_font_->set_font_name(value.get_string());
-    }
-    else if (key.raw() == conf_key_match_color)
-    {
-      button_match_color_->set_color(Gdk::Color(value.get_string()));
-    }
-    else if (key.raw() == conf_key_current_match_color)
-    {
-      button_current_color_->set_color(Gdk::Color(value.get_string()));
-    }
-    else if (key.raw() == conf_key_fallback_encoding)
-    {
-      entry_fallback_->set_text(value.get_string());
-      entry_fallback_changed_ = false;
-    }
+    button_textview_font_->set_font_name(settings->get_string(key));
+  }
+  else if (key.raw() == conf_key_match_color)
+  {
+    button_match_color_->set_color(Gdk::Color(settings->get_string(key)));
+  }
+  else if (key.raw() == conf_key_current_match_color)
+  {
+    button_current_color_->set_color(Gdk::Color(settings->get_string(key)));
+  }
+  else if (key.raw() == conf_key_fallback_encoding)
+  {
+    entry_fallback_->set_text(settings->get_string(key));
+    entry_fallback_changed_ = false;
   }
 }
 
 void PrefDialog::initialize_configuration()
 {
-  using namespace Gnome::Conf;
+  Glib::RefPtr<Gio::Settings> settings = Settings::instance();
+  const std::list<Glib::ustring> entries = settings->list_keys();
 
-  const Glib::RefPtr<Client> client = Client::get_default_client();
-  const std::list<Entry> entries (client->all_entries(conf_dir_application));
+  for (std::list<Glib::ustring>::const_iterator p = entries.begin(); p != entries.end(); ++p)
+    on_conf_value_changed(*p);
 
-  for (std::list<Entry>::const_iterator p = entries.begin(); p != entries.end(); ++p)
-  {
-    on_conf_value_changed(p->get_key(), p->get_value());
-  }
-
-  client->signal_value_changed().connect(
-      sigc::mem_fun(*this, &PrefDialog::on_conf_value_changed));
+  settings->bind(conf_key_textview_font, button_textview_font_, "font_name");
 }
 
 void PrefDialog::on_textview_font_set()
 {
   const Glib::ustring value = button_textview_font_->get_font_name();
-  Gnome::Conf::Client::get_default_client()->set(conf_key_textview_font, value);
+  Settings::instance()->set_string(conf_key_textview_font, value);
 }
 
 void PrefDialog::on_match_color_set()
 {
   const Glib::ustring value = Util::color_to_string(button_match_color_->get_color());
-  Gnome::Conf::Client::get_default_client()->set(conf_key_match_color, value);
+  Settings::instance()->set_string(conf_key_match_color, value);
 }
 
 void PrefDialog::on_current_color_set()
 {
   const Glib::ustring value = Util::color_to_string(button_current_color_->get_color());
-  Gnome::Conf::Client::get_default_client()->set(conf_key_current_match_color, value);
+  Settings::instance()->set_string(conf_key_current_match_color, value);
 }
 
 void PrefDialog::on_entry_fallback_changed()
 {
-  // On dialog close, write back to the GConf database only if the user
-  // actually did something with the entry widget.  This prevents GConf from
-  // detaching the key's Schema each time the preferences dialog is closed.
   entry_fallback_changed_ = true;
 }
 
@@ -193,8 +176,8 @@ void PrefDialog::on_entry_fallback_activate()
 
   if (Util::validate_encoding(fallback_encoding.raw()))
   {
-    Gnome::Conf::Client::get_default_client()
-        ->set(conf_key_fallback_encoding, fallback_encoding.uppercase());
+    Settings::instance()->set_string(conf_key_fallback_encoding,
+                                     fallback_encoding.uppercase());
 
     entry_fallback_changed_ = false;
   }

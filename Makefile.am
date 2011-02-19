@@ -64,7 +64,8 @@ src_regexxer_SOURCES =		\
 	src/translation.cc	\
 	src/translation.h	\
 	src/undostack.cc	\
-	src/undostack.h
+	src/undostack.h		\
+	src/settings.h
 
 nodist_src_regexxer_SOURCES =	\
 	ui/stockimages.h
@@ -83,9 +84,7 @@ iconthemedir        = $(datadir)/icons/hicolor
 appicondir          = $(iconthemedir)/48x48/apps
 dist_appicon_DATA   = ui/regexxer.png
 
-schemas_in_files    = ui/regexxer.schemas.in
-schemasdir          = $(GCONF_SCHEMA_FILE_DIR)
-schemas_DATA        = ui/regexxer.schemas
+gsettingsschema_DATA = ui/org.gnome.regexxer.gschema.xml
 
 desktop_in_files    = ui/regexxer.desktop.in
 desktopdir          = $(datadir)/applications
@@ -94,27 +93,23 @@ desktop_DATA        = ui/regexxer.desktop
 dist_intltool       = intltool-extract.in intltool-merge.in intltool-update.in
 stockimages         = ui/stock_save_all_16.png ui/stock_save_all_24.png
 
-dist_noinst_DATA    = $(stockimages) $(dist_intltool) $(desktop_in_files) $(schemas_in_files)
+dist_noinst_DATA    = $(stockimages) $(dist_intltool) $(desktop_in_files)
 dist_noinst_SCRIPTS = autogen.sh
 
 BUILT_SOURCES       = $(nodist_src_regexxer_SOURCES)
-CLEANFILES          = $(nodist_src_regexxer_SOURCES) $(desktop_DATA) $(schemas_DATA)
+CLEANFILES          = $(nodist_src_regexxer_SOURCES) $(desktop_DATA)
 DISTCLEANFILES      = intltool-extract intltool-merge intltool-update
 
 pixbuf_csource      = $(GDK_PIXBUF_CSOURCE) --raw
 update_icon_cache   = $(GTK_UPDATE_ICON_CACHE) --ignore-theme-index --force
-gconftool           = GCONF_CONFIG_SOURCE='$(GCONF_SCHEMA_CONFIG_SOURCE)' $(GCONFTOOL)
 
-@INTLTOOL_SCHEMAS_RULE@
 @INTLTOOL_DESKTOP_RULE@
 
-if GCONF_SCHEMAS_INSTALL
-install-data-hook: install-schemas install-update-icon-cache
-uninstall-hook: uninstall-schemas uninstall-update-icon-cache
-else
 install-data-hook: install-update-icon-cache
+	$(GLIB_COMPILE_SCHEMAS) $(gsettingsschemadir)
+#$(gsettingsupdateschemacache) $(gsettingsschemadir)
+
 uninstall-hook: uninstall-update-icon-cache
-endif
 
 dist-hook: dist-changelog
 
@@ -144,15 +139,6 @@ dist-changelog:
 	  then mv -f .ChangeLog.tmp "$(top_distdir)/ChangeLog"; \
 	  else rm -f .ChangeLog.tmp; exit 1; fi; \
 	fi
-
-install-schemas: $(schemas_DATA)
-	@$(POST_INSTALL)
-	test -n "$(DESTDIR)" || $(gconftool) --makefile-install-rule $(schemas_DATA)
-
-uninstall-schemas: $(schemas_DATA)
-	@$(POST_UNINSTALL)
-	test -n "$(DESTDIR)" || $(gconftool) --makefile-uninstall-rule $(schemas_DATA)
-
 install-update-icon-cache:
 	@$(POST_INSTALL)
 	test -n "$(DESTDIR)" || $(update_icon_cache) "$(iconthemedir)"
@@ -161,7 +147,7 @@ uninstall-update-icon-cache:
 	@$(POST_UNINSTALL)
 	test -n "$(DESTDIR)" || $(update_icon_cache) "$(iconthemedir)"
 
-.PHONY: dist-changelog install-schemas uninstall-schemas \
+.PHONY: dist-changelog \
 	install-update-icon-cache uninstall-update-icon-cache
 
 .DELETE_ON_ERROR:

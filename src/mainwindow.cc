@@ -25,11 +25,11 @@
 #include "statusline.h"
 #include "stringutils.h"
 #include "translation.h"
+#include "settings.h"
 
 #include <glib.h>
 #include <gtkmm.h>
 #include <gtksourceviewmm.h>
-#include <gconfmm/client.h>
 #include <algorithm>
 #include <functional>
 #include <iostream>
@@ -185,10 +185,10 @@ MainWindow::MainWindow()
   button_recursive_       (0),
   button_hidden_          (0),
   entry_regex_            (0),
-  entry_regex_completion_stack_(10, Gnome::Conf::Client::get_default_client()->get_string_list(conf_key_regex_patterns)),
+  entry_regex_completion_stack_(10, Settings::instance()->get_string_array(conf_key_regex_patterns)),
   entry_regex_completion_ (Gtk::EntryCompletion::create()),
   entry_substitution_     (0),
-  entry_substitution_completion_stack_(10, Gnome::Conf::Client::get_default_client()->get_string_list(conf_key_substitution_patterns)),
+  entry_substitution_completion_stack_(10, Settings::instance()->get_string_array(conf_key_substitution_patterns)),
   entry_substitution_completion_ (Gtk::EntryCompletion::create()),
   button_multiple_        (0),
   button_caseless_        (0),
@@ -356,8 +356,7 @@ void MainWindow::connect_signals()
   controller_.replace_file.connect(mem_fun(*this, &MainWindow::on_replace_file));
   controller_.replace_all .connect(mem_fun(*this, &MainWindow::on_replace_all));
 
-  Gnome::Conf::Client::get_default_client()
-      ->signal_value_changed().connect(mem_fun(*this, &MainWindow::on_conf_value_changed));
+  Settings::instance()->signal_changed().connect(mem_fun(*this, &MainWindow::on_conf_value_changed));
 
   statusline_->signal_cancel_clicked.connect(
       mem_fun(*this, &MainWindow::on_busy_action_cancel));
@@ -575,10 +574,11 @@ void MainWindow::on_exec_search()
   const Glib::ustring regex = entry_regex_->get_text();
   const bool caseless = button_caseless_->get_active();
   const bool multiple = button_multiple_->get_active();
-  
+
   entry_regex_completion_stack_.push(regex);
-  Gnome::Conf::Client::get_default_client()->set_string_list(conf_key_regex_patterns, entry_regex_completion_stack_.get_stack());
-  
+
+  Settings::instance()->set_string_array(conf_key_regex_patterns, entry_regex_completion_stack_.get_stack());
+
   try
   {
     Glib::RefPtr<Glib::Regex> pattern =
@@ -759,7 +759,7 @@ void MainWindow::on_replace()
   {
     const Glib::ustring substitution = entry_substitution_->get_text();
     entry_substitution_completion_stack_.push(substitution);
-    Gnome::Conf::Client::get_default_client()->set_string_list(conf_key_substitution_patterns, entry_substitution_completion_stack_.get_stack());
+    Settings::instance()->set_string_array(conf_key_substitution_patterns, entry_substitution_completion_stack_.get_stack());
     buffer->replace_current_match(substitution);
     on_go_next(true);
   }
@@ -771,7 +771,7 @@ void MainWindow::on_replace_file()
   {
     const Glib::ustring substitution = entry_substitution_->get_text();
     entry_substitution_completion_stack_.push(substitution);
-    Gnome::Conf::Client::get_default_client()->set_string_list(conf_key_substitution_patterns, entry_substitution_completion_stack_.get_stack());
+    Settings::instance()->set_string_array(conf_key_substitution_patterns, entry_substitution_completion_stack_.get_stack());
     buffer->replace_all_matches(substitution);
     statusline_->set_match_index(0);
   }
@@ -783,7 +783,7 @@ void MainWindow::on_replace_all()
 
   const Glib::ustring substitution = entry_substitution_->get_text();
   entry_substitution_completion_stack_.push(substitution);
-  Gnome::Conf::Client::get_default_client()->set_string_list(conf_key_substitution_patterns, entry_substitution_completion_stack_.get_stack());
+  Settings::instance()->set_string_array(conf_key_substitution_patterns, entry_substitution_completion_stack_.get_stack());
   filetree_->replace_all_matches(substitution);
   statusline_->set_match_index(0);
 }
@@ -1003,16 +1003,13 @@ void MainWindow::on_pref_dialog_hide()
   const std::auto_ptr<PrefDialog> temp (pref_dialog_);
 }
 
-void MainWindow::on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value)
+void MainWindow::on_conf_value_changed(const Glib::ustring& key)
 {
-  if (value.get_type() == Gnome::Conf::VALUE_STRING)
+  if (key == conf_key_textview_font)
   {
-    if (key.raw() == conf_key_textview_font)
-    {
-      const Pango::FontDescription font (value.get_string());
-      textview_     ->modify_font(font);
-      entry_preview_->modify_font(font);
-    }
+    const Pango::FontDescription font (Settings::instance()->get_string(key));
+    textview_     ->modify_font(font);
+    entry_preview_->modify_font(font);
   }
 }
 

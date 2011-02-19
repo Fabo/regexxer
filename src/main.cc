@@ -26,7 +26,6 @@
 #include <glib.h>
 #include <gtk/gtkwindow.h> /* for gtk_window_set_default_icon_name() */
 #include <glibmm.h>
-#include <gconfmm.h>
 #include <gtkmm/iconfactory.h>
 #include <gtkmm/iconset.h>
 #include <gtkmm/iconsource.h>
@@ -194,45 +193,6 @@ void register_stock_items()
   factory->add_default();
 }
 
-static
-void trap_gconf_exceptions()
-{
-  try
-  {
-    throw; // re-throw current exception
-  }
-  catch (const Gnome::Conf::Error&)
-  {
-    // Ignore GConf exceptions thrown from GObject signal handlers.
-    // GConf itself is going print the warning message for us
-    // since we set the error handling mode to CLIENT_HANDLE_ALL.
-  }
-}
-
-static
-void initialize_configuration()
-{
-  using namespace Gnome::Conf;
-
-  Glib::add_exception_handler(&trap_gconf_exceptions);
-
-  const Glib::RefPtr<Client> client = Client::get_default_client();
-
-  client->set_error_handling(CLIENT_HANDLE_ALL);
-  client->add_dir(Regexxer::conf_dir_application, CLIENT_PRELOAD_ONELEVEL);
-
-  const std::list<Entry> entries = client->all_entries(Regexxer::conf_dir_application);
-
-  // Issue an artificial value_changed() signal for each entry in /apps/regexxer.
-  // Reusing the signal handlers this way neatly avoids the need for separate
-  // startup-initialization routines.
-
-  for (std::list<Entry>::const_iterator p = entries.begin(); p != entries.end(); ++p)
-  {
-    client->value_changed(p->get_key(), p->get_value());
-  }
-}
-
 } // anonymous namespace
 
 int main(int argc, char** argv)
@@ -240,7 +200,6 @@ int main(int argc, char** argv)
   try
   {
     Util::initialize_gettext(PACKAGE_TARNAME, REGEXXER_LOCALEDIR);
-    Gnome::Conf::init();
 
     std::auto_ptr<RegexxerOptions> options = RegexxerOptions::create();
     Gtk::Main main_instance (argc, argv, options->context());
@@ -253,7 +212,6 @@ int main(int argc, char** argv)
 
     Regexxer::MainWindow window;
 
-    initialize_configuration();
     window.initialize(options->init_state());
     options.reset();
 

@@ -38,9 +38,6 @@ class Widget;
 class Window;
 }
 
-namespace Gnome { namespace Conf { class Value; } }
-
-
 namespace Regexxer
 {
 
@@ -58,7 +55,6 @@ private:
   Gtk::ColorButton*           button_match_color_;
   Gtk::ColorButton*           button_current_color_;
   Gtk::Entry*                 entry_fallback_;
-  Util::AutoConnection        conn_toolbar_style_;
   bool                        entry_fallback_changed_;
 
   void load_xml();
@@ -66,7 +62,7 @@ private:
 
   void on_response(int response_id);
 
-  void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
+  void on_conf_value_changed(const Glib::ustring& key);
   void initialize_configuration();
 
   void on_textview_font_set();

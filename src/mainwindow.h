@@ -55,8 +55,6 @@ namespace gtksourceview
 class SourceView;
 }
 
-namespace Gnome { namespace Conf { class Value; } }
-
 namespace Regexxer
 {
 
@@ -197,7 +195,7 @@ private:
   void on_preferences();
   void on_pref_dialog_hide();
 
-  void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
+  void on_conf_value_changed(const Glib::ustring& key);
 };
 
 } // namespace Regexxer

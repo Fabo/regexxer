@@ -24,9 +24,9 @@
 #include "miscutils.h"
 #include "stringutils.h"
 #include "translation.h"
+#include "settings.h"
 
 #include <glib.h>
-#include <gconfmm/client.h>
 #include <algorithm>
 #include <list>
 
@@ -55,7 +55,7 @@ protected:
   virtual ~RegexxerTags();
 
 private:
-  void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
+  void on_conf_value_changed(const Glib::ustring& key);
 };
 
 RegexxerTags::RegexxerTags()
@@ -71,30 +71,30 @@ RegexxerTags::RegexxerTags()
 
   error_title->property_scale() = Pango::SCALE_X_LARGE;
 
-  Gnome::Conf::Client::get_default_client()->signal_value_changed()
-      .connect(sigc::mem_fun(*this, &RegexxerTags::on_conf_value_changed));
-
   add(error_message);
   add(error_title);
   add(match);
   add(current);
+
+  Glib::RefPtr<Gio::Settings> settings = Regexxer::Settings::instance();
+
+  settings->signal_changed().connect(sigc::mem_fun(*this, &RegexxerTags::on_conf_value_changed));
+  std::vector<std::string> keys = settings->list_keys();
+  for (std::vector<std::string>::iterator i = keys.begin(); i != keys.end(); ++i)
+    on_conf_value_changed(*i);
 }
 
 RegexxerTags::~RegexxerTags()
 {}
 
-void RegexxerTags::on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value)
+void RegexxerTags::on_conf_value_changed(const Glib::ustring& key)
 {
   using namespace Regexxer;
 
-  if (value.get_type() == Gnome::Conf::VALUE_STRING)
-  {
-    if (key.raw() == conf_key_match_color)
-      match->property_background() = value.get_string();
-
-    else if (key.raw() == conf_key_current_match_color)
-      current->property_background() = value.get_string();
-  }
+  if (key.raw() == conf_key_match_color)
+    match->property_background() = Settings::instance()->get_string(key);
+  else if (key.raw() == conf_key_current_match_color)
+    current->property_background() = Settings::instance()->get_string(key);
 }
 
 // static

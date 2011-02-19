@@ -34,7 +34,6 @@
 
 namespace Gtk   { class TreeStore; }
 namespace Glib  { class Regex; }
-namespace Gnome { namespace Conf { class Value; } }
 
 namespace Regexxer
 {
@@ -155,7 +154,7 @@ private:
 
   void load_file_with_fallback(const Gtk::TreeModel::iterator& iter, const FileInfoPtr& fileinfo);
 
-  void on_conf_value_changed(const Glib::ustring& key, const Gnome::Conf::Value& value);
+  void on_conf_value_changed(const Glib::ustring& key);
 };
 
 class FileTree::Error

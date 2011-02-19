@@ -1,0 +1,34 @@
+<schemalist>
+  <schema id="org.gnome.regexxer" path="/org/gnome/regexxer/">
+    <key name="regex-patterns" type="as">
+      <default>[]</default>
+      <summary>Regex Patterns</summary>
+      <description>List of last pattern used for the regex entry.</description>
+    </key>
+    <key name="substitution-patterns" type="as">
+      <default>[]</default>
+      <summary>Regex Patterns</summary>
+      <description>List of last pattern used for the substitution entry.</description>
+    </key>
+    <key name="textview-font" type="s">
+      <default>'Monospace 10'</default>
+      <summary>Text view font</summary>
+      <description>The font used in the file editor.</description>
+    </key>
+    <key name="match-color" type="s">
+      <default>'#9DB8D2'</default>
+      <summary>Match color</summary>
+      <description>The background color used to highlight matches of the search expression.</description>
+    </key>
+    <key name="current-match-color" type="s">
+      <default>'#EED680'</default>
+      <summary>Current-match color</summary>
+      <description>The background color used to highlight the currently selected match of the search expression.</description>
+    </key>
+    <key name="fallback-encoding" type="s">
+      <default>'ISO-8859-15'</default>
+      <summary>Fallback encoding</summary>
+      <description>Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try "iconv --list" for a complete list of possible values.</description>
+    </key>
+  </schema>
+</schemalist>
