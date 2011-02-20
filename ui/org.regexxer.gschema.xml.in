@@ -1,15 +1,21 @@
 <schemalist>
   <schema id="org.regexxer" path="/apps/regexxer/">
+    <key name="files-patterns" type="as">
+      <default>['*.[ch]','*.{c,cc,cpp,cxx,c++,C,h,hh,hpp,hxx,h++}','*.{ccg,hg}','*.idl','*.{java,jsp}','*.{pl,pm,cgi}','*.py','*.php[0-9]?','*.{html,htm,shtml,js,wml}','*.{xml,xsl,css,dtd,xsd}']</default>
+      <_summary>File Patterns</_summary>
+      <_description>List of pre-defined patterns available in the 'Pattern' entry.</_description>
+    </key>
+
     <key name="regex-patterns" type="as">
       <default>[]</default>
       <_summary>Regex Patterns</_summary>
-      <_description>List of last patterns used for the regex entry.</_description>
+      <_description>List of last patterns used in the 'Regex' entry.</_description>
     </key>
 
     <key name="substitution-patterns" type="as">
       <default>[]</default>
       <_summary>Regex Patterns</_summary>
-      <_description>List of last patterns used for the substitution entry.</_description>
+      <_description>List of last patterns used in the 'Substitution' entry.</_description>
     </key>
 
     <key name="textview-font" type="s">

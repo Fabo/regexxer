@@ -39,6 +39,7 @@ const char *const conf_key_current_match_color = "current-match-color";
 const char *const conf_key_fallback_encoding   = "fallback-encoding";
 const char *const conf_key_substitution_patterns = "substitution-patterns";
 const char *const conf_key_regex_patterns      = "regex-patterns";
+const char *const conf_key_files_patterns      = "files-patterns";
 const char *const conf_key_window_width        = "window-width";
 const char *const conf_key_window_height       = "window-height";
 const char *const conf_key_window_position_x   = "window-position-x";

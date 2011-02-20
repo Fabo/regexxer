@@ -281,16 +281,14 @@ void MainWindow::initialize(const InitState& init)
   button_multiple_ ->set_active(!init.no_global);
   button_caseless_ ->set_active(init.ignorecase);
 
-  combo_entry_pattern_->append_text("*.[ch]");
-  combo_entry_pattern_->append_text("*.{c,cc,cpp,cxx,c++,C,h,hh,hpp,hxx,h++}");
-  combo_entry_pattern_->append_text("*.{ccg,hg}");
-  combo_entry_pattern_->append_text("*.idl");
-  combo_entry_pattern_->append_text("*.{java,jsp}");
-  combo_entry_pattern_->append_text("*.{pl,pm,cgi}");
-  combo_entry_pattern_->append_text("*.py");
-  combo_entry_pattern_->append_text("*.php[0-9]?");
-  combo_entry_pattern_->append_text("*.{html,htm,shtml,js,wml}");
-  combo_entry_pattern_->append_text("*.{xml,xsl,css,dtd,xsd}");
+  const std::list<Glib::ustring> patterns =
+      settings->get_string_array(conf_key_files_patterns);
+  for (std::list<Glib::ustring>::const_iterator pattern = patterns.begin();
+       pattern != patterns.end();
+       ++pattern)
+  {
+    combo_entry_pattern_->append_text(*pattern);
+  }
 
   if (init.feedback)
     filetree_->signal_feedback.connect(&print_location);
