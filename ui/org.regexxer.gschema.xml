@@ -3,12 +3,12 @@
     <key name="regex-patterns" type="as">
       <default>[]</default>
       <summary>Regex Patterns</summary>
-      <description>List of last pattern used for the regex entry.</description>
+      <description>List of last patterns used for the regex entry.</description>
     </key>
     <key name="substitution-patterns" type="as">
       <default>[]</default>
       <summary>Regex Patterns</summary>
-      <description>List of last pattern used for the substitution entry.</description>
+      <description>List of last patterns used for the substitution entry.</description>
     </key>
     <key name="textview-font" type="s">
       <default>'Monospace 10'</default>
