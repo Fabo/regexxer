@@ -204,24 +204,24 @@ MainWindow::MainWindow()
   undo_stack_             (new UndoStack())
 {
   load_xml();
-  
+
   entry_regex_ = comboboxentry_regex_->get_entry();
   entry_substitution_ = comboboxentry_substitution_->get_entry();
-  
+
   textview_->set_buffer(FileBuffer::create());
   window_->set_title(PACKAGE_NAME);
 
   vbox_main_->pack_start(*statusline_, Gtk::PACK_SHRINK);
   scrollwin_filetree_->add(*filetree_);
   table_file_->attach(*combo_entry_pattern_, 1, 2, 1, 2);
-  
+
   scrollwin_textview_->add(*textview_);
-  
+
   statusline_->show_all();
   filetree_->show_all();
   combo_entry_pattern_->show_all();
   scrollwin_textview_->show_all();
-  
+
   connect_signals();
 }
 
@@ -230,6 +230,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::initialize(const InitState& init)
 {
+  Glib::RefPtr<Gio::Settings> settings = Settings::instance();
+  int width = settings->get_int(conf_key_window_width);
+  int height = settings->get_int(conf_key_window_height);
+
+  int x = settings->get_int(conf_key_window_position_x);
+  int y = settings->get_int(conf_key_window_position_y);
+
+  bool maximized = settings->get_boolean(conf_key_window_maximized);
+
+  window_->resize(width, height);
+  window_->move(x, y);
+  if (maximized)
+    window_->maximize();
+
   std::string folder;
 
   if (!init.folder.empty())
@@ -251,7 +265,7 @@ void MainWindow::initialize(const InitState& init)
   comboboxentry_regex_->set_text_column(entry_regex_completion_stack_.get_completion_column());
   comboboxentry_substitution_->set_model(entry_substitution_completion_stack_.get_completion_model());
   comboboxentry_substitution_->set_text_column(entry_substitution_completion_stack_.get_completion_column());
-  
+
   entry_regex_completion_->set_model(entry_regex_completion_stack_.get_completion_model());
   entry_regex_completion_->set_text_column(entry_regex_completion_stack_.get_completion_column());
   entry_regex_completion_->set_inline_completion(true);
@@ -417,7 +431,9 @@ void MainWindow::on_style_changed(const Glib::RefPtr<Gtk::Style>&)
 
 bool MainWindow::on_delete_event(GdkEventAny*)
 {
-  return !confirm_quit_request();
+  bool quit = confirm_quit_request();
+  save_window_state();
+  return !quit;
 }
 
 void MainWindow::on_cut()
@@ -500,7 +516,35 @@ void MainWindow::on_erase()
 void MainWindow::on_quit()
 {
   if (confirm_quit_request())
+  {
+    save_window_state();
     window_->hide();
+  }
+}
+
+void MainWindow::save_window_state()
+{
+  int x = 0;
+  int y = 0;
+
+  int width = 0;
+  int height = 0;
+
+  window_->get_position(x, y);
+  window_->get_size(width, height);
+  bool maximized = (window_->get_window()->get_state() & Gdk::WINDOW_STATE_MAXIMIZED);
+
+  Glib::RefPtr<Gio::Settings> settings = Settings::instance();
+
+  settings->set_int(conf_key_window_position_x, x);
+  settings->set_int(conf_key_window_position_y, y);
+  settings->set_boolean(conf_key_window_maximized, maximized);
+
+  if (!maximized)
+  {
+    settings->set_int(conf_key_window_width, width);
+    settings->set_int(conf_key_window_height, height);
+  }
 }
 
 bool MainWindow::confirm_quit_request()

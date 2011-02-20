@@ -94,16 +94,16 @@ private:
 
   std::auto_ptr<Gtk::Window>  window_;
   Controller                  controller_;
-  
+
   Gtk::VBox*                  vbox_main_;
 
   Gtk::Toolbar*               toolbar_;
 
   Gtk::Table*                 table_file_;
   Gtk::FileChooser*           button_folder_;
-  
+
   Gtk::ComboBoxEntryText*     combo_entry_pattern_;
-  
+
   Gtk::CheckButton*           button_recursive_;
   Gtk::CheckButton*           button_hidden_;
 
@@ -111,12 +111,12 @@ private:
   Gtk::Entry*                 entry_regex_;
   CompletionStack             entry_regex_completion_stack_;
   Glib::RefPtr<Gtk::EntryCompletion> entry_regex_completion_;
-  
+
   Gtk::ComboBoxEntry*         comboboxentry_substitution_;
   Gtk::Entry*                 entry_substitution_;
   CompletionStack             entry_substitution_completion_stack_;
   Glib::RefPtr<Gtk::EntryCompletion> entry_substitution_completion_;
-  
+
   Gtk::CheckButton*           button_multiple_;
   Gtk::CheckButton*           button_caseless_;
 
@@ -142,6 +142,7 @@ private:
   void load_xml();
   void connect_signals();
   bool autorun_idle();
+  void save_window_state();
 
   void on_hide();
   void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);

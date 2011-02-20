@@ -39,6 +39,11 @@ const char *const conf_key_current_match_color = "current-match-color";
 const char *const conf_key_fallback_encoding   = "fallback-encoding";
 const char *const conf_key_substitution_patterns = "substitution-patterns";
 const char *const conf_key_regex_patterns      = "regex-patterns";
+const char *const conf_key_window_width        = "window-width";
+const char *const conf_key_window_height       = "window-height";
+const char *const conf_key_window_position_x   = "window-position-x";
+const char *const conf_key_window_position_y   = "window-position-y";
+const char *const conf_key_window_maximized    = "window-maximized";
 
 const char *const ui_mainwindow_filename       = REGEXXER_PKGDATADIR G_DIR_SEPARATOR_S
                                                  "mainwindow.ui";
