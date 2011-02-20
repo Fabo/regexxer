@@ -1,11 +1,10 @@
 [encoding: UTF-8]
 ui/regexxer.desktop.in
-ui/regexxer.schemas.in
+ui/org.regexxer.gschema.xml.in
 src/filebuffer.cc
 src/filetree.cc
 src/main.cc
 src/mainwindow.cc
-src/pcreshell.cc
 src/prefdialog.cc
 src/statusline.cc
 [type: gettext/glade]ui/mainwindow.ui

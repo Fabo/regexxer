@@ -84,6 +84,7 @@ iconthemedir        = $(datadir)/icons/hicolor
 appicondir          = $(iconthemedir)/48x48/apps
 dist_appicon_DATA   = ui/regexxer.png
 
+gsettingsschema_in_files    = ui/org.regexxer.gschema.xml.in
 gsettingsschema_DATA = ui/org.regexxer.gschema.xml
 
 desktop_in_files    = ui/regexxer.desktop.in
@@ -93,17 +94,18 @@ desktop_DATA        = ui/regexxer.desktop
 dist_intltool       = intltool-extract.in intltool-merge.in intltool-update.in
 stockimages         = ui/stock_save_all_16.png ui/stock_save_all_24.png
 
-dist_noinst_DATA    = $(stockimages) $(dist_intltool) $(desktop_in_files)
+dist_noinst_DATA    = $(stockimages) $(dist_intltool) $(desktop_in_files) $(gsettingsschema_in_files)
 dist_noinst_SCRIPTS = autogen.sh
 
 BUILT_SOURCES       = $(nodist_src_regexxer_SOURCES)
-CLEANFILES          = $(nodist_src_regexxer_SOURCES) $(desktop_DATA)
+CLEANFILES          = $(nodist_src_regexxer_SOURCES) $(desktop_DATA) $(gsettingsschema_DATA)
 DISTCLEANFILES      = intltool-extract intltool-merge intltool-update
 
 pixbuf_csource      = $(GDK_PIXBUF_CSOURCE) --raw
 update_icon_cache   = $(GTK_UPDATE_ICON_CACHE) --ignore-theme-index --force
 
 @INTLTOOL_DESKTOP_RULE@
+@INTLTOOL_XML_NOMERGE_RULE@
 
 install-data-hook: install-update-icon-cache
 	$(GLIB_COMPILE_SCHEMAS) $(gsettingsschemadir)

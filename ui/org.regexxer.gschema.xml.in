@@ -1,0 +1,69 @@
+<schemalist>
+  <schema id="org.regexxer" path="/apps/regexxer/">
+    <key name="regex-patterns" type="as">
+      <default>[]</default>
+      <_summary>Regex Patterns</_summary>
+      <_description>List of last patterns used for the regex entry.</_description>
+    </key>
+
+    <key name="substitution-patterns" type="as">
+      <default>[]</default>
+      <_summary>Regex Patterns</_summary>
+      <_description>List of last patterns used for the substitution entry.</_description>
+    </key>
+
+    <key name="textview-font" type="s">
+      <default>'Monospace 10'</default>
+      <_summary>Text view font</_summary>
+      <_description>The font used in the file editor.</_description>
+    </key>
+
+    <key name="match-color" type="s">
+      <default>'#9DB8D2'</default>
+      <_summary>Match color</_summary>
+      <_description>The background color used to highlight matches of the search expression.</_description>
+    </key>
+
+    <key name="current-match-color" type="s">
+      <default>'#EED680'</default>
+      <_summary>Current-match color</_summary>
+      <_description>The background color used to highlight the currently selected match of the search expression.</_description>
+    </key>
+
+    <key name="fallback-encoding" type="s">
+      <default>'ISO-8859-15'</default>
+      <_summary>Fallback encoding</_summary>
+      <_description>Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try "iconv --list" for a complete list of possible values.</_description>
+    </key>
+
+    <key name="window-width" type="i">
+      <default>800</default>
+      <_summary>window width</_summary>
+      <_description>The width of the window.</_description>
+    </key>
+
+    <key name="window-height" type="i">
+      <default>600</default>
+      <_summary>window height</_summary>
+      <_description>The height of the window.</_description>
+    </key>
+
+    <key name="window-position-x" type="i">
+      <default>10</default>
+      <_summary>window x position</_summary>
+      <_description>The X coordinate of the window.</_description>
+    </key>
+
+    <key name="window-position-y" type="i">
+      <default>10</default>
+      <_summary>window y position</_summary>
+      <_description>The Y coordinate of the window.</_description>
+    </key>
+
+    <key name="window-maximized" type="b">
+      <default>false</default>
+      <_summary>window maximization</_summary>
+      <_description>Whether the window is maximized.</_description>
+    </key>
+  </schema>
+</schemalist>
