@@ -2,26 +2,26 @@
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>.
 # This file is distributed under the same license as the regexxer package.
+#
 # Miloslav Trmac <mitr@volny.cz>, 2004.
 # Lucas Lommer <llommer@svn.gnome.org>, 2008 (I did one string only...).
-# Marek Černocký <marek@manet.cz>, 2009, 2010.
+# Marek Černocký <marek@manet.cz>, 2009, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
-"POT-Creation-Date: 2010-02-25 10:37+0000\n"
-"PO-Revision-Date: 2010-02-25 23:48+0100\n"
+"POT-Creation-Date: 2011-02-20 19:41+0000\n"
+"PO-Revision-Date: 2011-02-22 00:22+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
-"X-Poedit-Language: Czech\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
-#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:967
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:1001
 msgid "Search and replace using regular expressions"
 msgstr "Hledat a nahradit pomocí regulárních výrazů"
 
@@ -29,54 +29,73 @@ msgstr "Hledat a nahradit pomocí regulárních výrazů"
 msgid "regexxer Search Tool"
 msgstr "Nástroj pro hledání regexxer"
 
-#: ../ui/regexxer.schemas.in.h:1
+#: ../ui/org.regexxer.gschema.xml.in.h:1
 msgid "Current-match color"
 msgstr "Barva aktuálního výskytu"
 
-#: ../ui/regexxer.schemas.in.h:2
+#: ../ui/org.regexxer.gschema.xml.in.h:2
 msgid "Fallback encoding"
 msgstr "Náhradní kódování"
 
-#: ../ui/regexxer.schemas.in.h:3
-msgid "List of last pattern used for the file's regex entry."
-msgstr "Seznam naposledy použitých vzorů v poli vzorek pro soubor."
+#: ../ui/org.regexxer.gschema.xml.in.h:3
+#| msgid "Regex Patterns"
+msgid "File Patterns"
+msgstr "Vzory souborů"
 
-#: ../ui/regexxer.schemas.in.h:4
-msgid "List of last pattern used for the regex entry."
-msgstr "Seznam naposledy použitých vzorů v poli hledat."
+#: ../ui/org.regexxer.gschema.xml.in.h:4
+#| msgid "List of last pattern used for the regex entry."
+msgid "List of last patterns used in the 'Regex' entry."
+msgstr "Seznam naposledy použitých vzorů v poli „Hledat“."
 
-#: ../ui/regexxer.schemas.in.h:5
-msgid "List of last pattern used for the substitution entry."
-msgstr "Seznam naposledy použitých vzorů v poli nahradit."
+#: ../ui/org.regexxer.gschema.xml.in.h:5
+#| msgid "List of last pattern used for the substitution entry."
+msgid "List of last patterns used in the 'Substitution' entry."
+msgstr "Seznam naposledy použitých vzorů v poli „Nahradit“."
 
-#: ../ui/regexxer.schemas.in.h:6
+#: ../ui/org.regexxer.gschema.xml.in.h:6
+msgid "List of pre-defined patterns available in the 'Pattern' entry."
+msgstr "Seznam předdefinovaných vzorů dostupných v poli „Vzor“."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:7
 msgid "Match color"
 msgstr "Barva výskytu"
 
-#: ../ui/regexxer.schemas.in.h:7
+#: ../ui/org.regexxer.gschema.xml.in.h:8
+#| msgid ""
+#| "Name of the character encoding to use if a file is not readable in either "
+#| "UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
+#| "for a complete list of possible values."
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
-"a complete list of possible values."
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
 msgstr ""
 "Název kódování znaků, které se má použít v případě, že soubor není čitelný "
-"ani v UTF-8 ani v kódování určeném současným národním nastavením. Pro úplný "
-"seznam možných hodnot zkuste „iconv --list“."
+"ani v UTF-8 ani v kódování určeném současným národním nastavením. Pro "
+"získání úplného seznamu možných hodnot zkuste „iconv --list“."
 
-#: ../ui/regexxer.schemas.in.h:8
+#: ../ui/org.regexxer.gschema.xml.in.h:9
 msgid "Regex Patterns"
-msgstr "Vzor regex:"
+msgstr "Vzory regulárních výrazů"
 
-#: ../ui/regexxer.schemas.in.h:9
+#: ../ui/org.regexxer.gschema.xml.in.h:10
 msgid "Text view font"
 msgstr "Písmo pro zobrazení textu"
 
-#: ../ui/regexxer.schemas.in.h:10
+#: ../ui/org.regexxer.gschema.xml.in.h:11
+msgid "The X coordinate of the window."
+msgstr "Souřadnice x okna."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:12
+msgid "The Y coordinate of the window."
+msgstr "Souřadnice y okna."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:13
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr "Barva pozadí používaná pro zvýraznění výskytů hledaného výrazu."
 
-#: ../ui/regexxer.schemas.in.h:11
+#: ../ui/org.regexxer.gschema.xml.in.h:14
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
@@ -84,89 +103,121 @@ msgstr ""
 "Barva pozadí používaná pro zvýraznění aktuálně vybraného výskytu hledaného "
 "výrazu."
 
-#: ../ui/regexxer.schemas.in.h:12
+#: ../ui/org.regexxer.gschema.xml.in.h:15
 msgid "The font used in the file editor."
 msgstr "Písmo používané v editoru souborů."
 
-#: ../src/filebuffer.cc:198
+#: ../ui/org.regexxer.gschema.xml.in.h:16
+msgid "The height of the window."
+msgstr "Výška okna."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:17
+msgid "The width of the window."
+msgstr "Šířka okna."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:18
+msgid "Whether the window is maximized."
+msgstr "Zda je okno maximalizováno."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:19
+msgid "window height"
+msgstr "výška okna"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:20
+msgid "window maximization"
+msgstr "maximalizace okna"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:21
+msgid "window width"
+msgstr "šířka okna"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:22
+msgid "window x position"
+msgstr "poloha okna ve směru x"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:23
+msgid "window y position"
+msgstr "poloha okna ve směru y"
+
+#: ../src/filebuffer.cc:197
 msgid "Can’t read file:"
 msgstr "Nelze číst soubor:"
 
-#: ../src/filetree.cc:61
+#: ../src/filetree.cc:60
 msgid "File"
 msgstr "Soubor"
 
-#: ../src/filetree.cc:80
+#: ../src/filetree.cc:79
 msgid "#"
-msgstr "#"
+msgstr "Počet"
 
-#: ../src/filetree.cc:511
+#: ../src/filetree.cc:509
 #, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Selhalo uložení souboru „%1“: %2"
 
-#: ../src/filetree.cc:927
+#: ../src/filetree.cc:925
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "„%1“ je zřejmě binární soubor."
 
-#: ../src/main.cc:79
+#: ../src/main.cc:78
 msgid "Save _all"
 msgstr "Uložit _vše"
 
-#: ../src/main.cc:136
+#: ../src/main.cc:135
 msgid "Find files matching PATTERN"
 msgstr "Hledat soubory odpovídající VZORU"
 
-#: ../src/main.cc:136
+#: ../src/main.cc:135
 msgid "PATTERN"
 msgstr "VZOR"
 
-#: ../src/main.cc:138
+#: ../src/main.cc:137
 msgid "Do not recurse into subdirectories"
-msgstr "Nezanořovat se do podadresářů"
+msgstr "Nezanořovat se do podsložek"
 
-#: ../src/main.cc:140 ../ui/mainwindow.ui.h:2
+#: ../src/main.cc:139 ../ui/mainwindow.ui.h:2
 msgid "Also find hidden files"
 msgstr "Hledat i skryté soubory"
 
-#: ../src/main.cc:142
+#: ../src/main.cc:141
 msgid "Find text matching REGEX"
 msgstr "Hledat text odpovídající REGEX"
 
-#: ../src/main.cc:142
+#: ../src/main.cc:141
 msgid "REGEX"
 msgstr "REGEX"
 
-#: ../src/main.cc:144
+#: ../src/main.cc:143
 msgid "Find only the first match in a line"
 msgstr "Hledat pouze první výskyt na řádku"
 
-#: ../src/main.cc:146 ../ui/mainwindow.ui.h:4
+#: ../src/main.cc:145 ../ui/mainwindow.ui.h:4
 msgid "Do case insensitive matching"
 msgstr "Nerozlišovat velikost písmen"
 
-#: ../src/main.cc:148
+#: ../src/main.cc:147
 msgid "Replace matches with STRING"
 msgstr "Nahradit výskyty ŘETĚZCEM"
 
-#: ../src/main.cc:148
+#: ../src/main.cc:147
 msgid "STRING"
 msgstr "ŘETĚZEC"
 
-#: ../src/main.cc:150
+#: ../src/main.cc:149
 msgid "Print match location to standard output"
 msgstr "Vypsat umístění výskytů na standardní výstup"
 
-#: ../src/main.cc:152
+#: ../src/main.cc:151
 msgid "Do not automatically start search"
 msgstr "Nezačínat hledání automaticky"
 
-#: ../src/main.cc:154
+#: ../src/main.cc:153
 msgid "[FOLDER]"
 msgstr "[SLOŽKA]"
 
-#: ../src/mainwindow.cc:513
+#: ../src/mainwindow.cc:554
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -174,7 +225,7 @@ msgstr ""
 "Některé soubory dosud nebyly uloženy.\n"
 "Přesto skončit?"
 
-#: ../src/mainwindow.cc:527
+#: ../src/mainwindow.cc:568
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -182,56 +233,25 @@ msgstr ""
 "Některé soubory dosud nebyly uloženy.\n"
 "Přesto pokračovat?"
 
-#: ../src/mainwindow.cc:559
+#: ../src/mainwindow.cc:598
 msgid "The file search pattern is invalid."
 msgstr "Vzor pro hledání souborů je neplatný."
 
-#: ../src/mainwindow.cc:565
+#: ../src/mainwindow.cc:604
 msgid "The following errors occurred during search:"
 msgstr "Při hledání došlo k následujícím chybám:"
 
-#: ../src/mainwindow.cc:824
+#: ../src/mainwindow.cc:858
 msgid "The following errors occurred during save:"
 msgstr "Při ukládání došlo k následujícím chybám:"
 
-#: ../src/mainwindow.cc:972
+#: ../src/mainwindow.cc:1006
 msgid "translator-credits"
 msgstr ""
 "Miloslav Trmač <mitr@volny.cz>\n"
 "Marek Černocký <marek@manet.cz>"
 
-#: ../src/pcreshell.cc:62
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
-"Používání sekvence escape \\C pro hledání jednoho bajtu není podporováno."
-
-#: ../src/pcreshell.cc:84
-#, qt-format
-msgid ""
-"Error in regular expression at “%1” (index %2):\n"
-"%3"
-msgstr ""
-"Chyba v regulárním výrazu v „%1“ (pozice %2):\n"
-"%3"
-
-#: ../src/pcreshell.cc:89
-#, qt-format
-msgid ""
-"Error in regular expression:\n"
-"%1"
-msgstr ""
-"Chyba v regulárním výrazu:\n"
-"%1"
-
-#: ../src/pcreshell.cc:171
-msgid ""
-"Reached the recursion and backtracking limit of the regular expression "
-"engine."
-msgstr ""
-"Byl dosažen maximální počet zanoření ve funkci pro zpracování regulárních "
-"výrazů."
-
-#: ../src/prefdialog.cc:204
+#: ../src/prefdialog.cc:186
 #, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "„%1“ není platné kódování."
@@ -322,7 +342,7 @@ msgstr "Náhled nahrazení"
 
 #: ../ui/mainwindow.ui.h:20
 msgid "Recurse into subdirectories"
-msgstr "Vnořovat se do adresářů"
+msgstr "Zanořovat se do podsložek"
 
 #: ../ui/mainwindow.ui.h:21
 msgid "Replace _current"
@@ -446,7 +466,7 @@ msgstr "Pouze text"
 
 #: ../ui/prefdialog.ui.h:11
 msgid "The encoding specified by the current locale"
-msgstr "Kódování určené aktuálním locale"
+msgstr "Kódování dané aktuálním národním nastavením"
 
 #: ../ui/prefdialog.ui.h:12
 msgid "UTF-8"
@@ -473,3 +493,31 @@ msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr "Než se regexxer vzdá, zkouší soubor načíst v následujících kódováních:"
 
+#~ msgid "List of last pattern used for the file's regex entry."
+#~ msgstr "Seznam naposledy použitých vzorů v poli vzorek pro soubor."
+
+#~ msgid ""
+#~ "Using the \\C escape sequence to match a single byte is not supported."
+#~ msgstr ""
+#~ "Používání sekvence escape \\C pro hledání jednoho bajtu není podporováno."
+
+#~ msgid ""
+#~ "Error in regular expression at “%1” (index %2):\n"
+#~ "%3"
+#~ msgstr ""
+#~ "Chyba v regulárním výrazu v „%1“ (pozice %2):\n"
+#~ "%3"
+
+#~ msgid ""
+#~ "Error in regular expression:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "Chyba v regulárním výrazu:\n"
+#~ "%1"
+
+#~ msgid ""
+#~ "Reached the recursion and backtracking limit of the regular expression "
+#~ "engine."
+#~ msgstr ""
+#~ "Byl dosažen maximální počet zanoření ve funkci pro zpracování regulárních "
+#~ "výrazů."
