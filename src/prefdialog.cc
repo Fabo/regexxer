@@ -26,7 +26,7 @@
 
 #include <glib.h>
 #include <gtkmm.h>
-#include <list>
+#include <vector>
 
 #include <config.h>
 
@@ -138,9 +138,9 @@ void PrefDialog::on_conf_value_changed(const Glib::ustring& key)
 void PrefDialog::initialize_configuration()
 {
   Glib::RefPtr<Gio::Settings> settings = Settings::instance();
-  const std::list<Glib::ustring> entries = settings->list_keys();
+  const std::vector<Glib::ustring> entries = settings->list_keys();
 
-  for (std::list<Glib::ustring>::const_iterator p = entries.begin(); p != entries.end(); ++p)
+  for (std::vector<Glib::ustring>::const_iterator p = entries.begin(); p != entries.end(); ++p)
     on_conf_value_changed(*p);
 
   settings->bind(conf_key_textview_font, button_textview_font_, "font_name");

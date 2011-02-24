@@ -77,7 +77,7 @@ public:
   sigc::signal<void, int, const Glib::ustring&, FileInfoPtr> signal_feedback;
 
 protected:
-  virtual void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
+  virtual void on_style_updated();
 
 private:
   class  TreeRowRef;

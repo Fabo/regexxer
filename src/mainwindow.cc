@@ -181,7 +181,7 @@ MainWindow::MainWindow()
   toolbar_                (0),
   table_file_             (0),
   button_folder_          (0),
-  combo_entry_pattern_    (Gtk::manage(new Gtk::ComboBoxEntryText())),
+  combo_entry_pattern_    (Gtk::manage(new Gtk::ComboBoxText(true))),
   button_recursive_       (0),
   button_hidden_          (0),
   entry_regex_            (0),
@@ -195,7 +195,7 @@ MainWindow::MainWindow()
   filetree_               (Gtk::manage(new FileTree())),
   scrollwin_filetree_     (0),
   scrollwin_textview_     (0),
-  textview_               (Gtk::manage(new gtksourceview::SourceView())),
+  textview_               (Gtk::manage(new Gsv::SourceView())),
   entry_preview_          (0),
   statusline_             (Gtk::manage(new StatusLine())),
   busy_action_running_    (false),
@@ -213,7 +213,7 @@ MainWindow::MainWindow()
 
   vbox_main_->pack_start(*statusline_, Gtk::PACK_SHRINK);
   scrollwin_filetree_->add(*filetree_);
-  table_file_->attach(*combo_entry_pattern_, 1, 2, 1, 2);
+  table_file_->attach(*combo_entry_pattern_, 1, 2, 1, 2, Gtk::EXPAND | Gtk::FILL, Gtk::FILL);
 
   scrollwin_textview_->add(*textview_);
 
@@ -254,17 +254,16 @@ void MainWindow::initialize(const InitState& init)
   const bool folder_exists = button_folder_->set_current_folder(folder);
 
   combo_entry_pattern_->get_entry()->set_text((init.pattern.empty()) ? Glib::ustring(1, '*') : init.pattern);
-  entry_regex_  ->set_text(init.regex);
-  
+
   entry_regex_->set_text(init.regex);
   entry_regex_->set_completion(entry_regex_completion_);
   entry_substitution_->set_text(init.substitution);
   entry_substitution_->set_completion(entry_substitution_completion_);
 
   comboboxentry_regex_->set_model(entry_regex_completion_stack_.get_completion_model());
-  comboboxentry_regex_->set_text_column(entry_regex_completion_stack_.get_completion_column());
+  comboboxentry_regex_->set_entry_text_column(entry_regex_completion_stack_.get_completion_column());
   comboboxentry_substitution_->set_model(entry_substitution_completion_stack_.get_completion_model());
-  comboboxentry_substitution_->set_text_column(entry_substitution_completion_stack_.get_completion_column());
+  comboboxentry_substitution_->set_entry_text_column(entry_substitution_completion_stack_.get_completion_column());
 
   entry_regex_completion_->set_model(entry_regex_completion_stack_.get_completion_model());
   entry_regex_completion_->set_text_column(entry_regex_completion_stack_.get_completion_column());
@@ -281,13 +280,14 @@ void MainWindow::initialize(const InitState& init)
   button_multiple_ ->set_active(!init.no_global);
   button_caseless_ ->set_active(init.ignorecase);
 
+  combo_entry_pattern_->set_entry_text_column(0);
   const std::list<Glib::ustring> patterns =
       settings->get_string_array(conf_key_files_patterns);
   for (std::list<Glib::ustring>::const_iterator pattern = patterns.begin();
        pattern != patterns.end();
        ++pattern)
   {
-    combo_entry_pattern_->append_text(*pattern);
+    combo_entry_pattern_->append(*pattern);
   }
 
   if (init.feedback)
@@ -338,7 +338,7 @@ void MainWindow::connect_signals()
   using sigc::mem_fun;
 
   window_->signal_hide         ().connect(mem_fun(*this, &MainWindow::on_hide));
-  window_->signal_style_changed().connect(mem_fun(*this, &MainWindow::on_style_changed));
+  window_->signal_style_updated().connect(mem_fun(*this, &MainWindow::on_style_updated));
   window_->signal_delete_event ().connect(mem_fun(*this, &MainWindow::on_delete_event));
 
   combo_entry_pattern_->get_entry()->signal_activate().connect(controller_.find_files.slot());
@@ -422,7 +422,7 @@ void MainWindow::on_hide()
   }
 }
 
-void MainWindow::on_style_changed(const Glib::RefPtr<Gtk::Style>&)
+void MainWindow::on_style_updated()
 {
   FileBuffer::pango_context_changed(window_->get_pango_context());
 }
@@ -995,6 +995,9 @@ void MainWindow::on_about()
   else
   {
     std::auto_ptr<Gtk::AboutDialog> dialog (new Gtk::AboutDialog());
+    std::vector<Glib::ustring> authors;
+    for (int i = 0; program_authors[i]; i++)
+      authors.push_back(program_authors[i]);
 
     dialog->set_version(PACKAGE_VERSION);
     dialog->set_logo_icon_name(PACKAGE_TARNAME);
@@ -1002,7 +1005,7 @@ void MainWindow::on_about()
     dialog->set_copyright("Copyright \302\251 2002-2007 Daniel Elstner");
     dialog->set_website("http://regexxer.sourceforge.net/");
 
-    dialog->set_authors(program_authors);
+    dialog->set_authors(authors);
     dialog->set_translator_credits(_("translator-credits"));
     dialog->set_license(program_license);
     dialog->set_wrap_license(true);
@@ -1049,9 +1052,14 @@ void MainWindow::on_conf_value_changed(const Glib::ustring& key)
 {
   if (key == conf_key_textview_font)
   {
-    const Pango::FontDescription font (Settings::instance()->get_string(key));
-    textview_     ->modify_font(font);
-    entry_preview_->modify_font(font);
+    std::string style = "GtkTextView { font: ";
+    style += Settings::instance()->get_string(key);
+    style += "}";
+    Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
+    css->load_from_data(style, style.size());
+
+    textview_     ->get_style_context()->add_provider(css, 1);
+    entry_preview_->get_style_context()->add_provider(css, 1);
   }
 }
 

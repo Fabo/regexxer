@@ -36,7 +36,7 @@ namespace Regexxer
 class FileBufferActionRemoveMatch;
 
 
-class FileBuffer : public gtksourceview::SourceBuffer
+class FileBuffer : public Gsv::SourceBuffer
 {
 public:
   static Glib::RefPtr<FileBuffer> create();

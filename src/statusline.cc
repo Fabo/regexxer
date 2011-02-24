@@ -55,7 +55,7 @@ private:
   Glib::ustring number_to_string(int number);
 
   void recalculate_label_width();
-  void on_label_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
+  void on_label_style_updated();
 };
 
 CounterBox::CounterBox(const Glib::ustring& label)
@@ -89,8 +89,8 @@ CounterBox::CounterBox(const Glib::ustring& label)
   label_index_->set_single_line_mode(true);
   label_count_->set_single_line_mode(true);
 
-  label_index_->signal_style_changed().connect(
-      sigc::mem_fun(*this, &CounterBox::on_label_style_changed));
+  label_index_->signal_style_updated().connect(
+      sigc::mem_fun(*this, &CounterBox::on_label_style_updated));
 
   try // don't abort if the user-specified locale doesn't exist
   {
@@ -184,7 +184,7 @@ void CounterBox::recalculate_label_width()
  * The code relies on both labels having the same style.
  * I think that's a quite safe assumption to make ;)
  */
-void CounterBox::on_label_style_changed(const Glib::RefPtr<Gtk::Style>&)
+void CounterBox::on_label_style_updated()
 {
   const Glib::RefPtr<Pango::Layout> layout = label_index_->create_pango_layout("");
 
@@ -233,17 +233,19 @@ StatusLine::StatusLine()
   // The statusbar looks ugly if the stop button gets its default size,
   // so let's reduce the button's size request to a reasonable amount.
 
-  RC::parse_string("style \"regexxer-stop-button-style\"\n"
-                   "{\n"
-                   "  ythickness = 0\n"
-                   "  GtkWidget::interior_focus = 0\n"
-                   "  GtkWidget::focus_padding = 0\n"
-                   "}\n"
-                   "widget \"*.regexxer-stop-button\" style \"regexxer-stop-button-style\"\n");
+  std::string style = "GtkButton#regexxer-stop-button\n"
+                      "{\n"
+                      "  padding-left: 0;"
+                      "  -GtkWidget-interior-focus: 0;\n"
+                      "  -GtkWidget-focus-padding: 0;\n"
+                      "}";
+  Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
+  css->load_from_data(style, style.size());
 
   stop_button_ = new Button(_("Stop"));
   pack_start(*manage(stop_button_), PACK_SHRINK);
   stop_button_->set_name("regexxer-stop-button");
+  stop_button_->get_style_context()->add_provider(css, 1);
 
   progressbar_ = new ProgressBar();
   pack_start(*manage(progressbar_), PACK_SHRINK);
@@ -326,7 +328,7 @@ void StatusLine::on_hierarchy_changed(Gtk::Widget* previous_toplevel)
   if (Gtk::Window *const window = dynamic_cast<Gtk::Window*>(previous_toplevel))
   {
     stop_button_->remove_accelerator(
-        window->get_accel_group(), GDK_Escape, Gdk::ModifierType(0));
+        window->get_accel_group(), GDK_KEY_Escape, Gdk::ModifierType(0));
   }
 
   Gtk::HBox::on_hierarchy_changed(previous_toplevel);
@@ -335,7 +337,7 @@ void StatusLine::on_hierarchy_changed(Gtk::Widget* previous_toplevel)
   {
     stop_button_->add_accelerator(
         "activate", window->get_accel_group(),
-        GDK_Escape, Gdk::ModifierType(0), Gtk::AccelFlags(0));
+        GDK_KEY_Escape, Gdk::ModifierType(0), Gtk::AccelFlags(0));
   }
 }
 

@@ -1,8 +1,8 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
-  <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkWindow" id="mainwindow">
+    <property name="can_focus">False</property>
     <property name="default_width">640</property>
     <property name="default_height">480</property>
     <accel-groups>
@@ -11,21 +11,27 @@
     <child>
       <object class="GtkVBox" id="vbox_main">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
+        <property name="can_focus">False</property>
         <child>
           <object class="GtkMenuBar" id="menubar">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <child>
               <object class="GtkMenuItem" id="menuitem_file">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_File</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
                   <object class="GtkMenu" id="menuitem_file_menu">
+                    <property name="can_focus">False</property>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_save">
                         <property name="label">gtk-save</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -34,8 +40,10 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_save_all">
-                        <property name="label" translatable="yes">Save all</property>
+                        <property name="label">Save all</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -44,12 +52,15 @@
                     <child>
                       <object class="GtkSeparatorMenuItem" id="menuitem_separator1">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_quit">
                         <property name="label">gtk-quit</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -63,14 +74,19 @@
             <child>
               <object class="GtkMenuItem" id="menuitem_edit">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_Edit</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
                   <object class="GtkMenu" id="menuitem_edit_menu">
+                    <property name="can_focus">False</property>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_undo">
                         <property name="label">gtk-undo</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -80,12 +96,15 @@
                     <child>
                       <object class="GtkSeparatorMenuItem" id="menuitem_separator2">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_cut">
                         <property name="label">gtk-cut</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -96,6 +115,8 @@
                       <object class="GtkImageMenuItem" id="menuitem_copy">
                         <property name="label">gtk-copy</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -106,6 +127,8 @@
                       <object class="GtkImageMenuItem" id="menuitem_paste">
                         <property name="label">gtk-paste</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -116,6 +139,8 @@
                       <object class="GtkImageMenuItem" id="menuitem_delete">
                         <property name="label">gtk-delete</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -124,12 +149,15 @@
                     <child>
                       <object class="GtkSeparatorMenuItem" id="menuitem_separator3">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_preferences">
                         <property name="label">gtk-preferences</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -142,14 +170,19 @@
             <child>
               <object class="GtkMenuItem" id="menuitem_match">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_Match</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
                   <object class="GtkMenu" id="menuitem_match_menu">
+                    <property name="can_focus">False</property>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_prev_file">
-                        <property name="label" translatable="yes">_Previous file</property>
+                        <property name="label">_Previous file</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -160,6 +193,8 @@
                       <object class="GtkImageMenuItem" id="menuitem_prev_match">
                         <property name="label">gtk-go-back</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -170,6 +205,8 @@
                       <object class="GtkImageMenuItem" id="menuitem_next_match">
                         <property name="label">gtk-go-forward</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -178,8 +215,10 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_next_file">
-                        <property name="label" translatable="yes">_Next file</property>
+                        <property name="label">_Next file</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -189,12 +228,15 @@
                     <child>
                       <object class="GtkSeparatorMenuItem" id="menuitem_separator4">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_replace">
-                        <property name="label" translatable="yes">Replace _current</property>
+                        <property name="label">Replace _current</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -203,8 +245,10 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_replace_file">
-                        <property name="label" translatable="yes">Replace in _this file</property>
+                        <property name="label">Replace in _this file</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -212,8 +256,10 @@
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_replace_all">
-                        <property name="label" translatable="yes">Replace in _all files</property>
+                        <property name="label">Replace in _all files</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -226,14 +272,19 @@
             <child>
               <object class="GtkMenuItem" id="menuitem_help">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
                 <property name="label" translatable="yes">_Help</property>
                 <property name="use_underline">True</property>
                 <child type="submenu">
                   <object class="GtkMenu" id="menuitem_help_menu">
+                    <property name="can_focus">False</property>
                     <child>
                       <object class="GtkImageMenuItem" id="menuitem_about">
                         <property name="label">gtk-about</property>
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="accel_group">mainwindow_accelgroup</property>
@@ -253,9 +304,12 @@
         <child>
           <object class="GtkToolbar" id="toolbar">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <child>
               <object class="GtkToolButton" id="button_save">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
                 <property name="is_important">True</property>
                 <property name="stock_id">gtk-save</property>
               </object>
@@ -267,6 +321,8 @@
             <child>
               <object class="GtkToolButton" id="button_save_all">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
                 <property name="is_important">True</property>
                 <property name="stock_id">regexxer-save-all</property>
               </object>
@@ -278,6 +334,7 @@
             <child>
               <object class="GtkSeparatorToolItem" id="separatortoolitem1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -286,6 +343,8 @@
             <child>
               <object class="GtkToolButton" id="button_undo">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
                 <property name="is_important">True</property>
                 <property name="stock_id">gtk-undo</property>
               </object>
@@ -297,6 +356,7 @@
             <child>
               <object class="GtkSeparatorToolItem" id="separatortoolitem2">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -305,6 +365,8 @@
             <child>
               <object class="GtkToolButton" id="button_quit">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
                 <property name="is_important">True</property>
                 <property name="stock_id">gtk-quit</property>
               </object>
@@ -323,8 +385,8 @@
         <child>
           <object class="GtkVBox" id="vbox_interior">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="border_width">6</property>
-            <property name="orientation">vertical</property>
             <child>
               <object class="GtkHPaned" id="paned">
                 <property name="visible">True</property>
@@ -332,12 +394,13 @@
                 <child>
                   <object class="GtkVBox" id="vbox_left">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="border_width">6</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkTable" id="table_file">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="n_rows">3</property>
                         <property name="n_columns">2</property>
                         <property name="column_spacing">6</property>
@@ -345,6 +408,7 @@
                         <child>
                           <object class="GtkLabel" id="label_pattern">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Pattern:</property>
                           </object>
@@ -358,11 +422,12 @@
                         <child>
                           <object class="GtkHBox" id="hbox_file">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="spacing">9</property>
                             <child>
                               <object class="GtkVBox" id="vbox_options">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
+                                <property name="can_focus">False</property>
                                 <property name="spacing">3</property>
                                 <child>
                                   <object class="GtkCheckButton" id="button_recursive">
@@ -371,6 +436,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="tooltip_text" translatable="yes">Recurse into subdirectories</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="active">True</property>
                                     <property name="draw_indicator">True</property>
@@ -388,6 +454,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="tooltip_text" translatable="yes">Also find hidden files</property>
+                                    <property name="use_action_appearance">False</property>
                                     <property name="use_underline">True</property>
                                     <property name="draw_indicator">True</property>
                                   </object>
@@ -407,6 +474,7 @@
                             <child>
                               <object class="GtkAlignment" id="alignment_options">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="yalign">1</property>
                                 <property name="xscale">0</property>
@@ -417,18 +485,22 @@
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
                                     <property name="tooltip_text" translatable="yes">Find all files that match the filename pattern</property>
+                                    <property name="use_action_appearance">False</property>
                                     <child>
                                       <object class="GtkAlignment" id="alignment_button_find_files">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="xscale">0</property>
                                         <property name="yscale">0</property>
                                         <child>
                                           <object class="GtkHBox" id="hbox_button_find_files">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="spacing">2</property>
                                             <child>
                                               <object class="GtkImage" id="image_button_find_files">
                                                 <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
                                                 <property name="stock">gtk-find</property>
                                               </object>
                                               <packing>
@@ -440,6 +512,7 @@
                                             <child>
                                               <object class="GtkLabel" id="label_button_find_files">
                                                 <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
                                                 <property name="label" translatable="yes">Find fi_les</property>
                                                 <property name="use_underline">True</property>
                                               </object>
@@ -468,12 +541,14 @@
                             <property name="right_attach">2</property>
                             <property name="top_attach">2</property>
                             <property name="bottom_attach">3</property>
+                            <property name="x_options">GTK_FILL</property>
                             <property name="y_options"></property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="label_folder">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Fol_der:</property>
                             <property name="use_underline">True</property>
@@ -510,13 +585,12 @@
                     <child>
                       <object class="GtkFrame" id="frame_filetree">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="label_xalign">0</property>
                         <child>
                           <object class="GtkScrolledWindow" id="scrollwin_filetree">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="hscrollbar_policy">automatic</property>
-                            <property name="vscrollbar_policy">automatic</property>
                             <child>
                               <placeholder/>
                             </child>
@@ -524,6 +598,8 @@
                         </child>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -536,12 +612,13 @@
                 <child>
                   <object class="GtkVBox" id="vbox_right">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="border_width">6</property>
-                    <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkTable" id="table_regex">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="n_rows">2</property>
                         <property name="n_columns">3</property>
                         <property name="column_spacing">6</property>
@@ -549,17 +626,19 @@
                         <child>
                           <object class="GtkLabel" id="label_search">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Search:</property>
                           </object>
                           <packing>
                             <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
+                            <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="label_replace">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Replace:</property>
                           </object>
@@ -567,12 +646,13 @@
                             <property name="top_attach">1</property>
                             <property name="bottom_attach">2</property>
                             <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
+                            <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkHBox" id="hbox_options">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkCheckButton" id="button_multiple">
@@ -581,6 +661,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">Find all possible matches in a line</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="active">True</property>
                                 <property name="draw_indicator">True</property>
                               </object>
@@ -597,6 +678,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="tooltip_text" translatable="yes">Do case insensitive matching</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -610,7 +692,7 @@
                             <property name="left_attach">2</property>
                             <property name="right_attach">3</property>
                             <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
+                            <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -620,6 +702,7 @@
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="tooltip_text" translatable="yes">Find all matches of the regular expression</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="use_stock">True</property>
                           </object>
                           <packing>
@@ -628,30 +711,44 @@
                             <property name="top_attach">1</property>
                             <property name="bottom_attach">2</property>
                             <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
+                            <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBoxEntry" id="comboboxentry_regex">
+                          <object class="GtkComboBoxText" id="comboboxentry_regex">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">A regular expression in Perl syntax</property>
+                            <property name="has_entry">True</property>
+                            <child internal-child="entry">
+                              <object class="GtkEntry" id="comboboxentry_entry">
+                                <property name="can_focus">True</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="right_attach">2</property>
-                            <property name="y_options"></property>
+                            <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBoxEntry" id="comboboxentry_substitution">
+                          <object class="GtkComboBoxText" id="comboboxentry_substitution">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="has_entry">True</property>
+                            <child internal-child="entry">
+                              <object class="GtkEntry" id="comboboxentry_entry1">
+                                <property name="can_focus">True</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="right_attach">2</property>
                             <property name="top_attach">1</property>
                             <property name="bottom_attach">2</property>
-                            <property name="y_options"></property>
+                            <property name="y_options">GTK_FILL</property>
                           </packing>
                         </child>
                       </object>
@@ -664,29 +761,31 @@
                     <child>
                       <object class="GtkFrame" id="frame_textview">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="label_xalign">0</property>
                         <child>
                           <object class="GtkVBox" id="vbox_textview">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
+                            <property name="can_focus">False</property>
                             <property name="spacing">3</property>
                             <child>
                               <object class="GtkScrolledWindow" id="scrollwin_textview">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="hscrollbar_policy">automatic</property>
-                                <property name="vscrollbar_policy">automatic</property>
                                 <child>
                                   <placeholder/>
                                 </child>
                               </object>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkEntry" id="entry_preview">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="tooltip_text" translatable="yes">Preview of the substitution</property>
                                 <property name="editable">False</property>
                                 <property name="has_frame">False</property>
@@ -706,6 +805,8 @@
                         </child>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -717,122 +818,21 @@
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
               <object class="GtkHBox" id="action_area">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="border_width">2</property>
                 <property name="spacing">10</property>
                 <child>
-                  <object class="GtkHBox" id="box_move">
-                    <property name="visible">True</property>
-                    <property name="spacing">6</property>
-                    <property name="homogeneous">True</property>
-                    <child>
-                      <object class="GtkButton" id="button_prev_file">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="button_prev_file-atkobject">
-                            <property name="AtkObject::accessible-name" translatable="yes">File backward</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Go to the previous matching file</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkImage" id="image_button_prev_file">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-goto-first</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="button_prev_match">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="button_prev_match-atkobject">
-                            <property name="AtkObject::accessible-name" translatable="yes">Backward</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Go to previous match</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkImage" id="image_button_prev_match">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-go-back</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="button_next_match">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="button_next_match-atkobject">
-                            <property name="AtkObject::accessible-name" translatable="yes">Forward</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Go to next match</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkImage" id="image_button_next_match">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-go-forward</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="button_next_file">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <child internal-child="accessible">
-                          <object class="AtkObject" id="button_next_file-atkobject">
-                            <property name="AtkObject::accessible-name" translatable="yes">File forward</property>
-                            <property name="AtkObject::accessible-description" translatable="yes">Go to the next matching file</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkImage" id="image_button_next_file">
-                            <property name="visible">True</property>
-                            <property name="stock">gtk-goto-last</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="pack_type">end</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkHBox" id="box_replace">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="spacing">6</property>
                     <property name="homogeneous">True</property>
                     <child>
@@ -840,6 +840,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
+                        <property name="use_action_appearance">False</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="button_replace-atkobject">
                             <property name="AtkObject::accessible-description" translatable="yes">Replace current match</property>
@@ -848,15 +849,18 @@
                         <child>
                           <object class="GtkAlignment" id="alignment_button_replace">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xscale">0</property>
                             <property name="yscale">0</property>
                             <child>
                               <object class="GtkHBox" id="hbox_button_replace">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="spacing">2</property>
                                 <child>
                                   <object class="GtkImage" id="image_button_replace">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="stock">gtk-convert</property>
                                   </object>
                                   <packing>
@@ -868,6 +872,7 @@
                                 <child>
                                   <object class="GtkLabel" id="label_button_replace">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">_Replace</property>
                                     <property name="use_underline">True</property>
                                   </object>
@@ -884,6 +889,7 @@
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -892,6 +898,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
+                        <property name="use_action_appearance">False</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="button_replace_file-atkobject">
                             <property name="AtkObject::accessible-description" translatable="yes">Replace all matches in the current file</property>
@@ -900,15 +907,18 @@
                         <child>
                           <object class="GtkAlignment" id="alignment_button_replace_file">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xscale">0</property>
                             <property name="yscale">0</property>
                             <child>
                               <object class="GtkHBox" id="hbox_button_replace_file">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="spacing">2</property>
                                 <child>
                                   <object class="GtkImage" id="image_button_replace_file">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="stock">gtk-convert</property>
                                   </object>
                                   <packing>
@@ -920,6 +930,7 @@
                                 <child>
                                   <object class="GtkLabel" id="label_button_replace_file">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">_This file</property>
                                     <property name="use_underline">True</property>
                                   </object>
@@ -936,6 +947,7 @@
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
@@ -944,6 +956,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
+                        <property name="use_action_appearance">False</property>
                         <child internal-child="accessible">
                           <object class="AtkObject" id="button_replace_all-atkobject">
                             <property name="AtkObject::accessible-description" translatable="yes">Replace all matches in all files</property>
@@ -952,15 +965,18 @@
                         <child>
                           <object class="GtkAlignment" id="alignment_button_replace_all">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xscale">0</property>
                             <property name="yscale">0</property>
                             <child>
                               <object class="GtkHBox" id="hbox_button_replace_all">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="spacing">2</property>
                                 <child>
                                   <object class="GtkImage" id="image_button_replace_all">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="stock">gtk-convert</property>
                                   </object>
                                   <packing>
@@ -972,6 +988,7 @@
                                 <child>
                                   <object class="GtkLabel" id="label_button_replace_all">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="label" translatable="yes">_All files</property>
                                     <property name="use_underline">True</property>
                                   </object>
@@ -988,6 +1005,7 @@
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
@@ -999,6 +1017,124 @@
                     <property name="position">0</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkHBox" id="box_move">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="spacing">6</property>
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkButton" id="button_prev_file">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="button_prev_file-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">File backward</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Go to the previous matching file</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="image_button_prev_file">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="stock">gtk-goto-first</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="button_prev_match">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="button_prev_match-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">Backward</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Go to previous match</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="image_button_prev_match">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="stock">gtk-go-back</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="button_next_match">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="button_next_match-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">Forward</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Go to next match</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="image_button_next_match">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="stock">gtk-go-forward</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="button_next_file">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="button_next_file-atkobject">
+                            <property name="AtkObject::accessible-name" translatable="yes">File forward</property>
+                            <property name="AtkObject::accessible-description" translatable="yes">Go to the next matching file</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="image_button_next_file">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="stock">gtk-goto-last</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="pack_type">end</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1008,6 +1144,8 @@
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
         </child>

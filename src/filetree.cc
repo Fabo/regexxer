@@ -279,17 +279,16 @@ int FileTree::get_modified_count() const
 
 /**** Regexxer::FileTree -- protected **************************************/
 
-void FileTree::on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style)
+void FileTree::on_style_updated()
 {
-  const Glib::ustring detail = "regexxer-filetree";
+  pixbuf_directory_   = render_icon_pixbuf(Gtk::Stock::DIRECTORY,     Gtk::ICON_SIZE_MENU);
+  pixbuf_file_        = render_icon_pixbuf(Gtk::Stock::FILE,          Gtk::ICON_SIZE_MENU);
+  pixbuf_load_failed_ = render_icon_pixbuf(Gtk::Stock::MISSING_IMAGE, Gtk::ICON_SIZE_MENU);
 
-  pixbuf_directory_   = render_icon(Gtk::Stock::DIRECTORY,     Gtk::ICON_SIZE_MENU, detail);
-  pixbuf_file_        = render_icon(Gtk::Stock::FILE,          Gtk::ICON_SIZE_MENU, detail);
-  pixbuf_load_failed_ = render_icon(Gtk::Stock::MISSING_IMAGE, Gtk::ICON_SIZE_MENU, detail);
+  Gdk::RGBA rgba = get_style_context()->get_color(Gtk::STATE_FLAG_INSENSITIVE);
+  color_load_failed_.set_rgb_p(rgba.get_red(), rgba.get_green(), rgba.get_blue());
 
-  color_load_failed_ = get_style()->get_text(Gtk::STATE_INSENSITIVE);
-
-  Gtk::TreeView::on_style_changed(previous_style);
+  Gtk::TreeView::on_style_updated();
 }
 
 /**** Regexxer::FileTree -- private ****************************************/
@@ -914,14 +913,14 @@ void FileTree::load_file_with_fallback(const Gtk::TreeModel::iterator& iter,
   catch (const Glib::Error& error)
   {
     fileinfo->buffer = FileBuffer::create_with_error_message(
-        render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG), error.what());
+        render_icon_pixbuf(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG), error.what());
   }
   catch (const ErrorBinaryFile&)
   {
     const Glib::ustring filename = (*iter)[FileTreeColumns::instance().filename];
 
     fileinfo->buffer = FileBuffer::create_with_error_message(
-        render_icon(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG),
+        render_icon_pixbuf(Gtk::Stock::DIALOG_ERROR, Gtk::ICON_SIZE_DIALOG),
         Util::compose(_("\342\200\234%1\342\200\235 seems to be a binary file."), filename));
   }
 

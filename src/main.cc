@@ -24,7 +24,7 @@
 #include "translation.h"
 
 #include <glib.h>
-#include <gtk/gtkwindow.h> /* for gtk_window_set_default_icon_name() */
+#include <gtk/gtk.h> /* for gtk_window_set_default_icon_name() */
 #include <glibmm.h>
 #include <gtkmm/iconfactory.h>
 #include <gtkmm/iconset.h>
@@ -168,7 +168,7 @@ void register_stock_items()
   for (unsigned int item = 0; item < G_N_ELEMENTS(regexxer_stock_items); ++item)
   {
     const StockItemData& stock = regexxer_stock_items[item];
-    Gtk::IconSet icon_set;
+    Glib::RefPtr<Gtk::IconSet> icon_set = Gtk::IconSet::create();
 
     for (int icon = 0; icon < stock.n_icons; ++icon)
     {
@@ -181,7 +181,7 @@ void register_stock_items()
       // Unset wildcarded for all but the the last icon.
       source.set_size_wildcarded(icon == stock.n_icons - 1);
 
-      icon_set.add_source(source);
+      icon_set->add_source(source);
     }
 
     const Gtk::StockID stock_id (stock.id);
@@ -203,7 +203,7 @@ int main(int argc, char** argv)
 
     std::auto_ptr<RegexxerOptions> options = RegexxerOptions::create();
     Gtk::Main main_instance (argc, argv, options->context());
-    gtksourceview::init();
+    Gsv::init();
     Gio::init();
 
     Glib::set_application_name(PACKAGE_NAME);

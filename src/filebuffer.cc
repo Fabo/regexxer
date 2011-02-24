@@ -29,6 +29,7 @@
 #include <glib.h>
 #include <algorithm>
 #include <list>
+#include <vector>
 
 #include <config.h>
 
@@ -79,8 +80,8 @@ RegexxerTags::RegexxerTags()
   Glib::RefPtr<Gio::Settings> settings = Regexxer::Settings::instance();
 
   settings->signal_changed().connect(sigc::mem_fun(*this, &RegexxerTags::on_conf_value_changed));
-  std::vector<std::string> keys = settings->list_keys();
-  for (std::vector<std::string>::iterator i = keys.begin(); i != keys.end(); ++i)
+  std::vector<Glib::ustring> keys = settings->list_keys();
+  for (std::vector<Glib::ustring>::iterator i = keys.begin(); i != keys.end(); ++i)
     on_conf_value_changed(*i);
 }
 
@@ -159,7 +160,7 @@ public:
 
 FileBuffer::FileBuffer()
 :
-  gtksourceview::SourceBuffer(Glib::RefPtr<Gtk::TextTagTable>(RegexxerTags::instance())),
+  Gsv::SourceBuffer(Glib::RefPtr<Gtk::TextTagTable>(RegexxerTags::instance())),
   match_set_            (),
   current_match_        (match_set_.end()),
   user_action_stack_    (),
@@ -641,7 +642,7 @@ void FileBuffer::on_erase(const FileBuffer::iterator& rbegin, const FileBuffer::
       ++backward_chars;
       --pos;
 
-      typedef std::list< Glib::RefPtr<Mark> > MarkList;
+      typedef std::vector< Glib::RefPtr<Mark> > MarkList;
       const MarkList marks (const_cast<iterator&>(pos).get_marks());  // XXX
 
       for (MarkList::const_iterator pmark = marks.begin(); pmark != marks.end(); ++pmark)
@@ -787,7 +788,7 @@ void FileBuffer::replace_match(MatchSet::const_iterator pos, const Glib::ustring
  */
 void FileBuffer::remove_match_at_iter(const FileBuffer::iterator& start)
 {
-  typedef std::list< Glib::RefPtr<Mark> > MarkList;
+  typedef std::vector< Glib::RefPtr<Mark> > MarkList;
   const MarkList marks (const_cast<iterator&>(start).get_marks()); // XXX
 
   for (MarkList::const_iterator pmark = marks.begin(); pmark != marks.end(); ++pmark)
@@ -883,7 +884,7 @@ void FileBuffer::apply_tag_current()
 // static
 bool FileBuffer::is_match_start(const iterator& where)
 {
-  typedef std::list< Glib::RefPtr<Mark> > MarkList;
+  typedef std::vector< Glib::RefPtr<Mark> > MarkList;
   const MarkList marks (const_cast<iterator&>(where).get_marks()); // XXX
 
   return (std::find_if(marks.begin(), marks.end(), &MatchData::is_match_mark) != marks.end());

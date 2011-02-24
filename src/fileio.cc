@@ -29,8 +29,6 @@
 #include <gtksourceviewmm.h> 
 #include <cstring>
 
-namespace Gsv=gtksourceview;
-
 namespace
 {
 
