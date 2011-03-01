@@ -1,6 +1,19 @@
-regexxer 0.10 (2009-??-??)
+regexxer 0.10 (2011-??-??)
 
 	* New maintainer: Fabien Parent
+	* Port to gtkmm-3.0.
+	* Port to GSettings and GtkBuilder (libglademm, gmodule, gconfmm dropped).
+	* Port from libpcre to GRegex.
+	* Fix copy and paste on the textview.
+	* Use the default system toolbar (remove the custom toolbar preference).
+	* Set scrollbar visibility of the file tree and the textview to 'automatic'.
+	* Add syntax highlighting (gtksourceviewmm-3.0).
+	* Add (auto)completion of regex and substitution entries.
+	* Remember window position, size, and state.
+	* Move pre-defined file patterns to gsettings
+	* New translations: da, gl, el, nb, oc.
+	* Translations updated: de, es, sl, cs, pt_BR, eu, fr, hu, sv, ta, pt,
+		ca, ne, fi, ja, vi, ar.
 
 regexxer 0.9 (2007-02-18)
 
