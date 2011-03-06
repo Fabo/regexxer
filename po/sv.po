@@ -1,7 +1,7 @@
 # Swedish messages for regexxer.
-# Copyright (C) 2004-2009 Free Software Foundation, Inc.
+# Copyright (C) 2004-2011 Free Software Foundation, Inc.
 # Christian Rose <menthos@menthos.com>, 2004.
-# Daniel Nylander <po@danielnylander.se>, 2006, 2009.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2009, 2011.
 #
 # $Id: sv.po,v 1.5 2006/03/01 09:27:16 dnylande Exp $
 #
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2011-02-27 18:52+0100\n"
-"PO-Revision-Date: 2011-02-27 18:56+0100\n"
+"POT-Creation-Date: 2011-03-06 22:45+0100\n"
+"PO-Revision-Date: 2011-03-06 22:47+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../ui/regexxer.desktop.in.h:1
-#: ../src/mainwindow.cc:1004
+#: ../src/mainwindow.cc:1010
 msgid "Search and replace using regular expressions"
 msgstr "Sök och ersätt med hjälp av reguljära uttryck"
 
@@ -29,94 +29,126 @@ msgid "regexxer Search Tool"
 msgstr "Sökverktyget regexxer"
 
 #: ../ui/org.regexxer.gschema.xml.in.h:1
+msgid "Auto indentation"
+msgstr "Automatisk indragning"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:2
 msgid "Current-match color"
 msgstr "Färg för aktuell träff"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:2
+#: ../ui/org.regexxer.gschema.xml.in.h:3
+msgid "Draw spaces"
+msgstr "Rita ut mellanslag"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:4
 msgid "Fallback encoding"
 msgstr "Teckenkodning att falla tillbaka på"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:3
+#: ../ui/org.regexxer.gschema.xml.in.h:5
 msgid "File Patterns"
 msgstr "Filmönster"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:4
+#: ../ui/org.regexxer.gschema.xml.in.h:6
+msgid "Highlight the current line"
+msgstr "Färgmarkera aktuell rad"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:7
 msgid "List of last patterns used in the 'Regex' entry."
 msgstr "Lista över senaste mönster använda för \"Regex\"-posten."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:5
+#: ../ui/org.regexxer.gschema.xml.in.h:8
 msgid "List of last patterns used in the 'Substitution' entry."
 msgstr "Lista över senaste mönster använda för \"Ersättning\"-posten."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:6
+#: ../ui/org.regexxer.gschema.xml.in.h:9
 msgid "List of pre-defined patterns available in the 'Pattern' entry."
 msgstr "Lista över fördefinierade mönster tillgängliga i \"Mönster\"-posten."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:7
+#: ../ui/org.regexxer.gschema.xml.in.h:10
 msgid "Match color"
 msgstr "Matchningsfärg"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:8
+#: ../ui/org.regexxer.gschema.xml.in.h:11
 msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" for a complete list of possible values."
 msgstr "Namn på teckenkodning att använda om en fil inte är läsbar i varken UTF-8 eller teckenuppsättningen som angivits av aktuell lokal. Prova med \"iconv --list\" för en komplett lista av möjliga värden."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:9
+#: ../ui/org.regexxer.gschema.xml.in.h:12
 msgid "Regex Patterns"
 msgstr "Reguljära uttrycksmönster"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:10
+#: ../ui/org.regexxer.gschema.xml.in.h:13
+msgid "Show line numbers"
+msgstr "Visa radnummer"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:14
 msgid "Text view font"
 msgstr "Typsnitt för textvy"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:11
+#: ../ui/org.regexxer.gschema.xml.in.h:15
 msgid "The X coordinate of the window."
 msgstr "X-koordinaten för fönstret."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:12
+#: ../ui/org.regexxer.gschema.xml.in.h:16
 msgid "The Y coordinate of the window."
 msgstr "Y-koordinaten för fönstret."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:13
+#: ../ui/org.regexxer.gschema.xml.in.h:17
 msgid "The background color used to highlight matches of the search expression."
 msgstr "Bakgrundsfärgen som används för att framhäva träffar från sökuttrycket."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:14
+#: ../ui/org.regexxer.gschema.xml.in.h:18
 msgid "The background color used to highlight the currently selected match of the search expression."
 msgstr "Bakgrundsfärgen som används för att framhäva aktuellt markerad träff från sökuttrycket."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:15
+#: ../ui/org.regexxer.gschema.xml.in.h:19
 msgid "The font used in the file editor."
 msgstr "Typsnittet som används i filredigeraren."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:16
+#: ../ui/org.regexxer.gschema.xml.in.h:20
 msgid "The height of the window."
 msgstr "Höjden för fönstret."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:17
+#: ../ui/org.regexxer.gschema.xml.in.h:21
 msgid "The width of the window."
 msgstr "Bredden för fönstret."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:18
+#: ../ui/org.regexxer.gschema.xml.in.h:22
 msgid "Whether the window is maximized."
 msgstr "Huruvida fönstret är maximerat."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:19
+#: ../ui/org.regexxer.gschema.xml.in.h:23
+msgid "Whether to enable auto indentation the text view."
+msgstr "Huruvida automatisk indragning ska aktiveras i textvyn."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:24
+msgid "Whether to highlight the current line of the text view."
+msgstr "Huruvida aktuell rad ska färgmarkeras i textvyn."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:25
+msgid "Whether to show the line numbers of the text view."
+msgstr "Huruvida radnummer ska visas i textvyn."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:26
+msgid "Which type of space to draw in the text view."
+msgstr "Vilken typ av mellanslag som ska ritas ut i textvyn."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:27
 msgid "window height"
 msgstr "fönsterhöjd"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:20
+#: ../ui/org.regexxer.gschema.xml.in.h:28
 msgid "window maximization"
 msgstr "fönstermaximering"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:21
+#: ../ui/org.regexxer.gschema.xml.in.h:29
 msgid "window width"
 msgstr "fönsterbredd"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:22
+#: ../ui/org.regexxer.gschema.xml.in.h:30
 msgid "window x position"
 msgstr "fönstrets x-position"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:23
+#: ../ui/org.regexxer.gschema.xml.in.h:31
 msgid "window y position"
 msgstr "fönstrets y-position"
 
@@ -200,7 +232,7 @@ msgstr "Starta inte sökningen automatiskt"
 msgid "[FOLDER]"
 msgstr "[MAPP]"
 
-#: ../src/mainwindow.cc:554
+#: ../src/mainwindow.cc:560
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -208,7 +240,7 @@ msgstr ""
 "Vissa filer har inte sparats ännu.\n"
 "Avsluta ändå?"
 
-#: ../src/mainwindow.cc:568
+#: ../src/mainwindow.cc:574
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -216,20 +248,20 @@ msgstr ""
 "Vissa filer har inte sparats ännu.\n"
 "Fortsätta ändå?"
 
-#: ../src/mainwindow.cc:598
+#: ../src/mainwindow.cc:604
 msgid "The file search pattern is invalid."
 msgstr "Filsökmönstret är ogiltigt."
 
-#: ../src/mainwindow.cc:604
+#: ../src/mainwindow.cc:610
 msgid "The following errors occurred during search:"
 msgstr "Följande fel inträffade under sökningen:"
 
 # Sparandet?
-#: ../src/mainwindow.cc:858
+#: ../src/mainwindow.cc:864
 msgid "The following errors occurred during save:"
 msgstr "Följande fel inträffade under sparning:"
 
-#: ../src/mainwindow.cc:1009
+#: ../src/mainwindow.cc:1015
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -352,38 +384,42 @@ msgid "Search:"
 msgstr "Sök:"
 
 #: ../ui/mainwindow.ui.h:26
+msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&amp;, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
+msgstr "Den nya strängen att ersätta. Precis som i Perl kan du referera till delar av träffen med $1, $2, etc. eller även $+, $&amp;, $` och $'. Operanderna \\l, \\u, \\L, \\U och \\E stöds också."
+
+#: ../ui/mainwindow.ui.h:27
 msgid "_All files"
 msgstr "_Alla filer"
 
-#: ../ui/mainwindow.ui.h:27
+#: ../ui/mainwindow.ui.h:28
 msgid "_Edit"
 msgstr "_Redigera"
 
-#: ../ui/mainwindow.ui.h:28
+#: ../ui/mainwindow.ui.h:29
 msgid "_File"
 msgstr "_Arkiv"
 
-#: ../ui/mainwindow.ui.h:29
+#: ../ui/mainwindow.ui.h:30
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../ui/mainwindow.ui.h:30
+#: ../ui/mainwindow.ui.h:31
 msgid "_Match"
 msgstr "_Träff"
 
-#: ../ui/mainwindow.ui.h:31
+#: ../ui/mainwindow.ui.h:32
 msgid "_Replace"
 msgstr "_Ersätt"
 
-#: ../ui/mainwindow.ui.h:32
+#: ../ui/mainwindow.ui.h:33
 msgid "_This file"
 msgstr "_Denna fil"
 
-#: ../ui/mainwindow.ui.h:33
+#: ../ui/mainwindow.ui.h:34
 msgid "hidden"
 msgstr "dold"
 
-#: ../ui/mainwindow.ui.h:34
+#: ../ui/mainwindow.ui.h:35
 msgid "recursive"
 msgstr "rekursiv"
 
@@ -507,14 +543,6 @@ msgstr "regexxer försöker att läsa en fil i följande teckenkodningar före d
 #~ msgstr ""
 #~ "Ett filnamnsmönster som används av skalet. Teckenklasser [ab] och csh-"
 #~ "liknande klammerparentesuttryck {a,b} stöds."
-#~ msgid ""
-#~ "The new string to substitute. As in Perl, you can refer to parts of the "
-#~ "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
-#~ "\\u, \\L, \\U and \\E are supported as well."
-#~ msgstr ""
-#~ "Den nya strängen att ersätta. Precis som i Perl, kan du referera till "
-#~ "delar av träffen med $1, $2, etc. eller även $+, $&, $` och $'. "
-#~ "Operanderna \\l, \\u, \\L, \\U och \\E stöds också."
 #~ msgid ""
 #~ "Icons only\n"
 #~ "Text only\n"
