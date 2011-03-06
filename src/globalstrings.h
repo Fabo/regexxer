@@ -45,6 +45,10 @@ const char *const conf_key_window_height       = "window-height";
 const char *const conf_key_window_position_x   = "window-position-x";
 const char *const conf_key_window_position_y   = "window-position-y";
 const char *const conf_key_window_maximized    = "window-maximized";
+const char *const conf_key_show_line_numbers   = "show-line-numbers";
+const char *const conf_key_highlight_current_line = "highlight-current-line";
+const char *const conf_key_auto_indentation    = "auto-indentation";
+const char *const conf_key_draw_spaces         = "draw-space";
 
 const char *const ui_mainwindow_filename       = REGEXXER_PKGDATADIR G_DIR_SEPARATOR_S
                                                  "mainwindow.ui";

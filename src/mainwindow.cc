@@ -244,6 +244,12 @@ void MainWindow::initialize(const InitState& init)
   if (maximized)
     window_->maximize();
 
+  textview_->set_show_line_numbers(settings->get_boolean(conf_key_show_line_numbers));
+  textview_->set_highlight_current_line(settings->get_boolean(conf_key_highlight_current_line));
+  textview_->set_auto_indent(settings->get_boolean(conf_key_auto_indentation));
+  textview_->set_draw_spaces(static_cast<Gsv::SourceDrawSpacesFlags>
+                              (settings->get_flags(conf_key_draw_spaces)));
+
   std::string folder;
 
   if (!init.folder.empty())

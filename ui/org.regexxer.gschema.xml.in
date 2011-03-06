@@ -1,4 +1,11 @@
 <schemalist>
+   <flags id="draw-space-flags">
+    <value nick="space" value="1"/>
+    <value nick="tab" value="2"/>
+    <value nick="new-line" value="4"/>
+    <value nick="nbsp" value="8"/>
+  </flags>
+
   <schema id="org.regexxer" path="/apps/regexxer/">
     <key name="files-patterns" type="as">
       <default>['*.[ch]','*.{c,cc,cpp,cxx,c++,C,h,hh,hpp,hxx,h++}','*.{ccg,hg}','*.idl','*.{java,jsp}','*.{pl,pm,cgi}','*.py','*.php[0-9]?','*.{html,htm,shtml,js,wml}','*.{xml,xsl,css,dtd,xsd}']</default>
@@ -70,6 +77,30 @@
       <default>false</default>
       <_summary>window maximization</_summary>
       <_description>Whether the window is maximized.</_description>
+    </key>
+
+    <key name="show-line-numbers" type="b">
+      <default>true</default>
+      <_summary>Show line numbers</_summary>
+      <_description>Whether to show the line numbers of the text view.</_description>
+    </key>
+
+    <key name="highlight-current-line" type="b">
+      <default>true</default>
+      <_summary>Highlight the current line</_summary>
+      <_description>Whether to highlight the current line of the text view.</_description>
+    </key>
+
+    <key name="auto-indentation" type="b">
+      <default>true</default>
+      <_summary>Auto indentation</_summary>
+      <_description>Whether to enable auto indentation the text view.</_description>
+    </key>
+
+    <key name="draw-space" flags="draw-space-flags">
+      <default>["space","tab"]</default>
+      <_summary>Draw spaces</_summary>
+      <_description>Which type of space to draw in the text view.</_description>
     </key>
   </schema>
 </schemalist>
