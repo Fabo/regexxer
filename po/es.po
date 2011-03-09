@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer.HEAD.es\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
-"POT-Creation-Date: 2011-02-24 20:30+0000\n"
-"PO-Revision-Date: 2011-02-26 12:22+0100\n"
+"POT-Creation-Date: 2011-03-06 16:58+0000\n"
+"PO-Revision-Date: 2011-03-08 15:05+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:1004
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:1010
 msgid "Search and replace using regular expressions"
 msgstr "Buscar y reemplazar usando expresiones regulares"
 
@@ -29,41 +29,47 @@ msgid "regexxer Search Tool"
 msgstr "Herramienta de búsqueda regexxer"
 
 #: ../ui/org.regexxer.gschema.xml.in.h:1
+#, fuzzy
+msgid "Auto indentation"
+msgstr "Sangrado automático"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:2
 msgid "Current-match color"
 msgstr "Color para la coincidencia actual"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:2
+#: ../ui/org.regexxer.gschema.xml.in.h:3
+msgid "Draw spaces"
+msgstr "Mostrar espacios"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:4
 msgid "Fallback encoding"
 msgstr "Codificación en caso de fallo"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:3
-#| msgid "Regex Patterns"
+#: ../ui/org.regexxer.gschema.xml.in.h:5
 msgid "File Patterns"
 msgstr "Patrones de archivo"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:4
-#| msgid "List of last pattern used for the regex entry."
+#: ../ui/org.regexxer.gschema.xml.in.h:6
+msgid "Highlight the current line"
+msgstr "Resaltar la línea actual"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:7
 msgid "List of last patterns used in the 'Regex' entry."
 msgstr "Lista de los últimos patrones usados en la entrada de «EXPREG»."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:5
-#| msgid "List of last pattern used for the substitution entry."
+#: ../ui/org.regexxer.gschema.xml.in.h:8
 msgid "List of last patterns used in the 'Substitution' entry."
 msgstr "Lista de los últimos patrones usados en la entrada «Sustitución»."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:6
+#: ../ui/org.regexxer.gschema.xml.in.h:9
 msgid "List of pre-defined patterns available in the 'Pattern' entry."
 msgstr "Lista de patrones predefinidos disponibles en la entrada «Patrón»."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:7
+#: ../ui/org.regexxer.gschema.xml.in.h:10
 msgid "Match color"
 msgstr "Color de coincidencia"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:8
-#| msgid ""
-#| "Name of the character encoding to use if a file is not readable in either "
-#| "UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
-#| "for a complete list of possible values."
+#: ../ui/org.regexxer.gschema.xml.in.h:11
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
 "UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
@@ -74,30 +80,34 @@ msgstr ""
 "localización actual. Intente «iconv --list» para una lista completa de los "
 "valores posibles."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:9
+#: ../ui/org.regexxer.gschema.xml.in.h:12
 msgid "Regex Patterns"
 msgstr "Patrones regex"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:10
+#: ../ui/org.regexxer.gschema.xml.in.h:13
+msgid "Show line numbers"
+msgstr "Mostrar números de línea"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:14
 msgid "Text view font"
 msgstr "Tipografía para la vista de texto"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:11
+#: ../ui/org.regexxer.gschema.xml.in.h:15
 msgid "The X coordinate of the window."
 msgstr "La coordenada X de la ventana."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:12
+#: ../ui/org.regexxer.gschema.xml.in.h:16
 msgid "The Y coordinate of the window."
 msgstr "La coordenada Y de la ventana."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:13
+#: ../ui/org.regexxer.gschema.xml.in.h:17
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr ""
 "El color de fondo usado para resaltar las coincidencias de la expresión de "
 "búsqueda."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:14
+#: ../ui/org.regexxer.gschema.xml.in.h:18
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
@@ -105,39 +115,56 @@ msgstr ""
 "El color de fondo usado para resaltar la coincidencia actualmente "
 "seleccionada de la expresión de búsqueda."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:15
+#: ../ui/org.regexxer.gschema.xml.in.h:19
 msgid "The font used in the file editor."
 msgstr "La tipografía usada en el editor de archivos."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:16
+#: ../ui/org.regexxer.gschema.xml.in.h:20
 msgid "The height of the window."
 msgstr "La altura de la ventana."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:17
+#: ../ui/org.regexxer.gschema.xml.in.h:21
 msgid "The width of the window."
 msgstr "La anchura de la ventana."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:18
+#: ../ui/org.regexxer.gschema.xml.in.h:22
 msgid "Whether the window is maximized."
 msgstr "Indica si la ventana está maximizada."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:19
+#: ../ui/org.regexxer.gschema.xml.in.h:23
+#, fuzzy
+msgid "Whether to enable auto indentation the text view."
+msgstr "Indica si se debe activar el sangrado automático en la vista de texto."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:24
+msgid "Whether to highlight the current line of the text view."
+msgstr "Indica si se debe resaltar la línea actual en la vista de texto."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:25
+msgid "Whether to show the line numbers of the text view."
+msgstr "Indica si se deben mostrar los números de línea en la vista de texto."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:26
+msgid "Which type of space to draw in the text view."
+msgstr "Indica el tipo de espacio que pintar en la vista de texto."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:27
 msgid "window height"
 msgstr "altura de la ventana"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:20
+#: ../ui/org.regexxer.gschema.xml.in.h:28
 msgid "window maximization"
 msgstr "maximización de la ventana"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:21
+#: ../ui/org.regexxer.gschema.xml.in.h:29
 msgid "window width"
 msgstr "anchura de la ventana"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:22
+#: ../ui/org.regexxer.gschema.xml.in.h:30
 msgid "window x position"
 msgstr "posición x de la ventana"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:23
+#: ../ui/org.regexxer.gschema.xml.in.h:31
 msgid "window y position"
 msgstr "posición y de la ventana"
 
@@ -219,7 +246,7 @@ msgstr "No empezar a buscar automáticamente"
 msgid "[FOLDER]"
 msgstr "[CARPETA]"
 
-#: ../src/mainwindow.cc:554
+#: ../src/mainwindow.cc:560
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -227,25 +254,25 @@ msgstr ""
 "Algunos archivos no han sido guardados aún.\n"
 "¿Desea salir de todas formas?"
 
-#: ../src/mainwindow.cc:568
+#: ../src/mainwindow.cc:574
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
 msgstr "Algunos archivos no han sido guardados aún.ºn ¿Aún quiere continuar?"
 
-#: ../src/mainwindow.cc:598
+#: ../src/mainwindow.cc:604
 msgid "The file search pattern is invalid."
 msgstr "El patrón de búsqueda de archivos es inválido."
 
-#: ../src/mainwindow.cc:604
+#: ../src/mainwindow.cc:610
 msgid "The following errors occurred during search:"
 msgstr "Los siguientes errores ocurrieron durante la búsqueda:"
 
-#: ../src/mainwindow.cc:858
+#: ../src/mainwindow.cc:864
 msgid "The following errors occurred during save:"
 msgstr "Los siguientes errores ocurrieron al guardar:"
 
-#: ../src/mainwindow.cc:1009
+#: ../src/mainwindow.cc:1015
 msgid "translator-credits"
 msgstr ""
 "Jorge González <jorgegonz@svn.gnome.org>, 2007\n"
@@ -367,38 +394,53 @@ msgid "Search:"
 msgstr "Buscar:"
 
 #: ../ui/mainwindow.ui.h:26
+#, fuzzy
+#| msgid ""
+#| "The new string to substitute. As in Perl, you can refer to parts of the "
+#| "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
+#| "\\u, \\L, \\U and \\E are supported as well."
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&amp;, $` and $'. The operators \\l, "
+"\\u, \\L, \\U and \\E are supported as well."
+msgstr ""
+"La cadena nueva a sustituir. Como en Perl, puede referirse a partes de la "
+"coincidencia usando $1, $2, etc. o incluso $+, $&, $` y $'. Los operadores "
+"\\l, \\u, \\L, \\U y \\E están soportados también."
+
+#: ../ui/mainwindow.ui.h:27
 msgid "_All files"
 msgstr "_Todos los archivos"
 
-#: ../ui/mainwindow.ui.h:27
+#: ../ui/mainwindow.ui.h:28
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../ui/mainwindow.ui.h:28
+#: ../ui/mainwindow.ui.h:29
 msgid "_File"
 msgstr "_Archivo"
 
-#: ../ui/mainwindow.ui.h:29
+#: ../ui/mainwindow.ui.h:30
 msgid "_Help"
 msgstr "Ay_uda"
 
-#: ../ui/mainwindow.ui.h:30
+#: ../ui/mainwindow.ui.h:31
 msgid "_Match"
 msgstr "_Coincide"
 
-#: ../ui/mainwindow.ui.h:31
+#: ../ui/mainwindow.ui.h:32
 msgid "_Replace"
 msgstr "_Reemplazar"
 
-#: ../ui/mainwindow.ui.h:32
+#: ../ui/mainwindow.ui.h:33
 msgid "_This file"
 msgstr "_Este archivo"
 
-#: ../ui/mainwindow.ui.h:33
+#: ../ui/mainwindow.ui.h:34
 msgid "hidden"
 msgstr "oculto"
 
-#: ../ui/mainwindow.ui.h:34
+#: ../ui/mainwindow.ui.h:35
 msgid "recursive"
 msgstr "recursivo"
 
@@ -540,15 +582,6 @@ msgstr ""
 #~ "Un patrón de nombres de archivos tal como se usa por el shell. Las clases "
 #~ "de caracteres [ab] y las expresiones de llaves estilo csh, {a,b} están "
 #~ "soportadas."
-
-#~ msgid ""
-#~ "The new string to substitute. As in Perl, you can refer to parts of the "
-#~ "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
-#~ "\\u, \\L, \\U and \\E are supported as well."
-#~ msgstr ""
-#~ "La cadena nueva a sustituir. Como en Perl, puede referirse a partes de la "
-#~ "coincidencia usando $1, $2, etc. o incluso $+, $&, $` y $'. Los "
-#~ "operadores \\l, \\u, \\L, \\U y \\E están soportados también."
 
 #~ msgid ""
 #~ "Icons only\n"
