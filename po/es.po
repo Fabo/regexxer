@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer.HEAD.es\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
-"POT-Creation-Date: 2011-03-06 16:58+0000\n"
-"PO-Revision-Date: 2011-03-08 15:05+0100\n"
+"POT-Creation-Date: 2011-03-09 18:28+0000\n"
+"PO-Revision-Date: 2011-03-09 19:32+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,6 @@ msgid "regexxer Search Tool"
 msgstr "Herramienta de búsqueda regexxer"
 
 #: ../ui/org.regexxer.gschema.xml.in.h:1
-#, fuzzy
 msgid "Auto indentation"
 msgstr "Sangrado automático"
 
@@ -132,7 +131,6 @@ msgid "Whether the window is maximized."
 msgstr "Indica si la ventana está maximizada."
 
 #: ../ui/org.regexxer.gschema.xml.in.h:23
-#, fuzzy
 msgid "Whether to enable auto indentation the text view."
 msgstr "Indica si se debe activar el sangrado automático en la vista de texto."
 
@@ -394,7 +392,6 @@ msgid "Search:"
 msgstr "Buscar:"
 
 #: ../ui/mainwindow.ui.h:26
-#, fuzzy
 #| msgid ""
 #| "The new string to substitute. As in Perl, you can refer to parts of the "
 #| "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
@@ -404,9 +401,9 @@ msgid ""
 "match using $1, $2, etc. or even $+, $&amp;, $` and $'. The operators \\l, "
 "\\u, \\L, \\U and \\E are supported as well."
 msgstr ""
-"La cadena nueva a sustituir. Como en Perl, puede referirse a partes de la "
+"La cadena nueva que sustituir. Como en Perl, puede referirse a partes de la "
 "coincidencia usando $1, $2, etc. o incluso $+, $&, $` y $'. Los operadores "
-"\\l, \\u, \\L, \\U y \\E están soportados también."
+"\\l, \\u, \\L, \\U y \\E también están soportados."
 
 #: ../ui/mainwindow.ui.h:27
 msgid "_All files"
