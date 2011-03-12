@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
-"POT-Creation-Date: 2011-02-20 19:41+0000\n"
-"PO-Revision-Date: 2011-02-22 00:22+0100\n"
+"POT-Creation-Date: 2011-03-06 16:58+0000\n"
+"PO-Revision-Date: 2011-03-12 20:16+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
-#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:1001
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:1010
 msgid "Search and replace using regular expressions"
 msgstr "Hledat a nahradit pomocí regulárních výrazů"
 
@@ -30,41 +30,46 @@ msgid "regexxer Search Tool"
 msgstr "Nástroj pro hledání regexxer"
 
 #: ../ui/org.regexxer.gschema.xml.in.h:1
+msgid "Auto indentation"
+msgstr "Automatické odsazování"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:2
 msgid "Current-match color"
 msgstr "Barva aktuálního výskytu"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:2
+#: ../ui/org.regexxer.gschema.xml.in.h:3
+msgid "Draw spaces"
+msgstr "Vykreslovat mezery"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:4
 msgid "Fallback encoding"
 msgstr "Náhradní kódování"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:3
-#| msgid "Regex Patterns"
+#: ../ui/org.regexxer.gschema.xml.in.h:5
 msgid "File Patterns"
 msgstr "Vzory souborů"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:4
-#| msgid "List of last pattern used for the regex entry."
+#: ../ui/org.regexxer.gschema.xml.in.h:6
+msgid "Highlight the current line"
+msgstr "Zvýrazňovat aktuální řádek"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:7
 msgid "List of last patterns used in the 'Regex' entry."
 msgstr "Seznam naposledy použitých vzorů v poli „Hledat“."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:5
-#| msgid "List of last pattern used for the substitution entry."
+#: ../ui/org.regexxer.gschema.xml.in.h:8
 msgid "List of last patterns used in the 'Substitution' entry."
 msgstr "Seznam naposledy použitých vzorů v poli „Nahradit“."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:6
+#: ../ui/org.regexxer.gschema.xml.in.h:9
 msgid "List of pre-defined patterns available in the 'Pattern' entry."
 msgstr "Seznam předdefinovaných vzorů dostupných v poli „Vzor“."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:7
+#: ../ui/org.regexxer.gschema.xml.in.h:10
 msgid "Match color"
 msgstr "Barva výskytu"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:8
-#| msgid ""
-#| "Name of the character encoding to use if a file is not readable in either "
-#| "UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
-#| "for a complete list of possible values."
+#: ../ui/org.regexxer.gschema.xml.in.h:11
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
 "UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
@@ -74,28 +79,32 @@ msgstr ""
 "ani v UTF-8 ani v kódování určeném současným národním nastavením. Pro "
 "získání úplného seznamu možných hodnot zkuste „iconv --list“."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:9
+#: ../ui/org.regexxer.gschema.xml.in.h:12
 msgid "Regex Patterns"
 msgstr "Vzory regulárních výrazů"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:10
+#: ../ui/org.regexxer.gschema.xml.in.h:13
+msgid "Show line numbers"
+msgstr "Zobrazovat čísla řádků"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:14
 msgid "Text view font"
 msgstr "Písmo pro zobrazení textu"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:11
+#: ../ui/org.regexxer.gschema.xml.in.h:15
 msgid "The X coordinate of the window."
 msgstr "Souřadnice x okna."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:12
+#: ../ui/org.regexxer.gschema.xml.in.h:16
 msgid "The Y coordinate of the window."
 msgstr "Souřadnice y okna."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:13
+#: ../ui/org.regexxer.gschema.xml.in.h:17
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr "Barva pozadí používaná pro zvýraznění výskytů hledaného výrazu."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:14
+#: ../ui/org.regexxer.gschema.xml.in.h:18
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
@@ -103,43 +112,59 @@ msgstr ""
 "Barva pozadí používaná pro zvýraznění aktuálně vybraného výskytu hledaného "
 "výrazu."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:15
+#: ../ui/org.regexxer.gschema.xml.in.h:19
 msgid "The font used in the file editor."
 msgstr "Písmo používané v editoru souborů."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:16
+#: ../ui/org.regexxer.gschema.xml.in.h:20
 msgid "The height of the window."
 msgstr "Výška okna."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:17
+#: ../ui/org.regexxer.gschema.xml.in.h:21
 msgid "The width of the window."
 msgstr "Šířka okna."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:18
+#: ../ui/org.regexxer.gschema.xml.in.h:22
 msgid "Whether the window is maximized."
 msgstr "Zda je okno maximalizováno."
 
-#: ../ui/org.regexxer.gschema.xml.in.h:19
+#: ../ui/org.regexxer.gschema.xml.in.h:23
+msgid "Whether to enable auto indentation the text view."
+msgstr "Zda zapnout automatické odsazování v zobrazeném textu."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:24
+msgid "Whether to highlight the current line of the text view."
+msgstr "Zda zvýrazňovat aktuální řádek v zobrazeném textu."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:25
+msgid "Whether to show the line numbers of the text view."
+msgstr "Zda zobrazovat čísla řádků zobrazeného textu."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:26
+msgid "Which type of space to draw in the text view."
+msgstr "Jaký typ mezer vykreslovat v zobrazeném textu."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:27
 msgid "window height"
 msgstr "výška okna"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:20
+#: ../ui/org.regexxer.gschema.xml.in.h:28
 msgid "window maximization"
 msgstr "maximalizace okna"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:21
+#: ../ui/org.regexxer.gschema.xml.in.h:29
 msgid "window width"
 msgstr "šířka okna"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:22
+#: ../ui/org.regexxer.gschema.xml.in.h:30
 msgid "window x position"
 msgstr "poloha okna ve směru x"
 
-#: ../ui/org.regexxer.gschema.xml.in.h:23
+#: ../ui/org.regexxer.gschema.xml.in.h:31
 msgid "window y position"
 msgstr "poloha okna ve směru y"
 
-#: ../src/filebuffer.cc:197
+#: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "Nelze číst soubor:"
 
@@ -151,12 +176,12 @@ msgstr "Soubor"
 msgid "#"
 msgstr "Počet"
 
-#: ../src/filetree.cc:509
+#: ../src/filetree.cc:508
 #, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Selhalo uložení souboru „%1“: %2"
 
-#: ../src/filetree.cc:925
+#: ../src/filetree.cc:924
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "„%1“ je zřejmě binární soubor."
@@ -217,7 +242,7 @@ msgstr "Nezačínat hledání automaticky"
 msgid "[FOLDER]"
 msgstr "[SLOŽKA]"
 
-#: ../src/mainwindow.cc:554
+#: ../src/mainwindow.cc:560
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -225,7 +250,7 @@ msgstr ""
 "Některé soubory dosud nebyly uloženy.\n"
 "Přesto skončit?"
 
-#: ../src/mainwindow.cc:568
+#: ../src/mainwindow.cc:574
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -233,19 +258,19 @@ msgstr ""
 "Některé soubory dosud nebyly uloženy.\n"
 "Přesto pokračovat?"
 
-#: ../src/mainwindow.cc:598
+#: ../src/mainwindow.cc:604
 msgid "The file search pattern is invalid."
 msgstr "Vzor pro hledání souborů je neplatný."
 
-#: ../src/mainwindow.cc:604
+#: ../src/mainwindow.cc:610
 msgid "The following errors occurred during search:"
 msgstr "Při hledání došlo k následujícím chybám:"
 
-#: ../src/mainwindow.cc:858
+#: ../src/mainwindow.cc:864
 msgid "The following errors occurred during save:"
 msgstr "Při ukládání došlo k následujícím chybám:"
 
-#: ../src/mainwindow.cc:1006
+#: ../src/mainwindow.cc:1015
 msgid "translator-credits"
 msgstr ""
 "Miloslav Trmač <mitr@volny.cz>\n"
@@ -256,19 +281,19 @@ msgstr ""
 msgid "“%1” is not a valid encoding."
 msgstr "„%1“ není platné kódování."
 
-#: ../src/statusline.cc:244
+#: ../src/statusline.cc:245
 msgid "Stop"
 msgstr "Zastavit"
 
-#: ../src/statusline.cc:251
+#: ../src/statusline.cc:253
 msgid "File:"
 msgstr "Soubor:"
 
-#: ../src/statusline.cc:254
+#: ../src/statusline.cc:256
 msgid "Match:"
 msgstr "Výskyt:"
 
-#: ../src/statusline.cc:265
+#: ../src/statusline.cc:267
 msgid "Cancels the running search"
 msgstr "Zruší probíhající hledání"
 
@@ -345,82 +370,68 @@ msgid "Recurse into subdirectories"
 msgstr "Zanořovat se do podsložek"
 
 #: ../ui/mainwindow.ui.h:21
-msgid "Replace _current"
-msgstr "Nahradit _aktuální"
-
-#: ../ui/mainwindow.ui.h:22
 msgid "Replace all matches in all files"
 msgstr "Nahradit všechny výskyty ve všech souborech"
 
-#: ../ui/mainwindow.ui.h:23
+#: ../ui/mainwindow.ui.h:22
 msgid "Replace all matches in the current file"
 msgstr "Nahradit všechny výskyty v aktuálním souboru"
 
-#: ../ui/mainwindow.ui.h:24
+#: ../ui/mainwindow.ui.h:23
 msgid "Replace current match"
 msgstr "Nahradit aktuální výskyt"
 
-#: ../ui/mainwindow.ui.h:25
-msgid "Replace in _all files"
-msgstr "Nahrazovat ve _všech souborech"
-
-#: ../ui/mainwindow.ui.h:26
-msgid "Replace in _this file"
-msgstr "Nahrazovat v _tomto souboru"
-
-#: ../ui/mainwindow.ui.h:27
+#: ../ui/mainwindow.ui.h:24
 msgid "Replace:"
 msgstr "Nahradit:"
 
-#: ../ui/mainwindow.ui.h:28
-msgid "Save all"
-msgstr "Uložit vše"
-
-#: ../ui/mainwindow.ui.h:29
+#: ../ui/mainwindow.ui.h:25
 msgid "Search:"
 msgstr "Hledat:"
 
-#: ../ui/mainwindow.ui.h:30
+#: ../ui/mainwindow.ui.h:26
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&amp;, $` and $'. The operators \\l, "
+"\\u, \\L, \\U and \\E are supported as well."
+msgstr ""
+"Nový řetězec k nahrazení. Stejně jako v jazyce Perl, můžete odkazovat na "
+"část nalezené shody pomocí $1, $2, atd. nebo i s pomocí $+, $&amp;, $` a $'. "
+"Stejně tak jsou podporovány operátory \\l, \\u, \\L, \\U a \\E."
+
+#: ../ui/mainwindow.ui.h:27
 msgid "_All files"
 msgstr "_Všechny soubory"
 
-#: ../ui/mainwindow.ui.h:31
+#: ../ui/mainwindow.ui.h:28
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: ../ui/mainwindow.ui.h:32
+#: ../ui/mainwindow.ui.h:29
 msgid "_File"
 msgstr "_Soubor"
 
-#: ../ui/mainwindow.ui.h:33
+#: ../ui/mainwindow.ui.h:30
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: ../ui/mainwindow.ui.h:34
+#: ../ui/mainwindow.ui.h:31
 msgid "_Match"
 msgstr "_Výskyt"
 
-#: ../ui/mainwindow.ui.h:35
-msgid "_Next file"
-msgstr "_Následující soubor"
-
-#: ../ui/mainwindow.ui.h:36
-msgid "_Previous file"
-msgstr "_Předchozí soubor"
-
-#: ../ui/mainwindow.ui.h:37
+#: ../ui/mainwindow.ui.h:32
 msgid "_Replace"
 msgstr "Na_hradit"
 
-#: ../ui/mainwindow.ui.h:38
+#: ../ui/mainwindow.ui.h:33
 msgid "_This file"
 msgstr "_Tento soubor"
 
-#: ../ui/mainwindow.ui.h:39
+#: ../ui/mainwindow.ui.h:34
 msgid "hidden"
 msgstr "skryté"
 
-#: ../ui/mainwindow.ui.h:40
+#: ../ui/mainwindow.ui.h:35
 msgid "recursive"
 msgstr "rekurzivně"
 
@@ -492,6 +503,24 @@ msgstr "_Písmo textového pohledu:"
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr "Než se regexxer vzdá, zkouší soubor načíst v následujících kódováních:"
+
+#~ msgid "Replace _current"
+#~ msgstr "Nahradit _aktuální"
+
+#~ msgid "Replace in _all files"
+#~ msgstr "Nahrazovat ve _všech souborech"
+
+#~ msgid "Replace in _this file"
+#~ msgstr "Nahrazovat v _tomto souboru"
+
+#~ msgid "Save all"
+#~ msgstr "Uložit vše"
+
+#~ msgid "_Next file"
+#~ msgstr "_Následující soubor"
+
+#~ msgid "_Previous file"
+#~ msgstr "_Předchozí soubor"
 
 #~ msgid "List of last pattern used for the file's regex entry."
 #~ msgstr "Seznam naposledy použitých vzorů v poli vzorek pro soubor."
