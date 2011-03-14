@@ -3,21 +3,22 @@
 # João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>, 2004.
 # Raphael Higino <In memoriam>, 2004.
 # Andrius da Costa Ribas <andriusmao@gmail.com>, 2008.
+# Marco Biscaro <marcobiscaro2112@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
-"POT-Creation-Date: 2010-10-24 15:59+0000\n"
-"PO-Revision-Date: 2010-11-30 19:23-0300\n"
-"Last-Translator: Mateus Zenaide <mateus.gnome@gmail.com>\n"
+"POT-Creation-Date: 2011-03-12 19:18+0000\n"
+"PO-Revision-Date: 2011-03-13 14:12-0300\n"
+"Last-Translator: Marco Biscaro <marcobiscaro2112@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:964
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:1010
 msgid "Search and replace using regular expressions"
 msgstr "Pesquise e substitua usando expressões regulares"
 
@@ -25,51 +26,92 @@ msgstr "Pesquise e substitua usando expressões regulares"
 msgid "regexxer Search Tool"
 msgstr "Ferramenta de pesquisa Regexxer"
 
-#: ../ui/regexxer.schemas.in.h:1
+#: ../ui/org.regexxer.gschema.xml.in.h:1
+msgid "Auto indentation"
+msgstr "Recuo automático"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:2
 msgid "Current-match color"
 msgstr "Cor da ocorrência atual"
 
-#: ../ui/regexxer.schemas.in.h:2
+#: ../ui/org.regexxer.gschema.xml.in.h:3
+msgid "Draw spaces"
+msgstr "Mostrar espaços"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:4
 msgid "Fallback encoding"
 msgstr "Codificação secundária"
 
-#: ../ui/regexxer.schemas.in.h:3
-msgid "List of last pattern used for the regex entry."
-msgstr "Lista do último padrão usado para a entrada de expressão regular."
+#: ../ui/org.regexxer.gschema.xml.in.h:5
+#, fuzzy
+#| msgid "Regex Patterns"
+msgid "File Patterns"
+msgstr "Padrões de arquivo"
 
-#: ../ui/regexxer.schemas.in.h:4
-msgid "List of last pattern used for the substitution entry."
-msgstr "Lista do último padrão usado para a entrada de substituição."
+#: ../ui/org.regexxer.gschema.xml.in.h:6
+msgid "Highlight the current line"
+msgstr "Destacar a linha atual"
 
-#: ../ui/regexxer.schemas.in.h:5
+#: ../ui/org.regexxer.gschema.xml.in.h:7
+#| msgid "List of last pattern used for the regex entry."
+msgid "List of last patterns used in the 'Regex' entry."
+msgstr "Lista dos padrões usados recentemente para entrada \"ER\"."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:8
+#| msgid "List of last pattern used for the substitution entry."
+msgid "List of last patterns used in the 'Substitution' entry."
+msgstr "Lista dos padrões usados recentemente para entrada \"substituição\"."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:9
+msgid "List of pre-defined patterns available in the 'Pattern' entry."
+msgstr "Lista de padrões pré-definidos disponíveis para entrada \"padrão\"."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:10
 msgid "Match color"
 msgstr "Cor da ocorrência"
 
-#: ../ui/regexxer.schemas.in.h:6
+#: ../ui/org.regexxer.gschema.xml.in.h:11
+#, fuzzy
+#| msgid ""
+#| "Name of the character encoding to use if a file is not readable in either "
+#| "UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
+#| "for a complete list of possible values."
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
-"a complete list of possible values."
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
 msgstr ""
 "Nome da codificação de caracteres para usar se um arquivo não for legível em "
 "UTF-8 nem na codificação especificada pela localidade atual. Tente \"iconv --"
 "list\" para uma lista completa de possíveis valores."
 
-#: ../ui/regexxer.schemas.in.h:7
+#: ../ui/org.regexxer.gschema.xml.in.h:12
 msgid "Regex Patterns"
 msgstr "Padrões de Expressões Regulares"
 
-#: ../ui/regexxer.schemas.in.h:8
+#: ../ui/org.regexxer.gschema.xml.in.h:13
+msgid "Show line numbers"
+msgstr "Mostrar números de linha"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:14
 msgid "Text view font"
 msgstr "Fonte de visualização do texto"
 
-#: ../ui/regexxer.schemas.in.h:9
+#: ../ui/org.regexxer.gschema.xml.in.h:15
+msgid "The X coordinate of the window."
+msgstr "Coordenada X da janela."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:16
+msgid "The Y coordinate of the window."
+msgstr "Coordenada Y da janela."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:17
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr ""
 "A cor de fundo usada para destacar as ocorrências da expressão de pesquisa."
 
-#: ../ui/regexxer.schemas.in.h:10
+#: ../ui/org.regexxer.gschema.xml.in.h:18
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
@@ -77,89 +119,137 @@ msgstr ""
 "A cor de fundo usada para destacar a ocorrência atualmente selecionada da "
 "expressão de pesquisa."
 
-#: ../ui/regexxer.schemas.in.h:11
+#: ../ui/org.regexxer.gschema.xml.in.h:19
 msgid "The font used in the file editor."
 msgstr "A fonte usada no editor de arquivo."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:20
+msgid "The height of the window."
+msgstr "Altura da janela."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:21
+msgid "The width of the window."
+msgstr "Largura da janela."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:22
+msgid "Whether the window is maximized."
+msgstr ""
+
+#: ../ui/org.regexxer.gschema.xml.in.h:23
+msgid "Whether to enable auto indentation the text view."
+msgstr ""
+
+#: ../ui/org.regexxer.gschema.xml.in.h:24
+msgid "Whether to highlight the current line of the text view."
+msgstr ""
+
+#: ../ui/org.regexxer.gschema.xml.in.h:25
+msgid "Whether to show the line numbers of the text view."
+msgstr ""
+
+#: ../ui/org.regexxer.gschema.xml.in.h:26
+msgid "Which type of space to draw in the text view."
+msgstr ""
+
+#: ../ui/org.regexxer.gschema.xml.in.h:27
+msgid "window height"
+msgstr ""
+
+#: ../ui/org.regexxer.gschema.xml.in.h:28
+msgid "window maximization"
+msgstr ""
+
+#: ../ui/org.regexxer.gschema.xml.in.h:29
+msgid "window width"
+msgstr ""
+
+#: ../ui/org.regexxer.gschema.xml.in.h:30
+msgid "window x position"
+msgstr ""
+
+#: ../ui/org.regexxer.gschema.xml.in.h:31
+msgid "window y position"
+msgstr ""
 
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "Não é possível ler o arquivo:"
 
-#: ../src/filetree.cc:61
+#: ../src/filetree.cc:60
 msgid "File"
 msgstr "Arquivo"
 
-#: ../src/filetree.cc:80
+#: ../src/filetree.cc:79
 msgid "#"
 msgstr "#"
 
-#: ../src/filetree.cc:511
+#: ../src/filetree.cc:508
 #, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Falha ao salvar o arquivo \"%1\": %2"
 
-#: ../src/filetree.cc:927
+#: ../src/filetree.cc:924
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "\"%1\" parece ser um arquivo binário."
 
-#: ../src/main.cc:79
+#: ../src/main.cc:78
 msgid "Save _all"
 msgstr "Salvar _tudo"
 
-#: ../src/main.cc:136
+#: ../src/main.cc:135
 msgid "Find files matching PATTERN"
 msgstr "Localizar arquivos que coincidem com PADRÃO"
 
-#: ../src/main.cc:136
+#: ../src/main.cc:135
 msgid "PATTERN"
 msgstr "PADRÃO"
 
-#: ../src/main.cc:138
+#: ../src/main.cc:137
 msgid "Do not recurse into subdirectories"
 msgstr "Não incluir subdiretórios"
 
-#: ../src/main.cc:140 ../ui/mainwindow.ui.h:2
+#: ../src/main.cc:139 ../ui/mainwindow.ui.h:2
 msgid "Also find hidden files"
 msgstr "Localizar arquivos ocultos também"
 
-#: ../src/main.cc:142
+#: ../src/main.cc:141
 msgid "Find text matching REGEX"
 msgstr "Localizar texto que coincida com ER"
 
-#: ../src/main.cc:142
+#: ../src/main.cc:141
 msgid "REGEX"
 msgstr "ER"
 
-#: ../src/main.cc:144
+#: ../src/main.cc:143
 msgid "Find only the first match in a line"
 msgstr "Localizar apenas a primeira ocorrência na linha"
 
-#: ../src/main.cc:146 ../ui/mainwindow.ui.h:4
+#: ../src/main.cc:145 ../ui/mainwindow.ui.h:4
 msgid "Do case insensitive matching"
 msgstr "Não diferenciar maiúsc./minúsc."
 
-#: ../src/main.cc:148
+#: ../src/main.cc:147
 msgid "Replace matches with STRING"
 msgstr "Substituir ocorrências com EXPRESSÃO"
 
-#: ../src/main.cc:148
+#: ../src/main.cc:147
 msgid "STRING"
 msgstr "EXPRESSÃO"
 
-#: ../src/main.cc:150
+#: ../src/main.cc:149
 msgid "Print match location to standard output"
 msgstr "Imprimir a localização da ocorrência na saída padrão"
 
-#: ../src/main.cc:152
+#: ../src/main.cc:151
 msgid "Do not automatically start search"
 msgstr "Não iniciar pesquisa automaticamente"
 
-#: ../src/main.cc:154
+#: ../src/main.cc:153
 msgid "[FOLDER]"
 msgstr "[PASTA]"
 
-#: ../src/mainwindow.cc:514
+#: ../src/mainwindow.cc:560
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -167,7 +257,7 @@ msgstr ""
 "Alguns arquivos ainda não foram salvos.\n"
 "Sair mesmo assim?"
 
-#: ../src/mainwindow.cc:528
+#: ../src/mainwindow.cc:574
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -175,75 +265,43 @@ msgstr ""
 "Alguns arquivos ainda não foram salvos.\n"
 "Continuar mesmo assim?"
 
-#: ../src/mainwindow.cc:556
+#: ../src/mainwindow.cc:604
 msgid "The file search pattern is invalid."
 msgstr "O padrão de pesquisa de arquivos é invalido."
 
-#: ../src/mainwindow.cc:562
+#: ../src/mainwindow.cc:610
 msgid "The following errors occurred during search:"
 msgstr "Os seguintes erros ocorreram durante a pesquisa:"
 
-#: ../src/mainwindow.cc:821
+#: ../src/mainwindow.cc:864
 msgid "The following errors occurred during save:"
 msgstr "Os seguintes erros ocorreram durante a gravação:"
 
-#: ../src/mainwindow.cc:969
+#: ../src/mainwindow.cc:1015
 msgid "translator-credits"
 msgstr ""
 "João Paulo Gomes Vanzuita <joaopaulo99@terra.com.br>\n"
 "Raphael Higino <In memoriam>\n"
 "Andrius da Costa Ribas <andriusmao@gmail.com>"
 
-#: ../src/pcreshell.cc:62
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
-"Não há suporte para o uso de sequências de escape \\C para coincidir um "
-"único byte."
-
-#: ../src/pcreshell.cc:84
-#, qt-format
-msgid ""
-"Error in regular expression at “%1” (index %2):\n"
-"%3"
-msgstr ""
-"Erro na expressão regular em \"%1\" (índice %2):\n"
-"%3"
-
-#: ../src/pcreshell.cc:89
-#, qt-format
-msgid ""
-"Error in regular expression:\n"
-"%1"
-msgstr ""
-"Erro na expressão regular:\n"
-"%1"
-
-#: ../src/pcreshell.cc:171
-msgid ""
-"Reached the recursion and backtracking limit of the regular expression "
-"engine."
-msgstr ""
-"Alcançado o limite de recursividade e de retrocesso do mecanismo de "
-"expressões regulares."
-
-#: ../src/prefdialog.cc:204
+#: ../src/prefdialog.cc:186
 #, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "\"%1\" não é uma codificação válida."
 
-#: ../src/statusline.cc:244
+#: ../src/statusline.cc:245
 msgid "Stop"
 msgstr "Parar"
 
-#: ../src/statusline.cc:251
+#: ../src/statusline.cc:253
 msgid "File:"
 msgstr "Arquivo:"
 
-#: ../src/statusline.cc:254
+#: ../src/statusline.cc:256
 msgid "Match:"
 msgstr "Ocorrência:"
 
-#: ../src/statusline.cc:265
+#: ../src/statusline.cc:267
 msgid "Cancels the running search"
 msgstr "Cancela a pesquisa em execução"
 
@@ -321,82 +379,72 @@ msgid "Recurse into subdirectories"
 msgstr "Incluir subdiretórios"
 
 #: ../ui/mainwindow.ui.h:21
-msgid "Replace _current"
-msgstr "Substituir _atual"
-
-#: ../ui/mainwindow.ui.h:22
 msgid "Replace all matches in all files"
 msgstr "Substitui todas as ocorrências em todos os arquivos"
 
-#: ../ui/mainwindow.ui.h:23
+#: ../ui/mainwindow.ui.h:22
 msgid "Replace all matches in the current file"
 msgstr "Substitui todas as ocorrências no arquivo atual"
 
-#: ../ui/mainwindow.ui.h:24
+#: ../ui/mainwindow.ui.h:23
 msgid "Replace current match"
 msgstr "Substitui a ocorrência atual"
 
-#: ../ui/mainwindow.ui.h:25
-msgid "Replace in _all files"
-msgstr "Substituir em todos os a_rquivos"
-
-#: ../ui/mainwindow.ui.h:26
-msgid "Replace in _this file"
-msgstr "Substituir nes_te arquivo"
-
-#: ../ui/mainwindow.ui.h:27
+#: ../ui/mainwindow.ui.h:24
 msgid "Replace:"
 msgstr "Substituir:"
 
-#: ../ui/mainwindow.ui.h:28
-msgid "Save all"
-msgstr "Salvar todos"
-
-#: ../ui/mainwindow.ui.h:29
+#: ../ui/mainwindow.ui.h:25
 msgid "Search:"
 msgstr "Pesquisar:"
 
-#: ../ui/mainwindow.ui.h:30
+#: ../ui/mainwindow.ui.h:26
+#| msgid ""
+#| "The new string to substitute. As in Perl, you can refer to parts of the "
+#| "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
+#| "\\u, \\L, \\U and \\E are supported as well."
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&amp;, $` and $'. The operators \\l, "
+"\\u, \\L, \\U and \\E are supported as well."
+msgstr ""
+"A nova expressão para substituir. Assim como em Perl, você pode referir-se "
+"às partes da ocorrência usando $1, $2 etc. ou mesmo $+, $&amp;, $` e $'. "
+"Também há suporte para os operadores \\l, \\u, \\L, \\U e \\E."
+
+#: ../ui/mainwindow.ui.h:27
 msgid "_All files"
 msgstr "_Todos os arquivos"
 
-#: ../ui/mainwindow.ui.h:31
+#: ../ui/mainwindow.ui.h:28
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../ui/mainwindow.ui.h:32
+#: ../ui/mainwindow.ui.h:29
 msgid "_File"
 msgstr "_Arquivo"
 
-#: ../ui/mainwindow.ui.h:33
+#: ../ui/mainwindow.ui.h:30
 msgid "_Help"
 msgstr "Aj_uda"
 
-#: ../ui/mainwindow.ui.h:34
+#: ../ui/mainwindow.ui.h:31
 msgid "_Match"
 msgstr "_Ocorrência"
 
-#: ../ui/mainwindow.ui.h:35
-msgid "_Next file"
-msgstr "_Próximo arquivo"
-
-#: ../ui/mainwindow.ui.h:36
-msgid "_Previous file"
-msgstr "_Arquivo anterior"
-
-#: ../ui/mainwindow.ui.h:37
+#: ../ui/mainwindow.ui.h:32
 msgid "_Replace"
 msgstr "_Substituir"
 
-#: ../ui/mainwindow.ui.h:38
+#: ../ui/mainwindow.ui.h:33
 msgid "_This file"
 msgstr "_Este arquivo"
 
-#: ../ui/mainwindow.ui.h:39
+#: ../ui/mainwindow.ui.h:34
 msgid "hidden"
 msgstr "oculto"
 
-#: ../ui/mainwindow.ui.h:40
+#: ../ui/mainwindow.ui.h:35
 msgid "recursive"
 msgstr "recursivo"
 
@@ -471,107 +519,3 @@ msgstr ""
 "O regexxer tentará ler um arquivo nas seguintes codificações antes de "
 "desistir:"
 
-#~ msgid "List of last pattern used for the file's regex entry."
-#~ msgstr ""
-#~ "Lista do último padrão usado para a entrada de expressão regular do "
-#~ "arquivo."
-
-#~ msgid ""
-#~ "The style of the application’s toolbar. Possible values are “icons”, "
-#~ "“text”, “both”, and “both-horiz”."
-#~ msgstr ""
-#~ "O estilo da barra de ferramentas do aplicativo. Os valores possíveis são "
-#~ "\"icons\" (ícones), \"text\" (texto), \"both\" (ambos) e \"both-horiz"
-#~ "\" (ambos, horizontal)."
-
-#~ msgid "Toolbar style"
-#~ msgstr "Estilo da barra de ferramentas"
-
-#~ msgid ""
-#~ "A filename pattern as used by the shell. Character classes [ab] and csh "
-#~ "style brace expressions {a,b} are supported."
-#~ msgstr ""
-#~ "Um padrão de nome de arquivo como o usado pelo console. Há suporte para "
-#~ "classes de caracteres [ab] e expressões de chaves no estilo csh como {a,"
-#~ "b}."
-
-#~ msgid ""
-#~ "The new string to substitute. As in Perl, you can refer to parts of the "
-#~ "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
-#~ "\\u, \\L, \\U and \\E are supported as well."
-#~ msgstr ""
-#~ "A nova expressão para substituir. Assim como em Perl, você pode referir-"
-#~ "se às partes da ocorrência usando $1, $2 etc. ou mesmo $+, $& $\" e $\". "
-#~ "Também há suporte para os operadores \\l, \\u, \\L, \\U e \\E."
-
-#~ msgid ""
-#~ "Icons only\n"
-#~ "Text only\n"
-#~ "Icons and text\n"
-#~ "Both horizontal"
-#~ msgstr ""
-#~ "Apenas ícones\n"
-#~ "Apenas texto\n"
-#~ "Texto e ícones\n"
-#~ "Ambos horizontais"
-
-#~ msgid "Tool_bar style:"
-#~ msgstr "Estilo da _barra de ferramentas:"
-
-#~ msgid "_Look’n’feel"
-#~ msgstr "_Aparência"
-
-#~ msgid "_About"
-#~ msgstr "_Sobre"
-
-#~ msgid "[OPTION]... [FOLDER]"
-#~ msgstr "[OPÇÕES]... [PASTA]"
-
-#~ msgid "Try “regexxer --help” for more information."
-#~ msgstr "Tente \"regexxer --help\" para mais informações."
-
-#~ msgid ""
-#~ "The folder name “%1” contains characters not representable in the "
-#~ "encoding of the local file system."
-#~ msgstr ""
-#~ "O nome da pasta %1 contém caracteres que não podem ser representados na "
-#~ "codificação do sistema de arquivos local."
-
-#~ msgid "Select a folder"
-#~ msgstr "Selecione uma pasta"
-
-#~ msgid "About regexxer"
-#~ msgstr "Sobre o regexxer"
-
-#~ msgid "The application icon of regexxer"
-#~ msgstr "O ícone de aplicação do regexxer"
-
-#~ msgid "regexxer icon"
-#~ msgstr "ícone do regexxer"
-
-#~ msgid "translated by"
-#~ msgstr "traduzido por"
-
-#~ msgid "written by"
-#~ msgstr "escrito por"
-
-#~ msgid "The directory to be searched"
-#~ msgstr "O diretório no qual pesquisar"
-
-#~ msgid ""
-#~ "If enabled, the text direction of the file editor, preview area, and all "
-#~ "file-related entry boxes is always set to left-to-right no matter what "
-#~ "the locale's default direction is."
-#~ msgstr ""
-#~ "Se ativo a direção do texto do edtitor de arquivo, area prévia, e todas "
-#~ "as caixas de entrada relacionadas do arquivo será sempre da esquerda para "
-#~ "a direita independente de qual é a direção padrão."
-
-#~ msgid "Override text direction"
-#~ msgstr "Substituir direção do texto"
-
-#~ msgid "*"
-#~ msgstr "*"
-
-#~ msgid "_Ignore the text direction of the locale"
-#~ msgstr "_Ignorar direção de texto do local"
