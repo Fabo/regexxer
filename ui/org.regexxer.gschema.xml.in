@@ -94,7 +94,7 @@
     <key name="auto-indentation" type="b">
       <default>true</default>
       <_summary>Auto indentation</_summary>
-      <_description>Whether to enable auto indentation the text view.</_description>
+      <_description>Whether to enable auto indentation in the text view.</_description>
     </key>
 
     <key name="draw-space" flags="draw-space-flags">
