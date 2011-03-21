@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer.HEAD.es\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
-"POT-Creation-Date: 2011-03-09 18:28+0000\n"
-"PO-Revision-Date: 2011-03-09 19:32+0100\n"
+"POT-Creation-Date: 2011-03-20 14:25+0000\n"
+"PO-Revision-Date: 2011-03-21 11:38+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -131,7 +131,8 @@ msgid "Whether the window is maximized."
 msgstr "Indica si la ventana está maximizada."
 
 #: ../ui/org.regexxer.gschema.xml.in.h:23
-msgid "Whether to enable auto indentation the text view."
+#| msgid "Whether to enable auto indentation the text view."
+msgid "Whether to enable auto indentation in the text view."
 msgstr "Indica si se debe activar el sangrado automático en la vista de texto."
 
 #: ../ui/org.regexxer.gschema.xml.in.h:24
@@ -392,10 +393,6 @@ msgid "Search:"
 msgstr "Buscar:"
 
 #: ../ui/mainwindow.ui.h:26
-#| msgid ""
-#| "The new string to substitute. As in Perl, you can refer to parts of the "
-#| "match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, "
-#| "\\u, \\L, \\U and \\E are supported as well."
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
 "match using $1, $2, etc. or even $+, $&amp;, $` and $'. The operators \\l, "
