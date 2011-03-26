@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: regexxer\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
-"POT-Creation-Date: 2011-03-06 16:58+0000\n"
-"PO-Revision-Date: 2011-03-12 20:16+0100\n"
+"POT-Creation-Date: 2011-03-20 14:25+0000\n"
+"PO-Revision-Date: 2011-03-26 17:27+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,8 @@ msgid "Whether the window is maximized."
 msgstr "Zda je okno maximalizováno."
 
 #: ../ui/org.regexxer.gschema.xml.in.h:23
-msgid "Whether to enable auto indentation the text view."
+#| msgid "Whether to enable auto indentation the text view."
+msgid "Whether to enable auto indentation in the text view."
 msgstr "Zda zapnout automatické odsazování v zobrazeném textu."
 
 #: ../ui/org.regexxer.gschema.xml.in.h:24
@@ -504,49 +505,3 @@ msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
 msgstr "Než se regexxer vzdá, zkouší soubor načíst v následujících kódováních:"
 
-#~ msgid "Replace _current"
-#~ msgstr "Nahradit _aktuální"
-
-#~ msgid "Replace in _all files"
-#~ msgstr "Nahrazovat ve _všech souborech"
-
-#~ msgid "Replace in _this file"
-#~ msgstr "Nahrazovat v _tomto souboru"
-
-#~ msgid "Save all"
-#~ msgstr "Uložit vše"
-
-#~ msgid "_Next file"
-#~ msgstr "_Následující soubor"
-
-#~ msgid "_Previous file"
-#~ msgstr "_Předchozí soubor"
-
-#~ msgid "List of last pattern used for the file's regex entry."
-#~ msgstr "Seznam naposledy použitých vzorů v poli vzorek pro soubor."
-
-#~ msgid ""
-#~ "Using the \\C escape sequence to match a single byte is not supported."
-#~ msgstr ""
-#~ "Používání sekvence escape \\C pro hledání jednoho bajtu není podporováno."
-
-#~ msgid ""
-#~ "Error in regular expression at “%1” (index %2):\n"
-#~ "%3"
-#~ msgstr ""
-#~ "Chyba v regulárním výrazu v „%1“ (pozice %2):\n"
-#~ "%3"
-
-#~ msgid ""
-#~ "Error in regular expression:\n"
-#~ "%1"
-#~ msgstr ""
-#~ "Chyba v regulárním výrazu:\n"
-#~ "%1"
-
-#~ msgid ""
-#~ "Reached the recursion and backtracking limit of the regular expression "
-#~ "engine."
-#~ msgstr ""
-#~ "Byl dosažen maximální počet zanoření ve funkci pro zpracování regulárních "
-#~ "výrazů."
