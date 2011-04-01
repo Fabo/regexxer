@@ -1,22 +1,25 @@
 # Danish translation for regexxer.
-# Copyright (C) 2010 regexxer's COPYRIGHT HOLDER
+# Copyright (C) 2011 regexxer's COPYRIGHT HOLDER.
 # This file is distributed under the same license as the regexxer package.
-# Joe Hansen <joedalton2@yahoo.dk>, 2010.
+# Joe Hansen <joedalton2@yahoo.dk>, 2010, 2011.
+#
+# indentation -> indryk (kunne også være indrykning)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer master\n"
 "Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2010-10-24 17:59+0200\n"
-"PO-Revision-Date: 2010-10-20 19:48+0100\n"
+"POT-Creation-Date: 2011-04-01 22:39+0200\n"
+"PO-Revision-Date: 2011-03-17 19:48+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:964
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:1010
 msgid "Search and replace using regular expressions"
 msgstr "Søg og erstat med brug af regulære udtryk"
 
@@ -24,51 +27,84 @@ msgstr "Søg og erstat med brug af regulære udtryk"
 msgid "regexxer Search Tool"
 msgstr "regexxer - søgeværktøj"
 
+#: ../ui/org.regexxer.gschema.xml.in.h:1
+msgid "Auto indentation"
+msgstr "Automatisk indryk"
+
 # ingen andre resultater på open-tran. Hvad er dette?
-#: ../ui/regexxer.schemas.in.h:1
+#: ../ui/org.regexxer.gschema.xml.in.h:2
 msgid "Current-match color"
 msgstr "Farve for aktuel match"
 
-#: ../ui/regexxer.schemas.in.h:2
+#: ../ui/org.regexxer.gschema.xml.in.h:3
+msgid "Draw spaces"
+msgstr "Tegn mellemrum"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:4
 msgid "Fallback encoding"
 msgstr "Reservekodning"
 
-#: ../ui/regexxer.schemas.in.h:3
-msgid "List of last pattern used for the regex entry."
-msgstr "Liste over sidste mønster brugt for det regulær udtrykspunkt."
+#: ../ui/org.regexxer.gschema.xml.in.h:5
+msgid "File Patterns"
+msgstr "Filmønstre"
 
-#: ../ui/regexxer.schemas.in.h:4
-msgid "List of last pattern used for the substitution entry."
-msgstr "Liste over sidste mønster brugt for erstatningspunktet."
+#: ../ui/org.regexxer.gschema.xml.in.h:6
+msgid "Highlight the current line"
+msgstr "Fremhæv den aktuelle linje"
 
-#: ../ui/regexxer.schemas.in.h:5
+#: ../ui/org.regexxer.gschema.xml.in.h:7
+msgid "List of last patterns used in the 'Regex' entry."
+msgstr "Liste over det senest brugte mønster for det regulær udtrykspunkt."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:8
+msgid "List of last patterns used in the 'Substitution' entry."
+msgstr "Liste over det senest brugte mønster for erstatningspunktet."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:9
+msgid "List of pre-defined patterns available in the 'Pattern' entry."
+msgstr "Liste over prædefinerede mønstre som er tilgængelige i mønsterpunktet."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:10
 msgid "Match color"
 msgstr "Match farve"
 
-#: ../ui/regexxer.schemas.in.h:6
+# måske either -> hverken
+#: ../ui/org.regexxer.gschema.xml.in.h:11
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
-"a complete list of possible values."
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
 msgstr ""
-"Navn på tegnkodningen som skal bruges hvis en fil ikke er læsbar i enten UTF-"
-"8 eller kodesættet angivet af det aktuelle sprog. Prøv med \"iconv --list"
+"Navn på tegnkodningen som skal bruges hvis en fil ikke er læsbar i enten "
+"UTF-8 eller kodesættet angivet af det aktuelle sprog. Prøv med \"iconv --list"
 "\"for en fuldstændig liste over mulige værdier."
 
-#: ../ui/regexxer.schemas.in.h:7
+#: ../ui/org.regexxer.gschema.xml.in.h:12
 msgid "Regex Patterns"
 msgstr "Regex-mønstre"
 
-#: ../ui/regexxer.schemas.in.h:8
+#: ../ui/org.regexxer.gschema.xml.in.h:13
+msgid "Show line numbers"
+msgstr "Vis linjenumre"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:14
 msgid "Text view font"
 msgstr "Tekstvisningsskrift"
 
-#: ../ui/regexxer.schemas.in.h:9
+#: ../ui/org.regexxer.gschema.xml.in.h:15
+msgid "The X coordinate of the window."
+msgstr "X-koordinaten på vinduet."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:16
+msgid "The Y coordinate of the window."
+msgstr "Y-koordinaten på vinduet."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:17
 msgid ""
 "The background color used to highlight matches of the search expression."
 msgstr "Baggrundsfarven brugt til at fremhæve resultater af søgeudtrykket."
 
-#: ../ui/regexxer.schemas.in.h:10
+#: ../ui/org.regexxer.gschema.xml.in.h:18
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
@@ -76,89 +112,138 @@ msgstr ""
 "Baggrundsfarven brugt til at fremhæve det aktuelt valgte resultat af "
 "søgeudtrykket."
 
-#: ../ui/regexxer.schemas.in.h:11
+#: ../ui/org.regexxer.gschema.xml.in.h:19
 msgid "The font used in the file editor."
 msgstr "Skriften brugt i filredigeringen."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:20
+msgid "The height of the window."
+msgstr "Vinduets højde."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:21
+msgid "The width of the window."
+msgstr "Vinduets bredde."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:22
+msgid "Whether the window is maximized."
+msgstr "Hvorvidt vinduet er maksimeret."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:23
+#, fuzzy
+msgid "Whether to enable auto indentation in the text view."
+msgstr "Hvorvidt der skal aktivers automatisk indryk i tekstvisningen."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:24
+msgid "Whether to highlight the current line of the text view."
+msgstr "Hvorvidt den aktuelle linje i tekstvisningen skal fremhæves."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:25
+msgid "Whether to show the line numbers of the text view."
+msgstr "Hvorvidt linjenumrene i tekstvisningen skal vises."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:26
+msgid "Which type of space to draw in the text view."
+msgstr "Type af mellemrum som skal tegnes i tekstvisningen."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:27
+msgid "window height"
+msgstr "vindueshøjde"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:28
+msgid "window maximization"
+msgstr "vinduesmaksimering"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:29
+msgid "window width"
+msgstr "vinduesbredde"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:30
+msgid "window x position"
+msgstr "vindues x-position"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:31
+msgid "window y position"
+msgstr "vindues y-position"
 
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "Kan ikke læse fil:"
 
-#: ../src/filetree.cc:61
+#: ../src/filetree.cc:60
 msgid "File"
 msgstr "Fil"
 
-#: ../src/filetree.cc:80
+#: ../src/filetree.cc:79
 msgid "#"
 msgstr "#"
 
-#: ../src/filetree.cc:511
+#: ../src/filetree.cc:508
 #, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "Kunne ikke gemme fil \"%1\": %2"
 
-#: ../src/filetree.cc:927
+#: ../src/filetree.cc:924
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "\"%1\" ser ud til at være en binær fil."
 
-#: ../src/main.cc:79
+#: ../src/main.cc:78
 msgid "Save _all"
 msgstr "Gem _alle"
 
-#: ../src/main.cc:136
+#: ../src/main.cc:135
 msgid "Find files matching PATTERN"
 msgstr "Fil filer der matcher MØNSTER"
 
-#: ../src/main.cc:136
+#: ../src/main.cc:135
 msgid "PATTERN"
 msgstr "MØNSTER"
 
-#: ../src/main.cc:138
+#: ../src/main.cc:137
 msgid "Do not recurse into subdirectories"
 msgstr "Rekursiv ikke ind i undermapper"
 
-#: ../src/main.cc:140 ../ui/mainwindow.ui.h:2
+#: ../src/main.cc:139 ../ui/mainwindow.ui.h:2
 msgid "Also find hidden files"
 msgstr "Find også skjulte filer"
 
-#: ../src/main.cc:142
+#: ../src/main.cc:141
 msgid "Find text matching REGEX"
 msgstr "Find tekst der matcher REGEX"
 
-#: ../src/main.cc:142
+#: ../src/main.cc:141
 msgid "REGEX"
 msgstr "REGEX"
 
-#: ../src/main.cc:144
+#: ../src/main.cc:143
 msgid "Find only the first match in a line"
 msgstr "Find kun det første resultat i en linje"
 
-#: ../src/main.cc:146 ../ui/mainwindow.ui.h:4
+#: ../src/main.cc:145 ../ui/mainwindow.ui.h:4
 msgid "Do case insensitive matching"
 msgstr "Udfør versalfølsom søgning"
 
-#: ../src/main.cc:148
+#: ../src/main.cc:147
 msgid "Replace matches with STRING"
 msgstr "Erstat resultater med STRENG"
 
-#: ../src/main.cc:148
+#: ../src/main.cc:147
 msgid "STRING"
 msgstr "STRENG"
 
-#: ../src/main.cc:150
+#: ../src/main.cc:149
 msgid "Print match location to standard output"
 msgstr "Vis matchplacering til standarduddata"
 
-#: ../src/main.cc:152
+#: ../src/main.cc:151
 msgid "Do not automatically start search"
 msgstr "Start ikke automatisk søgning"
 
-#: ../src/main.cc:154
+#: ../src/main.cc:153
 msgid "[FOLDER]"
 msgstr "[MAPPE]"
 
-#: ../src/mainwindow.cc:514
+#: ../src/mainwindow.cc:560
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
@@ -166,7 +251,7 @@ msgstr ""
 "Nogle filer er endnu ikke gemt.\n"
 "Afslut alligevel?"
 
-#: ../src/mainwindow.cc:528
+#: ../src/mainwindow.cc:574
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -174,19 +259,19 @@ msgstr ""
 "Nogle filer er endnu ikke gemt.\n"
 "Fortsæt alligevel?"
 
-#: ../src/mainwindow.cc:556
+#: ../src/mainwindow.cc:604
 msgid "The file search pattern is invalid."
 msgstr "Filsøgningsmønsteret er ugyldigt."
 
-#: ../src/mainwindow.cc:562
+#: ../src/mainwindow.cc:610
 msgid "The following errors occurred during search:"
 msgstr "De følgende fejl opstod under søgning:"
 
-#: ../src/mainwindow.cc:821
+#: ../src/mainwindow.cc:864
 msgid "The following errors occurred during save:"
 msgstr "De følgende fejl opstod under gemning:"
 
-#: ../src/mainwindow.cc:969
+#: ../src/mainwindow.cc:1015
 msgid "translator-credits"
 msgstr ""
 "Joe Hansen, 2010.\n"
@@ -194,55 +279,24 @@ msgstr ""
 "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Mere info: http://www.dansk-gruppen.dk"
 
-#: ../src/pcreshell.cc:62
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
-"Brug af \\C-undvigesekvens til at matche en enkelt byte er ikke understøttet."
-
-#: ../src/pcreshell.cc:84
-#, qt-format
-msgid ""
-"Error in regular expression at “%1” (index %2):\n"
-"%3"
-msgstr ""
-"Fejl i regulært udtryk ved \"%1\" (indeks %2):\n"
-"%3"
-
-#: ../src/pcreshell.cc:89
-#, qt-format
-msgid ""
-"Error in regular expression:\n"
-"%1"
-msgstr ""
-"Fejl i regulært udtryk:\n"
-"%1"
-
-#: ../src/pcreshell.cc:171
-msgid ""
-"Reached the recursion and backtracking limit of the regular expression "
-"engine."
-msgstr ""
-"Nåede rekursionen og grænsen for bagudlæsningen på det regulære udtryks "
-"motor."
-
-#: ../src/prefdialog.cc:204
+#: ../src/prefdialog.cc:186
 #, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "\"%1\" er ikke en gyldig kodning."
 
-#: ../src/statusline.cc:244
+#: ../src/statusline.cc:245
 msgid "Stop"
 msgstr "Stop"
 
-#: ../src/statusline.cc:251
+#: ../src/statusline.cc:253
 msgid "File:"
 msgstr "Fil:"
 
-#: ../src/statusline.cc:254
+#: ../src/statusline.cc:256
 msgid "Match:"
 msgstr "Match:"
 
-#: ../src/statusline.cc:265
+#: ../src/statusline.cc:267
 msgid "Cancels the running search"
 msgstr "Afbryder den kørende søgning"
 
@@ -319,82 +373,68 @@ msgid "Recurse into subdirectories"
 msgstr "Rekursiv ind i undermapper"
 
 #: ../ui/mainwindow.ui.h:21
-msgid "Replace _current"
-msgstr "Erstat _aktuel"
-
-#: ../ui/mainwindow.ui.h:22
 msgid "Replace all matches in all files"
 msgstr "Erstat alle resultater i alle filer"
 
-#: ../ui/mainwindow.ui.h:23
+#: ../ui/mainwindow.ui.h:22
 msgid "Replace all matches in the current file"
 msgstr "Erstat alle resultater i den aktuelle fil"
 
-#: ../ui/mainwindow.ui.h:24
+#: ../ui/mainwindow.ui.h:23
 msgid "Replace current match"
 msgstr "Erstat aktuelt resultat"
 
-#: ../ui/mainwindow.ui.h:25
-msgid "Replace in _all files"
-msgstr "Erstat i _alle filer"
-
-#: ../ui/mainwindow.ui.h:26
-msgid "Replace in _this file"
-msgstr "Erstat i _denne fil"
-
-#: ../ui/mainwindow.ui.h:27
+#: ../ui/mainwindow.ui.h:24
 msgid "Replace:"
 msgstr "Erstat:"
 
-#: ../ui/mainwindow.ui.h:28
-msgid "Save all"
-msgstr "Gem alle"
-
-#: ../ui/mainwindow.ui.h:29
+#: ../ui/mainwindow.ui.h:25
 msgid "Search:"
 msgstr "Søg:"
 
-#: ../ui/mainwindow.ui.h:30
+#: ../ui/mainwindow.ui.h:26
+msgid ""
+"The new string to substitute. As in Perl, you can refer to parts of the "
+"match using $1, $2, etc. or even $+, $&amp;, $` and $'. The operators \\l, "
+"\\u, \\L, \\U and \\E are supported as well."
+msgstr ""
+"Den nye streng som skal erstattes. Som i Perl kan du referere til dele af "
+"resultatet med $1, $2 etc. eller endog $+, $&amp;, $` og $'. Operatørerne "
+"\\l, \\u, \\L, \\U og \\E er også understøttet."
+
+#: ../ui/mainwindow.ui.h:27
 msgid "_All files"
 msgstr "_Alle filer"
 
-#: ../ui/mainwindow.ui.h:31
+#: ../ui/mainwindow.ui.h:28
 msgid "_Edit"
 msgstr "_Rediger"
 
-#: ../ui/mainwindow.ui.h:32
+#: ../ui/mainwindow.ui.h:29
 msgid "_File"
 msgstr "_Fil"
 
-#: ../ui/mainwindow.ui.h:33
+#: ../ui/mainwindow.ui.h:30
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: ../ui/mainwindow.ui.h:34
+#: ../ui/mainwindow.ui.h:31
 msgid "_Match"
 msgstr "_Resultat"
 
-#: ../ui/mainwindow.ui.h:35
-msgid "_Next file"
-msgstr "_Næste fil"
-
-#: ../ui/mainwindow.ui.h:36
-msgid "_Previous file"
-msgstr "_Forrige fil"
-
-#: ../ui/mainwindow.ui.h:37
+#: ../ui/mainwindow.ui.h:32
 msgid "_Replace"
 msgstr "_Erstat"
 
-#: ../ui/mainwindow.ui.h:38
+#: ../ui/mainwindow.ui.h:33
 msgid "_This file"
 msgstr "_Denne fil"
 
-#: ../ui/mainwindow.ui.h:39
+#: ../ui/mainwindow.ui.h:34
 msgid "hidden"
 msgstr "skjult"
 
-#: ../ui/mainwindow.ui.h:40
+#: ../ui/mainwindow.ui.h:35
 msgid "recursive"
 msgstr "rekursiv"
 
