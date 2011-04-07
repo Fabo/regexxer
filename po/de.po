@@ -2,15 +2,15 @@
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the regexxer package.
 # Daniel Elstner <daniel.kitta@gmail.com>, 2004.
-# Mario Blättermann <mariobl@gnome.org>, 2009, 2010, 2011.
+# Mario Blättermann <mariobl@freenet.de>, 2009, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer master\n"
 "Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
-"POT-Creation-Date: 2011-03-06 16:58+0000\n"
-"PO-Revision-Date: 2011-03-17 17:46+0100\n"
-"Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
+"POT-Creation-Date: 2011-03-20 14:25+0000\n"
+"PO-Revision-Date: 2011-04-07 19:43+0100\n"
+"Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -128,7 +128,7 @@ msgid "Whether the window is maximized."
 msgstr "Legt fest, ob das Fenster maximiert ist."
 
 #: ../ui/org.regexxer.gschema.xml.in.h:23
-msgid "Whether to enable auto indentation the text view."
+msgid "Whether to enable auto indentation in the text view."
 msgstr ""
 "Legt fest, ob automatisches Einrücken in der Textansicht aktiviert werden "
 "soll."
@@ -276,7 +276,7 @@ msgstr "Die folgenden Fehler sind beim Speichern aufgetreten:"
 msgid "translator-credits"
 msgstr ""
 "Daniel Elstner <daniel.kitta@gmail.com>\n"
-"Mario Blättermann <mariobl@gnome.org>"
+"Mario Blättermann <mariobl@freenet.de>"
 
 #: ../src/prefdialog.cc:186
 #, qt-format
@@ -507,4 +507,3 @@ msgid ""
 msgstr ""
 "Regexxer versucht eine Datei in den folgenden Zeichensätzen zu lesen, bevor "
 "ein Fehlschlag angezeigt wird:"
-
