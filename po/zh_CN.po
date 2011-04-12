@@ -2,20 +2,23 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Funda Wang <fundawang@linux.net.cn>, 2004.
+# YunQiang Su <wzssyqa@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: regexxer HEAD\n"
-"Report-Msgid-Bugs-To: http://regexxer.sourceforge.net/bugs\n"
-"POT-Creation-Date: 2007-02-18 22:12+0100\n"
-"PO-Revision-Date: 2004-11-29 19:03+0800\n"
-"Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
-"Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
+"POT-Creation-Date: 2011-04-07 17:45+0000\n"
+"PO-Revision-Date: 2011-04-12 22:53+0800\n"
+"Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
+"Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:849
+#: ../ui/regexxer.desktop.in.h:1 ../src/mainwindow.cc:1010
 msgid "Search and replace using regular expressions"
 msgstr "使用正则表达式搜索并替换"
 
@@ -23,139 +26,225 @@ msgstr "使用正则表达式搜索并替换"
 msgid "regexxer Search Tool"
 msgstr "regexxer 搜索工具"
 
-#: ../ui/regexxer.schemas.in.h:1
+#: ../ui/org.regexxer.gschema.xml.in.h:1
+msgid "Auto indentation"
+msgstr "自动缩进"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:2
 msgid "Current-match color"
 msgstr "当前匹配的颜色"
 
-#: ../ui/regexxer.schemas.in.h:2
+#: ../ui/org.regexxer.gschema.xml.in.h:3
+msgid "Draw spaces"
+msgstr "绘制空格"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:4
 msgid "Fallback encoding"
 msgstr "默认编码"
 
-#: ../ui/regexxer.schemas.in.h:3
+#: ../ui/org.regexxer.gschema.xml.in.h:5
+msgid "File Patterns"
+msgstr "文件模式"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:6
+msgid "Highlight the current line"
+msgstr "高亮当前行"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:7
+msgid "List of last patterns used in the 'Regex' entry."
+msgstr "“正则表达式”输入条中最近使用的模式列表"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:8
+msgid "List of last patterns used in the 'Substitution' entry."
+msgstr "“替换”输入条中最近使用的模式列表"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:9
+msgid "List of pre-defined patterns available in the 'Pattern' entry."
+msgstr "“模式”输入条中可用的预定义模式列表"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:10
 msgid "Match color"
 msgstr "匹配颜色"
 
-#: ../ui/regexxer.schemas.in.h:4
+#: ../ui/org.regexxer.gschema.xml.in.h:11
 msgid ""
 "Name of the character encoding to use if a file is not readable in either "
-"UTF-8 or the codeset specified by the current locale. Try “iconv --list” for "
-"a complete list of possible values."
+"UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" "
+"for a complete list of possible values."
 msgstr ""
+"使用 UTF8 和当前区域设置指定的文件编码都无法读取文件时使用的字符编码。尝"
+"试“iconv --list”来获得完整的可能值。"
 
-#: ../ui/regexxer.schemas.in.h:5
+#: ../ui/org.regexxer.gschema.xml.in.h:12
+msgid "Regex Patterns"
+msgstr "正则模式"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:13
+msgid "Show line numbers"
+msgstr "显示行号"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:14
 msgid "Text view font"
-msgstr "文本视图颜色"
+msgstr "文本视图字体"
 
-#: ../ui/regexxer.schemas.in.h:6
+#: ../ui/org.regexxer.gschema.xml.in.h:15
+msgid "The X coordinate of the window."
+msgstr "窗口的 X 的坐标。"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:16
+msgid "The Y coordinate of the window."
+msgstr "窗口的 Y 坐标"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:17
 msgid ""
 "The background color used to highlight matches of the search expression."
-msgstr ""
+msgstr "用来高亮显示搜索表达式之匹配项的背景颜色。"
 
-#: ../ui/regexxer.schemas.in.h:7
+#: ../ui/org.regexxer.gschema.xml.in.h:18
 msgid ""
 "The background color used to highlight the currently selected match of the "
 "search expression."
-msgstr ""
+msgstr "用来高亮显示当前选中的搜索表达式之匹配项的背景颜色。"
 
-#: ../ui/regexxer.schemas.in.h:8
+#: ../ui/org.regexxer.gschema.xml.in.h:19
 msgid "The font used in the file editor."
-msgstr ""
+msgstr "在文件编辑器中使用的字体。"
 
-#: ../ui/regexxer.schemas.in.h:9
-msgid ""
-"The style of the application’s toolbar. Possible values are “icons”, “text”, "
-"“both”, and “both-horiz”."
-msgstr ""
+#: ../ui/org.regexxer.gschema.xml.in.h:20
+msgid "The height of the window."
+msgstr "窗口高度。"
 
-#: ../ui/regexxer.schemas.in.h:10
-msgid "Toolbar style"
-msgstr "工具栏样式"
+#: ../ui/org.regexxer.gschema.xml.in.h:21
+msgid "The width of the window."
+msgstr "窗口宽度。"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:22
+msgid "Whether the window is maximized."
+msgstr "是否最大化窗口。"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:23
+msgid "Whether to enable auto indentation in the text view."
+msgstr "是否在文本视图中启用自动缩进。"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:24
+msgid "Whether to highlight the current line of the text view."
+msgstr "是否高亮显示文本视图的当前行。"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:25
+msgid "Whether to show the line numbers of the text view."
+msgstr "是否显示文本视图的行号。"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:26
+msgid "Which type of space to draw in the text view."
+msgstr "在文本视图中绘制何种空白"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:27
+msgid "window height"
+msgstr "窗口高度"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:28
+msgid "window maximization"
+msgstr "窗口最大化"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:29
+msgid "window width"
+msgstr "窗口宽度"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:30
+msgid "window x position"
+msgstr "窗口 X 位置"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:31
+msgid "window y position"
+msgstr "窗口 Y 位置"
 
 #: ../src/filebuffer.cc:198
 msgid "Can’t read file:"
 msgstr "无法读取文件："
 
-#: ../src/filetree.cc:80
+#: ../src/filetree.cc:60
 msgid "File"
 msgstr "文件"
 
-#: ../src/filetree.cc:99
+#: ../src/filetree.cc:79
 msgid "#"
 msgstr "#"
 
-#: ../src/filetree.cc:530
+#: ../src/filetree.cc:508
 #, qt-format
 msgid "Failed to save file “%1”: %2"
 msgstr "保存文件“%1”失败：%2"
 
-#: ../src/filetree.cc:946
+#: ../src/filetree.cc:924
 #, qt-format
 msgid "“%1” seems to be a binary file."
 msgstr "“%1”似乎是二进制文件。"
 
-#: ../src/main.cc:77
+#: ../src/main.cc:78
 msgid "Save _all"
 msgstr "全部保存(_A)"
 
-#: ../src/main.cc:134
+#: ../src/main.cc:135
 msgid "Find files matching PATTERN"
 msgstr "查找与[模式]匹配的文件"
 
-#: ../src/main.cc:134
+#: ../src/main.cc:135
 msgid "PATTERN"
 msgstr "模式"
 
-#: ../src/main.cc:136
+#: ../src/main.cc:137
 msgid "Do not recurse into subdirectories"
-msgstr "不进入子目录"
+msgstr "不递归进入子目录"
 
-#: ../src/main.cc:138 ../ui/mainwindow.glade.h:3
+#: ../src/main.cc:139 ../ui/mainwindow.ui.h:2
 msgid "Also find hidden files"
 msgstr "也查找隐藏文件"
 
-#: ../src/main.cc:140
+#: ../src/main.cc:141
 msgid "Find text matching REGEX"
 msgstr "查找与[正则表达式]匹配的文本"
 
-#: ../src/main.cc:140
+#: ../src/main.cc:141
 msgid "REGEX"
 msgstr "正则表达式"
 
-#: ../src/main.cc:142
+#: ../src/main.cc:143
 msgid "Find only the first match in a line"
-msgstr ""
+msgstr "只查找一行中的第一个匹配"
 
-#: ../src/main.cc:144 ../ui/mainwindow.glade.h:5
+#: ../src/main.cc:145 ../ui/mainwindow.ui.h:4
 msgid "Do case insensitive matching"
-msgstr ""
+msgstr "使用大小写敏感匹配"
 
-#: ../src/main.cc:146
+#: ../src/main.cc:147
 msgid "Replace matches with STRING"
-msgstr ""
+msgstr "用[字符串]替换匹配项"
 
-#: ../src/main.cc:146
+#: ../src/main.cc:147
 msgid "STRING"
-msgstr ""
+msgstr "字符串"
 
-#: ../src/main.cc:148
+#: ../src/main.cc:149
 msgid "Print match location to standard output"
-msgstr ""
+msgstr "打印出匹配位置到标准输出"
 
-#: ../src/main.cc:150
+#: ../src/main.cc:151
 msgid "Do not automatically start search"
-msgstr ""
+msgstr "不自动开始搜索"
 
-#: ../src/main.cc:152
+#: ../src/main.cc:153
 msgid "[FOLDER]"
-msgstr ""
+msgstr "[文件夹]"
 
-#: ../src/mainwindow.cc:413
+#: ../src/mainwindow.cc:560
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Quit anyway?"
-msgstr "某些文件尚未保存。仍然退出吗？"
+msgstr ""
+"某些文件尚未保存。\n"
+"仍然退出吗？"
 
-#: ../src/mainwindow.cc:427
+#: ../src/mainwindow.cc:574
 msgid ""
 "Some files haven’t been saved yet.\n"
 "Continue anyway?"
@@ -163,300 +252,313 @@ msgstr ""
 "某些文件尚未保存。\n"
 "仍然继续吗？"
 
-#: ../src/mainwindow.cc:455
+#: ../src/mainwindow.cc:604
 msgid "The file search pattern is invalid."
-msgstr ""
+msgstr "文件的搜索模式无效."
 
-#: ../src/mainwindow.cc:461
+#: ../src/mainwindow.cc:610
 msgid "The following errors occurred during search:"
 msgstr "搜索时发生了下列错误："
 
-#: ../src/mainwindow.cc:708
+#: ../src/mainwindow.cc:864
 msgid "The following errors occurred during save:"
-msgstr ""
+msgstr "在保存时出现下列错误："
 
-#: ../src/mainwindow.cc:854
+#: ../src/mainwindow.cc:1015
 msgid "translator-credits"
 msgstr ""
-"开源软件国际化之 GNOME 简体中文组\n"
-"\thttp://i18n.linux.net.cn"
+"Funda Wang <fundawang@linux.net.cn>, 2004\n"
+"du baodao <centerpoint@139.com>, 2010\n"
+"YunQiang Su <wzssyqa@gmail.com>, 2011"
 
-#: ../src/pcreshell.cc:62
-msgid "Using the \\C escape sequence to match a single byte is not supported."
-msgstr ""
-
-#: ../src/pcreshell.cc:84
-#, qt-format
-msgid ""
-"Error in regular expression at “%1” (index %2):\n"
-"%3"
-msgstr ""
-
-#: ../src/pcreshell.cc:89
-#, qt-format
-msgid ""
-"Error in regular expression:\n"
-"%1"
-msgstr ""
-"正则表达式有错：\n"
-"%1"
-
-#: ../src/pcreshell.cc:171
-msgid ""
-"Reached the recursion and backtracking limit of the regular expression "
-"engine."
-msgstr ""
-
-#: ../src/prefdialog.cc:249
+#: ../src/prefdialog.cc:186
 #, qt-format
 msgid "“%1” is not a valid encoding."
 msgstr "“%1”不是有效的编码。"
 
-#: ../src/statusline.cc:263
+#: ../src/statusline.cc:245
 msgid "Stop"
 msgstr "停止"
 
-#: ../src/statusline.cc:270
+#: ../src/statusline.cc:253
 msgid "File:"
 msgstr "文件："
 
-#: ../src/statusline.cc:273
+#: ../src/statusline.cc:256
 msgid "Match:"
 msgstr "匹配："
 
-#: ../src/statusline.cc:284
+#: ../src/statusline.cc:267
 msgid "Cancels the running search"
-msgstr "取消运行中的搜索"
+msgstr "取消正在运行的搜索"
 
-#: ../ui/mainwindow.glade.h:1
-msgid ""
-"A filename pattern as used by the shell. Character classes [ab] and csh "
-"style brace expressions {a,b} are supported."
-msgstr ""
-
-#: ../ui/mainwindow.glade.h:2
+#: ../ui/mainwindow.ui.h:1
 msgid "A regular expression in Perl syntax"
 msgstr "Perl 语法的正则表达式"
 
-#: ../ui/mainwindow.glade.h:4
+#: ../ui/mainwindow.ui.h:3
 msgid "Backward"
-msgstr ""
+msgstr "向后"
 
-#: ../ui/mainwindow.glade.h:6
+#: ../ui/mainwindow.ui.h:5
 msgid "File backward"
-msgstr ""
+msgstr "文件向后"
 
-#: ../ui/mainwindow.glade.h:7
+#: ../ui/mainwindow.ui.h:6
 msgid "File forward"
-msgstr ""
+msgstr "文件向前"
 
-#: ../ui/mainwindow.glade.h:8
+#: ../ui/mainwindow.ui.h:7
 msgid "Find all files that match the filename pattern"
-msgstr ""
+msgstr "查找匹配文件名模式的所有文件"
 
-#: ../ui/mainwindow.glade.h:9
+#: ../ui/mainwindow.ui.h:8
 msgid "Find all matches of the regular expression"
-msgstr ""
+msgstr "查找正则表达式的所有匹配项"
 
-#: ../ui/mainwindow.glade.h:10
+#: ../ui/mainwindow.ui.h:9
 msgid "Find all possible matches in a line"
-msgstr ""
+msgstr "在一行中查找所有可能的匹配"
 
-#: ../ui/mainwindow.glade.h:11
+#: ../ui/mainwindow.ui.h:10
 msgid "Find fi_les"
 msgstr "查找文件(_L)"
 
-#: ../ui/mainwindow.glade.h:12
+#: ../ui/mainwindow.ui.h:11
 msgid "Fol_der:"
 msgstr "文件夹(_D)："
 
-#: ../ui/mainwindow.glade.h:13
+#: ../ui/mainwindow.ui.h:12
 msgid "Forward"
-msgstr ""
+msgstr "向前"
 
-#: ../ui/mainwindow.glade.h:14
+#: ../ui/mainwindow.ui.h:13
 msgid "Go to next match"
 msgstr "转到下次匹配"
 
-#: ../ui/mainwindow.glade.h:15
+#: ../ui/mainwindow.ui.h:14
 msgid "Go to previous match"
 msgstr "转到上次匹配"
 
-#: ../ui/mainwindow.glade.h:16
+#: ../ui/mainwindow.ui.h:15
 msgid "Go to the next matching file"
 msgstr "转到匹配的下个文件"
 
-#: ../ui/mainwindow.glade.h:17
+#: ../ui/mainwindow.ui.h:16
 msgid "Go to the previous matching file"
 msgstr "转到匹配的上个文件"
 
-#: ../ui/mainwindow.glade.h:18
+#: ../ui/mainwindow.ui.h:17
 msgid "Pattern:"
 msgstr "模式："
 
-#: ../ui/mainwindow.glade.h:19
+#: ../ui/mainwindow.ui.h:18
 msgid "Preview"
 msgstr "预览"
 
-#: ../ui/mainwindow.glade.h:20
+#: ../ui/mainwindow.ui.h:19
 msgid "Preview of the substitution"
-msgstr ""
+msgstr "替换预览"
 
-#: ../ui/mainwindow.glade.h:21
+#: ../ui/mainwindow.ui.h:20
 msgid "Recurse into subdirectories"
 msgstr "递归进入子目录"
 
-#: ../ui/mainwindow.glade.h:22
-msgid "Replace _current"
-msgstr "替换当前(_C)"
-
-#: ../ui/mainwindow.glade.h:23
+#: ../ui/mainwindow.ui.h:21
 msgid "Replace all matches in all files"
-msgstr "替换全部文件中的全部匹配"
+msgstr "替换全部文件中的所有匹配"
 
-#: ../ui/mainwindow.glade.h:24
+#: ../ui/mainwindow.ui.h:22
 msgid "Replace all matches in the current file"
-msgstr ""
+msgstr "替换当前文件的所有匹配项"
 
-#: ../ui/mainwindow.glade.h:25
+#: ../ui/mainwindow.ui.h:23
 msgid "Replace current match"
 msgstr "替换当前匹配"
 
-#: ../ui/mainwindow.glade.h:26
-msgid "Replace in _all files"
-msgstr "在全部文件中替换(_A)"
-
-#: ../ui/mainwindow.glade.h:27
-msgid "Replace in _this file"
-msgstr "在此文件中替换(_T)"
-
-#: ../ui/mainwindow.glade.h:28
+#: ../ui/mainwindow.ui.h:24
 msgid "Replace:"
 msgstr "替换："
 
-#: ../ui/mainwindow.glade.h:29
+#: ../ui/mainwindow.ui.h:25
 msgid "Search:"
 msgstr "搜索："
 
-#: ../ui/mainwindow.glade.h:30
+#: ../ui/mainwindow.ui.h:26
 msgid ""
 "The new string to substitute. As in Perl, you can refer to parts of the "
-"match using $1, $2, etc. or even $+, $&, $` and $'. The operators \\l, \\u, "
-"\\L, \\U and \\E are supported as well."
+"match using $1, $2, etc. or even $+, $&amp;, $` and $'. The operators \\l, "
+"\\u, \\L, \\U and \\E are supported as well."
 msgstr ""
+"要替换的新字符串。如同 Perl 中一样，可以使用 $1、$2 等引用匹配的部分，甚至也"
+"包括 $+、$&amp;、$` 和 $'。也支持 \\l, \\u, \\L, \\U 和 \\E 操作符。"
 
-#: ../ui/mainwindow.glade.h:31
+#: ../ui/mainwindow.ui.h:27
 msgid "_All files"
 msgstr "全部文件(_A)"
 
-#: ../ui/mainwindow.glade.h:32
+#: ../ui/mainwindow.ui.h:28
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ../ui/mainwindow.glade.h:33
+#: ../ui/mainwindow.ui.h:29
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ../ui/mainwindow.glade.h:34
+#: ../ui/mainwindow.ui.h:30
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../ui/mainwindow.glade.h:35
+#: ../ui/mainwindow.ui.h:31
 msgid "_Match"
 msgstr "匹配(_M)"
 
-#: ../ui/mainwindow.glade.h:36
-msgid "_Next file"
-msgstr "下个文件(_N)"
-
-#: ../ui/mainwindow.glade.h:37
-msgid "_Previous file"
-msgstr "上个文件(_P)"
-
-#: ../ui/mainwindow.glade.h:38
+#: ../ui/mainwindow.ui.h:32
 msgid "_Replace"
 msgstr "替换(_R)"
 
-#: ../ui/mainwindow.glade.h:39
+#: ../ui/mainwindow.ui.h:33
 msgid "_This file"
 msgstr "此文件(_T)"
 
-#: ../ui/mainwindow.glade.h:40
+#: ../ui/mainwindow.ui.h:34
 msgid "hidden"
 msgstr "隐藏"
 
-#: ../ui/mainwindow.glade.h:41
+#: ../ui/mainwindow.ui.h:35
 msgid "recursive"
 msgstr "递归"
 
-#: ../ui/prefdialog.glade.h:1
+#: ../ui/prefdialog.ui.h:1
 msgid "1."
 msgstr "1."
 
-#: ../ui/prefdialog.glade.h:2
+#: ../ui/prefdialog.ui.h:2
 msgid "2."
 msgstr "2."
 
-#: ../ui/prefdialog.glade.h:3
+#: ../ui/prefdialog.ui.h:3
 msgid "3."
 msgstr "3."
 
-#: ../ui/prefdialog.glade.h:4
+#: ../ui/prefdialog.ui.h:4
+msgid "Both horizontal"
+msgstr "都水平"
+
+#: ../ui/prefdialog.ui.h:5
 msgid "C_urrent match color:"
 msgstr "当前匹配颜色(_U)："
 
-#: ../ui/prefdialog.glade.h:5
+#: ../ui/prefdialog.ui.h:6
 msgid "Fallback _encoding:"
 msgstr "默认编码(_E)："
 
-#: ../ui/prefdialog.glade.h:6
-msgid ""
-"Icons only\n"
-"Text only\n"
-"Icons and text\n"
-"Both horizontal"
-msgstr ""
-"只有图标\n"
-"只有文字\n"
-"图标和文字\n"
-"两者水平排列"
+#: ../ui/prefdialog.ui.h:7
+msgid "Icons and text"
+msgstr "图标和文字"
 
-#: ../ui/prefdialog.glade.h:10
+#: ../ui/prefdialog.ui.h:8
+msgid "Icons only"
+msgstr "只有图标"
+
+#: ../ui/prefdialog.ui.h:9
 msgid "Preferences"
 msgstr "首选项"
 
-#: ../ui/prefdialog.glade.h:11
+#: ../ui/prefdialog.ui.h:10
+msgid "Text only"
+msgstr "仅文本"
+
+#: ../ui/prefdialog.ui.h:11
 msgid "The encoding specified by the current locale"
-msgstr "当前语系指定的编码"
+msgstr "当前区域选项指定的编码"
 
-#: ../ui/prefdialog.glade.h:12
-msgid "Tool_bar style:"
-msgstr "工具栏样式(_B)："
-
-#: ../ui/prefdialog.glade.h:13
+#: ../ui/prefdialog.ui.h:12
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: ../ui/prefdialog.glade.h:14
+#: ../ui/prefdialog.ui.h:13
 msgid "_File access"
 msgstr "文件访问(_F)"
 
-#: ../ui/prefdialog.glade.h:15
-msgid "_Look’n’feel"
-msgstr "观感(_L)"
+#: ../ui/prefdialog.ui.h:14
+msgid "_Look&#x2019;n&#x2019;feel"
+msgstr "查看(_L)&#x2019;n&#x2019;feel"
 
-#: ../ui/prefdialog.glade.h:16
+#: ../ui/prefdialog.ui.h:15
 msgid "_Match color:"
 msgstr "匹配颜色(_M)："
 
-#: ../ui/prefdialog.glade.h:17
+#: ../ui/prefdialog.ui.h:16
 msgid "_Text view font:"
 msgstr "文本视图字体(_T)："
 
-#: ../ui/prefdialog.glade.h:18
+#: ../ui/prefdialog.ui.h:17
 msgid ""
 "regexxer attempts to read a file in the following encodings before giving up:"
-msgstr ""
+msgstr "regexxer 在放弃以前尝试用下列编码读取文件："
+
+#~ msgid ""
+#~ "Using the \\C escape sequence to match a single byte is not supported."
+#~ msgstr "不支持使用“\\C”脱字序列来匹配单字节。"
+
+#~ msgid ""
+#~ "Error in regular expression at “%1” (index %2):\n"
+#~ "%3"
+#~ msgstr ""
+#~ "在正则表达式的 “%1” (索引 %2) 出现错误：\n"
+#~ "%3"
+
+#~ msgid ""
+#~ "Error in regular expression:\n"
+#~ "%1"
+#~ msgstr ""
+#~ "正则表达式有错：\n"
+#~ "%1"
+
+#~ msgid ""
+#~ "Reached the recursion and backtracking limit of the regular expression "
+#~ "engine."
+#~ msgstr "达到了正则表达式引擎的递归和回溯限制"
+
+#~ msgid "Replace _current"
+#~ msgstr "替换当前(_C)"
+
+#~ msgid "Replace in _all files"
+#~ msgstr "在全部文件中替换(_A)"
+
+#~ msgid "Replace in _this file"
+#~ msgstr "在此文件中替换(_T)"
+
+#~| msgid "Save _all"
+#~ msgid "Save all"
+#~ msgstr "全部保存"
+
+#~ msgid "_Next file"
+#~ msgstr "下个文件(_N)"
+
+#~ msgid "_Previous file"
+#~ msgstr "上个文件(_P)"
+
+#~ msgid "Toolbar style"
+#~ msgstr "工具栏样式"
+
+#~ msgid ""
+#~ "Icons only\n"
+#~ "Text only\n"
+#~ "Icons and text\n"
+#~ "Both horizontal"
+#~ msgstr ""
+#~ "只有图标\n"
+#~ "只有文字\n"
+#~ "图标和文字\n"
+#~ "两者水平排列"
+
+#~ msgid "Tool_bar style:"
+#~ msgstr "工具栏样式(_B)："
+
+#~ msgid "_Look’n’feel"
+#~ msgstr "观感(_L)"
 
 #~ msgid "_About"
 #~ msgstr "关于(_A)"
