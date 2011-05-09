@@ -1,0 +1,493 @@
+# Russian translation for regexxer.
+# Copyright (C) 2010 regexxer's COPYRIGHT HOLDER
+# This file is distributed under the same license as the regexxer package.
+# delpass <delpass@gmail.com>, 2010
+# Yuri Myasoedov <omerta13@yandex.ru>, 2011
+msgid ""
+msgstr ""
+"Project-Id-Version: regexxer master\n"
+"Report-Msgid-Bugs-To: http://sourceforge.net/tracker/?group_id=64876\n"
+"POT-Creation-Date: 2011-03-20 14:25+0000\n"
+"PO-Revision-Date: 2011-05-09 22:38+0300\n"
+"Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
+"Language-Team: Russian <gnome-cyr@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../ui/regexxer.desktop.in.h:1
+#: ../src/mainwindow.cc:1010
+msgid "Search and replace using regular expressions"
+msgstr "Поиск и замена с помощью регулярных выражений"
+
+#: ../ui/regexxer.desktop.in.h:2
+msgid "regexxer Search Tool"
+msgstr "Инструмент поиска regexxer"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:1
+msgid "Auto indentation"
+msgstr "Автоматический отступ"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:2
+msgid "Current-match color"
+msgstr "Цвет текущего совпадения"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:3
+msgid "Draw spaces"
+msgstr "Показывать пробелы"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:4
+msgid "Fallback encoding"
+msgstr "Дополнительная кодировка"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:5
+#| msgid "Regex Patterns"
+msgid "File Patterns"
+msgstr "Шаблоны файлов"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:6
+msgid "Highlight the current line"
+msgstr "Подсвечивать текущую строку"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:7
+#| msgid "List of last pattern used for the regex entry."
+msgid "List of last patterns used in the 'Regex' entry."
+msgstr "Список последних шаблонов, используемых для регулярного выражения."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:8
+#| msgid "List of last pattern used for the substitution entry."
+msgid "List of last patterns used in the 'Substitution' entry."
+msgstr "Список последних шаблонов, используемых для замены."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:9
+msgid "List of pre-defined patterns available in the 'Pattern' entry."
+msgstr "Список предопределённых шаблонов, доступных в элементе «Шаблон»."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:10
+msgid "Match color"
+msgstr "Цвет соответствия"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:11
+#| msgid ""
+#| "Name of the character encoding to use if a file is not readable in either "
+#| "UTF-8 or the codeset specified by the current locale. Try “iconv --list” "
+#| "for a complete list of possible values."
+msgid "Name of the character encoding to use if a file is not readable in either UTF-8 or the codeset specified by the current locale. Try \"iconv --list\" for a complete list of possible values."
+msgstr "Название кодировки, используемой в случае если файл не может быть прочитан в кодировке UTF-8 или в кодировке, определённой текущей локалью. Для просмотра всех возможных значений выполните команду «iconv --list»."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:12
+msgid "Regex Patterns"
+msgstr "Шаблоны регулярных выражений"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:13
+msgid "Show line numbers"
+msgstr "Показывать номера строк"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:14
+msgid "Text view font"
+msgstr "Шрифт текста"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:15
+msgid "The X coordinate of the window."
+msgstr "Координата окна по оси X."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:16
+msgid "The Y coordinate of the window."
+msgstr "Координата окна по оси Y."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:17
+msgid "The background color used to highlight matches of the search expression."
+msgstr "Фоновый цвет используемый для подсветки искомых совпадений"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:18
+msgid "The background color used to highlight the currently selected match of the search expression."
+msgstr "Фоновый цвет используемый для подсветки текущего выделения длязамены по регулярному выражению"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:19
+msgid "The font used in the file editor."
+msgstr "Шрифт редактора"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:20
+msgid "The height of the window."
+msgstr "Высота окна."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:21
+msgid "The width of the window."
+msgstr "Ширина окна."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:22
+msgid "Whether the window is maximized."
+msgstr "Являются ли размеры окна максимальными."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:23
+msgid "Whether to enable auto indentation in the text view."
+msgstr "Использовать ли автоматические отступы в тексте."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:24
+msgid "Whether to highlight the current line of the text view."
+msgstr "Подсвечивать ли текущую строку в тексте."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:25
+msgid "Whether to show the line numbers of the text view."
+msgstr "Показывать ли номера строк в тексте."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:26
+msgid "Which type of space to draw in the text view."
+msgstr "Какой тип пробелов показывать в тексте."
+
+#: ../ui/org.regexxer.gschema.xml.in.h:27
+msgid "window height"
+msgstr "высота окна"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:28
+msgid "window maximization"
+msgstr "максимизировать окно"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:29
+msgid "window width"
+msgstr "ширина окна"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:30
+msgid "window x position"
+msgstr "положение окна по оси x"
+
+#: ../ui/org.regexxer.gschema.xml.in.h:31
+msgid "window y position"
+msgstr "положение окна по оси y"
+
+#: ../src/filebuffer.cc:198
+msgid "Can’t read file:"
+msgstr "Не удалось прочитать файл:"
+
+#: ../src/filetree.cc:60
+msgid "File"
+msgstr "Файл"
+
+#: ../src/filetree.cc:79
+msgid "#"
+msgstr "№"
+
+#: ../src/filetree.cc:508
+#, qt-format
+msgid "Failed to save file “%1”: %2"
+msgstr "Не удалось сохранить файл «%1»: %2"
+
+#: ../src/filetree.cc:924
+#, qt-format
+msgid "“%1” seems to be a binary file."
+msgstr "Похоже, «%1» является бинарным файлом."
+
+#: ../src/main.cc:78
+msgid "Save _all"
+msgstr "_Сохранить всё"
+
+#: ../src/main.cc:135
+msgid "Find files matching PATTERN"
+msgstr "Найти файлы, совпадающие с шаблоном"
+
+#: ../src/main.cc:135
+msgid "PATTERN"
+msgstr "ШАБЛОН"
+
+#: ../src/main.cc:137
+msgid "Do not recurse into subdirectories"
+msgstr "Не искать в подпапках"
+
+#: ../src/main.cc:139
+#: ../ui/mainwindow.ui.h:2
+msgid "Also find hidden files"
+msgstr "Искать скрытые файлы"
+
+#: ../src/main.cc:141
+msgid "Find text matching REGEX"
+msgstr "Найти текст, совпадающий с выражением"
+
+#: ../src/main.cc:141
+msgid "REGEX"
+msgstr "РЕГУЛЯРНОЕ ВЫРАЖЕНИЕ"
+
+#: ../src/main.cc:143
+msgid "Find only the first match in a line"
+msgstr "Искать только первое совпадение в строке"
+
+#: ../src/main.cc:145
+#: ../ui/mainwindow.ui.h:4
+msgid "Do case insensitive matching"
+msgstr "Регистро-независимый поиск"
+
+#: ../src/main.cc:147
+msgid "Replace matches with STRING"
+msgstr "Заменить совпадения строкой"
+
+#: ../src/main.cc:147
+msgid "STRING"
+msgstr "СТРОКА"
+
+#: ../src/main.cc:149
+msgid "Print match location to standard output"
+msgstr "Выводить совпадения в поток стандартного вывода"
+
+#: ../src/main.cc:151
+msgid "Do not automatically start search"
+msgstr "Не запускать автоматически поиск"
+
+#: ../src/main.cc:153
+msgid "[FOLDER]"
+msgstr "[ПАПКА]"
+
+#: ../src/mainwindow.cc:560
+msgid ""
+"Some files haven’t been saved yet.\n"
+"Quit anyway?"
+msgstr ""
+"Не все файлы сохранены.\n"
+"Выйти?"
+
+#: ../src/mainwindow.cc:574
+msgid ""
+"Some files haven’t been saved yet.\n"
+"Continue anyway?"
+msgstr ""
+"Не все файлы сохранены.\n"
+"Продолжить?"
+
+#: ../src/mainwindow.cc:604
+msgid "The file search pattern is invalid."
+msgstr "Некорректный шаблон поиска файла."
+
+#: ../src/mainwindow.cc:610
+msgid "The following errors occurred during search:"
+msgstr "Во время поиска возникли следующие ошибки:"
+
+#: ../src/mainwindow.cc:864
+msgid "The following errors occurred during save:"
+msgstr "Во время сохранения возникли следующие ошибки:"
+
+#: ../src/mainwindow.cc:1015
+msgid "translator-credits"
+msgstr ""
+"Yaroslav Sazonov <delpass at gmail dot com>, 2010\n"
+"Yuri Myasoedov <omerta13@yandex.ru>, 2011"
+
+#: ../src/prefdialog.cc:186
+#, qt-format
+msgid "“%1” is not a valid encoding."
+msgstr "Некорректная кодировка «%1»."
+
+#: ../src/statusline.cc:245
+msgid "Stop"
+msgstr "Стоп"
+
+#: ../src/statusline.cc:253
+msgid "File:"
+msgstr "Файл:"
+
+#: ../src/statusline.cc:256
+msgid "Match:"
+msgstr "Сравнить:"
+
+#: ../src/statusline.cc:267
+msgid "Cancels the running search"
+msgstr "Отменяет поиск"
+
+#: ../ui/mainwindow.ui.h:1
+msgid "A regular expression in Perl syntax"
+msgstr "Использовать cинтаксис регулярных выражений, как в Perl"
+
+#: ../ui/mainwindow.ui.h:3
+msgid "Backward"
+msgstr "Назад"
+
+#: ../ui/mainwindow.ui.h:5
+msgid "File backward"
+msgstr "Предыдущий файл"
+
+#: ../ui/mainwindow.ui.h:6
+msgid "File forward"
+msgstr "Следующий файл"
+
+#: ../ui/mainwindow.ui.h:7
+msgid "Find all files that match the filename pattern"
+msgstr "Найти все файлы имена которых совпадают с шаблоном"
+
+#: ../ui/mainwindow.ui.h:8
+msgid "Find all matches of the regular expression"
+msgstr "Найти все совпадения регулярного выражения"
+
+#: ../ui/mainwindow.ui.h:9
+msgid "Find all possible matches in a line"
+msgstr "Найти все возможные совпадения в строке"
+
+#: ../ui/mainwindow.ui.h:10
+msgid "Find fi_les"
+msgstr "Поиск _файлов"
+
+#: ../ui/mainwindow.ui.h:11
+msgid "Fol_der:"
+msgstr "_Папка:"
+
+#: ../ui/mainwindow.ui.h:12
+msgid "Forward"
+msgstr "Вперёд"
+
+#: ../ui/mainwindow.ui.h:13
+msgid "Go to next match"
+msgstr "К следующему совпадению"
+
+#: ../ui/mainwindow.ui.h:14
+msgid "Go to previous match"
+msgstr "К предыдущему совпадению"
+
+#: ../ui/mainwindow.ui.h:15
+msgid "Go to the next matching file"
+msgstr "К следующему подходящему файлу"
+
+#: ../ui/mainwindow.ui.h:16
+msgid "Go to the previous matching file"
+msgstr "К предыдущему подходящему файлу"
+
+#: ../ui/mainwindow.ui.h:17
+msgid "Pattern:"
+msgstr "Шаблон:"
+
+#: ../ui/mainwindow.ui.h:18
+msgid "Preview"
+msgstr "Просмотр"
+
+#: ../ui/mainwindow.ui.h:19
+msgid "Preview of the substitution"
+msgstr "Просмотр замены"
+
+#: ../ui/mainwindow.ui.h:20
+msgid "Recurse into subdirectories"
+msgstr "Искать в подкаталогах"
+
+#: ../ui/mainwindow.ui.h:21
+msgid "Replace all matches in all files"
+msgstr "Заменить все совпадения во всех файлах"
+
+#: ../ui/mainwindow.ui.h:22
+msgid "Replace all matches in the current file"
+msgstr "Запенить все совпадения в текущем файле"
+
+#: ../ui/mainwindow.ui.h:23
+msgid "Replace current match"
+msgstr "Заменить текущее совпадение"
+
+#: ../ui/mainwindow.ui.h:24
+msgid "Replace:"
+msgstr "Заменить:"
+
+#: ../ui/mainwindow.ui.h:25
+msgid "Search:"
+msgstr "Поиск:"
+
+#: ../ui/mainwindow.ui.h:26
+msgid "The new string to substitute. As in Perl, you can refer to parts of the match using $1, $2, etc. or even $+, $&amp;, $` and $'. The operators \\l, \\u, \\L, \\U and \\E are supported as well."
+msgstr "Новая строка для замены. Как и в Perl, можно указывать части совпадений с помощью $1, $2 и т. д. или даже $+, $&amp;, $` и $'. Также поддерживаются операции \\l, \\u, \\L, \\U и \\E."
+
+#: ../ui/mainwindow.ui.h:27
+msgid "_All files"
+msgstr "_Все файлы"
+
+#: ../ui/mainwindow.ui.h:28
+msgid "_Edit"
+msgstr "_Правка"
+
+#: ../ui/mainwindow.ui.h:29
+msgid "_File"
+msgstr "_Файл"
+
+#: ../ui/mainwindow.ui.h:30
+msgid "_Help"
+msgstr "_Справка"
+
+#: ../ui/mainwindow.ui.h:31
+msgid "_Match"
+msgstr "_Сравнить"
+
+#: ../ui/mainwindow.ui.h:32
+msgid "_Replace"
+msgstr "_Заменить"
+
+#: ../ui/mainwindow.ui.h:33
+msgid "_This file"
+msgstr "_Этот файл"
+
+#: ../ui/mainwindow.ui.h:34
+msgid "hidden"
+msgstr "скрытый"
+
+#: ../ui/mainwindow.ui.h:35
+msgid "recursive"
+msgstr "рекурсивный"
+
+#: ../ui/prefdialog.ui.h:1
+msgid "1."
+msgstr "1."
+
+#: ../ui/prefdialog.ui.h:2
+msgid "2."
+msgstr "2."
+
+#: ../ui/prefdialog.ui.h:3
+msgid "3."
+msgstr "3."
+
+#: ../ui/prefdialog.ui.h:4
+msgid "Both horizontal"
+msgstr "Оба горизонтально"
+
+#: ../ui/prefdialog.ui.h:5
+msgid "C_urrent match color:"
+msgstr "_Текущий цвет совпадений:"
+
+#: ../ui/prefdialog.ui.h:6
+msgid "Fallback _encoding:"
+msgstr "Дополнительная _кодировка:"
+
+#: ../ui/prefdialog.ui.h:7
+msgid "Icons and text"
+msgstr "Значки и текст"
+
+#: ../ui/prefdialog.ui.h:8
+msgid "Icons only"
+msgstr "Только значки"
+
+#: ../ui/prefdialog.ui.h:9
+msgid "Preferences"
+msgstr "Настройки"
+
+#: ../ui/prefdialog.ui.h:10
+msgid "Text only"
+msgstr "Только текст"
+
+#: ../ui/prefdialog.ui.h:11
+msgid "The encoding specified by the current locale"
+msgstr "Кодировка определена по текущей локали"
+
+#: ../ui/prefdialog.ui.h:12
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: ../ui/prefdialog.ui.h:13
+msgid "_File access"
+msgstr "_Доступ к файлу"
+
+#: ../ui/prefdialog.ui.h:14
+msgid "_Look&#x2019;n&#x2019;feel"
+msgstr "_Внешний вид"
+
+#: ../ui/prefdialog.ui.h:15
+msgid "_Match color:"
+msgstr "_Цвет сравнения:"
+
+#: ../ui/prefdialog.ui.h:16
+msgid "_Text view font:"
+msgstr "_Шрифт текста:"
+
+#: ../ui/prefdialog.ui.h:17
+msgid "regexxer attempts to read a file in the following encodings before giving up:"
+msgstr "regexxer пытается прочитать файл в следующей кодировке прежде, чем:"
+
