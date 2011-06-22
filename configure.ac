@@ -46,13 +46,10 @@ GLIB_GSETTINGS
 
 AC_LANG([C++])
 
-# Disabling -Wnon-virtual-dtor is nasty, but unfortunately required due to
-# a bug in gconfmm that triggers this warning.  Not disabling this warning
-# would make --enable-warnings=fatal unusable.
 DK_ARG_ENABLE_WARNINGS([REGEXXER_WARNING_FLAGS],
-                       [-Wall -w1 -Wno-non-virtual-dtor],
-                       [-pedantic -Wall -Wextra -w1 -Wno-non-virtual-dtor],
-                       [GLIBMM GTKMM])
+                       [-Wall -w1 -Wno-long-long],
+                       [-pedantic -Wall -Wextra -w1 -Wno-long-long],
+                       [G GDK GTK PANGO ATK GLIBMM GDKMM ATKMM GTKMM])
 
 AC_CONFIG_FILES([Makefile po/Makefile.in])
 AC_OUTPUT
