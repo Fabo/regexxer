@@ -240,7 +240,7 @@ StatusLine::StatusLine()
                       "  -GtkWidget-focus-padding: 0;\n"
                       "}";
   Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
-  css->load_from_data(style, style.size());
+  css->load_from_data(style);
 
   stop_button_ = new Button(_("Stop"));
   pack_start(*manage(stop_button_), PACK_SHRINK);

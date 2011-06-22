@@ -1062,7 +1062,7 @@ void MainWindow::on_conf_value_changed(const Glib::ustring& key)
     style += Settings::instance()->get_string(key);
     style += "}";
     Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
-    css->load_from_data(style, style.size());
+    css->load_from_data(style);
 
     textview_     ->get_style_context()->add_provider(css, 1);
     entry_preview_->get_style_context()->add_provider(css, 1);

@@ -36,7 +36,7 @@ AM_GNU_GETTEXT_VERSION([0.11])
 AM_GLIB_GNU_GETTEXT
 
 PKG_CHECK_MODULES([REGEXXER_MODULES],
-                  [gtkmm-3.0 >= 2.99.5 glibmm-2.4 >= 2.27.94
+                  [gtkmm-3.0 >= 3.0.0 glibmm-2.4 >= 2.27.94
                   gtksourceviewmm-3.0 >= 2.91.5])
 
 DK_PKG_PATH_PROG([GDK_PIXBUF_CSOURCE], [gdk-pixbuf-2.0], [gdk-pixbuf-csource])
