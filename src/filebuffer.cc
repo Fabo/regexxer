@@ -160,7 +160,7 @@ public:
 
 FileBuffer::FileBuffer()
 :
-  Gsv::SourceBuffer(Glib::RefPtr<Gtk::TextTagTable>(RegexxerTags::instance())),
+  Gsv::Buffer(Glib::RefPtr<Gtk::TextTagTable>(RegexxerTags::instance())),
   match_set_            (),
   current_match_        (match_set_.end()),
   user_action_stack_    (),

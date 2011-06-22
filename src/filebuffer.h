@@ -25,7 +25,7 @@
 #include "signalutils.h"
 #include "undostack.h"
 
-#include <gtksourceviewmm/sourcebuffer.h>
+#include <gtksourceviewmm/buffer.h>
 #include <set>
 #include <stack>
 
@@ -36,7 +36,7 @@ namespace Regexxer
 class FileBufferActionRemoveMatch;
 
 
-class FileBuffer : public Gsv::SourceBuffer
+class FileBuffer : public Gsv::Buffer
 {
 public:
   static Glib::RefPtr<FileBuffer> create();

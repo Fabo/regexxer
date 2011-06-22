@@ -157,7 +157,7 @@ void load_file(const FileInfoPtr& fileinfo, const std::string& fallback_encoding
   if (!buffer)
     throw ErrorBinaryFile();
 
-  Glib::RefPtr<Gsv::SourceLanguageManager> language_manager = Gsv::SourceLanguageManager::create();
+  Glib::RefPtr<Gsv::LanguageManager> language_manager = Gsv::LanguageManager::create();
   
   bool uncertain = false;
   std::string content_type = Gio::content_type_guess(fileinfo->fullname, buffer->get_text(), uncertain);

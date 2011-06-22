@@ -195,7 +195,7 @@ MainWindow::MainWindow()
   filetree_               (Gtk::manage(new FileTree())),
   scrollwin_filetree_     (0),
   scrollwin_textview_     (0),
-  textview_               (Gtk::manage(new Gsv::SourceView())),
+  textview_               (Gtk::manage(new Gsv::View())),
   entry_preview_          (0),
   statusline_             (Gtk::manage(new StatusLine())),
   busy_action_running_    (false),
@@ -247,7 +247,7 @@ void MainWindow::initialize(const InitState& init)
   textview_->set_show_line_numbers(settings->get_boolean(conf_key_show_line_numbers));
   textview_->set_highlight_current_line(settings->get_boolean(conf_key_highlight_current_line));
   textview_->set_auto_indent(settings->get_boolean(conf_key_auto_indentation));
-  textview_->set_draw_spaces(static_cast<Gsv::SourceDrawSpacesFlags>
+  textview_->set_draw_spaces(static_cast<Gsv::DrawSpacesFlags>
                               (settings->get_flags(conf_key_draw_spaces)));
 
   std::string folder;

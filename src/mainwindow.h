@@ -52,7 +52,7 @@ class EntryCompletion;
 
 namespace Gsv
 {
-class SourceView;
+class View;
 }
 
 namespace Regexxer
@@ -123,7 +123,7 @@ private:
   FileTree*                   filetree_;
   Gtk::ScrolledWindow*        scrollwin_filetree_;
   Gtk::ScrolledWindow*        scrollwin_textview_;
-  Gsv::SourceView*            textview_;
+  Gsv::View*            textview_;
   Gtk::Entry*                 entry_preview_;
 
   StatusLine*                 statusline_;
