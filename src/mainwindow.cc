@@ -783,13 +783,20 @@ void MainWindow::on_go_next_file(bool move_forward)
   on_go_next(move_forward);
 }
 
+bool MainWindow::do_scroll(const Glib::RefPtr<Gtk::TextMark> mark)
+{
+  textview_->scroll_to(mark, 0.125);
+  return false;
+}
+
 void MainWindow::on_go_next(bool move_forward)
 {
   if (const FileBufferPtr buffer = FileBufferPtr::cast_static(textview_->get_buffer()))
   {
     if (const Glib::RefPtr<Gtk::TextMark> mark = buffer->get_next_match(move_forward))
     {
-      textview_->scroll_to(mark, 0.125);
+      Glib::signal_idle ().connect (sigc::bind<const Glib::RefPtr<Gtk::TextMark> >
+            (sigc::mem_fun (*this, &MainWindow::do_scroll), mark));
       statusline_->set_match_index(buffer->get_match_index());
       return;
     }

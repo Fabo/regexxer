@@ -168,6 +168,8 @@ private:
   void on_bound_state_changed();
   void on_buffer_modified_changed();
 
+  bool do_scroll(const Glib::RefPtr<Gtk::TextMark> mark);
+
   void on_go_next_file(bool move_forward);
   void on_go_next(bool move_forward);
   void on_replace();
