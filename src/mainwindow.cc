@@ -785,6 +785,9 @@ void MainWindow::on_go_next_file(bool move_forward)
 
 bool MainWindow::do_scroll(const Glib::RefPtr<Gtk::TextMark> mark)
 {
+  if (!mark)
+    return false;
+
   textview_->scroll_to(mark, 0.125);
   return false;
 }
