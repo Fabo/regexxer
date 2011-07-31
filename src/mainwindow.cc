@@ -299,6 +299,13 @@ void MainWindow::initialize(const InitState& init)
   if (init.feedback)
     filetree_->signal_feedback.connect(&print_location);
 
+  Glib::RefPtr<Gtk::StyleContext> style_context =
+      toolbar_->get_style_context ();
+  if (style_context)
+  {
+    style_context->add_class (GTK_STYLE_CLASS_PRIMARY_TOOLBAR);
+  }
+
   // Strangely, folder_exists seems to be always true, probably because the
   // file chooser works asynchronously but the GLib main loop isn't running
   // yet.  As a work-around, explicitely check whether the directory exists
